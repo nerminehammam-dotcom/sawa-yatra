@@ -44,6 +44,30 @@
   text-transform: uppercase;
 }
 
+.invitation,
+.mobileInvitation {
+  display: inline-flex;
+  min-height: var(--touch-min);
+  align-items: center;
+  justify-content: center;
+  padding: 0.7rem 1rem;
+  border-radius: var(--radius-pill);
+  color: var(--cream);
+  background: var(--brick);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.invitation:hover,
+.mobileInvitation:hover {
+  color: var(--cream);
+  background: var(--hover);
+}
+
 .link:hover,
 .link[aria-current="page"],
 .signIn:hover,
@@ -127,6 +151,11 @@
   padding-top: var(--space-8);
 }
 
+.mobileInvitation {
+  width: 100%;
+  margin-top: var(--space-4);
+}
+
 @media (min-width: 1024px) {
   .desktop {
     display: flex;
@@ -140,6 +169,18 @@
   .mobileButton,
   .drawer {
     display: none;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .list li:nth-last-child(-n+2) {
+    display: none;
+  }
+
+  .link,
+  .signIn,
+  .invitation {
+    font-size: 0.67rem;
   }
 }
 

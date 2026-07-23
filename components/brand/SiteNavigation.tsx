@@ -17,6 +17,7 @@ export interface SiteNavigationItem {
 export interface SiteNavigationProps {
   items?: readonly SiteNavigationItem[];
   signInHref?: string;
+  invitationHref?: string;
 }
 
 const defaultItems: readonly SiteNavigationItem[] = [
@@ -34,6 +35,7 @@ function isCurrentPath(pathname: string, href: string): boolean {
 export function SiteNavigation({
   items = defaultItems,
   signInHref = "/sign-in",
+  invitationHref = "/request-invitation",
 }: SiteNavigationProps) {
   const pathname = usePathname();
   const drawerId = useId();
@@ -122,6 +124,9 @@ export function SiteNavigation({
           >
             Sign in
           </Link>
+          <Link className={styles.invitation} href={invitationHref}>
+            Request invitation
+          </Link>
         </div>
         <button
           ref={triggerRef}
@@ -177,6 +182,13 @@ export function SiteNavigation({
               onClick={() => setIsOpen(false)}
             >
               Sign in
+            </Link>
+            <Link
+              className={styles.mobileInvitation}
+              href={invitationHref}
+              onClick={() => setIsOpen(false)}
+            >
+              Request invitation
             </Link>
           </div>
         </div>

@@ -24,6 +24,14 @@ const defaultLegalLinks: readonly FooterLink[] = [
   { href: "/accessibility", label: "Accessibility" },
 ] as const;
 
+const exploreLinks: readonly FooterLink[] = [
+  { href: "/departures", label: "Departures" },
+  { href: "/travel-self", label: "Meet your Travel Self" },
+  { href: "/how-it-works", label: "How it works" },
+  { href: "/membership", label: "Membership" },
+  { href: "/about", label: "About" },
+] as const;
+
 export function Footer({
   legalLinks = defaultLegalLinks,
   pronunciation = "sa·wa·ya·tra",
@@ -40,17 +48,31 @@ export function Footer({
             {pronunciation}
           </p>
         </div>
-        <nav aria-label="Legal">
-          <ul className={styles.legal}>
-            {legalLinks.map((link) => (
-              <li key={link.href}>
-                <Link className={styles.link} href={link.href}>
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className={styles.footerNavs}>
+          <nav aria-label="Explore">
+            <p className={styles.navLabel}>Explore</p>
+            <ul className={styles.explore}>
+              {exploreLinks.map((link) => (
+                <li key={link.href}>
+                  <Link className={styles.link} href={link.href}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <nav aria-label="Legal">
+            <p className={styles.navLabel}>Small print</p>
+            <ul className={styles.legal}>
+              {legalLinks.map((link) => (
+                <li key={link.href}>
+                  <Link className={styles.link} href={link.href}>{link.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <Link className={styles.invitation} href="/request-invitation">
+            Request an invitation <span aria-hidden="true">↗</span>
+          </Link>
+        </div>
       </Container>
     </footer>
   );

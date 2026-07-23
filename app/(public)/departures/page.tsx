@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { createPageMetadata } from "@/app/_metadata";
 import { RisoArtwork } from "@/components/brand/RisoArtwork";
@@ -51,6 +52,7 @@ export default function DeparturesPage() {
     <main id="main-content" tabIndex={-1}>
       <PageHero
         className={styles.hero}
+        ground="ink"
         eyebrow="Departures · Signature Caravan 01"
         title="One journey through the Andes. Nine ways to join it."
         titleClassName={styles.heroTitle}
@@ -82,11 +84,26 @@ export default function DeparturesPage() {
           <RisoArtwork
             asset={andeanCaravanHeroImage}
             aspectRatio="hero"
-            sizes="100vw"
+            sizes="(max-width: 639px) 100vw, 54vw"
             priority
           />
         }
       />
+
+      <nav className={styles.routeNavigator} aria-label="Andean Caravan sections">
+        <Container className={styles.routeTrack}>
+          <Link className={styles.routeStart} href="/departures#whole-caravan-heading">
+            <span>All</span>
+            <strong>71 days</strong>
+          </Link>
+          {andeanCaravanSections.map((section) => (
+            <Link key={section.id} href={`/departures#section-${section.sectionNumber}`}>
+              <span>{String(section.sectionNumber).padStart(2, "0")}</span>
+              <strong>{section.title}</strong>
+            </Link>
+          ))}
+        </Container>
+      </nav>
 
       <Section ground="cream" aria-labelledby="caravan-proposition-heading">
         <Container className={styles.propositionGrid}>
@@ -171,7 +188,7 @@ export default function DeparturesPage() {
           </div>
           <ol className={styles.sectionGrid}>
             {andeanCaravanSections.map((section, index) => (
-              <li key={section.id}>
+              <li id={`section-${section.sectionNumber}`} key={section.id}>
                 <DepartureCard
                   href={`/departures/${section.slug}`}
                   title={section.title}

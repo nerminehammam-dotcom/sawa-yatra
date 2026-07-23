@@ -31,6 +31,7 @@
 .image {
   object-fit: cover;
   object-position: var(--focal-x, 50%) var(--focal-y, 50%);
+  filter: saturate(0.86) contrast(1.06);
 }
 
 .duotone .image {

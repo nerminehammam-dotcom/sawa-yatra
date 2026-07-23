@@ -101,7 +101,8 @@
 .formHeader {
   display: grid;
   max-width: 58rem;
-  margin-bottom: clamp(var(--space-12), 7vw, var(--space-24));
+  align-content: start;
+  margin-bottom: var(--space-12);
 }
 
 .formTitle {
@@ -146,8 +147,7 @@
 }
 
 .invitationLayout {
-  width: min(100%, 56rem);
-  margin-left: auto;
+  width: 100%;
 }
 
 .legalPage {
@@ -271,6 +271,25 @@
   .formLayout {
     grid-template-columns: minmax(14rem, 4fr) minmax(0, 7fr);
     align-items: start;
+  }
+}
+
+@media (min-width: 1024px) {
+  .formPageGrid {
+    display: grid;
+    grid-template-columns: minmax(18rem, 0.72fr) minmax(30rem, 1.28fr);
+    gap: clamp(var(--space-12), 7vw, var(--space-24));
+    align-items: start;
+  }
+
+  .formPageGrid .formHeader {
+    position: sticky;
+    top: calc(var(--nav-height) + var(--space-8));
+    margin-bottom: 0;
+  }
+
+  .signInBody {
+    grid-template-columns: 1fr;
   }
 }
 

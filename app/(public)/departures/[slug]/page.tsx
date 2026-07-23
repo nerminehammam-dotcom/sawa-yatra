@@ -171,6 +171,7 @@ function CompleteCaravanPage() {
     <>
       <PageHero
         className={styles.hero}
+        ground="ink"
         eyebrow={
           <Link className={styles.breadcrumb} href="/departures">
             Departures · The Andean Caravan
@@ -196,7 +197,7 @@ function CompleteCaravanPage() {
           <RisoArtwork
             asset={andeanCaravanHeroImage}
             aspectRatio="hero"
-            sizes="100vw"
+            sizes="(max-width: 639px) 100vw, 54vw"
             priority
           />
         }
@@ -322,6 +323,7 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
     <>
       <PageHero
         className={styles.hero}
+        ground="ink"
         eyebrow={
           <Link className={styles.breadcrumb} href="/departures">
             Departures · Section {String(section.sectionNumber).padStart(2, "0")}
@@ -341,7 +343,7 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
           <RisoArtwork
             asset={getAndeanCaravanImage(section.slug)}
             aspectRatio="hero"
-            sizes="100vw"
+            sizes="(max-width: 639px) 100vw, 54vw"
             priority
           />
         }

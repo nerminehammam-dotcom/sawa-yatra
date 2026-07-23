@@ -17,7 +17,7 @@ export default function RequestInvitationPage() {
       tabIndex={-1}
       aria-labelledby="request-invitation-title"
     >
-      <Container>
+      <Container className={styles.formPageGrid}>
         <header className={styles.formHeader}>
           <div className={styles.statusRow}>
             <ContentStatusLabel status={requestInvitationContent.contentStatus} />

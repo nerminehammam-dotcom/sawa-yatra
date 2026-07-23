@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import {
   RisoArtwork,
   type RisoAsset,
@@ -40,7 +38,7 @@ export function DepartureCard({
   featured = false,
 }: DepartureCardProps) {
   return (
-    <Link
+    <a
       className={classNames(
         styles.card,
         featured && styles.featured,
@@ -88,6 +86,6 @@ export function DepartureCard({
           </span>
         </div>
       </div>
-    </Link>
+    </a>
   );
 }

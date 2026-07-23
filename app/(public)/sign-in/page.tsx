@@ -18,7 +18,7 @@ export default function SignInPage() {
       tabIndex={-1}
       aria-labelledby="sign-in-title"
     >
-      <Container>
+      <Container className={styles.formPageGrid}>
         <header className={styles.formHeader}>
           <div className={styles.statusRow}>
             <ContentStatusLabel status={signInContent.contentStatus} />
@@ -30,7 +30,7 @@ export default function SignInPage() {
           <p className={styles.formLead}>{signInContent.body}</p>
         </header>
 
-        <div className={styles.formLayout}>
+        <div className={`${styles.formLayout} ${styles.signInBody}`}>
           <div className={styles.formSupportingCopy}>
             <div className={styles.actions}>
               <ButtonLink
