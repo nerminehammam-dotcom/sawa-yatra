@@ -77,8 +77,7 @@ export function RisoArtwork({
           alt={asset.alt}
           fill
           sizes={sizes}
-          loading={priority ? "eager" : "lazy"}
-          fetchPriority={priority ? "high" : undefined}
+          priority={priority}
         />
       )}
     </figure>

@@ -11,13 +11,14 @@ import { Section } from "@/components/ui/Section";
 import { archetypes } from "@/content/archetypes";
 import { andeanCaravanSections } from "@/content/andean-caravan";
 import { getAndeanCaravanImage } from "@/content/andean-caravan-images";
-import { andeanCaravanHeroImage } from "@/content/andean-caravan-images";
+import { assetManifest } from "@/content/assets";
 import { homeContent } from "@/content/site";
 
 import styles from "./home.module.css";
 
 export const metadata = createPageMetadata("/");
 
+const homeHeroAsset = assetManifest[homeContent.hero.assetId];
 const featuredAndeanSections = andeanCaravanSections.filter((section) =>
   ["desert-coast", "the-mirror", "the-end-of-the-road"].includes(
     section.slug,
@@ -56,7 +57,6 @@ export default function HomePage() {
   return (
     <main id="main-content" tabIndex={-1}>
       <PageHero
-        ground="ink"
         eyebrow={homeContent.hero.eyebrow}
         title={<HomeHeroTitle />}
         intro={<p>{homeContent.hero.lead}</p>}
@@ -76,9 +76,14 @@ export default function HomePage() {
         }
         media={
           <RisoArtwork
-            asset={andeanCaravanHeroImage}
+            asset={{
+              src: homeHeroAsset.src,
+              alt: homeHeroAsset.alt,
+              treatment: homeHeroAsset.treatment,
+              status: homeHeroAsset.contentStatus,
+            }}
             aspectRatio="hero"
-            sizes="(max-width: 639px) 100vw, 54vw"
+            sizes="100vw"
             priority
           />
         }

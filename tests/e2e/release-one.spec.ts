@@ -276,10 +276,9 @@ test.describe("keyboard interaction", () => {
     test.skip(testInfo.project.name !== "desktop-1024", "One keyboard flow is sufficient.");
 
     await page.goto("/departures");
-    const desertCoastCard = page.getByRole("link", {
-      name: "Explore Desert Coast",
-      exact: true,
-    });
+    const desertCoastCard = page
+      .locator('a[href="/departures/desert-coast"]')
+      .last();
 
     await expect(desertCoastCard).toContainText("Desert Coast");
     await expect(desertCoastCard).toContainText("Lima");

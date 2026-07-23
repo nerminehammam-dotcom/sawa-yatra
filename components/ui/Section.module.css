@@ -1,6 +1,8 @@
 .root {
   position: relative;
   padding-block: var(--section-space);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 48rem;
 }
 
 .flush {

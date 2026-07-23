@@ -27,24 +27,10 @@
   letter-spacing: 0.08em;
 }
 
-.footerNavs {
-  display: grid;
-  gap: var(--space-8);
-}
-
-.navLabel {
-  margin-bottom: var(--space-3);
-  color: var(--honey);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.explore,
 .legal {
-  display: grid;
-  gap: 0 var(--space-6);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-6);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -59,35 +45,17 @@
   text-underline-offset: 0.24em;
 }
 
-.invitation {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-8);
-  padding-block: var(--space-4);
-  border-block: 1px solid rgb(246 238 220 / 32%);
-  color: var(--cream);
-  font-family: var(--font-display);
-  font-size: clamp(1.35rem, 2.2vw, 1.9rem);
-  text-decoration: none;
-}
-
-.invitation span {
-  color: var(--honey);
-}
-
 .link:hover {
   color: var(--honey);
 }
 
-@media (min-width: 1120px) {
+@media (min-width: 768px) {
   .layout {
-    grid-template-columns: minmax(15rem, 0.75fr) minmax(0, 1.25fr);
-    align-items: start;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
   }
 
-  .footerNavs {
-    grid-template-columns: repeat(2, minmax(9rem, 0.45fr)) minmax(16rem, 1.1fr);
-    align-items: start;
+  .legal {
+    justify-content: flex-end;
   }
 }

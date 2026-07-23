@@ -1,11 +1,11 @@
 .heroAccent {
-  color: var(--honey);
+  color: var(--brick);
   font-style: italic;
 }
 
 a.heroSecondary {
-  color: var(--cream);
-  border-color: var(--cream);
+  color: var(--brick);
+  border-color: var(--brick);
 }
 
 .sectionHeading {
@@ -198,17 +198,6 @@ a.heroSecondary {
 
   .membershipBand > a {
     justify-self: end;
-  }
-}
-
-@media (max-width: 639px) {
-  .heroAccent {
-    color: var(--brick);
-  }
-
-  a.heroSecondary {
-    color: var(--brick);
-    border-color: var(--brick);
   }
 }
 

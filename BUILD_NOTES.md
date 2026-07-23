@@ -44,8 +44,7 @@ Not built: authentication, verification, passport or date-of-birth collection, h
 
 - `public/assets/textures/grain.svg` implements the locked grain recipe.
 - Fraunces and Inter are self-hosted as WOFF2 files. Only the regular and italic Fraunces faces required by the first view are explicitly preloaded.
-- The Andean Caravan uses ten photographs supplied with the new working materials. Optimized copies are stored at `public/assets/images/departures/andean/`; original filenames and the public mapping are recorded below. The approved working Caravan hero is also reused on the homepage so the public entry point is photographic rather than a generic placeholder. The founder portrait and other unresolved imagery remain manifest-controlled rather than invented.
-- The July 2026 design-flow pass introduced split photographic heroes, an accessible numbered route navigator for the nine Caravan sections, a persistent invitation action, fuller footer wayfinding and side-by-side desktop form layouts. No business behavior or Release 1 scope changed.
+- The Andean Caravan uses ten photographs supplied with the new working materials. Optimized copies are stored at `public/assets/images/departures/andean/`; original filenames and the public mapping are recorded below. Other unresolved site imagery remains manifest-controlled rather than invented.
 - Complete Caravan: `chile 2025 Web/patagonia 62.png` → `andean-caravan.jpg`.
 - Section 01: `peru 2025 Web/lima 05.png` → `desert-coast.jpg`.
 - Section 02: `peru 2025 Web/_Z8N0934.png` → `white-city-deep-canyon.jpg`.
