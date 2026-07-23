@@ -52,6 +52,14 @@ Playwright covers the acceptance widths at 375px, 768px, 1024px and 1440px. The 
 
 Repeated editorial content, journeys, archetypes, quiz data, FAQs, legal placeholders and metadata live in `content/`. The public Departures area now reads from the typed Andean Caravan model in `content/andean-caravan.ts`: one complete 71-day Caravan plus nine consecutive sections. The photographs used there are local, responsive Next.js image assets in `public/assets/images/departures/andean/`.
 
+All 70 supplied HD journey photographs are assigned to their corresponding route sections in `content/andean-caravan-images.ts`. To regenerate the web copies from the untouched originals, run:
+
+```bash
+python3 scripts/optimize-journey-images.py
+```
+
+The script creates progressive, metadata-free JPEGs with a maximum 2,400-pixel edge. Next.js serves responsive device-sized variants from those source files.
+
 The public URLs remain under the Release 1 route contract: `/departures`, `/departures/the-andean-caravan`, and the nine `/departures/[section-slug]` pages. The earlier three visual-manual demonstration slugs are no longer generated.
 
 Missing source material elsewhere remains visibly status-labelled as `DRAFT`, `PLACEHOLDER` or `LEGAL REVIEW`; see [BUILD_NOTES.md](./BUILD_NOTES.md) for the launch blockers.

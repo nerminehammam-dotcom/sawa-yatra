@@ -16,7 +16,7 @@ Not built: authentication, verification, passport or date-of-birth collection, h
 | Final logo | PLACEHOLDER | Replace the typeset Fraunces wordmark with the approved identity asset while preserving the wordmark component contract. |
 | Home hero and land imagery | PLACEHOLDER | Supply founder-owned or commissioned imagery, focal points and approved alt text. |
 | About/founder material | PLACEHOLDER | Supply the founder name, biography/story, portrait, signature, host-role copy and approved alt text. No facts have been inferred. |
-| Andean photography | DRAFT | Ten supplied photographs are now used across the Departures landing, complete Caravan and nine section pages. Confirm publication rights, final captions, focal points and founder-approved alt text before launch. |
+| Andean photography | DRAFT | All 70 supplied HD photographs are now assigned to their corresponding Caravan sections and used across the Departures experience. Confirm publication rights, final focal points and founder-approved alt text before launch. |
 | Andean dates | PROVISIONAL | Public pages intentionally show only “February–April 2028 · exact dates announced when the route is secured” or the relevant month window with the same qualification. Do not publish internal gate dates until the route is secured. |
 | Andean commercial facts | PLACEHOLDER | Public pricing remains “Price on request”. Availability, contracted accommodation, rooming terms and commercial policy are not activated in Release 1. |
 | Andean operating details | DRAFT | The new master supplies the public route narrative and section structure. Any content requiring a separate safety, participation or supplier decision remains omitted or framed only as an honest route condition. |
@@ -44,7 +44,9 @@ Not built: authentication, verification, passport or date-of-birth collection, h
 
 - `public/assets/textures/grain.svg` implements the locked grain recipe.
 - Fraunces and Inter are self-hosted as WOFF2 files. Only the regular and italic Fraunces faces required by the first view are explicitly preloaded.
-- The Andean Caravan uses ten photographs supplied with the new working materials. Optimized copies are stored at `public/assets/images/departures/andean/`; original filenames and the public mapping are recorded below. Other unresolved site imagery remains manifest-controlled rather than invented.
+- The Andean Caravan uses all 70 supplied HD photographs from the Peru, Bolivia, Atacama and Chile working folders. Web copies are stored at `public/assets/images/departures/andean/gallery/` and assigned geographically across the nine route sections in `content/andean-caravan-images.ts`. Other unresolved site imagery remains manifest-controlled rather than invented.
+- `scripts/optimize-journey-images.py` reproduces the gallery assets from the untouched originals. It applies orientation, converts embedded colour profiles to sRGB, removes source metadata, resizes the longest edge to 2,400 pixels and writes progressive JPEGs at quality 78.
+- The compression pass reduced 5.65 GB of originals to 42.9 MB of web assets, a 99.2% reduction. Next.js then serves responsive, device-sized variants from these sources.
 - Complete Caravan: `chile 2025 Web/patagonia 62.png` → `andean-caravan.jpg`.
 - Section 01: `peru 2025 Web/lima 05.png` → `desert-coast.jpg`.
 - Section 02: `peru 2025 Web/_Z8N0934.png` → `white-city-deep-canyon.jpg`.

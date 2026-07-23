@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { createPageMetadata } from "@/app/_metadata";
 import { RisoArtwork } from "@/components/brand/RisoArtwork";
 import { DepartureCard } from "@/components/departures/DepartureCard";
+import { JourneyGallery } from "@/components/departures/JourneyGallery";
 import { JourneyInterestForm } from "@/components/forms/JourneyInterestForm";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Container } from "@/components/ui/Container";
@@ -20,6 +21,7 @@ import {
 } from "@/content/andean-caravan";
 import {
   andeanCaravanHeroImage,
+  getAndeanCaravanGallery,
   getAndeanCaravanImage,
 } from "@/content/andean-caravan-images";
 import { archetypes } from "@/content/archetypes";
@@ -317,6 +319,7 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
   const feature = textList(section.feature);
   const warnings = textList(section.warnings);
   const standalone = textList(section.standaloneWindows);
+  const gallery = getAndeanCaravanGallery(section.slug);
 
   return (
     <>
@@ -389,6 +392,8 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
         title={feature[0] ?? "One clear reason to travel this section."}
         paragraphs={feature.length > 1 ? feature.slice(1) : feature}
       />
+
+      <JourneyGallery journeySlug={section.slug} images={gallery.slice(1)} />
 
       {standalone.length > 0 ? (
         <CopySection
