@@ -1,0 +1,164 @@
+.heroAccent {
+  color: var(--terracotta);
+  font-style: italic;
+}
+
+.heroIntro,
+.founderCopy,
+.placeholderBlock,
+.sectionHeading,
+.ctaCopy {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-4);
+}
+
+.founderLayout,
+.beliefLayout,
+.hostRole,
+.ctaBand {
+  display: grid;
+  gap: var(--space-12);
+}
+
+.founderCopy {
+  align-content: center;
+}
+
+.founderCopy h2 {
+  max-width: 12ch;
+}
+
+.placeholderBlock {
+  max-width: var(--measure);
+}
+
+.founderDetails {
+  display: grid;
+  width: 100%;
+  gap: var(--space-4);
+  margin: var(--space-4) 0 0;
+}
+
+.founderDetails > div {
+  display: grid;
+  grid-template-columns: minmax(7rem, 0.35fr) minmax(0, 1fr);
+  gap: var(--space-4);
+  padding-block: var(--space-4);
+  border-top: var(--border-hairline) solid var(--hairline);
+}
+
+.founderDetails dt {
+  color: var(--deep-brown);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.founderDetails dd {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.sectionHeading {
+  align-content: start;
+  max-width: 48rem;
+}
+
+.beliefLayout blockquote {
+  max-width: 30ch;
+  padding-inline-start: var(--space-8);
+  border-inline-start: 3px solid var(--terracotta);
+  color: var(--brick);
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  font-weight: 300;
+  line-height: 1.3;
+}
+
+.hostRole {
+  color: var(--cream);
+}
+
+.hostRole .placeholderBlock p {
+  color: var(--cream);
+}
+
+.valueGrid {
+  display: grid;
+  gap: var(--space-8);
+  margin: clamp(var(--space-12), 7vw, var(--space-24)) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.value {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  min-width: 0;
+  padding-top: var(--space-6);
+  border-top: var(--border-hairline) solid var(--hairline);
+}
+
+.valueNumber {
+  color: var(--brick);
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1;
+}
+
+.value p {
+  color: var(--deep-brown);
+}
+
+.ctaBand {
+  align-items: end;
+}
+
+.ctaCopy h2 {
+  max-width: 14ch;
+}
+
+.ctaBand > a {
+  justify-self: start;
+}
+
+@media (min-width: 640px) {
+  .founderLayout,
+  .beliefLayout,
+  .hostRole,
+  .ctaBand {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+  }
+
+  .valueGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ctaBand > a {
+    justify-self: end;
+  }
+}
+
+@media (min-width: 1024px) {
+  .valueGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 639px) {
+  .founderDetails > div {
+    grid-template-columns: 1fr;
+  }
+
+  .beliefLayout blockquote {
+    padding-inline-start: var(--space-6);
+  }
+}

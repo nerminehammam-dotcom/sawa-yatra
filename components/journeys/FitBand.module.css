@@ -1,0 +1,35 @@
+.root {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+}
+
+.item {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: 0.45rem;
+}
+
+.aligns {
+  color: var(--olive-text);
+  background: var(--soft-olive);
+}
+
+.canFlex {
+  color: #704309;
+  background: var(--soft-honey);
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.value {
+  margin: 0;
+  font-size: 0.875rem;
+}

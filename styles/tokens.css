@@ -1,0 +1,60 @@
+:root {
+  --butter: #fae3b1;
+  --cream: #f6eedc;
+  --brick: #7d2027;
+  --olive: #6e6a28;
+  --terracotta: #b4472c;
+  --burnt: #cf5527;
+  --honey: #dfa22b;
+  --deep-brown: #673c34;
+  --dusty-blue: #5fa8c2;
+  --dusty-rose: #eeb6c4;
+  --warm-ink: #2b2420;
+  --olive-text: #55521e;
+  --link: #245c68;
+  --action: #7d2027;
+  --action-on-deep: #dfa22b;
+  --focus: #245c68;
+  --hover: #8e3522;
+  --visited: #5a3a5e;
+  --disabled: #b7ae97;
+  --success: #4b6b2e;
+  --warning: #b87514;
+  --error: #9b2a2a;
+  --info: #245c68;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-read: "Inter", system-ui, sans-serif;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  --radius-card: 14px;
+  --radius-pill: 999px;
+  --border-hairline: 1px;
+  --measure: 66ch;
+  --touch-min: 44px;
+  --content-max: 1440px;
+  --section-space: clamp(5rem, 10vw, 9rem);
+  --page-gutter: clamp(1.25rem, 5vw, 6rem);
+  --nav-height: 72px;
+  --grain-opacity: 0.085;
+
+  --hairline: rgb(103 60 52 / 22%);
+  --soft-butter: #f9e7c0;
+  --soft-olive: #dbd4b8;
+  --soft-honey: #f0dcb2;
+  --soft-rose: #f3dbd4;
+  --soft-butter: color-mix(in srgb, var(--butter) 66%, var(--cream));
+  --soft-olive: color-mix(in srgb, var(--olive) 20%, var(--cream));
+  --soft-honey: color-mix(in srgb, var(--honey) 24%, var(--cream));
+  --soft-rose: color-mix(in srgb, var(--dusty-rose) 34%, var(--cream));
+}

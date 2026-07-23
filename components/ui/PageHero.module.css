@@ -1,0 +1,110 @@
+.root {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.cream {
+  color: var(--warm-ink);
+  background: var(--cream);
+}
+
+.butter {
+  color: var(--warm-ink);
+  background: var(--butter);
+}
+
+.brick {
+  color: var(--cream);
+  background: var(--brick);
+}
+
+.olive {
+  color: var(--cream);
+  background: var(--olive);
+}
+
+.ink {
+  color: var(--cream);
+  background: var(--warm-ink);
+}
+
+.media {
+  min-height: 48svh;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-height: 54svh;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-6);
+  padding-block: clamp(var(--space-16), 9vw, var(--space-24));
+}
+
+.withMedia .content {
+  color: var(--warm-ink);
+  background: var(--cream);
+}
+
+.copy {
+  display: grid;
+  max-width: min(100%, 66rem);
+  gap: var(--space-6);
+}
+
+.right .copy {
+  margin-inline-start: auto;
+}
+
+.title {
+  max-width: 12ch;
+  color: inherit;
+}
+
+.intro {
+  max-width: var(--measure);
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  line-height: 1.55;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+@media (min-width: 640px) {
+  .root:not(.withMedia) .content {
+    min-height: min(72svh, 760px);
+  }
+
+  .withMedia {
+    min-height: min(82svh, 900px);
+    color: var(--cream);
+    background: var(--warm-ink);
+  }
+
+  .withMedia .media {
+    position: absolute;
+    inset: 0;
+    min-height: 0;
+  }
+
+  .withMedia .content {
+    min-height: min(82svh, 900px);
+    color: var(--cream);
+    background: transparent;
+  }
+
+  .withMedia .copy {
+    width: min(58rem, 72%);
+  }
+
+  .withMedia .intro {
+    color: inherit;
+  }
+}

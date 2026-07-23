@@ -1,0 +1,96 @@
+.form,
+.fieldset {
+  min-width: 0;
+  width: 100%;
+}
+
+.fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.legend {
+  margin-bottom: var(--space-4);
+  color: var(--deep-brown);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.scroller {
+  display: flex;
+  width: 100%;
+  gap: var(--space-2);
+  padding-block: var(--space-1) var(--space-3);
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-color: var(--deep-brown) transparent;
+  scrollbar-width: thin;
+  scroll-snap-type: inline proximity;
+}
+
+.chip {
+  min-height: var(--touch-min);
+  flex: 0 0 auto;
+  padding: 0.55rem 0.9rem;
+  border: var(--border-hairline) solid rgb(103 60 52 / 40%);
+  border-color:
+    color-mix(in srgb, var(--deep-brown) 40%, transparent);
+  border-radius: var(--radius-pill);
+  color: var(--deep-brown);
+  background: rgb(246 238 220 / 86%);
+  background: color-mix(in srgb, var(--cream) 86%, transparent);
+  font-family: var(--font-read);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.2;
+  scroll-snap-align: start;
+  white-space: nowrap;
+  transition:
+    color 160ms ease,
+    background-color 160ms ease,
+    border-color 160ms ease;
+}
+
+.chip:hover {
+  color: var(--cream);
+  background: var(--brick);
+  border-color: var(--brick);
+}
+
+.chip[aria-pressed="true"] {
+  color: var(--cream);
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+}
+
+@media (min-width: 640px) {
+  .scroller {
+    flex-wrap: wrap;
+    padding-bottom: var(--space-1);
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .chip,
+  .chip[aria-pressed="true"] {
+    color: ButtonText;
+    background: ButtonFace;
+    border-color: ButtonText;
+  }
+
+  .chip[aria-pressed="true"] {
+    outline: 2px solid Highlight;
+  }
+}

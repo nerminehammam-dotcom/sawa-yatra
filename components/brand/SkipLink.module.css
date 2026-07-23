@@ -1,0 +1,27 @@
+.root {
+  position: fixed;
+  top: var(--space-3);
+  left: var(--space-3);
+  z-index: 10001;
+  min-height: var(--touch-min);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-pill);
+  color: var(--cream);
+  background: var(--brick);
+  font-size: 0.875rem;
+  line-height: 1.8;
+  text-decoration: none;
+  transform: translateY(calc(-100% - var(--space-6)));
+  transition: transform 140ms ease;
+}
+
+.root:focus-visible {
+  color: var(--cream);
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root {
+    transition: none;
+  }
+}

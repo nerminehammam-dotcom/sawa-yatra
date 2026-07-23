@@ -1,0 +1,21 @@
+.root {
+  color: inherit;
+  font-family: var(--font-read);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.muted {
+  color: var(--deep-brown);
+}
+
+.accent {
+  color: var(--brick);
+}
+
+.honey {
+  color: var(--honey);
+}

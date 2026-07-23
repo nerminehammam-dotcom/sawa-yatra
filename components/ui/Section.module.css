@@ -1,0 +1,40 @@
+.root {
+  position: relative;
+  padding-block: var(--section-space);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 48rem;
+}
+
+.flush {
+  padding-block: 0;
+}
+
+.cream {
+  color: var(--warm-ink);
+  background: var(--cream);
+}
+
+.butter {
+  color: var(--warm-ink);
+  background: var(--butter);
+}
+
+.brick {
+  color: var(--cream);
+  background: var(--brick);
+}
+
+.olive {
+  color: var(--cream);
+  background: var(--olive);
+}
+
+.ink {
+  color: var(--cream);
+  background: var(--warm-ink);
+}
+
+.transparent {
+  color: inherit;
+  background: transparent;
+}

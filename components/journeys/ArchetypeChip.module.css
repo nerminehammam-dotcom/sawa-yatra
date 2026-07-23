@@ -1,0 +1,45 @@
+.root {
+  display: inline-flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  padding: 0.42rem 0.78rem;
+  border: var(--border-hairline) solid rgb(103 60 52 / 38%);
+  border-color: color-mix(in srgb, var(--deep-brown) 38%, transparent);
+  border-radius: var(--radius-pill);
+  color: var(--deep-brown);
+  background: rgb(246 238 220 / 82%);
+  background: color-mix(in srgb, var(--cream) 82%, transparent);
+  font-size: 0.875rem;
+  line-height: 1.25;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.interactive {
+  min-height: var(--touch-min);
+  cursor: pointer;
+}
+
+button.root {
+  font-family: var(--font-read);
+}
+
+.interactive:hover {
+  color: var(--cream);
+  background: var(--brick);
+  border-color: var(--brick);
+}
+
+.selected {
+  color: var(--cream);
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+}
+
+.interactive:disabled {
+  color: var(--warm-ink);
+  background: var(--disabled);
+  border-color: var(--disabled);
+  cursor: not-allowed;
+}

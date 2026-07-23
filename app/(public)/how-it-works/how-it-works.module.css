@@ -1,0 +1,172 @@
+.heroAccent {
+  color: var(--terracotta);
+  font-style: italic;
+}
+
+.heroIntro,
+.sectionHeading,
+.deepHeading,
+.mechanismHeading {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.heroIntro {
+  justify-items: start;
+}
+
+.sectionHeading,
+.deepHeading {
+  max-width: 50rem;
+}
+
+.steps {
+  margin: clamp(var(--space-12), 7vw, var(--space-24)) 0 0;
+  padding: 0;
+  border-top: var(--border-hairline) solid var(--hairline);
+  list-style: none;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: minmax(4rem, 0.18fr) minmax(0, 1fr);
+  gap: var(--space-8);
+  padding-block: var(--space-8);
+  border-bottom: var(--border-hairline) solid var(--hairline);
+}
+
+.keystone {
+  margin-inline: calc(-1 * var(--space-6));
+  padding-inline: var(--space-6);
+  background: rgb(223 162 43 / 18%);
+  background: color-mix(in srgb, var(--honey) 18%, transparent);
+}
+
+.stepNumber {
+  color: var(--brick);
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 300;
+  line-height: 0.9;
+}
+
+.stepCopy {
+  display: grid;
+  max-width: var(--measure);
+  gap: var(--space-3);
+}
+
+.stepCopy p {
+  color: var(--deep-brown);
+}
+
+.deepHeading {
+  color: var(--cream);
+}
+
+.wayGrid {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: clamp(var(--space-12), 7vw, var(--space-24));
+}
+
+.wayCard {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  min-height: 18rem;
+  padding: var(--space-8);
+  border: var(--border-hairline) solid rgb(246 238 220 / 48%);
+  border-radius: var(--radius-card);
+  color: var(--warm-ink);
+  background: var(--cream);
+}
+
+.wayCard p {
+  color: var(--deep-brown);
+}
+
+.highlighted {
+  border-color: var(--honey);
+  background: var(--butter);
+  box-shadow: inset 0 0 0 2px var(--honey);
+}
+
+.mechanismPanel {
+  display: grid;
+  gap: var(--space-12);
+  padding: clamp(var(--space-8), 7vw, var(--space-16));
+  border-radius: var(--radius-card);
+  color: var(--cream);
+  background: var(--olive);
+}
+
+.mechanismHeading h2 {
+  max-width: 16ch;
+}
+
+.mechanismList {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.mechanism {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  border-left: 3px solid var(--honey);
+  background: rgb(43 36 32 / 16%);
+}
+
+.mechanism p {
+  color: var(--cream);
+}
+
+.ctaBand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+.ctaBand h2 {
+  max-width: 14ch;
+}
+
+.ctaBand > a {
+  flex: none;
+}
+
+@media (min-width: 640px) {
+  .wayGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .mechanismPanel {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    align-items: start;
+  }
+}
+
+@media (max-width: 639px) {
+  .step {
+    grid-template-columns: 1fr;
+  }
+
+  .keystone {
+    margin-inline: 0;
+  }
+
+  .wayCard {
+    min-height: 0;
+  }
+
+  .mechanismPanel {
+    padding-inline: var(--space-6);
+  }
+
+  .ctaBand {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

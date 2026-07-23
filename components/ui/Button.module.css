@@ -1,0 +1,97 @@
+.root {
+  display: inline-flex;
+  min-height: var(--touch-min);
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0.72rem 1.25rem;
+  border: var(--border-hairline) solid transparent;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-read);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  text-wrap: balance;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.root:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.root:not(:disabled):not([aria-disabled="true"]):active {
+  transform: translateY(1px);
+}
+
+.primary {
+  color: var(--cream);
+  background: var(--action);
+  border-color: var(--action);
+}
+
+.primary:hover:not(:disabled):not([aria-disabled="true"]) {
+  color: var(--cream);
+  background: var(--hover);
+  border-color: var(--hover);
+}
+
+.secondary {
+  color: var(--brick);
+  background: transparent;
+  border-color: var(--brick);
+}
+
+.secondary:hover:not(:disabled):not([aria-disabled="true"]) {
+  color: var(--cream);
+  background: var(--brick);
+}
+
+.primaryDeep {
+  color: var(--warm-ink);
+  background: var(--action-on-deep);
+  border-color: var(--action-on-deep);
+}
+
+.primaryDeep:hover:not(:disabled):not([aria-disabled="true"]) {
+  color: var(--warm-ink);
+  background: var(--butter);
+  border-color: var(--butter);
+}
+
+.secondaryDeep {
+  color: var(--cream);
+  background: transparent;
+  border-color: var(--cream);
+}
+
+.secondaryDeep:hover:not(:disabled):not([aria-disabled="true"]) {
+  color: var(--brick);
+  background: var(--cream);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.root:disabled,
+.root[aria-disabled="true"] {
+  color: var(--warm-ink);
+  background: var(--disabled);
+  border-color: var(--disabled);
+  cursor: not-allowed;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root {
+    transition: none;
+  }
+}

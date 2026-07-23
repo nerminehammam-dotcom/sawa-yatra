@@ -1,0 +1,118 @@
+.root {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  overflow: hidden;
+  color: var(--warm-ink);
+  background: var(--butter);
+}
+
+.card {
+  aspect-ratio: 4 / 3;
+}
+
+.wide {
+  aspect-ratio: 16 / 9;
+}
+
+.hero {
+  min-height: 48svh;
+  aspect-ratio: auto;
+}
+
+.square {
+  aspect-ratio: 1;
+}
+
+.auto {
+  height: 100%;
+}
+
+.image {
+  object-fit: cover;
+  object-position: var(--focal-x, 50%) var(--focal-y, 50%);
+}
+
+.duotone .image {
+  filter: grayscale(1) contrast(1.06) sepia(0.18);
+}
+
+.duotone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(135deg, var(--honey), var(--brick));
+  mix-blend-mode: multiply;
+  opacity: 0.52;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  min-height: 12rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: var(--space-2);
+  padding: clamp(var(--space-4), 5vw, var(--space-8));
+  background:
+    linear-gradient(142deg, transparent 0 42%, rgb(125 32 39 / 64%) 42% 72%, transparent 72%),
+    linear-gradient(32deg, var(--dusty-blue) 0 38%, var(--honey) 38% 67%, var(--olive) 67%);
+}
+
+.placeholder::before {
+  content: "";
+  position: absolute;
+  width: min(58%, 22rem);
+  aspect-ratio: 1;
+  inset: -18% auto auto -9%;
+  border-radius: 50%;
+  background: var(--terracotta);
+  mix-blend-mode: multiply;
+  opacity: 0.88;
+}
+
+.label,
+.description {
+  position: relative;
+  z-index: 1;
+}
+
+.label {
+  color: var(--cream);
+}
+
+.description {
+  max-width: 34ch;
+  padding: var(--space-2) var(--space-3);
+  color: var(--cream);
+  background: var(--warm-ink);
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+@media (max-width: 639px) {
+  .card {
+    aspect-ratio: 3 / 2;
+  }
+}
+
+@media (min-width: 640px) {
+  .hero {
+    min-height: 100%;
+  }
+}
+
+@media (forced-colors: active) {
+  .placeholder {
+    background: Canvas;
+  }
+
+  .placeholder::before,
+  .duotone::after {
+    display: none;
+  }
+}

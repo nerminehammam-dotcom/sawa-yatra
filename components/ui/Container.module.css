@@ -1,0 +1,14 @@
+.root {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+.narrow {
+  max-width: calc(var(--measure) + (2 * var(--page-gutter)));
+}
+
+.full {
+  max-width: none;
+}
