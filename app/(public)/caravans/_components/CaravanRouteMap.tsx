@@ -89,7 +89,7 @@ function stopStyleFor(
     "--marker-shift-x": `${shift.x}px`,
     "--marker-shift-y": `${shift.y}px`,
     "--leader-length": `${length}px`,
-    "--leader-angle": `${angle}deg`,
+    "--leader-angle": `${angle.toFixed(6)}deg`,
   };
 }
 

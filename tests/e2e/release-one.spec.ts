@@ -251,6 +251,152 @@ test.describe("Andean caravan scope", () => {
   });
 });
 
+test.describe("Caravans map regressions", () => {
+  test("keeps hydration deterministic and overflow local to the map stage", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name !== "wide-1440",
+      "One controlled viewport sweep is sufficient.",
+    );
+
+    const hydrationErrors: string[] = [];
+    page.on("console", (message) => {
+      const text = message.text();
+      if (
+        message.type() === "error" &&
+        /hydrated but some attributes|hydration mismatch|--leader-angle/iu.test(
+          text,
+        )
+      ) {
+        hydrationErrors.push(text);
+      }
+    });
+
+    const expectNoRootOverflow = async (context: string) => {
+      const dimensions = await page.evaluate(() => ({
+        viewport: window.innerWidth,
+        document: document.documentElement.scrollWidth,
+        body: document.body.scrollWidth,
+        scrollX: window.scrollX,
+      }));
+
+      expect(dimensions.document, context).toBeLessThanOrEqual(
+        dimensions.viewport,
+      );
+      expect(dimensions.body, context).toBeLessThanOrEqual(
+        dimensions.viewport,
+      );
+      expect(dimensions.scrollX, context).toBe(0);
+    };
+
+    for (const width of [1440, 1280, 1024, 768, 390, 375, 320]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/caravans");
+      await page.evaluate(() => document.fonts.ready);
+      await page.waitForTimeout(750);
+
+      const leaderAngles = await page
+        .locator("[data-route-id]")
+        .evaluateAll((stops) =>
+          stops.map((stop) =>
+            (stop as HTMLElement).style.getPropertyValue("--leader-angle"),
+          ),
+        );
+      expect(
+        leaderAngles.every((angle) => /^-?\d+\.\d{6}deg$/u.test(angle)),
+        `${width}px leader angles use fixed precision`,
+      ).toBe(true);
+      await expectNoRootOverflow(`${width}px initial render`);
+
+      const zoomIn = page.getByRole("button", {
+        name: "Show a closer map view",
+      });
+      await zoomIn.click();
+      await expect(page.getByText("Closer", { exact: true })).toBeVisible();
+      await zoomIn.click();
+      await expect(page.getByText("Closest", { exact: true })).toBeVisible();
+      await page.waitForTimeout(750);
+      await expectNoRootOverflow(`${width}px maximum zoom`);
+
+      const mapStageDimensions = await page
+        .locator(
+          '[aria-label^="Illustrated geographic map of the Andean Caravan"]',
+        )
+        .evaluate((stage) => ({
+          client: stage.clientWidth,
+          scroll: stage.scrollWidth,
+        }));
+      expect(
+        mapStageDimensions.scroll,
+        `${width}px map canvas remains internally zoomable`,
+      ).toBeGreaterThan(mapStageDimensions.client);
+
+      const stopThirteen = page.getByRole("button", {
+        name: "Stop 13: Balmaceda (return), Chile",
+      });
+      await stopThirteen.focus();
+      await page.keyboard.press("Enter");
+      await expect(stopThirteen).toHaveAttribute("aria-pressed", "true");
+      await page.waitForTimeout(80);
+      await expectNoRootOverflow(`${width}px destination-card entrance`);
+
+      const routeLog = page.getByRole("complementary", {
+        name: "Selected route stop",
+      });
+      const destinationCard = routeLog.locator(":scope > div");
+      const animation = await destinationCard.evaluate((card) => {
+        const style = getComputedStyle(card);
+        return {
+          duration: style.animationDuration,
+          name: style.animationName,
+          transform: style.transform,
+        };
+      });
+      expect(animation.name).toContain("reveal-card");
+      expect(parseFloat(animation.duration)).toBeGreaterThan(0);
+      expect(animation.transform).not.toBe("none");
+
+      await page.waitForTimeout(700);
+      await expectNoRootOverflow(`${width}px selected destination settled`);
+
+      const previousStop = routeLog.getByRole("button", {
+        name: "Previous stop",
+      });
+      const restingBackground = await previousStop.evaluate(
+        (button) => getComputedStyle(button).backgroundColor,
+      );
+      await previousStop.focus();
+      await expect(previousStop).toBeFocused();
+      const focusEvidence = await previousStop.evaluate((button) => {
+        const buttonRect = button.getBoundingClientRect();
+        const routeLogRect = button
+          .closest('aside[aria-label="Selected route stop"]')
+          ?.getBoundingClientRect();
+        const style = getComputedStyle(button);
+        const outlineWidth = parseFloat(style.outlineWidth) || 0;
+
+        return {
+          background: style.backgroundColor,
+          buttonLeft: buttonRect.left - outlineWidth,
+          buttonRight: buttonRect.right + outlineWidth,
+          routeLogLeft: routeLogRect?.left ?? 0,
+          routeLogRight: routeLogRect?.right ?? 0,
+        };
+      });
+      expect(focusEvidence.background).not.toBe(restingBackground);
+      expect(focusEvidence.buttonLeft).toBeGreaterThanOrEqual(
+        focusEvidence.routeLogLeft,
+      );
+      expect(focusEvidence.buttonRight).toBeLessThanOrEqual(
+        focusEvidence.routeLogRight,
+      );
+    }
+
+    expect(hydrationErrors).toEqual([]);
+  });
+});
+
 test.describe("keyboard interaction", () => {
   test("the illustrated Caravan map can be explored without a pointer", async ({
     page,
