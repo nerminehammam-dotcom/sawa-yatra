@@ -1,18 +1,31 @@
 import { describe, expect, it } from "vitest";
 
+import sitemap from "@/app/sitemap";
+
 import {
   andeanCaravan,
   andeanCaravanSections,
 } from "@/content/andean-caravan";
+import {
+  andeanCaravanHeroImage,
+  andeanCaravanSectionGalleries,
+} from "@/content/andean-caravan-images";
+import { andeanDestinationDetails } from "@/content/andean-caravan-destinations";
+import { andeanMapCountries } from "@/content/andean-map-geometry";
+import { andeanCaravanRouteStops } from "@/content/andean-caravan-route";
 import { archetypes } from "@/content/archetypes";
 import { assetManifest } from "@/content/assets";
 import { primaryNavigation, utilityNavigation } from "@/content/navigation";
 import { quizQuestions } from "@/content/quiz";
-import { routeMetadata } from "@/content/site";
+import { howItWorksContent, routeMetadata } from "@/content/site";
 import { formSchemas } from "@/lib/forms/schemas";
 
 const releaseOneRoutes = [
   "/",
+  "/caravans",
+  "/caravans/the-andean-caravan",
+  "/joining-points",
+  "/start-here",
   "/how-it-works",
   "/travel-self",
   "/departures",
@@ -80,23 +93,43 @@ describe("Release 1 content contracts", () => {
     );
   });
 
+  it("keeps placeholder-description routes out of the sitemap", () => {
+    const urls = sitemap().map((entry) => new URL(entry.url).pathname);
+
+    expect(urls).toContain("/departures");
+    expect(urls).toContain("/departures/the-andean-caravan");
+    expect(urls).toContain("/caravans");
+    expect(urls).toContain("/caravans/the-andean-caravan");
+    expect(urls).toContain("/joining-points");
+    expect(urls).toContain("/start-here");
+    expect(urls).not.toContain("/about");
+    expect(urls).not.toContain("/membership");
+    expect(urls).not.toContain("/privacy");
+  });
+
   it("keeps Open Seats and dead links out of navigation", () => {
     const navigation = [...primaryNavigation, ...utilityNavigation];
-    const departuresItem = primaryNavigation.find(
-      (item) => item.href === "/departures",
+    const caravansItem = primaryNavigation.find(
+      (item) => item.href === "/caravans",
     );
 
-    expect(departuresItem?.label).toBe("Departures");
+    expect(caravansItem?.label).toBe("Caravans");
     expect(
       navigation.every(
         (item) =>
           !item.label.toLowerCase().includes("open seats") &&
-          item.label.toLowerCase() !== "caravans" &&
+          item.label.toLowerCase() !== "departures" &&
           !item.href.includes("open-seats") &&
           item.href.startsWith("/") &&
           !item.href.includes("#"),
       ),
     ).toBe(true);
+  });
+
+  it("offers Caravan / Join and Create without a Match path", () => {
+    expect(
+      howItWorksContent.waysToTravel.items.map((item) => item.title),
+    ).toEqual(["Caravan / Join", "Create"]);
   });
 
   it("supports exactly twelve archetypes and a six-by-four draft quiz", () => {
@@ -146,6 +179,49 @@ describe("Release 1 content contracts", () => {
     ).toBe(71);
   });
 
+  it("keeps the illustrated Caravan map in the approved thirteen-stop order", () => {
+    expect(andeanCaravanRouteStops.map((stop) => stop.name)).toEqual([
+      "Lima",
+      "Arequipa",
+      "Cusco",
+      "Lake Titicaca",
+      "La Paz",
+      "Sucre",
+      "Uyuni",
+      "Atacama",
+      "Santiago",
+      "Balmaceda Airport (arrival)",
+      "Coyhaique",
+      "Carretera Austral to Villa O’Higgins",
+      "Balmaceda (return)",
+    ]);
+    expect(new Set(andeanCaravanRouteStops.map((stop) => stop.id)).size).toBe(13);
+  });
+
+  it("uses geographic outlines for each Caravan country", () => {
+    expect(andeanMapCountries.map((country) => country.name)).toEqual([
+      "Peru",
+      "Bolivia",
+      "Chile",
+    ]);
+    expect(
+      andeanMapCountries.every((country) => country.path.length > 500),
+    ).toBe(true);
+  });
+
+  it("provides sourced orientation details and a photograph for every map stop", () => {
+    expect(Object.keys(andeanDestinationDetails)).toHaveLength(13);
+    for (const stop of andeanCaravanRouteStops) {
+      const detail = andeanDestinationDetails[stop.id];
+      expect(detail.stopId).toBe(stop.id);
+      expect(detail.altitude.length).toBeGreaterThan(2);
+      expect(detail.populationContext.length).toBeGreaterThan(8);
+      expect(detail.orientation).toHaveLength(2);
+      expect(detail.image.src).toMatch(/^\/assets\/images\//u);
+      expect(detail.source.href).toMatch(/^https:\/\//u);
+    }
+  });
+
   it("exposes only the provisional public date wording", () => {
     const publicJourneyData = JSON.stringify({
       andeanCaravan,
@@ -181,6 +257,15 @@ describe("Release 1 content contracts", () => {
         (asset) => asset.src.startsWith("/") && asset.contentStatus.length > 0,
       ),
     ).toBe(true);
+  });
+
+  it("keeps all Departures photography in its natural colour", () => {
+    const treatments = Object.values(andeanCaravanSectionGalleries)
+      .flat()
+      .map((asset) => asset.treatment);
+
+    expect(andeanCaravanHeroImage.treatment).toBe("true");
+    expect(treatments.every((treatment) => treatment === "true")).toBe(true);
   });
 
   it("collects only the three permitted non-sensitive form shapes", () => {

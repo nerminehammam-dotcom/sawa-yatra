@@ -1,6 +1,6 @@
 import type { NavigationItem } from "@/lib/types";
 
-export const primaryNavigation = [
+export const primaryNavigation: readonly NavigationItem[] = [
   {
     id: "how-it-works",
     label: "How it works",
@@ -14,9 +14,15 @@ export const primaryNavigation = [
     contentStatus: "LOCKED",
   },
   {
-    id: "departures",
-    label: "Departures",
-    href: "/departures",
+    id: "caravan-hop-on-hop-off",
+    label: "Caravan Hop On Hop Off",
+    href: "/caravans",
+    contentStatus: "LOCKED",
+  },
+  {
+    id: "do-it-yourself",
+    label: "Do It Yourself",
+    href: "/do-it-yourself",
     contentStatus: "LOCKED",
   },
   {
@@ -31,7 +37,7 @@ export const primaryNavigation = [
     href: "/about",
     contentStatus: "LOCKED",
   },
-] as const satisfies readonly NavigationItem[];
+] as const;
 
 export const utilityNavigation = [
   {
@@ -44,12 +50,6 @@ export const utilityNavigation = [
 
 export const footerNavigation = [
   ...primaryNavigation,
-  {
-    id: "request-invitation",
-    label: "Request an invitation",
-    href: "/request-invitation",
-    contentStatus: "LOCKED",
-  },
   {
     id: "privacy",
     label: "Privacy",

@@ -22,10 +22,16 @@ export interface SiteNavigationProps {
 const defaultItems: readonly SiteNavigationItem[] = [
   { href: "/how-it-works", label: "How it works" },
   { href: "/travel-self", label: "Meet your Travel Self" },
-  { href: "/departures", label: "Departures" },
+  { href: "/caravans", label: "Caravan Hop On Hop Off" },
+  { href: "/do-it-yourself", label: "Do It Yourself" },
   { href: "/membership", label: "Membership" },
   { href: "/about", label: "About" },
 ] as const;
+
+const joiningPointsItem = {
+  href: "/joining-points",
+  label: "Joining & Leaving Points",
+} as const;
 
 function isCurrentPath(pathname: string, href: string): boolean {
   return href === "/" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
@@ -99,41 +105,77 @@ export function SiteNavigation({
 
   return (
     <nav className={styles.root} aria-label="Primary">
-      <Container className={styles.bar}>
-        <Wordmark />
-        <div className={styles.desktop}>
-          <ul className={styles.list}>
-            {visibleItems.map((item) => (
-              <li key={item.href}>
-                <Link
-                  className={styles.link}
-                  href={item.href}
-                  aria-current={isCurrentPath(pathname, item.href) ? "page" : undefined}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+      <div className={styles.brandBand}>
+        <Container className={styles.brandRow}>
+          <Wordmark size="large" />
           <Link
             className={styles.signIn}
             href={signInHref}
-            aria-current={isCurrentPath(pathname, signInHref) ? "page" : undefined}
+            aria-current={
+              isCurrentPath(pathname, signInHref) ? "page" : undefined
+            }
           >
             Sign in
           </Link>
-        </div>
-        <button
-          ref={triggerRef}
-          className={styles.mobileButton}
-          type="button"
-          aria-expanded={isOpen}
-          aria-controls={drawerId}
-          onClick={() => setIsOpen(true)}
-        >
-          Menu
-        </button>
-      </Container>
+        </Container>
+      </div>
+
+      <div className={styles.navigationBand}>
+        <Container className={styles.navigationRow}>
+          <div className={styles.desktop}>
+          <ul className={styles.list}>
+            {visibleItems.map((item) => {
+              const hasJoiningPoints = item.href === "/departures";
+              const isActive =
+                isCurrentPath(pathname, item.href) ||
+                (hasJoiningPoints && pathname === joiningPointsItem.href);
+
+              return (
+              <li
+                className={hasJoiningPoints ? styles.hasSubmenu : undefined}
+                key={item.href}
+              >
+                <Link
+                  className={styles.link}
+                  href={item.href}
+                  aria-current={
+                    isCurrentPath(pathname, item.href) ? "page" : undefined
+                  }
+                  data-active={isActive ? "true" : undefined}
+                >
+                  {item.label}
+                </Link>
+                {hasJoiningPoints ? (
+                  <div className={styles.submenu}>
+                    <Link
+                      className={styles.submenuLink}
+                      href={joiningPointsItem.href}
+                      aria-current={
+                        pathname === joiningPointsItem.href ? "page" : undefined
+                      }
+                    >
+                      {joiningPointsItem.label}
+                    </Link>
+                  </div>
+                ) : null}
+              </li>
+              );
+            })}
+          </ul>
+          </div>
+          <button
+            ref={triggerRef}
+            className={styles.mobileButton}
+            type="button"
+            aria-expanded={isOpen}
+            aria-controls={drawerId}
+            onClick={() => setIsOpen(true)}
+          >
+            <span>Menu</span>
+            <span aria-hidden="true">↘</span>
+          </button>
+        </Container>
+      </div>
 
       {isOpen ? (
         <div
@@ -156,7 +198,10 @@ export function SiteNavigation({
               </button>
             </div>
             <ul className={styles.mobileList}>
-              {visibleItems.map((item, index) => (
+              {visibleItems.map((item, index) => {
+                const hasJoiningPoints = item.href === "/departures";
+
+                return (
                 <li key={item.href}>
                   <Link
                     ref={index === 0 ? firstLinkRef : undefined}
@@ -167,13 +212,28 @@ export function SiteNavigation({
                   >
                     {item.label}
                   </Link>
+                  {hasJoiningPoints ? (
+                    <Link
+                      className={styles.mobileSubmenuLink}
+                      href={joiningPointsItem.href}
+                      aria-current={
+                        pathname === joiningPointsItem.href ? "page" : undefined
+                      }
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {joiningPointsItem.label}
+                    </Link>
+                  ) : null}
                 </li>
-              ))}
+                );
+              })}
             </ul>
             <Link
-              className={`${styles.mobileLink} ${styles.mobileSignIn}`}
+              className={styles.mobileSignIn}
               href={signInHref}
-              aria-current={isCurrentPath(pathname, signInHref) ? "page" : undefined}
+              aria-current={
+                isCurrentPath(pathname, signInHref) ? "page" : undefined
+              }
               onClick={() => setIsOpen(false)}
             >
               Sign in

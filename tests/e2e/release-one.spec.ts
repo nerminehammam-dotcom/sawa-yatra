@@ -20,12 +20,16 @@ const andeanDepartureRoutes = andeanDepartureSlugs.map(
 
 const publicRoutes = [
   "/",
+  "/caravans",
+  "/caravans/the-andean-caravan",
+  "/joining-points",
   "/how-it-works",
   "/travel-self",
   "/departures",
   ...andeanDepartureRoutes,
   "/membership",
   "/about",
+  "/start-here",
   "/sign-in",
   "/request-invitation",
   "/privacy",
@@ -89,8 +93,8 @@ test.describe("Release 1 route contract", () => {
   });
 });
 
-test.describe("Andean departures scope", () => {
-  test("keeps Departures as the public navigation label", async ({
+test.describe("Andean caravan scope", () => {
+  test("uses Caravans as the public navigation label", async ({
     page,
   }, testInfo) => {
     test.skip(
@@ -98,14 +102,14 @@ test.describe("Andean departures scope", () => {
       "One desktop navigation assertion is sufficient.",
     );
 
-    await page.goto("/departures");
+    await page.goto("/caravans");
     const navigation = page.getByRole("navigation", { name: "Primary" });
 
     await expect(
-      navigation.getByRole("link", { name: "Departures", exact: true }),
+      navigation.getByRole("link", { name: "Caravans", exact: true }),
     ).toBeVisible();
     await expect(
-      navigation.getByRole("link", { name: "Caravans", exact: true }),
+      navigation.getByRole("link", { name: "Departures", exact: true }),
     ).toHaveCount(0);
     await expect(
       navigation.getByRole("link", { name: /open seats/i }),
@@ -206,6 +210,60 @@ test.describe("Andean departures scope", () => {
 });
 
 test.describe("keyboard interaction", () => {
+  test("the illustrated Caravan map can be explored without a pointer", async ({
+    page,
+  }, testInfo) => {
+    test.skip(testInfo.project.name !== "desktop-1024", "One keyboard map flow is sufficient.");
+
+    await page.goto("/departures/the-andean-caravan#caravan-route-map-heading");
+    await expect(
+      page.getByRole("heading", { level: 3, name: "Follow the Andes south." }),
+    ).toBeVisible();
+    const routeOverview = page.locator(
+      'dl[aria-label="Complete Caravan route overview"]',
+    );
+    await expect(routeOverview).not.toContainText("Puno");
+    await expect(routeOverview).toContainText("Balmaceda Airport (arrival)");
+    await expect(routeOverview).toContainText(
+      "Carretera Austral to Villa O’Higgins",
+    );
+    await expect(routeOverview).toContainText("Balmaceda (return)");
+
+    const uyuni = page.getByRole("button", {
+      name: "Stop 7: Uyuni, Bolivia",
+    });
+    await uyuni.click();
+    const destinationCard = page.getByRole("complementary", {
+      name: "Selected route stop",
+    });
+    await expect(destinationCard).toContainText("3,656 m");
+    await expect(destinationCard).toContainText("29.7k");
+    await expect(destinationCard).toContainText("08 · Atacama");
+    await expect(
+      destinationCard.getByRole("img", {
+        name: "A shallow high-altitude lagoon reflects the mountains near Uyuni.",
+      }),
+    ).toBeVisible();
+
+    await page.getByRole("button", { name: "Show a closer map view" }).click();
+    await expect(page.getByText("Closer", { exact: true })).toBeVisible();
+
+    const balmaceda = page.getByRole("button", {
+      name: "Stop 13: Balmaceda (return), Chile",
+    });
+    await balmaceda.focus();
+    await page.keyboard.press("Enter");
+    await expect(balmaceda).toHaveAttribute("aria-pressed", "true");
+    await expect(
+      page.getByRole("complementary", { name: "Selected route stop" }),
+    ).toContainText("Balmaceda");
+    await expect(
+      page.getByRole("progressbar", {
+        name: "Progress along the illustrated route",
+      }),
+    ).toHaveAttribute("aria-valuenow", "100");
+  });
+
   test("the collapsed navigation traps focus and closes with Escape", async ({
     page,
   }, testInfo) => {
@@ -223,7 +281,7 @@ test.describe("keyboard interaction", () => {
     await expect(dialog).toBeVisible();
     await expect(menuButton).toHaveAttribute("aria-expanded", "true");
     await expect(
-      dialog.getByRole("link", { name: "How it works" }),
+      dialog.getByRole("link", { name: "Caravans" }),
     ).toBeFocused();
 
     await page.keyboard.press("Escape");
@@ -270,22 +328,35 @@ test.describe("keyboard interaction", () => {
     ).toBeVisible();
   });
 
-  test("Andean departure cards expose their route and work by keyboard", async ({
+  test("the Caravan entry and departure cards work by keyboard", async ({
     page,
   }, testInfo) => {
     test.skip(testInfo.project.name !== "desktop-1024", "One keyboard flow is sufficient.");
 
     await page.goto("/departures");
-    const desertCoastCard = page
-      .locator('a[href="/departures/desert-coast"]')
-      .last();
+    const caravanEntry = page.locator(
+      'a[href="/departures/the-andean-caravan"]',
+    );
+
+    await expect(caravanEntry).toHaveCount(1);
+    await caravanEntry.focus();
+    await Promise.all([
+      page.waitForURL(/\/departures\/the-andean-caravan$/u),
+      page.keyboard.press("Enter"),
+    ]);
+
+    const desertCoastCard = page.getByRole("link", {
+      name: /Caravan section Desert Coast/u,
+    });
 
     await expect(desertCoastCard).toContainText("Desert Coast");
     await expect(desertCoastCard).toContainText("Lima");
     await expect(desertCoastCard).toContainText("Arequipa");
-    await desertCoastCard.press("Enter");
-
-    await expect(page).toHaveURL(/\/departures\/desert-coast$/u);
+    await desertCoastCard.focus();
+    await Promise.all([
+      page.waitForURL(/\/departures\/desert-coast$/u),
+      page.keyboard.press("Enter"),
+    ]);
   });
 
   test("membership FAQ exposes its expanded state", async ({ page }, testInfo) => {
