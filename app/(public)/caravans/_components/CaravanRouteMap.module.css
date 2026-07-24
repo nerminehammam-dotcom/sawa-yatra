@@ -1,0 +1,733 @@
+.root {
+  display: grid;
+  gap: var(--space-8);
+  color: var(--ink);
+  background: var(--paper);
+  border-bottom: var(--border-strong) solid var(--ink);
+}
+
+.heading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(20rem, 0.65fr);
+  gap: var(--space-8);
+  align-items: end;
+  padding: clamp(2rem, 5vw, 5rem) var(--page-gutter) 0;
+}
+
+.heading h3 {
+  grid-column: 1;
+  max-width: 10ch;
+  font-size: clamp(3.5rem, 8vw, 8rem);
+  line-height: 0.82;
+  scroll-margin-top: calc(var(--nav-height) + var(--space-4));
+}
+
+.heading > p:last-child {
+  grid-column: 2;
+  grid-row: 2;
+  max-width: 35ch;
+  font-size: 0.9rem;
+}
+
+.kicker,
+.stopCount,
+.country,
+.progressLabel,
+.orientation > p,
+.quickFacts dt {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.mapShell {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(30rem, 0.75fr);
+  min-height: 56rem;
+  border-block: var(--border-strong) solid var(--ink);
+}
+
+.mapStage {
+  position: relative;
+  min-height: 56rem;
+  overflow: hidden;
+  background: var(--olive);
+  border-inline-end: var(--border-strong) solid var(--ink);
+}
+
+.mapCanvas {
+  position: absolute;
+  inset: 0;
+  min-width: 44rem;
+  transform: scale(var(--map-zoom));
+  transform-origin: var(--map-origin-x) var(--map-origin-y);
+  transition: transform var(--motion-route) ease;
+}
+
+.landscape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.zoomControls {
+  position: absolute;
+  z-index: 8;
+  top: var(--space-4);
+  left: var(--space-4);
+  display: grid;
+  grid-template-columns: var(--touch-min) auto var(--touch-min);
+  align-items: center;
+  color: var(--paper);
+  background: var(--ink);
+  border: var(--border-strong) solid var(--ink);
+}
+
+.zoomControls button {
+  min-width: var(--touch-min);
+  min-height: var(--touch-min);
+  color: var(--ink);
+  font-size: 1.35rem;
+  background: var(--sun);
+  border: 0;
+}
+
+.zoomControls button:hover:not(:disabled),
+.zoomControls button:focus-visible {
+  color: var(--paper);
+  background: var(--signal);
+}
+
+.zoomControls button:disabled {
+  color: var(--paper);
+  background: var(--olive);
+}
+
+.zoomControls > span {
+  min-width: 6rem;
+  padding: var(--space-3);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.zoomControls .resetZoom {
+  grid-column: 1 / -1;
+  min-height: 2.25rem;
+  color: var(--ink);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--pink);
+  border-top: var(--border-hairline) solid var(--ink);
+}
+
+.countryShapes path {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.countryShapes .peru {
+  fill: var(--sun);
+}
+
+.countryShapes .bolivia {
+  fill: var(--pink);
+}
+
+.countryShapes .chile {
+  fill: var(--clay);
+}
+
+.countryLabels text {
+  fill: var(--ink);
+  font-family: var(--font-read);
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+.oceanMarks,
+.mountainChain,
+.lakeIllustration,
+.saltIllustration,
+.desertIllustration,
+.patagoniaIllustration,
+.condorIllustration,
+.llamaIllustration,
+.vanIllustration {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2;
+}
+
+.oceanMarks,
+.mountainChain,
+.patagoniaIllustration {
+  stroke-dasharray: 7 5;
+}
+
+.condorIllustration,
+.llamaIllustration,
+.vanIllustration {
+  fill: var(--ink);
+}
+
+.flightShadow {
+  fill: none;
+  stroke: var(--paper);
+  stroke-width: 10;
+}
+
+.flightArc {
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 4;
+  stroke-dasharray: 10 10;
+}
+
+.flightArcActive {
+  stroke: var(--signal);
+}
+
+.plane {
+  fill: var(--ink);
+  offset-path: path("M369.7 599 C490 660 468 765 339.3 816");
+  offset-distance: 46%;
+}
+
+.routeShadow,
+.routeUpcoming,
+.routeProgress {
+  fill: none;
+  stroke-linecap: square;
+  stroke-linejoin: bevel;
+}
+
+.routeShadow {
+  stroke: var(--paper);
+  stroke-width: 14;
+}
+
+.routeUpcoming {
+  stroke: var(--ink);
+  stroke-width: 5;
+  stroke-dasharray: 3 11;
+}
+
+.routeProgress {
+  stroke: var(--signal);
+  stroke-width: 7;
+}
+
+.mapCaptions text {
+  fill: var(--ink);
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-style: italic;
+}
+
+.stops {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stop {
+  position: absolute;
+  left: var(--stop-x);
+  top: var(--stop-y);
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  transform: translate(
+    calc(-50% + var(--marker-shift-x)),
+    calc(-50% + var(--marker-shift-y))
+  );
+}
+
+.stop::before {
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  width: var(--leader-length);
+  height: var(--border-strong);
+  background: var(--ink);
+  content: "";
+  transform: rotate(var(--leader-angle));
+  transform-origin: left center;
+}
+
+.stopButton {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: 0 0 2.75rem;
+  place-items: center;
+  color: var(--paper);
+  font-size: 0.68rem;
+  font-weight: 500;
+  background: var(--ink);
+  border: var(--border-strong) solid var(--paper);
+  transition: transform var(--motion-fast) ease;
+}
+
+.stop[data-route-role="join"] .stopButton {
+  border-radius: 50%;
+}
+
+.stop[data-route-role="leave"] .stopButton {
+  outline: var(--border-strong) solid var(--ink);
+  outline-offset: 0.18rem;
+}
+
+.stop[data-route-role="join-leave"] .stopButton {
+  border-radius: 50%;
+  outline: var(--border-strong) solid var(--ink);
+  outline-offset: 0.18rem;
+}
+
+.stopButton:hover,
+.stopButton[aria-pressed="true"] {
+  color: var(--ink);
+  background: var(--signal);
+  border-color: var(--ink);
+  transform: translateY(-3px);
+}
+
+.stopButton:focus-visible {
+  color: var(--ink);
+  background: var(--sun);
+  border-color: var(--ink);
+  outline: 0.22rem solid var(--paper);
+  outline-offset: 0.2rem;
+}
+
+.stopLabel {
+  position: relative;
+  z-index: 2;
+  max-width: 10rem;
+  padding: var(--space-1) var(--space-2);
+  color: var(--ink);
+  font-size: 0.68rem;
+  font-weight: 500;
+  line-height: 1.15;
+  background: var(--paper);
+  border: var(--border-hairline) solid var(--ink);
+}
+
+.left .stopLabel {
+  order: -1;
+}
+
+.stopLabelActive {
+  background: var(--pink);
+  border-width: var(--border-strong);
+}
+
+.stop[data-route-id="arequipa"] .stopLabel {
+  transform: translate(-0.25rem, 1.35rem);
+}
+
+.stop[data-route-id="cusco"] .stopLabel {
+  transform: translate(0.25rem, -1.35rem);
+}
+
+.stop[data-route-id="titicaca"] .stopLabel {
+  transform: translate(0.25rem, -1.6rem);
+}
+
+.stop[data-route-id="la-paz"] .stopLabel {
+  transform: translate(-0.25rem, 1.5rem);
+}
+
+.stop[data-route-id="sucre"] .stopLabel {
+  transform: translate(0.25rem, -1.35rem);
+}
+
+.stop[data-route-id="uyuni"] .stopLabel {
+  transform: translate(-0.25rem, 1.4rem);
+}
+
+.stop[data-route-id="balmaceda-airport"] .stopLabel,
+.stop[data-route-id="coyhaique"] .stopLabel,
+.stop[data-route-id="villa-ohiggins"] .stopLabel,
+.stop[data-route-id="balmaceda"] .stopLabel {
+  max-width: 8.5rem;
+}
+
+.traveller {
+  position: absolute;
+  z-index: 3;
+  left: var(--stop-x);
+  top: var(--stop-y);
+  width: 4rem;
+  height: 4rem;
+  border: var(--border-strong) solid var(--ink);
+  transform: translate(-50%, -50%) rotate(45deg);
+  transition: left var(--motion-route) ease, top var(--motion-route) ease;
+}
+
+.traveller span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0.55rem solid var(--signal);
+}
+
+.routeLog {
+  min-width: 0;
+  background: var(--paper);
+}
+
+.destinationCard {
+  display: grid;
+  grid-template-rows: minmax(18rem, 0.72fr) auto;
+  min-height: 100%;
+  animation: reveal-card var(--motion-route) ease both;
+}
+
+.destinationPhoto {
+  position: relative;
+  min-height: 18rem;
+  margin: 0;
+  overflow: hidden;
+  border-bottom: var(--border-strong) solid var(--ink);
+}
+
+.destinationPhoto img {
+  object-fit: cover;
+}
+
+.destinationPhoto figcaption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: var(--space-3) var(--space-4);
+  color: var(--paper);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  background: var(--ink);
+}
+
+.destinationBody {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.stopCount,
+.country {
+  color: var(--ink);
+}
+
+.activeName {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 5.6rem);
+  line-height: 0.82;
+  letter-spacing: -0.055em;
+}
+
+.introduction {
+  font-size: 0.9rem;
+}
+
+.quickFacts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  margin: 0;
+  border: var(--border-strong) solid var(--ink);
+}
+
+.quickFacts > div {
+  min-width: 0;
+  padding: var(--space-3);
+}
+
+.quickFacts > div + div {
+  border-inline-start: var(--border-hairline) solid var(--ink);
+}
+
+.quickFacts dd {
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+  margin: var(--space-2) 0 0;
+  overflow-wrap: anywhere;
+}
+
+.quickFactValue {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 2.6vw, 2.6rem);
+  line-height: 1;
+}
+
+.quickFacts small {
+  font-size: 0.68rem;
+  line-height: 1.3;
+}
+
+.orientation {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.orientation ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2) var(--space-4);
+  margin: 0;
+  padding-inline-start: 1.2rem;
+  font-size: 0.8rem;
+}
+
+.nextStop {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  min-height: 4.75rem;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  color: var(--ink);
+  text-align: left;
+  background: var(--pink);
+  border: var(--border-strong) solid var(--ink);
+}
+
+.nextStop span:first-child {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.nextStop strong {
+  grid-column: 1;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.nextStop span:last-child {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  font-size: 2rem;
+}
+
+.progressGroup {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.progressLabel {
+  display: flex;
+  justify-content: space-between;
+}
+
+.progressTrack {
+  height: 0.7rem;
+  background: var(--paper);
+  border: var(--border-hairline) solid var(--ink);
+}
+
+.progressTrack > span {
+  display: block;
+  height: 100%;
+  background: var(--signal);
+  transition: width var(--motion-route) ease;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: var(--touch-min) 1fr var(--touch-min);
+  gap: var(--space-2);
+}
+
+.controls button,
+.motionNote {
+  min-height: var(--touch-min);
+  color: var(--paper);
+  background: var(--ink);
+  border: var(--border-strong) solid var(--ink);
+}
+
+.controls button {
+  font-size: 1.2rem;
+}
+
+.controls .playButton,
+.motionNote {
+  display: grid;
+  place-items: center;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.controls button:hover,
+.controls button:focus-visible {
+  color: var(--ink);
+  background: var(--sun);
+}
+
+.mapNote {
+  font-size: 0.68rem;
+  line-height: 1.4;
+}
+
+.mapNote a {
+  color: var(--ink);
+}
+
+@keyframes reveal-card {
+  from {
+    transform: translateX(1.25rem);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 1050px) {
+  .mapShell {
+    grid-template-columns: 1fr;
+  }
+
+  .mapStage {
+    min-height: 52rem;
+    border-inline-end: 0;
+    border-bottom: var(--border-strong) solid var(--ink);
+  }
+
+  .routeLog {
+    min-height: 0;
+  }
+
+  .destinationCard {
+    grid-template-columns: minmax(0, 0.9fr) minmax(22rem, 1.1fr);
+    grid-template-rows: auto;
+  }
+
+  .destinationPhoto {
+    min-height: 38rem;
+    border-bottom: 0;
+    border-inline-end: var(--border-strong) solid var(--ink);
+  }
+}
+
+@media (max-width: 767px) {
+  .heading {
+    grid-template-columns: 1fr;
+    padding-inline: var(--page-gutter);
+  }
+
+  .heading > p:last-child {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .mapStage {
+    min-height: 42rem;
+    overflow: auto;
+  }
+
+  .mapCanvas {
+    min-width: 0;
+  }
+
+  .zoomControls {
+    position: sticky;
+    width: max-content;
+  }
+
+  .stopLabel {
+    display: none;
+  }
+
+  .activeStop .stopLabel {
+    position: absolute;
+    display: block;
+    top: 50%;
+    min-width: max-content;
+    order: initial;
+    transform: translateY(-50%);
+  }
+
+  .activeStop.right .stopLabel {
+    left: calc(100% + var(--space-2));
+  }
+
+  .activeStop.left .stopLabel {
+    right: calc(100% + var(--space-2));
+    left: auto;
+  }
+
+  .destinationCard {
+    grid-template-columns: 1fr;
+  }
+
+  .destinationPhoto {
+    min-height: 24rem;
+    border-inline-end: 0;
+    border-bottom: var(--border-strong) solid var(--ink);
+  }
+
+  .orientation ul {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 440px) {
+  .heading h3 {
+    font-size: clamp(3.35rem, 16vw, 4.8rem);
+  }
+
+  .mapStage {
+    min-height: 39rem;
+  }
+
+  .zoomControls {
+    top: var(--space-3);
+    left: var(--space-3);
+  }
+
+  .zoomControls > span {
+    min-width: 5.25rem;
+  }
+
+  .quickFacts {
+    grid-template-columns: 1fr;
+  }
+
+  .quickFacts > div + div {
+    border-inline-start: 0;
+    border-top: var(--border-hairline) solid var(--ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mapCanvas,
+  .stopButton,
+  .traveller,
+  .progressTrack > span {
+    transition: none;
+  }
+
+  .destinationCard {
+    animation: none;
+  }
+}
