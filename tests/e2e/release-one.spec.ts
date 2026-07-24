@@ -94,7 +94,7 @@ test.describe("Release 1 route contract", () => {
 });
 
 test.describe("Andean caravan scope", () => {
-  test("uses Caravans as the public navigation label", async ({
+  test("uses the approved primary and utility navigation", async ({
     page,
   }, testInfo) => {
     test.skip(
@@ -102,18 +102,60 @@ test.describe("Andean caravan scope", () => {
       "One desktop navigation assertion is sufficient.",
     );
 
-    await page.goto("/caravans");
+    await page.goto("/");
     const navigation = page.getByRole("navigation", { name: "Primary" });
+    const primaryList = navigation.getByRole("list", {
+      name: "Primary navigation links",
+    });
+    const primaryLinks = primaryList.locator(":scope > li > a");
+    const expectedPrimaryNavigation = [
+      ["How it works", "/how-it-works"],
+      ["Meet your Travel Self", "/travel-self"],
+      ["Caravan Hop On Hop Off", "/caravans"],
+      ["Do It Yourself", "/do-it-yourself"],
+      ["Discover Journeys With Others", "/departures"],
+      ["About", "/about"],
+    ] as const;
 
+    await expect(primaryLinks).toHaveCount(expectedPrimaryNavigation.length);
+    for (const [index, [label, href]] of expectedPrimaryNavigation.entries()) {
+      await expect(primaryLinks.nth(index)).toHaveText(label);
+      await expect(primaryLinks.nth(index)).toHaveAttribute("href", href);
+    }
     await expect(
-      navigation.getByRole("link", { name: "Caravans", exact: true }),
-    ).toBeVisible();
-    await expect(
-      navigation.getByRole("link", { name: "Departures", exact: true }),
+      primaryList.getByRole("link", { name: "Membership", exact: true }),
     ).toHaveCount(0);
+    const utilityActions = navigation.getByRole("group", {
+      name: "Utility actions",
+    });
+    await expect(
+      utilityActions.getByRole("link", {
+        name: "Become a Member",
+        exact: true,
+      }),
+    ).toHaveAttribute("href", "/membership");
+    await expect(
+      utilityActions.getByRole("link", { name: "Sign in", exact: true }),
+    ).toHaveAttribute("href", "/sign-in");
     await expect(
       navigation.getByRole("link", { name: /open seats/i }),
     ).toHaveCount(0);
+
+    const navigationGeometry = await primaryLinks.evaluateAll((links) => ({
+      tops: links.map((link) => link.getBoundingClientRect().top),
+      whiteSpace: links.map((link) => getComputedStyle(link).whiteSpace),
+      documentWidth: document.documentElement.scrollWidth,
+      viewportWidth: window.innerWidth,
+    }));
+    expect(
+      Math.max(...navigationGeometry.tops) - Math.min(...navigationGeometry.tops),
+    ).toBeLessThanOrEqual(1);
+    expect(navigationGeometry.whiteSpace).toEqual(
+      Array(expectedPrimaryNavigation.length).fill("nowrap"),
+    );
+    expect(navigationGeometry.documentWidth).toBeLessThanOrEqual(
+      navigationGeometry.viewportWidth,
+    );
   });
 
   test("publishes provisional date wording without internal gate dates", async ({
@@ -281,8 +323,36 @@ test.describe("keyboard interaction", () => {
     await expect(dialog).toBeVisible();
     await expect(menuButton).toHaveAttribute("aria-expanded", "true");
     await expect(
-      dialog.getByRole("link", { name: "Caravans" }),
+      dialog.getByRole("link", { name: "How it works" }),
     ).toBeFocused();
+    const mobilePrimaryLinks = dialog
+      .getByRole("list", { name: "Primary navigation links" })
+      .locator(":scope > li > a:first-child");
+    await expect(mobilePrimaryLinks).toHaveCount(6);
+    await expect(mobilePrimaryLinks).toHaveText([
+      "How it works",
+      "Meet your Travel Self",
+      "Caravan Hop On Hop Off",
+      "Do It Yourself",
+      "Discover Journeys With Others",
+      "About",
+    ]);
+    const mobileUtilities = dialog.getByRole("group", {
+      name: "Utility actions",
+    });
+    await expect(
+      mobileUtilities.getByRole("link", { name: "Become a Member" }),
+    ).toHaveAttribute("href", "/membership");
+    await expect(
+      mobileUtilities.getByRole("link", { name: "Sign in" }),
+    ).toHaveAttribute("href", "/sign-in");
+    const mobileGeometry = await page.evaluate(() => ({
+      documentWidth: document.documentElement.scrollWidth,
+      viewportWidth: window.innerWidth,
+    }));
+    expect(mobileGeometry.documentWidth).toBeLessThanOrEqual(
+      mobileGeometry.viewportWidth,
+    );
 
     await page.keyboard.press("Escape");
     await expect(dialog).toBeHidden();

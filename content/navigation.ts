@@ -1,6 +1,6 @@
 import type { NavigationItem } from "@/lib/types";
 
-export const primaryNavigation: readonly NavigationItem[] = [
+export const primaryNavigation = [
   {
     id: "how-it-works",
     label: "How it works",
@@ -26,9 +26,9 @@ export const primaryNavigation: readonly NavigationItem[] = [
     contentStatus: "LOCKED",
   },
   {
-    id: "membership",
-    label: "Membership",
-    href: "/membership",
+    id: "discover-journeys-with-others",
+    label: "Discover Journeys With Others",
+    href: "/departures",
     contentStatus: "LOCKED",
   },
   {
@@ -37,9 +37,15 @@ export const primaryNavigation: readonly NavigationItem[] = [
     href: "/about",
     contentStatus: "LOCKED",
   },
-] as const;
+] as const satisfies readonly NavigationItem[];
 
 export const utilityNavigation = [
+  {
+    id: "become-a-member",
+    label: "Become a Member",
+    href: "/membership",
+    contentStatus: "LOCKED",
+  },
   {
     id: "sign-in",
     label: "Sign in",
@@ -49,7 +55,14 @@ export const utilityNavigation = [
 ] as const satisfies readonly NavigationItem[];
 
 export const footerNavigation = [
-  ...primaryNavigation,
+  ...primaryNavigation.slice(0, 4),
+  {
+    id: "membership",
+    label: "Membership",
+    href: "/membership",
+    contentStatus: "LOCKED",
+  },
+  primaryNavigation[5],
   {
     id: "privacy",
     label: "Privacy",

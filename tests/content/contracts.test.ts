@@ -109,16 +109,34 @@ describe("Release 1 content contracts", () => {
 
   it("keeps Open Seats and dead links out of navigation", () => {
     const navigation = [...primaryNavigation, ...utilityNavigation];
-    const caravansItem = primaryNavigation.find(
-      (item) => item.href === "/caravans",
-    );
 
-    expect(caravansItem?.label).toBe("Caravans");
+    expect(
+      primaryNavigation.map(({ label, href }) => ({ label, href })),
+    ).toEqual([
+      { label: "How it works", href: "/how-it-works" },
+      { label: "Meet your Travel Self", href: "/travel-self" },
+      { label: "Caravan Hop On Hop Off", href: "/caravans" },
+      { label: "Do It Yourself", href: "/do-it-yourself" },
+      {
+        label: "Discover Journeys With Others",
+        href: "/departures",
+      },
+      { label: "About", href: "/about" },
+    ]);
+    expect(
+      utilityNavigation.map(({ label, href }) => ({ label, href })),
+    ).toEqual([
+      { label: "Become a Member", href: "/membership" },
+      { label: "Sign in", href: "/sign-in" },
+    ]);
+    const primaryHrefs: readonly string[] = primaryNavigation.map(
+      (item) => item.href,
+    );
+    expect(primaryHrefs).not.toContain("/membership");
     expect(
       navigation.every(
         (item) =>
           !item.label.toLowerCase().includes("open seats") &&
-          item.label.toLowerCase() !== "departures" &&
           !item.href.includes("open-seats") &&
           item.href.startsWith("/") &&
           !item.href.includes("#"),

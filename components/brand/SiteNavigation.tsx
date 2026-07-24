@@ -2,9 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useId, useRef, useState } from "react";
+import { Fragment, useEffect, useId, useRef, useState } from "react";
 
 import { Container } from "@/components/ui/Container";
+import { utilityNavigation } from "@/content/navigation";
 
 import styles from "./SiteNavigation.module.css";
 import { Wordmark } from "./Wordmark";
@@ -24,7 +25,7 @@ const defaultItems: readonly SiteNavigationItem[] = [
   { href: "/travel-self", label: "Meet your Travel Self" },
   { href: "/caravans", label: "Caravan Hop On Hop Off" },
   { href: "/do-it-yourself", label: "Do It Yourself" },
-  { href: "/membership", label: "Membership" },
+  { href: "/departures", label: "Discover Journeys With Others" },
   { href: "/about", label: "About" },
 ] as const;
 
@@ -48,6 +49,10 @@ export function SiteNavigation({
   const drawerRef = useRef<HTMLDivElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
   const visibleItems = items.filter((item) => item.href !== "/open-seats");
+  const utilityItems = utilityNavigation.map((item) => ({
+    ...item,
+    href: item.id === "sign-in" ? signInHref : item.href,
+  }));
 
   useEffect(() => {
     const desktopQuery = window.matchMedia("(min-width: 1024px)");
@@ -108,22 +113,37 @@ export function SiteNavigation({
       <div className={styles.brandBand}>
         <Container className={styles.brandRow}>
           <Wordmark size="large" />
-          <Link
-            className={styles.signIn}
-            href={signInHref}
-            aria-current={
-              isCurrentPath(pathname, signInHref) ? "page" : undefined
-            }
+          <div
+            className={styles.utilityActions}
+            role="group"
+            aria-label="Utility actions"
           >
-            Sign in
-          </Link>
+            {utilityItems.map((item, index) => (
+              <Fragment key={item.id}>
+                {index > 0 ? (
+                  <span className={styles.utilitySeparator} aria-hidden="true">
+                    ·
+                  </span>
+                ) : null}
+                <Link
+                  className={styles.utilityLink}
+                  href={item.href}
+                  aria-current={
+                    isCurrentPath(pathname, item.href) ? "page" : undefined
+                  }
+                >
+                  {item.label}
+                </Link>
+              </Fragment>
+            ))}
+          </div>
         </Container>
       </div>
 
       <div className={styles.navigationBand}>
         <Container className={styles.navigationRow}>
           <div className={styles.desktop}>
-          <ul className={styles.list}>
+          <ul className={styles.list} aria-label="Primary navigation links">
             {visibleItems.map((item) => {
               const hasJoiningPoints = item.href === "/departures";
               const isActive =
@@ -197,7 +217,10 @@ export function SiteNavigation({
                 Close
               </button>
             </div>
-            <ul className={styles.mobileList}>
+            <ul
+              className={styles.mobileList}
+              aria-label="Primary navigation links"
+            >
               {visibleItems.map((item, index) => {
                 const hasJoiningPoints = item.href === "/departures";
 
@@ -228,16 +251,25 @@ export function SiteNavigation({
                 );
               })}
             </ul>
-            <Link
-              className={styles.mobileSignIn}
-              href={signInHref}
-              aria-current={
-                isCurrentPath(pathname, signInHref) ? "page" : undefined
-              }
-              onClick={() => setIsOpen(false)}
+            <div
+              className={styles.mobileUtilities}
+              role="group"
+              aria-label="Utility actions"
             >
-              Sign in
-            </Link>
+              {utilityItems.map((item) => (
+                <Link
+                  className={styles.mobileUtilityLink}
+                  href={item.href}
+                  aria-current={
+                    isCurrentPath(pathname, item.href) ? "page" : undefined
+                  }
+                  key={item.id}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       ) : null}

@@ -20,7 +20,14 @@
   gap: var(--space-8);
 }
 
-.signIn {
+.utilityActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  white-space: nowrap;
+}
+
+.utilityLink {
   display: inline-flex;
   min-height: var(--touch-min);
   align-items: center;
@@ -34,9 +41,14 @@
   border-inline: var(--border-hairline) solid transparent;
 }
 
-.signIn:hover,
-.signIn[aria-current="page"] {
+.utilityLink:hover,
+.utilityLink[aria-current="page"] {
   border-bottom: var(--border-strong) solid var(--pink);
+}
+
+.utilitySeparator {
+  font-size: 0.75rem;
+  line-height: 1;
 }
 
 .navigationBand {
@@ -63,7 +75,13 @@
 .list {
   display: grid;
   height: 100%;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-template-columns:
+    minmax(0, 0.75fr)
+    minmax(0, 1.25fr)
+    minmax(0, 1.28fr)
+    minmax(0, 0.9fr)
+    minmax(0, 1.67fr)
+    minmax(0, 0.5fr);
   border-inline-start: var(--border-hairline) solid var(--ink);
 }
 
@@ -73,13 +91,28 @@
   border-inline-end: var(--border-hairline) solid var(--ink);
 }
 
+.list > li:not(:last-child)::after {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  right: 0;
+  padding-inline: var(--space-1);
+  color: var(--ink);
+  font-size: 0.9rem;
+  line-height: 1;
+  background: var(--paper);
+  content: "·";
+  pointer-events: none;
+  transform: translate(50%, -50%);
+}
+
 .link {
   position: relative;
   display: flex;
   min-height: 3.75rem;
   align-items: center;
   justify-content: center;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-3) clamp(var(--space-1), 0.75vw, var(--space-4));
   color: var(--ink);
   font-size: 0.72rem;
   font-weight: 500;
@@ -88,6 +121,7 @@
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .link::after {
@@ -257,7 +291,13 @@
   background: var(--ink);
 }
 
-.mobileSignIn {
+.mobileUtilities {
+  display: grid;
+  background: var(--ink);
+  border-top: var(--border-strong) solid var(--pink);
+}
+
+.mobileUtilityLink {
   display: flex;
   min-height: 4.5rem;
   align-items: center;
@@ -270,16 +310,30 @@
   text-decoration: none;
   text-transform: uppercase;
   background: var(--ink);
-  border-top: var(--border-strong) solid var(--pink);
 }
 
-.mobileSignIn::after {
+.mobileUtilityLink + .mobileUtilityLink {
+  border-top: var(--border-hairline) solid var(--paper);
+}
+
+.mobileUtilityLink::after {
   content: "↗";
+}
+
+@media (min-width: 1024px) and (max-width: 1120px) {
+  .link {
+    padding-inline: var(--space-1);
+    letter-spacing: 0.065em;
+  }
 }
 
 @media (max-width: 1023px) {
   .brandRow {
     min-height: 5rem;
+  }
+
+  .utilityActions {
+    display: none;
   }
 
   .desktop {
