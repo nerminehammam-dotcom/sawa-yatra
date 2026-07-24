@@ -11,6 +11,7 @@ export interface PageHeroProps {
   intro?: ReactNode;
   actions?: ReactNode;
   media?: ReactNode;
+  mediaLayout?: "overlay" | "split";
   ground?: "cream" | "butter" | "brick" | "olive" | "ink";
   contentPosition?: "left" | "right";
   className?: string;
@@ -23,6 +24,7 @@ export function PageHero({
   intro,
   actions,
   media,
+  mediaLayout = "overlay",
   ground = "cream",
   contentPosition = "left",
   className,
@@ -34,6 +36,7 @@ export function PageHero({
         styles.root,
         styles[ground],
         Boolean(media) && styles.withMedia,
+        Boolean(media) && mediaLayout === "split" && styles.splitMedia,
         styles[contentPosition],
         className,
       )}

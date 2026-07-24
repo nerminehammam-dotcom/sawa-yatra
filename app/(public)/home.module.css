@@ -1,223 +1,314 @@
-.heroAccent {
-  color: var(--brick);
-  font-style: italic;
+.how,
+.route,
+.joining,
+.regions,
+.fieldNotes {
+  background: var(--paper);
 }
 
-a.heroSecondary {
-  color: var(--brick);
-  border-color: var(--brick);
-}
-
-.sectionHeading {
+.how {
   display: grid;
-  max-width: 58rem;
-  gap: var(--space-4);
+  grid-template-columns: minmax(18rem, 0.72fr) minmax(0, 1.28fr);
+  border-bottom: var(--border-strong) solid var(--ink);
 }
 
-.sectionHeading h2,
-.travelSelfCopy h2,
-.membershipCopy h2 {
-  max-width: 17ch;
+.editorialHeading,
+.routeHeading,
+.joiningHeading,
+.regionsHeading,
+.fieldNotes > header {
+  padding: clamp(3rem, 7vw, 7rem) var(--page-gutter);
 }
 
-.splitHeading {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: var(--space-8);
+.editorialHeading {
+  display: grid;
+  align-content: space-between;
+  gap: var(--space-12);
+  min-height: 48rem;
+  border-inline-end: var(--border-strong) solid var(--ink);
 }
 
-.splitHeading > a {
-  flex: none;
+.editorialHeading > p,
+.routeHeading > div > p,
+.joiningHeading > p:first-child,
+.regionsHeading > p,
+.fieldNotes > header > p,
+.finalAction > p {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
 }
 
-.pillarGrid,
-.stepList {
-  margin: clamp(var(--space-12), 7vw, var(--space-24)) 0 0;
+.editorialHeading h2 {
+  max-width: 11ch;
+}
+
+.editorialHeading a {
+  color: var(--ink);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.howSteps {
+  margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.pillarGrid {
+.howSteps li {
   display: grid;
-  gap: var(--space-8);
-}
-
-.pillar {
-  display: grid;
-  align-content: start;
-  gap: var(--space-4);
-  padding-top: var(--space-6);
-  border-top: var(--border-hairline) solid var(--hairline);
-}
-
-.pillar h3,
-.step h3 {
-  max-width: 18ch;
-}
-
-.pillar p,
-.step p {
-  color: var(--deep-brown);
-}
-
-.number,
-.stepNumber {
-  color: var(--brick);
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5vw, 4.25rem);
-  font-weight: 300;
-  line-height: 1;
-}
-
-.stepList {
-  border-top: var(--border-hairline) solid var(--hairline);
-}
-
-.step {
-  display: grid;
-  grid-template-columns: minmax(3.5rem, 0.18fr) minmax(0, 1fr);
-  gap: var(--space-6);
-  padding-block: var(--space-8);
-  border-bottom: var(--border-hairline) solid var(--hairline);
-}
-
-.stepCopy {
-  display: grid;
-  gap: var(--space-3);
-}
-
-.featureStack {
-  display: grid;
-  gap: var(--section-space);
-}
-
-.travelSelfPanel {
-  display: grid;
-  gap: var(--space-12);
-  padding: clamp(var(--space-8), 6vw, var(--space-16));
-  overflow: hidden;
-  border-radius: var(--radius-card);
-  background: var(--soft-butter);
-}
-
-.travelSelfCopy {
-  display: grid;
-  align-content: start;
-  justify-items: start;
-  gap: var(--space-4);
-}
-
-.lead {
-  color: var(--deep-brown);
-  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
-}
-
-.statusLine,
-.mechanismLine {
-  display: flex;
-  flex-wrap: wrap;
+  grid-template-columns: minmax(6rem, 0.4fr) minmax(12rem, 0.8fr) minmax(15rem, 1fr);
   align-items: center;
-  gap: var(--space-3);
+  min-height: 16rem;
+  border-bottom: var(--border-hairline) solid var(--ink);
 }
 
-.chipField {
+.howSteps li:last-child {
+  border-bottom: 0;
+}
+
+.howSteps span,
+.howSteps h3,
+.howSteps p {
+  padding: var(--space-8);
+}
+
+.howSteps span {
+  align-self: stretch;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 6rem);
+  line-height: 1;
+  border-inline-end: var(--border-hairline) solid var(--ink);
+}
+
+.howSteps h3 {
+  font-size: clamp(2rem, 3.8vw, 4rem);
+}
+
+.howSteps p {
+  font-size: 0.95rem;
+}
+
+.routeHeading {
   display: grid;
-  align-content: center;
-  gap: var(--space-4);
+  grid-template-columns: minmax(0, 1.35fr) minmax(22rem, 0.65fr);
+  gap: var(--space-16);
+  align-items: end;
 }
 
-.chipList {
+.routeHeading h2,
+.joiningHeading h2,
+.regionsHeading h2,
+.fieldNotes h2,
+.finalAction h2 {
+  max-width: 11ch;
+  margin-top: var(--space-5);
+  letter-spacing: -0.055em;
+}
+
+.routeHeading aside {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.routeHeading aside strong {
+  color: var(--paper);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+}
+
+.routeHeading aside p {
+  font-size: 0.92rem;
+}
+
+.joining {
+  padding-top: var(--section-space);
+}
+
+.joiningHeading {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(18rem, 0.5fr);
+  gap: var(--space-8);
+  align-items: end;
+}
+
+.joiningHeading > p:first-child,
+.joiningHeading > h2 {
+  grid-column: 1;
+}
+
+.joiningHeading > p:last-child {
+  grid-column: 2;
+  grid-row: 2;
+  max-width: 32ch;
+}
+
+.regions {
+  padding-top: var(--section-space);
+}
+
+.regionsHeading {
+  border-top: var(--border-strong) solid var(--ink);
+}
+
+.fieldNotes {
+  display: grid;
+  gap: var(--space-12);
+  padding-bottom: var(--section-space);
+}
+
+.fieldNotes > header {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--space-8);
+  align-items: start;
+}
+
+.fieldNotes h2 {
+  margin-top: 0;
+}
+
+.imageStrip {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr 1fr 1.2fr;
+  gap: var(--border-strong);
+  min-height: 38rem;
+  overflow-x: auto;
+  background: var(--ink);
+  border-block: var(--border-strong) solid var(--ink);
+}
+
+.imageStrip figure {
+  position: relative;
+  min-width: 17rem;
+  min-height: 38rem;
+  margin: 0;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.imageStrip img {
+  object-fit: cover;
+}
+
+.imageStrip figcaption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: var(--space-3) var(--space-4);
+  color: var(--paper);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  background: var(--ink);
+}
+
+.finalAction {
+  display: grid;
+  min-height: 72vh;
+  align-content: space-between;
+  gap: var(--space-16);
+  padding: clamp(3rem, 7vw, 7rem) var(--page-gutter);
+  color: var(--ink);
+  background: var(--pink);
+}
+
+.finalAction h2 {
+  max-width: 8ch;
+  font-size: clamp(4.5rem, 13vw, 13rem);
+  line-height: 0.78;
+}
+
+.finalAction > div {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
-}
-
-.departures {
-  display: grid;
-  gap: clamp(var(--space-12), 7vw, var(--space-24));
-}
-
-.journeyGrid {
-  display: grid;
-  gap: var(--space-8);
-}
-
-.journeyItem {
-  display: grid;
-  min-width: 0;
-  gap: var(--space-3);
-}
-
-.membershipBand {
-  display: grid;
-  align-items: end;
-  gap: var(--space-12);
-}
-
-.membershipCopy {
-  display: grid;
   gap: var(--space-4);
 }
 
-.mechanismLine {
-  margin-top: var(--space-4);
+.finalAction a {
+  display: inline-flex;
+  min-height: var(--touch-min);
+  align-items: center;
+  padding: var(--space-4) var(--space-5);
+  color: var(--paper);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  background: var(--ink);
+  border: var(--border-strong) solid var(--ink);
 }
 
-.mechanismLine p {
-  color: var(--butter);
+.finalAction a:last-child {
+  color: var(--ink);
+  background: var(--sun);
 }
 
-@media (min-width: 640px) {
-  .heroAccent {
-    color: var(--honey);
+@media (max-width: 1023px) {
+  .how {
+    grid-template-columns: 1fr;
   }
 
-  a.heroSecondary {
-    color: var(--cream);
-    border-color: var(--cream);
+  .editorialHeading {
+    min-height: 38rem;
+    border-inline-end: 0;
+    border-bottom: var(--border-strong) solid var(--ink);
   }
 
-  a.heroSecondary:hover {
-    color: var(--brick);
-    background: var(--cream);
+  .howSteps li {
+    grid-template-columns: 6rem minmax(0, 1fr);
   }
 
-  .pillarGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .howSteps p {
+    grid-column: 2;
+    border-top: var(--border-hairline) solid var(--ink);
   }
 
-  .journeyGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .routeHeading,
+  .joiningHeading,
+  .fieldNotes > header {
+    grid-template-columns: 1fr;
   }
 
-  .travelSelfPanel,
-  .membershipBand {
-    grid-template-columns: minmax(0, 1.25fr) minmax(15rem, 0.75fr);
-  }
-
-  .membershipBand > a {
-    justify-self: end;
-  }
-}
-
-@media (min-width: 1024px) {
-  .journeyGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .joiningHeading > p:last-child {
+    grid-column: 1;
+    grid-row: auto;
   }
 }
 
 @media (max-width: 639px) {
-  .splitHeading {
-    align-items: flex-start;
-    flex-direction: column;
+  .howSteps li {
+    grid-template-columns: 4.5rem minmax(0, 1fr);
   }
 
-  .step {
-    grid-template-columns: 1fr;
+  .howSteps span,
+  .howSteps h3,
+  .howSteps p {
+    padding: var(--space-5);
   }
 
-  .travelSelfPanel {
-    padding-inline: var(--space-6);
+  .howSteps span {
+    font-size: 3.4rem;
+  }
+
+  .imageStrip {
+    display: flex;
+    min-height: 31rem;
+    scroll-snap-type: x mandatory;
+  }
+
+  .imageStrip figure {
+    width: 78vw;
+    min-width: 78vw;
+    min-height: 31rem;
+    scroll-snap-align: start;
   }
 }

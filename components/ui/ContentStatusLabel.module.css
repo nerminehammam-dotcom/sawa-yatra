@@ -2,11 +2,11 @@
   display: inline-flex;
   width: fit-content;
   align-items: center;
-  padding: 0.22rem 0.45rem;
+  padding: 0.28rem 0.5rem;
   border: var(--border-hairline) solid currentColor;
-  border-radius: 0.25rem;
+  border-radius: var(--radius-card);
   font-family: var(--font-read);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: 0.12em;
@@ -14,25 +14,25 @@
 }
 
 .locked {
-  color: var(--success);
+  color: var(--ink);
   background: var(--cream);
-  background: color-mix(in srgb, var(--success) 10%, var(--cream));
+  background: var(--paper);
 }
 
 .draft {
-  color: #704309;
+  color: var(--ink);
   background: var(--cream);
-  background: color-mix(in srgb, var(--warning) 14%, var(--cream));
+  background: var(--paper);
 }
 
 .placeholder {
-  color: var(--error);
+  color: var(--ink);
   background: var(--cream);
-  background: color-mix(in srgb, var(--error) 8%, var(--cream));
+  background: var(--paper);
 }
 
 .legalReview {
-  color: var(--info);
+  color: var(--ink);
   background: var(--cream);
-  background: color-mix(in srgb, var(--info) 9%, var(--cream));
+  background: var(--paper);
 }

@@ -14,7 +14,7 @@ export interface FooterLink {
 export interface FooterProps {
   legalLinks?: readonly FooterLink[];
   pronunciation?: string;
-  ground?: "brick" | "ink";
+  ground?: "brick" | "ink" | "olive";
   className?: string;
 }
 
@@ -27,7 +27,7 @@ const defaultLegalLinks: readonly FooterLink[] = [
 export function Footer({
   legalLinks = defaultLegalLinks,
   pronunciation = "sa·wa·ya·tra",
-  ground = "ink",
+  ground = "olive",
   className,
 }: FooterProps) {
   return (

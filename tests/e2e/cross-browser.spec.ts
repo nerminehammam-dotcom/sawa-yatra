@@ -4,6 +4,9 @@ const publicDateNotice = "exact dates announced when the route is secured";
 
 const crossBrowserRoutes = [
   "/",
+  "/caravans",
+  "/caravans/the-andean-caravan",
+  "/joining-points",
   "/how-it-works",
   "/travel-self",
   "/departures",
@@ -11,6 +14,7 @@ const crossBrowserRoutes = [
   "/departures/the-mirror",
   "/membership",
   "/about",
+  "/start-here",
   "/sign-in",
   "/request-invitation",
   "/privacy",
@@ -38,7 +42,7 @@ for (const route of crossBrowserRoutes) {
     expect(renderingContract.scrollWidth).toBeLessThanOrEqual(
       renderingContract.viewport,
     );
-    expect(renderingContract.cssVariables).toBe("#f6eedc");
+    expect(renderingContract.cssVariables).toBe("#e7e1d6");
     expect(renderingContract.grid).toBe(true);
 
     if (route.startsWith("/departures/")) {

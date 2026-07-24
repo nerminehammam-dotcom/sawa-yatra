@@ -23,6 +23,16 @@ export const siteConfig = {
 } as const;
 
 const approvedRouteDescriptions = {
+  home:
+    "One annual caravan through Peru, Bolivia and Chile. Join at a designated point and leave when your part of the route is complete.",
+  caravans:
+    "Explore Sawayatra caravans, beginning with the annual Andean Caravan through Peru, Bolivia and Chile.",
+  "andean-caravan":
+    "Follow the complete Andean Caravan route through Peru, Bolivia, the Atacama and the Carretera Austral.",
+  "joining-points":
+    "Compare the designated places where travellers can enter and leave the Andean Caravan.",
+  "start-here":
+    "Choose a joining point and begin an enquiry about the Andean Caravan.",
   departures:
     "The Andean Caravan moves through Peru, Bolivia and Chile. Join one of nine consecutive sections, connect several, or travel the complete 71-day route.",
   journey:
@@ -30,7 +40,15 @@ const approvedRouteDescriptions = {
 } as const;
 
 export const routeMetadata = ([
-  ["home", "/", "Sawayatra | Go alone, arrive together."],
+  ["home", "/", "Sawayatra | One caravan. One long route."],
+  ["caravans", "/caravans", "Caravans | Sawayatra"],
+  [
+    "andean-caravan",
+    "/caravans/the-andean-caravan",
+    "The Andean Caravan | Sawayatra",
+  ],
+  ["joining-points", "/joining-points", "Joining points | Sawayatra"],
+  ["start-here", "/start-here", "Start here | Sawayatra"],
   ["how-it-works", "/how-it-works", "How it works | Sawayatra"],
   ["travel-self", "/travel-self", "Meet your Travel Self | Sawayatra"],
   ["departures", "/departures", "Departures | Sawayatra"],
@@ -225,15 +243,24 @@ export const howItWorksContent = {
     },
   ],
   waysToTravel: {
-    title: "Three ways to travel",
-    items: ["Join", "Match", "Create"].map((title) => ({
-      id: title.toLowerCase(),
-      title,
-      body: TO_BE_CONFIRMED,
-      highlighted: title === "Match",
-      contentStatus: "PLACEHOLDER",
-    })),
-    contentStatus: "PLACEHOLDER",
+    title: "Two ways to travel",
+    items: [
+      {
+        id: "caravan-join",
+        title: "Caravan / Join",
+        body: "Join one of nine consecutive sections, combine several, or travel the complete 71-day Andean Caravan.",
+        highlighted: true,
+        contentStatus: "LOCKED",
+      },
+      {
+        id: "create",
+        title: "Create",
+        body: TO_BE_CONFIRMED,
+        highlighted: false,
+        contentStatus: "PLACEHOLDER",
+      },
+    ],
+    contentStatus: "DRAFT",
   },
   mechanisms: {
     eyebrow: "How we keep you held",

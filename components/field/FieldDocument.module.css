@@ -1,0 +1,353 @@
+.hero {
+  position: relative;
+  min-height: calc(100svh - var(--nav-height));
+  overflow: hidden;
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.heroImage,
+.chapterImage img,
+.routePhoto img {
+  object-fit: cover;
+}
+
+.heroScrim {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  opacity: 0.3;
+}
+
+.heroCopy {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: end;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  min-height: calc(100svh - var(--nav-height));
+  padding: clamp(7rem, 14vh, 11rem) var(--page-gutter) clamp(4rem, 9vh, 7rem);
+}
+
+.heroCopy h1 {
+  max-width: 15ch;
+  font-size: clamp(3.4rem, 6vw, 7.2rem);
+  line-height: 0.88;
+  letter-spacing: -0.06em;
+  text-wrap: pretty;
+}
+
+.heroEyebrow,
+.heroCaption,
+.heroIndex,
+.routeFacts dt,
+.chapterImage figcaption {
+  font-family: var(--font-read);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.heroIndex {
+  position: absolute;
+  z-index: 2;
+  top: var(--space-6);
+  right: var(--page-gutter);
+  padding: var(--space-3) var(--space-4);
+  color: var(--ink);
+  background: var(--sun);
+}
+
+.heroCaption {
+  position: absolute;
+  z-index: 2;
+  right: var(--page-gutter);
+  bottom: var(--space-6);
+  writing-mode: vertical-rl;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.primaryAction,
+.secondaryAction,
+.routeLink {
+  display: inline-flex;
+  min-height: var(--touch-min);
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+  padding: 0.75rem 1rem;
+  font-size: 0.86rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: transform var(--motion-fast) ease, background var(--motion-fast) ease;
+}
+
+.primaryAction {
+  color: var(--ink);
+  background: var(--sun);
+  border: var(--border-strong) solid var(--sun);
+}
+
+.secondaryAction {
+  color: var(--paper);
+  border: var(--border-strong) solid var(--paper);
+}
+
+.primaryAction:hover,
+.secondaryAction:hover,
+.routeLink:hover {
+  transform: translate(4px, -4px);
+}
+
+.signal {
+  display: grid;
+  min-height: 48vh;
+  align-content: space-between;
+  gap: var(--space-16);
+  padding: clamp(2rem, 5vw, 5rem) var(--page-gutter);
+  color: var(--ink);
+  background: var(--signal);
+}
+
+.signal > span {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+}
+
+.signal > p {
+  max-width: 9ch;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 12vw, 12rem);
+  line-height: 0.78;
+  letter-spacing: -0.065em;
+}
+
+.routeIndex {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--border-strong) solid var(--ink);
+}
+
+.routeItem {
+  display: grid;
+  grid-template-columns: minmax(5rem, 0.55fr) minmax(8rem, 1fr) minmax(16rem, 2fr) minmax(15rem, 1.4fr) auto;
+  align-items: stretch;
+  min-height: 13rem;
+  border-bottom: var(--border-strong) solid var(--ink);
+}
+
+.routeNumber {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: var(--space-5);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 6vw, 6.5rem);
+  font-weight: 300;
+  line-height: 0.8;
+}
+
+.routePhoto {
+  position: relative;
+  min-height: 13rem;
+  overflow: hidden;
+  border-inline: var(--border-hairline) solid var(--ink);
+}
+
+.routeMain,
+.routeFacts,
+.routeLink {
+  padding: clamp(1.25rem, 2.8vw, 2.5rem);
+}
+
+.routeMain {
+  display: grid;
+  align-content: center;
+  gap: var(--space-3);
+}
+
+.routeMain h3 {
+  font-size: clamp(2rem, 3.5vw, 4rem);
+}
+
+.routeMain p {
+  color: var(--ink);
+}
+
+.routeFacts {
+  display: grid;
+  align-content: center;
+  gap: var(--space-4);
+  margin: 0;
+  border-inline-start: var(--border-hairline) solid var(--ink);
+}
+
+.routeFacts div {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: var(--space-4);
+}
+
+.routeFacts dd {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.routeLink {
+  align-self: stretch;
+  color: var(--ink);
+  background: var(--pink);
+  border-inline-start: var(--border-strong) solid var(--ink);
+}
+
+.chapter {
+  display: grid;
+  grid-template-columns: minmax(18rem, 0.8fr) minmax(0, 1.2fr);
+  min-height: 42rem;
+}
+
+.chapterField {
+  display: grid;
+  align-content: space-between;
+  padding: clamp(2rem, 5vw, 5rem);
+  color: var(--ink);
+  background: var(--sun);
+}
+
+.chapter[data-tone="pink"] .chapterField {
+  background: var(--pink);
+}
+
+.chapter[data-tone="clay"] .chapterField {
+  background: var(--clay);
+}
+
+.chapter[data-tone="olive"] .chapterField {
+  background: var(--olive);
+}
+
+.chapterField > span {
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 8vw, 9rem);
+  line-height: 0.8;
+}
+
+.chapterField h3 {
+  align-self: end;
+  font-size: clamp(4rem, 8vw, 9rem);
+  line-height: 0.78;
+  letter-spacing: -0.06em;
+}
+
+.chapter[data-tone="clay"] .chapterField p {
+  font-size: 1.5rem;
+  line-height: 1.35;
+}
+
+.chapterField p {
+  max-width: 33ch;
+  font-size: 1rem;
+}
+
+.chapterImage {
+  position: relative;
+  min-height: 42rem;
+  margin: 0;
+  overflow: hidden;
+}
+
+.chapterImage figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: var(--space-3) var(--space-4);
+  color: var(--paper);
+  background: var(--ink);
+}
+
+@media (max-width: 1023px) {
+  .routeItem {
+    grid-template-columns: 5.5rem 8rem minmax(0, 1fr);
+  }
+
+  .routeFacts {
+    grid-column: 2 / -1;
+    border-top: var(--border-hairline) solid var(--ink);
+    border-inline-start: var(--border-hairline) solid var(--ink);
+  }
+
+  .routeLink {
+    grid-column: 2 / -1;
+    border-top: var(--border-hairline) solid var(--ink);
+  }
+}
+
+@media (max-width: 767px) {
+  .heroCaption {
+    display: none;
+  }
+
+  .heroCopy h1 {
+    max-width: 10ch;
+  }
+
+  .signal {
+    min-height: 34rem;
+  }
+
+  .routeItem {
+    grid-template-columns: 4.5rem minmax(7rem, 34vw) minmax(0, 1fr);
+  }
+
+  .routeNumber {
+    font-size: 3.5rem;
+  }
+
+  .routeMain {
+    padding: var(--space-4);
+  }
+
+  .routeMain h3 {
+    font-size: clamp(1.55rem, 7.6vw, 2.6rem);
+  }
+
+  .routeMain p {
+    font-size: 0.82rem;
+  }
+
+  .routeFacts {
+    grid-column: 1 / -1;
+    border-inline-start: 0;
+  }
+
+  .routeLink {
+    grid-column: 1 / -1;
+    border-inline-start: 0;
+  }
+
+  .chapter {
+    grid-template-columns: 1fr;
+  }
+
+  .chapterField {
+    min-height: 30rem;
+  }
+
+  .chapterImage {
+    min-height: 28rem;
+  }
+}

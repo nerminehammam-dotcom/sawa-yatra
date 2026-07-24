@@ -18,25 +18,25 @@
 }
 
 .success {
-  color: var(--success);
+  color: var(--ink);
   background: var(--cream);
-  background: color-mix(in srgb, var(--success) 10%, var(--cream));
+  background: var(--paper);
 }
 
 .warning {
-  color: #704309;
+  color: var(--ink);
   background: var(--cream);
-  background: color-mix(in srgb, var(--warning) 14%, var(--cream));
+  background: var(--paper);
 }
 
 .error {
-  color: var(--error);
+  color: var(--ink);
   background: var(--cream);
-  background: color-mix(in srgb, var(--error) 9%, var(--cream));
+  background: var(--paper);
 }
 
 .info {
-  color: var(--info);
+  color: var(--ink);
   background: var(--cream);
-  background: color-mix(in srgb, var(--info) 9%, var(--cream));
+  background: var(--paper);
 }

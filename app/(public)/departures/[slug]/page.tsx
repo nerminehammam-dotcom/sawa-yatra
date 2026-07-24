@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { createPageMetadata } from "@/app/_metadata";
 import { RisoArtwork } from "@/components/brand/RisoArtwork";
 import { DepartureCard } from "@/components/departures/DepartureCard";
+import { CaravanRouteMap } from "@/components/departures/CaravanRouteMap";
 import { JourneyGallery } from "@/components/departures/JourneyGallery";
 import { JourneyInterestForm } from "@/components/forms/JourneyInterestForm";
 import { ButtonLink } from "@/components/ui/ButtonLink";
@@ -24,6 +25,10 @@ import {
   getAndeanCaravanGallery,
   getAndeanCaravanImage,
 } from "@/content/andean-caravan-images";
+import {
+  andeanCaravanCountries,
+  andeanCaravanRouteStops,
+} from "@/content/andean-caravan-route";
 import { archetypes } from "@/content/archetypes";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/site-url";
@@ -106,11 +111,13 @@ function CopySection({
   title,
   paragraphs,
   ground = "cream",
+  tone = "plain",
 }: {
   eyebrow: string;
   title: string;
   paragraphs: readonly string[];
-  ground?: "cream" | "butter" | "olive";
+  ground?: "cream" | "olive";
+  tone?: "plain" | "blue" | "rose";
 }) {
   if (paragraphs.length === 0) return null;
   const headingId = `${eyebrow
@@ -119,7 +126,11 @@ function CopySection({
     .replace(/^-|-$/gu, "")}-heading`;
 
   return (
-    <Section ground={ground} aria-labelledby={headingId}>
+    <Section
+      className={`${styles.copySection} ${tone === "blue" ? styles.blueCopySection : tone === "rose" ? styles.roseCopySection : ""}`}
+      ground={ground}
+      aria-labelledby={headingId}
+    >
       <Container className={styles.copyGrid}>
         <div className={styles.sectionHeading}>
           <Eyebrow
@@ -144,13 +155,13 @@ function InterestSection({ id, title }: { id: string; title: string }) {
   return (
     <Section
       className={styles.interestSection}
-      ground="butter"
+      ground="brick"
       aria-labelledby="journey-interest-heading"
       data-dense="true"
     >
       <Container className={styles.interestGrid}>
         <div className={styles.sectionHeading}>
-          <Eyebrow tone="accent">Enquire</Eyebrow>
+          <Eyebrow tone="inherit" className={styles.deepEyebrow}>Enquire</Eyebrow>
           <h2 id="journey-interest-heading">Where would you like to join?</h2>
           <p>
             This Release 1 form records interest only. It does not reserve a
@@ -173,9 +184,11 @@ function CompleteCaravanPage() {
     <>
       <PageHero
         className={styles.hero}
+        mediaLayout="split"
+        ground="cream"
         eyebrow={
-          <Link className={styles.breadcrumb} href="/departures">
-            Departures · The Andean Caravan
+          <Link className={styles.breadcrumb} href="/caravans">
+            Caravans · The Andean Caravan
           </Link>
         }
         title="The whole length of the Andes. Once a year."
@@ -191,7 +204,7 @@ function CompleteCaravanPage() {
         }
         actions={
           <ButtonLink href="/departures/desert-coast" className={styles.heroAction}>
-            Prefer a shorter journey? Start with section 01
+            Explore section 01 · Desert Coast
           </ButtonLink>
         }
         media={
@@ -204,7 +217,11 @@ function CompleteCaravanPage() {
         }
       />
 
-      <Section ground="butter" aria-labelledby="complete-facts-heading">
+      <Section
+        className={styles.factsSection}
+        ground="cream"
+        aria-labelledby="complete-facts-heading"
+      >
         <Container>
           <div className={styles.sectionHeadingInline}>
             <Eyebrow tone="accent">Complete Caravan</Eyebrow>
@@ -227,25 +244,57 @@ function CompleteCaravanPage() {
         </Container>
       </Section>
 
-      <CopySection
-        eyebrow="The whole journey"
-        title="Nine movements, one altitude curve and one changing group."
-        paragraphs={[
-          "The complete journey is not nine holidays placed end to end. It has one altitude curve, one seasonal logic and one changing group. People will join and leave along the way. Those who stay experience the Caravan gathering and releasing travellers as the landscape changes.",
-          "It moves overland—by van, Land Cruiser, train, boat and barge—with only four short flights, because the point is the ground between places, not the places alone.",
-        ]}
-      />
-
-      <Section ground="cream" aria-labelledby="movements-heading">
+      <Section
+        className={styles.routeSection}
+        ground="cream"
+        aria-labelledby="movements-heading"
+      >
         <Container>
           <div className={styles.routeHeader}>
             <div className={styles.sectionHeading}>
               <Eyebrow tone="accent">The nine movements</Eyebrow>
               <h2 id="movements-heading">From the Pacific to the end of the road.</h2>
             </div>
+            <div className={styles.routeOverview}>
+              <p className={styles.routeOverviewLabel}>Route at a glance</p>
+              <dl
+                className={styles.countryRoutes}
+                aria-label="Complete Caravan route overview"
+              >
+                {andeanCaravanCountries.map((country) => (
+                  <div key={country} data-country={country.toLowerCase()}>
+                    <dt>{country}</dt>
+                    <dd>
+                      {andeanCaravanRouteStops
+                        .filter((stop) => stop.country === country)
+                        .map((stop) => stop.name)
+                        .join(" → ")}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+          <CaravanRouteMap />
+        </Container>
+      </Section>
+
+      <Section
+        className={styles.movementsSection}
+        ground="cream"
+        aria-labelledby="join-sections-heading"
+      >
+        <Container>
+          <div className={styles.movementsHeader}>
+            <div className={styles.sectionHeading}>
+              <Eyebrow tone="accent">Choose where to join</Eyebrow>
+              <h2 id="join-sections-heading">
+                Nine complete sections. One moving Caravan.
+              </h2>
+            </div>
             <p>
-              Lima → Arequipa → Puno → Cusco → Titicaca → La Paz → Sucre →
-              Uyuni → Atacama → Santiago → Villa O’Higgins → Balmaceda
+              Join and leave at designated gates. Travel one section or combine
+              consecutive sections along the route.
             </p>
           </div>
           <ol className={styles.movementGrid}>
@@ -264,12 +313,30 @@ function CompleteCaravanPage() {
                   price={displayValue(section.price, "Price on request")}
                   sequence={String(section.sectionNumber).padStart(2, "0")}
                   asset={getAndeanCaravanImage(section.slug)}
+                  tone={
+                    section.countries.length > 1
+                      ? "crossing"
+                      : section.countries[0] === "Bolivia"
+                        ? "bolivia"
+                        : section.countries[0] === "Chile"
+                          ? "chile"
+                          : "peru"
+                  }
                 />
               </li>
             ))}
           </ol>
         </Container>
       </Section>
+
+      <CopySection
+        eyebrow="The whole journey"
+        title="Nine movements, one altitude curve and one changing group."
+        paragraphs={[
+          "The complete journey is not nine holidays placed end to end. It has one altitude curve, one seasonal logic and one changing group. People will join and leave along the way. Those who stay experience the Caravan gathering and releasing travellers as the landscape changes.",
+          "It moves overland—by van, Land Cruiser, train, boat and barge—with only four short flights, because the point is the ground between places, not the places alone.",
+        ]}
+      />
 
       <CopySection
         eyebrow="Why it leaves once"
@@ -284,6 +351,7 @@ function CompleteCaravanPage() {
       <CopySection
         eyebrow="The Patagonian culmination"
         title="The road ends. The journey does not simply reverse."
+        tone="blue"
         paragraphs={[
           "Villa O’Higgins is the narrative culmination: the point where the Carretera Austral stops. Coyhaique/Balmaceda is the operational end and final flight gateway.",
           "Some initial retracing from Villa O’Higgins is unavoidable because there is only one road. The northbound return then changes route through Chile Chico and crosses Lago General Carrera by ferry before reaching Coyhaique/Balmaceda.",
@@ -293,7 +361,8 @@ function CompleteCaravanPage() {
       <CopySection
         eyebrow="Honest conditions"
         title="Some places on this route are deliberately simple."
-        ground="butter"
+        ground="cream"
+        tone="rose"
         paragraphs={[
           "On the Lagunas route, accommodation means simple high-altitude refuges, shared bathrooms and limited heating. On Amantaní, guests sleep in a family home. Tortel has no streets, and luggage must be carried along its boardwalks and stairs.",
           "These are not hidden compromises. They are part of the journey, and we explain them before anyone books.",
@@ -325,9 +394,11 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
     <>
       <PageHero
         className={styles.hero}
+        mediaLayout="split"
+        ground="cream"
         eyebrow={
-          <Link className={styles.breadcrumb} href="/departures">
-            Departures · Section {String(section.sectionNumber).padStart(2, "0")}
+          <Link className={styles.breadcrumb} href="/caravans">
+            Caravans · Section {String(section.sectionNumber).padStart(2, "0")}
           </Link>
         }
         title={section.title}
@@ -350,7 +421,11 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
         }
       />
 
-      <Section ground="butter" aria-labelledby="section-facts-heading">
+      <Section
+        className={styles.factsSection}
+        ground="cream"
+        aria-labelledby="section-facts-heading"
+      >
         <Container>
           <div className={styles.sectionHeadingInline}>
             <Eyebrow tone="accent">Section details</Eyebrow>
@@ -376,6 +451,8 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
         </Container>
       </Section>
 
+      <JourneyGallery journeySlug={section.slug} images={gallery.slice(1)} />
+
       <CopySection
         eyebrow="Why this section exists"
         title={why[0] ?? section.promise}
@@ -385,15 +462,13 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
         eyebrow="The shape of the journey"
         title="A complete journey in its own right."
         paragraphs={shape}
-        ground="butter"
+        tone="blue"
       />
       <CopySection
         eyebrow="What makes it distinct"
         title={feature[0] ?? "One clear reason to travel this section."}
         paragraphs={feature.length > 1 ? feature.slice(1) : feature}
       />
-
-      <JourneyGallery journeySlug={section.slug} images={gallery.slice(1)} />
 
       {standalone.length > 0 ? (
         <CopySection
@@ -409,12 +484,20 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
           eyebrow="Before you enquire"
           title="Conditions we explain plainly."
           paragraphs={warnings}
-          ground="butter"
+          tone="rose"
         />
       ) : null}
 
-      <Section ground="cream" aria-label="Adjacent Caravan sections">
+      <Section
+        className={styles.adjacentSection}
+        ground="cream"
+        aria-label="Adjacent Caravan sections"
+      >
         <Container className={styles.adjacentLinks}>
+          <Link href={`/departures/${COMPLETE_SLUG}`}>
+            <span>All nine sections</span>
+            <strong>The Andean Caravan</strong>
+          </Link>
           {previous ? (
             <Link href={`/departures/${previous.slug}`}>
               <span>Previous section</span>
@@ -422,12 +505,7 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
                 {String(previous.sectionNumber).padStart(2, "0")} · {previous.title}
               </strong>
             </Link>
-          ) : (
-            <Link href={`/departures/${COMPLETE_SLUG}`}>
-              <span>Complete journey</span>
-              <strong>The Andean Caravan</strong>
-            </Link>
-          )}
+          ) : null}
           {next ? (
             <Link href={`/departures/${next.slug}`}>
               <span>Next section</span>
@@ -435,12 +513,7 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
                 {String(next.sectionNumber).padStart(2, "0")} · {next.title}
               </strong>
             </Link>
-          ) : (
-            <Link href={`/departures/${COMPLETE_SLUG}`}>
-              <span>Complete journey</span>
-              <strong>The Andean Caravan</strong>
-            </Link>
-          )}
+          ) : null}
         </Container>
       </Section>
 

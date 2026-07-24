@@ -16,16 +16,16 @@
 
 .butter {
   color: var(--warm-ink);
-  background: var(--butter);
+  background: var(--soft-blue);
 }
 
 .brick {
-  color: var(--cream);
+  color: var(--ink);
   background: var(--brick);
 }
 
 .olive {
-  color: var(--cream);
+  color: var(--ink);
   background: var(--olive);
 }
 

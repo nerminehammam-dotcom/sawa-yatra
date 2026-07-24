@@ -1,31 +1,50 @@
 .root {
+  --hero-ground: var(--cream);
+  --hero-ink: var(--warm-ink);
+  --hero-content-background: var(--hero-ground);
+
   position: relative;
   isolation: isolate;
   overflow: hidden;
 }
 
 .cream {
-  color: var(--warm-ink);
+  --hero-ground: var(--cream);
+  --hero-ink: var(--warm-ink);
+
+  color: var(--hero-ink);
   background: var(--cream);
 }
 
 .butter {
-  color: var(--warm-ink);
-  background: var(--butter);
+  --hero-ground: var(--soft-blue);
+  --hero-ink: var(--warm-ink);
+
+  color: var(--hero-ink);
+  background: var(--soft-blue);
 }
 
 .brick {
-  color: var(--cream);
+  --hero-ground: var(--brick);
+  --hero-ink: var(--ink);
+
+  color: var(--hero-ink);
   background: var(--brick);
 }
 
 .olive {
-  color: var(--cream);
+  --hero-ground: var(--olive);
+  --hero-ink: var(--ink);
+
+  color: var(--hero-ink);
   background: var(--olive);
 }
 
 .ink {
-  color: var(--cream);
+  --hero-ground: var(--warm-ink);
+  --hero-ink: var(--cream);
+
+  color: var(--hero-ink);
   background: var(--warm-ink);
 }
 
@@ -41,18 +60,18 @@
   flex-direction: column;
   justify-content: center;
   gap: var(--space-6);
-  padding-block: clamp(var(--space-16), 9vw, var(--space-24));
+  padding-block: clamp(var(--space-16), 8vw, var(--space-24));
 }
 
 .withMedia .content {
-  color: var(--warm-ink);
-  background: var(--cream);
+  color: var(--hero-ink);
+  background: var(--hero-content-background);
 }
 
 .copy {
   display: grid;
   max-width: min(100%, 66rem);
-  gap: var(--space-6);
+  gap: var(--space-5);
 }
 
 .right .copy {
@@ -60,14 +79,16 @@
 }
 
 .title {
-  max-width: 12ch;
+  max-width: 11ch;
   color: inherit;
+  font-size: clamp(3.4rem, 7vw, 7rem);
+  line-height: 1.03;
 }
 
 .intro {
-  max-width: var(--measure);
+  max-width: var(--measure-narrow);
   font-size: clamp(1.1rem, 1.5vw, 1.4rem);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 .actions {
@@ -79,11 +100,11 @@
 
 @media (min-width: 640px) {
   .root:not(.withMedia) .content {
-    min-height: min(72svh, 760px);
+    min-height: min(64svh, 690px);
   }
 
   .withMedia {
-    min-height: min(82svh, 900px);
+    min-height: var(--hero-min-height, min(82svh, 900px));
     color: var(--cream);
     background: var(--warm-ink);
   }
@@ -95,7 +116,8 @@
   }
 
   .withMedia .content {
-    min-height: min(82svh, 900px);
+    min-height: var(--hero-min-height, min(82svh, 900px));
+    padding-block: var(--hero-block-padding, clamp(var(--space-16), 8vw, var(--space-24)));
     color: var(--cream);
     background: transparent;
   }
@@ -106,5 +128,32 @@
 
   .withMedia .intro {
     color: inherit;
+  }
+
+  .splitMedia {
+    display: grid;
+    grid-template-columns: minmax(25rem, 0.92fr) minmax(0, 1.08fr);
+    color: var(--hero-ink);
+    background: var(--hero-ground);
+  }
+
+  .splitMedia .media {
+    position: relative;
+    inset: auto;
+    grid-column: 2;
+    grid-row: 1;
+    min-height: var(--hero-min-height, min(82svh, 900px));
+  }
+
+  .splitMedia .content {
+    grid-column: 1;
+    grid-row: 1;
+    min-width: 0;
+    color: var(--hero-ink);
+    background: var(--hero-content-background);
+  }
+
+  .splitMedia .copy {
+    width: 100%;
   }
 }

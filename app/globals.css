@@ -57,8 +57,9 @@
 html {
   min-width: 320px;
   min-height: 100%;
-  background: var(--cream);
+  background: var(--paper);
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-height) + var(--space-4));
   text-size-adjust: 100%;
 }
 
@@ -66,12 +67,12 @@ body {
   min-width: 320px;
   min-height: 100%;
   margin: 0;
-  color: var(--warm-ink);
-  background: var(--cream);
+  color: var(--ink);
+  background: var(--paper);
   font-family: var(--font-read);
-  font-size: 1.0625rem;
+  font-size: clamp(1rem, 0.94rem + 0.22vw, 1.125rem);
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.65;
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -95,8 +96,8 @@ body:has([data-dense="true"])::before {
 }
 
 ::selection {
-  color: var(--cream);
-  background: var(--brick);
+  color: var(--ink);
+  background: var(--pink);
 }
 
 :where(h1, h2, h3, p, ul, ol, dl, blockquote, figure) {
@@ -126,7 +127,7 @@ textarea:disabled {
 }
 
 a {
-  color: var(--link);
+  color: var(--ink);
   text-decoration-color: currentColor;
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.18em;
@@ -137,9 +138,9 @@ a:visited:not([class]) {
 }
 
 :where(a, button, input, select, textarea, summary):focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 4px var(--cream);
+  outline: 3px solid var(--signal);
+  outline-offset: 4px;
+  box-shadow: none;
 }
 
 img,
@@ -156,22 +157,23 @@ h3,
 h4 {
   font-family: var(--font-display);
   font-weight: 400;
-  line-height: 1.04;
+  line-height: 1.06;
   text-wrap: balance;
 }
 
 h1 {
-  font-size: clamp(3rem, 8vw, 8rem);
+  font-size: clamp(3.6rem, 9.5vw, 9.5rem);
   letter-spacing: -0.035em;
 }
 
 h2 {
-  font-size: clamp(2rem, 5vw, 4.5rem);
+  font-size: clamp(2.6rem, 6vw, 6.25rem);
   letter-spacing: -0.025em;
 }
 
 h3 {
-  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-size: clamp(1.65rem, 2.8vw, 2.65rem);
+  line-height: 1.12;
   letter-spacing: -0.015em;
 }
 
@@ -208,7 +210,7 @@ main {
   }
 
   h1 {
-    font-size: clamp(3rem, 15vw, 5.2rem);
+    font-size: clamp(3.2rem, 16vw, 5.6rem);
   }
 }
 

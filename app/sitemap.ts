@@ -8,7 +8,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticEntries: MetadataRoute.Sitemap = routeMetadata
     .filter(
       (entry) =>
-        entry.path !== "/departures/[slug]" && entry.noIndex !== true,
+        entry.path !== "/departures/[slug]" &&
+        entry.noIndex !== true &&
+        entry.descriptionStatus !== "PLACEHOLDER",
     )
     .map((entry) => ({ url: absoluteUrl(entry.path) }));
 

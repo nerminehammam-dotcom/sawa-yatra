@@ -4,12 +4,12 @@
   align-items: center;
   justify-content: center;
   padding: 0.42rem 0.78rem;
-  border: var(--border-hairline) solid rgb(103 60 52 / 38%);
-  border-color: color-mix(in srgb, var(--deep-brown) 38%, transparent);
+  border: var(--border-hairline) solid var(--ink);
+  border-color: var(--deep-brown);
   border-radius: var(--radius-pill);
   color: var(--deep-brown);
-  background: rgb(246 238 220 / 82%);
-  background: color-mix(in srgb, var(--cream) 82%, transparent);
+  background: var(--paper);
+  background: var(--paper);
   font-size: 0.875rem;
   line-height: 1.25;
   text-decoration: none;
@@ -26,13 +26,13 @@ button.root {
 }
 
 .interactive:hover {
-  color: var(--cream);
+  color: var(--ink);
   background: var(--brick);
   border-color: var(--brick);
 }
 
 .selected {
-  color: var(--cream);
+  color: var(--ink);
   background: var(--terracotta);
   border-color: var(--terracotta);
 }

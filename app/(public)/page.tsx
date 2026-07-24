@@ -1,241 +1,138 @@
+import Image from "next/image";
+import Link from "next/link";
+
 import { createPageMetadata } from "@/app/_metadata";
-import { RisoArtwork } from "@/components/brand/RisoArtwork";
-import { DepartureCard } from "@/components/departures/DepartureCard";
-import { ArchetypeChip } from "@/components/journeys/ArchetypeChip";
-import { ButtonLink } from "@/components/ui/ButtonLink";
-import { Container } from "@/components/ui/Container";
-import { ContentStatusLabel } from "@/components/ui/ContentStatusLabel";
-import { Eyebrow } from "@/components/ui/Eyebrow";
-import { PageHero } from "@/components/ui/PageHero";
-import { Section } from "@/components/ui/Section";
-import { archetypes } from "@/content/archetypes";
-import { andeanCaravanSections } from "@/content/andean-caravan";
-import { getAndeanCaravanImage } from "@/content/andean-caravan-images";
-import { assetManifest } from "@/content/assets";
-import { homeContent } from "@/content/site";
+import { CinematicHero } from "@/components/field/CinematicHero";
+import { JoiningPointSelector } from "@/components/field/JoiningPointSelector";
+import { RegionalChapter } from "@/components/field/RegionalChapter";
+import { RouteIndex } from "@/components/field/RouteIndex";
+import { SignalStatement } from "@/components/field/SignalStatement";
+import { getAndeanCaravanGallery } from "@/content/andean-caravan-images";
+import {
+  fieldDocumentContent,
+  joiningPoints,
+} from "@/content/field-document";
 
 import styles from "./home.module.css";
 
 export const metadata = createPageMetadata("/");
 
-const homeHeroAsset = assetManifest[homeContent.hero.assetId];
-const featuredAndeanSections = andeanCaravanSections.filter((section) =>
-  ["desert-coast", "the-mirror", "the-end-of-the-road"].includes(
-    section.slug,
-  ),
-);
-
-function displayDepartureValue(value: unknown, fallback: string): string {
-  if (typeof value === "string" || typeof value === "number") {
-    return String(value);
-  }
-
-  if (value && typeof value === "object") {
-    for (const key of ["publicLabel", "label", "summary", "text"]) {
-      const candidate = (value as Record<string, unknown>)[key];
-      if (typeof candidate === "string") return candidate;
-    }
-  }
-
-  return fallback;
-}
-
-function HomeHeroTitle() {
-  const accent = homeContent.hero.accentWord;
-  const [beforeAccent, afterAccent] = homeContent.hero.title.split(accent);
-
-  return (
-    <>
-      {beforeAccent}
-      <em className={styles.heroAccent}>{accent}</em>
-      {afterAccent}
-    </>
-  );
-}
+const fieldNotes = [
+  getAndeanCaravanGallery("white-city-deep-canyon")[0]!,
+  getAndeanCaravanGallery("both-shores")[2]!,
+  getAndeanCaravanGallery("the-mirror")[0]!,
+  getAndeanCaravanGallery("the-end-of-the-road")[0]!,
+];
 
 export default function HomePage() {
+  const content = fieldDocumentContent;
+
   return (
     <main id="main-content" tabIndex={-1}>
-      <PageHero
-        eyebrow={homeContent.hero.eyebrow}
-        title={<HomeHeroTitle />}
-        intro={<p>{homeContent.hero.lead}</p>}
-        actions={
-          <>
-            <ButtonLink href={homeContent.hero.primaryAction.href}>
-              {homeContent.hero.primaryAction.label}
-            </ButtonLink>
-            <ButtonLink
-              href={homeContent.hero.secondaryAction.href}
-              variant="secondary"
-              className={styles.heroSecondary}
-            >
-              {homeContent.hero.secondaryAction.label}
-            </ButtonLink>
-          </>
-        }
-        media={
-          <RisoArtwork
-            asset={{
-              src: homeHeroAsset.src,
-              alt: homeHeroAsset.alt,
-              treatment: homeHeroAsset.treatment,
-              status: homeHeroAsset.contentStatus,
-            }}
-            aspectRatio="hero"
-            sizes="100vw"
-            priority
-          />
-        }
+      <CinematicHero
+        eyebrow={content.hero.eyebrow}
+        title={content.proposition}
+        image={content.hero.image}
+        primary={{
+          href: content.hero.actionHref,
+          label: content.hero.actionLabel,
+        }}
+        secondary={{
+          href: content.hero.secondaryHref,
+          label: content.hero.secondaryLabel,
+        }}
       />
 
-      <Section ground="cream" aria-labelledby="positioning-heading">
-        <Container>
-          <div className={styles.sectionHeading}>
-            <Eyebrow tone="accent">{homeContent.positioning.eyebrow}</Eyebrow>
-            <h2 id="positioning-heading">{homeContent.positioning.title}</h2>
+      <SignalStatement>{content.interruption}</SignalStatement>
+
+      <section className={styles.how} aria-labelledby="how-caravan-heading">
+        <header className={styles.editorialHeading}>
+          <p>{content.how.eyebrow}</p>
+          <h2 id="how-caravan-heading">{content.how.title}</h2>
+          <Link href="/how-it-works">Read the practical guide →</Link>
+        </header>
+        <ol className={styles.howSteps}>
+          {content.how.steps.map((step) => (
+            <li key={step.number}>
+              <span>{step.number}</span>
+              <h3>{step.label}</h3>
+              <p>{step.body}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className={styles.route} aria-labelledby="connected-route-heading">
+        <header className={styles.routeHeading}>
+          <div>
+            <p>{content.route.eyebrow}</p>
+            <h2 id="connected-route-heading">{content.route.title}</h2>
           </div>
-          <ol className={styles.pillarGrid}>
-            {homeContent.positioning.pillars.map((pillar, index) => (
-              <li className={styles.pillar} key={pillar.id}>
-                <span className={styles.number} aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <ContentStatusLabel status={pillar.contentStatus} />
-                <h3>{pillar.title}</h3>
-                <p>{pillar.body}</p>
-              </li>
-            ))}
-          </ol>
-        </Container>
-      </Section>
+          <aside>
+            <strong>TRANSFER / SOUTHERN CONNECTION</strong>
+            <p>{content.route.transfer}</p>
+          </aside>
+        </header>
+        <RouteIndex />
+      </section>
 
-      <Section ground="butter" aria-labelledby="home-how-heading">
-        <Container>
-          <div className={styles.splitHeading}>
-            <div className={styles.sectionHeading}>
-              <Eyebrow tone="accent">{homeContent.howItWorks.eyebrow}</Eyebrow>
-              <h2 id="home-how-heading">{homeContent.howItWorks.title}</h2>
-            </div>
-            <ButtonLink
-              href={homeContent.howItWorks.action.href}
-              variant="secondary"
-            >
-              {homeContent.howItWorks.action.label}
-            </ButtonLink>
-          </div>
-          <ol className={styles.stepList}>
-            {homeContent.howItWorks.steps.map((step) => (
-              <li className={styles.step} key={step.id}>
-                <span className={styles.stepNumber}>{step.number}</span>
-                <div className={styles.stepCopy}>
-                  <ContentStatusLabel status={step.contentStatus} />
-                  <h3>{step.title}</h3>
-                  <p>{step.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </Container>
-      </Section>
+      <section className={styles.joining} aria-labelledby="joining-heading">
+        <header className={styles.joiningHeading}>
+          <p>Joining points / practical heart of the caravan</p>
+          <h2 id="joining-heading">Where will you join us?</h2>
+          <p>
+            Choose a numbered gateway. Dates, access, time on the road and the
+            next leaving point stay visible together.
+          </p>
+        </header>
+        <JoiningPointSelector points={joiningPoints} headingId="joining-heading" />
+      </section>
 
-      <Section
-        ground="cream"
-        aria-label={`${homeContent.travelSelfHook.eyebrow} and ${homeContent.departuresPreview.eyebrow}`}
-      >
-        <Container className={styles.featureStack}>
-          <section
-            className={styles.travelSelfPanel}
-            aria-labelledby="travel-self-hook-heading"
-          >
-            <div className={styles.travelSelfCopy}>
-              <div className={styles.statusLine}>
-                <ContentStatusLabel status={homeContent.travelSelfHook.contentStatus} />
-              </div>
-              <Eyebrow tone="accent">{homeContent.travelSelfHook.eyebrow}</Eyebrow>
-              <h2 id="travel-self-hook-heading">{homeContent.travelSelfHook.title}</h2>
-              <p className={styles.lead}>{homeContent.travelSelfHook.body}</p>
-              <ButtonLink href={homeContent.travelSelfHook.action.href}>
-                {homeContent.travelSelfHook.action.label}
-              </ButtonLink>
-            </div>
-            <div
-              className={styles.chipField}
-              aria-label={`${homeContent.travelSelfHook.eyebrow} archetypes`}
-            >
-              <ContentStatusLabel status="DRAFT" />
-              <div className={styles.chipList}>
-                {archetypes.map((archetype) => (
-                  <ArchetypeChip key={archetype.id}>{archetype.name}</ArchetypeChip>
-                ))}
-              </div>
-            </div>
-          </section>
+      <section className={styles.regions} aria-labelledby="regions-heading">
+        <header className={styles.regionsHeading}>
+          <p>Regional chapters / one connected geography</p>
+          <h2 id="regions-heading">Four rhythms. One long spine.</h2>
+        </header>
+        {content.regionalChapters.map((chapter) => (
+          <RegionalChapter key={chapter.id} {...chapter} />
+        ))}
+      </section>
 
-          <section className={styles.departures} aria-labelledby="departures-heading">
-            <div className={styles.splitHeading}>
-              <div className={styles.sectionHeading}>
-                <Eyebrow tone="accent">{homeContent.departuresPreview.eyebrow}</Eyebrow>
-                <h2 id="departures-heading">{homeContent.departuresPreview.title}</h2>
-              </div>
-              <ButtonLink
-                href={homeContent.departuresPreview.action.href}
-                variant="secondary"
-              >
-                {homeContent.departuresPreview.action.label}
-              </ButtonLink>
-            </div>
-            <div className={styles.journeyGrid}>
-              {featuredAndeanSections.map((section) => (
-                <div className={styles.journeyItem} key={section.id}>
-                  <DepartureCard
-                    href={`/departures/${section.slug}`}
-                    title={section.title}
-                    route={displayDepartureValue(section.route, "Andean route")}
-                    duration={`${section.durationDays} days`}
-                    dateWindow={displayDepartureValue(
-                      section.publicDateWindow,
-                      "February–April 2028",
-                    )}
-                    groupSize={displayDepartureValue(
-                      section.group,
-                      "Group maximum varies",
-                    )}
-                    price={displayDepartureValue(
-                      section.price,
-                      "Price on request",
-                    )}
-                    sequence={String(section.sectionNumber).padStart(2, "0")}
-                    asset={getAndeanCaravanImage(section.slug)}
-                  />
-                </div>
-              ))}
-            </div>
-          </section>
-        </Container>
-      </Section>
+      <section className={styles.fieldNotes} aria-labelledby="field-notes-heading">
+        <header>
+          <p>Human proof / field notes</p>
+          <h2 id="field-notes-heading">The road is made of details.</h2>
+        </header>
+        <div
+          className={styles.imageStrip}
+          aria-label="Photographs from the Andean Caravan route"
+          tabIndex={0}
+        >
+          {fieldNotes.map((image, index) => (
+            <figure key={image.src}>
+              <Image
+                src={image.src}
+                alt={image.alt}
+                fill
+                sizes="(max-width: 767px) 72vw, 28vw"
+                style={{
+                  objectPosition: `${image.focalPoint?.x ?? 50}% ${image.focalPoint?.y ?? 50}%`,
+                }}
+              />
+              <figcaption>FIELD NOTE / {String(index + 1).padStart(2, "0")}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </section>
 
-      <Section ground="brick" aria-labelledby="membership-band-heading">
-        <Container className={styles.membershipBand}>
-          <div className={styles.membershipCopy}>
-            <div className={styles.statusLine}>
-              <ContentStatusLabel status={homeContent.membershipBand.contentStatus} />
-            </div>
-            <Eyebrow>{homeContent.membershipBand.eyebrow}</Eyebrow>
-            <h2 id="membership-band-heading">{homeContent.membershipBand.title}</h2>
-            <div className={styles.mechanismLine}>
-              <ContentStatusLabel status="PLACEHOLDER" />
-              <p>{homeContent.membershipBand.safetyMechanismLine}</p>
-            </div>
-          </div>
-          <ButtonLink
-            href={homeContent.membershipBand.action.href}
-            surface="deep"
-          >
-            {homeContent.membershipBand.action.label}
-          </ButtonLink>
-        </Container>
-      </Section>
+      <section className={styles.finalAction} aria-labelledby="final-action-heading">
+        <p>Final question / joining point selector</p>
+        <h2 id="final-action-heading">Where will you join us?</h2>
+        <div>
+          <Link href="/joining-points">Compare joining points →</Link>
+          <Link href="/start-here">Start here ↗</Link>
+        </div>
+      </section>
     </main>
   );
 }

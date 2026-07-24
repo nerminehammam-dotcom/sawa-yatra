@@ -1,19 +1,47 @@
-# Sawayatra — Release 1 public website
+# Sawayatra — public website
 
-This repository contains the Release 1 public website defined by the Sawayatra Master Brand & Build Spec v1.3 and Visual Manual v1.1. The master specification governs scope and behaviour; the visual manual governs execution. Phase 2 features and sensitive-data collection are intentionally absent.
+This repository contains the Sawayatra public website governed by **Sawayatra Website Master Build Brief v2 — Fonts and Pink Locked** (24 July 2026). The implementation preserves the existing Fraunces display face, Inter reading face, existing pink `#eeb6c4`, and the established temporary logo.
+
+The site now behaves as a photographic field document: full-bleed natural-colour imagery, strong editorial sequencing, index-like route rows, numbered joining points, regional chapters and rare bold colour fields. It deliberately avoids generic rounded-card layouts, gradients and decorative overlays on photographs.
+
+## Principal public routes
+
+- `/` — photographic opening, key proposition, route index, joining-point selector and regional chapters
+- `/caravans` — Caravan collection and flagship journey entry
+- `/caravans/the-andean-caravan` — complete journey, sections and interactive route atlas
+- `/joining-points` — numbered entry-gate selector
+- `/how-it-works` — entry, movement and exit model
+- `/about` — point of view and operating principles
+- `/start-here` — joining-point context and interest form
+
+The older `/departures` paths remain functional for existing links and the nine detailed journey sections, but **Caravans** is the principal public label.
+
+## Locked visual system
+
+| Role | Value |
+| --- | --- |
+| Paper | `#e7e1d6` |
+| Ink | `#27231f` |
+| Signal orange | `#f05a2a` |
+| Clay | `#a96f47` |
+| Sun | `#e5bc4f` |
+| Olive | `#98904f` |
+| Existing pink | `#eeb6c4` |
+
+No additional interface colours, gradients or photo casts are used. Readable copy uses ink on coloured fields; colour is carried by surfaces, markers, borders and graphic accents.
 
 ## Stack
 
 - Next.js App Router and React
-- TypeScript in strict mode
-- CSS Modules with global design tokens
+- strict TypeScript
+- CSS Modules and global tokens
 - React Hook Form and Zod
-- Typed local content in `content/`
+- typed local content in `content/`
 - Vitest, Testing Library and Playwright
 
-## Local setup
+## Run locally
 
-Use Node.js 20.9 or newer.
+Node.js 20.9 or newer is required.
 
 ```bash
 npm install
@@ -22,58 +50,32 @@ cp .env.example .env.local
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000). Release 1 is safe to run without credentials: every form uses a clearly labelled development mock that sends and stores no submitted values on the server.
-
-## Environment variables
-
-| Variable | Release 1 use |
-| --- | --- |
-| `NEXT_PUBLIC_FORM_MODE` | Keep as `mock`. No live form adapter is implemented. |
-| `NEXT_PUBLIC_SITE_URL` | Required before production launch for canonical, sitemap and social URLs. |
-| `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | Leave blank. Analytics transmission is disabled pending a domain, consent decision and privacy basis. |
-| `RESEND_API_KEY` | Reserved for a future approved server-side adapter; unused in Release 1. |
-| `SAWAYATRA_FORM_ENDPOINT` | Reserved for a future approved endpoint; unused in Release 1. |
-
-Never place private credentials in a `NEXT_PUBLIC_*` variable.
+Open [http://localhost:3000](http://localhost:3000). Release 1 forms use a clearly labelled local mock and do not send or retain raw submissions on a server.
 
 ## Quality commands
 
 ```bash
 npm run typecheck
 npm run lint
-npm run test:unit
+npm test
 npm run test:e2e
 npm run build
 ```
 
-Playwright covers the acceptance widths at 375px, 768px, 1024px and 1440px. The test runner starts a local Next.js server automatically.
+The browser suite checks 375px, 768px, 1024px and 1440px, plus Firefox and WebKit. It covers overflow, keyboard navigation, real CTA destinations, forms, metadata and automated accessibility.
 
-## Content and assets
+## Content and imagery
 
-Repeated editorial content, journeys, archetypes, quiz data, FAQs, legal placeholders and metadata live in `content/`. The public Departures area now reads from the typed Andean Caravan model in `content/andean-caravan.ts`: one complete 71-day Caravan plus nine consecutive sections. The photographs used there are local, responsive Next.js image assets in `public/assets/images/departures/andean/`.
+The field-document model lives in `content/field-document.ts`. The detailed Andean model and local photographs live in the other typed files under `content/`. Supplied route photography is presented in natural colour and served responsively through Next.js Image.
 
-All 70 supplied HD journey photographs are assigned to their corresponding route sections in `content/andean-caravan-images.ts`. To regenerate the web copies from the untouched originals, run:
+To regenerate the compressed web copies from untouched journey originals:
 
 ```bash
 python3 scripts/optimize-journey-images.py
 ```
 
-The script creates progressive, metadata-free JPEGs with a maximum 2,400-pixel edge. Next.js serves responsive device-sized variants from those source files.
+The script applies orientation, converts to sRGB, removes metadata, limits the longest edge to 2,400 pixels and writes progressive JPEGs.
 
-The public URLs remain under the Release 1 route contract: `/departures`, `/departures/the-andean-caravan`, and the nine `/departures/[section-slug]` pages. The earlier three visual-manual demonstration slugs are no longer generated.
+## Production
 
-Missing source material elsewhere remains visibly status-labelled as `DRAFT`, `PLACEHOLDER` or `LEGAL REVIEW`; see [BUILD_NOTES.md](./BUILD_NOTES.md) for the launch blockers.
-
-The current logo is an intentionally temporary Fraunces wordmark paired with a decorative route-through-a-gate mark. Final identity assets can replace the manifest entries in `content/assets.ts` without changing page layout contracts.
-
-## Deployment
-
-The locked deployment target is Vercel. Before creating a production deployment:
-
-1. Resolve every launch blocker in `BUILD_NOTES.md`.
-2. Set `NEXT_PUBLIC_SITE_URL` to the approved HTTPS origin.
-3. Keep analytics and live delivery disabled until their legal and operational decisions are approved.
-4. Run the full quality command set above.
-5. Import the repository into Vercel using the Next.js preset and repeat the acceptance checks on the preview URL.
-
-No deployment is performed by this repository setup.
+Before launch, resolve the explicit placeholders and approvals in `BUILD_NOTES.md`, set the approved `NEXT_PUBLIC_SITE_URL`, keep live form delivery and analytics disabled until approved, and repeat the complete quality suite on the Vercel preview URL.

@@ -19,7 +19,7 @@
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
   gap: var(--space-6);
-  padding: var(--space-6) 0;
+  padding: var(--space-8) 0;
   border: 0;
   color: var(--warm-ink);
   background: transparent;
@@ -31,7 +31,7 @@
 }
 
 .trigger:hover {
-  color: var(--brick);
+  color: var(--ink);
 }
 
 .indicator {
@@ -46,7 +46,7 @@
 }
 
 .panel {
-  padding: 0 0 var(--space-6);
+  padding: 0 0 var(--space-8);
   color: var(--deep-brown);
   font-family: var(--font-read);
   font-size: 1.0625rem;

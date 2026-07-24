@@ -19,13 +19,13 @@ export default function Icon() {
           height: "100%",
           alignItems: "center",
           justifyContent: "center",
-          background: "#FAE3B1",
+          background: "#E7E1D6",
         }}
       >
         <RouteGateMark
-          gateColor="#7D2027"
+          gateColor="#F05A2A"
           height={350}
-          routeColor="#6E6A28"
+          routeColor="#98904F"
           width={395}
         />
       </div>

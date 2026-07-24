@@ -22,7 +22,7 @@
 .link:hover {
   color: var(--warm-ink);
   border-color: var(--brick);
-  box-shadow: 0 0.9rem 2rem rgb(43 36 32 / 10%);
+  box-shadow: none;
   transform: translateY(-2px);
 }
 

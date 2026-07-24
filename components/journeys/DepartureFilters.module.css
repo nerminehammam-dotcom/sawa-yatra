@@ -36,13 +36,13 @@
   min-height: var(--touch-min);
   flex: 0 0 auto;
   padding: 0.55rem 0.9rem;
-  border: var(--border-hairline) solid rgb(103 60 52 / 40%);
+  border: var(--border-hairline) solid var(--ink);
   border-color:
-    color-mix(in srgb, var(--deep-brown) 40%, transparent);
+    var(--deep-brown);
   border-radius: var(--radius-pill);
   color: var(--deep-brown);
-  background: rgb(246 238 220 / 86%);
-  background: color-mix(in srgb, var(--cream) 86%, transparent);
+  background: var(--paper);
+  background: var(--paper);
   font-family: var(--font-read);
   font-size: 0.875rem;
   font-weight: 400;
@@ -56,13 +56,13 @@
 }
 
 .chip:hover {
-  color: var(--cream);
+  color: var(--ink);
   background: var(--brick);
   border-color: var(--brick);
 }
 
 .chip[aria-pressed="true"] {
-  color: var(--cream);
+  color: var(--ink);
   background: var(--terracotta);
   border-color: var(--terracotta);
 }

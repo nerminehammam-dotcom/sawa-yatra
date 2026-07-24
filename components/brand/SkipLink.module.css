@@ -6,7 +6,7 @@
   min-height: var(--touch-min);
   padding: var(--space-2) var(--space-4);
   border-radius: var(--radius-pill);
-  color: var(--cream);
+  color: var(--ink);
   background: var(--brick);
   font-size: 0.875rem;
   line-height: 1.8;
@@ -16,7 +16,7 @@
 }
 
 .root:focus-visible {
-  color: var(--cream);
+  color: var(--ink);
   transform: translateY(0);
 }
 

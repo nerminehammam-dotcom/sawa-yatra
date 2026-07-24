@@ -24,8 +24,13 @@ export type SixItemTuple<T> = readonly [T, T, T, T, T, T];
 export type StaticRoute =
   | "/"
   | "/how-it-works"
+  | "/caravans"
+  | "/caravans/the-andean-caravan"
+  | "/joining-points"
+  | "/start-here"
   | "/travel-self"
   | "/departures"
+  | "/do-it-yourself"
   | "/membership"
   | "/about"
   | "/sign-in"
@@ -35,7 +40,7 @@ export type StaticRoute =
   | "/accessibility"
   | "/404";
 
-export type JourneyRoute = `/departures/${string}`;
+export type JourneyRoute = `/departures/${string}` | `/caravans/${string}`;
 export type SiteRoute = StaticRoute | JourneyRoute;
 export type RouteTemplate = StaticRoute | "/departures/[slug]";
 

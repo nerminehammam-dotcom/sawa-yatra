@@ -21,7 +21,10 @@ export function createPageMetadata(path: StaticRoute): Metadata {
   const entry = routeMetadataByPath[path];
   const socialImage = assetManifest[siteConfig.defaultSocialAssetId];
   const socialImageUrl = absoluteUrl(socialImage.src);
-  const shouldIndex = isIndexableEnvironment && entry.noIndex !== true;
+  const shouldIndex =
+    isIndexableEnvironment &&
+    entry.noIndex !== true &&
+    entry.descriptionStatus !== "PLACEHOLDER";
 
   return {
     title: routeTitle(path, entry.title),

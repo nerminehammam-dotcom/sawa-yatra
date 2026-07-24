@@ -1,15 +1,9 @@
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    90deg,
-    rgb(23 20 17 / 82%) 0%,
-    rgb(23 20 17 / 50%) 56%,
-    rgb(23 20 17 / 15%) 100%
-  );
+.hero {
+  --hero-min-height: min(74svh, 790px);
+  --hero-block-padding: clamp(var(--space-12), 6vw, var(--space-20, 5rem));
+  --hero-content-background: var(--paper);
+
+  border-bottom: 0.65rem solid var(--terracotta);
 }
 
 .breadcrumb,
@@ -20,10 +14,13 @@
 
 .heroTitle {
   max-width: 10ch;
+  font-size: clamp(3.2rem, 5.3vw, 5.8rem);
 }
 
 .completeHeroTitle {
-  max-width: 13ch;
+  max-width: 14ch;
+  font-size: clamp(3.2rem, 4.5vw, 5.2rem);
+  line-height: 1.02;
 }
 
 .heroIntro {
@@ -35,20 +32,20 @@
   width: fit-content;
   padding-block-start: var(--space-4);
   border-top: 1px solid currentColor;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
 }
 
 a.heroAction,
 a.heroAction:visited {
-  color: var(--cream);
-  border-color: var(--cream);
+  color: var(--ink);
+  border-color: var(--brick);
   background: transparent;
 }
 
 a.heroAction:hover {
-  color: var(--brick);
-  background: var(--cream);
+  color: var(--cream);
+  background: var(--brick);
 }
 
 .sectionHeading,
@@ -61,6 +58,7 @@ a.heroAction:hover {
 .sectionHeading h2,
 .sectionHeadingInline h2 {
   max-width: 15ch;
+  font-size: clamp(2.35rem, 4vw, 4rem);
 }
 
 .sectionHeading > p {
@@ -68,11 +66,43 @@ a.heroAction:hover {
 }
 
 .sectionHeading > p.oliveEyebrow {
-  color: var(--cream);
+  color: var(--ink);
 }
 
 .sectionHeadingInline {
-  margin-bottom: clamp(var(--space-8), 6vw, var(--space-16));
+  margin-bottom: clamp(var(--space-8), 4vw, var(--space-12));
+}
+
+.factsSection,
+.copySection,
+.adjacentSection,
+.interestSection {
+  --section-space: clamp(3.75rem, 6vw, 6rem);
+}
+
+.factsSection {
+  background: var(--paper);
+}
+
+.routeSection {
+  --section-space: clamp(4rem, 7vw, 6.75rem);
+
+  background: var(--paper);
+}
+
+.movementsSection {
+  --section-space: clamp(4rem, 7vw, 6.75rem);
+
+  border-top: var(--border-hairline) solid var(--hairline);
+  background: var(--paper);
+}
+
+.blueCopySection {
+  background: var(--paper);
+}
+
+.roseCopySection {
+  background: var(--paper);
 }
 
 .facts {
@@ -87,8 +117,17 @@ a.heroAction:hover {
   align-content: start;
   gap: var(--space-2);
   min-width: 0;
-  padding: var(--space-5, 1.25rem) var(--space-4);
+  padding: var(--space-6) var(--space-5, 1.25rem);
   border-bottom: var(--border-hairline) solid var(--hairline);
+  background: var(--cream);
+}
+
+.facts div:nth-child(3n + 1) {
+  background: var(--paper);
+}
+
+.facts div:nth-child(3n + 2) {
+  background: var(--paper);
 }
 
 .facts div:nth-child(odd) {
@@ -97,7 +136,7 @@ a.heroAction:hover {
 
 .facts dt {
   color: var(--deep-brown);
-  font-size: 0.68rem;
+  font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.11em;
   text-transform: uppercase;
@@ -105,9 +144,8 @@ a.heroAction:hover {
 
 .facts dd {
   margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(1.05rem, 1.8vw, 1.4rem);
-  line-height: 1.25;
+  font-size: clamp(1.125rem, 1.8vw, 1.45rem);
+  line-height: 1.45;
 }
 
 .copyGrid,
@@ -122,7 +160,8 @@ a.heroAction:hover {
   gap: var(--space-6);
   max-width: var(--measure);
   color: inherit;
-  font-size: clamp(1.08rem, 1.45vw, 1.3rem);
+  font-size: clamp(1.125rem, 1.4vw, 1.28rem);
+  line-height: 1.65;
 }
 
 .copyGrid:not(:has(+ *)) .copyBody {
@@ -131,20 +170,90 @@ a.heroAction:hover {
 
 .routeHeader {
   display: grid;
-  gap: var(--space-8);
-  margin-bottom: clamp(var(--space-12), 8vw, var(--space-24));
+  gap: clamp(var(--space-8), 5vw, var(--space-16));
+  margin-bottom: clamp(var(--space-10), 6vw, var(--space-16));
 }
 
-.routeHeader > p {
-  max-width: 52ch;
+.routeHeader h2 {
+  max-width: 13ch;
+  font-size: clamp(2.65rem, 4.7vw, 4.8rem);
+}
+
+.routeOverview {
+  align-self: stretch;
+  padding: clamp(var(--space-5), 3vw, var(--space-8));
+  border: 2px solid var(--dusty-blue);
+  border-radius: var(--radius-card);
+  background: var(--paper);
+}
+
+.routeOverviewLabel {
+  color: var(--ink);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.countryRoutes {
+  display: grid;
+  gap: 0;
+  margin-top: var(--space-4);
+}
+
+.countryRoutes > div {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  gap: var(--space-4);
+  padding-block: var(--space-4);
+  border-top: var(--border-hairline) solid var(--hairline);
+}
+
+.countryRoutes dt {
+  width: fit-content;
+  height: fit-content;
+  padding: 0.18rem 0.48rem;
+  border-radius: var(--radius-pill);
+  color: var(--warm-ink);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.countryRoutes [data-country="peru"] dt {
+  background: var(--paper);
+}
+
+.countryRoutes [data-country="bolivia"] dt {
+  background: var(--soft-olive);
+}
+
+.countryRoutes [data-country="chile"] dt {
+  background: var(--soft-rose);
+}
+
+.countryRoutes dd {
+  margin: 0;
   color: var(--deep-brown);
-  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  font-size: clamp(1.0625rem, 1.3vw, 1.16rem);
+  line-height: 1.55;
+}
+
+.movementsHeader {
+  display: grid;
+  gap: clamp(var(--space-6), 4vw, var(--space-12));
+  margin-bottom: clamp(var(--space-10), 5vw, var(--space-16));
+}
+
+.movementsHeader > p {
+  max-width: 46ch;
+  color: var(--deep-brown);
+  font-size: clamp(1.0625rem, 1.35vw, 1.2rem);
 }
 
 .movementGrid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: var(--space-8);
+  gap: clamp(var(--space-6), 3vw, var(--space-10));
   margin: 0;
   padding: 0;
   list-style: none;
@@ -180,7 +289,7 @@ a.heroAction:hover {
 }
 
 .adjacentLinks span {
-  color: var(--brick);
+  color: var(--ink);
   font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.11em;
@@ -195,12 +304,19 @@ a.heroAction:hover {
 
 .interestSection {
   border-top: var(--border-hairline) solid var(--hairline);
+  background: var(--paper);
+}
+
+.interestSection .sectionHeading > p,
+.deepEyebrow {
+  color: var(--cream);
 }
 
 .formPanel {
   padding: clamp(var(--space-6), 5vw, var(--space-12));
   border-radius: var(--radius-card);
   background: var(--cream);
+  box-shadow: none;
 }
 
 @media (min-width: 640px) {
@@ -216,35 +332,49 @@ a.heroAction:hover {
     border-inline-end: var(--border-hairline) solid var(--hairline);
   }
 
-  .movementGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
   .adjacentLinks {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   }
 }
 
 @media (min-width: 768px) {
   .routeHeader {
-    grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+    grid-template-columns: minmax(0, 1fr) minmax(22rem, 0.9fr);
+    align-items: stretch;
+  }
+
+  .movementsHeader {
+    grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
     align-items: end;
+  }
+}
+
+@media (max-width: 479px) {
+  .countryRoutes > div {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
   }
 }
 
 @media (min-width: 1024px) {
   .facts {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .facts div,
+  .facts div {
+    border-bottom: var(--border-hairline) solid var(--hairline);
+  }
+
   .facts div:not(:nth-child(3n)) {
-    border-bottom: 0;
     border-inline-end: var(--border-hairline) solid var(--hairline);
   }
 
-  .facts div:last-child {
+  .facts div:nth-child(3n) {
     border-inline-end: 0;
+  }
+
+  .facts div:nth-last-child(-n + 3) {
+    border-bottom: 0;
   }
 
   .copyGrid,
@@ -254,19 +384,7 @@ a.heroAction:hover {
   }
 
   .movementGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 639px) {
-  .hero::after {
-    display: none;
-  }
-
-  a.heroAction,
-  a.heroAction:visited {
-    color: var(--brick);
-    border-color: var(--brick);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 

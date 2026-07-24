@@ -1,120 +1,110 @@
+import Image from "next/image";
+import Link from "next/link";
+
 import { createPageMetadata } from "@/app/_metadata";
-import { ButtonLink } from "@/components/ui/ButtonLink";
-import { Container } from "@/components/ui/Container";
-import { ContentStatusLabel } from "@/components/ui/ContentStatusLabel";
-import { Eyebrow } from "@/components/ui/Eyebrow";
-import { PageHero } from "@/components/ui/PageHero";
-import { Section } from "@/components/ui/Section";
-import { howItWorksContent } from "@/content/site";
+import { fieldDocumentContent } from "@/content/field-document";
 
 import styles from "./how-it-works.module.css";
 
 export const metadata = createPageMetadata("/how-it-works");
 
-function HowItWorksTitle() {
-  const accent = howItWorksContent.hero.accentWord;
-  const [beforeAccent, afterAccent] = howItWorksContent.hero.title.split(accent);
-
-  return (
-    <>
-      {beforeAccent}
-      <em className={styles.heroAccent}>{accent}</em>
-      {afterAccent}
-    </>
-  );
-}
+const roadImage = {
+  src: "/assets/images/how-it-works/london-0ps.png",
+  alt: "A dirt road runs between highland fields and a wall of dark mountains.",
+  focalPoint: { x: 28, y: 62 },
+} as const;
 
 export default function HowItWorksPage() {
+  const content = fieldDocumentContent;
+
   return (
     <main id="main-content" tabIndex={-1}>
-      <PageHero
-        ground="cream"
-        eyebrow={howItWorksContent.hero.eyebrow}
-        title={<HowItWorksTitle />}
-        intro={
-          <div className={styles.heroIntro}>
-            <ContentStatusLabel status={howItWorksContent.hero.contentStatus} />
-            <p>{howItWorksContent.hero.lead}</p>
-          </div>
-        }
-      />
+      <section className={styles.hero} aria-labelledby="how-heading">
+        <div className={styles.heroTitle}>
+          <p>How it works / field guide 01</p>
+          <h1 id="how-heading">The caravan moves. You choose your span.</h1>
+        </div>
+        <figure className={styles.heroImage}>
+          <Image
+            src={roadImage.src}
+            alt={roadImage.alt}
+            fill
+            priority
+            unoptimized
+            sizes="(max-width: 800px) 100vw, 48vw"
+            style={{
+              objectPosition: `${roadImage.focalPoint?.x ?? 50}% ${roadImage.focalPoint?.y ?? 50}%`,
+            }}
+          />
+          <figcaption>ROAD NOTE / CARRETERA AUSTRAL</figcaption>
+        </figure>
+      </section>
 
-      <Section ground="butter" aria-labelledby="four-steps-heading">
-        <Container>
-          <div className={styles.sectionHeading}>
-            <Eyebrow tone="accent">{howItWorksContent.stepsEyebrow}</Eyebrow>
-            <h2 id="four-steps-heading">{howItWorksContent.stepsHeading}</h2>
-          </div>
-          <ol className={styles.steps}>
-            {howItWorksContent.steps.map((step) => (
-              <li
-                className={`${styles.step} ${
-                  step.id === "everyone-says-yes" ? styles.keystone : ""
-                }`}
-                key={step.id}
-              >
-                <span className={styles.stepNumber}>{step.number}</span>
-                <div className={styles.stepCopy}>
-                  <ContentStatusLabel status={step.contentStatus} />
-                  <h3>{step.title}</h3>
-                  <p>{step.body}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </Container>
-      </Section>
+      <section className={styles.proposition} aria-label="Core proposition">
+        <p>{content.proposition}</p>
+      </section>
 
-      <Section ground="olive" aria-labelledby="ways-heading">
-        <Container>
-          <div className={styles.deepHeading}>
-            <ContentStatusLabel status={howItWorksContent.waysToTravel.contentStatus} />
-            <h2 id="ways-heading">{howItWorksContent.waysToTravel.title}</h2>
-          </div>
-          <div className={styles.wayGrid}>
-            {howItWorksContent.waysToTravel.items.map((way) => (
-              <article
-                className={`${styles.wayCard} ${way.highlighted ? styles.highlighted : ""}`}
-                key={way.id}
-              >
-                <ContentStatusLabel status="PLACEHOLDER" />
-                <h3>{way.title}</h3>
-                <p>{way.body}</p>
-              </article>
-            ))}
-          </div>
-        </Container>
-      </Section>
+      <section className={styles.steps} aria-labelledby="steps-heading">
+        <header>
+          <p>Three actions / one continuous expedition</p>
+          <h2 id="steps-heading">Entry. Movement. Exit.</h2>
+        </header>
+        <ol>
+          {content.how.steps.map((step) => (
+            <li key={step.number}>
+              <span>{step.number}</span>
+              <div>
+                <h3>{step.label}</h3>
+                <p>{step.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
 
-      <Section ground="cream" aria-labelledby="mechanisms-heading">
-        <Container>
-          <div className={styles.mechanismPanel}>
-            <div className={styles.mechanismHeading}>
-              <ContentStatusLabel status={howItWorksContent.mechanisms.contentStatus} />
-              <Eyebrow>{howItWorksContent.mechanisms.eyebrow}</Eyebrow>
-              <h2 id="mechanisms-heading">{howItWorksContent.mechanisms.title}</h2>
-            </div>
-            <div className={styles.mechanismList}>
-              {howItWorksContent.mechanisms.items.map((mechanism) => (
-                <article className={styles.mechanism} key={mechanism.id}>
-                  <ContentStatusLabel status={mechanism.contentStatus} />
-                  <h3>{mechanism.title}</h3>
-                  <p>{mechanism.body}</p>
-                </article>
-              ))}
-            </div>
+      <section className={styles.fixedFlexible} aria-labelledby="fixed-heading">
+        <header>
+          <p>Planning logic / what changes and what does not</p>
+          <h2 id="fixed-heading">Fixed route. Flexible participation.</h2>
+        </header>
+        <dl>
+          <div>
+            <dt>Fixed</dt>
+            <dd>
+              The annual departure, connected direction of travel, designated
+              joining points and approved transfer logic.
+            </dd>
           </div>
-        </Container>
-      </Section>
+          <div>
+            <dt>Chosen by you</dt>
+            <dd>
+              Where you join, how many connected sections you travel and where
+              your journey finishes.
+            </dd>
+          </div>
+          <div>
+            <dt>Confirmed before travel</dt>
+            <dd>
+              Exact dates, accommodation, transport details and final transfer
+              instructions are supplied from the secured itinerary.
+            </dd>
+          </div>
+        </dl>
+      </section>
 
-      <Section ground="brick" aria-label={howItWorksContent.action.label}>
-        <Container className={styles.ctaBand}>
-          <h2>{howItWorksContent.action.label}</h2>
-          <ButtonLink href={howItWorksContent.action.href} surface="deep">
-            {howItWorksContent.action.label}
-          </ButtonLink>
-        </Container>
-      </Section>
+      <section className={styles.transfer} aria-labelledby="transfer-heading">
+        <p>Transfer note / the southern connection</p>
+        <h2 id="transfer-heading">The road pauses. The route does not.</h2>
+        <p>{content.route.transfer}</p>
+      </section>
+
+      <section className={styles.actions} aria-labelledby="action-heading">
+        <h2 id="action-heading">Choose an entry point.</h2>
+        <div>
+          <Link href="/joining-points">Compare joining points →</Link>
+          <Link href="/caravans/the-andean-caravan">Follow the full route ↗</Link>
+        </div>
+      </section>
     </main>
   );
 }

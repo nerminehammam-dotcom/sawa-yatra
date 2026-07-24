@@ -1,0 +1,217 @@
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+  height: auto;
+  min-height: auto;
+  overflow: visible;
+  border-bottom: var(--border-strong) solid var(--ink);
+}
+
+.heroCopy {
+  display: grid;
+  min-width: 0;
+  align-content: space-between;
+  gap: clamp(2rem, 4vh, 4rem);
+  padding: clamp(2.5rem, 7vh, 5rem) clamp(2rem, 4.5vw, 5rem);
+  background: var(--sun);
+}
+
+.heroCopy > p:first-child,
+.flagshipTitle > p:first-child,
+.facts dt,
+.future > p:first-child,
+.heroImage figcaption {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.heroCopy h1 {
+  width: 100%;
+  max-width: 100%;
+  align-self: center;
+  font-size: clamp(4rem, 6vw, 7rem);
+  line-height: 0.9;
+  text-wrap: initial;
+}
+
+.heroCopy h1 span {
+  display: block;
+}
+
+.heroCopy > p:last-child {
+  max-width: 34ch;
+}
+
+.heroImage {
+  position: relative;
+  min-height: 42rem;
+  margin: 0;
+  overflow: hidden;
+}
+
+.heroImage img {
+  object-fit: cover;
+  transform: scale(1.2);
+  transform-origin: 52% 76%;
+}
+
+.heroImage figcaption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: var(--space-3) var(--space-4);
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.flagship {
+  display: grid;
+  grid-template-columns: minmax(7rem, 0.35fr) minmax(22rem, 1.1fr) minmax(20rem, 0.9fr);
+  border-bottom: var(--border-strong) solid var(--ink);
+}
+
+.number {
+  padding: var(--space-8);
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 10vw, 10rem);
+  line-height: 0.7;
+  border-inline-end: var(--border-strong) solid var(--ink);
+}
+
+.flagshipTitle {
+  display: grid;
+  align-content: center;
+  gap: var(--space-5);
+  padding: clamp(3rem, 6vw, 6rem);
+}
+
+.flagshipTitle h2 {
+  max-width: 8ch;
+}
+
+.facts {
+  display: grid;
+  align-content: center;
+  margin: 0;
+  border-inline-start: var(--border-strong) solid var(--ink);
+}
+
+.facts div {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: var(--space-4);
+  padding: var(--space-5);
+  border-bottom: var(--border-hairline) solid var(--ink);
+}
+
+.facts dd {
+  margin: 0;
+}
+
+.actions {
+  grid-column: 2 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: var(--border-strong) solid var(--ink);
+}
+
+.actions a {
+  display: flex;
+  min-height: 5.5rem;
+  align-items: center;
+  padding: var(--space-5);
+  color: var(--ink);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+  background: var(--pink);
+}
+
+.actions a:last-child {
+  background: var(--olive);
+  border-inline-start: var(--border-strong) solid var(--ink);
+}
+
+.future {
+  display: grid;
+  min-height: 42rem;
+  align-content: space-between;
+  gap: var(--space-12);
+  padding: clamp(3rem, 7vw, 7rem) var(--page-gutter);
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.future h2 {
+  max-width: 11ch;
+}
+
+.future > p:last-child {
+  max-width: 45ch;
+  color: var(--pink);
+}
+
+@media (max-width: 900px) {
+  .hero,
+  .flagship {
+    grid-template-columns: 1fr;
+  }
+
+  .heroCopy {
+    min-height: auto;
+    padding: clamp(3rem, 8vw, 5rem) var(--page-gutter);
+  }
+
+  .heroCopy h1 {
+    max-width: 10ch;
+    font-size: clamp(4rem, 12vw, 6rem);
+  }
+
+  .heroImage {
+    min-height: clamp(24rem, 68vw, 36rem);
+  }
+
+  .number {
+    border-inline-end: 0;
+    border-bottom: var(--border-strong) solid var(--ink);
+  }
+
+  .facts {
+    border-inline-start: 0;
+    border-top: var(--border-strong) solid var(--ink);
+  }
+
+  .actions {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 560px) {
+  .heroCopy {
+    gap: var(--space-8);
+    padding-block: clamp(2.75rem, 10vw, 4rem);
+  }
+
+  .heroCopy h1 {
+    font-size: clamp(3.6rem, 15vw, 5.25rem);
+    line-height: 0.92;
+  }
+
+  .heroImage {
+    min-height: clamp(21rem, 105vw, 28rem);
+  }
+
+  .actions {
+    grid-template-columns: 1fr;
+  }
+
+  .actions a:last-child {
+    border-inline-start: 0;
+    border-top: var(--border-strong) solid var(--ink);
+  }
+}

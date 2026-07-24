@@ -4,7 +4,7 @@
   width: 100%;
   overflow: hidden;
   color: var(--warm-ink);
-  background: var(--butter);
+  background: var(--soft-blue);
 }
 
 .card {
@@ -34,18 +34,11 @@
 }
 
 .duotone .image {
-  filter: grayscale(1) contrast(1.06) sepia(0.18);
+  filter: none;
 }
 
 .duotone::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  background: linear-gradient(135deg, var(--honey), var(--brick));
-  mix-blend-mode: multiply;
-  opacity: 0.52;
+  display: none;
 }
 
 .placeholder {
@@ -58,9 +51,7 @@
   justify-content: flex-end;
   gap: var(--space-2);
   padding: clamp(var(--space-4), 5vw, var(--space-8));
-  background:
-    linear-gradient(142deg, transparent 0 42%, rgb(125 32 39 / 64%) 42% 72%, transparent 72%),
-    linear-gradient(32deg, var(--dusty-blue) 0 38%, var(--honey) 38% 67%, var(--olive) 67%);
+  background: var(--paper);
 }
 
 .placeholder::before {

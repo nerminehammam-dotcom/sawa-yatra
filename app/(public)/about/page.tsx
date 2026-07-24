@@ -1,145 +1,106 @@
+import Image from "next/image";
+import Link from "next/link";
+
 import { createPageMetadata } from "@/app/_metadata";
-import { RisoArtwork } from "@/components/brand/RisoArtwork";
-import { ButtonLink } from "@/components/ui/ButtonLink";
-import { Container } from "@/components/ui/Container";
-import { ContentStatusLabel } from "@/components/ui/ContentStatusLabel";
-import { Eyebrow } from "@/components/ui/Eyebrow";
-import { PageHero } from "@/components/ui/PageHero";
-import { Section } from "@/components/ui/Section";
-import { assetManifest } from "@/content/assets";
-import { aboutContent } from "@/content/site";
+import { getAndeanCaravanGallery } from "@/content/andean-caravan-images";
 
 import styles from "./about.module.css";
 
-const founderPortrait = assetManifest[aboutContent.founder.portraitAssetId];
-
 export const metadata = createPageMetadata("/about");
 
-function AboutTitle() {
-  const accent = aboutContent.hero.accentWord;
-  const [beforeAccent, afterAccent] = aboutContent.hero.title.split(accent);
+const fieldImage = getAndeanCaravanGallery("both-shores")[3]!;
 
-  return (
-    <>
-      {beforeAccent}
-      <em className={styles.heroAccent}>{accent}</em>
-      {afterAccent}
-    </>
-  );
-}
+const principles = [
+  {
+    number: "01",
+    title: "The route is real work",
+    body: "Distances, altitude, borders, ferries and transfer days belong in the story—not in hidden small print.",
+  },
+  {
+    number: "02",
+    title: "The caravan stays connected",
+    body: "Each section is part of one annual movement through the Andes, even as travellers join and leave.",
+  },
+  {
+    number: "03",
+    title: "Places are not decoration",
+    body: "The site uses approved factual content and observed photography without reducing a region or culture to a motif.",
+  },
+  {
+    number: "04",
+    title: "Clarity is a form of care",
+    body: "A complex route should still feel possible to understand, compare and enter.",
+  },
+] as const;
 
 export default function AboutPage() {
   return (
     <main id="main-content" tabIndex={-1}>
-      <PageHero
-        ground="cream"
-        eyebrow={aboutContent.hero.eyebrow}
-        title={<AboutTitle />}
-        intro={
-          <div className={styles.heroIntro}>
-            <ContentStatusLabel status={aboutContent.hero.contentStatus} />
-            <p>{aboutContent.hero.lead}</p>
-          </div>
-        }
-      />
+      <section className={styles.hero} aria-labelledby="about-heading">
+        <p>About / Sawayatra field document</p>
+        <h1 id="about-heading">A caravan with a point of view.</h1>
+        <p>
+          Sawayatra organises one long route around designated joining points,
+          practical clarity and the life found between destinations.
+        </p>
+      </section>
 
-      <Section ground="butter" aria-labelledby="founder-heading">
-        <Container className={styles.founderLayout}>
-          <RisoArtwork
-            asset={{
-              src: founderPortrait.src,
-              alt: founderPortrait.alt,
-              treatment: founderPortrait.treatment,
-              status: founderPortrait.contentStatus,
+      <section className={styles.observation} aria-labelledby="observation-heading">
+        <figure>
+          <Image
+            src={fieldImage.src}
+            alt={fieldImage.alt}
+            fill
+            sizes="(max-width: 800px) 100vw, 58vw"
+            style={{
+              objectPosition: `${fieldImage.focalPoint?.x ?? 50}% ${fieldImage.focalPoint?.y ?? 50}%`,
             }}
-            aspectRatio="square"
-            sizes="(max-width: 639px) 100vw, 46vw"
           />
-          <div className={styles.founderCopy}>
-            <ContentStatusLabel status={aboutContent.founder.contentStatus} />
-            <Eyebrow tone="accent">{aboutContent.founder.eyebrow}</Eyebrow>
-            <h2 id="founder-heading">{aboutContent.founder.name}</h2>
-            <div className={styles.placeholderBlock}>
-              <ContentStatusLabel status="PLACEHOLDER" />
-              {aboutContent.founder.story.map((paragraph, index) => (
-                <p key={`founder-story-${index + 1}`}>{paragraph}</p>
-              ))}
-            </div>
-            <dl className={styles.founderDetails}>
-              <div>
-                <dt>{aboutContent.founder.nameLabel}</dt>
-                <dd>
-                  <ContentStatusLabel status="PLACEHOLDER" />
-                  <span>{aboutContent.founder.name}</span>
-                </dd>
-              </div>
-              <div>
-                <dt>{aboutContent.founder.signatureLabel}</dt>
-                <dd>
-                  <ContentStatusLabel status="PLACEHOLDER" />
-                  <span>{aboutContent.founder.signature}</span>
-                </dd>
-              </div>
-            </dl>
-          </div>
-        </Container>
-      </Section>
+          <figcaption>FIELD NOTE / ALTIPLANO ROAD</figcaption>
+        </figure>
+        <div>
+          <p>Working belief</p>
+          <h2>The in-between moments are part of the expedition.</h2>
+          <p>
+            Roads, weather, roadside meals, border crossings and changes of
+            vehicle make a continuous caravan tangible. They are not edited out
+            to create a polished travel fantasy.
+          </p>
+        </div>
+      </section>
 
-      <Section ground="cream" aria-labelledby="belief-heading">
-        <Container className={styles.beliefLayout}>
-          <div className={styles.sectionHeading}>
-            <ContentStatusLabel status={aboutContent.beliefSection.contentStatus} />
-            <Eyebrow tone="accent">{aboutContent.beliefSection.eyebrow}</Eyebrow>
-            <h2 id="belief-heading">{aboutContent.beliefSection.title}</h2>
-          </div>
-          <blockquote>{aboutContent.belief}</blockquote>
-        </Container>
-      </Section>
+      <section className={styles.principles} aria-labelledby="principles-heading">
+        <header>
+          <p>Operating principles / what remains visible</p>
+          <h2 id="principles-heading">Practical, authored, alive.</h2>
+        </header>
+        <ol>
+          {principles.map((principle) => (
+            <li key={principle.number}>
+              <span>{principle.number}</span>
+              <h3>{principle.title}</h3>
+              <p>{principle.body}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
 
-      <Section ground="olive" aria-labelledby="host-role-heading">
-        <Container className={styles.hostRole}>
-          <div className={styles.sectionHeading}>
-            <ContentStatusLabel status={aboutContent.hostRole.contentStatus} />
-            <h2 id="host-role-heading">{aboutContent.hostRole.title}</h2>
-          </div>
-          <div className={styles.placeholderBlock}>
-            <ContentStatusLabel status={aboutContent.hostRole.contentStatus} />
-            <p>{aboutContent.hostRole.body}</p>
-          </div>
-        </Container>
-      </Section>
+      <section className={styles.founder} aria-labelledby="founder-heading">
+        <p>Founder story / factual placeholder</p>
+        <h2 id="founder-heading">Founder-approved biography and portrait to be supplied.</h2>
+        <p>
+          This space is deliberately labelled until the founder facts and
+          approved portrait are available. Nothing has been invented for launch.
+        </p>
+      </section>
 
-      <Section ground="cream" aria-labelledby="values-heading">
-        <Container>
-          <div className={styles.sectionHeading}>
-            <h2 id="values-heading">{aboutContent.valuesHeading}</h2>
-          </div>
-          <ol className={styles.valueGrid}>
-            {aboutContent.values.map((value, index) => (
-              <li className={styles.value} key={value.id}>
-                <span className={styles.valueNumber} aria-hidden="true">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <ContentStatusLabel status={value.contentStatus} />
-                <h3>{value.title}</h3>
-                <p>{value.body}</p>
-              </li>
-            ))}
-          </ol>
-        </Container>
-      </Section>
-
-      <Section ground="brick" aria-labelledby="about-cta-heading">
-        <Container className={styles.ctaBand}>
-          <div className={styles.ctaCopy}>
-            <ContentStatusLabel status={aboutContent.contentStatus} />
-            <h2 id="about-cta-heading">{aboutContent.closingLine}</h2>
-          </div>
-          <ButtonLink href={aboutContent.action.href} surface="deep">
-            {aboutContent.action.label}
-          </ButtonLink>
-        </Container>
-      </Section>
+      <section className={styles.action} aria-labelledby="about-action-heading">
+        <h2 id="about-action-heading">Begin with the route.</h2>
+        <div>
+          <Link href="/caravans/the-andean-caravan">Follow the caravan →</Link>
+          <Link href="/start-here">Start here ↗</Link>
+        </div>
+      </section>
     </main>
   );
 }

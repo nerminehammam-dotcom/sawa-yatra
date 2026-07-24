@@ -1,13 +1,13 @@
 .form {
   display: grid;
-  gap: var(--space-6, 1.5rem);
+  gap: var(--space-8);
   width: min(100%, var(--measure, 66ch));
-  color: var(--warm-ink, #2b2420);
+  color: var(--warm-ink);
 }
 
 .field {
   display: grid;
-  gap: var(--space-2, 0.5rem);
+  gap: var(--space-3);
   min-width: 0;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .required {
-  color: var(--deep-brown, #673c34);
+  color: var(--deep-brown);
   font-size: 0.8125rem;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -32,27 +32,27 @@
 .control {
   width: 100%;
   min-height: var(--touch-min, 44px);
-  padding: 0.75rem 0.875rem;
-  color: var(--warm-ink, #2b2420);
-  background: var(--cream, #f6eedc);
-  border: 1px solid var(--deep-brown, #673c34);
-  border-radius: 0.5rem;
+  padding: 0.9rem 1rem;
+  color: var(--warm-ink);
+  background: var(--cream);
+  border: 1px solid var(--deep-brown);
+  border-radius: var(--radius-card);
   box-shadow: none;
 }
 
 .control:hover:not(:disabled) {
-  border-color: var(--hover, #8e3522);
+  border-color: var(--hover);
 }
 
 .control[aria-invalid="true"] {
-  border-color: var(--error, #9b2a2a);
+  border-color: var(--error);
   border-width: 2px;
 }
 
 .control:disabled {
-  color: var(--deep-brown, #673c34);
-  background: var(--disabled, #b7ae97);
-  border-color: var(--disabled, #b7ae97);
+  color: var(--deep-brown);
+  background: var(--disabled);
+  border-color: var(--disabled);
 }
 
 .textarea {
@@ -68,13 +68,13 @@
 }
 
 .hint {
-  color: var(--deep-brown, #673c34);
+  color: var(--deep-brown);
   font-size: 0.9375rem;
   line-height: 1.5;
 }
 
 .fieldError {
-  color: var(--error, #9b2a2a);
+  color: var(--ink);
   font-size: 0.9375rem;
   font-weight: 500;
   line-height: 1.45;
@@ -102,11 +102,11 @@
   width: 1.25rem;
   height: 1.25rem;
   margin: 0.7rem auto 0;
-  accent-color: var(--action, #7d2027);
+  accent-color: var(--action);
 }
 
 .checkbox[aria-invalid="true"] {
-  outline: 2px solid var(--error, #9b2a2a);
+  outline: 2px solid var(--error);
   outline-offset: 2px;
 }
 
@@ -114,8 +114,8 @@
 .mockNotice,
 .journeyContext {
   padding: var(--space-4, 1rem);
-  border: 1px solid var(--deep-brown, #673c34);
-  border-radius: var(--radius-card, 14px);
+  border: 1px solid var(--deep-brown);
+  border-radius: var(--radius-card);
 }
 
 .formStatus {
@@ -125,38 +125,38 @@
 }
 
 .formStatus[data-tone="pending"] {
-  border-color: var(--info, #245c68);
-  background: var(--cream, #f6eedc);
+  border-color: var(--info);
+  background: var(--cream);
 }
 
 .formStatus[data-tone="validation"],
 .formStatus[data-tone="network-error"] {
-  border-color: var(--error, #9b2a2a);
-  background: var(--cream, #f6eedc);
+  border-color: var(--error);
+  background: var(--cream);
 }
 
 .formStatus[data-tone="success"] {
-  border-color: var(--success, #4b6b2e);
-  background: var(--cream, #f6eedc);
+  border-color: var(--success);
+  background: var(--cream);
 }
 
 .formStatus[data-tone="duplicate"] {
-  border-color: var(--warning, #b87514);
-  background: var(--cream, #f6eedc);
+  border-color: var(--warning);
+  background: var(--cream);
 }
 
 .mockNotice {
   display: grid;
   gap: var(--space-1, 0.25rem);
   border-style: dashed;
-  background: var(--butter, #fae3b1);
+  background: var(--butter);
   font-size: 0.9375rem;
 }
 
 .journeyContext {
   display: grid;
   gap: var(--space-1, 0.25rem);
-  background: var(--butter, #fae3b1);
+  background: var(--butter);
 }
 
 .journeyContext span {
@@ -178,10 +178,10 @@
   min-width: min(100%, 15rem);
   min-height: var(--touch-min, 44px);
   padding: 0.75rem 1.35rem;
-  color: var(--cream, #f6eedc);
-  background: var(--action, #7d2027);
-  border: 2px solid var(--action, #7d2027);
-  border-radius: var(--radius-pill, 999px);
+  color: var(--ink);
+  background: var(--action);
+  border: 2px solid var(--action);
+  border-radius: var(--radius-pill);
   font-weight: 500;
   line-height: 1.2;
   text-align: center;
@@ -192,8 +192,8 @@
 }
 
 .primaryAction:hover:not(:disabled) {
-  background: var(--hover, #8e3522);
-  border-color: var(--hover, #8e3522);
+  background: var(--hover);
+  border-color: var(--hover);
   transform: translateY(-1px);
 }
 
@@ -202,9 +202,9 @@
 }
 
 .primaryAction:disabled {
-  color: var(--warm-ink, #2b2420);
-  background: var(--disabled, #b7ae97);
-  border-color: var(--disabled, #b7ae97);
+  color: var(--warm-ink);
+  background: var(--disabled);
+  border-color: var(--disabled);
 }
 
 @media (max-width: 639px) {

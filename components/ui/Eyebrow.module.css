@@ -1,10 +1,10 @@
 .root {
   color: inherit;
   font-family: var(--font-read);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 500;
   line-height: 1.35;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 
@@ -13,7 +13,7 @@
 }
 
 .accent {
-  color: var(--brick);
+  color: var(--ink);
 }
 
 .honey {

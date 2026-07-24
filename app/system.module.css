@@ -15,6 +15,10 @@
   display: grid;
   width: min(100%, 54rem);
   margin-inline: auto;
+  padding: clamp(var(--space-6), 4vw, var(--space-12));
+  border-inline-start: 3px solid var(--brick);
+  border-radius: 0 var(--radius-card) var(--radius-card) 0;
+  background: var(--soft-blue);
 }
 
 .statusRow {
@@ -26,7 +30,7 @@
 
 .eyebrow {
   margin-bottom: var(--space-6);
-  color: var(--terracotta);
+  color: var(--ink);
   font-size: 0.8125rem;
   font-weight: 500;
   letter-spacing: 0.2em;
@@ -71,24 +75,25 @@
 
 .primary,
 .primary:visited {
-  color: var(--cream);
-  background: var(--terracotta);
-  border-color: var(--terracotta);
+  color: var(--ink);
+  background: var(--signal);
+  border-color: var(--signal);
 }
 
 .primary:hover {
+  color: var(--paper);
   background: var(--hover);
   border-color: var(--hover);
 }
 
 .secondary,
 .secondary:visited {
-  color: var(--brick);
+  color: var(--ink);
   background: transparent;
 }
 
 .secondary:hover {
-  color: var(--cream);
+  color: var(--ink);
   background: var(--brick);
 }
 
@@ -101,7 +106,7 @@
 .formHeader {
   display: grid;
   max-width: 58rem;
-  margin-bottom: clamp(var(--space-12), 7vw, var(--space-24));
+  margin-bottom: clamp(var(--space-12), 6vw, var(--space-16));
 }
 
 .formTitle {
@@ -141,8 +146,8 @@
   padding: clamp(var(--space-6), 5vw, var(--space-12));
   border: var(--border-hairline) solid var(--hairline);
   border-radius: var(--radius-card);
-  background: var(--butter);
-  box-shadow: 0 1.25rem 3rem rgb(103 60 52 / 8%);
+  background: var(--soft-blue);
+  box-shadow: none;
 }
 
 .invitationLayout {
@@ -159,6 +164,7 @@
 .legalDocument {
   display: grid;
   gap: var(--space-12);
+  max-width: 72rem;
 }
 
 .legalHeader {
@@ -173,13 +179,13 @@
 .legalNotice {
   max-width: var(--measure);
   margin-top: var(--space-8);
-  padding: var(--space-6);
+  padding: var(--space-8);
   border: var(--border-hairline) solid var(--info);
   border-inline-start-width: 0.35rem;
   border-radius: var(--radius-card);
   color: var(--warm-ink);
   background: var(--cream);
-  background: color-mix(in srgb, var(--info) 7%, var(--cream));
+  background: var(--paper);
 }
 
 .legalBody {
@@ -230,8 +236,8 @@
   position: relative;
   overflow: hidden;
   border-radius: var(--radius-card);
-  background: #e7e3d4;
-  background: color-mix(in srgb, var(--deep-brown) 10%, var(--cream));
+  background: var(--paper);
+  background: var(--paper);
 }
 
 .skeletonLine::after,
@@ -239,7 +245,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent, rgb(250 227 177 / 75%), transparent);
+  background: var(--paper);
   animation: loading-sweep 1.8s ease-in-out infinite;
   transform: translateX(-100%);
 }

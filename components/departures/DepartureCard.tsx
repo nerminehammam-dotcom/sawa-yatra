@@ -22,6 +22,7 @@ export interface DepartureCardProps {
   className?: string;
   priority?: boolean;
   featured?: boolean;
+  tone?: "peru" | "bolivia" | "chile" | "crossing";
 }
 
 export function DepartureCard({
@@ -38,16 +39,17 @@ export function DepartureCard({
   className,
   priority = false,
   featured = false,
+  tone = "peru",
 }: DepartureCardProps) {
   return (
     <Link
       className={classNames(
         styles.card,
         featured && styles.featured,
+        styles[tone],
         className,
       )}
       href={href}
-      aria-label={`Explore ${title}`}
     >
       <RisoArtwork
         asset={asset}
@@ -55,36 +57,42 @@ export function DepartureCard({
         sizes={
           featured
             ? "(max-width: 767px) 100vw, 55vw"
-            : "(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw"
+            : "(max-width: 1023px) 100vw, 50vw"
         }
         priority={priority}
         className={styles.image}
       />
       <div className={styles.body}>
-        <div className={styles.kicker}>
-          {sequence ? <span aria-hidden="true">{sequence}</span> : null}
-          <span>{eyebrow ?? "Caravan section"}</span>
+        <div className={styles.intro}>
+          <div className={styles.kicker}>
+            {sequence ? (
+              <span className={styles.sequence} aria-hidden="true">
+                {sequence}
+              </span>
+            ) : null}
+            <span>{eyebrow ?? "Caravan section"}</span>
+          </div>
+          <h3>{title}</h3>
+          <p className={styles.route}>{route}</p>
         </div>
-        <h3>{title}</h3>
-        <p className={styles.route}>{route}</p>
         <dl className={styles.facts}>
           <div>
             <dt>Duration</dt>
             <dd>{duration}</dd>
           </div>
           <div>
-            <dt>Window</dt>
-            <dd>{dateWindow}</dd>
-          </div>
-          <div>
             <dt>Group</dt>
             <dd>{groupSize}</dd>
           </div>
+          <div className={styles.windowFact}>
+            <dt>Window</dt>
+            <dd>{dateWindow}</dd>
+          </div>
         </dl>
         <div className={styles.footer}>
-          <span>{price}</span>
-          <span className={styles.arrow} aria-hidden="true">
-            ↗
+          <span className={styles.price}>{price}</span>
+          <span className={styles.viewLink} aria-hidden="true">
+            View journey <span className={styles.arrow}>→</span>
           </span>
         </div>
       </div>
