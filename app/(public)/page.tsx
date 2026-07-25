@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { createPageMetadata } from "@/app/_metadata";
-import { CinematicHero } from "@/components/field/CinematicHero";
 import { JoiningPointSelector } from "@/components/field/JoiningPointSelector";
 import { RegionalChapter } from "@/components/field/RegionalChapter";
 import { RouteIndex } from "@/components/field/RouteIndex";
@@ -28,24 +27,38 @@ export default function HomePage() {
   const content = fieldDocumentContent;
 
   return (
-    <main id="main-content" tabIndex={-1}>
-      <CinematicHero
-        eyebrow={content.hero.eyebrow}
-        title={content.proposition}
-        image={content.hero.image}
-        primary={{
-          href: content.hero.actionHref,
-          label: content.hero.actionLabel,
-        }}
-        secondary={{
-          href: content.hero.secondaryHref,
-          label: content.hero.secondaryLabel,
-        }}
+    <>
+      <link rel="preconnect" href="https://api.fontshare.com" />
+      <link
+        rel="preconnect"
+        href="https://cdn.fontshare.com"
+        crossOrigin="anonymous"
       />
+      <link
+        rel="stylesheet"
+        href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500&display=swap"
+      />
+      <main className={styles.homePage} id="main-content" tabIndex={-1}>
+        <section className={styles.homeHero} aria-labelledby="home-heading">
+          <Image
+            className={styles.homeHeroImage}
+            src="/assets/images/home/hero.jpg"
+            alt="A quiet road runs through open Patagonian grassland beneath a pale blue sky."
+            fill
+            preload
+            sizes="100vw"
+          />
+          <div className={styles.homeHeroScrim} aria-hidden="true" />
 
-      <SignalStatement>{content.interruption}</SignalStatement>
+          <div className={styles.homeHeroCopy}>
+            <h1 id="home-heading">Go alone, arrive together.</h1>
+            <p>A members’ club that matches travellers by how they travel.</p>
+          </div>
+        </section>
 
-      <section className={styles.how} aria-labelledby="how-caravan-heading">
+        <SignalStatement>{content.interruption}</SignalStatement>
+
+        <section className={styles.how} aria-labelledby="how-caravan-heading">
         <header className={styles.editorialHeading}>
           <p>{content.how.eyebrow}</p>
           <h2 id="how-caravan-heading">{content.how.title}</h2>
@@ -55,14 +68,14 @@ export default function HomePage() {
           {content.how.steps.map((step) => (
             <li key={step.number}>
               <span>{step.number}</span>
-              <h3>{step.label}</h3>
+              <h3>{step.label.replace("—", " ")}</h3>
               <p>{step.body}</p>
             </li>
           ))}
         </ol>
-      </section>
+        </section>
 
-      <section className={styles.route} aria-labelledby="connected-route-heading">
+        <section className={styles.route} aria-labelledby="connected-route-heading">
         <header className={styles.routeHeading}>
           <div>
             <p>{content.route.eyebrow}</p>
@@ -74,9 +87,9 @@ export default function HomePage() {
           </aside>
         </header>
         <RouteIndex />
-      </section>
+        </section>
 
-      <section className={styles.joining} aria-labelledby="joining-heading">
+        <section className={styles.joining} aria-labelledby="joining-heading">
         <header className={styles.joiningHeading}>
           <p>Joining points / practical heart of the caravan</p>
           <h2 id="joining-heading">Where will you join us?</h2>
@@ -85,10 +98,13 @@ export default function HomePage() {
             next leaving point stay visible together.
           </p>
         </header>
-        <JoiningPointSelector points={joiningPoints} headingId="joining-heading" />
-      </section>
+          <JoiningPointSelector
+            points={joiningPoints}
+            headingId="joining-heading"
+          />
+        </section>
 
-      <section className={styles.regions} aria-labelledby="regions-heading">
+        <section className={styles.regions} aria-labelledby="regions-heading">
         <header className={styles.regionsHeading}>
           <p>Regional chapters / one connected geography</p>
           <h2 id="regions-heading">Four rhythms. One long spine.</h2>
@@ -96,9 +112,12 @@ export default function HomePage() {
         {content.regionalChapters.map((chapter) => (
           <RegionalChapter key={chapter.id} {...chapter} />
         ))}
-      </section>
+        </section>
 
-      <section className={styles.fieldNotes} aria-labelledby="field-notes-heading">
+        <section
+          className={styles.fieldNotes}
+          aria-labelledby="field-notes-heading"
+        >
         <header>
           <p>Human proof / field notes</p>
           <h2 id="field-notes-heading">The road is made of details.</h2>
@@ -123,16 +142,20 @@ export default function HomePage() {
             </figure>
           ))}
         </div>
-      </section>
+        </section>
 
-      <section className={styles.finalAction} aria-labelledby="final-action-heading">
-        <p>Final question / joining point selector</p>
-        <h2 id="final-action-heading">Where will you join us?</h2>
-        <div>
-          <Link href="/joining-points">Compare joining points →</Link>
-          <Link href="/start-here">Start here ↗</Link>
-        </div>
-      </section>
-    </main>
+        <section
+          className={styles.finalAction}
+          aria-labelledby="final-action-heading"
+        >
+          <p>Final question / joining point selector</p>
+          <h2 id="final-action-heading">Where will you join us?</h2>
+          <div>
+            <Link href="/joining-points">Compare joining points →</Link>
+            <Link href="/start-here">Start here ↗</Link>
+          </div>
+        </section>
+      </main>
+    </>
   );
 }

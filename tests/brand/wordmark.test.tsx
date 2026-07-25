@@ -6,17 +6,14 @@ import { temporaryWordmark } from "@/content/assets";
 import { siteConfig } from "@/content/site";
 
 describe("Wordmark", () => {
-  it("keeps the temporary mark decorative beside an accessible home link", () => {
+  it("renders the word-only identity as an accessible home link", () => {
     render(<Wordmark />);
 
     const homeLink = screen.getByRole("link", {
       name: `${siteConfig.name} home`,
     });
-    const mark = homeLink.querySelector("svg");
-
     expect(homeLink).toHaveTextContent(temporaryWordmark.text);
-    expect(mark).toHaveAttribute("aria-hidden", "true");
-    expect(mark).toHaveAttribute("focusable", "false");
+    expect(homeLink.querySelector("svg")).not.toBeInTheDocument();
   });
 
   it("preserves the non-link wordmark variant", () => {

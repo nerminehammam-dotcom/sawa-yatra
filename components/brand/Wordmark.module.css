@@ -1,11 +1,8 @@
 .root {
-  --wordmark-route: var(--terracotta);
-
   display: inline-flex;
   align-items: center;
-  gap: 0.28em;
   width: fit-content;
-  color: var(--warm-ink);
+  color: var(--signal);
   font-family: var(--font-display);
   font-size: clamp(1.65rem, 2.4vw, 2.15rem);
   font-variation-settings:
@@ -18,30 +15,20 @@
   text-decoration: none;
 }
 
-.mark {
-  display: block;
-  flex: 0 0 auto;
-  width: 1.08em;
-  height: 0.96em;
-  overflow: visible;
-}
-
 .label {
   display: block;
 }
 
 .root:hover {
-  color: var(--brick);
+  color: var(--signal);
 }
 
 .cream {
-  --wordmark-route: var(--honey);
-
-  color: var(--cream);
+  color: var(--signal);
 }
 
 .cream:hover {
-  color: var(--honey);
+  color: var(--signal);
 }
 
 .large {

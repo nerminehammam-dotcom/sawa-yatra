@@ -462,7 +462,7 @@ export function CaravanRouteMap() {
                 } as StopPosition
               }
             >
-              <span />
+              <span key={activeStop.id} />
             </span>
           </div>
         </div>
@@ -475,6 +475,9 @@ export function CaravanRouteMap() {
           data-country={activeStop.country.toLowerCase()}
           tabIndex={-1}
         >
+          <p className="sr-only" aria-live="polite" aria-atomic="true">
+            Selected stop: {activeDetail.shortName}, {activeStop.country}.
+          </p>
           <div key={activeStop.id} className={styles.destinationCard}>
             <figure className={styles.destinationPhoto}>
               <Image

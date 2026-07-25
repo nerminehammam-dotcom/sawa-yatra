@@ -4,7 +4,6 @@ import { classNames } from "@/components/ui/classNames";
 import { temporaryWordmark } from "@/content/assets";
 import { siteConfig } from "@/content/site";
 
-import { RouteGateMark } from "./RouteGateMark";
 import styles from "./Wordmark.module.css";
 
 export interface WordmarkProps {
@@ -27,16 +26,7 @@ export function Wordmark({
     !href && styles.text,
     className,
   );
-  const wordmark = (
-    <>
-      <RouteGateMark
-        className={styles.mark}
-        gateColor="currentColor"
-        routeColor="var(--wordmark-route)"
-      />
-      <span className={styles.label}>{temporaryWordmark.text}</span>
-    </>
-  );
+  const wordmark = <span className={styles.label}>{temporaryWordmark.text}</span>;
 
   if (!href) {
     return <span className={wordmarkClassName}>{wordmark}</span>;

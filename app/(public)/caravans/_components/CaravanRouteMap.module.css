@@ -307,6 +307,10 @@
   transform: translateY(-3px);
 }
 
+.stopButton[aria-pressed="true"] {
+  animation: marker-arrival var(--motion-route) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 .stopButton:focus-visible {
   color: var(--ink);
   background: var(--sun);
@@ -385,6 +389,7 @@
   width: 100%;
   height: 100%;
   border: 0.55rem solid var(--signal);
+  animation: traveller-arrival var(--motion-route) cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .routeLog {
@@ -397,7 +402,7 @@
   display: grid;
   grid-template-rows: minmax(18rem, 0.72fr) auto;
   min-height: 100%;
-  animation: reveal-card var(--motion-route) ease both;
+  animation: reveal-card var(--motion-route) cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .destinationPhoto {
@@ -410,6 +415,8 @@
 
 .destinationPhoto img {
   object-fit: cover;
+  animation: reveal-photo calc(var(--motion-route) * 1.15)
+    cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .destinationPhoto figcaption {
@@ -429,6 +436,8 @@
   align-content: start;
   gap: var(--space-4);
   padding: clamp(1.5rem, 3vw, 2.5rem);
+  animation: reveal-copy calc(var(--motion-route) * 0.85)
+    cubic-bezier(0.16, 1, 0.3, 1) 80ms both;
 }
 
 .stopCount,
@@ -596,10 +605,61 @@
 
 @keyframes reveal-card {
   from {
+    opacity: 0.72;
     transform: translateX(1.25rem);
   }
   to {
+    opacity: 1;
     transform: translateX(0);
+  }
+}
+
+@keyframes reveal-photo {
+  from {
+    opacity: 0.78;
+    transform: scale(1.035);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes reveal-copy {
+  from {
+    opacity: 0;
+    transform: translateX(0.8rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes marker-arrival {
+  0% {
+    transform: translateY(-3px) scale(0.82);
+  }
+  55% {
+    transform: translateY(-3px) scale(1.14);
+  }
+  100% {
+    transform: translateY(-3px) scale(1);
+  }
+}
+
+@keyframes traveller-arrival {
+  0% {
+    opacity: 0.35;
+    transform: scale(0.62);
+  }
+  62% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -728,7 +788,11 @@
     transition: none;
   }
 
-  .destinationCard {
+  .destinationCard,
+  .destinationPhoto img,
+  .destinationBody,
+  .stopButton[aria-pressed="true"],
+  .traveller span {
     animation: none;
   }
 }

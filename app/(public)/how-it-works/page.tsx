@@ -1,110 +1,188 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import { createPageMetadata } from "@/app/_metadata";
-import { fieldDocumentContent } from "@/content/field-document";
+import { ButtonLink } from "@/components/ui/ButtonLink";
 
 import styles from "./how-it-works.module.css";
 
 export const metadata = createPageMetadata("/how-it-works");
 
-const roadImage = {
-  src: "/assets/images/how-it-works/london-0ps.png",
-  alt: "A dirt road runs between highland fields and a wall of dark mountains.",
-  focalPoint: { x: 28, y: 62 },
-} as const;
+const participationStates = [
+  "Interest sent",
+  "Awaiting response",
+  "Interest accepted",
+  "Introduction opened",
+  "Not moving forward",
+] as const;
+
+const consentSteps = [
+  "Find a journey",
+  "Express interest privately",
+  "Both members opt in",
+  "Connect and plan",
+] as const;
 
 export default function HowItWorksPage() {
-  const content = fieldDocumentContent;
-
   return (
-    <main id="main-content" tabIndex={-1}>
-      <section className={styles.hero} aria-labelledby="how-heading">
-        <div className={styles.heroTitle}>
-          <p>How it works / field guide 01</p>
-          <h1 id="how-heading">The caravan moves. You choose your span.</h1>
+    <main className={styles.page} id="main-content" tabIndex={-1}>
+      {/* 1. Opening */}
+      <section className={styles.opening} aria-labelledby="how-heading">
+        <div className={styles.openingInner}>
+          <p className={styles.kicker}>A simple arrangement</p>
+          <h1 id="how-heading">How Sawayatra works</h1>
+          <p className={styles.openingLine}>
+            Browse journeys openly. Connect privately. Nothing is revealed until
+            the interest is mutual.
+          </p>
         </div>
-        <figure className={styles.heroImage}>
-          <Image
-            src={roadImage.src}
-            alt={roadImage.alt}
-            fill
-            priority
-            unoptimized
-            sizes="(max-width: 800px) 100vw, 48vw"
-            style={{
-              objectPosition: `${roadImage.focalPoint?.x ?? 50}% ${roadImage.focalPoint?.y ?? 50}%`,
-            }}
-          />
-          <figcaption>ROAD NOTE / CARRETERA AUSTRAL</figcaption>
-        </figure>
       </section>
 
-      <section className={styles.proposition} aria-label="Core proposition">
-        <p>{content.proposition}</p>
-      </section>
-
-      <section className={styles.steps} aria-labelledby="steps-heading">
-        <header>
-          <p>Three actions / one continuous expedition</p>
-          <h2 id="steps-heading">Entry. Movement. Exit.</h2>
+      {/* 2. Three ways to travel */}
+      <section className={styles.ways} aria-labelledby="ways-heading">
+        <header className={styles.sectionHeader}>
+          <p className={styles.kicker}>Choose your way in</p>
+          <h2 id="ways-heading">Three ways to travel</h2>
         </header>
-        <ol>
-          {content.how.steps.map((step) => (
-            <li key={step.number}>
-              <span>{step.number}</span>
-              <div>
-                <h3>{step.label}</h3>
-                <p>{step.body}</p>
+
+        <article className={styles.featuredJourney}>
+          <div className={styles.featuredImage}>
+            <Image
+              src="/assets/images/departures/andean/gallery/the-end-of-the-road/09-patagonia-41.jpg"
+              alt="A broad Patagonian lake lies beneath a distant ridge of snow-covered mountains."
+              fill
+              priority
+              sizes="(max-width: 767px) 100vw, 92vw"
+            />
+          </div>
+          <div className={styles.featuredCopy}>
+            <h3>Caravan</h3>
+            <p className={styles.panelSummary}>
+              Join one section, combine several, or travel until the road ends.
+            </p>
+            <ButtonLink
+              className={styles.featuredAction}
+              href="/caravans"
+              surface="deep"
+            >
+              Explore the Andean Caravan <span aria-hidden="true">→</span>
+            </ButtonLink>
+          </div>
+        </article>
+
+        <div className={styles.secondaryWays}>
+          <article className={`${styles.wayCard} ${styles.joinCard}`}>
+            <div className={styles.wayImage}>
+              <Image
+                src="/assets/images/departures/andean/gallery/white-city-deep-canyon/05-london-0ps.jpg"
+                alt="A pale road crosses cultivated Andean fields beneath dark mountains and gathering clouds."
+                fill
+                loading="eager"
+                sizes="(max-width: 1023px) 100vw, 58vw"
+              />
+            </div>
+            <div className={styles.wayCopy}>
+              <h3>Join a Journey</h3>
+              <p className={styles.panelSummary}>
+                Browse journeys created by other members and express interest
+                when one feels right.
+              </p>
+              <ButtonLink href="/departures" surface="deep">
+                Browse Member Journeys <span aria-hidden="true">→</span>
+              </ButtonLink>
+            </div>
+          </article>
+
+          <article className={styles.wayCard}>
+            <div className={`${styles.wayImage} ${styles.atacamaImage}`}>
+              <Image
+                src="/assets/images/departures/andean/atacama.jpg"
+                alt="Stars fill the night sky above rock formations in the Atacama Desert."
+                fill
+                sizes="(max-width: 1023px) 100vw, 58vw"
+              />
+            </div>
+            <div className={styles.wayCopy}>
+              <p className={styles.cardLabel}>Created by you</p>
+              <h3>Create Your Own</h3>
+              <p className={styles.panelSummary}>
+                Choose your destination, dates and travel style, then invite
+                compatible members to join.
+              </p>
+              <div className={styles.cardActionGroup}>
+                <ButtonLink
+                  href="/request-invitation?intent=create-journey&amp;returnTo=%2Fdo-it-yourself"
+                  surface="deep"
+                >
+                  Create a Journey <span aria-hidden="true">→</span>
+                </ButtonLink>
+                <p className={styles.requirement}>Completed Travel Self required.</p>
               </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      {/* 3. Meet Your Travel Self */}
+      <section className={styles.travelSelf} aria-labelledby="travel-self-heading">
+        <div className={styles.travelSelfHeading}>
+          <p className={styles.kicker}>Before you participate</p>
+          <h2 id="travel-self-heading">Meet Your Travel Self</h2>
+        </div>
+        <div className={styles.travelSelfCopy}>
+          <p className={styles.largeBody}>
+            When you are ready to join, create or express interest in a journey,
+            begin by telling us how you travel.
+          </p>
+          <p>
+            Your Travel Self captures your pace, preferences, independence,
+            comfort and interests. It helps Sawayatra suggest journeys and
+            travelling companions that are more likely to suit you.
+          </p>
+          <ButtonLink href="/request-invitation?intent=create-travel-self&amp;returnTo=%2Ftravel-self">
+            Create Your Travel Self <span aria-hidden="true">→</span>
+          </ButtonLink>
+          <p className={styles.note}>
+            You can explore freely. A completed Travel Self is required only when
+            you want to participate.
+          </p>
+        </div>
+      </section>
+
+      {/* 4. Privacy and mutual consent */}
+      <section className={styles.privacy} aria-labelledby="privacy-heading">
+        <header className={styles.privacyHeader}>
+          <p className={styles.kicker}>Privacy by design</p>
+          <h2 id="privacy-heading">Your interest remains private</h2>
+        </header>
+
+        <div className={styles.privacyCopy}>
+          <blockquote>“People don&apos;t browse people. They browse journeys.”</blockquote>
+          <p>
+            When you express interest in a journey, the other member can review
+            your Travel Self without receiving your private identity or contact
+            details. If both of you choose to connect, Sawayatra opens an
+            introduction.
+          </p>
+        </div>
+
+        <ol className={styles.consentSequence} aria-label="How a private connection opens">
+          {consentSteps.map((step) => (
+            <li key={step}>
+              <span>{step}</span>
             </li>
           ))}
         </ol>
-      </section>
 
-      <section className={styles.fixedFlexible} aria-labelledby="fixed-heading">
-        <header>
-          <p>Planning logic / what changes and what does not</p>
-          <h2 id="fixed-heading">Fixed route. Flexible participation.</h2>
-        </header>
-        <dl>
-          <div>
-            <dt>Fixed</dt>
-            <dd>
-              The annual departure, connected direction of travel, designated
-              joining points and approved transfer logic.
-            </dd>
-          </div>
-          <div>
-            <dt>Chosen by you</dt>
-            <dd>
-              Where you join, how many connected sections you travel and where
-              your journey finishes.
-            </dd>
-          </div>
-          <div>
-            <dt>Confirmed before travel</dt>
-            <dd>
-              Exact dates, accommodation, transport details and final transfer
-              instructions are supplied from the secured itinerary.
-            </dd>
-          </div>
-        </dl>
-      </section>
-
-      <section className={styles.transfer} aria-labelledby="transfer-heading">
-        <p>Transfer note / the southern connection</p>
-        <h2 id="transfer-heading">The road pauses. The route does not.</h2>
-        <p>{content.route.transfer}</p>
-      </section>
-
-      <section className={styles.actions} aria-labelledby="action-heading">
-        <h2 id="action-heading">Choose an entry point.</h2>
-        <div>
-          <Link href="/joining-points">Compare joining points →</Link>
-          <Link href="/caravans/the-andean-caravan">Follow the full route ↗</Link>
+        <div className={styles.interestStates}>
+          <p className={styles.stateLabel}>Interest states</p>
+          <ul>
+            {participationStates.map((state) => (
+              <li key={state}>{state}</li>
+            ))}
+          </ul>
         </div>
       </section>
+
     </main>
   );
 }

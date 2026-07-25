@@ -1,3 +1,77 @@
+:global(body):has(.homePage)::before {
+  opacity: 0.085;
+}
+
+.homePage {
+  --hero-cream: #f6eedc;
+  --hero-ink: #2b2420;
+  --hero-rose: #eeb6c4;
+
+  overflow: clip;
+}
+
+.homeHero {
+  position: relative;
+  width: 100vw;
+  height: 100dvh;
+  min-height: 100dvh;
+  overflow: hidden;
+  color: var(--hero-cream);
+  background: var(--hero-ink);
+}
+
+.homeHeroImage {
+  z-index: 0;
+  object-fit: cover;
+  object-position: center;
+}
+
+.homeHeroScrim {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(43, 36, 32, 0) 0%,
+    rgba(43, 36, 32, 0.08) 42%,
+    rgba(43, 36, 32, 0.55) 100%
+  );
+  pointer-events: none;
+}
+
+.homeHeroCopy {
+  position: absolute;
+  z-index: 3;
+  right: 6vw;
+  bottom: 8vh;
+  width: min(620px, 90vw);
+  text-align: right;
+}
+
+.homeHeroCopy h1 {
+  color: var(--hero-rose);
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 6vw, 5.5rem);
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "opsz" 144;
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.homeHeroCopy p {
+  max-width: 620px;
+  margin-top: 1.25rem;
+  margin-left: auto;
+  color: rgba(246, 238, 220, 0.92);
+  font-family: "General Sans", "Inter", system-ui, sans-serif;
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
 .how,
 .route,
 .joining,
@@ -285,6 +359,22 @@
 }
 
 @media (max-width: 639px) {
+  .homeHeroCopy {
+    right: 6vw;
+    bottom: 12vh;
+    width: 90vw;
+  }
+
+  .homeHeroCopy h1 {
+    font-size: clamp(2.6rem, 12vw, 4.2rem);
+    line-height: 1.05;
+  }
+
+  .homeHeroCopy p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
   .howSteps li {
     grid-template-columns: 4.5rem minmax(0, 1fr);
   }
