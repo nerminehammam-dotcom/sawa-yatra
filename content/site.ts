@@ -33,6 +33,8 @@ const approvedRouteDescriptions = {
     "Compare the designated places where travellers can enter and leave the Andean Caravan.",
   "start-here":
     "Choose a joining point and begin an enquiry about the Andean Caravan.",
+  "do-it-yourself":
+    "Create your own Sawayatra journey. The Do It Yourself experience is coming later.",
   departures:
     "The Andean Caravan moves through Peru, Bolivia and Chile. Join one of nine consecutive sections, connect several, or travel the complete 71-day route.",
   journey:
@@ -51,6 +53,7 @@ export const routeMetadata = ([
   ["start-here", "/start-here", "Start here | Sawayatra"],
   ["how-it-works", "/how-it-works", "How it works | Sawayatra"],
   ["travel-self", "/travel-self", "Meet your Travel Self | Sawayatra"],
+  ["do-it-yourself", "/do-it-yourself", "Do It Yourself | Sawayatra"],
   ["departures", "/departures", "Departures | Sawayatra"],
   ["journey", "/departures/[slug]", "Journey | Sawayatra"],
   ["membership", "/membership", "Membership | Sawayatra"],
@@ -74,7 +77,10 @@ export const routeMetadata = ([
   descriptionStatus:
     id in approvedRouteDescriptions ? "LOCKED" : "PLACEHOLDER",
   canonicalPath: path,
-  noIndex: id === "sign-in" || id === "not-found" ? true : undefined,
+  noIndex:
+    id === "do-it-yourself" || id === "sign-in" || id === "not-found"
+      ? true
+      : undefined,
   contentStatus: "LOCKED",
   contentNote: "Title follows the locked route map; description remains a placeholder.",
 })) as readonly RouteMetadataEntry[];

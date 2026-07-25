@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 
 import sitemap from "@/app/sitemap";
 
@@ -17,7 +17,11 @@ import { archetypes } from "@/content/archetypes";
 import { assetManifest } from "@/content/assets";
 import { primaryNavigation, utilityNavigation } from "@/content/navigation";
 import { quizQuestions } from "@/content/quiz";
-import { howItWorksContent, routeMetadata } from "@/content/site";
+import {
+  howItWorksContent,
+  routeMetadata,
+  routeMetadataByPath,
+} from "@/content/site";
 import { formSchemas } from "@/lib/forms/schemas";
 
 const releaseOneRoutes = [
@@ -28,6 +32,7 @@ const releaseOneRoutes = [
   "/start-here",
   "/how-it-works",
   "/travel-self",
+  "/do-it-yourself",
   "/departures",
   "/departures/[slug]",
   "/membership",
@@ -102,9 +107,22 @@ describe("Release 1 content contracts", () => {
     expect(urls).toContain("/caravans/the-andean-caravan");
     expect(urls).toContain("/joining-points");
     expect(urls).toContain("/start-here");
+    expect(urls).not.toContain("/do-it-yourself");
     expect(urls).not.toContain("/about");
     expect(urls).not.toContain("/membership");
     expect(urls).not.toContain("/privacy");
+  });
+
+  it("keeps the approved Do It Yourself metadata explicitly non-indexed", () => {
+    expect(routeMetadataByPath["/do-it-yourself"]).toMatchObject({
+      path: "/do-it-yourself",
+      title: "Do It Yourself | Sawayatra",
+      description:
+        "Create your own Sawayatra journey. The Do It Yourself experience is coming later.",
+      descriptionStatus: "LOCKED",
+      canonicalPath: "/do-it-yourself",
+      noIndex: true,
+    });
   });
 
   it("keeps Open Seats and dead links out of navigation", () => {
@@ -317,5 +335,62 @@ describe("Release 1 content contracts", () => {
     expect(publicFieldNames.join(" ")).not.toMatch(
       /passport|nationality|date.?of.?birth|health|mobility|emergency|room|altitude|deposit|payment/i,
     );
+  });
+});
+
+describe("Do It Yourself generated metadata", () => {
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.resetModules();
+  });
+
+  it("uses noindex, follow on a configured production domain", async () => {
+    vi.stubEnv("NODE_ENV", "production");
+    vi.stubEnv("NEXT_PUBLIC_SITE_URL", "https://www.sawayatra.test");
+    vi.resetModules();
+
+    const { createPageMetadata } = await import("@/app/_metadata");
+    const metadata = createPageMetadata("/do-it-yourself");
+
+    expect(metadata.alternates?.canonical).toBe(
+      "https://www.sawayatra.test/do-it-yourself",
+    );
+    expect(metadata.robots).toMatchObject({
+      index: false,
+      follow: true,
+      googleBot: {
+        index: false,
+        follow: true,
+      },
+    });
+    expect(metadata.openGraph).toMatchObject({
+      title: "Do It Yourself | Sawayatra",
+      description:
+        "Create your own Sawayatra journey. The Do It Yourself experience is coming later.",
+      url: "https://www.sawayatra.test/do-it-yourself",
+    });
+    expect(metadata.twitter).toMatchObject({
+      title: "Do It Yourself | Sawayatra",
+      description:
+        "Create your own Sawayatra journey. The Do It Yourself experience is coming later.",
+    });
+  });
+
+  it("preserves noindex, nofollow without a configured production domain", async () => {
+    vi.stubEnv("NODE_ENV", "development");
+    vi.stubEnv("NEXT_PUBLIC_SITE_URL", "");
+    vi.resetModules();
+
+    const { createPageMetadata } = await import("@/app/_metadata");
+    const metadata = createPageMetadata("/do-it-yourself");
+
+    expect(metadata.robots).toMatchObject({
+      index: false,
+      follow: false,
+      googleBot: {
+        index: false,
+        follow: false,
+      },
+    });
   });
 });

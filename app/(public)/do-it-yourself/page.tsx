@@ -1,7 +1,10 @@
+import { createPageMetadata } from "@/app/_metadata";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 
 import styles from "../departures/departures.module.css";
+
+export const metadata = createPageMetadata("/do-it-yourself");
 
 export default function DoItYourselfPage() {
   return (

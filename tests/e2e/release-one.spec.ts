@@ -835,6 +835,52 @@ test.describe("links, metadata and accessibility", () => {
       "content",
       /noindex/u,
     );
+
+    await page.goto("/do-it-yourself");
+    await expect(page).toHaveTitle("Do It Yourself | Sawayatra");
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute(
+      "content",
+      "Create your own Sawayatra journey. The Do It Yourself experience is coming later.",
+    );
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      /\/do-it-yourself$/u,
+    );
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute(
+      "content",
+      /noindex, nofollow/u,
+    );
+    await expect(page.locator('meta[name="googlebot"]')).toHaveAttribute(
+      "content",
+      /noindex, nofollow/u,
+    );
+    await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
+      "content",
+      "Do It Yourself | Sawayatra",
+    );
+    await expect(
+      page.locator('meta[property="og:description"]'),
+    ).toHaveAttribute(
+      "content",
+      "Create your own Sawayatra journey. The Do It Yourself experience is coming later.",
+    );
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+      "content",
+      /\/do-it-yourself$/u,
+    );
+    await expect(page.locator('meta[name="twitter:title"]')).toHaveAttribute(
+      "content",
+      "Do It Yourself | Sawayatra",
+    );
+    await expect(
+      page.locator('meta[name="twitter:description"]'),
+    ).toHaveAttribute(
+      "content",
+      "Create your own Sawayatra journey. The Do It Yourself experience is coming later.",
+    );
+
+    const sitemapResponse = await page.request.get("/sitemap.xml");
+    expect(await sitemapResponse.text()).not.toContain("/do-it-yourself");
   });
 
   for (const route of publicRoutes) {
