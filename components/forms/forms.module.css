@@ -45,7 +45,7 @@
 }
 
 .control[aria-invalid="true"] {
-  border-color: var(--error);
+  border-color: var(--ink);
   border-width: 2px;
 }
 
@@ -106,7 +106,7 @@
 }
 
 .checkbox[aria-invalid="true"] {
-  outline: 2px solid var(--error);
+  outline: 2px solid var(--ink);
   outline-offset: 2px;
 }
 
@@ -122,6 +122,11 @@
   display: grid;
   gap: var(--space-1, 0.25rem);
   border-inline-start-width: 0.35rem;
+}
+
+.formStatus:focus {
+  outline: 3px solid var(--ink);
+  outline-offset: 4px;
 }
 
 .formStatus[data-tone="pending"] {
@@ -180,7 +185,7 @@
   padding: 0.75rem 1.35rem;
   color: var(--ink);
   background: var(--action);
-  border: 2px solid var(--action);
+  border: 2px solid var(--ink);
   border-radius: var(--radius-pill);
   font-weight: 500;
   line-height: 1.2;
@@ -191,7 +196,12 @@
     transform 160ms ease;
 }
 
+.primaryAction:focus-visible {
+  outline-color: var(--ink);
+}
+
 .primaryAction:hover:not(:disabled) {
+  color: var(--paper);
   background: var(--hover);
   border-color: var(--hover);
   transform: translateY(-1px);

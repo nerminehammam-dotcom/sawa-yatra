@@ -43,7 +43,7 @@
 
 .utilityLink:hover,
 .utilityLink[aria-current="page"] {
-  border-bottom: var(--border-strong) solid var(--pink);
+  border-bottom: var(--border-strong) solid var(--clay);
 }
 
 .utilitySeparator {
@@ -130,7 +130,7 @@
   bottom: 0;
   left: var(--space-4);
   height: 2px;
-  background: var(--pink);
+  background: var(--clay);
   content: "";
   transform: scaleX(0);
   transform-origin: left;

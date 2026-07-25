@@ -67,7 +67,7 @@
 .selectivity blockquote {
   color: var(--ink);
   max-width: 25ch;
-  color: var(--cream);
+  color: var(--ink);
   font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 4.5rem);
   font-weight: 300;

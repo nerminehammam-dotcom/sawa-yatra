@@ -24,7 +24,7 @@
 }
 
 .root:focus-visible {
-  outline: 2px solid var(--focus);
+  outline: 2px solid var(--ink);
   outline-offset: 2px;
 }
 
@@ -39,7 +39,7 @@
 
   color: var(--ink);
   background: var(--action);
-  border-color: var(--action);
+  border-color: var(--ink);
 }
 
 .primary:hover:not(:disabled):not([aria-disabled="true"]) {
@@ -56,7 +56,7 @@
 
   color: var(--ink);
   background: transparent;
-  border-color: var(--brick);
+  border-color: var(--ink);
 }
 
 .secondary:hover:not(:disabled):not([aria-disabled="true"]) {
@@ -72,7 +72,7 @@
 
   color: var(--warm-ink);
   background: var(--action-on-deep);
-  border-color: var(--action-on-deep);
+  border-color: var(--ink);
 }
 
 .primaryDeep:hover:not(:disabled):not([aria-disabled="true"]) {
@@ -97,6 +97,10 @@
   background: var(--cream);
   transform: translate(-1px, -1px);
   box-shadow: none;
+}
+
+.secondaryDeep:focus-visible {
+  outline-color: var(--paper);
 }
 
 .fullWidth {

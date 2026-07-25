@@ -25,7 +25,7 @@ export default defineConfig({
   projects: [
     {
       name: "mobile-375",
-      testMatch: /release-one\.spec\.ts/,
+      testMatch: [/release-one\.spec\.ts/, /contrast\.spec\.ts/],
       use: {
         ...devices["Desktop Chrome"],
         channel: "chrome",
@@ -52,7 +52,7 @@ export default defineConfig({
     },
     {
       name: "wide-1440",
-      testMatch: /release-one\.spec\.ts/,
+      testMatch: [/release-one\.spec\.ts/, /contrast\.spec\.ts/],
       use: {
         ...devices["Desktop Chrome"],
         channel: "chrome",

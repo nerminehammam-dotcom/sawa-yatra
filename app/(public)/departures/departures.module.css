@@ -82,7 +82,7 @@
 }
 
 .caravanPath:focus-visible {
-  outline: 4px solid var(--signal);
+  outline: 4px solid var(--ink);
   outline-offset: 7px;
 }
 
