@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 
 import { formUiContent } from "@/content/forms";
 import { submitMockForm } from "@/lib/forms/client";
@@ -12,6 +12,7 @@ interface VisibleSubmissionState {
   status: Exclude<FormStatusTone, never>;
   title: string;
   message: string;
+  focusValidationAlert?: boolean;
 }
 
 type SubmissionState = { status: "idle" } | VisibleSubmissionState;
@@ -20,6 +21,26 @@ const idleState: SubmissionState = { status: "idle" };
 
 export function useFormSubmission<K extends FormKind>(kind: K) {
   const [state, setState] = useState<SubmissionState>(idleState);
+  const [formElement, setFormElement] = useState<HTMLFormElement | null>(null);
+
+  useLayoutEffect(() => {
+    if (state.status !== "validation" || !state.focusValidationAlert) {
+      return;
+    }
+
+    const validationAlert = formElement?.querySelector<HTMLElement>(
+      '[data-tone="validation"][role="alert"]',
+    );
+
+    if (validationAlert) {
+      validationAlert.focus();
+      return;
+    }
+
+    formElement
+      ?.querySelector<HTMLElement>('[aria-invalid="true"]')
+      ?.focus();
+  }, [formElement, state]);
 
   const submit = useCallback(
     async (values: FormValuesByKind[K]) => {
@@ -74,6 +95,7 @@ export function useFormSubmission<K extends FormKind>(kind: K) {
       status: "validation",
       title: formUiContent.submission.validationTitle,
       message: formUiContent.submission.validationMessage,
+      focusValidationAlert: true,
     });
   }, []);
 
@@ -88,5 +110,6 @@ export function useFormSubmission<K extends FormKind>(kind: K) {
     submit,
     showValidationState,
     clearSettledState,
+    setFormElement,
   };
 }

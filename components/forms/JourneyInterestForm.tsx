@@ -60,6 +60,7 @@ export function JourneyInterestForm({
   } = useForm<JourneyInterestValues>({
     resolver: zodResolver(clientSchema),
     mode: "onBlur",
+    shouldFocusError: false,
     defaultValues: {
       name: "",
       email: "",
@@ -69,25 +70,29 @@ export function JourneyInterestForm({
       consent: false,
     },
   });
-  const submission = useFormSubmission("journey-interest");
+  const {
+    state,
+    submit,
+    showValidationState,
+    clearSettledState,
+    setFormElement,
+  } = useFormSubmission("journey-interest");
 
   return (
     <form
+      ref={setFormElement}
       className={styles.form}
       aria-label={`${journeyInterestFormContent.ariaLabelPrefix} ${journeyLabel}`}
       aria-busy={isSubmitting}
       noValidate
-      onChange={submission.clearSettledState}
-      onSubmit={handleSubmit(
-        submission.submit,
-        submission.showValidationState,
-      )}
+      onChange={clearSettledState}
+      onSubmit={handleSubmit(submit, showValidationState)}
     >
-      {submission.state.status !== "idle" ? (
+      {state.status !== "idle" ? (
         <FormStatus
-          tone={submission.state.status}
-          title={submission.state.title}
-          message={submission.state.message}
+          tone={state.status}
+          title={state.title}
+          message={state.message}
         />
       ) : null}
 

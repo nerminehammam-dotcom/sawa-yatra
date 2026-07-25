@@ -21,9 +21,9 @@ export default function DoItYourselfPage() {
               </div>
               <div className={styles.createCopy}>
                 <p className={styles.laterLabel}>Later release</p>
-                <h2 id="do-it-yourself-heading">
+                <h1 id="do-it-yourself-heading">
                   Create <span className={styles.comingLater}>Coming later</span>
-                </h2>
+                </h1>
                 <p>
                   Create is not available in Release 1. Explore Caravan / Join
                   for the journey available now.

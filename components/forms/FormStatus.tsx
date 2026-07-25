@@ -23,6 +23,7 @@ export function FormStatus({ tone, title, message }: FormStatusProps) {
       role={isAlert ? "alert" : "status"}
       aria-live={isAlert ? "assertive" : "polite"}
       aria-atomic="true"
+      tabIndex={tone === "validation" ? -1 : undefined}
     >
       <strong>{title}</strong>
       <p>{message}</p>

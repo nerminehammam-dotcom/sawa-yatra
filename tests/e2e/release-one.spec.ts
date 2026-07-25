@@ -26,6 +26,7 @@ const publicRoutes = [
   "/how-it-works",
   "/travel-self",
   "/departures",
+  "/do-it-yourself",
   ...andeanDepartureRoutes,
   "/membership",
   "/about",
@@ -90,6 +91,53 @@ test.describe("Release 1 route contract", () => {
       "href",
       "/",
     );
+  });
+
+  test("the Do It Yourself title is the sole H1 with unchanged styling", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      !["mobile-375", "wide-1440"].includes(testInfo.project.name),
+      "The title is checked at the approved mobile and desktop widths.",
+    );
+
+    await page.goto("/do-it-yourself");
+    await page.evaluate(() => document.fonts.ready);
+
+    const heading = page.locator("h1");
+    await expect(heading).toHaveCount(1);
+    await expect(heading).toHaveText("Create Coming later");
+    await expect(heading.locator("span")).toHaveText("Coming later");
+
+    const appearance = await heading.evaluate((element) => {
+      const style = getComputedStyle(element);
+
+      return {
+        color: style.color,
+        fontFamily: style.fontFamily,
+        fontSize: parseFloat(style.fontSize),
+        fontWeight: style.fontWeight,
+        letterSpacing: parseFloat(style.letterSpacing),
+        lineHeight: parseFloat(style.lineHeight),
+        maxWidth: style.maxWidth,
+        viewportWidth: window.innerWidth,
+      };
+    });
+    const expectedFontSize =
+      appearance.viewportWidth <= 767
+        ? Math.min(96, Math.max(64, appearance.viewportWidth * 0.2))
+        : Math.min(144, Math.max(64, appearance.viewportWidth * 0.09));
+
+    expect(appearance.color).toBe("rgb(231, 225, 214)");
+    expect(appearance.fontFamily).toContain("Fraunces");
+    expect(appearance.fontSize).toBeCloseTo(expectedFontSize, 1);
+    expect(appearance.fontWeight).toBe("400");
+    expect(appearance.letterSpacing).toBeCloseTo(
+      expectedFontSize * -0.025,
+      1,
+    );
+    expect(appearance.lineHeight).toBeCloseTo(expectedFontSize * 0.86, 1);
+    expect(appearance.maxWidth).not.toBe("none");
   });
 });
 
@@ -184,6 +232,35 @@ test.describe("Andean caravan scope", () => {
         /^February–April 2028 · exact dates announced when the route is secured\.?$/u,
       ).first(),
     ).toBeVisible();
+  });
+
+  test("renders the approved Flights fact exactly once", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name !== "desktop-1024",
+      "One departure-facts regression pass is sufficient.",
+    );
+
+    await page.goto("/departures/the-andean-caravan");
+    const completeFacts = page.locator(
+      'dl[aria-label="Complete Caravan facts"]',
+    );
+    const completeFlights = completeFacts.locator("dt").filter({
+      hasText: "Flights",
+    });
+    await expect(completeFlights).toHaveCount(1);
+    await expect(completeFlights.locator("..").locator("dd")).toHaveText(
+      "Four short flights",
+    );
+
+    for (const route of andeanDepartureRoutes.slice(1)) {
+      await page.goto(route);
+      const sectionFlights = page
+        .locator('dl[aria-label$=" facts"] dt')
+        .filter({ hasText: "Flights" });
+      await expect(sectionFlights, route).toHaveCount(0);
+    }
   });
 
   test("keeps the journey enquiry non-sensitive and payment-free", async ({
@@ -594,6 +671,60 @@ test.describe("keyboard interaction", () => {
 });
 
 test.describe("forms and holding states", () => {
+  test("invalid submission focuses the shared alert on every form surface", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name !== "desktop-1024",
+      "One keyboard focus pass across all form surfaces is sufficient.",
+    );
+
+    const surfaces = [
+      {
+        route: "/request-invitation",
+        action: "Request an invitation",
+      },
+      {
+        route: "/start-here",
+        action: "Ask to join this table",
+      },
+      {
+        route: "/departures/desert-coast",
+        action: "Ask to join this table",
+      },
+      {
+        route: "/sign-in",
+        action: "Record interest in member access",
+      },
+    ] as const;
+
+    for (const surface of surfaces) {
+      await page.goto(surface.route);
+      const form = page.locator("form");
+      await expect(form, surface.route).toHaveCount(1);
+      const submit = form.getByRole("button", { name: surface.action });
+      await submit.focus();
+      await page.keyboard.press("Enter");
+
+      const alert = form
+        .getByRole("alert")
+        .filter({ hasText: "Check the form" });
+      await expect(alert, surface.route).toBeFocused();
+      await expect(alert).toHaveAttribute("aria-live", "assertive");
+      await expect(alert).toHaveAttribute("aria-atomic", "true");
+      await expect(alert).toHaveAttribute("tabindex", "-1");
+
+      const invalidControls = form.locator('[aria-invalid="true"]');
+      const invalidCount = await invalidControls.count();
+      expect(invalidCount, surface.route).toBeGreaterThan(0);
+      const firstInvalid = invalidControls.first();
+      await expect(firstInvalid).toHaveAttribute("aria-describedby", /.+/u);
+
+      await page.keyboard.press("Tab");
+      await expect(firstInvalid, surface.route).toBeFocused();
+    }
+  });
+
   test("invitation request shows validation, success and duplicate states", async ({
     page,
   }, testInfo) => {

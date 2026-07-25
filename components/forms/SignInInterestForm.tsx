@@ -23,29 +23,34 @@ export function SignInInterestForm() {
   } = useForm<SignInInterestValues>({
     resolver: zodResolver(signInInterestSchema),
     mode: "onBlur",
+    shouldFocusError: false,
     defaultValues: {
       email: "",
     },
   });
-  const submission = useFormSubmission("sign-in-interest");
+  const {
+    state,
+    submit,
+    showValidationState,
+    clearSettledState,
+    setFormElement,
+  } = useFormSubmission("sign-in-interest");
 
   return (
     <form
+      ref={setFormElement}
       className={styles.form}
       aria-label={signInInterestFormContent.ariaLabel}
       aria-busy={isSubmitting}
       noValidate
-      onChange={submission.clearSettledState}
-      onSubmit={handleSubmit(
-        submission.submit,
-        submission.showValidationState,
-      )}
+      onChange={clearSettledState}
+      onSubmit={handleSubmit(submit, showValidationState)}
     >
-      {submission.state.status !== "idle" ? (
+      {state.status !== "idle" ? (
         <FormStatus
-          tone={submission.state.status}
-          title={submission.state.title}
-          message={submission.state.message}
+          tone={state.status}
+          title={state.title}
+          message={state.message}
         />
       ) : null}
 
