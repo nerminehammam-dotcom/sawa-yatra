@@ -1,0 +1,588 @@
+.root {
+  scroll-margin-top: calc(var(--nav-height) + var(--space-6));
+  border-block: var(--border-strong) solid var(--ink);
+  background: var(--paper);
+}
+
+.root:focus {
+  outline: none;
+}
+
+.root:focus-visible {
+  outline: 3px solid var(--signal);
+  outline-offset: -3px;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(18rem, 0.6fr);
+  gap: var(--space-12);
+  align-items: end;
+  padding: clamp(4rem, 9vw, 8rem) var(--page-gutter) clamp(3rem, 6vw, 5rem);
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.header h2 {
+  max-width: 10ch;
+  color: var(--pink);
+}
+
+.header > p {
+  max-width: 34ch;
+}
+
+.kicker,
+.label,
+.gateChoice label > span,
+.truths span,
+.drawerHeader p {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.kicker {
+  margin-bottom: var(--space-5);
+}
+
+.altitudeAid {
+  display: grid;
+  grid-template-columns: minmax(15rem, 0.65fr) minmax(0, 1.35fr);
+  gap: var(--space-10);
+  padding: var(--space-10) var(--page-gutter);
+  background: var(--olive);
+  border-bottom: var(--border-strong) solid var(--ink);
+}
+
+.altitudeAid h3 {
+  margin-bottom: var(--space-3);
+}
+
+.altitudeOptions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: var(--border-hairline) solid var(--ink);
+}
+
+.altitudeOptions button {
+  display: grid;
+  min-height: 5.5rem;
+  align-content: center;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-inline-end: var(--border-hairline) solid var(--ink);
+}
+
+.altitudeOptions button:last-child {
+  border-inline-end: 0;
+}
+
+.altitudeOptions button:hover,
+.altitudeOptions button:focus-visible {
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.altitudeOptions span {
+  font-size: 0.82rem;
+}
+
+.gateChoice {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto;
+  gap: var(--space-4);
+  align-items: end;
+  padding: var(--space-8) var(--page-gutter);
+  border-bottom: var(--border-strong) solid var(--ink);
+}
+
+.gateChoice label {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.gateChoice select {
+  width: 100%;
+  min-height: var(--touch-min);
+  padding: 0.72rem var(--space-4);
+  color: var(--ink);
+  background: var(--paper);
+  border: var(--border-hairline) solid var(--ink);
+  border-radius: var(--radius-card);
+}
+
+.choiceArrow {
+  min-height: var(--touch-min);
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+}
+
+.error {
+  max-width: none;
+  padding: var(--space-4) var(--page-gutter);
+  background: var(--pink);
+  border-bottom: var(--border-strong) solid var(--ink);
+}
+
+.selectorLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(22rem, 0.65fr);
+  align-items: start;
+}
+
+.cards {
+  border-inline-end: var(--border-strong) solid var(--ink);
+}
+
+.card {
+  border-bottom: var(--border-hairline) solid var(--ink);
+}
+
+.card[data-selected] {
+  box-shadow: inset 0.42rem 0 var(--signal);
+}
+
+.cardTrigger {
+  display: grid;
+  width: 100%;
+  min-height: 7rem;
+  grid-template-columns: 4rem minmax(12rem, 1fr) minmax(17rem, 0.95fr) 4rem;
+  gap: var(--space-5);
+  align-items: center;
+  padding: var(--space-5) var(--space-8);
+  text-align: left;
+  background: transparent;
+  border: 0;
+}
+
+.cardTrigger:hover {
+  background: var(--sun);
+}
+
+.sectionNumber {
+  color: var(--signal);
+  font-family: var(--font-display);
+  font-size: 2.15rem;
+}
+
+.cardMain,
+.cardFacts {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.cardMain strong {
+  font-family: var(--font-display);
+  font-size: clamp(1.65rem, 2.4vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1;
+}
+
+.cardMain > span,
+.cardFacts {
+  font-size: 0.86rem;
+}
+
+.cardFacts {
+  grid-template-columns: 0.6fr 1.4fr 0.8fr;
+}
+
+.cardState {
+  justify-self: end;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.physicalNotice {
+  max-width: none;
+  padding: 0 var(--space-8) var(--space-5) 8rem;
+  font-size: 0.9rem;
+}
+
+.panel {
+  padding: var(--space-8);
+  background: color-mix(in srgb, var(--pink) 35%, var(--paper));
+  border-top: var(--border-hairline) solid var(--ink);
+}
+
+.gateDetails {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: var(--border-hairline) solid var(--ink);
+}
+
+.gateDetails > section {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  padding: var(--space-6);
+}
+
+.gateDetails > section + section {
+  border-inline-start: var(--border-hairline) solid var(--ink);
+}
+
+.gateDetails h4,
+.ledger h4 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.gateDetails dl,
+.drawerFacts {
+  margin: 0;
+}
+
+.gateDetails dl > div {
+  display: grid;
+  grid-template-columns: 6rem 1fr;
+  gap: var(--space-3);
+  padding-block: var(--space-2);
+  border-top: var(--border-hairline) solid var(--ink);
+}
+
+.gateDetails dt,
+.drawerFacts dt {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.gateDetails dd,
+.drawerFacts dd {
+  margin: 0;
+}
+
+.handover {
+  padding: var(--space-3);
+  background: var(--sun);
+  border: var(--border-hairline) solid var(--ink);
+}
+
+.truths {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+  margin-block: var(--space-8);
+}
+
+.truths div {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: var(--border-strong) solid var(--ink);
+}
+
+.truths p {
+  font-size: 0.92rem;
+}
+
+.ledger {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.ledger ol {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--border-hairline) solid var(--paper);
+}
+
+.ledger li {
+  display: grid;
+  grid-template-columns: minmax(12rem, 1.25fr) 0.8fr 0.8fr;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-bottom: var(--border-hairline) solid var(--paper);
+}
+
+.ledger small {
+  grid-column: 1 / -1;
+  color: var(--pink);
+}
+
+.cardAction {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding-top: var(--space-6);
+}
+
+.dynamicImage {
+  position: sticky;
+  top: calc(var(--nav-height) + var(--space-4));
+  min-height: 36rem;
+}
+
+.imageFrame {
+  position: relative;
+  min-height: 32rem;
+  overflow: hidden;
+}
+
+.imageFrame img {
+  object-fit: cover;
+}
+
+.dynamicImage > p {
+  display: flex;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.imageRest {
+  display: grid;
+  min-height: 36rem;
+  align-items: end;
+  padding: var(--space-8);
+  background: var(--sun);
+}
+
+.imageRest p {
+  max-width: 28ch;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1.1;
+}
+
+.drawerBackdrop {
+  position: fixed;
+  z-index: 300;
+  inset: 0;
+  display: grid;
+  justify-items: end;
+  background: color-mix(in srgb, var(--ink) 88%, transparent);
+}
+
+.drawer {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  width: min(100%, 44rem);
+  height: 100dvh;
+  color: var(--ink);
+  background: var(--paper);
+  border-inline-start: var(--border-strong) solid var(--ink);
+}
+
+.drawerHeader {
+  display: flex;
+  min-height: 8rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-8);
+  color: var(--paper);
+  background: var(--ink);
+  border-bottom: var(--border-strong) solid var(--pink);
+}
+
+.drawerHeader h2 {
+  max-width: 9ch;
+  color: var(--pink);
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+}
+
+.drawerHeader button {
+  min-height: var(--touch-min);
+  padding: var(--space-3) var(--space-4);
+  color: var(--paper);
+  background: transparent;
+  border: var(--border-hairline) solid var(--paper);
+}
+
+.drawerBody {
+  display: grid;
+  align-content: start;
+  gap: var(--space-8);
+  padding: var(--space-8);
+  overflow-y: auto;
+}
+
+.selectedList {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--border-hairline) solid var(--ink);
+}
+
+.selectedList li {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-3) 0;
+  border-bottom: var(--border-hairline) solid var(--ink);
+}
+
+.selectedList strong {
+  font-weight: 400;
+}
+
+.drawerFacts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: var(--border-hairline) solid var(--ink);
+}
+
+.drawerFacts div {
+  min-height: 6rem;
+  padding: var(--space-4);
+  border-bottom: var(--border-hairline) solid var(--ink);
+}
+
+.drawerFacts div:nth-child(odd) {
+  border-inline-end: var(--border-hairline) solid var(--ink);
+}
+
+.drawerFacts dd {
+  margin-top: var(--space-2);
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  line-height: 1.1;
+}
+
+.drawerNotices {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.enquiryNote {
+  padding: var(--space-4);
+  background: var(--sun);
+  border: var(--border-hairline) solid var(--ink);
+}
+
+@media (max-width: 1000px) {
+  .header,
+  .altitudeAid,
+  .selectorLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .cards {
+    border-inline-end: 0;
+  }
+
+  .dynamicImage {
+    position: static;
+    min-height: auto;
+    border-top: var(--border-strong) solid var(--ink);
+  }
+
+  .imageRest {
+    min-height: 18rem;
+  }
+
+  .imageFrame {
+    min-height: 28rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .header {
+    gap: var(--space-8);
+  }
+
+  .altitudeOptions,
+  .gateChoice,
+  .gateDetails,
+  .truths {
+    grid-template-columns: 1fr;
+  }
+
+  .altitudeOptions button {
+    border-inline-end: 0;
+    border-bottom: var(--border-hairline) solid var(--ink);
+  }
+
+  .altitudeOptions button:last-child {
+    border-bottom: 0;
+  }
+
+  .choiceArrow {
+    display: none;
+  }
+
+  .cardTrigger {
+    grid-template-columns: 3rem minmax(0, 1fr) auto;
+    gap: var(--space-3);
+    padding: var(--space-5) var(--space-4);
+  }
+
+  .cardFacts {
+    grid-column: 2 / -1;
+    grid-template-columns: 1fr;
+  }
+
+  .physicalNotice {
+    padding: 0 var(--space-4) var(--space-5) 4.5rem;
+  }
+
+  .panel {
+    padding: var(--space-4);
+  }
+
+  .gateDetails > section + section {
+    border-inline-start: 0;
+    border-top: var(--border-hairline) solid var(--ink);
+  }
+
+  .ledger li {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+
+  .cardAction,
+  .selectedList li {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .imageFrame {
+    min-height: 22rem;
+  }
+
+  .drawer {
+    border-inline-start: 0;
+  }
+
+  .drawerHeader,
+  .drawerBody {
+    padding-inline: var(--page-gutter);
+  }
+
+  .drawerFacts {
+    grid-template-columns: 1fr;
+  }
+
+  .drawerFacts div:nth-child(odd) {
+    border-inline-end: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root {
+    scroll-behavior: auto;
+  }
+}
