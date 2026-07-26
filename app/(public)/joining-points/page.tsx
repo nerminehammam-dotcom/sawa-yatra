@@ -29,7 +29,9 @@ export default function JoiningPointsPage() {
       <section className={styles.final} aria-labelledby="joining-final-heading">
         <p>Need a calm way into the route?</p>
         <h2 id="joining-final-heading">Start with the place—not a package.</h2>
-        <Link href="/start-here">Ask about a joining point ↗</Link>
+        <a href="mailto:nerminehammam@gmail.com?subject=Sawayatra%20joining%20point%20question">
+          Ask about a joining point ↗
+        </a>
       </section>
     </main>
   );

@@ -83,7 +83,11 @@ export function JoiningPointSelector({
           </dl>
           <div className={styles.actions}>
             <Link href={`/departures/${active.sectionSlug}`}>View this section →</Link>
-            <Link href={`/start-here?join=${active.id}`}>Ask about joining here ↗</Link>
+            <a
+              href={`mailto:nerminehammam@gmail.com?subject=${encodeURIComponent(`Sawayatra joining point: ${active.place}`)}`}
+            >
+              Ask about joining here ↗
+            </a>
           </div>
         </div>
       </article>

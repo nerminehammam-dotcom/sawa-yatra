@@ -14,21 +14,15 @@ export const primaryNavigation = [
     contentStatus: "LOCKED",
   },
   {
-    id: "caravan-hop-on-hop-off",
-    label: "Caravan Hop On Hop Off",
-    href: "/caravans",
-    contentStatus: "LOCKED",
-  },
-  {
-    id: "do-it-yourself",
-    label: "Do It Yourself",
-    href: "/do-it-yourself",
-    contentStatus: "LOCKED",
-  },
-  {
-    id: "discover-journeys-with-others",
-    label: "Discover Journeys With Others",
+    id: "departures",
+    label: "Departures",
     href: "/departures",
+    contentStatus: "LOCKED",
+  },
+  {
+    id: "membership",
+    label: "Membership",
+    href: "/membership",
     contentStatus: "LOCKED",
   },
   {
@@ -41,28 +35,48 @@ export const primaryNavigation = [
 
 export const utilityNavigation = [
   {
-    id: "become-a-member",
-    label: "Become a Member",
-    href: "/membership",
+    id: "ask-a-question",
+    label: "Ask a question",
+    href: "mailto:nerminehammam@gmail.com",
     contentStatus: "LOCKED",
+  },
+] as const;
+
+export const departuresNavigation = [
+  {
+    id: "andean-caravan",
+    label: "The Andean Caravan",
+    href: "/departures/the-andean-caravan",
   },
   {
-    id: "sign-in",
-    label: "Sign in",
-    href: "/sign-in",
-    contentStatus: "LOCKED",
+    id: "all-sections",
+    label: "Browse all nine sections",
+    href: "/departures#all-sections",
   },
-] as const satisfies readonly NavigationItem[];
+  {
+    id: "route-map",
+    label: "Full route map",
+    href: "/caravans#caravan-route-map-heading",
+  },
+  {
+    id: "joining-points",
+    label: "Joining & Leaving Points",
+    href: "/joining-points",
+  },
+  {
+    id: "dates",
+    label: "Dates & availability",
+    href: "/departures#dates-availability",
+  },
+  {
+    id: "included",
+    label: "What is included",
+    href: "/departures#what-is-included",
+  },
+] as const;
 
 export const footerNavigation = [
-  ...primaryNavigation.slice(0, 4),
-  {
-    id: "membership",
-    label: "Membership",
-    href: "/membership",
-    contentStatus: "LOCKED",
-  },
-  primaryNavigation[5],
+  ...primaryNavigation,
   {
     id: "privacy",
     label: "Privacy",

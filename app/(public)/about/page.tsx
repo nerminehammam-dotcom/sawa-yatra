@@ -85,20 +85,13 @@ export default function AboutPage() {
         </ol>
       </section>
 
-      <section className={styles.founder} aria-labelledby="founder-heading">
-        <p>Founder story / factual placeholder</p>
-        <h2 id="founder-heading">Founder-approved biography and portrait to be supplied.</h2>
-        <p>
-          This space is deliberately labelled until the founder facts and
-          approved portrait are available. Nothing has been invented for launch.
-        </p>
-      </section>
-
       <section className={styles.action} aria-labelledby="about-action-heading">
         <h2 id="about-action-heading">Begin with the route.</h2>
         <div>
-          <Link href="/caravans/the-andean-caravan">Follow the caravan →</Link>
-          <Link href="/start-here">Start here ↗</Link>
+          <Link href="/departures/the-andean-caravan">Follow the caravan →</Link>
+          <a href="mailto:nerminehammam@gmail.com?subject=Sawayatra%20question">
+            Ask a question ↗
+          </a>
         </div>
       </section>
     </main>

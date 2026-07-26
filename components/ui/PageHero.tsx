@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { isValidElement, type ReactNode } from "react";
 
 import { classNames } from "./classNames";
 import { Container } from "./Container";
@@ -46,7 +46,9 @@ export function PageHero({
       {media ? <div className={styles.media}>{media}</div> : null}
       <Container className={styles.content}>
         <div className={styles.copy}>
-          {eyebrow ? (
+          {eyebrow && isValidElement(eyebrow) ? (
+            eyebrow
+          ) : eyebrow ? (
             <Eyebrow kind={eyebrowKind} tone={media ? "inherit" : "accent"}>
               {eyebrow}
             </Eyebrow>

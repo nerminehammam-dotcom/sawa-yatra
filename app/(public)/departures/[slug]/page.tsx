@@ -7,14 +7,12 @@ import { RisoArtwork } from "@/components/brand/RisoArtwork";
 import { DepartureCard } from "@/components/departures/DepartureCard";
 import { CaravanRouteMap } from "@/components/departures/CaravanRouteMap";
 import { JourneyGallery } from "@/components/departures/JourneyGallery";
-import { JourneyInterestForm } from "@/components/forms/JourneyInterestForm";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import {
-  andeanCaravanPublicEnquiryIds,
   andeanCaravanSectionBySlug,
   andeanCaravanSections,
   type AndeanCaravanSection,
@@ -29,7 +27,6 @@ import {
   andeanCaravanCountries,
   andeanCaravanRouteStops,
 } from "@/content/andean-caravan-route";
-import { archetypes } from "@/content/archetypes";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/site-url";
 
@@ -38,7 +35,6 @@ import styles from "./journey.module.css";
 const COMPLETE_SLUG = "the-andean-caravan";
 const publicDate =
   "February–April 2028 · exact dates announced when the route is secured.";
-const travelSelfIds = archetypes.map((archetype) => archetype.id);
 
 export const dynamicParams = false;
 
@@ -151,7 +147,42 @@ function CopySection({
   );
 }
 
-function InterestSection({ id, title }: { id: string; title: string }) {
+function JourneyBreadcrumbs({ sectionTitle }: { sectionTitle?: string }) {
+  return (
+    <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
+      <Link href="/">Home</Link>
+      <span aria-hidden="true">›</span>
+      <Link href="/departures">Departures</Link>
+      <span aria-hidden="true">›</span>
+      {sectionTitle ? (
+        <>
+          <Link href="/departures/the-andean-caravan">The Andean Caravan</Link>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">{sectionTitle}</span>
+        </>
+      ) : (
+        <span aria-current="page">The Andean Caravan</span>
+      )}
+    </nav>
+  );
+}
+
+function Wayfinding({ title }: { title: string }) {
+  return (
+    <Section className={styles.wayfindingSection} ground="cream" aria-label="Journey navigation">
+      <Container className={styles.wayfindingLinks}>
+        <Link href="/departures#all-sections">Back to all sections</Link>
+        <Link href="/joining-points">Joining & Leaving Points</Link>
+        <Link href="/caravans#caravan-route-map-heading">Full route map</Link>
+        <a href={`mailto:nerminehammam@gmail.com?subject=${encodeURIComponent(`Sawayatra section: ${title}`)}`}>
+          Ask about this section
+        </a>
+      </Container>
+    </Section>
+  );
+}
+
+function InterestSection({ title }: { title: string }) {
   return (
     <Section
       className={styles.interestSection}
@@ -161,18 +192,17 @@ function InterestSection({ id, title }: { id: string; title: string }) {
     >
       <Container className={styles.interestGrid}>
         <div className={styles.sectionHeading}>
-          <Eyebrow kind="decision" tone="inherit" className={styles.deepEyebrow}>Enquire</Eyebrow>
-          <h2 id="journey-interest-heading">Where would you like to join?</h2>
-          <p>
-            This Release 1 form records interest only. It does not reserve a
-            place or confirm availability.
-          </p>
+          <Eyebrow kind="decision" tone="inherit" className={styles.deepEyebrow}>Ask</Eyebrow>
+          <h2 id="journey-interest-heading">Ask about this section.</h2>
+          <p>Your question opens in your email app. Nothing is submitted or stored on this site.</p>
         </div>
         <div className={styles.formPanel}>
-          <JourneyInterestForm
-            journey={{ id, label: title }}
-            availableTravelSelfIds={travelSelfIds}
-          />
+          <a
+            className={styles.askLink}
+            href={`mailto:nerminehammam@gmail.com?subject=${encodeURIComponent(`Sawayatra section: ${title}`)}`}
+          >
+            Email a question →
+          </a>
         </div>
       </Container>
     </Section>
@@ -187,9 +217,7 @@ function CompleteCaravanPage() {
         mediaLayout="split"
         ground="cream"
         eyebrow={
-          <Link className={styles.breadcrumb} href="/caravans">
-            Caravans · The Andean Caravan
-          </Link>
+          <JourneyBreadcrumbs />
         }
         eyebrowKind="decision"
         title="The whole length of the Andes. Once a year."
@@ -370,10 +398,8 @@ function CompleteCaravanPage() {
         ]}
       />
 
-      <InterestSection
-        id={andeanCaravanPublicEnquiryIds[0]}
-        title="The Andean Caravan · complete journey"
-      />
+      <Wayfinding title="The Andean Caravan" />
+      <InterestSection title="The Andean Caravan - complete journey" />
     </>
   );
 }
@@ -398,9 +424,7 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
         mediaLayout="split"
         ground="cream"
         eyebrow={
-          <Link className={styles.breadcrumb} href="/caravans">
-            Caravans · Section {String(section.sectionNumber).padStart(2, "0")}
-          </Link>
+          <JourneyBreadcrumbs sectionTitle={section.title} />
         }
         eyebrowKind="decision"
         title={section.title}
@@ -519,7 +543,8 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
         </Container>
       </Section>
 
-      <InterestSection id={section.publicEnquiryId} title={section.title} />
+      <Wayfinding title={section.title} />
+      <InterestSection title={section.title} />
     </>
   );
 }

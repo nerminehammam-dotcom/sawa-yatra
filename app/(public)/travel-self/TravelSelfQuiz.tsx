@@ -451,6 +451,10 @@ export function TravelSelfQuiz({
               {TRAVEL_SELF_CONTENT.intro.title}
             </h1>
             <p className={styles.lead}>{TRAVEL_SELF_CONTENT.intro.lead}</p>
+            <p className={styles.introPractical}>
+              Allow a few minutes. At the end, you receive an exploratory
+              Travel Self and route sections worth a closer look.
+            </p>
             <p className={styles.disclaimer}>
               {TRAVEL_SELF_CONTENT.interpretationDisclaimer}
             </p>
@@ -967,7 +971,7 @@ export function TravelSelfQuiz({
 
           <div className={styles.actions}>
             <ButtonLink
-              href="/start-here"
+              href="mailto:nerminehammam@gmail.com?subject=Sawayatra%20Travel%20Self%20question"
               surface="deep"
               onClick={() =>
                 trackTravelSelfEvent({ name: "travel_self_email_cta_clicked" })

@@ -75,6 +75,13 @@
   font-size: clamp(1.1rem, 1.5vw, 1.4rem);
 }
 
+.introPractical {
+  max-width: var(--measure-narrow);
+  margin-bottom: var(--space-4);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
 .disclaimer,
 .errorSummary {
   max-width: var(--measure-narrow);

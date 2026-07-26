@@ -1,190 +1,64 @@
-.heroAccent {
-  color: var(--ink);
-  font-style: italic;
-}
-
-.sectionHeading,
-.promiseCopy,
-.placeholderCopy,
-.tier,
-.tierHeader,
-.price,
-.priceNotice,
-.faqAnswer {
-  display: grid;
-  gap: var(--space-4);
-}
-
-.sectionHeading {
-  max-width: 58rem;
-}
-
-.sectionHeading h2 {
-  max-width: 17ch;
-}
-
-.promiseGrid {
-  display: grid;
-  gap: 0;
-  margin: clamp(var(--space-12), 7vw, var(--space-24)) 0 0;
-  padding: 0;
-  border-block: var(--border-hairline) solid var(--hairline);
-  list-style: none;
-}
-
-.promise {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: var(--space-5);
-  padding: var(--space-8);
-}
-
-.promiseNumber {
-  color: var(--ink);
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  line-height: 1.25;
-}
-
-.promiseCopy p,
-.priceNotice p,
-.tier p,
-.benefits {
-  color: var(--deep-brown);
-}
-
-.placeholderCopy,
-.priceNotice {
-  justify-items: start;
-}
-
-.selectivity {
+.hero,
+.note {
   display: grid;
   justify-items: start;
   gap: var(--space-6);
+  padding: var(--section-space) var(--page-gutter);
+  border-bottom: var(--border-hairline) solid var(--ink);
 }
 
-.selectivity blockquote {
-  color: var(--ink);
-  max-width: 25ch;
-  color: var(--ink);
-  font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 4.5rem);
-  font-weight: 300;
-  line-height: 1.08;
+.hero {
+  min-height: min(48rem, calc(100dvh - 9.75rem));
+  align-content: center;
+  background: var(--pink);
 }
 
-.tierGrid {
-  display: grid;
-  gap: var(--space-8);
-  margin-top: clamp(var(--space-12), 7vw, var(--space-24));
+.hero > p:first-child {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
-.tierAction {
-  display: flex;
-  justify-content: center;
-  margin-top: var(--space-12);
+.hero h1 {
+  max-width: 11ch;
 }
 
-.tier {
-  align-content: start;
-  justify-items: start;
-  padding: clamp(var(--space-6), 5vw, var(--space-12));
-  border: var(--border-hairline) solid var(--hairline);
-  border-radius: var(--radius-card);
-  background: var(--soft-blue);
+.hero > p:last-of-type,
+.note p {
+  max-width: 42ch;
+  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
 }
 
-.tierHeader {
-  width: 100%;
-}
-
-.tierHeader h3 {
-  font-size: clamp(2rem, 4vw, 3.5rem);
-}
-
-.price {
-  justify-items: start;
-  padding-block: var(--space-4);
-  border-block: var(--border-hairline) solid var(--hairline);
-}
-
-.price p {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-}
-
-.benefits {
-  display: grid;
-  gap: var(--space-3);
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.benefits li {
-  display: grid;
-  gap: var(--space-2);
-  padding-block: var(--space-3);
-  border-bottom: var(--border-hairline) solid var(--hairline);
-}
-
-.faqQuestion {
-  display: grid;
-  gap: var(--space-3);
-}
-
-.faqQuestion > span:last-child {
-  min-width: 0;
-}
-
-.faqAnswer {
-  justify-items: start;
-}
-
-.ctaBand {
-  display: flex;
+.hero a {
+  display: inline-flex;
+  min-height: var(--touch-min);
   align-items: center;
-  justify-content: space-between;
-  gap: var(--space-8);
+  padding: var(--space-3) var(--space-4);
+  color: var(--paper);
+  font-weight: 500;
+  text-decoration: none;
+  background: var(--ink);
+  border: var(--border-hairline) solid var(--ink);
 }
 
-.ctaBand h2 {
-  max-width: 14ch;
+.note {
+  min-height: 32rem;
+  align-content: center;
+  background: var(--paper);
 }
 
-.ctaBand > a {
-  flex: none;
+.note h2 {
+  max-width: 12ch;
 }
 
-@media (min-width: 640px) {
-  .promiseGrid,
-  .tierGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+@media (max-width: 767px) {
+  .hero {
+    min-height: 36rem;
   }
 
-  .promise:nth-child(even) {
-    border-inline-start: var(--border-hairline) solid var(--hairline);
-  }
-
-  .promise:nth-child(n + 3) {
-    border-top: var(--border-hairline) solid var(--hairline);
-  }
-}
-
-@media (max-width: 639px) {
-  .promise {
-    grid-template-columns: 1fr;
-    padding-inline: 0;
-  }
-
-  .promise + .promise {
-    border-top: var(--border-hairline) solid var(--hairline);
-  }
-
-  .ctaBand {
-    align-items: flex-start;
-    flex-direction: column;
+  .hero a {
+    width: 100%;
+    justify-content: center;
   }
 }

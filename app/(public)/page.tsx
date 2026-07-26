@@ -152,7 +152,9 @@ export default function HomePage() {
           <h2 id="final-action-heading">Where will you join us?</h2>
           <div>
             <Link href="/joining-points">Compare joining points →</Link>
-            <Link href="/start-here">Start here ↗</Link>
+            <a href="mailto:nerminehammam@gmail.com?subject=Sawayatra%20joining%20point%20question">
+              Ask a question ↗
+            </a>
           </div>
         </section>
       </main>
