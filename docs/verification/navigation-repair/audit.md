@@ -76,9 +76,9 @@ Captured routes:
 - `app/(public)/caravans/page.tsx` publicly renders a future-route placeholder.
 - `app/(public)/departures/page.tsx` publicly renders “Later release” and “Coming later” material.
 
-## Contact and enquiry blocker
+## Contact and enquiry resolution
 
-The required real contact destination does not exist in the repository:
+The original repository did not contain a real contact destination:
 
 - `app/(public)/start-here/page.tsx` mounts `JourneyInterestForm`.
 - `content/forms.ts` explicitly calls the experience a “Development mock only” and states it sends and stores nothing.
@@ -87,4 +87,6 @@ The required real contact destination does not exist in the repository:
 - No approved `mailto:` address, monitored inbox, or functional contact page is present.
 - Existing links from the homepage, About, joining points, Travel Self, and the joining selector point to the blocked `/start-here` experience.
 
-The supplied brief says to hide `/start-here`, not link “Ask a question” to it, use only an existing approved real destination, and **stop if no real destination exists**. Therefore no navigation, departures, route, map, content, or production file has been modified. Implementation is paused pending an approved monitored email address or a genuinely functional contact destination.
+The supplied brief says to hide `/start-here`, not link “Ask a question” to it, and use only an approved real destination. Work paused at that point. On 2026-07-26, the owner explicitly approved `nerminehammam@gmail.com` as the temporary public contact address while the idea is still being developed.
+
+Implementation therefore uses `mailto:nerminehammam@gmail.com` for public question and enquiry paths. The mock form route is hidden from public use, but its source is preserved. No prices, capacity claims, operating promises, or unapproved membership details were invented.

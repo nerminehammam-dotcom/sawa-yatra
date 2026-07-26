@@ -133,30 +133,25 @@ describe("Release 1 content contracts", () => {
     ).toEqual([
       { label: "How it works", href: "/how-it-works" },
       { label: "Meet your Travel Self", href: "/travel-self" },
-      { label: "Caravan Hop On Hop Off", href: "/caravans" },
-      { label: "Do It Yourself", href: "/do-it-yourself" },
-      {
-        label: "Discover Journeys With Others",
-        href: "/departures",
-      },
+      { label: "Departures", href: "/departures" },
+      { label: "Membership", href: "/membership" },
       { label: "About", href: "/about" },
     ]);
     expect(
       utilityNavigation.map(({ label, href }) => ({ label, href })),
     ).toEqual([
-      { label: "Become a Member", href: "/membership" },
-      { label: "Sign in", href: "/sign-in" },
+      { label: "Ask a question", href: "mailto:nerminehammam@gmail.com" },
     ]);
     const primaryHrefs: readonly string[] = primaryNavigation.map(
       (item) => item.href,
     );
-    expect(primaryHrefs).not.toContain("/membership");
+    expect(primaryHrefs).toContain("/membership");
     expect(
       navigation.every(
         (item) =>
           !item.label.toLowerCase().includes("open seats") &&
           !item.href.includes("open-seats") &&
-          item.href.startsWith("/") &&
+          (item.href.startsWith("/") || item.href.startsWith("mailto:")) &&
           !item.href.includes("#"),
       ),
     ).toBe(true);
