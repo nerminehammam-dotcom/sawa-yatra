@@ -2,10 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Fragment, useEffect, useId, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 
 import { Container } from "@/components/ui/Container";
-import { utilityNavigation } from "@/content/navigation";
+import {
+  departuresNavigation,
+  utilityNavigation,
+} from "@/content/navigation";
 
 import styles from "./SiteNavigation.module.css";
 import { Wordmark } from "./Wordmark";
@@ -17,22 +20,15 @@ export interface SiteNavigationItem {
 
 export interface SiteNavigationProps {
   items?: readonly SiteNavigationItem[];
-  signInHref?: string;
 }
 
 const defaultItems: readonly SiteNavigationItem[] = [
   { href: "/how-it-works", label: "How it works" },
   { href: "/travel-self", label: "Meet your Travel Self" },
-  { href: "/caravans", label: "Caravan Hop On Hop Off" },
-  { href: "/do-it-yourself", label: "Do It Yourself" },
-  { href: "/departures", label: "Discover Journeys With Others" },
+  { href: "/departures", label: "Departures" },
+  { href: "/membership", label: "Membership" },
   { href: "/about", label: "About" },
 ] as const;
-
-const joiningPointsItem = {
-  href: "/joining-points",
-  label: "Joining & Leaving Points",
-} as const;
 
 function isCurrentPath(pathname: string, href: string): boolean {
   return href === "/" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
@@ -40,22 +36,24 @@ function isCurrentPath(pathname: string, href: string): boolean {
 
 export function SiteNavigation({
   items = defaultItems,
-  signInHref = "/sign-in",
 }: SiteNavigationProps) {
   const pathname = usePathname();
   const drawerId = useId();
+  const departuresMenuId = useId();
+  const mobileDeparturesMenuId = useId();
   const [isOpen, setIsOpen] = useState(false);
+  const [isDeparturesOpen, setIsDeparturesOpen] = useState(false);
+  const [isMobileDeparturesOpen, setIsMobileDeparturesOpen] = useState(false);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const departuresTriggerRef = useRef<HTMLButtonElement>(null);
+  const departuresItemRef = useRef<HTMLLIElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
   const visibleItems = items.filter((item) => item.href !== "/open-seats");
-  const utilityItems = utilityNavigation.map((item) => ({
-    ...item,
-    href: item.id === "sign-in" ? signInHref : item.href,
-  }));
+  const askAction = utilityNavigation[0];
 
   useEffect(() => {
-    const desktopQuery = window.matchMedia("(min-width: 1024px)");
+    const desktopQuery = window.matchMedia("(min-width: 1281px)");
     const closeAtDesktop = (event: MediaQueryListEvent) => {
       if (event.matches) setIsOpen(false);
     };
@@ -63,6 +61,33 @@ export function SiteNavigation({
     desktopQuery.addEventListener("change", closeAtDesktop);
     return () => desktopQuery.removeEventListener("change", closeAtDesktop);
   }, []);
+
+  useEffect(() => {
+    if (!isDeparturesOpen) return;
+
+    function handlePointerDown(event: MouseEvent) {
+      if (
+        departuresItemRef.current &&
+        !departuresItemRef.current.contains(event.target as Node)
+      ) {
+        setIsDeparturesOpen(false);
+      }
+    }
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key !== "Escape") return;
+      event.preventDefault();
+      setIsDeparturesOpen(false);
+      departuresTriggerRef.current?.focus();
+    }
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isDeparturesOpen]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -76,6 +101,7 @@ export function SiteNavigation({
       if (event.key === "Escape") {
         event.preventDefault();
         setIsOpen(false);
+        setIsMobileDeparturesOpen(false);
         return;
       }
 
@@ -113,30 +139,20 @@ export function SiteNavigation({
       <div className={styles.brandBand}>
         <Container className={styles.brandRow}>
           <Wordmark size="large" />
-          <div
-            className={styles.utilityActions}
-            role="group"
-            aria-label="Utility actions"
+          <Link className={styles.utilityLink} href={askAction.href}>
+            {askAction.label}
+          </Link>
+          <button
+            ref={triggerRef}
+            className={styles.mobileButton}
+            type="button"
+            aria-expanded={isOpen}
+            aria-controls={drawerId}
+            onClick={() => setIsOpen((open) => !open)}
           >
-            {utilityItems.map((item, index) => (
-              <Fragment key={item.id}>
-                {index > 0 ? (
-                  <span className={styles.utilitySeparator} aria-hidden="true">
-                    ·
-                  </span>
-                ) : null}
-                <Link
-                  className={styles.utilityLink}
-                  href={item.href}
-                  aria-current={
-                    isCurrentPath(pathname, item.href) ? "page" : undefined
-                  }
-                >
-                  {item.label}
-                </Link>
-              </Fragment>
-            ))}
-          </div>
+            <span>{isOpen ? "Close" : "Menu"}</span>
+            <span aria-hidden="true">{isOpen ? "×" : "+"}</span>
+          </button>
         </Container>
       </div>
 
@@ -145,17 +161,21 @@ export function SiteNavigation({
           <div className={styles.desktop}>
           <ul className={styles.list} aria-label="Primary navigation links">
             {visibleItems.map((item) => {
-              const hasJoiningPoints = item.href === "/departures";
+              const hasDeparturesMenu = item.href === "/departures";
               const isActive =
                 isCurrentPath(pathname, item.href) ||
-                (hasJoiningPoints && pathname === joiningPointsItem.href);
+                (hasDeparturesMenu &&
+                  (pathname.startsWith("/caravans") ||
+                    pathname === "/joining-points"));
 
               return (
               <li
-                className={hasJoiningPoints ? styles.hasSubmenu : undefined}
+                ref={hasDeparturesMenu ? departuresItemRef : undefined}
+                className={hasDeparturesMenu ? styles.hasSubmenu : undefined}
                 key={item.href}
               >
-                <Link
+                <div className={styles.linkGroup}>
+                  <Link
                   className={styles.link}
                   href={item.href}
                   aria-current={
@@ -165,17 +185,32 @@ export function SiteNavigation({
                 >
                   {item.label}
                 </Link>
-                {hasJoiningPoints ? (
-                  <div className={styles.submenu}>
-                    <Link
-                      className={styles.submenuLink}
-                      href={joiningPointsItem.href}
-                      aria-current={
-                        pathname === joiningPointsItem.href ? "page" : undefined
-                      }
-                    >
-                      {joiningPointsItem.label}
-                    </Link>
+                {hasDeparturesMenu ? (
+                  <button
+                    ref={departuresTriggerRef}
+                    className={styles.submenuButton}
+                    type="button"
+                    aria-label="Toggle Departures menu"
+                    aria-expanded={isDeparturesOpen}
+                    aria-controls={departuresMenuId}
+                    onClick={() => setIsDeparturesOpen((open) => !open)}
+                  >
+                    <span aria-hidden="true">{isDeparturesOpen ? "↑" : "↓"}</span>
+                  </button>
+                ) : null}
+                </div>
+                {hasDeparturesMenu && isDeparturesOpen ? (
+                  <div className={styles.submenu} id={departuresMenuId}>
+                    {departuresNavigation.map((subitem) => (
+                      <Link
+                        className={styles.submenuLink}
+                        href={subitem.href}
+                        key={subitem.id}
+                        onClick={() => setIsDeparturesOpen(false)}
+                      >
+                        {subitem.label}
+                      </Link>
+                    ))}
                   </div>
                 ) : null}
               </li>
@@ -183,17 +218,6 @@ export function SiteNavigation({
             })}
           </ul>
           </div>
-          <button
-            ref={triggerRef}
-            className={styles.mobileButton}
-            type="button"
-            aria-expanded={isOpen}
-            aria-controls={drawerId}
-            onClick={() => setIsOpen(true)}
-          >
-            <span>Menu</span>
-            <span aria-hidden="true">↘</span>
-          </button>
         </Container>
       </div>
 
@@ -222,11 +246,12 @@ export function SiteNavigation({
               aria-label="Primary navigation links"
             >
               {visibleItems.map((item, index) => {
-                const hasJoiningPoints = item.href === "/departures";
+                const hasDeparturesMenu = item.href === "/departures";
 
                 return (
                 <li key={item.href}>
-                  <Link
+                  <div className={styles.mobileLinkRow}>
+                    <Link
                     ref={index === 0 ? firstLinkRef : undefined}
                     className={styles.mobileLink}
                     href={item.href}
@@ -235,17 +260,32 @@ export function SiteNavigation({
                   >
                     {item.label}
                   </Link>
-                  {hasJoiningPoints ? (
-                    <Link
-                      className={styles.mobileSubmenuLink}
-                      href={joiningPointsItem.href}
-                      aria-current={
-                        pathname === joiningPointsItem.href ? "page" : undefined
-                      }
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {joiningPointsItem.label}
-                    </Link>
+                    {hasDeparturesMenu ? (
+                      <button
+                        className={styles.mobileSubmenuButton}
+                        type="button"
+                        aria-label="Toggle Departures menu"
+                        aria-expanded={isMobileDeparturesOpen}
+                        aria-controls={mobileDeparturesMenuId}
+                        onClick={() => setIsMobileDeparturesOpen((open) => !open)}
+                      >
+                        <span aria-hidden="true">{isMobileDeparturesOpen ? "↑" : "↓"}</span>
+                      </button>
+                    ) : null}
+                  </div>
+                  {hasDeparturesMenu && isMobileDeparturesOpen ? (
+                    <div className={styles.mobileSubmenu} id={mobileDeparturesMenuId}>
+                      {departuresNavigation.map((subitem) => (
+                        <Link
+                          className={styles.mobileSubmenuLink}
+                          href={subitem.href}
+                          key={subitem.id}
+                          onClick={() => setIsOpen(false)}
+                        >
+                          {subitem.label}
+                        </Link>
+                      ))}
+                    </div>
                   ) : null}
                 </li>
                 );
@@ -256,19 +296,13 @@ export function SiteNavigation({
               role="group"
               aria-label="Utility actions"
             >
-              {utilityItems.map((item) => (
-                <Link
-                  className={styles.mobileUtilityLink}
-                  href={item.href}
-                  aria-current={
-                    isCurrentPath(pathname, item.href) ? "page" : undefined
-                  }
-                  key={item.id}
-                  onClick={() => setIsOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              <Link
+                className={styles.mobileUtilityLink}
+                href={askAction.href}
+                onClick={() => setIsOpen(false)}
+              >
+                {askAction.label}
+              </Link>
             </div>
           </div>
         </div>
