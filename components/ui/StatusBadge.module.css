@@ -7,7 +7,7 @@
   border: var(--border-hairline) solid currentColor;
   border-radius: var(--radius-pill);
   font-family: var(--font-read);
-  font-size: 0.8125rem;
+  font-size: 1rem;
   font-weight: 500;
   line-height: 1.25;
 }

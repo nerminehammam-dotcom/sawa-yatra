@@ -72,7 +72,7 @@
   border: 1px solid var(--brick);
   border-radius: var(--radius-pill);
   font-family: var(--font-read);
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 500;
   line-height: 1.2;
   text-decoration: none;
@@ -81,9 +81,9 @@
 
 .primary,
 .primary:visited {
-  color: var(--ink);
-  background: var(--signal);
-  border-color: var(--signal);
+  color: var(--action-text);
+  background: var(--action-bg);
+  border-color: var(--action-bg);
 }
 
 .primary:hover {

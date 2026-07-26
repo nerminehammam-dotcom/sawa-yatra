@@ -3,6 +3,7 @@
   --paper: #e7e1d6;
   --ink: #27231f;
   --signal: #f05a2a;
+  --signal-text: #b03a0c;
   --clay: #a96f47;
   --sun: #e5bc4f;
   --olive: #98904f;
@@ -21,15 +22,22 @@
   --warm-ink: var(--ink);
   --olive-text: var(--ink);
   --link: var(--ink);
-  --action: var(--signal);
+  --action-bg: var(--signal);
+  --action-text: var(--ink);
+  --focus-ring-light: var(--ink);
+  --focus-ring-dark: var(--paper);
+  --error-text: var(--ink);
+  --error-border: var(--ink);
+
+  --action: var(--action-bg);
   --action-on-deep: var(--paper);
-  --focus: var(--signal);
+  --focus: var(--focus-ring-light);
   --hover: var(--ink);
   --visited: var(--ink);
   --disabled: var(--olive);
   --success: var(--olive);
   --warning: var(--sun);
-  --error: var(--signal);
+  --error: var(--error-border);
   --info: var(--olive);
 
   --soft-butter: var(--sun);

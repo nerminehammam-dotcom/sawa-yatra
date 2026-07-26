@@ -10,7 +10,7 @@
   justify-content: space-between;
   gap: var(--space-4);
   color: var(--deep-brown);
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.4;
 }
 
