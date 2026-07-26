@@ -33,11 +33,11 @@
   align-items: center;
   padding-inline: var(--space-4);
   color: var(--ink);
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: normal;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: none;
   border-inline: var(--border-hairline) solid transparent;
 }
 
@@ -114,13 +114,13 @@
   justify-content: center;
   padding: var(--space-3) clamp(var(--space-1), 0.75vw, var(--space-4));
   color: var(--ink);
-  font-size: 0.72rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.075em;
+  letter-spacing: normal;
   line-height: 1.25;
   text-align: center;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: none;
   white-space: nowrap;
 }
 
@@ -175,12 +175,12 @@
   align-items: center;
   padding: var(--space-4);
   color: var(--ink);
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.06em;
+  letter-spacing: normal;
   line-height: 1.35;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .submenuLink:hover,
@@ -194,10 +194,10 @@
   min-height: var(--touch-min);
   padding: var(--space-3) var(--space-4);
   color: var(--ink);
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
+  letter-spacing: normal;
+  text-transform: none;
   background: var(--paper);
   border: var(--border-hairline) solid var(--ink);
   border-radius: 0;
@@ -275,12 +275,12 @@
   margin-inline-start: var(--page-gutter);
   padding: var(--space-3) var(--page-gutter) var(--space-3) var(--space-5);
   color: var(--ink);
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: normal;
   line-height: 1.35;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: none;
   border-inline-start: var(--border-strong) solid var(--pink);
   border-bottom: var(--border-hairline) solid var(--ink);
 }
@@ -304,11 +304,11 @@
   justify-content: space-between;
   padding: var(--space-4) var(--page-gutter);
   color: var(--paper);
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: normal;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: none;
   background: var(--ink);
 }
 
@@ -320,14 +320,14 @@
   content: "↗";
 }
 
-@media (min-width: 1024px) and (max-width: 1120px) {
+@media (min-width: 1121px) and (max-width: 1240px) {
   .link {
     padding-inline: var(--space-1);
-    letter-spacing: 0.065em;
+    letter-spacing: normal;
   }
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1120px) {
   .brandRow {
     min-height: 5rem;
   }

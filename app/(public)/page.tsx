@@ -82,7 +82,7 @@ export default function HomePage() {
             <h2 id="connected-route-heading">{content.route.title}</h2>
           </div>
           <aside>
-            <strong>TRANSFER / SOUTHERN CONNECTION</strong>
+            <strong>Transfer / southern connection</strong>
             <p>{content.route.transfer}</p>
           </aside>
         </header>

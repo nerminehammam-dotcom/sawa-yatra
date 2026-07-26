@@ -22,13 +22,15 @@ export function ContentStatusLabel({
   className,
   ...props
 }: ContentStatusLabelProps) {
+  const visibleStatus = status.charAt(0) + status.slice(1).toLocaleLowerCase("en");
+
   return (
     <span
       {...props}
       className={classNames(styles.root, statusClasses[status], className)}
       aria-label={`Content status: ${status}`}
     >
-      {status}
+      {visibleStatus}
     </span>
   );
 }

@@ -8,13 +8,19 @@
   border-bottom: var(--border-strong) solid var(--ink);
 }
 
-.hero > p:first-child,
+.hero > p:first-child {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .context > p:first-child,
 .context dt {
-  font-size: 0.72rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .hero h1 {
@@ -73,10 +79,10 @@
 
 .selector a strong,
 .selector a small {
-  font-size: 0.72rem;
+  font-size: 1rem;
   line-height: 1.3;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .enquiry {

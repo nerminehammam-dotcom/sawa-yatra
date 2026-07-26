@@ -35,7 +35,9 @@ export default function PublicError({
         <div className={styles.statusRow}>
           <ContentStatusLabel status={content.contentStatus} />
         </div>
-        <p className={styles.eyebrow}>{content.eyebrow}</p>
+        <p className={`${styles.eyebrow} ${styles.statusEyebrow}`}>
+          {content.eyebrow}
+        </p>
         <h1 className={styles.title} id="public-error-title">
           {content.title}
         </h1>

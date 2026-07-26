@@ -38,11 +38,11 @@
   min-width: 3.75rem;
   color: var(--deep-brown);
   font-family: var(--font-read);
-  font-size: 0.8125rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.08em;
+  letter-spacing: normal;
   text-align: end;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .panel {

@@ -25,7 +25,9 @@ export function LegalPlaceholderPage({
           <div className={styles.statusRow}>
             <ContentStatusLabel status={content.contentStatus} />
           </div>
-          <p className={styles.eyebrow}>{content.reviewLabel}</p>
+          <p className={`${styles.eyebrow} ${styles.statusEyebrow}`}>
+            {content.reviewLabel.charAt(0) + content.reviewLabel.slice(1).toLocaleLowerCase("en")}
+          </p>
           <h1 className={styles.legalTitle} id={titleId}>
             {content.title}
           </h1>

@@ -19,9 +19,9 @@
 
 .pronunciation {
   color: var(--pink);
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.12em;
 }
 
 .legal {
@@ -36,11 +36,11 @@
 
 .link {
   color: var(--paper);
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: normal;
   text-underline-offset: 0.3em;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .link:visited {

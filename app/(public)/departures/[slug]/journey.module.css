@@ -136,10 +136,10 @@ a.heroAction:hover {
 
 .facts dt {
   color: var(--deep-brown);
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .facts dd {
@@ -189,10 +189,10 @@ a.heroAction:hover {
 
 .routeOverviewLabel {
   color: var(--ink);
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .countryRoutes {
@@ -215,7 +215,7 @@ a.heroAction:hover {
   padding: 0.18rem 0.48rem;
   border-radius: var(--radius-pill);
   color: var(--warm-ink);
-  font-size: 0.8125rem;
+  font-size: 1rem;
   font-weight: 500;
 }
 
@@ -290,10 +290,10 @@ a.heroAction:hover {
 
 .adjacentLinks span {
   color: var(--ink);
-  font-size: 0.72rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.11em;
-  text-transform: uppercase;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .adjacentLinks strong {
