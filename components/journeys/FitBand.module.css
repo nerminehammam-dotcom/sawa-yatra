@@ -1,16 +1,15 @@
 .root {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-2);
+  display: grid;
+  gap: var(--space-3);
   margin: 0;
 }
 
 .item {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-3);
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  min-width: 0;
+  padding: var(--space-5);
   border-radius: var(--radius-card);
 }
 
@@ -24,12 +23,31 @@
   background: var(--soft-honey);
 }
 
+.willChafeWith {
+  color: var(--ink);
+  background: var(--soft-rose);
+}
+
+.needsFromGroup {
+  color: var(--ink);
+  background: var(--paper);
+}
+
 .label {
   font-size: 0.875rem;
   font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .value {
   margin: 0;
-  font-size: 0.875rem;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+@media (min-width: 768px) {
+  .root {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }

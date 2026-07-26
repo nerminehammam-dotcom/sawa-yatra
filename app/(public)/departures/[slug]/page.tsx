@@ -161,7 +161,7 @@ function InterestSection({ id, title }: { id: string; title: string }) {
     >
       <Container className={styles.interestGrid}>
         <div className={styles.sectionHeading}>
-          <Eyebrow tone="inherit" className={styles.deepEyebrow}>Enquire</Eyebrow>
+          <Eyebrow kind="decision" tone="inherit" className={styles.deepEyebrow}>Enquire</Eyebrow>
           <h2 id="journey-interest-heading">Where would you like to join?</h2>
           <p>
             This Release 1 form records interest only. It does not reserve a
@@ -191,6 +191,7 @@ function CompleteCaravanPage() {
             Caravans · The Andean Caravan
           </Link>
         }
+        eyebrowKind="decision"
         title="The whole length of the Andes. Once a year."
         titleClassName={styles.completeHeroTitle}
         intro={
@@ -224,7 +225,7 @@ function CompleteCaravanPage() {
       >
         <Container>
           <div className={styles.sectionHeadingInline}>
-            <Eyebrow tone="accent">Complete Caravan</Eyebrow>
+            <Eyebrow kind="decision" tone="accent">Complete Caravan</Eyebrow>
             <h2 id="complete-facts-heading">One continuous north-to-south journey.</h2>
           </div>
           <FactGrid
@@ -252,7 +253,7 @@ function CompleteCaravanPage() {
         <Container>
           <div className={styles.routeHeader}>
             <div className={styles.sectionHeading}>
-              <Eyebrow tone="accent">The nine movements</Eyebrow>
+              <Eyebrow kind="decision" tone="accent">The nine movements</Eyebrow>
               <h2 id="movements-heading">From the Pacific to the end of the road.</h2>
             </div>
             <div className={styles.routeOverview}>
@@ -287,7 +288,7 @@ function CompleteCaravanPage() {
         <Container>
           <div className={styles.movementsHeader}>
             <div className={styles.sectionHeading}>
-              <Eyebrow tone="accent">Choose where to join</Eyebrow>
+              <Eyebrow kind="decision" tone="accent">Choose where to join</Eyebrow>
               <h2 id="join-sections-heading">
                 Nine complete sections. One moving Caravan.
               </h2>
@@ -401,6 +402,7 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
             Caravans · Section {String(section.sectionNumber).padStart(2, "0")}
           </Link>
         }
+        eyebrowKind="decision"
         title={section.title}
         titleClassName={styles.heroTitle}
         intro={
@@ -428,7 +430,7 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
       >
         <Container>
           <div className={styles.sectionHeadingInline}>
-            <Eyebrow tone="accent">Section details</Eyebrow>
+            <Eyebrow kind="decision" tone="accent">Section details</Eyebrow>
             <h2 id="section-facts-heading">Join here. Leave when this section ends.</h2>
           </div>
           <FactGrid

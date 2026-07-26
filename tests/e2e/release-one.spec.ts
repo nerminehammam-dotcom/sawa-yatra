@@ -583,18 +583,18 @@ test.describe("keyboard interaction", () => {
     await expect(menuButton).toHaveAttribute("aria-expanded", "false");
   });
 
-  test("the six-question taster works entirely by keyboard", async ({
+  test("the Travel Self flow works entirely by keyboard", async ({
     page,
   }, testInfo) => {
     test.skip(testInfo.project.name !== "mobile-375", "One keyboard flow is sufficient.");
 
     await page.goto("/travel-self");
-    const start = page.getByRole("button", { name: "Begin the taster" });
+    const start = page.getByRole("button", { name: "Begin" });
     await start.focus();
     await page.keyboard.press("Enter");
 
-    for (let question = 1; question <= 6; question += 1) {
-      await expect(page.getByText(`${question} of 6`)).toBeVisible();
+    for (let question = 1; question <= 16; question += 1) {
+      await expect(page.getByText(`${question} of 17`)).toBeVisible();
       await expect(
         page.getByRole("heading", {
           level: 1,
@@ -606,19 +606,72 @@ test.describe("keyboard interaction", () => {
       await page.keyboard.press("Space");
       const next = page.getByRole("button", {
         name:
-          question === 6
-            ? "Reveal my draft Travel Self"
-            : "Next question",
+          question === 16 ? "Choose my passions" : "Next",
+        exact: true,
       });
       await next.focus();
       await page.keyboard.press("Enter");
     }
 
-    await expect(page.locator("#travel-self-result")).toBeVisible();
-    await expect(page.getByText(/not validated/i)).toBeVisible();
+    await expect(page.getByText("17 of 17")).toBeVisible();
     await expect(
-      page.getByRole("button", { name: "Restart the draft taster" }),
+      page.getByRole("heading", { name: "Choose the reasons you travel." }),
+    ).toBeFocused();
+    await page.getByRole("checkbox", { name: /Food/u }).focus();
+    await page.keyboard.press("Space");
+    const primaryGroup = page.getByRole("group", {
+      name: "Which passion leads?",
+    });
+    await primaryGroup.getByRole("radio", { name: "Food" }).focus();
+    await page.keyboard.press("Space");
+    const reveal = page.getByRole("button", { name: "Read my Travel Self" });
+    await reveal.focus();
+    await page.keyboard.press("Enter");
+
+    await expect(page.locator("#travel-self-result")).toBeVisible();
+    await expect(page.getByText(/not diagnostic/i)).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Start over" }),
     ).toBeVisible();
+
+    await expect(
+      page.getByText("Practical details under review"),
+    ).toHaveCount(3);
+    await expect(
+      page.getByRole("link", {
+        name: "Tell me when these sections open",
+      }),
+    ).toHaveAttribute("href", "/start-here");
+
+    const editButtons = page.getByRole("button", {
+      name: "Edit this answer",
+    });
+    await editButtons.first().focus();
+    await page.keyboard.press("Enter");
+    await expect(
+      page.getByRole("heading", {
+        level: 1,
+        name: /^Meet your Travel Self:/u,
+      }),
+    ).toBeFocused();
+    await page.locator('input[type="radio"]').nth(1).focus();
+    await page.keyboard.press("Space");
+    const save = page.getByRole("button", {
+      name: "Save answer",
+      exact: true,
+    });
+    await save.focus();
+    await page.keyboard.press("Enter");
+    await expect(editButtons.first()).toBeFocused();
+
+    const accessibility = await new AxeBuilder({ page })
+      .include("#main-content")
+      .analyze();
+    const seriousViolations = accessibility.violations.filter(
+      (violation) =>
+        violation.impact === "serious" || violation.impact === "critical",
+    );
+    expect(seriousViolations).toEqual([]);
   });
 
   test("the Caravan entry and departure cards work by keyboard", async ({

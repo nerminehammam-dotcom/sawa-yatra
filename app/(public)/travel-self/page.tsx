@@ -8,9 +8,15 @@ import { TravelSelfQuiz } from "./TravelSelfQuiz";
 export const metadata: Metadata = createPageMetadata("/travel-self");
 
 export default function TravelSelfPage() {
+  const showEditorialStatus =
+    process.env.NEXT_PUBLIC_CONTENT_REVIEW === "true";
+
   return (
     <main id="main-content" tabIndex={-1}>
-      <TravelSelfQuiz pageContent={travelSelfPageContent} />
+      <TravelSelfQuiz
+        pageContent={travelSelfPageContent}
+        showEditorialStatus={showEditorialStatus}
+      />
     </main>
   );
 }

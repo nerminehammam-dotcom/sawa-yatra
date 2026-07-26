@@ -195,8 +195,11 @@ test.describe("approved ordinary-site contrast corrections", () => {
     );
 
     await page.goto("/travel-self");
-    await page.getByRole("button", { name: "Begin the taster" }).click();
-    const disabledNext = page.getByRole("button", { name: "Next question" });
+    await page.getByRole("button", { name: "Begin" }).click();
+    const disabledNext = page.getByRole("button", {
+      name: "Next",
+      exact: true,
+    });
     await expect(disabledNext).toBeDisabled();
     const disabledColours = await computedColours(disabledNext);
     expect(disabledColours.color).toBe(palette.ink);
@@ -265,7 +268,7 @@ test.describe("approved ordinary-site contrast corrections", () => {
     page,
   }) => {
     await page.goto("/travel-self");
-    await page.getByRole("button", { name: "Begin the taster" }).click();
+    await page.getByRole("button", { name: "Begin" }).click();
 
     const firstRadio = page.getByRole("radio").first();
     const firstOption = firstRadio.locator("..");
@@ -277,8 +280,8 @@ test.describe("approved ordinary-site contrast corrections", () => {
     await firstOption.click();
     await firstRadio.focus();
     const selectedOption = await computedColours(firstOption);
-    expect(selectedOption.outlineColor).toBe(palette.paper);
-    expect(selectedOption.background).toBe("rgb(169, 111, 71)");
+    expect(selectedOption.outlineColor).toBe(palette.ink);
+    expect(selectedOption.background).toBe("rgb(238, 182, 196)");
     expectContrast(selectedOption.outlineColor, selectedOption.background, 3);
 
     await page.goto("/departures");

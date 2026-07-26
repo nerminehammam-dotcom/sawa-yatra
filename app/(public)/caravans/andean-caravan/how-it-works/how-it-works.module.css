@@ -19,10 +19,10 @@
 }
 
 .eyebrow {
-  font-size: 0.72rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .hero h1 {
@@ -90,10 +90,10 @@
 .numbers p {
   padding: var(--space-2) var(--space-5);
   border-inline-end: var(--border-hairline) solid var(--ink);
-  font-size: 0.86rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .numbers strong {

@@ -32,15 +32,21 @@
   max-width: 34ch;
 }
 
-.kicker,
+.kicker {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .label,
 .gateChoice label > span,
 .truths span,
 .drawerHeader p {
-  font-size: 0.72rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .kicker {
@@ -89,7 +95,7 @@
 }
 
 .altitudeOptions span {
-  font-size: 0.82rem;
+  font-size: 1rem;
 }
 
 .gateChoice {
@@ -186,7 +192,7 @@
 
 .cardMain > span,
 .cardFacts {
-  font-size: 0.86rem;
+  font-size: 1rem;
 }
 
 .cardFacts {
@@ -195,16 +201,16 @@
 
 .cardState {
   justify-self: end;
-  font-size: 0.72rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .physicalNotice {
   max-width: none;
   padding: 0 var(--space-8) var(--space-5) 8rem;
-  font-size: 0.9rem;
+  font-size: 1.125rem;
 }
 
 .panel {
@@ -253,10 +259,10 @@
 
 .gateDetails dt,
 .drawerFacts dt {
-  font-size: 0.72rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .gateDetails dd,
@@ -286,7 +292,7 @@
 }
 
 .truths p {
-  font-size: 0.92rem;
+  font-size: 1.125rem;
 }
 
 .ledger {
@@ -346,9 +352,9 @@
   display: flex;
   gap: var(--space-3);
   padding: var(--space-4);
-  font-size: 0.78rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-size: 1rem;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .imageRest {

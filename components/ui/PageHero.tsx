@@ -7,6 +7,7 @@ import styles from "./PageHero.module.css";
 
 export interface PageHeroProps {
   eyebrow?: ReactNode;
+  eyebrowKind?: "decorative" | "decision";
   title: ReactNode;
   intro?: ReactNode;
   actions?: ReactNode;
@@ -20,6 +21,7 @@ export interface PageHeroProps {
 
 export function PageHero({
   eyebrow,
+  eyebrowKind = "decorative",
   title,
   intro,
   actions,
@@ -45,7 +47,9 @@ export function PageHero({
       <Container className={styles.content}>
         <div className={styles.copy}>
           {eyebrow ? (
-            <Eyebrow tone={media ? "inherit" : "accent"}>{eyebrow}</Eyebrow>
+            <Eyebrow kind={eyebrowKind} tone={media ? "inherit" : "accent"}>
+              {eyebrow}
+            </Eyebrow>
           ) : null}
           <h1 className={classNames(styles.title, titleClassName)}>{title}</h1>
           {intro ? <div className={styles.intro}>{intro}</div> : null}
