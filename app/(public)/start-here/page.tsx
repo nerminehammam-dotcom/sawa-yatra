@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 import { createPageMetadata } from "@/app/_metadata";
 import { JourneyInterestForm } from "@/components/forms/JourneyInterestForm";
@@ -16,9 +17,9 @@ interface StartHerePageProps {
 export default async function StartHerePage({ searchParams }: StartHerePageProps) {
   const { join } = await searchParams;
   const selected =
-    joiningPoints.find((point) => point.id === join) ?? joiningPoints[0];
+    joiningPoints.find((point) => point.id === join) ?? joiningPoints[0]!;
 
-  if (!selected) return null;
+  notFound();
 
   return (
     <main id="main-content" tabIndex={-1}>
