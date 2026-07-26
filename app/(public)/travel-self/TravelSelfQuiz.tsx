@@ -454,17 +454,19 @@ export function TravelSelfQuiz({
             <p className={styles.disclaimer}>
               {TRAVEL_SELF_CONTENT.interpretationDisclaimer}
             </p>
+          </div>
+          <div className={styles.introAside}>
+            <div
+              className={styles.archetypeCloud}
+              aria-label={TRAVEL_SELF_CONTENT.intro.passionNounsLabel}
+            >
+              {PASSIONS.slice(0, 8).map((passion) => (
+                <ArchetypeChip key={passion.id}>{passion.noun}</ArchetypeChip>
+              ))}
+            </div>
             <Button onClick={startQuiz}>
               {TRAVEL_SELF_CONTENT.intro.startLabel}
             </Button>
-          </div>
-          <div
-            className={styles.archetypeCloud}
-            aria-label={TRAVEL_SELF_CONTENT.intro.passionNounsLabel}
-          >
-            {PASSIONS.slice(0, 8).map((passion) => (
-              <ArchetypeChip key={passion.id}>{passion.noun}</ArchetypeChip>
-            ))}
           </div>
         </Container>
       </section>

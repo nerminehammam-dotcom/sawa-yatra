@@ -27,6 +27,16 @@
   max-width: 52rem;
 }
 
+.introAside {
+  display: grid;
+  gap: var(--space-6);
+  align-self: center;
+}
+
+.introAside > button {
+  justify-self: start;
+}
+
 .statusRow {
   display: flex;
   flex-wrap: wrap;
