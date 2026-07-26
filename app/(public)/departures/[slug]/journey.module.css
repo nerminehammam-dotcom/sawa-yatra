@@ -12,6 +12,21 @@
   text-decoration-color: currentColor;
 }
 
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+  color: inherit;
+  font-size: 1rem;
+  text-transform: none;
+}
+
+.breadcrumbs a,
+.breadcrumbs a:visited {
+  color: inherit;
+}
+
 .heroTitle {
   max-width: 10ch;
   font-size: clamp(3.2rem, 5.3vw, 5.8rem);
@@ -76,8 +91,33 @@ a.heroAction:hover {
 .factsSection,
 .copySection,
 .adjacentSection,
-.interestSection {
+.interestSection,
+.wayfindingSection {
   --section-space: clamp(3.75rem, 6vw, 6rem);
+}
+
+.wayfindingLinks {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-block: var(--border-hairline) solid var(--ink);
+  border-inline-start: var(--border-hairline) solid var(--ink);
+}
+
+.wayfindingLinks a {
+  display: flex;
+  min-height: 4rem;
+  align-items: center;
+  padding: var(--space-4);
+  color: var(--ink);
+  font-weight: 500;
+  text-decoration: none;
+  border-inline-end: var(--border-hairline) solid var(--ink);
+}
+
+.wayfindingLinks a:hover,
+.wayfindingLinks a:focus-visible {
+  color: var(--paper);
+  background: var(--ink);
 }
 
 .factsSection {
@@ -319,6 +359,18 @@ a.heroAction:hover {
   box-shadow: none;
 }
 
+.askLink {
+  display: inline-flex;
+  min-height: var(--touch-min);
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  color: var(--paper);
+  font-weight: 500;
+  text-decoration: none;
+  background: var(--ink);
+  border: var(--border-hairline) solid var(--ink);
+}
+
 @media (min-width: 640px) {
   .facts {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -353,6 +405,26 @@ a.heroAction:hover {
   .countryRoutes > div {
     grid-template-columns: 1fr;
     gap: var(--space-2);
+  }
+}
+
+@media (max-width: 900px) {
+  .wayfindingLinks {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .wayfindingLinks a:nth-child(-n + 2) {
+    border-bottom: var(--border-hairline) solid var(--ink);
+  }
+}
+
+@media (max-width: 560px) {
+  .wayfindingLinks {
+    grid-template-columns: 1fr;
+  }
+
+  .wayfindingLinks a:not(:last-child) {
+    border-bottom: var(--border-hairline) solid var(--ink);
   }
 }
 
