@@ -56,6 +56,60 @@ const prohibitedJourneyFieldPattern =
   /passport|nationality|residence|date.?of.?birth|health|mobility|emergency|room|altitude|insurance|deposit|payment/i;
 
 test.describe("Release 1 route contract", () => {
+  test("the homepage first screen explains Sawayatra and offers the approved actions", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      !["mobile-375", "wide-1440"].includes(testInfo.project.name),
+      "The homepage first screen is checked at the approved mobile and desktop widths.",
+    );
+
+    await page.goto("/");
+    await page.evaluate(() => document.fonts.ready);
+
+    const hero = page.locator("section").filter({
+      has: page.getByRole("heading", {
+        level: 1,
+        name: "Go alone, arrive together.",
+      }),
+    });
+    await expect(hero).toHaveCount(1);
+    await expect(
+      hero.getByText(
+        "Sawayatra is a members’ travel club that brings compatible travellers together through shared journeys, beginning with the annual Andean Caravan.",
+      ),
+    ).toBeVisible();
+
+    const howItWorks = hero.getByRole("link", {
+      name: "See how Sawayatra works",
+    });
+    const caravan = hero.getByRole("link", {
+      name: "Explore the Andean Caravan",
+    });
+    const practical = hero.getByRole("link", {
+      name: "Altitude, physical demands and accommodation",
+    });
+
+    await expect(howItWorks).toHaveAttribute("href", "/how-it-works");
+    await expect(caravan).toHaveAttribute(
+      "href",
+      "/departures/the-andean-caravan",
+    );
+    await expect(practical).toHaveAttribute(
+      "href",
+      "/departures/the-andean-caravan#honest-conditions-heading",
+    );
+
+    for (const action of [howItWorks, caravan, practical]) {
+      await expect(action).toBeVisible();
+      const box = await action.boundingBox();
+      expect(box).not.toBeNull();
+      expect(box!.y + box!.height).toBeLessThanOrEqual(
+        page.viewportSize()!.height,
+      );
+    }
+  });
+
   for (const route of publicRoutes) {
     test(`${route} renders without horizontal overflow`, async ({ page }) => {
       const response = await page.goto(route);
