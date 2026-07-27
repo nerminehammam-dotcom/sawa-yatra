@@ -51,7 +51,7 @@ export function SiteNavigation({
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
   const rootRef = useRef<HTMLElement>(null);
   const visibleItems = items.filter((item) => item.href !== "/open-seats");
-  const askAction = utilityNavigation[0];
+  const utilityAction = utilityNavigation[0];
 
   useEffect(() => {
     const root = rootRef.current;
@@ -157,12 +157,18 @@ export function SiteNavigation({
   }, [isOpen]);
 
   return (
-    <nav ref={rootRef} className={styles.root} aria-label="Primary">
+    <nav
+      ref={rootRef}
+      className={styles.root}
+      id="site-top"
+      tabIndex={-1}
+      aria-label="Primary"
+    >
       <div className={styles.brandBand}>
         <Container className={styles.brandRow}>
           <Wordmark size="large" />
-          <Link className={styles.utilityLink} href={askAction.href}>
-            {askAction.label}
+          <Link className={styles.utilityLink} href={utilityAction.href}>
+            {utilityAction.label}
           </Link>
           <button
             ref={triggerRef}
@@ -320,10 +326,10 @@ export function SiteNavigation({
             >
               <Link
                 className={styles.mobileUtilityLink}
-                href={askAction.href}
+                href={utilityAction.href}
                 onClick={() => setIsOpen(false)}
               >
-                {askAction.label}
+                {utilityAction.label}
               </Link>
             </div>
           </div>

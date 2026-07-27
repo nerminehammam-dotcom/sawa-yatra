@@ -26,6 +26,21 @@ describe("SiteNavigation Departures menu", () => {
     );
   });
 
+  it("keeps Sign in in the separate utility position", () => {
+    render(<SiteNavigation />);
+
+    expect(screen.getByRole("link", { name: "Sign in" })).toHaveAttribute(
+      "href",
+      "/sign-in",
+    );
+    const primary = screen.getByRole("list", {
+      name: "Primary navigation links",
+    });
+    expect(
+      within(primary).queryByRole("link", { name: "Sign in" }),
+    ).not.toBeInTheDocument();
+  });
+
   it("keeps every desktop dropdown item available in its approved order", async () => {
     const user = userEvent.setup();
     render(<SiteNavigation />);

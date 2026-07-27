@@ -57,6 +57,99 @@ const prohibitedJourneyFieldPattern =
   /passport|nationality|residence|date.?of.?birth|health|mobility|emergency|room|altitude|insurance|deposit|payment/i;
 
 test.describe("Release 1 route contract", () => {
+  test("Task 6 joining controls and footer wayfinding work without swiping", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      !["mobile-375", "wide-1440"].includes(testInfo.project.name),
+      "Task 6 is verified at the approved mobile and desktop widths.",
+    );
+
+    await page.goto("/joining-points");
+
+    const position = page.getByText(/Joining point \d+ of 10/u);
+    const previous = page.getByRole("button", {
+      name: "Previous",
+      exact: true,
+    });
+    const next = page.getByRole("button", { name: "Next", exact: true });
+    await expect(position).toContainText("Joining point 1 of 10");
+    await expect(previous).toBeDisabled();
+    await expect(next).toBeEnabled();
+
+    await next.focus();
+    await page.keyboard.press("Enter");
+    await expect(next).toBeFocused();
+    await expect(position).toContainText("Joining point 2 of 10");
+    await expect(page.getByRole("heading", { name: "Arequipa" })).toBeVisible();
+
+    await page
+      .getByRole("button", { name: "Cusco, joining point 4 of 10" })
+      .click();
+    await expect(position).toContainText("Joining point 4 of 10");
+    await expect(page.getByRole("heading", { name: "Cusco" })).toBeVisible();
+    await expect(page.getByText("03B", { exact: true }).last()).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: /Balmaceda, joining point/u }),
+    ).toHaveCount(0);
+
+    const footer = page.getByRole("contentinfo");
+    await expect(
+      footer.getByRole("link", { name: "Ask a question" }),
+    ).toHaveAttribute("href", "/contact");
+    await expect(footer.getByRole("link", { name: "Sign in" })).toHaveAttribute(
+      "href",
+      "/sign-in",
+    );
+    await expect(
+      footer.getByRole("link", { name: "Back to top" }),
+    ).toHaveAttribute("href", "#site-top");
+    await expect(footer.getByRole("link", { name: "Privacy" })).toBeVisible();
+    await expect(footer.getByRole("link", { name: "Terms" })).toBeVisible();
+    await expect(
+      footer.getByRole("link", { name: "Accessibility" }),
+    ).toBeVisible();
+
+    const accessibility = await new AxeBuilder({ page }).include("main").analyze();
+    expect(
+      accessibility.violations.filter((violation) =>
+        ["serious", "critical"].includes(violation.impact ?? ""),
+      ),
+    ).toEqual([]);
+
+    const primaryNavigation = page.getByRole("navigation", { name: "Primary" });
+    if (testInfo.project.name === "wide-1440") {
+      await expect(
+        primaryNavigation.getByRole("link", { name: "Sign in", exact: true }),
+      ).toHaveAttribute("href", "/sign-in");
+    }
+
+    await footer.getByRole("link", { name: "Back to top" }).click();
+    await expect(page).toHaveURL(/#site-top$/u);
+    await expect(primaryNavigation).toBeFocused();
+
+    const geometry = await page.evaluate(() => ({
+      documentWidth: document.documentElement.scrollWidth,
+      viewportWidth: window.innerWidth,
+    }));
+    expect(geometry.documentWidth).toBeLessThanOrEqual(geometry.viewportWidth);
+
+    if (testInfo.project.name === "mobile-375") {
+      await page.setViewportSize({ width: 320, height: 800 });
+      await page.reload();
+      const narrowGeometry = await page.evaluate(() => ({
+        documentWidth: document.documentElement.scrollWidth,
+        viewportWidth: window.innerWidth,
+      }));
+      expect(narrowGeometry.documentWidth).toBeLessThanOrEqual(
+        narrowGeometry.viewportWidth,
+      );
+      await expect(
+        page.getByRole("button", { name: "Next", exact: true }),
+      ).toBeVisible();
+    }
+  });
+
   test("the homepage first screen explains Sawayatra and offers the approved actions", async ({
     page,
   }, testInfo) => {
@@ -1031,7 +1124,7 @@ test.describe("links, metadata and accessibility", () => {
           continue;
         }
         if (href.startsWith("#")) {
-          expect(href).toBe("#main-content");
+          expect(["#main-content", "#site-top"]).toContain(href);
           continue;
         }
         expect(href).not.toContain("javascript:");

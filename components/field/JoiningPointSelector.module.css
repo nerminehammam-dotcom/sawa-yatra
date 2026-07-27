@@ -3,6 +3,80 @@
   border-bottom: var(--border-strong) solid var(--ink);
 }
 
+.controls {
+  display: grid;
+  grid-template-columns: minmax(13rem, 0.7fr) auto minmax(16rem, 1fr);
+  align-items: center;
+  gap: var(--space-6);
+  padding: var(--space-4) var(--page-gutter);
+  color: var(--paper);
+  background: var(--ink);
+  border-bottom: var(--border-strong) solid var(--ink);
+}
+
+.position {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-2) var(--space-4);
+}
+
+.position p {
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+.position strong {
+  color: var(--sun);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.position span,
+.railHint {
+  color: var(--paper);
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+.navigation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: var(--border-hairline) solid var(--paper);
+}
+
+.navigation button {
+  min-width: 8.5rem;
+  min-height: var(--touch-min);
+  padding: var(--space-3) var(--space-4);
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 500;
+  background: var(--paper);
+  border: 0;
+}
+
+.navigation button + button {
+  border-inline-start: var(--border-hairline) solid var(--ink);
+}
+
+.navigation button:hover:not(:disabled) {
+  background: var(--sun);
+}
+
+.navigation button:disabled {
+  color: color-mix(in srgb, var(--ink) 58%, var(--paper));
+  cursor: not-allowed;
+  background: color-mix(in srgb, var(--paper) 78%, var(--ink));
+}
+
+.railHint {
+  justify-self: end;
+  max-width: 34ch;
+  text-align: right;
+}
+
 .index {
   display: grid;
   grid-auto-columns: minmax(7rem, 1fr);
@@ -28,6 +102,10 @@
 .indexButton:hover,
 .indexButton[data-active="true"] {
   background: var(--pink);
+}
+
+.indexButton[data-active="true"] {
+  box-shadow: inset 0 -0.35rem 0 var(--signal);
 }
 
 .indexButton span {
@@ -161,6 +239,17 @@
 }
 
 @media (max-width: 900px) {
+  .controls {
+    grid-template-columns: minmax(12rem, 1fr) auto;
+  }
+
+  .railHint {
+    grid-column: 1 / -1;
+    justify-self: start;
+    max-width: none;
+    text-align: left;
+  }
+
   .detail {
     grid-template-columns: 1fr;
   }
@@ -172,6 +261,24 @@
 }
 
 @media (max-width: 560px) {
+  .controls {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+    padding-block: var(--space-5);
+  }
+
+  .navigation {
+    width: 100%;
+  }
+
+  .navigation button {
+    min-width: 0;
+  }
+
+  .railHint {
+    grid-column: auto;
+  }
+
   .indexButton {
     min-height: 7.5rem;
   }

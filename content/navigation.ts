@@ -35,9 +35,9 @@ export const primaryNavigation = [
 
 export const utilityNavigation = [
   {
-    id: "ask-a-question",
-    label: "Ask a question",
-    href: "/contact",
+    id: "sign-in",
+    label: "Sign in",
+    href: "/sign-in",
     contentStatus: "LOCKED",
   },
 ] as const;

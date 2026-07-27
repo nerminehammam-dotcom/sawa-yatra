@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import type { JoiningPointRecord } from "@/content/field-document";
 import { contactHref } from "@/lib/contact";
@@ -17,21 +17,86 @@ export function JoiningPointSelector({
   headingId: string;
 }) {
   const [activeId, setActiveId] = useState(points[0]?.id ?? "");
+  const pointButtonRefs = useRef(new Map<string, HTMLButtonElement>());
+  const hasSelectedPoint = useRef(false);
   const active = points.find((point) => point.id === activeId) ?? points[0];
+  const activeIndex = active
+    ? points.findIndex((point) => point.id === active.id)
+    : -1;
+
+  useEffect(() => {
+    if (!active || !hasSelectedPoint.current) return;
+
+    pointButtonRefs.current.get(active.id)?.scrollIntoView({
+      behavior: "auto",
+      block: "nearest",
+      inline: "center",
+    });
+  }, [active]);
 
   if (!active) return null;
 
+  const selectedPosition = activeIndex + 1;
+  const totalPoints = points.length;
+  const detailId = `${headingId}-selected-point`;
+  const detailHeadingId = `${detailId}-heading`;
+
+  function selectPoint(index: number) {
+    const point = points[index];
+    if (!point) return;
+
+    hasSelectedPoint.current = true;
+    setActiveId(point.id);
+  }
+
   return (
     <div className={styles.root} aria-labelledby={headingId}>
+      <div className={styles.controls}>
+        <div className={styles.position} aria-live="polite" aria-atomic="true">
+          <p>
+            Joining point <strong>{selectedPosition}</strong> of{" "}
+            <strong>{totalPoints}</strong>
+          </p>
+          <span>{active.place}</span>
+        </div>
+        <div className={styles.navigation} aria-label="Joining point navigation">
+          <button
+            type="button"
+            disabled={activeIndex === 0}
+            aria-controls={detailId}
+            onClick={() => selectPoint(activeIndex - 1)}
+          >
+            <span aria-hidden="true">←</span> Previous
+          </button>
+          <button
+            type="button"
+            disabled={activeIndex === totalPoints - 1}
+            aria-controls={detailId}
+            onClick={() => selectPoint(activeIndex + 1)}
+          >
+            Next <span aria-hidden="true">→</span>
+          </button>
+        </div>
+        <p className={styles.railHint}>
+          More choices continue horizontally. Swipe, scroll, or use Previous and
+          Next.
+        </p>
+      </div>
       <div className={styles.index} aria-label="Choose a joining point">
-        {points.map((point) => (
+        {points.map((point, index) => (
           <button
             className={styles.indexButton}
             data-active={point.id === active.id}
             key={point.id}
             type="button"
+            ref={(node) => {
+              if (node) pointButtonRefs.current.set(point.id, node);
+              else pointButtonRefs.current.delete(point.id);
+            }}
             aria-pressed={point.id === active.id}
-            onClick={() => setActiveId(point.id)}
+            aria-controls={detailId}
+            aria-label={`${point.place}, joining point ${index + 1} of ${totalPoints}`}
+            onClick={() => selectPoint(index)}
           >
             <span>{point.number}</span>
             <strong>{point.place}</strong>
@@ -40,7 +105,12 @@ export function JoiningPointSelector({
         ))}
       </div>
 
-      <article className={styles.detail} key={active.id}>
+      <article
+        className={styles.detail}
+        id={detailId}
+        key={active.id}
+        aria-labelledby={detailHeadingId}
+      >
         <figure className={styles.image}>
           <Image
             src={active.image.src}
@@ -59,7 +129,7 @@ export function JoiningPointSelector({
           <p className={styles.number}>{active.number}</p>
           <div className={styles.titleBlock}>
             <p>{active.country}</p>
-            <h3>{active.place}</h3>
+            <h3 id={detailHeadingId}>{active.place}</h3>
             <p className={styles.route}>{active.route}</p>
           </div>
           <dl className={styles.facts}>

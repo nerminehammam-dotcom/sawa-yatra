@@ -146,7 +146,7 @@ describe("Release 1 content contracts", () => {
     expect(
       utilityNavigation.map(({ label, href }) => ({ label, href })),
     ).toEqual([
-      { label: "Ask a question", href: "/contact" },
+      { label: "Sign in", href: "/sign-in" },
     ]);
     const primaryHrefs: readonly string[] = primaryNavigation.map(
       (item) => item.href,
