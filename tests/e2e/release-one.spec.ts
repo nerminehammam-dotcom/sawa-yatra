@@ -260,6 +260,48 @@ test.describe("Andean caravan scope", () => {
     );
   });
 
+  test("keeps the complete Departures menu interactive after reloads", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      !["mobile-375", "wide-1440"].includes(testInfo.project.name),
+      "Covers the collapsed and desktop navigation modes.",
+    );
+
+    const expectedItems = [
+      "The Andean Caravan",
+      "Browse all nine sections",
+      "Full route map",
+      "Joining & Leaving Points",
+      "Dates & availability",
+      "What is included",
+    ];
+
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      await page.goto("/departures");
+
+      if (testInfo.project.name === "mobile-375") {
+        await page.getByRole("button", { name: "Menu" }).click();
+      }
+
+      const scope =
+        testInfo.project.name === "mobile-375"
+          ? page.getByRole("dialog", { name: "Site menu" })
+          : page.getByRole("navigation", { name: "Primary" });
+      const toggle = scope.getByRole("button", {
+        name: "Toggle Departures menu",
+      });
+
+      await expect(toggle).toHaveAttribute("aria-expanded", "false");
+      await toggle.click();
+      await expect(toggle).toHaveAttribute("aria-expanded", "true");
+      const menuId = await toggle.getAttribute("aria-controls");
+      expect(menuId).not.toBeNull();
+      const departuresMenu = page.locator(`[id="${menuId}"]`);
+      await expect(departuresMenu.getByRole("link")).toHaveText(expectedItems);
+    }
+  });
+
   test("publishes provisional date wording without internal gate dates", async ({
     page,
   }, testInfo) => {
