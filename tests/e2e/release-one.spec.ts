@@ -849,18 +849,17 @@ test.describe("keyboard interaction", () => {
     await expect(menuButton).toHaveAttribute("aria-expanded", "false");
   });
 
-  test("the Travel Self flow works entirely by keyboard", async ({
+  test("Task 7 unifies Travel Self progress and splits the passion flow", async ({
     page,
-  }, testInfo) => {
-    test.skip(testInfo.project.name !== "mobile-375", "One keyboard flow is sufficient.");
-
+  }) => {
     await page.goto("/travel-self");
     const start = page.getByRole("button", { name: "Begin" });
     await start.focus();
     await page.keyboard.press("Enter");
 
     for (let question = 1; question <= 16; question += 1) {
-      await expect(page.getByText(`${question} of 17`)).toBeVisible();
+      await expect(page.getByText(`Step ${question} of 17`)).toBeVisible();
+      await expect(page.getByText(`Question ${question} of 16`)).toHaveCount(0);
       await expect(
         page.getByRole("heading", {
           level: 1,
@@ -879,12 +878,22 @@ test.describe("keyboard interaction", () => {
       await page.keyboard.press("Enter");
     }
 
-    await expect(page.getByText("17 of 17")).toBeVisible();
+    await expect(page.getByText("Step 17 of 17")).toBeVisible();
     await expect(
-      page.getByRole("heading", { name: "Choose the reasons you travel." }),
+      page.getByRole("heading", {
+        name: "Choose up to four reasons you travel.",
+      }),
     ).toBeFocused();
     await page.getByRole("checkbox", { name: /Food/u }).focus();
     await page.keyboard.press("Space");
+    const choosePriorities = page.getByRole("button", {
+      name: "Choose priorities",
+    });
+    await choosePriorities.focus();
+    await page.keyboard.press("Enter");
+    await expect(
+      page.getByRole("heading", { name: "Which passion leads?" }),
+    ).toBeFocused();
     const primaryGroup = page.getByRole("group", {
       name: "Which passion leads?",
     });
@@ -900,6 +909,20 @@ test.describe("keyboard interaction", () => {
       page.getByRole("button", { name: "Start over" }),
     ).toBeVisible();
 
+    const editPassions = page.getByRole("button", { name: "Edit passions" });
+    await editPassions.focus();
+    await page.keyboard.press("Enter");
+    await expect(
+      page.getByRole("heading", {
+        name: "Choose up to four reasons you travel.",
+      }),
+    ).toBeFocused();
+    await expect(page.getByRole("checkbox", { name: /Food/u })).toBeChecked();
+    const cancelPassionEdit = page.getByRole("button", { name: "Cancel" });
+    await cancelPassionEdit.focus();
+    await page.keyboard.press("Enter");
+    await expect(editPassions).toBeFocused();
+
     await expect(
       page.getByText("Practical details under review"),
     ).toHaveCount(3);
@@ -907,7 +930,7 @@ test.describe("keyboard interaction", () => {
       page.getByRole("link", {
         name: "Tell me when these sections open",
       }),
-    ).toHaveAttribute("href", "/start-here");
+    ).toHaveAttribute("href", "/contact?journey=Travel%20Self");
 
     const editButtons = page.getByRole("button", {
       name: "Edit this answer",

@@ -53,6 +53,7 @@ describe("Travel Self v2 quiz", () => {
       JSON.stringify({
         version: TRAVEL_SELF_MODEL_VERSION,
         stage: "passions",
+        passionStep: "choose",
         questionIndex: TRAVEL_SELF_QUESTIONS.length - 1,
         answers: completeAnswers(),
         selectedPassions: [],
@@ -63,9 +64,15 @@ describe("Travel Self v2 quiz", () => {
     const user = userEvent.setup();
     render(<TravelSelfQuiz pageContent={pageContent} />);
 
-    await screen.findByRole("heading", { name: "Choose the reasons you travel." });
+    await screen.findByRole("heading", {
+      name: "Choose up to four reasons you travel.",
+    });
+    expect(screen.getByText("Step 17 of 17")).toBeInTheDocument();
     await user.click(screen.getByRole("checkbox", { name: /nature/iu }));
     await user.click(screen.getByRole("checkbox", { name: /food/iu }));
+
+    await user.click(screen.getByRole("button", { name: "Choose priorities" }));
+    await screen.findByRole("heading", { name: "Which passion leads?" });
 
     const continueButton = screen.getByRole("button", {
       name: "Read my Travel Self",
@@ -86,5 +93,15 @@ describe("Travel Self v2 quiz", () => {
         screen.getByLabelText("Selected passion roles"),
       ).getByText("Nature", { selector: "strong" }),
     ).toBeInTheDocument();
+
+    await user.click(screen.getByRole("button", { name: "Back" }));
+    expect(screen.getByRole("checkbox", { name: /nature/iu })).toBeChecked();
+    expect(screen.getByRole("checkbox", { name: /food/iu })).toBeChecked();
+    await user.click(screen.getByRole("button", { name: "Choose priorities" }));
+    expect(
+      within(
+        screen.getByRole("group", { name: "Which passion leads?" }),
+      ).getByRole("radio", { name: "Food" }),
+    ).toBeChecked();
   });
 });

@@ -30,6 +30,7 @@ export function Progress({
         max={safeMax}
         value={safeValue}
         aria-label={label}
+        aria-valuetext={valueText}
       />
     </div>
   );

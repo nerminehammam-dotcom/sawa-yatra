@@ -26,6 +26,7 @@ function completeAnswers() {
 const baseState: StoredTravelSelfState = {
   version: TRAVEL_SELF_MODEL_VERSION,
   stage: "intro",
+  passionStep: "choose",
   questionIndex: 0,
   answers: {},
   selectedPassions: [],
@@ -59,6 +60,47 @@ describe("Travel Self v2 session recovery", () => {
       secondary: "nature",
     };
     expect(parseTravelSelfSession(JSON.stringify(state))).toEqual(state);
+  });
+
+  it("restores either passion substage without losing selections", () => {
+    const chooseState: StoredTravelSelfState = {
+      ...baseState,
+      stage: "passions",
+      passionStep: "choose",
+      questionIndex: TRAVEL_SELF_QUESTIONS.length - 1,
+      answers: completeAnswers(),
+      selectedPassions: ["food", "nature"],
+    };
+    const prioritiseState: StoredTravelSelfState = {
+      ...chooseState,
+      passionStep: "prioritise",
+      primary: "food",
+    };
+
+    expect(parseTravelSelfSession(JSON.stringify(chooseState))).toEqual(chooseState);
+    expect(parseTravelSelfSession(JSON.stringify(prioritiseState))).toEqual(
+      prioritiseState,
+    );
+  });
+
+  it("migrates a saved pre-split passion session to the safe substage", () => {
+    const legacyState = {
+      ...baseState,
+      stage: "passions",
+      questionIndex: TRAVEL_SELF_QUESTIONS.length - 1,
+      answers: completeAnswers(),
+      selectedPassions: ["food", "nature"],
+      primary: "food",
+    };
+    const legacyPayload = JSON.stringify({
+      ...legacyState,
+      passionStep: undefined,
+    });
+
+    expect(parseTravelSelfSession(legacyPayload)).toEqual({
+      ...legacyState,
+      passionStep: "prioritise",
+    });
   });
 
   it.each([

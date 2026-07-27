@@ -10,13 +10,15 @@
   justify-content: space-between;
   gap: var(--space-4);
   color: var(--deep-brown);
-  font-size: 1rem;
+  font-size: 0.875rem;
   line-height: 1.4;
 }
 
 .valueText {
   flex: none;
   color: inherit;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .progress {
