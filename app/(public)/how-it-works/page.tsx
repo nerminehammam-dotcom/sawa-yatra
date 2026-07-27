@@ -31,8 +31,8 @@ export default function HowItWorksPage() {
           <p className={styles.kicker}>A simple arrangement</p>
           <h1 id="how-heading">How Sawayatra works</h1>
           <p className={styles.openingLine}>
-            Browse journeys openly. Connect privately. Nothing is revealed until
-            the interest is mutual.
+            Browse the Andean Caravan openly. Connect privately. Nothing is
+            revealed until the interest is mutual.
           </p>
         </div>
       </section>
@@ -83,11 +83,11 @@ export default function HowItWorksPage() {
             <div className={styles.wayCopy}>
               <h3>Join a Journey</h3>
               <p className={styles.panelSummary}>
-                Browse journeys created by other members and express interest
-                when one feels right.
+                Available now: the Andean Caravan, with nine consecutive
+                sections and one complete route.
               </p>
               <ButtonLink href="/departures" surface="deep">
-                Browse Member Journeys <span aria-hidden="true">→</span>
+                Browse available journeys <span aria-hidden="true">→</span>
               </ButtonLink>
             </div>
           </article>
@@ -102,20 +102,20 @@ export default function HowItWorksPage() {
               />
             </div>
             <div className={styles.wayCopy}>
-              <p className={styles.cardLabel}>Created by you</p>
+              <p className={styles.cardLabel}>Future membership pathway</p>
               <h3>Create Your Own</h3>
               <p className={styles.panelSummary}>
-                Choose your destination, dates and travel style, then invite
-                compatible members to join.
+                A later way for members to propose a destination, dates and
+                travel style, then invite compatible members to join.
               </p>
               <div className={styles.cardActionGroup}>
                 <ButtonLink
                   href="/request-invitation?intent=create-journey&amp;returnTo=%2Fdo-it-yourself"
                   surface="deep"
                 >
-                  Create a Journey <span aria-hidden="true">→</span>
+                  Ask about future access <span aria-hidden="true">→</span>
                 </ButtonLink>
-                <p className={styles.requirement}>Completed Travel Self required.</p>
+                <p className={styles.requirement}>Not yet available.</p>
               </div>
             </div>
           </article>
@@ -151,17 +151,17 @@ export default function HowItWorksPage() {
       {/* 4. Privacy and mutual consent */}
       <section className={styles.privacy} aria-labelledby="privacy-heading">
         <header className={styles.privacyHeader}>
-          <p className={styles.kicker}>Privacy by design</p>
+          <p className={styles.kicker}>Future member-created journeys</p>
           <h2 id="privacy-heading">Your interest remains private</h2>
         </header>
 
         <div className={styles.privacyCopy}>
           <blockquote>“People don&apos;t browse people. They browse journeys.”</blockquote>
           <p>
-            When you express interest in a journey, the other member can review
-            your Travel Self without receiving your private identity or contact
-            details. If both of you choose to connect, Sawayatra opens an
-            introduction.
+            When this membership pathway opens, another member will be able to
+            review your Travel Self without receiving your private identity or
+            contact details. If both of you choose to connect, Sawayatra will
+            open an introduction.
           </p>
         </div>
 
@@ -174,7 +174,7 @@ export default function HowItWorksPage() {
         </ol>
 
         <div className={styles.interestStates}>
-          <p className={styles.stateLabel}>Interest states</p>
+          <p className={styles.stateLabel}>Planned interest states</p>
           <ul>
             {participationStates.map((state) => (
               <li key={state}>{state}</li>

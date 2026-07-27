@@ -38,10 +38,12 @@ export default function AboutPage() {
     <main id="main-content" tabIndex={-1}>
       <section className={styles.hero} aria-labelledby="about-heading">
         <p>About / Sawayatra field document</p>
-        <h1 id="about-heading">A caravan with a point of view.</h1>
+        <h1 id="about-heading">A travel club with a point of view.</h1>
         <p>
-          Sawayatra organises one long route around designated joining points,
-          practical clarity and the life found between destinations.
+          Sawayatra brings compatible travellers together through shared
+          journeys. It begins with the annual Andean Caravan, built around
+          designated joining points, practical clarity and the life found
+          between destinations.
         </p>
       </section>
 
@@ -86,9 +88,9 @@ export default function AboutPage() {
       </section>
 
       <section className={styles.action} aria-labelledby="about-action-heading">
-        <h2 id="about-action-heading">Begin with the route.</h2>
+        <h2 id="about-action-heading">Begin with the first route.</h2>
         <div>
-          <Link href="/departures/the-andean-caravan">Follow the caravan →</Link>
+          <Link href="/departures/the-andean-caravan">Explore the Andean Caravan →</Link>
           <a href="mailto:nerminehammam@gmail.com?subject=Sawayatra%20question">
             Ask a question ↗
           </a>
