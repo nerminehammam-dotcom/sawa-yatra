@@ -33,6 +33,7 @@ export type StaticRoute =
   | "/do-it-yourself"
   | "/membership"
   | "/about"
+  | "/contact"
   | "/sign-in"
   | "/request-invitation"
   | "/privacy"

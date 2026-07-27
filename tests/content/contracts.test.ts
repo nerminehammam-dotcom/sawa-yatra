@@ -41,6 +41,7 @@ const releaseOneRoutes = [
   "/departures/[slug]",
   "/membership",
   "/about",
+  "/contact",
   "/sign-in",
   "/request-invitation",
   "/privacy",
@@ -111,6 +112,7 @@ describe("Release 1 content contracts", () => {
     expect(urls).not.toContain("/caravans/the-andean-caravan");
     expect(urls).toContain("/joining-points");
     expect(urls).toContain("/start-here");
+    expect(urls).toContain("/contact");
     expect(urls).not.toContain("/do-it-yourself");
     expect(urls).not.toContain("/about");
     expect(urls).not.toContain("/membership");
@@ -144,7 +146,7 @@ describe("Release 1 content contracts", () => {
     expect(
       utilityNavigation.map(({ label, href }) => ({ label, href })),
     ).toEqual([
-      { label: "Ask a question", href: "mailto:nerminehammam@gmail.com" },
+      { label: "Ask a question", href: "/contact" },
     ]);
     const primaryHrefs: readonly string[] = primaryNavigation.map(
       (item) => item.href,

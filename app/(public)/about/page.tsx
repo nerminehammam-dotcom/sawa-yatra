@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { createPageMetadata } from "@/app/_metadata";
 import { getAndeanCaravanGallery } from "@/content/andean-caravan-images";
+import { contactHref } from "@/lib/contact";
 
 import styles from "./about.module.css";
 
@@ -91,9 +92,9 @@ export default function AboutPage() {
         <h2 id="about-action-heading">Begin with the first route.</h2>
         <div>
           <Link href="/departures/the-andean-caravan">Explore the Andean Caravan →</Link>
-          <a href="mailto:nerminehammam@gmail.com?subject=Sawayatra%20question">
+          <Link href={contactHref()}>
             Ask a question ↗
-          </a>
+          </Link>
         </div>
       </section>
     </main>

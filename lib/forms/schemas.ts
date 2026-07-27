@@ -66,11 +66,24 @@ export const signInInterestSchema = z
   })
   .strict();
 
+export const contactQuestionSchema = z
+  .object({
+    name: requiredText("Name", 120),
+    email,
+    question: requiredText("Question", 3_000),
+    journeyContext: z
+      .string()
+      .trim()
+      .max(160, "Journey or section must be 160 characters or fewer."),
+  })
+  .strict();
+
 export type InvitationRequestValues = z.infer<
   typeof invitationRequestSchema
 >;
 export type JourneyInterestValues = z.infer<typeof journeyInterestSchema>;
 export type SignInInterestValues = z.infer<typeof signInInterestSchema>;
+export type ContactQuestionValues = z.infer<typeof contactQuestionSchema>;
 
 export interface FormValuesByKind {
   "invitation-request": InvitationRequestValues;

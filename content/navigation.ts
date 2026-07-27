@@ -37,7 +37,7 @@ export const utilityNavigation = [
   {
     id: "ask-a-question",
     label: "Ask a question",
-    href: "mailto:nerminehammam@gmail.com",
+    href: "/contact",
     contentStatus: "LOCKED",
   },
 ] as const;

@@ -79,6 +79,24 @@ export const signInInterestFormContent = {
   pendingActionLabel: "Recording member-access interest…",
 } as const;
 
+export const contactQuestionFormContent = {
+  ariaLabel: "Ask Sawayatra a question",
+  fields: {
+    name: "Name",
+    email: "Email address",
+    question: "What would you like to ask?",
+    journeyContext: "Journey or section, optional",
+  },
+  journeyContextHint:
+    "Change or remove this context if it is not relevant to your question.",
+  questionHint:
+    "Do not include payment details, identity documents, health information or emergency contacts.",
+  actionLabel: "Send question",
+  unavailableTitle: "Online delivery is not connected yet",
+  unavailableMessage:
+    "Your question was not sent or stored. Please use the email address shown on this page.",
+} as const;
+
 export const formApiMessages = {
   "invitation-request":
     "Development mock received the invitation request. Nothing was sent or stored on the server.",

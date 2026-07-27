@@ -30,6 +30,7 @@ const publicRoutes = [
   ...andeanDepartureRoutes,
   "/membership",
   "/about",
+  "/contact",
   "/start-here",
   "/sign-in",
   "/request-invitation",
@@ -145,6 +146,82 @@ test.describe("Release 1 route contract", () => {
       "href",
       "/",
     );
+  });
+
+  test("the contact journey validates honestly and keeps editable context", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      !["mobile-375", "wide-1440"].includes(testInfo.project.name),
+      "The contact journey is checked at the approved mobile and desktop widths.",
+    );
+
+    const requests: string[] = [];
+    page.on("request", (request) => requests.push(request.url()));
+    await page.goto("/contact?journey=The%20Mirror");
+
+    const context = page.getByLabel("Journey or section, optional");
+    await expect(context).toHaveValue("The Mirror");
+    await context.fill("");
+    const submit = page.getByRole("button", { name: "Send question" });
+    await submit.focus();
+    await page.keyboard.press("Enter");
+    const validationAlert = page
+      .locator('[data-tone="validation"][role="alert"]')
+      .filter({ hasText: "Check the form" });
+    await expect(validationAlert).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(page.getByLabel(/^Name/u)).toBeFocused();
+
+    await page.getByLabel(/^Name/u).fill("A Traveller");
+    await page.getByLabel(/^Email address/u).fill("traveller@example.com");
+    await page
+      .getByLabel(/^What would you like to ask/u)
+      .fill("Can I join this section and leave at Atacama?");
+    await submit.click();
+
+    await expect(
+      page.locator('[data-tone="network-error"][role="alert"]'),
+    ).toContainText(
+      "Your question was not sent or stored.",
+    );
+    await expect(page.getByLabel(/^Name/u)).toHaveValue("A Traveller");
+    expect(requests.some((url) => url.includes("/api/forms/"))).toBe(false);
+
+    const accessibility = await new AxeBuilder({ page })
+      .include("main")
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze();
+    const seriousViolations = accessibility.violations.filter((violation) =>
+      ["serious", "critical"].includes(violation.impact ?? ""),
+    );
+    expect(seriousViolations).toEqual([]);
+  });
+
+  test("the contact journey remains usable at 320px and a 200% zoom equivalent", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name !== "wide-1440",
+      "One responsive contact-page pass controls its own viewport widths.",
+    );
+
+    for (const width of [720, 320]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/contact?journey=The%20Andean%20Caravan");
+      await expect(page.getByLabel(/^Name/u)).toBeEditable();
+      await expect(page.getByLabel(/^Email address/u)).toBeEditable();
+      await expect(page.getByLabel(/^What would you like to ask/u)).toBeEditable();
+      await expect(page.getByRole("button", { name: "Send question" })).toBeVisible();
+
+      const dimensions = await page.evaluate(() => ({
+        viewport: document.documentElement.clientWidth,
+        document: document.documentElement.scrollWidth,
+      }));
+      expect(dimensions.document, `${width}px contact page`).toBeLessThanOrEqual(
+        dimensions.viewport,
+      );
+    }
   });
 
   test("the Do It Yourself title is the sole H1 with unchanged styling", async ({
@@ -845,6 +922,10 @@ test.describe("forms and holding states", () => {
         route: "/sign-in",
         action: "Record interest in member access",
       },
+      {
+        route: "/contact",
+        action: "Send question",
+      },
     ] as const;
 
     for (const surface of surfaces) {
@@ -944,6 +1025,11 @@ test.describe("links, metadata and accessibility", () => {
 
       for (const href of hrefs) {
         expect(href).not.toBe("");
+        if (href.startsWith("mailto:")) {
+          expect(route).toBe("/contact");
+          expect(href).toContain("nerminehammam@gmail.com");
+          continue;
+        }
         if (href.startsWith("#")) {
           expect(href).toBe("#main-content");
           continue;

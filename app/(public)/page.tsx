@@ -12,6 +12,7 @@ import {
   fieldDocumentContent,
   joiningPoints,
 } from "@/content/field-document";
+import { contactHref } from "@/lib/contact";
 
 import styles from "./home.module.css";
 
@@ -183,9 +184,9 @@ export default function HomePage() {
           <h2 id="final-action-heading">Where will you join us?</h2>
           <div>
             <Link href="/joining-points">Compare joining points →</Link>
-            <a href="mailto:nerminehammam@gmail.com?subject=Sawayatra%20joining%20point%20question">
+            <Link href={contactHref("Joining points")}>
               Ask a question ↗
-            </a>
+            </Link>
           </div>
         </section>
       </main>

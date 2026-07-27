@@ -37,6 +37,8 @@ const approvedRouteDescriptions = {
     "Create your own Sawayatra journey. The Do It Yourself experience is coming later.",
   departures:
     "The Andean Caravan moves through Peru, Bolivia and Chile. Join one of nine consecutive sections, connect several, or travel the complete 71-day route.",
+  contact:
+    "Ask Sawayatra about membership, the Andean Caravan, a journey section or how the club works.",
   journey:
     "Explore the complete Andean Caravan and its nine bookable sections through Peru, Bolivia and Chile.",
 } as const;
@@ -58,6 +60,7 @@ export const routeMetadata = ([
   ["journey", "/departures/[slug]", "Journey | Sawayatra"],
   ["membership", "/membership", "Membership | Sawayatra"],
   ["about", "/about", "About | Sawayatra"],
+  ["contact", "/contact", "Ask a question | Sawayatra"],
   ["sign-in", "/sign-in", "Member access | Sawayatra"],
   ["request-invitation", "/request-invitation", "Request an invitation | Sawayatra"],
   ["privacy", "/privacy", "Privacy | Sawayatra"],

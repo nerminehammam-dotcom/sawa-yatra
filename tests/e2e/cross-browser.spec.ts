@@ -14,6 +14,7 @@ const crossBrowserRoutes = [
   "/departures/the-mirror",
   "/membership",
   "/about",
+  "/contact",
   "/start-here",
   "/sign-in",
   "/request-invitation",

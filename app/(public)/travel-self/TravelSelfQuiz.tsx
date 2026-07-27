@@ -31,6 +31,7 @@ import {
   type StoredTravelSelfState,
   type TravelSelfStage,
 } from "@/lib/travel-self-session";
+import { contactHref } from "@/lib/contact";
 import type { CallToAction } from "@/lib/types";
 
 import styles from "./travel-self.module.css";
@@ -971,7 +972,7 @@ export function TravelSelfQuiz({
 
           <div className={styles.actions}>
             <ButtonLink
-              href="mailto:nerminehammam@gmail.com?subject=Sawayatra%20Travel%20Self%20question"
+              href={contactHref("Travel Self")}
               surface="deep"
               onClick={() =>
                 trackTravelSelfEvent({ name: "travel_self_email_cta_clicked" })

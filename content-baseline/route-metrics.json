@@ -993,6 +993,30 @@
       "/accessibility"
     ]
   },
+  "contact": {
+    "route": "/contact",
+    "headings": {
+      "h1": 1,
+      "h2": 2,
+      "h3": 0
+    },
+    "imageCount": 0,
+    "images": [],
+    "interactiveControlCount": 20,
+    "internalLinks": [
+      "/",
+      "/contact",
+      "/how-it-works",
+      "/travel-self",
+      "/departures",
+      "/membership",
+      "/about",
+      "/",
+      "/privacy",
+      "/terms",
+      "/accessibility"
+    ]
+  },
   "sign-in": {
     "route": "/sign-in",
     "headings": {

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { createPageMetadata } from "@/app/_metadata";
 import { JoiningPointSelector } from "@/components/field/JoiningPointSelector";
 import { joiningPoints } from "@/content/field-document";
+import { contactHref } from "@/lib/contact";
 
 import styles from "./joining-points.module.css";
 
@@ -29,9 +30,9 @@ export default function JoiningPointsPage() {
       <section className={styles.final} aria-labelledby="joining-final-heading">
         <p>Need a calm way into the route?</p>
         <h2 id="joining-final-heading">Start with the place—not a package.</h2>
-        <a href="mailto:nerminehammam@gmail.com?subject=Sawayatra%20joining%20point%20question">
+        <Link href={contactHref("Joining points")}>
           Ask about a joining point ↗
-        </a>
+        </Link>
       </section>
     </main>
   );

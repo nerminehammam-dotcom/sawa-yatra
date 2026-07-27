@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import type { JoiningPointRecord } from "@/content/field-document";
+import { contactHref } from "@/lib/contact";
 
 import styles from "./JoiningPointSelector.module.css";
 
@@ -83,11 +84,9 @@ export function JoiningPointSelector({
           </dl>
           <div className={styles.actions}>
             <Link href={`/departures/${active.sectionSlug}`}>View this section →</Link>
-            <a
-              href={`mailto:nerminehammam@gmail.com?subject=${encodeURIComponent(`Sawayatra joining point: ${active.place}`)}`}
-            >
+            <Link href={contactHref(`Joining point: ${active.place}`)}>
               Ask about joining here ↗
-            </a>
+            </Link>
           </div>
         </div>
       </article>
