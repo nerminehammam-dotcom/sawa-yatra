@@ -67,7 +67,7 @@ export const fieldDocumentContent = {
   hero: {
     eyebrow: "The Andean Caravan · annual expedition",
     actionLabel: "Enter the route",
-    actionHref: "/caravans/the-andean-caravan",
+    actionHref: "/departures/the-andean-caravan",
     secondaryLabel: "See joining points",
     secondaryHref: "/joining-points",
     image: andeanCaravanHeroImage,

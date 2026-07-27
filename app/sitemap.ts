@@ -9,6 +9,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .filter(
       (entry) =>
         entry.path !== "/departures/[slug]" &&
+        entry.path !== "/caravans" &&
+        entry.path !== "/caravans/the-andean-caravan" &&
         entry.noIndex !== true &&
         entry.descriptionStatus !== "PLACEHOLDER",
     )

@@ -15,7 +15,11 @@ import { andeanMapCountries } from "@/content/andean-map-geometry";
 import { andeanCaravanRouteStops } from "@/content/andean-caravan-route";
 import { archetypes } from "@/content/archetypes";
 import { assetManifest } from "@/content/assets";
-import { primaryNavigation, utilityNavigation } from "@/content/navigation";
+import {
+  departuresNavigation,
+  primaryNavigation,
+  utilityNavigation,
+} from "@/content/navigation";
 import { quizQuestions } from "@/content/quiz";
 import {
   howItWorksContent,
@@ -103,8 +107,8 @@ describe("Release 1 content contracts", () => {
 
     expect(urls).toContain("/departures");
     expect(urls).toContain("/departures/the-andean-caravan");
-    expect(urls).toContain("/caravans");
-    expect(urls).toContain("/caravans/the-andean-caravan");
+    expect(urls).not.toContain("/caravans");
+    expect(urls).not.toContain("/caravans/the-andean-caravan");
     expect(urls).toContain("/joining-points");
     expect(urls).toContain("/start-here");
     expect(urls).not.toContain("/do-it-yourself");
@@ -155,6 +159,41 @@ describe("Release 1 content contracts", () => {
           !item.href.includes("#"),
       ),
     ).toBe(true);
+  });
+
+  it("keeps the complete Departures dropdown intact and canonical", () => {
+    expect(departuresNavigation).toEqual([
+      {
+        id: "andean-caravan",
+        label: "The Andean Caravan",
+        href: "/departures/the-andean-caravan",
+      },
+      {
+        id: "all-sections",
+        label: "Browse all nine sections",
+        href: "/departures#all-sections",
+      },
+      {
+        id: "route-map",
+        label: "Full route map",
+        href: "/departures#full-route-map",
+      },
+      {
+        id: "joining-points",
+        label: "Joining & Leaving Points",
+        href: "/joining-points",
+      },
+      {
+        id: "dates",
+        label: "Dates & availability",
+        href: "/departures#dates-availability",
+      },
+      {
+        id: "included",
+        label: "What is included",
+        href: "/departures#what-is-included",
+      },
+    ]);
   });
 
   it("offers Caravan / Join and Create without a Match path", () => {

@@ -66,7 +66,7 @@ export default function CaravansPage() {
           </div>
         </dl>
         <div className={styles.actions}>
-          <Link href="/caravans/the-andean-caravan">Follow the complete route →</Link>
+          <Link href="/departures/the-andean-caravan">Follow the complete route →</Link>
           <Link href="/joining-points">Compare joining points ↗</Link>
         </div>
       </section>

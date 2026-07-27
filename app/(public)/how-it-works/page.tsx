@@ -61,7 +61,7 @@ export default function HowItWorksPage() {
             </p>
             <ButtonLink
               className={styles.featuredAction}
-              href="/caravans"
+              href="/departures/the-andean-caravan"
               surface="deep"
             >
               Explore the Andean Caravan <span aria-hidden="true">→</span>

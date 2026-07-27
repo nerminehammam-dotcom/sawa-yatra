@@ -173,7 +173,7 @@ function Wayfinding({ title }: { title: string }) {
       <Container className={styles.wayfindingLinks}>
         <Link href="/departures#all-sections">Back to all sections</Link>
         <Link href="/joining-points">Joining & Leaving Points</Link>
-        <Link href="/caravans#caravan-route-map-heading">Full route map</Link>
+        <Link href="/departures#full-route-map">Full route map</Link>
         <a href={`mailto:nerminehammam@gmail.com?subject=${encodeURIComponent(`Sawayatra section: ${title}`)}`}>
           Ask about this section
         </a>

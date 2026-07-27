@@ -56,7 +56,7 @@ export const departuresNavigation = [
   {
     id: "route-map",
     label: "Full route map",
-    href: "/caravans#caravan-route-map-heading",
+    href: "/departures#full-route-map",
   },
   {
     id: "joining-points",
