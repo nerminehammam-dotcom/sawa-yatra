@@ -13,6 +13,7 @@ describe("Wordmark", () => {
       name: `${siteConfig.name} home`,
     });
     expect(homeLink).toHaveTextContent(temporaryWordmark.text);
+    expect(homeLink.firstElementChild).toHaveAttribute("aria-hidden", "true");
     expect(homeLink.querySelector("svg")).not.toBeInTheDocument();
   });
 
@@ -20,6 +21,7 @@ describe("Wordmark", () => {
     render(<Wordmark href={null} />);
 
     expect(screen.queryByRole("link")).not.toBeInTheDocument();
+    expect(screen.getByRole("img", { name: siteConfig.name })).toBeVisible();
     expect(screen.getByText(temporaryWordmark.text)).toBeVisible();
   });
 });
