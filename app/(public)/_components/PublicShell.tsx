@@ -23,7 +23,7 @@ export function PublicShell({ children }: { children: ReactNode }) {
   return (
     <>
       <SkipLink />
-      <SiteNavigation items={primaryNavigation} />
+      <SiteNavigation />
       {children}
       <Footer
         navigationLinks={footerLinks}

@@ -49,7 +49,7 @@ export default function DeparturesPage() {
           <div><dt>Group</dt><dd>{andeanCaravan.group}</dd></div>
           <div><dt>Price</dt><dd>{andeanCaravan.price}</dd></div>
         </dl>
-        <Link href="/departures/the-andean-caravan">Explore the complete Caravan →</Link>
+        <Link href="/caravans/andean">Explore the complete Caravan →</Link>
       </section>
 
       <div className={styles.map} id="full-route-map">
@@ -102,7 +102,7 @@ export default function DeparturesPage() {
           <h2 id="joining-heading">Joining & Leaving Points</h2>
           <p>Compare every gateway, airport, time commitment and next natural leaving point in one place.</p>
         </div>
-        <Link href="/joining-points">Compare joining points →</Link>
+        <Link href="/caravans/andean-caravan/how-it-works">Compare joining points →</Link>
       </section>
 
       <section className={styles.information} id="dates-availability" aria-labelledby="dates-heading">

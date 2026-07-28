@@ -2,56 +2,71 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useId, useRef, useState } from "react";
-
-import { Container } from "@/components/ui/Container";
 import {
-  departuresNavigation,
+  type FocusEvent,
+  type KeyboardEvent,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react";
+
+import {
+  announcementNavigation,
+  caravansNavigation,
+  primaryNavigation,
   utilityNavigation,
 } from "@/content/navigation";
 
 import styles from "./SiteNavigation.module.css";
 import { Wordmark } from "./Wordmark";
 
-export interface SiteNavigationItem {
-  href: string;
-  label: string;
-}
-
-export interface SiteNavigationProps {
-  items?: readonly SiteNavigationItem[];
-}
-
-const defaultItems: readonly SiteNavigationItem[] = [
-  { href: "/how-it-works", label: "How it works" },
-  { href: "/travel-self", label: "Meet your Travel Self" },
-  { href: "/departures", label: "Departures" },
-  { href: "/membership", label: "Membership" },
-  { href: "/about", label: "About" },
-] as const;
+const BANNER_STORAGE_KEY = "sawayatra.navigation.notice.dismissed";
 
 function isCurrentPath(pathname: string, href: string): boolean {
-  return href === "/" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
+  return href === "/"
+    ? pathname === href
+    : pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function SiteNavigation({
-  items = defaultItems,
-}: SiteNavigationProps) {
+function isCaravansPath(pathname: string): boolean {
+  return (
+    pathname.startsWith("/caravans") ||
+    pathname.startsWith("/departures") ||
+    pathname === "/joining-points"
+  );
+}
+
+export function SiteNavigation() {
   const pathname = usePathname();
-  const drawerId = useId();
-  const departuresMenuId = useId();
-  const mobileDeparturesMenuId = useId();
-  const [isOpen, setIsOpen] = useState(false);
-  const [isDeparturesOpen, setIsDeparturesOpen] = useState(false);
-  const [isMobileDeparturesOpen, setIsMobileDeparturesOpen] = useState(false);
-  const triggerRef = useRef<HTMLButtonElement>(null);
-  const departuresTriggerRef = useRef<HTMLButtonElement>(null);
-  const departuresItemRef = useRef<HTMLLIElement>(null);
-  const drawerRef = useRef<HTMLDivElement>(null);
-  const firstLinkRef = useRef<HTMLAnchorElement>(null);
+  const sheetId = useId();
+  const caravansPanelId = useId();
+  const caravansTriggerId = useId();
+  const mobileCaravansId = useId();
+  const [isBannerVisible, setIsBannerVisible] = useState(true);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isCaravansOpen, setIsCaravansOpen] = useState(false);
+  const [isMobileCaravansOpen, setIsMobileCaravansOpen] = useState(false);
   const rootRef = useRef<HTMLElement>(null);
-  const visibleItems = items.filter((item) => item.href !== "/open-seats");
-  const utilityAction = utilityNavigation[0];
+  const previousPathnameRef = useRef(pathname);
+  const caravansItemRef = useRef<HTMLLIElement>(null);
+  const caravansTriggerRef = useRef<HTMLButtonElement>(null);
+  const firstCaravanLinkRef = useRef<HTMLAnchorElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const sheetRef = useRef<HTMLDivElement>(null);
+  const sheetCloseRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const frame = window.requestAnimationFrame(() => {
+      try {
+        setIsBannerVisible(sessionStorage.getItem(BANNER_STORAGE_KEY) !== "true");
+      } catch {
+        setIsBannerVisible(true);
+      }
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -75,33 +90,42 @@ export function SiteNavigation({
   }, []);
 
   useEffect(() => {
-    const desktopQuery = window.matchMedia("(min-width: 1281px)");
-    const closeAtDesktop = (event: MediaQueryListEvent) => {
-      if (event.matches) setIsOpen(false);
+    if (previousPathnameRef.current === pathname) return;
+    previousPathnameRef.current = pathname;
+    const frame = window.requestAnimationFrame(() => {
+      setIsCaravansOpen(false);
+      setIsSheetOpen(false);
+      setIsMobileCaravansOpen(false);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [pathname]);
+
+  useEffect(() => {
+    const desktopQuery = window.matchMedia("(min-width: 1025px)");
+    const closeSheetAtDesktop = (event: MediaQueryListEvent) => {
+      if (event.matches) setIsSheetOpen(false);
     };
 
-    desktopQuery.addEventListener("change", closeAtDesktop);
-    return () => desktopQuery.removeEventListener("change", closeAtDesktop);
+    desktopQuery.addEventListener("change", closeSheetAtDesktop);
+    return () => desktopQuery.removeEventListener("change", closeSheetAtDesktop);
   }, []);
 
   useEffect(() => {
-    if (!isDeparturesOpen) return;
+    if (!isCaravansOpen) return;
 
-    function handlePointerDown(event: MouseEvent) {
-      if (
-        departuresItemRef.current &&
-        !departuresItemRef.current.contains(event.target as Node)
-      ) {
-        setIsDeparturesOpen(false);
+    const handlePointerDown = (event: MouseEvent) => {
+      if (!caravansItemRef.current?.contains(event.target as Node)) {
+        setIsCaravansOpen(false);
       }
-    }
+    };
 
-    function handleKeyDown(event: KeyboardEvent) {
+    const handleKeyDown = (event: globalThis.KeyboardEvent) => {
       if (event.key !== "Escape") return;
       event.preventDefault();
-      setIsDeparturesOpen(false);
-      departuresTriggerRef.current?.focus();
-    }
+      setIsCaravansOpen(false);
+      caravansTriggerRef.current?.focus();
+    };
 
     document.addEventListener("mousedown", handlePointerDown);
     document.addEventListener("keydown", handleKeyDown);
@@ -109,28 +133,29 @@ export function SiteNavigation({
       document.removeEventListener("mousedown", handlePointerDown);
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [isDeparturesOpen]);
+  }, [isCaravansOpen]);
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isSheetOpen) return;
 
     const previousOverflow = document.body.style.overflow;
-    const trigger = triggerRef.current;
+    const trigger = menuButtonRef.current;
     document.body.style.overflow = "hidden";
-    const focusFrame = window.requestAnimationFrame(() => firstLinkRef.current?.focus());
+    const focusFrame = window.requestAnimationFrame(() => {
+      sheetCloseRef.current?.focus();
+    });
 
-    function handleKeyDown(event: KeyboardEvent) {
+    const handleKeyDown = (event: globalThis.KeyboardEvent) => {
       if (event.key === "Escape") {
         event.preventDefault();
-        setIsOpen(false);
-        setIsMobileDeparturesOpen(false);
+        setIsSheetOpen(false);
+        setIsMobileCaravansOpen(false);
         return;
       }
 
-      if (event.key !== "Tab" || !drawerRef.current) return;
-
+      if (event.key !== "Tab" || !sheetRef.current) return;
       const focusable = Array.from(
-        drawerRef.current.querySelectorAll<HTMLElement>(
+        sheetRef.current.querySelectorAll<HTMLElement>(
           'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
         ),
       );
@@ -145,7 +170,7 @@ export function SiteNavigation({
         event.preventDefault();
         first.focus();
       }
-    }
+    };
 
     document.addEventListener("keydown", handleKeyDown);
     return () => {
@@ -154,187 +179,268 @@ export function SiteNavigation({
       document.body.style.overflow = previousOverflow;
       trigger?.focus();
     };
-  }, [isOpen]);
+  }, [isSheetOpen]);
+
+  const dismissBanner = () => {
+    setIsBannerVisible(false);
+    try {
+      sessionStorage.setItem(BANNER_STORAGE_KEY, "true");
+    } catch {
+      // The banner still closes for this render when storage is unavailable.
+    }
+  };
+
+  const openCaravansFromKeyboard = (
+    event: KeyboardEvent<HTMLButtonElement>,
+  ) => {
+    if (event.key !== "ArrowDown") return;
+    event.preventDefault();
+    setIsCaravansOpen(true);
+    window.requestAnimationFrame(() => firstCaravanLinkRef.current?.focus());
+  };
+
+  const closeCaravansWhenFocusLeaves = (event: FocusEvent<HTMLLIElement>) => {
+    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+      setIsCaravansOpen(false);
+    }
+  };
+
+  const closeSheet = () => {
+    setIsSheetOpen(false);
+    setIsMobileCaravansOpen(false);
+  };
 
   return (
-    <nav
-      ref={rootRef}
-      className={styles.root}
-      id="site-top"
-      tabIndex={-1}
-      aria-label="Primary"
-    >
-      <div className={styles.brandBand}>
-        <Container className={styles.brandRow}>
-          <Wordmark size="large" />
-          <Link className={styles.utilityLink} href={utilityAction.href}>
-            {utilityAction.label}
-          </Link>
-          <button
-            ref={triggerRef}
-            className={styles.mobileButton}
-            type="button"
-            aria-expanded={isOpen}
-            aria-controls={drawerId}
-            onClick={() => setIsOpen((open) => !open)}
-          >
-            <span>{isOpen ? "Close" : "Menu"}</span>
-            <span aria-hidden="true">{isOpen ? "×" : "+"}</span>
-          </button>
-        </Container>
+    <header ref={rootRef} className={styles.root} id="site-top" tabIndex={-1}>
+      {isBannerVisible ? (
+        <div className={styles.banner}>
+          <p>
+            {announcementNavigation.message}{" "}
+            <Link href={announcementNavigation.action.href}>
+              {announcementNavigation.action.label}
+            </Link>
+          </p>
+          <div className={styles.bannerActions}>
+            <Link className={styles.bannerSignIn} href={announcementNavigation.signIn.href}>
+              {announcementNavigation.signIn.label}
+            </Link>
+            <button
+              className={styles.bannerClose}
+              type="button"
+              aria-label="Dismiss this notice"
+              onClick={dismissBanner}
+            >
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+        </div>
+      ) : null}
+
+      <div className={styles.brandRow}>
+        <Wordmark className={styles.wordmark} size="large" />
+        <nav className={styles.utility} aria-label="Club pages">
+          {utilityNavigation.map((item, index) => (
+            <span className={styles.utilityItem} key={item.id}>
+              {index > 0 ? <span className={styles.utilityRule} aria-hidden="true" /> : null}
+              <Link href={item.href}>{item.label}</Link>
+            </span>
+          ))}
+        </nav>
+        <button
+          ref={menuButtonRef}
+          className={styles.menuButton}
+          type="button"
+          aria-expanded={isSheetOpen}
+          aria-controls={sheetId}
+          onClick={() => setIsSheetOpen(true)}
+        >
+          <span className={styles.menuBars} aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </span>
+          Menu
+        </button>
       </div>
 
-      <div className={styles.navigationBand}>
-        <Container className={styles.navigationRow}>
-          <div className={styles.desktop}>
-          <ul className={styles.list} aria-label="Primary navigation links">
-            {visibleItems.map((item) => {
-              const hasDeparturesMenu = item.href === "/departures";
-              const isActive =
-                isCurrentPath(pathname, item.href) ||
-                (hasDeparturesMenu &&
-                  (pathname.startsWith("/caravans") ||
-                    pathname === "/joining-points"));
-
+      <nav className={styles.mainBar} aria-label="Primary">
+        <ul className={styles.mainList}>
+          {primaryNavigation.map((item) => {
+            const isCaravans = item.id === "caravans";
+            if (isCaravans) {
               return (
-              <li
-                ref={hasDeparturesMenu ? departuresItemRef : undefined}
-                className={hasDeparturesMenu ? styles.hasSubmenu : undefined}
-                key={item.href}
-              >
-                <div className={styles.linkGroup}>
-                  <Link
-                  className={styles.link}
+                <li
+                  ref={caravansItemRef}
+                  className={styles.mainItem}
+                  key={item.id}
+                  onBlur={closeCaravansWhenFocusLeaves}
+                >
+                  <button
+                    ref={caravansTriggerRef}
+                    id={caravansTriggerId}
+                    className={styles.mainLink}
+                    type="button"
+                    aria-expanded={isCaravansOpen}
+                    aria-controls={caravansPanelId}
+                    data-active={isCaravansPath(pathname) ? "true" : undefined}
+                    onClick={() => setIsCaravansOpen((open) => !open)}
+                    onKeyDown={openCaravansFromKeyboard}
+                  >
+                    {item.label}
+                    <span className={styles.caret} aria-hidden="true" />
+                  </button>
+                  {isCaravansOpen ? (
+                    <div
+                      className={styles.caravansPanel}
+                      id={caravansPanelId}
+                      role="region"
+                      aria-labelledby={caravansTriggerId}
+                    >
+                      <div className={styles.panelColumn}>
+                        <p className={styles.panelLabel}>Choose a caravan</p>
+                        {caravansNavigation.choose.map((entry, index) => (
+                          <Link
+                            ref={index === 0 ? firstCaravanLinkRef : undefined}
+                            className={styles.panelEntry}
+                            href={entry.href}
+                            key={entry.id}
+                          >
+                            <span className={styles.entryTitle}>{entry.label}</span>
+                            <span className={styles.entryMeta}>{entry.meta}</span>
+                          </Link>
+                        ))}
+                      </div>
+                      <div className={styles.panelColumn}>
+                        <p className={styles.panelLabel}>Join a caravan</p>
+                        {caravansNavigation.join.map((entry) => (
+                          <Link
+                            className={styles.panelEntry}
+                            href={entry.href}
+                            key={entry.id}
+                          >
+                            <span className={styles.entryTitle}>{entry.label}</span>
+                            {entry.id === "hop-on-hop-off" ? (
+                              <span className={styles.routeStrip} aria-hidden="true">
+                                {Array.from({ length: 9 }, (_, index) => (
+                                  <span key={index} />
+                                ))}
+                              </span>
+                            ) : null}
+                            <span className={styles.entryMeta}>{entry.meta}</span>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
+                </li>
+              );
+            }
+
+            return (
+              <li className={styles.mainItem} key={item.id}>
+                <Link
+                  className={styles.mainLink}
                   href={item.href}
-                  aria-current={
-                    isCurrentPath(pathname, item.href) ? "page" : undefined
-                  }
-                  data-active={isActive ? "true" : undefined}
+                  aria-current={isCurrentPath(pathname, item.href) ? "page" : undefined}
                 >
                   {item.label}
                 </Link>
-                {hasDeparturesMenu ? (
-                  <button
-                    ref={departuresTriggerRef}
-                    className={styles.submenuButton}
-                    type="button"
-                    aria-label="Toggle Departures menu"
-                    aria-expanded={isDeparturesOpen}
-                    aria-controls={departuresMenuId}
-                    onClick={() => setIsDeparturesOpen((open) => !open)}
-                  >
-                    <span aria-hidden="true">{isDeparturesOpen ? "↑" : "↓"}</span>
-                  </button>
-                ) : null}
-                </div>
-                {hasDeparturesMenu && isDeparturesOpen ? (
-                  <div className={styles.submenu} id={departuresMenuId}>
-                    {departuresNavigation.map((subitem) => (
-                      <Link
-                        className={styles.submenuLink}
-                        href={subitem.href}
-                        key={subitem.id}
-                        onClick={() => setIsDeparturesOpen(false)}
-                      >
-                        {subitem.label}
-                      </Link>
-                    ))}
-                  </div>
-                ) : null}
               </li>
-              );
-            })}
-          </ul>
-          </div>
-        </Container>
-      </div>
+            );
+          })}
+        </ul>
+      </nav>
 
-      {isOpen ? (
+      {isSheetOpen ? (
         <div
-          ref={drawerRef}
-          className={styles.drawer}
-          id={drawerId}
+          ref={sheetRef}
+          className={styles.sheet}
+          id={sheetId}
           role="dialog"
           aria-modal="true"
           aria-label="Site menu"
         >
-          <div className={styles.panel}>
-            <div className={styles.drawerHeader}>
-              <Wordmark href={null} />
-              <button
-                className={styles.closeButton}
-                type="button"
-                onClick={() => setIsOpen(false)}
-              >
-                Close
-              </button>
-            </div>
-            <ul
-              className={styles.mobileList}
-              aria-label="Primary navigation links"
+          <div className={styles.sheetTop}>
+            <Wordmark href={null} className={styles.sheetWordmark} />
+            <button
+              ref={sheetCloseRef}
+              className={styles.sheetClose}
+              type="button"
+              onClick={closeSheet}
             >
-              {visibleItems.map((item, index) => {
-                const hasDeparturesMenu = item.href === "/departures";
-
-                return (
-                <li key={item.href}>
-                  <div className={styles.mobileLinkRow}>
-                    <Link
-                    ref={index === 0 ? firstLinkRef : undefined}
-                    className={styles.mobileLink}
-                    href={item.href}
-                    aria-current={isCurrentPath(pathname, item.href) ? "page" : undefined}
-                    onClick={() => setIsOpen(false)}
+              Close
+            </button>
+          </div>
+          <ul className={styles.sheetList}>
+            {primaryNavigation.map((item) =>
+              item.id === "caravans" ? (
+                <li key={item.id}>
+                  <button
+                    className={styles.sheetLink}
+                    type="button"
+                    aria-expanded={isMobileCaravansOpen}
+                    aria-controls={mobileCaravansId}
+                    onClick={() => setIsMobileCaravansOpen((open) => !open)}
                   >
                     {item.label}
-                  </Link>
-                    {hasDeparturesMenu ? (
-                      <button
-                        className={styles.mobileSubmenuButton}
-                        type="button"
-                        aria-label="Toggle Departures menu"
-                        aria-expanded={isMobileDeparturesOpen}
-                        aria-controls={mobileDeparturesMenuId}
-                        onClick={() => setIsMobileDeparturesOpen((open) => !open)}
-                      >
-                        <span aria-hidden="true">{isMobileDeparturesOpen ? "↑" : "↓"}</span>
-                      </button>
-                    ) : null}
-                  </div>
-                  {hasDeparturesMenu && isMobileDeparturesOpen ? (
-                    <div className={styles.mobileSubmenu} id={mobileDeparturesMenuId}>
-                      {departuresNavigation.map((subitem) => (
+                    <span className={styles.caret} aria-hidden="true" />
+                  </button>
+                  {isMobileCaravansOpen ? (
+                    <div className={styles.sheetDrawer} id={mobileCaravansId}>
+                      <p className={styles.panelLabel}>Choose a caravan</p>
+                      {caravansNavigation.choose.map((entry) => (
                         <Link
-                          className={styles.mobileSubmenuLink}
-                          href={subitem.href}
-                          key={subitem.id}
-                          onClick={() => setIsOpen(false)}
+                          className={styles.panelEntry}
+                          href={entry.href}
+                          key={entry.id}
+                          onClick={closeSheet}
                         >
-                          {subitem.label}
+                          <span className={styles.entryTitle}>{entry.label}</span>
+                          <span className={styles.entryMeta}>{entry.meta}</span>
+                        </Link>
+                      ))}
+                      <p className={styles.panelLabel}>Join a caravan</p>
+                      {caravansNavigation.join.map((entry) => (
+                        <Link
+                          className={styles.panelEntry}
+                          href={entry.href}
+                          key={entry.id}
+                          onClick={closeSheet}
+                        >
+                          <span className={styles.entryTitle}>{entry.label}</span>
+                          <span className={styles.entryMeta}>{entry.meta}</span>
                         </Link>
                       ))}
                     </div>
                   ) : null}
                 </li>
-                );
-              })}
-            </ul>
-            <div
-              className={styles.mobileUtilities}
-              role="group"
-              aria-label="Utility actions"
-            >
+              ) : (
+                <li key={item.id}>
+                  <Link className={styles.sheetLink} href={item.href} onClick={closeSheet}>
+                    {item.label}
+                  </Link>
+                </li>
+              ),
+            )}
+            {utilityNavigation.map((item) => (
+              <li key={item.id}>
+                <Link className={styles.sheetLink} href={item.href} onClick={closeSheet}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+            <li>
               <Link
-                className={styles.mobileUtilityLink}
-                href={utilityAction.href}
-                onClick={() => setIsOpen(false)}
+                className={styles.sheetLink}
+                href={announcementNavigation.signIn.href}
+                onClick={closeSheet}
               >
-                {utilityAction.label}
+                {announcementNavigation.signIn.label}
               </Link>
-            </div>
-          </div>
+            </li>
+          </ul>
         </div>
       ) : null}
-    </nav>
+    </header>
   );
 }

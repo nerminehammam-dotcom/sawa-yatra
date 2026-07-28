@@ -72,7 +72,7 @@ export default function HomePage() {
               </ButtonLink>
               <ButtonLink
                 className={styles.homeHeroSecondaryAction}
-                href="/departures/the-andean-caravan"
+                href="/caravans/andean"
                 surface="deep"
                 variant="secondary"
               >
@@ -81,7 +81,7 @@ export default function HomePage() {
             </div>
             <Link
               className={styles.homeHeroPracticalLink}
-              href="/departures/the-andean-caravan#honest-conditions-heading"
+              href="/caravans/andean#honest-conditions-heading"
             >
               Altitude, physical demands and accommodation
             </Link>
@@ -183,7 +183,7 @@ export default function HomePage() {
           <p>Final question / joining point selector</p>
           <h2 id="final-action-heading">Where will you join us?</h2>
           <div>
-            <Link href="/joining-points">Compare joining points →</Link>
+            <Link href="/caravans/andean-caravan/how-it-works">Compare joining points →</Link>
             <Link href={contactHref("Joining points")}>
               Ask a question ↗
             </Link>

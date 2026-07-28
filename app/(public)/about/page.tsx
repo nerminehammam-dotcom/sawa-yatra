@@ -91,7 +91,7 @@ export default function AboutPage() {
       <section className={styles.action} aria-labelledby="about-action-heading">
         <h2 id="about-action-heading">Begin with the first route.</h2>
         <div>
-          <Link href="/departures/the-andean-caravan">Explore the Andean Caravan →</Link>
+          <Link href="/caravans/andean">Explore the Andean Caravan →</Link>
           <Link href={contactHref()}>
             Ask a question ↗
           </Link>

@@ -27,6 +27,16 @@ const approvedRouteDescriptions = {
     "One annual caravan through Peru, Bolivia and Chile. Join at a designated point and leave when your part of the route is complete.",
   caravans:
     "Explore Sawayatra caravans, beginning with the annual Andean Caravan through Peru, Bolivia and Chile.",
+  "caravans-andean":
+    "Explore the Andean Caravan and its nine connected route sections through Peru, Bolivia and Chile.",
+  "caravans-route-map":
+    "Follow the illustrated Andean Caravan route through Peru, Bolivia and Chile.",
+  "indian-caravan":
+    "The Indian Caravan is in development. Approved route information will be added when it is ready.",
+  "egyptian-caravan":
+    "The Egyptian Caravan is in development. Approved route information will be added when it is ready.",
+  "who-else-is-travelling":
+    "This section will show how each Caravan group is taking shape without naming individual members.",
   "andean-caravan":
     "Follow the complete Andean Caravan route through Peru, Bolivia, the Atacama and the Carretera Austral.",
   "joining-points":
@@ -37,6 +47,20 @@ const approvedRouteDescriptions = {
     "Create your own Sawayatra journey. The Do It Yourself experience is coming later.",
   departures:
     "The Andean Caravan moves through Peru, Bolivia and Chile. Join one of nine consecutive sections, connect several, or travel the complete 71-day route.",
+  "departure-dates":
+    "Browse Sawayatra journeys by departure date when confirmed dates become available.",
+  journeys:
+    "Shorter Sawayatra journeys are in development and will be added when their information is ready.",
+  "create-your-own-journey":
+    "Create your own journey is in development and will open when the structure is ready.",
+  members:
+    "Learn how Sawayatra membership keeps introductions considered and the travelling room small.",
+  "who-we-are":
+    "Meet the thinking behind Sawayatra and the practical principles that shape every journey.",
+  partners:
+    "Sawayatra partner information is being prepared and will be added when it is ready.",
+  "register-interest":
+    "Registration of interest is being prepared and will open when the process is ready.",
   contact:
     "Ask Sawayatra about membership, the Andean Caravan, a journey section or how the club works.",
   journey:
@@ -46,6 +70,19 @@ const approvedRouteDescriptions = {
 export const routeMetadata = ([
   ["home", "/", "Sawayatra | One caravan. One long route."],
   ["caravans", "/caravans", "Caravans | Sawayatra"],
+  ["caravans-andean", "/caravans/andean", "The Andean Caravan | Sawayatra"],
+  [
+    "caravans-route-map",
+    "/caravans/andean/route-map",
+    "Andean Caravan route map | Sawayatra",
+  ],
+  ["indian-caravan", "/caravans/indian", "The Indian Caravan | Sawayatra"],
+  ["egyptian-caravan", "/caravans/egyptian", "The Egyptian Caravan | Sawayatra"],
+  [
+    "who-else-is-travelling",
+    "/caravans/who-else-is-travelling",
+    "Who else is travelling | Sawayatra",
+  ],
   [
     "andean-caravan",
     "/caravans/the-andean-caravan",
@@ -57,10 +94,25 @@ export const routeMetadata = ([
   ["travel-self", "/travel-self", "Meet your Travel Self | Sawayatra"],
   ["do-it-yourself", "/do-it-yourself", "Do It Yourself | Sawayatra"],
   ["departures", "/departures", "Departures | Sawayatra"],
+  ["departure-dates", "/departure-dates", "Browse by departure date | Sawayatra"],
+  ["journeys", "/journeys", "Journeys | Sawayatra"],
+  [
+    "create-your-own-journey",
+    "/create-your-own-journey",
+    "Create your own journey | Sawayatra",
+  ],
   ["journey", "/departures/[slug]", "Journey | Sawayatra"],
   ["membership", "/membership", "Membership | Sawayatra"],
+  ["members", "/members", "Members | Sawayatra"],
   ["about", "/about", "About | Sawayatra"],
+  ["who-we-are", "/who-we-are", "Who we are | Sawayatra"],
+  ["partners", "/partners", "Our partners | Sawayatra"],
   ["contact", "/contact", "Ask a question | Sawayatra"],
+  [
+    "register-interest",
+    "/register-interest",
+    "Register your interest | Sawayatra",
+  ],
   ["sign-in", "/sign-in", "Member access | Sawayatra"],
   ["request-invitation", "/request-invitation", "Request an invitation | Sawayatra"],
   ["privacy", "/privacy", "Privacy | Sawayatra"],
@@ -81,7 +133,17 @@ export const routeMetadata = ([
     id in approvedRouteDescriptions ? "LOCKED" : "PLACEHOLDER",
   canonicalPath: path,
   noIndex:
-    id === "do-it-yourself" || id === "sign-in" || id === "not-found"
+    id === "do-it-yourself" ||
+    id === "sign-in" ||
+    id === "not-found" ||
+    id === "indian-caravan" ||
+    id === "egyptian-caravan" ||
+    id === "who-else-is-travelling" ||
+    id === "departure-dates" ||
+    id === "journeys" ||
+    id === "create-your-own-journey" ||
+    id === "partners" ||
+    id === "register-interest"
       ? true
       : undefined,
   contentStatus: "LOCKED",
@@ -189,7 +251,7 @@ export const homeContent = {
     title: "One journey through the Andes. Nine ways to join it.",
     action: {
       label: "Explore the Andean Caravan",
-      href: "/departures",
+      href: "/caravans/andean",
       style: "secondary",
       contentStatus: "LOCKED",
     },

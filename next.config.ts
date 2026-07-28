@@ -15,14 +15,34 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/caravans",
-        destination: "/departures#full-route-map",
-        permanent: true,
+        source: "/about",
+        destination: "/who-we-are",
+        statusCode: 301,
+      },
+      {
+        source: "/membership",
+        destination: "/members",
+        statusCode: 301,
+      },
+      {
+        source: "/do-it-yourself",
+        destination: "/create-your-own-journey",
+        statusCode: 301,
+      },
+      {
+        source: "/departures",
+        destination: "/caravans/andean",
+        statusCode: 301,
+      },
+      {
+        source: "/departures/the-andean-caravan",
+        destination: "/caravans/andean",
+        statusCode: 301,
       },
       {
         source: "/caravans/the-andean-caravan",
-        destination: "/departures/the-andean-caravan",
-        permanent: true,
+        destination: "/caravans/andean",
+        statusCode: 301,
       },
     ];
   },

@@ -14,66 +14,107 @@ export const primaryNavigation = [
     contentStatus: "LOCKED",
   },
   {
-    id: "departures",
-    label: "Departures",
-    href: "/departures",
+    id: "caravans",
+    label: "Caravans",
+    href: "/caravans",
     contentStatus: "LOCKED",
   },
   {
-    id: "membership",
-    label: "Membership",
-    href: "/membership",
+    id: "journeys",
+    label: "Journeys",
+    href: "/journeys",
     contentStatus: "LOCKED",
   },
   {
-    id: "about",
-    label: "About",
-    href: "/about",
+    id: "create-your-own-journey",
+    label: "Create your own journey",
+    href: "/create-your-own-journey",
+    contentStatus: "LOCKED",
+  },
+  {
+    id: "departure-dates",
+    label: "Departure dates",
+    href: "/departure-dates",
     contentStatus: "LOCKED",
   },
 ] as const satisfies readonly NavigationItem[];
 
 export const utilityNavigation = [
   {
-    id: "sign-in",
-    label: "Sign in",
-    href: "/sign-in",
+    id: "members",
+    label: "Members",
+    href: "/members",
     contentStatus: "LOCKED",
   },
-] as const;
+  {
+    id: "who-we-are",
+    label: "Who we are",
+    href: "/who-we-are",
+    contentStatus: "LOCKED",
+  },
+  {
+    id: "partners",
+    label: "Our partners",
+    href: "/partners",
+    contentStatus: "LOCKED",
+  },
+] as const satisfies readonly NavigationItem[];
 
-export const departuresNavigation = [
-  {
-    id: "andean-caravan",
-    label: "The Andean Caravan",
-    href: "/departures/the-andean-caravan",
+export const announcementNavigation = {
+  message:
+    "The Andean Caravan is open for interest. First departure February 2028.",
+  action: {
+    label: "Register your interest",
+    href: "/register-interest",
   },
-  {
-    id: "all-sections",
-    label: "Browse all nine sections",
-    href: "/departures#all-sections",
+  signIn: {
+    label: "Sign in",
+    href: "/sign-in",
   },
-  {
-    id: "route-map",
-    label: "Full route map",
-    href: "/departures#full-route-map",
-  },
-  {
-    id: "joining-points",
-    label: "Joining & Leaving Points",
-    href: "/joining-points",
-  },
-  {
-    id: "dates",
-    label: "Dates & availability",
-    href: "/departures#dates-availability",
-  },
-  {
-    id: "included",
-    label: "What is included",
-    href: "/departures#what-is-included",
-  },
-] as const;
+} as const;
+
+export const caravansNavigation = {
+  choose: [
+    {
+      id: "andean-caravan",
+      label: "The Andean Caravan",
+      href: "/caravans/andean",
+      meta: "71 days, Lima to Patagonia",
+    },
+    {
+      id: "indian-caravan",
+      label: "The Indian Caravan",
+      href: "/caravans/indian",
+      meta: "Coming soon",
+    },
+    {
+      id: "egyptian-caravan",
+      label: "The Egyptian Caravan",
+      href: "/caravans/egyptian",
+      meta: "In planning",
+    },
+  ],
+  join: [
+    {
+      id: "hop-on-hop-off",
+      label: "Hop on, hop off",
+      href: "/caravans/andean-caravan/how-it-works",
+      meta: "Nine route sections. Join for one, or ride the whole route.",
+    },
+    {
+      id: "route-map",
+      label: "Full route map, dates and availability",
+      href: "/caravans/andean/route-map",
+      meta: "Every route section, every date, and current availability.",
+    },
+    {
+      id: "who-else-is-travelling",
+      label: "See who else is travelling",
+      href: "/caravans/who-else-is-travelling",
+      meta: "How the group is shaping up on each route section.",
+    },
+  ],
+} as const;
 
 export const footerNavigation = [
   ...primaryNavigation,

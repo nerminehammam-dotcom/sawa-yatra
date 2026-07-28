@@ -153,11 +153,11 @@ function JourneyBreadcrumbs({ sectionTitle }: { sectionTitle?: string }) {
     <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
       <Link href="/">Home</Link>
       <span aria-hidden="true">›</span>
-      <Link href="/departures">Departures</Link>
+      <Link href="/caravans/andean">The Andean Caravan</Link>
       <span aria-hidden="true">›</span>
       {sectionTitle ? (
         <>
-          <Link href="/departures/the-andean-caravan">The Andean Caravan</Link>
+          <Link href="/caravans/andean">All route sections</Link>
           <span aria-hidden="true">›</span>
           <span aria-current="page">{sectionTitle}</span>
         </>
@@ -172,9 +172,9 @@ function Wayfinding({ title }: { title: string }) {
   return (
     <Section className={styles.wayfindingSection} ground="cream" aria-label="Journey navigation">
       <Container className={styles.wayfindingLinks}>
-        <Link href="/departures#all-sections">Back to all sections</Link>
-        <Link href="/joining-points">Joining & Leaving Points</Link>
-        <Link href="/departures#full-route-map">Full route map</Link>
+        <Link href="/caravans/andean#all-sections">Back to all sections</Link>
+        <Link href="/caravans/andean-caravan/how-it-works">Joining & Leaving Points</Link>
+        <Link href="/caravans/andean/route-map">Full route map</Link>
         <Link href={contactHref(title)}>
           Ask about this section
         </Link>
