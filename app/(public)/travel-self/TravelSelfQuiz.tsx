@@ -314,6 +314,9 @@ export function TravelSelfQuiz(_legacyProps: { pageContent?: unknown } = {}) {
     setStored(record);
     setUpdating(false);
     setView("result");
+    const shareUrl = new URL(window.location.href);
+    shareUrl.searchParams.set("self", completed.key);
+    window.history.replaceState(null, "", shareUrl);
     window.scrollTo({ top: 0, behavior: "auto" });
   }
 
