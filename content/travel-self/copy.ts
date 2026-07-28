@@ -1,0 +1,93 @@
+export const TRAVEL_SELF_COPY = {
+  title: "Your Travel Self",
+  standfirst: "Sawayatra is a members’ travel club that matches travellers by how they travel — not by age, not by destination. The Travel Self is how that works. Eight short questions about the way you move through a journey and what draws you to a place. Answer them once, and every journey on the site reads differently.",
+  introduction: {
+    heading: "You already know how you travel.",
+    paragraphs: [
+      "You know whether you want the week settled before you leave or open when you arrive. Whether the good part of the day is the first hour or the last one. Whether you come home from a trip refilled by the people in it, or quietly emptied.",
+      "You have probably never had to say any of it out loud. There has been no reason to. Trips are booked alone, or with people who worked it out about you years ago.",
+      "That is what this is for.",
+    ],
+  },
+  asks: {
+    heading: "It asks two things",
+    questions: ["How do you travel?", "What do you travel for?"],
+    note: "What draws you there is only ever shown.",
+  },
+  whatYouGet: {
+    heading: "What you get",
+    paragraphs: [
+      "A Travel Self: a name and a short portrait of how you move through a journey.",
+      "More usefully, it shows where you bend, where you do not, and the moment on a shared trip when you are most likely to feel the difference between you and everyone else.",
+      "It is not a compatibility score.",
+      "No number can tell you whether nine days with a stranger will work, and we would rather say so than pretend.",
+      "Where two ways of travelling differ, we name the difference and explain why it matters.",
+      "Nothing used to make the comparison is hidden from you.",
+    ],
+  },
+  journey: {
+    heading: "What you see on a journey",
+    paragraphs: [
+      "Open a journey and you see two things: how its pace and standard sit against your own, and how well the travellers already on it fit with your way of moving.",
+      "You see where you align and where you would need to agree.",
+      "You are not looking at people. There is no directory here and nobody to scroll through.",
+      "You see the comparison, not the person. Names stay private until interest runs both ways.",
+    ],
+  },
+  boundary: "The Travel Self is not a psychological test. It compares what travellers have said about how and why they travel. It cannot predict whether two people will get along.",
+  before: {
+    heading: "Before you begin",
+    groups: [
+      ["Answer for the way you travel with people you have not travelled with before.", "Not your solo self. Not the version of you on a family holiday."],
+      ["Each question has two ends and no middle.", "That is deliberate. It depends is true of very nearly everyone, and it is the one answer that tells us nothing."],
+      ["You do not need to feel strongly.", "Slightly more true is enough."],
+    ],
+  },
+  begin: "Begin",
+  progress: (step: number) => `Question ${step} of 8`,
+  back: "Back",
+  backToIntroduction: "Back to the introduction",
+  next: "Next",
+  submit: "See your Travel Self",
+  timeTogether: {
+    question: "When you travel with others, how much of the day do you want to spend together?",
+    helper: "This one shapes the group, not the comparison. Nobody is measured against it.",
+  },
+  passions: {
+    question: "What draws you to a place?",
+    helper: "Choose three. These are shown to other members — never scored, never counted against you.",
+    refusal: "Three only. Something has to go.",
+  },
+  followUp: {
+    question: "Which of these would most influence the journey you book?",
+    helper: "This orders what we show you first. It does not change your Travel Self.",
+  },
+  narrowing: [
+    ["All of them still yours.", "Each answer rules some out."],
+    ["Eight remain.", "Half the field, gone on one answer."],
+    ["Four remain.", "Getting close now."],
+    ["Two remain.", "One question decides it."],
+    ["One.", "You will meet it at the end."],
+  ],
+  narrowingSettled: "Your self is settled. The rest is what it is for.",
+  resultEyebrow: "Your Travel Self",
+  passportFields: {
+    essence: "Essence",
+    bring: "What you bring",
+    motivation: "You travel for",
+    comfort: "Comfort",
+    time: "Time together",
+    bend: "You bend on",
+    sting: "You will feel it when",
+  },
+  changeLater: "You can change any of this later.",
+  update: "Update your Travel Self",
+  annual: "You made this a year ago. Travel selves change — with age, with money, and with who you are travelling with.",
+  dismiss: "Dismiss",
+  others: {
+    heading: "The other fifteen",
+    introduction: "Sixteen ways of moving through a journey. You will recognise more than one of them.",
+    ownMarker: "Your Travel Self",
+  },
+  sharePronunciation: "sa · wa · ya · tra",
+} as const;
