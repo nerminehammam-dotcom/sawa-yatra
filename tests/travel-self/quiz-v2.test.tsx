@@ -1,107 +1,96 @@
-import { render, screen, within } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { TravelSelfQuiz } from "@/app/(public)/travel-self/TravelSelfQuiz";
-import {
-  TRAVEL_SELF_MODEL_VERSION,
-  TRAVEL_SELF_QUESTIONS,
-  TRAVEL_SELF_STORAGE_KEY,
-} from "@/content/travel-self/travel-self-model";
+import { TRAVEL_SELF_STORAGE_KEY, resetTravelSelfMemoryForTests } from "@/lib/travel-self/storage";
 
-const pageContent = {
-  title: "Meet your Travel Self",
-  saveNotice: "Draft save notice",
-  requestAction: {
-    label: "Request an invitation",
-    href: "/request-invitation" as const,
-    style: "primary" as const,
-    contentStatus: "LOCKED" as const,
-  },
-  signInAction: {
-    label: "Sign in",
-    href: "/sign-in" as const,
-    style: "secondary" as const,
-    contentStatus: "LOCKED" as const,
-  },
-  contentStatus: "DRAFT" as const,
-};
+async function completeTravelSelf() {
+  const user = userEvent.setup();
+  await user.click(screen.getByRole("button", { name: "Begin" }));
 
-function completeAnswers() {
-  return Object.fromEntries(
-    TRAVEL_SELF_QUESTIONS.map((question) => [
-      question.id,
-      question.options[0].id,
-    ]),
-  );
+  for (let step = 0; step < 5; step += 1) {
+    const radios = screen.getAllByRole("radio");
+    radios[0]?.focus();
+    await user.keyboard("{ArrowRight}");
+    await user.click(screen.getByRole("button", { name: "Next" }));
+  }
+
+  await user.click(screen.getByRole("radio", { name: "Some of it" }));
+  await user.click(screen.getByRole("button", { name: "Next" }));
+
+  await user.click(screen.getByRole("button", { name: /^Food/iu }));
+  await user.click(screen.getByRole("button", { name: /^Culture/iu }));
+  await user.click(screen.getByRole("button", { name: /^Water/iu }));
+  await user.click(screen.getByRole("button", { name: "Next" }));
+
+  await user.click(screen.getByRole("radio", { name: "Food" }));
+  await user.click(screen.getByRole("button", { name: "See your Travel Self" }));
 }
 
-describe("Travel Self v2 quiz", () => {
+describe("Travel Self v2 flow", () => {
   beforeEach(() => {
-    window.sessionStorage.clear();
-    vi.spyOn(console, "info").mockImplementation(() => undefined);
+    const values = new Map<string, string>();
+    Object.defineProperty(window, "localStorage", {
+      configurable: true,
+      value: {
+        getItem: (key: string) => values.get(key) ?? null,
+        setItem: (key: string, value: string) => values.set(key, value),
+        removeItem: (key: string) => values.delete(key),
+        clear: () => values.clear(),
+      },
+    });
+    resetTravelSelfMemoryForTests();
+    vi.stubGlobal("scrollTo", vi.fn());
+    Element.prototype.scrollIntoView = vi.fn();
   });
 
-  it("does not expose editorial labels to an ordinary visitor", () => {
-    render(<TravelSelfQuiz pageContent={pageContent} />);
-    expect(screen.queryByText(/draft model and copy/iu)).not.toBeInTheDocument();
-  });
-
-  it("keeps passion importance explicit and independent of tap order", async () => {
-    window.sessionStorage.setItem(
-      TRAVEL_SELF_STORAGE_KEY,
-      JSON.stringify({
-        version: TRAVEL_SELF_MODEL_VERSION,
-        stage: "passions",
-        passionStep: "choose",
-        questionIndex: TRAVEL_SELF_QUESTIONS.length - 1,
-        answers: completeAnswers(),
-        selectedPassions: [],
-        primary: null,
-        secondary: null,
-      }),
-    );
+  it("places the settled framing directly before question one", async () => {
     const user = userEvent.setup();
-    render(<TravelSelfQuiz pageContent={pageContent} />);
+    render(<TravelSelfQuiz />);
+    expect(await screen.findByRole("heading", { name: "Your Travel Self" })).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Begin" }));
+    const before = screen.getByRole("heading", { name: "Before you begin" }).closest("section");
+    expect(before?.nextElementSibling).toHaveAttribute("aria-labelledby", "question-heading");
+    expect(screen.getByText("Question 1 of 8")).toBeInTheDocument();
+  });
 
-    await screen.findByRole("heading", {
-      name: "Choose up to four reasons you travel.",
-    });
-    expect(screen.getByText("Step 17 of 17")).toBeInTheDocument();
-    await user.click(screen.getByRole("checkbox", { name: /nature/iu }));
-    await user.click(screen.getByRole("checkbox", { name: /food/iu }));
+  it("supports keyboard sliders, reveals without an update control, and returns to the passport", async () => {
+    const first = render(<TravelSelfQuiz />);
+    await screen.findByRole("heading", { name: "Your Travel Self" });
+    await completeTravelSelf();
 
-    await user.click(screen.getByRole("button", { name: "Choose priorities" }));
-    await screen.findByRole("heading", { name: "Which passion leads?" });
+    expect(await screen.findByRole("heading", { name: "The Seeker" })).toBeInTheDocument();
+    expect(screen.getAllByText("unhurried · unplanned · quiet · dawn-led").length).toBeGreaterThan(0);
+    expect(screen.queryByRole("button", { name: "Update your Travel Self" })).not.toBeInTheDocument();
 
-    const continueButton = screen.getByRole("button", {
-      name: "Read my Travel Self",
-    });
-    expect(continueButton).toBeDisabled();
+    const raw = window.localStorage.getItem(TRAVEL_SELF_STORAGE_KEY);
+    expect(raw).not.toContain("The Seeker");
+    expect(raw).not.toContain("unhurried");
 
-    const primaryGroup = screen.getByRole("group", {
-      name: "Which passion leads?",
-    });
-    await user.click(within(primaryGroup).getByRole("radio", { name: "Food" }));
+    first.unmount();
+    render(<TravelSelfQuiz />);
+    expect(await screen.findByRole("button", { name: "Update your Travel Self" })).toBeInTheDocument();
+    const user = userEvent.setup();
+    await user.click(screen.getByRole("button", { name: "Update your Travel Self" }));
+    expect(screen.getByRole("radio", { name: "Clearly Slow" })).toBeChecked();
+  });
 
-    expect(continueButton).toBeEnabled();
-    expect(
-      within(primaryGroup).getByRole("radio", { name: "Food" }),
-    ).toBeChecked();
-    expect(
-      within(
-        screen.getByLabelText("Selected passion roles"),
-      ).getByText("Nature", { selector: "strong" }),
-    ).toBeInTheDocument();
-
-    await user.click(screen.getByRole("button", { name: "Back" }));
-    expect(screen.getByRole("checkbox", { name: /nature/iu })).toBeChecked();
-    expect(screen.getByRole("checkbox", { name: /food/iu })).toBeChecked();
-    await user.click(screen.getByRole("button", { name: "Choose priorities" }));
-    expect(
-      within(
-        screen.getByRole("group", { name: "Which passion leads?" }),
-      ).getByRole("radio", { name: "Food" }),
-    ).toBeChecked();
+  it("refuses a fourth passion with the written line", async () => {
+    const user = userEvent.setup();
+    render(<TravelSelfQuiz />);
+    await screen.findByRole("heading", { name: "Your Travel Self" });
+    await user.click(screen.getByRole("button", { name: "Begin" }));
+    for (let step = 0; step < 5; step += 1) {
+      await user.click(screen.getAllByRole("radio")[0]!);
+      await user.click(screen.getByRole("button", { name: "Next" }));
+    }
+    await user.click(screen.getByRole("radio", { name: "Some of it" }));
+    await user.click(screen.getByRole("button", { name: "Next" }));
+    for (const name of [/^Food/iu, /^Culture/iu, /^Water/iu]) {
+      await user.click(screen.getByRole("button", { name }));
+    }
+    await user.click(screen.getByRole("button", { name: /^Nature/iu }));
+    expect(screen.getByText("Three only. Something has to go.")).toBeInTheDocument();
   });
 });
