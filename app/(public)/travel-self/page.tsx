@@ -22,7 +22,7 @@ export async function generateMetadata({
 
   const family = FAMILIES[rawKey];
   const image = {
-    url: absoluteUrl(`/travel-self/share/${rawKey}/opengraph-image`),
+    url: absoluteUrl(`/travel-self/share/${rawKey}`),
     width: 1200,
     height: 630,
     alt: `${family.name} — ${family.readout}`,

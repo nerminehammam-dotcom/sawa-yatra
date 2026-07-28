@@ -3,18 +3,20 @@ import { ImageResponse } from "next/og";
 import { TRAVEL_SELF_COPY } from "@/content/travel-self/copy";
 import { FAMILIES, type FamilyKey } from "@/content/travel-self/families";
 
-export const size = { width: 1200, height: 630 };
-export const contentType = "image/png";
+const size = { width: 1200, height: 630 };
 
 function familyFor(value: string) {
   return FAMILIES[value as FamilyKey] ?? FAMILIES.LRLR;
 }
 
-export default async function TravelSelfOpenGraphImage({
+export async function GET(
+  _request: Request,
+  {
   params,
-}: {
-  params: Promise<{ key: string }>;
-}) {
+  }: {
+    params: Promise<{ key: string }>;
+  },
+) {
   const { key } = await params;
   const family = familyFor(key);
 
@@ -29,7 +31,7 @@ export default async function TravelSelfOpenGraphImage({
           alignItems: "center",
           justifyContent: "center",
           padding: "72px",
-          color: "#E7E1D6",
+          color: "#27231F",
           background: "#F05A2A",
           textAlign: "center",
         }}

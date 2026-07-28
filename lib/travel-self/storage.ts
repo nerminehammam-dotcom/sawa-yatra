@@ -47,7 +47,8 @@ export function parseStoredTravelSelf(raw: string | null): StoredTravelSelf | nu
     const value: unknown = JSON.parse(raw);
     if (!isRecord(value) || value.version !== TRAVEL_SELF_STORAGE_VERSION) return null;
     if (!isRecord(value.positions)) return null;
-    if (!AXIS_IDS.every((axis) => isAxisPosition(value.positions[axis]))) return null;
+    const storedPositions = value.positions;
+    if (!AXIS_IDS.every((axis) => isAxisPosition(storedPositions[axis]))) return null;
     if (!TIME_TOGETHER_OPTIONS.includes(value.timeTogether as TimeTogether)) return null;
     if (!Array.isArray(value.passions) || value.passions.length !== 3) return null;
     if (!value.passions.every(isPassionId) || new Set(value.passions).size !== 3) return null;

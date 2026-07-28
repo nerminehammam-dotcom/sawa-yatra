@@ -6,7 +6,6 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import {
   AXES,
-  AXIS_BY_ID,
   POSITION_OPACITY,
   POSITION_STRENGTH,
   SLIDER_HELPER,
@@ -217,7 +216,7 @@ function BeforeYouBegin() {
   );
 }
 
-export function TravelSelfQuiz(_legacyProps: { pageContent?: unknown } = {}) {
+export function TravelSelfQuiz() {
   const [view, setView] = useState<View>("loading");
   const [step, setStep] = useState(0);
   const [draft, setDraft] = useState<DraftState>(EMPTY_DRAFT);
@@ -228,19 +227,22 @@ export function TravelSelfQuiz(_legacyProps: { pageContent?: unknown } = {}) {
   const resultHeadingRef = useRef<HTMLHeadingElement>(null);
 
   useEffect(() => {
-    const record = readStoredTravelSelf(storageForWindow());
-    if (record) {
-      setStored(record);
-      setDraft({
-        positions: record.positions,
-        timeTogether: record.timeTogether,
-        passions: [...record.passions],
-        lead: record.lead,
-      });
-      setView("passport");
-    } else {
-      setView("intro");
-    }
+    const timer = window.setTimeout(() => {
+      const record = readStoredTravelSelf(storageForWindow());
+      if (record) {
+        setStored(record);
+        setDraft({
+          positions: record.positions,
+          timeTogether: record.timeTogether,
+          passions: [...record.passions],
+          lead: record.lead,
+        });
+        setView("passport");
+      } else {
+        setView("intro");
+      }
+    }, 0);
+    return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -399,7 +401,7 @@ export function TravelSelfQuiz(_legacyProps: { pageContent?: unknown } = {}) {
               <section className={styles.question} aria-labelledby="question-heading">
                 <h2 ref={headingRef} id="question-heading" tabIndex={-1}>{heading}</h2>
                 {axis ? (
-                  <InkSlider axis={axis} value={draft.positions[axis.id]} onChange={(position) => updatePosition(axis.id, position)} />
+                  <InkSlider key={axis.id} axis={axis} value={draft.positions[axis.id]} onChange={(position) => updatePosition(axis.id, position)} />
                 ) : step === 5 ? (
                   <>
                     <p className={styles.questionHelper}>{COPY.timeTogether.helper}</p>
