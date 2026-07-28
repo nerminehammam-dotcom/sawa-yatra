@@ -5,7 +5,7 @@ import nextConfig from "@/next.config";
 interface RedirectRule {
   readonly source: string;
   readonly destination: string;
-  readonly permanent: boolean;
+  readonly statusCode: number;
 }
 
 describe("legacy Caravan redirects", () => {
@@ -13,21 +13,33 @@ describe("legacy Caravan redirects", () => {
     expect(nextConfig.allowedDevOrigins).toContain("127.0.0.1");
   });
 
-  it("redirects only duplicate public journey routes to direct Departures equivalents", async () => {
+  it("preserves old public addresses in the new navigation structure", async () => {
     const redirects = await (
       nextConfig as { redirects: () => Promise<readonly RedirectRule[]> }
     ).redirects();
 
     expect(redirects).toEqual([
+      { source: "/about", destination: "/who-we-are", statusCode: 301 },
+      { source: "/membership", destination: "/members", statusCode: 301 },
       {
-        source: "/caravans",
-        destination: "/departures#full-route-map",
-        permanent: true,
+        source: "/do-it-yourself",
+        destination: "/create-your-own-journey",
+        statusCode: 301,
+      },
+      {
+        source: "/departures",
+        destination: "/caravans/andean",
+        statusCode: 301,
+      },
+      {
+        source: "/departures/the-andean-caravan",
+        destination: "/caravans/andean",
+        statusCode: 301,
       },
       {
         source: "/caravans/the-andean-caravan",
-        destination: "/departures/the-andean-caravan",
-        permanent: true,
+        destination: "/caravans/andean",
+        statusCode: 301,
       },
     ]);
 

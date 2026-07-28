@@ -61,7 +61,7 @@ export default function HowItWorksPage() {
             </p>
             <ButtonLink
               className={styles.featuredAction}
-              href="/departures/the-andean-caravan"
+              href="/caravans/andean"
               surface="deep"
             >
               Explore the Andean Caravan <span aria-hidden="true">→</span>
@@ -86,7 +86,7 @@ export default function HowItWorksPage() {
                 Available now: the Andean Caravan, with nine consecutive
                 sections and one complete route.
               </p>
-              <ButtonLink href="/departures" surface="deep">
+              <ButtonLink href="/caravans/andean" surface="deep">
                 Browse available journeys <span aria-hidden="true">→</span>
               </ButtonLink>
             </div>

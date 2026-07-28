@@ -134,7 +134,7 @@ export default function HopOnHopOffPage() {
           <h3>One route, two propositions.</h3>
           <p><strong>The Mirror</strong> runs January–March, when water erases the Salar’s horizon.</p>
           <p><strong>The White Desert</strong> runs May–October, with dry crust and fuller access.</p>
-          <Link href="/departures">Browse standalone journeys →</Link>
+          <Link href="/journeys">Browse standalone journeys →</Link>
         </div>
       </section>
 

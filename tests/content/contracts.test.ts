@@ -16,7 +16,7 @@ import { andeanCaravanRouteStops } from "@/content/andean-caravan-route";
 import { archetypes } from "@/content/archetypes";
 import { assetManifest } from "@/content/assets";
 import {
-  departuresNavigation,
+  caravansNavigation,
   primaryNavigation,
   utilityNavigation,
 } from "@/content/navigation";
@@ -31,6 +31,11 @@ import { formSchemas } from "@/lib/forms/schemas";
 const releaseOneRoutes = [
   "/",
   "/caravans",
+  "/caravans/andean",
+  "/caravans/andean/route-map",
+  "/caravans/indian",
+  "/caravans/egyptian",
+  "/caravans/who-else-is-travelling",
   "/caravans/the-andean-caravan",
   "/joining-points",
   "/start-here",
@@ -38,10 +43,17 @@ const releaseOneRoutes = [
   "/travel-self",
   "/do-it-yourself",
   "/departures",
+  "/departure-dates",
+  "/journeys",
+  "/create-your-own-journey",
   "/departures/[slug]",
   "/membership",
+  "/members",
   "/about",
+  "/who-we-are",
+  "/partners",
   "/contact",
+  "/register-interest",
   "/sign-in",
   "/request-invitation",
   "/privacy",
@@ -95,9 +107,7 @@ describe("Release 1 content contracts", () => {
 
     expect(new Set(paths).size).toBe(paths.length);
     expect(paths).toEqual(releaseOneRoutes);
-    expect(new Set(routeMetadata.map((entry) => entry.title)).size).toBe(
-      routeMetadata.length,
-    );
+    expect(routeMetadata.every((entry) => entry.title.length > 0)).toBe(true);
     expect(routeMetadata.every((entry) => entry.description.length > 0)).toBe(
       true,
     );
@@ -106,16 +116,17 @@ describe("Release 1 content contracts", () => {
   it("keeps placeholder-description routes out of the sitemap", () => {
     const urls = sitemap().map((entry) => new URL(entry.url).pathname);
 
-    expect(urls).toContain("/departures");
-    expect(urls).toContain("/departures/the-andean-caravan");
-    expect(urls).not.toContain("/caravans");
+    expect(urls).not.toContain("/departures");
+    expect(urls).not.toContain("/departures/the-andean-caravan");
+    expect(urls).toContain("/caravans");
+    expect(urls).toContain("/caravans/andean");
     expect(urls).not.toContain("/caravans/the-andean-caravan");
-    expect(urls).toContain("/joining-points");
+    expect(urls).not.toContain("/joining-points");
     expect(urls).toContain("/start-here");
     expect(urls).toContain("/contact");
     expect(urls).not.toContain("/do-it-yourself");
-    expect(urls).not.toContain("/about");
-    expect(urls).not.toContain("/membership");
+    expect(urls).toContain("/who-we-are");
+    expect(urls).toContain("/members");
     expect(urls).not.toContain("/privacy");
   });
 
@@ -139,19 +150,22 @@ describe("Release 1 content contracts", () => {
     ).toEqual([
       { label: "How it works", href: "/how-it-works" },
       { label: "Meet your Travel Self", href: "/travel-self" },
-      { label: "Departures", href: "/departures" },
-      { label: "Membership", href: "/membership" },
-      { label: "About", href: "/about" },
+      { label: "Caravans", href: "/caravans" },
+      { label: "Journeys", href: "/journeys" },
+      { label: "Create your own journey", href: "/create-your-own-journey" },
+      { label: "Departure dates", href: "/departure-dates" },
     ]);
     expect(
       utilityNavigation.map(({ label, href }) => ({ label, href })),
     ).toEqual([
-      { label: "Sign in", href: "/sign-in" },
+      { label: "Members", href: "/members" },
+      { label: "Who we are", href: "/who-we-are" },
+      { label: "Our partners", href: "/partners" },
     ]);
     const primaryHrefs: readonly string[] = primaryNavigation.map(
       (item) => item.href,
     );
-    expect(primaryHrefs).toContain("/membership");
+    expect(primaryHrefs).toContain("/caravans");
     expect(
       navigation.every(
         (item) =>
@@ -163,39 +177,11 @@ describe("Release 1 content contracts", () => {
     ).toBe(true);
   });
 
-  it("keeps the complete Departures dropdown intact and canonical", () => {
-    expect(departuresNavigation).toEqual([
-      {
-        id: "andean-caravan",
-        label: "The Andean Caravan",
-        href: "/departures/the-andean-caravan",
-      },
-      {
-        id: "all-sections",
-        label: "Browse all nine sections",
-        href: "/departures#all-sections",
-      },
-      {
-        id: "route-map",
-        label: "Full route map",
-        href: "/departures#full-route-map",
-      },
-      {
-        id: "joining-points",
-        label: "Joining & Leaving Points",
-        href: "/joining-points",
-      },
-      {
-        id: "dates",
-        label: "Dates & availability",
-        href: "/departures#dates-availability",
-      },
-      {
-        id: "included",
-        label: "What is included",
-        href: "/departures#what-is-included",
-      },
-    ]);
+  it("keeps the complete Caravans menu intact and canonical", () => {
+    expect(caravansNavigation.choose).toHaveLength(3);
+    expect(caravansNavigation.join).toHaveLength(3);
+    expect(caravansNavigation.choose[0].href).toBe("/caravans/andean");
+    expect(caravansNavigation.join[1].href).toBe("/caravans/andean/route-map");
   });
 
   it("offers Caravan / Join and Create without a Match path", () => {

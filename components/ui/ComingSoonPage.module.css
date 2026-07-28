@@ -1,0 +1,145 @@
+.page {
+  min-height: 70dvh;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.wrap {
+  width: min(100%, calc(45rem + (2 * var(--page-gutter))));
+  margin: 0 auto;
+  padding: clamp(4.5rem, 10vw, 7.5rem) var(--page-gutter) clamp(5.5rem, 12vw, 8.75rem);
+}
+
+.label {
+  margin: 0 0 1.375rem;
+  color: var(--ink);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.wrap h1 {
+  max-width: 12ch;
+  margin: 0 0 1.625rem;
+  font-size: clamp(3rem, 6vw, 4.75rem);
+  line-height: 1.05;
+  letter-spacing: -0.012em;
+}
+
+.lede {
+  max-width: 56ch;
+  margin: 0 0 2.75rem;
+  font-size: clamp(1.125rem, 1.6vw, 1.25rem);
+  line-height: 1.55;
+}
+
+.rule {
+  margin: 0 0 2.25rem;
+  border: 0;
+  border-top: 1px solid var(--ink);
+  opacity: 0.34;
+}
+
+.notify {
+  margin: 0 0 3rem;
+}
+
+.notify label {
+  display: block;
+  margin-bottom: 0.625rem;
+  font-size: 1.0625rem;
+}
+
+.notifyRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.notify input {
+  min-width: 0;
+  min-height: 56px;
+  flex: 1 1 17.5rem;
+  padding: 0.875rem 1rem;
+  color: var(--ink);
+  font-size: 1.125rem;
+  background: color-mix(in srgb, var(--paper) 86%, var(--ink));
+  border: 1px solid var(--ink);
+  border-radius: 0;
+}
+
+.notify input::placeholder {
+  color: var(--ink);
+  opacity: 0.68;
+}
+
+.notify button {
+  min-height: 56px;
+  padding: 0.875rem 1.875rem;
+  color: var(--paper);
+  font-size: 1.0625rem;
+  white-space: nowrap;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 0;
+}
+
+.notify button:hover {
+  color: var(--ink);
+  background: var(--signal);
+}
+
+.formNote {
+  margin-top: 0.75rem;
+  font-size: 1rem;
+}
+
+.elsewhere > p {
+  margin: 0 0 1rem;
+  font-size: 1.0625rem;
+}
+
+.elsewhere ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.elsewhere li {
+  border-top: 1px solid color-mix(in srgb, var(--ink) 34%, transparent);
+}
+
+.elsewhere a {
+  display: block;
+  min-height: 64px;
+  padding: 1.125rem 0;
+  color: var(--signal-text);
+  font-size: 1.1875rem;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.elsewhere a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.elsewhere span {
+  display: block;
+  margin-top: 0.125rem;
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .wrap {
+    padding-block: 4.5rem 5.625rem;
+  }
+
+  .notify button {
+    width: 100%;
+  }
+}

@@ -22,7 +22,7 @@ describe("public product language", () => {
     ).toBeVisible();
     expect(
       screen.getByRole("link", { name: "Browse available journeys" }),
-    ).toHaveAttribute("href", "/departures");
+    ).toHaveAttribute("href", "/caravans/andean");
   });
 
   it("marks Create Your Own and member-created journeys as future pathways", () => {
@@ -54,6 +54,6 @@ describe("public product language", () => {
     ).toBeVisible();
     expect(
       screen.getByRole("link", { name: "Explore the Andean Caravan →" }),
-    ).toHaveAttribute("href", "/departures/the-andean-caravan");
+    ).toHaveAttribute("href", "/caravans/andean");
   });
 });

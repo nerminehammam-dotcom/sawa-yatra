@@ -3,14 +3,15 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { SiteNavigation } from "@/components/brand/SiteNavigation";
-import { departuresNavigation } from "@/content/navigation";
+import { caravansNavigation } from "@/content/navigation";
 
 vi.mock("next/navigation", () => ({
-  usePathname: () => "/departures",
+  usePathname: () => "/caravans/andean",
 }));
 
-describe("SiteNavigation Departures menu", () => {
+describe("SiteNavigation Caravans menu", () => {
   beforeEach(() => {
+    sessionStorage.clear();
     vi.stubGlobal(
       "matchMedia",
       vi.fn().mockImplementation((query: string) => ({
@@ -26,67 +27,77 @@ describe("SiteNavigation Departures menu", () => {
     );
   });
 
-  it("keeps Sign in in the separate utility position", () => {
+  it("keeps sign in in the announcement band and club pages in the brand row", () => {
     render(<SiteNavigation />);
 
     expect(screen.getByRole("link", { name: "Sign in" })).toHaveAttribute(
       "href",
       "/sign-in",
     );
-    const primary = screen.getByRole("list", {
-      name: "Primary navigation links",
-    });
+    const clubPages = screen.getByRole("navigation", { name: "Club pages" });
     expect(
-      within(primary).queryByRole("link", { name: "Sign in" }),
-    ).not.toBeInTheDocument();
+      within(clubPages).getAllByRole("link").map((link) => link.textContent),
+    ).toEqual(["Members", "Who we are", "Our partners"]);
   });
 
-  it("keeps every desktop dropdown item available in its approved order", async () => {
+  it("opens the complete desktop Caravans panel on click", async () => {
     const user = userEvent.setup();
     render(<SiteNavigation />);
 
-    const toggle = screen.getByRole("button", {
-      name: "Toggle Departures menu",
-    });
+    const toggle = within(
+      screen.getByRole("navigation", { name: "Primary" }),
+    ).getByRole("button", { name: "Caravans" });
     expect(toggle).toHaveAttribute("aria-expanded", "false");
 
     await user.click(toggle);
 
     expect(toggle).toHaveAttribute("aria-expanded", "true");
-    const menu = document.getElementById(toggle.getAttribute("aria-controls")!);
-    expect(menu).toBeInTheDocument();
-
-    const links = within(menu!).getAllByRole("link");
-    expect(links).toHaveLength(departuresNavigation.length);
+    const panel = document.getElementById(toggle.getAttribute("aria-controls")!);
+    const expected = [
+      ...caravansNavigation.choose,
+      ...caravansNavigation.join,
+    ].map((item) => ({ label: item.label, href: item.href }));
     expect(
-      links.map((link) => ({
-        label: link.textContent,
+      within(panel!).getAllByRole("link").map((link) => ({
+        label: link.querySelector("span")?.textContent,
         href: link.getAttribute("href"),
       })),
-    ).toEqual(
-      departuresNavigation.map((item) => ({
-        label: item.label,
-        href: item.href,
-      })),
-    );
+    ).toEqual(expected);
   });
 
-  it("keeps the same complete dropdown inside the mobile menu", async () => {
+  it("opens from ArrowDown, focuses the first destination, and closes on Escape", async () => {
+    const user = userEvent.setup();
+    render(<SiteNavigation />);
+    const toggle = within(
+      screen.getByRole("navigation", { name: "Primary" }),
+    ).getByRole("button", { name: "Caravans" });
+
+    toggle.focus();
+    await user.keyboard("{ArrowDown}");
+    await new Promise((resolve) => requestAnimationFrame(resolve));
+    expect(screen.getByRole("link", { name: /The Andean Caravan/u })).toHaveFocus();
+
+    await user.keyboard("{Escape}");
+    expect(toggle).toHaveAttribute("aria-expanded", "false");
+    expect(toggle).toHaveFocus();
+  });
+
+  it("keeps the complete Caravans panel in the mobile sheet", async () => {
     const user = userEvent.setup();
     render(<SiteNavigation />);
 
     await user.click(screen.getByRole("button", { name: "Menu" }));
-    const drawer = screen.getByRole("dialog", { name: "Site menu" });
-    const toggle = within(drawer).getByRole("button", {
-      name: "Toggle Departures menu",
-    });
+    const sheet = screen.getByRole("dialog", { name: "Site menu" });
+    await user.click(within(sheet).getByRole("button", { name: "Caravans" }));
 
-    await user.click(toggle);
-
-    const menu = document.getElementById(toggle.getAttribute("aria-controls")!);
-    const links = within(menu!).getAllByRole("link");
-    expect(links.map((link) => link.textContent)).toEqual(
-      departuresNavigation.map((item) => item.label),
-    );
+    for (const item of [
+      ...caravansNavigation.choose,
+      ...caravansNavigation.join,
+    ]) {
+      expect(within(sheet).getByRole("link", { name: new RegExp(item.label, "u") })).toHaveAttribute(
+        "href",
+        item.href,
+      );
+    }
   });
 });

@@ -99,7 +99,7 @@ export const systemPageContent = {
       returnHomeAction,
       {
         label: "Browse departures",
-        href: "/departures",
+        href: "/caravans/andean",
         style: "secondary",
         contentStatus: "LOCKED",
       },
