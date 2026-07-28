@@ -146,15 +146,15 @@
 .journeyFacts dt {
   margin-bottom: var(--space-1);
   color: var(--pink);
-  font-size: 0.68rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .journeyFacts dd {
   margin: 0;
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1.4;
 }
 

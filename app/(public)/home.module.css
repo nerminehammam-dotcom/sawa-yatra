@@ -12,9 +12,9 @@
 
 .homeHero {
   position: relative;
+  display: grid;
   width: 100vw;
-  height: 100dvh;
-  min-height: 100dvh;
+  min-height: calc(100svh - var(--site-header-height, 0px));
   overflow: hidden;
   color: var(--hero-cream);
   background: var(--hero-ink);
@@ -40,11 +40,12 @@
 }
 
 .homeHeroCopy {
-  position: absolute;
+  position: relative;
   z-index: 3;
-  right: 6vw;
-  bottom: 8vh;
-  width: min(620px, 90vw);
+  width: min(720px, 88vw);
+  margin: clamp(2.5rem, 7svh, 5rem) 6vw;
+  align-self: end;
+  justify-self: end;
   text-align: right;
 }
 
@@ -61,15 +62,76 @@
   text-wrap: balance;
 }
 
-.homeHeroCopy p {
+.homeHeroTagline,
+.homeHeroDefinition {
   max-width: 620px;
-  margin-top: 1.25rem;
   margin-left: auto;
   color: rgba(246, 238, 220, 0.92);
   font-family: "General Sans", "Inter", system-ui, sans-serif;
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
   font-weight: 400;
   line-height: 1.5;
+}
+
+.homeHeroTagline {
+  margin-top: 1rem;
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
+}
+
+.homeHeroDefinition {
+  max-width: 58ch;
+  margin-top: 0.75rem;
+  font-size: clamp(1rem, 1.15vw, 1.125rem);
+}
+
+.homeHeroActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+
+a.homeHeroPrimaryAction,
+a.homeHeroPrimaryAction:visited {
+  color: var(--hero-ink);
+  white-space: nowrap;
+  background: var(--signal);
+  border-color: var(--signal);
+}
+
+a.homeHeroPrimaryAction:hover {
+  color: var(--hero-cream);
+  background: var(--hero-ink);
+  border-color: var(--hero-cream);
+}
+
+a.homeHeroSecondaryAction,
+a.homeHeroSecondaryAction:visited {
+  color: var(--hero-cream);
+  white-space: nowrap;
+  background: var(--hero-ink);
+  border-color: var(--hero-cream);
+}
+
+a.homeHeroSecondaryAction:hover {
+  color: var(--hero-ink);
+  background: var(--hero-cream);
+  border-color: var(--hero-cream);
+}
+
+.homeHeroPracticalLink,
+.homeHeroPracticalLink:visited {
+  display: inline-flex;
+  min-height: var(--touch-min);
+  align-items: center;
+  margin-top: var(--space-3);
+  color: var(--hero-cream);
+  font-family: "General Sans", "Inter", system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
 }
 
 .how,
@@ -360,19 +422,37 @@
 
 @media (max-width: 639px) {
   .homeHeroCopy {
-    right: 6vw;
-    bottom: 12vh;
-    width: 90vw;
+    width: calc(100vw - (2 * var(--page-gutter)));
+    margin: clamp(2rem, 5svh, 3rem) var(--page-gutter);
   }
 
   .homeHeroCopy h1 {
-    font-size: clamp(2.6rem, 12vw, 4.2rem);
+    font-size: clamp(2.6rem, 11.5vw, 4rem);
     line-height: 1.05;
   }
 
-  .homeHeroCopy p {
+  .homeHeroTagline,
+  .homeHeroDefinition {
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.42;
+  }
+
+  .homeHeroActions {
+    display: grid;
+    justify-content: stretch;
+    gap: var(--space-2);
+    margin-top: var(--space-5);
+  }
+
+  a.homeHeroPrimaryAction,
+  a.homeHeroSecondaryAction {
+    width: 100%;
+    white-space: normal;
+  }
+
+  .homeHeroPracticalLink {
+    justify-content: flex-end;
+    margin-top: var(--space-2);
   }
 
   .howSteps li {

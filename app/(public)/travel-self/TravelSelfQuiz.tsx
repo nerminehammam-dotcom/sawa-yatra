@@ -29,8 +29,10 @@ import {
   readTravelSelfSession,
   writeTravelSelfSession,
   type StoredTravelSelfState,
+  type TravelSelfPassionStep,
   type TravelSelfStage,
 } from "@/lib/travel-self-session";
+import { contactHref } from "@/lib/contact";
 import type { CallToAction } from "@/lib/types";
 
 import styles from "./travel-self.module.css";
@@ -143,6 +145,8 @@ export function TravelSelfQuiz({
   showEditorialStatus = false,
 }: TravelSelfQuizProps) {
   const [stage, setStage] = useState<TravelSelfStage>("intro");
+  const [passionStep, setPassionStep] =
+    useState<TravelSelfPassionStep>("choose");
   const [questionIndex, setQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [selectedPassions, setSelectedPassions] = useState<PassionId[]>([]);
@@ -191,6 +195,7 @@ export function TravelSelfQuiz({
         const stored = readTravelSelfSession(window.sessionStorage);
         if (stored) {
           setStage(stored.stage);
+          setPassionStep(stored.passionStep);
           setQuestionIndex(stored.questionIndex);
           setAnswers(stored.answers);
           setSelectedPassions(stored.selectedPassions);
@@ -211,6 +216,7 @@ export function TravelSelfQuiz({
     const stored: StoredTravelSelfState = {
       version: TRAVEL_SELF_MODEL_VERSION,
       stage,
+      passionStep,
       questionIndex,
       answers,
       selectedPassions,
@@ -226,6 +232,7 @@ export function TravelSelfQuiz({
   }, [
     answers,
     primary,
+    passionStep,
     questionIndex,
     secondary,
     selectedPassions,
@@ -258,10 +265,13 @@ export function TravelSelfQuiz({
         return;
       }
 
+      screenHeadingRef.current?.closest("section")?.scrollIntoView?.({
+        block: "start",
+      });
       screenHeadingRef.current?.focus();
     });
     return () => window.cancelAnimationFrame(focusFrame);
-  }, [questionIndex, stage]);
+  }, [passionStep, questionIndex, stage]);
 
   useEffect(() => {
     if (stage === "question" && currentQuestion) {
@@ -303,6 +313,7 @@ export function TravelSelfQuiz({
     }
 
     setAnswers({});
+    setPassionStep("choose");
     setSelectedPassions([]);
     setPrimary(null);
     setSecondary(null);
@@ -347,6 +358,7 @@ export function TravelSelfQuiz({
       return;
     }
 
+    setPassionStep("choose");
     setStage("passions");
   }
 
@@ -432,6 +444,7 @@ export function TravelSelfQuiz({
   function editPassions() {
     focusReturnTargetRef.current = null;
     setReturnToReveal(true);
+    setPassionStep("choose");
     setStage("passions");
   }
 
@@ -503,13 +516,9 @@ export function TravelSelfQuiz({
           <Progress
             value={questionIndex + 1}
             max={INPUT_STEP_COUNT}
-            label={TRAVEL_SELF_CONTENT.progressLabel}
-            valueText={`${questionIndex + 1} of ${INPUT_STEP_COUNT}`}
+            label={`${TRAVEL_SELF_CONTENT.questionLabel} ${questionIndex + 1}`}
+            valueText={`Step ${questionIndex + 1} of ${INPUT_STEP_COUNT}`}
           />
-          <p className={styles.questionNumber}>
-            {TRAVEL_SELF_CONTENT.questionLabel} {questionIndex + 1} of{" "}
-            {TRAVEL_SELF_QUESTIONS.length}
-          </p>
           <form
             className={styles.questionForm}
             onSubmit={(event: FormEvent<HTMLFormElement>) => {
@@ -572,6 +581,10 @@ export function TravelSelfQuiz({
 
   if (stage === "passions") {
     const validSelection = Boolean(passionSelection);
+    const choosingPassions = passionStep === "choose";
+    const passionHeading = choosingPassions
+      ? TRAVEL_SELF_CONTENT.passion.title
+      : TRAVEL_SELF_CONTENT.passion.primaryLegend;
     return (
       <section
         className={styles.question}
@@ -585,7 +598,7 @@ export function TravelSelfQuiz({
             ref={screenHeadingRef}
             tabIndex={-1}
           >
-            {TRAVEL_SELF_CONTENT.passion.title}
+            {passionHeading}
           </h1>
           {showEditorialStatus ? (
             <div className={styles.statusRow}>
@@ -596,56 +609,62 @@ export function TravelSelfQuiz({
           <Progress
             value={INPUT_STEP_COUNT}
             max={INPUT_STEP_COUNT}
-            label={TRAVEL_SELF_CONTENT.progressLabel}
-            valueText={`${INPUT_STEP_COUNT} of ${INPUT_STEP_COUNT}`}
+            label={choosingPassions ? "Choose passions" : "Choose priorities"}
+            valueText={`Step ${INPUT_STEP_COUNT} of ${INPUT_STEP_COUNT}`}
           />
           <form
             className={styles.questionForm}
             onSubmit={(event: FormEvent<HTMLFormElement>) => {
               event.preventDefault();
+              if (choosingPassions) {
+                if (selectedPassions.length > 0) {
+                  setPassionError("");
+                  setPassionStep("prioritise");
+                }
+                return;
+              }
               revealResult();
             }}
           >
-            <fieldset aria-describedby="passion-selection-help passion-selection-status">
-              <legend>{TRAVEL_SELF_CONTENT.passion.title}</legend>
-              <p className={styles.lead}>{TRAVEL_SELF_CONTENT.passion.lead}</p>
-              <p id="passion-selection-help" className={styles.selectionHelp}>
-                {TRAVEL_SELF_CONTENT.passion.selectionHelp}
-              </p>
-              <p
-                id="passion-selection-status"
-                className={styles.selectionStatus}
-                aria-live="polite"
-              >
-                {selectedPassions.length} of 4{" "}
-                {TRAVEL_SELF_CONTENT.passion.selectedLabel}
-              </p>
-              <div className={styles.passionGrid}>
-                {PASSIONS.map((passion) => {
-                  const selected = selectedPassions.includes(passion.id);
-                  return (
-                    <label
-                      className={styles.option}
-                      data-selected={selected}
-                      key={passion.id}
-                    >
-                      <input
-                        className={styles.radio}
-                        type="checkbox"
-                        checked={selected}
-                        onChange={() => togglePassion(passion.id)}
-                      />
-                      <span>
-                        <strong>{passion.label}</strong>
-                        <small>{passion.shortDescription}</small>
-                      </span>
-                    </label>
-                  );
-                })}
-              </div>
-            </fieldset>
-
-            {selectedPassions.length ? (
+            {choosingPassions ? (
+              <fieldset aria-describedby="passion-selection-help passion-selection-status">
+                <legend>{TRAVEL_SELF_CONTENT.passion.title}</legend>
+                <p id="passion-selection-help" className={styles.selectionHelp}>
+                  {TRAVEL_SELF_CONTENT.passion.selectionHelp}
+                </p>
+                <p
+                  id="passion-selection-status"
+                  className={styles.selectionStatus}
+                  aria-live="polite"
+                >
+                  {selectedPassions.length} of 4{" "}
+                  {TRAVEL_SELF_CONTENT.passion.selectedLabel}
+                </p>
+                <div className={styles.passionGrid}>
+                  {PASSIONS.map((passion) => {
+                    const selected = selectedPassions.includes(passion.id);
+                    return (
+                      <label
+                        className={styles.option}
+                        data-selected={selected}
+                        key={passion.id}
+                      >
+                        <input
+                          className={styles.radio}
+                          type="checkbox"
+                          checked={selected}
+                          onChange={() => togglePassion(passion.id)}
+                        />
+                        <span>
+                          <strong>{passion.label}</strong>
+                          <small>{passion.shortDescription}</small>
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+              </fieldset>
+            ) : (
               <>
                 <fieldset aria-describedby={passionError ? "passion-error" : undefined}>
                   <legend>{TRAVEL_SELF_CONTENT.passion.primaryLegend}</legend>
@@ -739,7 +758,7 @@ export function TravelSelfQuiz({
                   </div>
                 ) : null}
               </>
-            ) : null}
+            )}
 
             {passionError ? (
               <p
@@ -758,7 +777,11 @@ export function TravelSelfQuiz({
                 type="button"
                 variant="secondary"
                 onClick={() => {
-                  if (returnToReveal) {
+                  if (!choosingPassions) {
+                    setPassionError("");
+                    setPassionStep("choose");
+                  } else if (returnToReveal) {
+                    focusReturnTargetRef.current = "passions";
                     setReturnToReveal(false);
                     setStage("reveal");
                   } else {
@@ -767,12 +790,23 @@ export function TravelSelfQuiz({
                   }
                 }}
               >
-                {TRAVEL_SELF_CONTENT.backLabel}
+                {choosingPassions && returnToReveal
+                  ? "Cancel"
+                  : TRAVEL_SELF_CONTENT.backLabel}
               </Button>
-              <Button type="submit" disabled={!validSelection}>
-                {returnToReveal
-                  ? TRAVEL_SELF_CONTENT.reveal.savePassionsLabel
-                  : TRAVEL_SELF_CONTENT.passion.continueLabel}
+              <Button
+                type="submit"
+                disabled={
+                  choosingPassions
+                    ? selectedPassions.length === 0
+                    : !validSelection
+                }
+              >
+                {choosingPassions
+                  ? "Choose priorities"
+                  : returnToReveal
+                    ? TRAVEL_SELF_CONTENT.reveal.savePassionsLabel
+                    : TRAVEL_SELF_CONTENT.passion.continueLabel}
               </Button>
             </div>
           </form>
@@ -971,7 +1005,7 @@ export function TravelSelfQuiz({
 
           <div className={styles.actions}>
             <ButtonLink
-              href="mailto:nerminehammam@gmail.com?subject=Sawayatra%20Travel%20Self%20question"
+              href={contactHref("Travel Self")}
               surface="deep"
               onClick={() =>
                 trackTravelSelfEvent({ name: "travel_self_email_cta_clicked" })

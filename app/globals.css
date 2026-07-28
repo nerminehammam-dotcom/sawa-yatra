@@ -138,7 +138,7 @@ a:visited:not([class]) {
 }
 
 :where(a, button, input, select, textarea, summary):focus-visible {
-  outline: 3px solid currentColor;
+  outline: 3px solid var(--focus-ring, currentColor);
   outline-offset: 4px;
   box-shadow: none;
 }

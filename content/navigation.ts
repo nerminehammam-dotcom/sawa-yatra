@@ -35,9 +35,9 @@ export const primaryNavigation = [
 
 export const utilityNavigation = [
   {
-    id: "ask-a-question",
-    label: "Ask a question",
-    href: "mailto:nerminehammam@gmail.com",
+    id: "sign-in",
+    label: "Sign in",
+    href: "/sign-in",
     contentStatus: "LOCKED",
   },
 ] as const;
@@ -56,7 +56,7 @@ export const departuresNavigation = [
   {
     id: "route-map",
     label: "Full route map",
-    href: "/caravans#caravan-route-map-heading",
+    href: "/departures#full-route-map",
   },
   {
     id: "joining-points",

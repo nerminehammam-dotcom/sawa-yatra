@@ -28,6 +28,7 @@ import {
   andeanCaravanRouteStops,
 } from "@/content/andean-caravan-route";
 import { siteConfig } from "@/content/site";
+import { contactHref } from "@/lib/contact";
 import { absoluteUrl } from "@/lib/site-url";
 
 import styles from "./journey.module.css";
@@ -173,10 +174,10 @@ function Wayfinding({ title }: { title: string }) {
       <Container className={styles.wayfindingLinks}>
         <Link href="/departures#all-sections">Back to all sections</Link>
         <Link href="/joining-points">Joining & Leaving Points</Link>
-        <Link href="/caravans#caravan-route-map-heading">Full route map</Link>
-        <a href={`mailto:nerminehammam@gmail.com?subject=${encodeURIComponent(`Sawayatra section: ${title}`)}`}>
+        <Link href="/departures#full-route-map">Full route map</Link>
+        <Link href={contactHref(title)}>
           Ask about this section
-        </a>
+        </Link>
       </Container>
     </Section>
   );
@@ -194,15 +195,15 @@ function InterestSection({ title }: { title: string }) {
         <div className={styles.sectionHeading}>
           <Eyebrow kind="decision" tone="inherit" className={styles.deepEyebrow}>Ask</Eyebrow>
           <h2 id="journey-interest-heading">Ask about this section.</h2>
-          <p>Your question opens in your email app. Nothing is submitted or stored on this site.</p>
+          <p>Use the question form without opening an email app. Online delivery is not connected yet.</p>
         </div>
         <div className={styles.formPanel}>
-          <a
+          <Link
             className={styles.askLink}
-            href={`mailto:nerminehammam@gmail.com?subject=${encodeURIComponent(`Sawayatra section: ${title}`)}`}
+            href={contactHref(title)}
           >
-            Email a question →
-          </a>
+            Ask a question →
+          </Link>
         </div>
       </Container>
     </Section>

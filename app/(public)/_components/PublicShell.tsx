@@ -12,6 +12,13 @@ const legalLinks = footerNavigation
   )
   .map(({ href, label }) => ({ href, label }));
 
+const footerLinks = [
+  ...primaryNavigation.map(({ href, label }) => ({ href, label })),
+  { href: "/contact", label: "Ask a question" },
+  { href: "/sign-in", label: "Sign in" },
+  { href: "#site-top", label: "Back to top" },
+] as const;
+
 export function PublicShell({ children }: { children: ReactNode }) {
   return (
     <>
@@ -19,6 +26,7 @@ export function PublicShell({ children }: { children: ReactNode }) {
       <SiteNavigation items={primaryNavigation} />
       {children}
       <Footer
+        navigationLinks={footerLinks}
         legalLinks={legalLinks}
         pronunciation={siteConfig.pronunciation}
       />

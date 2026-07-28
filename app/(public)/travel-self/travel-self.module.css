@@ -44,17 +44,24 @@
   gap: var(--space-3);
   margin-bottom: var(--space-8);
   color: inherit;
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
-.eyebrow,
-.questionNumber,
-.sectionRoute {
+.eyebrow {
   color: inherit;
   font-size: 0.875rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+}
+
+.questionNumber,
+.sectionRoute {
+  color: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .eyebrow {
@@ -178,7 +185,7 @@
 }
 
 .option small {
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.45;
 }
 
@@ -237,10 +244,10 @@
 
 .roleSummary span,
 .passportLine > span {
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .questionActions,
@@ -388,7 +395,7 @@
 }
 
 .practicalList dt {
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 .practicalList dd {

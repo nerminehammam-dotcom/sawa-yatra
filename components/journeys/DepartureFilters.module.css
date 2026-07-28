@@ -13,11 +13,11 @@
 .legend {
   margin-bottom: var(--space-4);
   color: var(--deep-brown);
-  font-size: 0.8125rem;
+  font-size: 1rem;
   font-weight: 500;
-  letter-spacing: 0.16em;
+  letter-spacing: normal;
   line-height: 1.35;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .scroller {
@@ -44,7 +44,7 @@
   background: var(--paper);
   background: var(--paper);
   font-family: var(--font-read);
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.2;
   scroll-snap-align: start;

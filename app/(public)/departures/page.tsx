@@ -13,13 +13,11 @@ import {
   andeanCaravanHeroImage,
   getAndeanCaravanImage,
 } from "@/content/andean-caravan-images";
+import { contactHref } from "@/lib/contact";
 
 import styles from "./departures.module.css";
 
 export const metadata: Metadata = createPageMetadata("/departures");
-
-const askHref =
-  "mailto:nerminehammam@gmail.com?subject=Sawayatra%20departure%20question";
 
 export default function DeparturesPage() {
   return (
@@ -138,7 +136,7 @@ export default function DeparturesPage() {
       <section className={styles.ask} aria-labelledby="ask-heading">
         <p>Ask about a section</p>
         <h2 id="ask-heading">Start with the part of the route you can already imagine.</h2>
-        <a href={askHref}>Ask a question →</a>
+        <Link href={contactHref("Departures")}>Ask a question →</Link>
       </section>
     </main>
   );

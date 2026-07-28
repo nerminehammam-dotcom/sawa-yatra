@@ -140,7 +140,7 @@
 }
 
 .rules li > span {
-  color: var(--signal);
+  color: var(--signal-text);
   font-weight: 500;
 }
 
@@ -331,7 +331,7 @@
   padding-top: var(--space-5);
   color: var(--sun);
   border-top: var(--border-hairline) solid var(--paper);
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 @media (max-width: 900px) {

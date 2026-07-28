@@ -1039,7 +1039,7 @@ export const TRAVEL_SELF_CONTENT = {
   nextLabel: "Next",
   passion: {
     eyebrow: "What pulls you",
-    title: "Choose the reasons you travel.",
+    title: "Choose up to four reasons you travel.",
     lead: "Choose up to four. Then name one primary passion and, if useful, one secondary.",
     selectedLimit: "Choose no more than four passions.",
     primaryRequired: "Choose a primary passion before continuing.",

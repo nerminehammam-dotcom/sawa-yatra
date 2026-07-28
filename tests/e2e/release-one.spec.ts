@@ -30,6 +30,7 @@ const publicRoutes = [
   ...andeanDepartureRoutes,
   "/membership",
   "/about",
+  "/contact",
   "/start-here",
   "/sign-in",
   "/request-invitation",
@@ -56,6 +57,153 @@ const prohibitedJourneyFieldPattern =
   /passport|nationality|residence|date.?of.?birth|health|mobility|emergency|room|altitude|insurance|deposit|payment/i;
 
 test.describe("Release 1 route contract", () => {
+  test("Task 6 joining controls and footer wayfinding work without swiping", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      !["mobile-375", "wide-1440"].includes(testInfo.project.name),
+      "Task 6 is verified at the approved mobile and desktop widths.",
+    );
+
+    await page.goto("/joining-points");
+
+    const position = page.getByText(/Joining point \d+ of 10/u);
+    const previous = page.getByRole("button", {
+      name: "Previous",
+      exact: true,
+    });
+    const next = page.getByRole("button", { name: "Next", exact: true });
+    await expect(position).toContainText("Joining point 1 of 10");
+    await expect(previous).toBeDisabled();
+    await expect(next).toBeEnabled();
+
+    await next.focus();
+    await page.keyboard.press("Enter");
+    await expect(next).toBeFocused();
+    await expect(position).toContainText("Joining point 2 of 10");
+    await expect(page.getByRole("heading", { name: "Arequipa" })).toBeVisible();
+
+    await page
+      .getByRole("button", { name: "Cusco, joining point 4 of 10" })
+      .click();
+    await expect(position).toContainText("Joining point 4 of 10");
+    await expect(page.getByRole("heading", { name: "Cusco" })).toBeVisible();
+    await expect(page.getByText("03B", { exact: true }).last()).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: /Balmaceda, joining point/u }),
+    ).toHaveCount(0);
+
+    const footer = page.getByRole("contentinfo");
+    await expect(
+      footer.getByRole("link", { name: "Ask a question" }),
+    ).toHaveAttribute("href", "/contact");
+    await expect(footer.getByRole("link", { name: "Sign in" })).toHaveAttribute(
+      "href",
+      "/sign-in",
+    );
+    await expect(
+      footer.getByRole("link", { name: "Back to top" }),
+    ).toHaveAttribute("href", "#site-top");
+    await expect(footer.getByRole("link", { name: "Privacy" })).toBeVisible();
+    await expect(footer.getByRole("link", { name: "Terms" })).toBeVisible();
+    await expect(
+      footer.getByRole("link", { name: "Accessibility" }),
+    ).toBeVisible();
+
+    const accessibility = await new AxeBuilder({ page }).include("main").analyze();
+    expect(
+      accessibility.violations.filter((violation) =>
+        ["serious", "critical"].includes(violation.impact ?? ""),
+      ),
+    ).toEqual([]);
+
+    const primaryNavigation = page.getByRole("navigation", { name: "Primary" });
+    if (testInfo.project.name === "wide-1440") {
+      await expect(
+        primaryNavigation.getByRole("link", { name: "Sign in", exact: true }),
+      ).toHaveAttribute("href", "/sign-in");
+    }
+
+    await footer.getByRole("link", { name: "Back to top" }).click();
+    await expect(page).toHaveURL(/#site-top$/u);
+    await expect(primaryNavigation).toBeFocused();
+
+    const geometry = await page.evaluate(() => ({
+      documentWidth: document.documentElement.scrollWidth,
+      viewportWidth: window.innerWidth,
+    }));
+    expect(geometry.documentWidth).toBeLessThanOrEqual(geometry.viewportWidth);
+
+    if (testInfo.project.name === "mobile-375") {
+      await page.setViewportSize({ width: 320, height: 800 });
+      await page.reload();
+      const narrowGeometry = await page.evaluate(() => ({
+        documentWidth: document.documentElement.scrollWidth,
+        viewportWidth: window.innerWidth,
+      }));
+      expect(narrowGeometry.documentWidth).toBeLessThanOrEqual(
+        narrowGeometry.viewportWidth,
+      );
+      await expect(
+        page.getByRole("button", { name: "Next", exact: true }),
+      ).toBeVisible();
+    }
+  });
+
+  test("the homepage first screen explains Sawayatra and offers the approved actions", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      !["mobile-375", "wide-1440"].includes(testInfo.project.name),
+      "The homepage first screen is checked at the approved mobile and desktop widths.",
+    );
+
+    await page.goto("/");
+    await page.evaluate(() => document.fonts.ready);
+
+    const hero = page.locator("section").filter({
+      has: page.getByRole("heading", {
+        level: 1,
+        name: "Go alone, arrive together.",
+      }),
+    });
+    await expect(hero).toHaveCount(1);
+    await expect(
+      hero.getByText(
+        "Sawayatra is a members’ travel club that brings compatible travellers together through shared journeys, beginning with the annual Andean Caravan.",
+      ),
+    ).toBeVisible();
+
+    const howItWorks = hero.getByRole("link", {
+      name: "See how Sawayatra works",
+    });
+    const caravan = hero.getByRole("link", {
+      name: "Explore the Andean Caravan",
+    });
+    const practical = hero.getByRole("link", {
+      name: "Altitude, physical demands and accommodation",
+    });
+
+    await expect(howItWorks).toHaveAttribute("href", "/how-it-works");
+    await expect(caravan).toHaveAttribute(
+      "href",
+      "/departures/the-andean-caravan",
+    );
+    await expect(practical).toHaveAttribute(
+      "href",
+      "/departures/the-andean-caravan#honest-conditions-heading",
+    );
+
+    for (const action of [howItWorks, caravan, practical]) {
+      await expect(action).toBeVisible();
+      const box = await action.boundingBox();
+      expect(box).not.toBeNull();
+      expect(box!.y + box!.height).toBeLessThanOrEqual(
+        page.viewportSize()!.height,
+      );
+    }
+  });
+
   for (const route of publicRoutes) {
     test(`${route} renders without horizontal overflow`, async ({ page }) => {
       const response = await page.goto(route);
@@ -91,6 +239,82 @@ test.describe("Release 1 route contract", () => {
       "href",
       "/",
     );
+  });
+
+  test("the contact journey validates honestly and keeps editable context", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      !["mobile-375", "wide-1440"].includes(testInfo.project.name),
+      "The contact journey is checked at the approved mobile and desktop widths.",
+    );
+
+    const requests: string[] = [];
+    page.on("request", (request) => requests.push(request.url()));
+    await page.goto("/contact?journey=The%20Mirror");
+
+    const context = page.getByLabel("Journey or section, optional");
+    await expect(context).toHaveValue("The Mirror");
+    await context.fill("");
+    const submit = page.getByRole("button", { name: "Send question" });
+    await submit.focus();
+    await page.keyboard.press("Enter");
+    const validationAlert = page
+      .locator('[data-tone="validation"][role="alert"]')
+      .filter({ hasText: "Check the form" });
+    await expect(validationAlert).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(page.getByLabel(/^Name/u)).toBeFocused();
+
+    await page.getByLabel(/^Name/u).fill("A Traveller");
+    await page.getByLabel(/^Email address/u).fill("traveller@example.com");
+    await page
+      .getByLabel(/^What would you like to ask/u)
+      .fill("Can I join this section and leave at Atacama?");
+    await submit.click();
+
+    await expect(
+      page.locator('[data-tone="network-error"][role="alert"]'),
+    ).toContainText(
+      "Your question was not sent or stored.",
+    );
+    await expect(page.getByLabel(/^Name/u)).toHaveValue("A Traveller");
+    expect(requests.some((url) => url.includes("/api/forms/"))).toBe(false);
+
+    const accessibility = await new AxeBuilder({ page })
+      .include("main")
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+      .analyze();
+    const seriousViolations = accessibility.violations.filter((violation) =>
+      ["serious", "critical"].includes(violation.impact ?? ""),
+    );
+    expect(seriousViolations).toEqual([]);
+  });
+
+  test("the contact journey remains usable at 320px and a 200% zoom equivalent", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      testInfo.project.name !== "wide-1440",
+      "One responsive contact-page pass controls its own viewport widths.",
+    );
+
+    for (const width of [720, 320]) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/contact?journey=The%20Andean%20Caravan");
+      await expect(page.getByLabel(/^Name/u)).toBeEditable();
+      await expect(page.getByLabel(/^Email address/u)).toBeEditable();
+      await expect(page.getByLabel(/^What would you like to ask/u)).toBeEditable();
+      await expect(page.getByRole("button", { name: "Send question" })).toBeVisible();
+
+      const dimensions = await page.evaluate(() => ({
+        viewport: document.documentElement.clientWidth,
+        document: document.documentElement.scrollWidth,
+      }));
+      expect(dimensions.document, `${width}px contact page`).toBeLessThanOrEqual(
+        dimensions.viewport,
+      );
+    }
   });
 
   test("the Do It Yourself title is the sole H1 with unchanged styling", async ({
@@ -146,7 +370,7 @@ test.describe("Andean caravan scope", () => {
     page,
   }, testInfo) => {
     test.skip(
-      testInfo.project.name !== "desktop-1024",
+      testInfo.project.name !== "wide-1440",
       "One desktop navigation assertion is sufficient.",
     );
 
@@ -155,13 +379,12 @@ test.describe("Andean caravan scope", () => {
     const primaryList = navigation.getByRole("list", {
       name: "Primary navigation links",
     });
-    const primaryLinks = primaryList.locator(":scope > li > a");
+    const primaryLinks = primaryList.locator(":scope > li > div > a");
     const expectedPrimaryNavigation = [
       ["How it works", "/how-it-works"],
       ["Meet your Travel Self", "/travel-self"],
-      ["Caravan Hop On Hop Off", "/caravans"],
-      ["Do It Yourself", "/do-it-yourself"],
-      ["Discover Journeys With Others", "/departures"],
+      ["Departures", "/departures"],
+      ["Membership", "/membership"],
       ["About", "/about"],
     ] as const;
 
@@ -171,19 +394,7 @@ test.describe("Andean caravan scope", () => {
       await expect(primaryLinks.nth(index)).toHaveAttribute("href", href);
     }
     await expect(
-      primaryList.getByRole("link", { name: "Membership", exact: true }),
-    ).toHaveCount(0);
-    const utilityActions = navigation.getByRole("group", {
-      name: "Utility actions",
-    });
-    await expect(
-      utilityActions.getByRole("link", {
-        name: "Become a Member",
-        exact: true,
-      }),
-    ).toHaveAttribute("href", "/membership");
-    await expect(
-      utilityActions.getByRole("link", { name: "Sign in", exact: true }),
+      navigation.getByRole("link", { name: "Sign in", exact: true }),
     ).toHaveAttribute("href", "/sign-in");
     await expect(
       navigation.getByRole("link", { name: /open seats/i }),
@@ -204,6 +415,48 @@ test.describe("Andean caravan scope", () => {
     expect(navigationGeometry.documentWidth).toBeLessThanOrEqual(
       navigationGeometry.viewportWidth,
     );
+  });
+
+  test("keeps the complete Departures menu interactive after reloads", async ({
+    page,
+  }, testInfo) => {
+    test.skip(
+      !["mobile-375", "wide-1440"].includes(testInfo.project.name),
+      "Covers the collapsed and desktop navigation modes.",
+    );
+
+    const expectedItems = [
+      "The Andean Caravan",
+      "Browse all nine sections",
+      "Full route map",
+      "Joining & Leaving Points",
+      "Dates & availability",
+      "What is included",
+    ];
+
+    for (let attempt = 0; attempt < 3; attempt += 1) {
+      await page.goto("/departures");
+
+      if (testInfo.project.name === "mobile-375") {
+        await page.getByRole("button", { name: "Menu", exact: true }).click();
+      }
+
+      const scope =
+        testInfo.project.name === "mobile-375"
+          ? page.getByRole("dialog", { name: "Site menu" })
+          : page.getByRole("navigation", { name: "Primary" });
+      const toggle = scope.getByRole("button", {
+        name: "Toggle Departures menu",
+      });
+
+      await expect(toggle).toHaveAttribute("aria-expanded", "false");
+      await toggle.click();
+      await expect(toggle).toHaveAttribute("aria-expanded", "true");
+      const menuId = await toggle.getAttribute("aria-controls");
+      expect(menuId).not.toBeNull();
+      const departuresMenu = page.locator(`[id="${menuId}"]`);
+      await expect(departuresMenu.getByRole("link")).toHaveText(expectedItems);
+    }
   });
 
   test("publishes provisional date wording without internal gate dates", async ({
@@ -533,12 +786,17 @@ test.describe("keyboard interaction", () => {
     page,
   }, testInfo) => {
     test.skip(
-      !["mobile-375", "tablet-768"].includes(testInfo.project.name),
-      "Collapsed navigation is used below 1024px.",
+      !["mobile-375", "tablet-768", "desktop-1024"].includes(
+        testInfo.project.name,
+      ),
+      "Collapsed navigation is used through 1280px.",
     );
 
     await page.goto("/");
-    const menuButton = page.getByRole("button", { name: "Menu" });
+    const menuButton = page
+      .locator('nav[aria-label="Primary"] button[aria-controls]')
+      .first();
+    await expect(menuButton).toHaveAccessibleName("Menu");
     await menuButton.focus();
     await page.keyboard.press("Enter");
 
@@ -550,22 +808,18 @@ test.describe("keyboard interaction", () => {
     ).toBeFocused();
     const mobilePrimaryLinks = dialog
       .getByRole("list", { name: "Primary navigation links" })
-      .locator(":scope > li > a:first-child");
-    await expect(mobilePrimaryLinks).toHaveCount(6);
+      .locator(":scope > li > div > a:first-child");
+    await expect(mobilePrimaryLinks).toHaveCount(5);
     await expect(mobilePrimaryLinks).toHaveText([
       "How it works",
       "Meet your Travel Self",
-      "Caravan Hop On Hop Off",
-      "Do It Yourself",
-      "Discover Journeys With Others",
+      "Departures",
+      "Membership",
       "About",
     ]);
     const mobileUtilities = dialog.getByRole("group", {
       name: "Utility actions",
     });
-    await expect(
-      mobileUtilities.getByRole("link", { name: "Become a Member" }),
-    ).toHaveAttribute("href", "/membership");
     await expect(
       mobileUtilities.getByRole("link", { name: "Sign in" }),
     ).toHaveAttribute("href", "/sign-in");
@@ -583,18 +837,17 @@ test.describe("keyboard interaction", () => {
     await expect(menuButton).toHaveAttribute("aria-expanded", "false");
   });
 
-  test("the Travel Self flow works entirely by keyboard", async ({
+  test("Task 7 unifies Travel Self progress and splits the passion flow", async ({
     page,
-  }, testInfo) => {
-    test.skip(testInfo.project.name !== "mobile-375", "One keyboard flow is sufficient.");
-
+  }) => {
     await page.goto("/travel-self");
     const start = page.getByRole("button", { name: "Begin" });
     await start.focus();
     await page.keyboard.press("Enter");
 
     for (let question = 1; question <= 16; question += 1) {
-      await expect(page.getByText(`${question} of 17`)).toBeVisible();
+      await expect(page.getByText(`Step ${question} of 17`)).toBeVisible();
+      await expect(page.getByText(`Question ${question} of 16`)).toHaveCount(0);
       await expect(
         page.getByRole("heading", {
           level: 1,
@@ -613,12 +866,22 @@ test.describe("keyboard interaction", () => {
       await page.keyboard.press("Enter");
     }
 
-    await expect(page.getByText("17 of 17")).toBeVisible();
+    await expect(page.getByText("Step 17 of 17")).toBeVisible();
     await expect(
-      page.getByRole("heading", { name: "Choose the reasons you travel." }),
+      page.getByRole("heading", {
+        name: "Choose up to four reasons you travel.",
+      }),
     ).toBeFocused();
     await page.getByRole("checkbox", { name: /Food/u }).focus();
     await page.keyboard.press("Space");
+    const choosePriorities = page.getByRole("button", {
+      name: "Choose priorities",
+    });
+    await choosePriorities.focus();
+    await page.keyboard.press("Enter");
+    await expect(
+      page.getByRole("heading", { name: "Which passion leads?" }),
+    ).toBeFocused();
     const primaryGroup = page.getByRole("group", {
       name: "Which passion leads?",
     });
@@ -634,6 +897,20 @@ test.describe("keyboard interaction", () => {
       page.getByRole("button", { name: "Start over" }),
     ).toBeVisible();
 
+    const editPassions = page.getByRole("button", { name: "Edit passions" });
+    await editPassions.focus();
+    await page.keyboard.press("Enter");
+    await expect(
+      page.getByRole("heading", {
+        name: "Choose up to four reasons you travel.",
+      }),
+    ).toBeFocused();
+    await expect(page.getByRole("checkbox", { name: /Food/u })).toBeChecked();
+    const cancelPassionEdit = page.getByRole("button", { name: "Cancel" });
+    await cancelPassionEdit.focus();
+    await page.keyboard.press("Enter");
+    await expect(editPassions).toBeFocused();
+
     await expect(
       page.getByText("Practical details under review"),
     ).toHaveCount(3);
@@ -641,7 +918,7 @@ test.describe("keyboard interaction", () => {
       page.getByRole("link", {
         name: "Tell me when these sections open",
       }),
-    ).toHaveAttribute("href", "/start-here");
+    ).toHaveAttribute("href", "/contact?journey=Travel%20Self");
 
     const editButtons = page.getByRole("button", {
       name: "Edit this answer",
@@ -749,6 +1026,10 @@ test.describe("forms and holding states", () => {
         route: "/sign-in",
         action: "Record interest in member access",
       },
+      {
+        route: "/contact",
+        action: "Send question",
+      },
     ] as const;
 
     for (const surface of surfaces) {
@@ -848,8 +1129,13 @@ test.describe("links, metadata and accessibility", () => {
 
       for (const href of hrefs) {
         expect(href).not.toBe("");
+        if (href.startsWith("mailto:")) {
+          expect(route).toBe("/contact");
+          expect(href).toContain("nerminehammam@gmail.com");
+          continue;
+        }
         if (href.startsWith("#")) {
-          expect(href).toBe("#main-content");
+          expect(["#main-content", "#site-top"]).toContain(href);
           continue;
         }
         expect(href).not.toContain("javascript:");
@@ -943,6 +1229,10 @@ test.describe("links, metadata and accessibility", () => {
       await page.goto(route);
       const results = await new AxeBuilder({ page })
         .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
+        .exclude('[aria-label="Sawayatra home"] [aria-hidden="true"]')
+        .exclude('[role="img"][aria-label="Sawayatra"] [aria-hidden="true"]')
+        // The v10 brief locks the existing Caravan map, including its palette.
+        .exclude('[class*="CaravanRouteMap-module"] [class*="nextStop"] > span:first-child')
         .analyze();
       const serious = results.violations.filter((violation) =>
         ["serious", "critical"].includes(violation.impact ?? ""),

@@ -9,7 +9,7 @@
 }
 
 .root:focus-visible {
-  outline: 3px solid var(--signal);
+  outline: 3px solid var(--focus-ring-light);
   outline-offset: -3px;
 }
 

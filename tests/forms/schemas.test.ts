@@ -1,12 +1,30 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  contactQuestionSchema,
   invitationRequestSchema,
   journeyInterestSchema,
   signInInterestSchema,
 } from "@/lib/forms/schemas";
 
 describe("Release 1 form schemas", () => {
+  it("accepts only the non-sensitive contact question fields", () => {
+    const validQuestion = {
+      name: "A Traveller",
+      email: "traveller@example.com",
+      question: "How does joining in Lima work?",
+      journeyContext: "The Andean Caravan",
+    };
+
+    expect(contactQuestionSchema.safeParse(validQuestion).success).toBe(true);
+    expect(
+      contactQuestionSchema.safeParse({
+        ...validQuestion,
+        paymentDetails: "not-allowed",
+      }).success,
+    ).toBe(false);
+  });
+
   it("accepts only the required invitation-request fields", () => {
     const validInvitation = {
       name: "A Traveller",

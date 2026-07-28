@@ -45,7 +45,8 @@
 }
 
 .control[aria-invalid="true"] {
-  border-color: var(--ink);
+  color: var(--error-text);
+  border-color: var(--error-border);
   border-width: 2px;
 }
 
@@ -69,13 +70,13 @@
 
 .hint {
   color: var(--deep-brown);
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.5;
 }
 
 .fieldError {
-  color: var(--ink);
-  font-size: 0.9375rem;
+  color: var(--error-text);
+  font-size: 1rem;
   font-weight: 500;
   line-height: 1.45;
 }
@@ -102,7 +103,7 @@
   width: 1.25rem;
   height: 1.25rem;
   margin: 0.7rem auto 0;
-  accent-color: var(--action);
+  accent-color: var(--action-bg);
 }
 
 .checkbox[aria-invalid="true"] {
@@ -136,7 +137,8 @@
 
 .formStatus[data-tone="validation"],
 .formStatus[data-tone="network-error"] {
-  border-color: var(--error);
+  color: var(--error-text);
+  border-color: var(--error-border);
   background: var(--cream);
 }
 
@@ -155,7 +157,7 @@
   gap: var(--space-1, 0.25rem);
   border-style: dashed;
   background: var(--butter);
-  font-size: 0.9375rem;
+  font-size: 1rem;
 }
 
 .journeyContext {
@@ -183,8 +185,8 @@
   min-width: min(100%, 15rem);
   min-height: var(--touch-min, 44px);
   padding: 0.75rem 1.35rem;
-  color: var(--ink);
-  background: var(--action);
+  color: var(--action-text);
+  background: var(--action-bg);
   border: 2px solid var(--ink);
   border-radius: var(--radius-pill);
   font-weight: 500;

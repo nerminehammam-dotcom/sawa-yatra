@@ -11,10 +11,12 @@ import {
 } from "@/content/travel-self/travel-self-model";
 
 export type TravelSelfStage = "intro" | "question" | "passions" | "reveal";
+export type TravelSelfPassionStep = "choose" | "prioritise";
 
 export interface StoredTravelSelfState {
   readonly version: typeof TRAVEL_SELF_MODEL_VERSION;
   readonly stage: TravelSelfStage;
+  readonly passionStep: TravelSelfPassionStep;
   readonly questionIndex: number;
   readonly answers: Record<string, string>;
   readonly selectedPassions: PassionId[];
@@ -25,6 +27,7 @@ export interface StoredTravelSelfState {
 export const EMPTY_TRAVEL_SELF_STATE: StoredTravelSelfState = {
   version: TRAVEL_SELF_MODEL_VERSION,
   stage: "intro",
+  passionStep: "choose",
   questionIndex: 0,
   answers: {},
   selectedPassions: [],
@@ -43,6 +46,10 @@ function isStage(value: unknown): value is TravelSelfStage {
     value === "passions" ||
     value === "reveal"
   );
+}
+
+function isPassionStep(value: unknown): value is TravelSelfPassionStep {
+  return value === "choose" || value === "prioritise";
 }
 
 function validAnswers(value: unknown): Record<string, string> | null {
@@ -125,6 +132,14 @@ export function parseTravelSelfSession(raw: string): StoredTravelSelfState | nul
         }
       : null;
 
+    // Sessions saved before the split passion flow did not include a substage.
+    // Reopen them at the earliest safe point without discarding any choices.
+    const passionStep = isPassionStep(value.passionStep)
+      ? value.passionStep
+      : primary
+        ? "prioritise"
+        : "choose";
+
     if (!progressIsConsistent(value.stage, value.questionIndex, answers, selection)) {
       return null;
     }
@@ -132,6 +147,7 @@ export function parseTravelSelfSession(raw: string): StoredTravelSelfState | nul
     return {
       version: TRAVEL_SELF_MODEL_VERSION,
       stage: value.stage,
+      passionStep,
       questionIndex: value.questionIndex,
       answers,
       selectedPassions,

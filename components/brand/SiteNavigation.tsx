@@ -49,8 +49,30 @@ export function SiteNavigation({
   const departuresItemRef = useRef<HTMLLIElement>(null);
   const drawerRef = useRef<HTMLDivElement>(null);
   const firstLinkRef = useRef<HTMLAnchorElement>(null);
+  const rootRef = useRef<HTMLElement>(null);
   const visibleItems = items.filter((item) => item.href !== "/open-seats");
-  const askAction = utilityNavigation[0];
+  const utilityAction = utilityNavigation[0];
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    const updateHeaderHeight = () => {
+      document.documentElement.style.setProperty(
+        "--site-header-height",
+        `${root.getBoundingClientRect().height}px`,
+      );
+    };
+
+    updateHeaderHeight();
+    const observer = new ResizeObserver(updateHeaderHeight);
+    observer.observe(root);
+
+    return () => {
+      observer.disconnect();
+      document.documentElement.style.removeProperty("--site-header-height");
+    };
+  }, []);
 
   useEffect(() => {
     const desktopQuery = window.matchMedia("(min-width: 1281px)");
@@ -135,12 +157,18 @@ export function SiteNavigation({
   }, [isOpen]);
 
   return (
-    <nav className={styles.root} aria-label="Primary">
+    <nav
+      ref={rootRef}
+      className={styles.root}
+      id="site-top"
+      tabIndex={-1}
+      aria-label="Primary"
+    >
       <div className={styles.brandBand}>
         <Container className={styles.brandRow}>
           <Wordmark size="large" />
-          <Link className={styles.utilityLink} href={askAction.href}>
-            {askAction.label}
+          <Link className={styles.utilityLink} href={utilityAction.href}>
+            {utilityAction.label}
           </Link>
           <button
             ref={triggerRef}
@@ -298,10 +326,10 @@ export function SiteNavigation({
             >
               <Link
                 className={styles.mobileUtilityLink}
-                href={askAction.href}
+                href={utilityAction.href}
                 onClick={() => setIsOpen(false)}
               >
-                {askAction.label}
+                {utilityAction.label}
               </Link>
             </div>
           </div>

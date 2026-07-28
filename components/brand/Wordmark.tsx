@@ -26,10 +26,22 @@ export function Wordmark({
     !href && styles.text,
     className,
   );
-  const wordmark = <span className={styles.label}>{temporaryWordmark.text}</span>;
+  const wordmark = (
+    <span className={styles.label} aria-hidden="true">
+      {temporaryWordmark.text}
+    </span>
+  );
 
   if (!href) {
-    return <span className={wordmarkClassName}>{wordmark}</span>;
+    return (
+      <span
+        className={wordmarkClassName}
+        role="img"
+        aria-label={siteConfig.name}
+      >
+        {wordmark}
+      </span>
+    );
   }
 
   return (

@@ -49,7 +49,7 @@
 
 .place {
   color: var(--deep-brown);
-  font-size: 0.9375rem;
+  font-size: 1rem;
 }
 
 .fit {
@@ -64,7 +64,7 @@
   margin: auto 0 0;
   padding: var(--space-2) 0 0;
   color: var(--deep-brown);
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.5;
   list-style: none;
 }

@@ -1,5 +1,6 @@
 .root {
   --button-shadow: var(--dusty-blue);
+  --focus-ring: var(--focus-ring-light);
 
   display: inline-flex;
   min-height: var(--touch-min);
@@ -37,8 +38,8 @@
 .primary:visited {
   --button-shadow: var(--dusty-rose);
 
-  color: var(--ink);
-  background: var(--action);
+  color: var(--action-text);
+  background: var(--action-bg);
   border-color: var(--ink);
 }
 
@@ -86,6 +87,7 @@
 .secondaryDeep,
 .secondaryDeep:visited {
   --button-shadow: var(--dusty-blue);
+  --focus-ring: var(--focus-ring-dark);
 
   color: var(--cream);
   background: transparent;
@@ -100,7 +102,7 @@
 }
 
 .secondaryDeep:focus-visible {
-  outline-color: var(--paper);
+  outline-color: var(--focus-ring-dark);
 }
 
 .fullWidth {

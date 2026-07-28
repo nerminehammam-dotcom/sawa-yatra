@@ -6,11 +6,13 @@ import { JoiningPointSelector } from "@/components/field/JoiningPointSelector";
 import { RegionalChapter } from "@/components/field/RegionalChapter";
 import { RouteIndex } from "@/components/field/RouteIndex";
 import { SignalStatement } from "@/components/field/SignalStatement";
+import { ButtonLink } from "@/components/ui/ButtonLink";
 import { getAndeanCaravanGallery } from "@/content/andean-caravan-images";
 import {
   fieldDocumentContent,
   joiningPoints,
 } from "@/content/field-document";
+import { contactHref } from "@/lib/contact";
 
 import styles from "./home.module.css";
 
@@ -52,7 +54,37 @@ export default function HomePage() {
 
           <div className={styles.homeHeroCopy}>
             <h1 id="home-heading">Go alone, arrive together.</h1>
-            <p>A members’ club that matches travellers by how they travel.</p>
+            <p className={styles.homeHeroTagline}>
+              A members’ club that matches travellers by how they travel.
+            </p>
+            <p className={styles.homeHeroDefinition}>
+              Sawayatra is a members’ travel club that brings compatible
+              travellers together through shared journeys, beginning with the
+              annual Andean Caravan.
+            </p>
+            <div className={styles.homeHeroActions}>
+              <ButtonLink
+                className={styles.homeHeroPrimaryAction}
+                href="/how-it-works"
+                surface="deep"
+              >
+                See how Sawayatra works
+              </ButtonLink>
+              <ButtonLink
+                className={styles.homeHeroSecondaryAction}
+                href="/departures/the-andean-caravan"
+                surface="deep"
+                variant="secondary"
+              >
+                Explore the Andean Caravan
+              </ButtonLink>
+            </div>
+            <Link
+              className={styles.homeHeroPracticalLink}
+              href="/departures/the-andean-caravan#honest-conditions-heading"
+            >
+              Altitude, physical demands and accommodation
+            </Link>
           </div>
         </section>
 
@@ -152,9 +184,9 @@ export default function HomePage() {
           <h2 id="final-action-heading">Where will you join us?</h2>
           <div>
             <Link href="/joining-points">Compare joining points →</Link>
-            <a href="mailto:nerminehammam@gmail.com?subject=Sawayatra%20joining%20point%20question">
+            <Link href={contactHref("Joining points")}>
               Ask a question ↗
-            </a>
+            </Link>
           </div>
         </section>
       </main>

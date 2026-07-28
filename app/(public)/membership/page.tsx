@@ -1,5 +1,8 @@
+import Link from "next/link";
+
 import { createPageMetadata } from "@/app/_metadata";
 import { membershipContent } from "@/content/membership";
+import { contactHref } from "@/lib/contact";
 
 import styles from "./membership.module.css";
 
@@ -15,9 +18,9 @@ export default function MembershipPage() {
           Membership is the way Sawayatra keeps introductions considered and
           the travelling room small.
         </p>
-        <a href="mailto:nerminehammam@gmail.com?subject=Sawayatra%20membership%20question">
+        <Link href={contactHref("Membership")}>
           Ask about membership →
-        </a>
+        </Link>
       </section>
       <section className={styles.note} aria-labelledby="membership-note-heading">
         <h2 id="membership-note-heading">The details come after the idea is clear.</h2>
