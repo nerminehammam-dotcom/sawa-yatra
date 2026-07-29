@@ -4,7 +4,7 @@ import {
   TRAVEL_SELF_MODEL_VERSION,
   TRAVEL_SELF_QUESTIONS,
   TRAVEL_SELF_STORAGE_KEY,
-} from "@/content/travel-self/travel-self-model";
+} from "@/content/travel-self/travel-self-model-legacy";
 import {
   parseTravelSelfSession,
   readTravelSelfSession,

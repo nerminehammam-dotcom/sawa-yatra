@@ -7,7 +7,7 @@ import {
   type AxisId,
   type PassionSelection,
   type TravelSelfAnswers,
-} from "@/content/travel-self/travel-self-model";
+} from "@/content/travel-self/travel-self-model-legacy";
 
 function answersFor(
   directions: Partial<Record<AxisId, AxisDirection>> = {},

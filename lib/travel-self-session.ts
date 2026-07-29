@@ -8,7 +8,7 @@ import {
   validatePassionSelection,
   type PassionId,
   type PassionSelection,
-} from "@/content/travel-self/travel-self-model";
+} from "@/content/travel-self/travel-self-model-legacy";
 
 export type TravelSelfStage = "intro" | "question" | "passions" | "reveal";
 export type TravelSelfPassionStep = "choose" | "prioritise";
