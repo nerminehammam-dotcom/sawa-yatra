@@ -163,8 +163,7 @@
 }
 
 .travelSelfIntro .introOdds p,
-.travelSelfIntro .introReassure,
-.travelSelfIntro .introNote {
+.travelSelfIntro .introReassure {
   margin: 0;
   font-size: 1.0625rem;
   line-height: 1.55;
@@ -227,67 +226,6 @@
 
 .travelSelfIntro .introBody p {
   margin: 0;
-}
-
-.travelSelfIntro .introAxes {
-  display: grid;
-  grid-column: 5 / -1;
-  row-gap: clamp(2rem, 3.5vw, 3rem);
-}
-
-.travelSelfIntro .introAxesLead {
-  max-width: 52ch;
-  margin: 0;
-}
-
-.travelSelfIntro .introAxis {
-  display: grid;
-  row-gap: 0.85rem;
-}
-
-.travelSelfIntro .introPoles {
-  display: flex;
-  justify-content: space-between;
-  gap: 2rem;
-  font-family: var(--tsi-display);
-  font-size: 1.3rem;
-}
-
-.travelSelfIntro .introPoles span:last-child {
-  text-align: right;
-}
-
-.travelSelfIntro .introScale {
-  position: relative;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  align-items: center;
-  padding-block: 0.4rem;
-}
-
-.travelSelfIntro .introScale::before {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  left: 0;
-  height: var(--tsi-hair);
-  background: var(--tsi-ink);
-  content: "";
-  opacity: 0.55;
-}
-
-.travelSelfIntro .introScale i {
-  position: relative;
-  width: 12px;
-  height: 12px;
-  justify-self: center;
-  background: var(--tsi-axis, var(--tsi-signal));
-  border: var(--tsi-hair) solid var(--tsi-ink);
-  border-radius: 50%;
-}
-
-.travelSelfIntro .introNote {
-  max-width: 48ch;
 }
 
 .travelSelfIntro .introClosing {
@@ -754,7 +692,6 @@
   .travelSelfIntro .introAct,
   .travelSelfIntro .introBand > h2,
   .travelSelfIntro .introBody,
-  .travelSelfIntro .introAxes,
   .travelSelfIntro .introBoundary {
     grid-column: 1 / -1;
   }

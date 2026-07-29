@@ -1,17 +1,7 @@
 import Image from "next/image";
-import type { CSSProperties } from "react";
-
-import { AXES } from "@/content/travel-self/axes";
 
 import styles from "./travel-self.module.css";
 import { TravelSelfTiles } from "./TravelSelfTiles";
-
-const INTRO_AXES = [
-  { axis: AXES[0], color: "var(--tsi-signal)" },
-  { axis: AXES[1], color: "var(--tsi-sun)" },
-  { axis: AXES[2], color: "var(--tsi-olive)" },
-  { axis: AXES[3], color: "var(--tsi-clay)" },
-] as const;
 
 const PRIVACY_SENTENCE =
   "Four minutes. Your answers are saved in this browser when you finish, and they are not sent to Sawayatra.";
@@ -68,39 +58,6 @@ export function TravelSelfIntro() {
           <p className={styles.introReassure}>{PRIVACY_SENTENCE}</p>
         </div>
       </div>
-
-      <section
-        className={`${styles.introGrid} ${styles.introBand}`}
-        aria-labelledby="tsi-asks"
-      >
-        <h2 id="tsi-asks">What it asks</h2>
-        <div className={styles.introAxes}>
-          <p className={styles.introAxesLead}>
-            Four questions describe how you travel. Four ask what draws you to
-            a place. You will land somewhere along each of these — nothing is
-            set until you answer.
-          </p>
-
-          {INTRO_AXES.map(({ axis, color }) => (
-            <div
-              className={styles.introAxis}
-              key={axis.id}
-              style={{ "--tsi-axis": color } as CSSProperties}
-            >
-              <div className={styles.introPoles}>
-                <span>{axis.left.name}</span>
-                <span>{axis.right.name}</span>
-              </div>
-              <div className={styles.introScale} aria-hidden="true">
-                {Array.from({ length: 6 }, (_, index) => (
-                  <i key={index} />
-                ))}
-              </div>
-              <p className={styles.introNote}>{axis.question}</p>
-            </div>
-          ))}
-        </div>
-      </section>
 
       <section
         className={`${styles.introGrid} ${styles.introBand}`}
