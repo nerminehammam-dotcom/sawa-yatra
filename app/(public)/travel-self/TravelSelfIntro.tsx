@@ -59,46 +59,6 @@ export function TravelSelfIntro() {
         </div>
       </div>
 
-      <section
-        className={`${styles.introGrid} ${styles.introBand}`}
-        aria-labelledby="tsi-back"
-      >
-        <h2 id="tsi-back">What comes back</h2>
-        <div className={styles.introBody}>
-          <p>
-            Your answers return as a Travel Self: a named portrait of how you
-            move through a journey, alongside what draws you to a place.
-          </p>
-          <p>
-            It is a description, not a compatibility score. It cannot tell you
-            whether you will like someone.
-          </p>
-          <p>
-            There is no directory of members to browse. You see the comparison,
-            not the person, and names stay private until interest runs both
-            ways.
-          </p>
-          <p>
-            It changes how every journey on the site reads: where its pace and
-            standard sit against your own, and where agreement may be needed.
-          </p>
-        </div>
-      </section>
-
-      <section
-        className={`${styles.introGrid} ${styles.introBand}`}
-        aria-labelledby="tsi-lives"
-      >
-        <h2 id="tsi-lives">Where it lives</h2>
-        <div className={styles.introBody}>
-          <p>
-            {PRIVACY_SENTENCE} No account needed. Revise it whenever you like,
-            and we will ask you to look at it again once a year — people change
-            how they travel.
-          </p>
-        </div>
-      </section>
-
       <div className={`${styles.introGrid} ${styles.introClosing}`}>
         <p className={styles.introBoundary}>
           You can read every route on this site without answering a single
