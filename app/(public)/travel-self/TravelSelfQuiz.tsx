@@ -1,6 +1,16 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+  type KeyboardEvent,
+  type MouseEvent,
+  type ReactNode,
+} from "react";
 
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -30,7 +40,8 @@ import {
 
 import styles from "./travel-self.module.css";
 
-type View = "loading" | "intro" | "questionnaire" | "result" | "passport";
+type View = "intro" | "questionnaire" | "result" | "passport";
+type QuestionnaireReturnView = "intro" | "passport";
 type PartialPositions = Partial<Record<AxisId, AxisPosition>>;
 
 interface DraftState {
@@ -216,18 +227,21 @@ function BeforeYouBegin() {
   );
 }
 
-export function TravelSelfQuiz() {
-  const [view, setView] = useState<View>("loading");
+export function TravelSelfQuiz({ children }: { children?: ReactNode }) {
+  const hasServerIntroduction = children !== undefined;
+  const [view, setView] = useState<View>("intro");
   const [step, setStep] = useState(0);
   const [draft, setDraft] = useState<DraftState>(EMPTY_DRAFT);
   const [stored, setStored] = useState<StoredTravelSelf | null>(null);
-  const [updating, setUpdating] = useState(false);
   const [refusal, setRefusal] = useState("");
   const headingRef = useRef<HTMLHeadingElement>(null);
   const resultHeadingRef = useRef<HTMLHeadingElement>(null);
+  const returnViewRef = useRef<QuestionnaireReturnView>("intro");
 
-  useEffect(() => {
-    const timer = window.setTimeout(() => {
+  useLayoutEffect(() => {
+    let mounted = true;
+    queueMicrotask(() => {
+      if (!mounted) return;
       const record = readStoredTravelSelf(storageForWindow());
       if (record) {
         setStored(record);
@@ -237,12 +251,39 @@ export function TravelSelfQuiz() {
           passions: [...record.passions],
           lead: record.lead,
         });
-        setView("passport");
-      } else {
-        setView("intro");
       }
-    }, 0);
-    return () => window.clearTimeout(timer);
+
+      if (
+        hasServerIntroduction &&
+        new URLSearchParams(window.location.search).get("stage") === "questionnaire"
+      ) {
+        setView("questionnaire");
+      } else if (record) {
+        setView("passport");
+      }
+    });
+
+    return () => {
+      mounted = false;
+    };
+  }, [hasServerIntroduction]);
+
+  useEffect(() => {
+    const syncToHistory = (event: PopStateEvent) => {
+      const stage = new URLSearchParams(window.location.search).get("stage");
+      if (stage === "questionnaire") {
+        setView("questionnaire");
+        return;
+      }
+      if (event.state?.travelSelfStage === "result") {
+        setView("result");
+        return;
+      }
+      setView(returnViewRef.current);
+    };
+
+    window.addEventListener("popstate", syncToHistory);
+    return () => window.removeEventListener("popstate", syncToHistory);
   }, []);
 
   useEffect(() => {
@@ -278,6 +319,46 @@ export function TravelSelfQuiz() {
     setDraft((current) => ({ ...current, positions: { ...current.positions, [axis]: position } }));
   }
 
+  function showQuestionnaire(returnView: QuestionnaireReturnView) {
+    returnViewRef.current = returnView;
+    setStep(0);
+    setView("questionnaire");
+
+    if (hasServerIntroduction) {
+      const nextUrl = new URL(window.location.href);
+      nextUrl.searchParams.delete("self");
+      nextUrl.searchParams.set("stage", "questionnaire");
+      window.history.pushState(
+        { travelSelfStage: "questionnaire" },
+        "",
+        nextUrl,
+      );
+    }
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
+
+  function beginFromIntroduction(event: MouseEvent<HTMLDivElement>) {
+    if (!(event.target instanceof Element)) return;
+    if (!event.target.closest("[data-travel-self-begin]")) return;
+    showQuestionnaire("intro");
+  }
+
+  function leaveQuestionnaire() {
+    const currentUrl = new URL(window.location.href);
+    const isPushedQuestionnaire =
+      currentUrl.searchParams.get("stage") === "questionnaire" &&
+      window.history.state?.travelSelfStage === "questionnaire";
+
+    if (isPushedQuestionnaire) {
+      window.history.back();
+      return;
+    }
+
+    currentUrl.searchParams.delete("stage");
+    window.history.replaceState(null, "", currentUrl);
+    setView(returnViewRef.current);
+  }
+
   function stepAnswered(): boolean {
     if (step < 5) {
       const axis = AXES[step];
@@ -293,8 +374,7 @@ export function TravelSelfQuiz() {
       setStep((current) => current - 1);
       return;
     }
-    setView(updating ? "passport" : "intro");
-    setUpdating(false);
+    leaveQuestionnaire();
   }
 
   function goNext() {
@@ -314,11 +394,11 @@ export function TravelSelfQuiz() {
     };
     writeStoredTravelSelf(record, storageForWindow());
     setStored(record);
-    setUpdating(false);
     setView("result");
     const shareUrl = new URL(window.location.href);
+    shareUrl.searchParams.delete("stage");
     shareUrl.searchParams.set("self", completed.key);
-    window.history.replaceState(null, "", shareUrl);
+    window.history.replaceState({ travelSelfStage: "result" }, "", shareUrl);
     window.scrollTo({ top: 0, behavior: "auto" });
   }
 
@@ -340,9 +420,7 @@ export function TravelSelfQuiz() {
   function beginUpdate() {
     if (!stored) return;
     setDraft({ positions: stored.positions, timeTogether: stored.timeTogether, passions: [...stored.passions], lead: stored.lead });
-    setUpdating(true);
-    setStep(0);
-    setView("questionnaire");
+    showQuestionnaire("passport");
   }
 
   function dismissAnnual() {
@@ -352,38 +430,15 @@ export function TravelSelfQuiz() {
     setStored(next);
   }
 
-  if (view === "loading") return <section className={styles.loading} aria-busy="true" />;
-
   if (view === "intro") {
     return (
-      <div className={styles.intro}>
-        <Container>
-          <p className={styles.standfirst}>{COPY.standfirst}</p>
-          <h1>{COPY.title}</h1>
-          <div className={styles.introGrid}>
-            <section className={styles.introOpening}>
-              <h2>{COPY.introduction.heading}</h2>
-              {COPY.introduction.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-            </section>
-            <section className={styles.asks}>
-              <p className={styles.panelEyebrow}>{COPY.asks.heading}</p>
-              {COPY.asks.questions.map((question) => <p key={question}>{question}</p>)}
-              <small>{COPY.asks.note}</small>
-            </section>
-            <section className={styles.editorialSection}>
-              <h2>{COPY.whatYouGet.heading}</h2>
-              {COPY.whatYouGet.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-            </section>
-            <section className={styles.editorialSection}>
-              <h2>{COPY.journey.heading}</h2>
-              {COPY.journey.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
-            </section>
-          </div>
-          <p className={styles.boundary}>{COPY.boundary}</p>
-          <div className={styles.introAction}>
-            <Button onClick={() => { setStep(0); setView("questionnaire"); }}>{COPY.begin}</Button>
-          </div>
-        </Container>
+      <div onClick={beginFromIntroduction}>
+        {children ?? (
+          <section>
+            <h1>Your Travel Self</h1>
+            <button data-travel-self-begin type="button">Begin</button>
+          </section>
+        )}
       </div>
     );
   }
