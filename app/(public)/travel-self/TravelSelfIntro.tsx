@@ -61,8 +61,11 @@ export function TravelSelfIntro() {
 
       <div className={`${styles.introGrid} ${styles.introClosing}`}>
         <p className={styles.introBoundary}>
-          You can read every route on this site without answering a single
-          question. This is only for when you want to join one.
+          <span>
+            You can read every route on this site without answering a single
+            question.
+          </span>
+          <span>This is only for when you want to join one.</span>
         </p>
       </div>
     </div>
