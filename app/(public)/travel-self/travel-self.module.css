@@ -106,9 +106,9 @@
   grid-column: 1 / span 8;
   margin: 0;
   font-family: var(--tsi-display);
-  font-size: clamp(3.25rem, 12vw, 10rem);
+  font-size: clamp(3.25rem, 5.5vw, 5rem);
   font-weight: 400;
-  line-height: 0.88;
+  line-height: 0.96;
   letter-spacing: -0.03em;
 }
 
@@ -668,6 +668,12 @@
   margin-top: var(--space-3);
   font-size: 0.8rem;
   letter-spacing: 0.12em;
+}
+
+@media (min-width: 900px) {
+  .travelSelfIntro .introHead h1 {
+    white-space: nowrap;
+  }
 }
 
 @media (max-width: 899px) {
