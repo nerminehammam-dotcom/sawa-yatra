@@ -64,9 +64,6 @@ export function TravelSelfIntro() {
           You can read every route on this site without answering a single
           question. This is only for when you want to join one.
         </p>
-        <div className={styles.introAct}>
-          <BeginButton />
-        </div>
       </div>
     </div>
   );

@@ -234,10 +234,6 @@
   line-height: 1.16;
 }
 
-.travelSelfIntro .introClosing .introAct {
-  grid-column: 1 / -1;
-}
-
 .questionnaire {
   min-height: calc(100dvh - var(--nav-height));
   padding-block: clamp(var(--space-10), 6vw, var(--space-20));
