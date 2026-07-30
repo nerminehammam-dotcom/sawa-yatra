@@ -43,12 +43,14 @@
   border-color: var(--ink);
 }
 
+/* Primary keeps its colour on hover; the border and lift do the work.
+   Filling with ink used to make it read as a different button entirely. */
 .primary:hover:not(:disabled):not([aria-disabled="true"]) {
-  color: var(--paper);
-  background: var(--hover);
-  border-color: var(--hover);
+  color: var(--action-text);
+  background: var(--action-bg);
+  border-color: var(--ink);
   transform: translate(-1px, -1px);
-  box-shadow: none;
+  box-shadow: 3px 3px 0 var(--ink);
 }
 
 .secondary,
@@ -60,9 +62,11 @@
   border-color: var(--ink);
 }
 
+/* Secondary fills with ink, not signal — filling with signal made it
+   indistinguishable from the primary button. */
 .secondary:hover:not(:disabled):not([aria-disabled="true"]) {
-  color: var(--ink);
-  background: var(--brick);
+  color: var(--paper);
+  background: var(--ink);
   transform: translate(-1px, -1px);
   box-shadow: none;
 }

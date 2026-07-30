@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your Travel Self · Sawayatra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f%5B%5D=general-sans@400,500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --butter:#FAE3B1; --cream:#F6EEDC; --brick:#7D2027; --olive:#6E6A28;
+  --terracotta:#B4472C; --burnt:#CF5527; --honey:#DFA22B; --deep-brown:#673C34;
+  --dusty-blue:#5FA8C2; --dusty-rose:#EEB6C4;
+  --warm-ink:#2B2420; --olive-text:#55521E;
+  --link:#245C68; --action:#7D2027; --focus:#245C68; --hover:#8E3522; --disabled:#B7AE97;
+  --error:#9B2A2A;
+  --font-display:"Fraunces",Georgia,serif;
+  --font-read:"General Sans","Inter",system-ui,sans-serif;
+  --radius-card:14px; --radius-pill:999px;
+  --measure:66ch; --touch-min:44px;
+  --grain-opacity:.085;
+  --space-2:.5rem; --space-3:.75rem; --space-4:1rem; --space-6:1.5rem;
+  --space-8:2rem; --space-12:3rem; --space-16:4rem;
+  --page-gutter:clamp(1.25rem,5vw,4rem);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; background:var(--cream); color:var(--warm-ink);
+  font-family:var(--font-read); font-size:19px; line-height:1.6;
+  font-weight:400; -webkit-font-smoothing:antialiased;
+}
+.grain{
+  position:fixed; inset:0; pointer-events:none; z-index:9999;
+  opacity:var(--grain-opacity); mix-blend-mode:soft-light;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+:focus-visible{outline:3px solid var(--focus); outline-offset:3px}
+
+/* ---------- shell ---------- */
+.masthead{
+  padding:var(--space-6) var(--page-gutter) var(--space-4);
+  display:flex; align-items:baseline; gap:var(--space-4); flex-wrap:wrap;
+}
+.wordmark{font-family:var(--font-display);font-weight:300;font-size:1.5rem;letter-spacing:.01em;line-height:1}
+.syllables{font-family:var(--font-read);font-size:.7rem;letter-spacing:.34em;text-transform:uppercase;color:var(--deep-brown);opacity:.8}
+main{padding:0 var(--page-gutter) var(--space-16); max-width:1180px; margin:0 auto}
+
+h1{font-family:var(--font-display);font-weight:300;font-size:clamp(2.6rem,6vw,4.4rem);line-height:1.02;letter-spacing:-.015em;margin:var(--space-8) 0 var(--space-6)}
+h2{font-family:var(--font-display);font-weight:300;font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.12;margin:0 0 var(--space-4)}
+p{max-width:var(--measure); margin:0 0 var(--space-4)}
+.lede{font-size:1.05rem;color:var(--deep-brown);max-width:60ch}
+.rule{border:0;border-top:1px solid rgba(43,36,32,.16);margin:var(--space-8) 0}
+
+/* ---------- intro ---------- */
+.intro-grid{display:grid;grid-template-columns:1fr;gap:var(--space-8);align-items:start}
+@media(min-width:900px){.intro-grid{grid-template-columns:1.35fr .9fr;gap:var(--space-16)}}
+.brief{background:var(--butter);border-radius:var(--radius-card);padding:var(--space-6)}
+.brief h3{font-family:var(--font-display);font-weight:400;font-size:1.25rem;margin:0 0 var(--space-3)}
+.brief ul{margin:0;padding:0;list-style:none}
+.brief li{padding:var(--space-3) 0;border-top:1px solid rgba(43,36,32,.14);font-size:1rem}
+.brief li:first-child{border-top:0;padding-top:0}
+.brief b{font-weight:500;display:block}
+.brief span{color:var(--deep-brown);font-size:.95rem}
+
+/* ---------- buttons ---------- */
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+.btn{
+  display:inline-block;background:var(--action);color:var(--cream);border:0;
+  border-radius:var(--radius-pill);padding:.85rem 2rem;font-family:var(--font-read);
+  font-weight:500;font-size:1.05rem;min-height:var(--touch-min);
+  transition:background .18s ease;
+}
+.btn:hover{background:#63191F}
+.btn[disabled]{background:var(--disabled);color:#5B5344;cursor:not-allowed}
+.btn-quiet{
+  background:transparent;color:var(--warm-ink);border:1px solid rgba(43,36,32,.3);
+  border-radius:var(--radius-pill);padding:.7rem 1.5rem;min-height:var(--touch-min);
+  font-family:var(--font-read);font-size:1rem;transition:border-color .18s ease
+}
+.btn-quiet:hover{border-color:var(--warm-ink)}
+.nav-row{display:flex;align-items:center;gap:var(--space-4);flex-wrap:wrap;margin-top:var(--space-8)}
+
+/* ---------- questionnaire ---------- */
+.form-grid{display:grid;grid-template-columns:1fr;gap:var(--space-8)}
+@media(min-width:960px){.form-grid{grid-template-columns:1fr 260px;gap:var(--space-16)}}
+.progress{font-size:.85rem;letter-spacing:.16em;text-transform:uppercase;color:var(--deep-brown);margin-bottom:var(--space-4)}
+.qtext{font-family:var(--font-display);font-weight:300;font-size:clamp(1.9rem,4vw,2.9rem);line-height:1.1;letter-spacing:-.01em;margin:0 0 var(--space-3);max-width:18ch}
+.helper{font-size:1rem;color:var(--deep-brown);margin:0 0 var(--space-8);font-style:italic}
+
+/* six-step ink slider */
+.poles{display:flex;justify-content:space-between;gap:var(--space-4);margin-bottom:var(--space-3)}
+.pole{max-width:16ch}
+.pole b{display:block;font-family:var(--font-display);font-weight:400;font-size:1.15rem;line-height:1.2}
+.pole span{font-size:.92rem;color:var(--deep-brown);line-height:1.35;display:block;margin-top:2px}
+.pole.right{text-align:right}
+.dots{display:flex;justify-content:space-between;align-items:center;gap:clamp(4px,2vw,14px);padding:var(--space-4) 0}
+.dot{
+  flex:1 1 0; aspect-ratio:1/1; max-width:66px; min-height:var(--touch-min);
+  border-radius:50%; border:1px solid var(--disabled); background:transparent;
+  padding:0; transition:background .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.dot:hover{border-color:var(--warm-ink)}
+.dot[aria-checked="true"]{border-color:transparent;box-shadow:0 0 0 3px var(--ink)}
+.track{height:1px;background:rgba(43,36,32,.18);margin-top:-2px}
+.echo{
+  font-family:var(--font-display);font-weight:300;font-style:italic;
+  font-size:clamp(1.15rem,2.4vw,1.55rem);line-height:1.35;
+  margin-top:var(--space-6);min-height:2.6em;max-width:34ch;color:var(--warm-ink)
+}
+.echo:empty::before{content:"Choose the side that is slightly more true.";color:var(--disabled);font-style:normal;font-family:var(--font-read);font-size:1rem}
+
+/* choice lists */
+.choices{list-style:none;margin:0;padding:0;display:grid;gap:var(--space-3);max-width:44ch}
+.choice{
+  display:block;width:100%;text-align:left;background:transparent;
+  border:1px solid rgba(43,36,32,.24);border-radius:var(--radius-card);
+  padding:1rem 1.25rem;min-height:var(--touch-min);font-family:var(--font-read);
+  font-size:1.1rem;transition:border-color .18s ease,background .18s ease
+}
+.choice:hover{border-color:var(--warm-ink)}
+.choice[aria-checked="true"],.choice[aria-pressed="true"]{
+  background:var(--butter);border-color:var(--warm-ink);border-width:2px;padding:calc(1rem - 1px) calc(1.25rem - 1px)
+}
+
+/* passions */
+.passions{list-style:none;margin:0;padding:0;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.passion{
+  display:block;width:100%;text-align:left;background:transparent;
+  border:1px solid rgba(43,36,32,.24);border-radius:var(--radius-card);
+  padding:1rem 1.15rem;min-height:var(--touch-min);font-family:var(--font-read);
+  transition:border-color .18s ease,background .18s ease
+}
+.passion b{display:block;font-family:var(--font-display);font-weight:400;font-size:1.2rem;margin-bottom:2px}
+.passion span{font-size:.95rem;color:var(--deep-brown);line-height:1.4}
+.passion:hover{border-color:var(--warm-ink)}
+.passion[aria-pressed="true"]{background:var(--butter);border-color:var(--warm-ink);border-width:2px;padding:calc(1rem - 1px) calc(1.15rem - 1px)}
+.count{font-size:1rem;color:var(--deep-brown);margin:var(--space-4) 0 var(--space-6)}
+.count.full{color:var(--warm-ink)}
+.refused{color:var(--error);font-family:var(--font-display);font-style:italic;font-size:1.15rem;min-height:1.5em;margin-top:var(--space-3)}
+
+/* narrowing panel */
+.narrowing{background:var(--butter);border-radius:var(--radius-card);padding:var(--space-6);align-self:start}
+@media(min-width:960px){.narrowing{position:sticky;top:var(--space-6)}}
+.narrowing h3{font-family:var(--font-read);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--deep-brown);margin:0 0 var(--space-4);font-weight:500}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-bottom:var(--space-4)}
+.tile{aspect-ratio:3/2;border-radius:3px;background:var(--terracotta);opacity:.42;transition:opacity .5s ease}
+.tile.out{opacity:.07}
+.narrow-line{font-family:var(--font-display);font-weight:300;font-size:1.3rem;line-height:1.25;margin:0}
+.narrow-sub{font-size:.9rem;color:var(--deep-brown);margin:var(--space-2) 0 0}
+
+/* ---------- reveal ---------- */
+.stage{background:var(--brick);color:var(--cream);border-radius:var(--radius-card);padding:clamp(2.5rem,8vw,5.5rem) clamp(1.5rem,6vw,4rem);text-align:center}
+.stage .eyebrow{font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;opacity:.72;margin:0 0 var(--space-6)}
+.selfname{font-family:var(--font-display);font-weight:300;font-size:clamp(3rem,10vw,6.5rem);line-height:.98;letter-spacing:-.02em;margin:0}
+.readout{font-family:var(--font-read);font-size:clamp(.8rem,2vw,1rem);letter-spacing:.24em;color:var(--dusty-rose);margin:var(--space-6) 0 0}
+.passport{max-width:var(--measure);margin:var(--space-16) 0 0}
+.field{border-top:1px solid rgba(43,36,32,.18);padding:var(--space-6) 0}
+.field h4{font-family:var(--font-read);font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--deep-brown);margin:0 0 var(--space-3);font-weight:500}
+.field p{font-size:1.15rem;margin:0}
+.field.sting{background:var(--butter);border-radius:var(--radius-card);border-top:0;padding:var(--space-8);margin-top:var(--space-8)}
+.field.sting p{font-family:var(--font-display);font-weight:300;font-style:italic;font-size:clamp(1.5rem,3.6vw,2.1rem);line-height:1.28}
+.disclaimer{font-style:italic;color:var(--deep-brown);font-size:1rem;max-width:60ch;margin-top:var(--space-8)}
+.fifteen{list-style:none;margin:var(--space-6) 0 0;padding:0;display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.fifteen li{border-top:1px solid rgba(43,36,32,.16);padding-top:var(--space-3)}
+.fifteen b{font-family:var(--font-display);font-weight:400;font-size:1.25rem;display:block}
+.fifteen span{font-size:.72rem;letter-spacing:.16em;color:var(--deep-brown);display:block;margin-top:3px}
+.fifteen li.you b{color:var(--terracotta)}
+.annual{background:var(--butter);border-radius:var(--radius-card);padding:var(--space-4) var(--space-6);font-size:1.05rem;margin:0 0 var(--space-4)}
+.btn-link{background:none;border:0;padding:0;color:var(--link);text-decoration:underline;font-size:1rem;font-family:inherit;min-height:auto}
+[hidden]{display:none !important}
+@media(prefers-reduced-motion:reduce){*{transition:none !important;animation:none !important}}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="masthead">
+  <span class="wordmark">Sawayatra</span>
+  <span class="syllables">sa · wa · ya · tra</span>
+</header>
+
+<main>
+
+<!-- ============ INTRO ============ -->
+<section id="intro">
+  <p class="lede">Sawayatra is a members' travel club that matches travellers by how they travel — not by age, not by destination. The Travel Self is how that works. Eight short questions about the way you move through a journey and what draws you to a place. Answer them once, and every journey on the site reads differently.</p>
+
+  <h1>Your Travel Self</h1>
+
+  <div class="intro-grid">
+    <div>
+      <p>You already know how you travel.</p>
+      <p>You know whether you want the week settled before you leave or open when you arrive. Whether the good part of the day is the first hour or the last one. Whether you come home from a trip refilled by the people in it, or quietly emptied.</p>
+      <p>You have probably never had to say any of it out loud. There has been no reason to. Trips are booked alone, or with people who worked it out about you years ago.</p>
+      <p>That is what this is for.</p>
+
+      <hr class="rule">
+
+      <h2>What you get</h2>
+      <p>A Travel Self: a name and a short portrait of how you move through a journey. More usefully, it shows where you bend, where you do not, and the moment on a shared trip when you are most likely to feel the difference between you and everyone else.</p>
+      <p>It is not a compatibility score. No number can tell you whether nine days with a stranger will work, and we would rather say so than pretend. Where two ways of travelling differ, we name the difference and explain why it matters. Nothing used to make the comparison is hidden from you.</p>
+      <p class="disclaimer">The Travel Self is not a psychological test. It compares what travellers have said about how and why they travel. It cannot predict whether two people will get along.</p>
+    </div>
+
+    <aside class="brief">
+      <h3>Before you begin</h3>
+      <ul>
+        <li><b>Answer for the way you travel with people you have not travelled with before.</b><span>Not your solo self. Not the version of you on a family holiday.</span></li>
+        <li><b>Each question has two ends and no middle.</b><span>That is deliberate. <i>It depends</i> is true of very nearly everyone, and it is the one answer that tells us nothing.</span></li>
+        <li><b>You do not need to feel strongly.</b><span>Slightly more true is enough.</span></li>
+      </ul>
+    </aside>
+  </div>
+
+  <div class="nav-row">
+    <button class="btn" id="begin">Begin</button>
+    <span style="font-size:.95rem;color:var(--deep-brown)">Eight questions. You can change any of it later.</span>
+  </div>
+</section>
+
+<!-- ============ QUESTIONNAIRE ============ -->
+<section id="quiz" hidden>
+  <div class="form-grid">
+    <div>
+      <p class="progress" id="progress">Question 1 of 8</p>
+      <div id="stage-q"></div>
+      <div class="nav-row">
+        <button class="btn-quiet" id="back">Back</button>
+        <button class="btn" id="next">Next</button>
+      </div>
+    </div>
+
+    <aside class="narrowing" id="narrowing">
+      <h3>Sixteen travel selves</h3>
+      <div class="tiles" id="tiles" aria-hidden="true"></div>
+      <p class="narrow-line" id="narrowLine">All of them still yours.</p>
+      <p class="narrow-sub" id="narrowSub">Each answer rules some out.</p>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ REVEAL ============ -->
+<section id="result" hidden>
+  <div class="stage">
+    <p class="eyebrow">Your travel self</p>
+    <p class="selfname" id="rName">—</p>
+    <p class="readout" id="rReadout">—</p>
+  </div>
+
+  <div class="passport">
+    <div id="returnBlock" hidden>
+      <p class="annual" id="annual" hidden>You made this a year ago. Travel selves change — with age, with money, and with who you are travelling with. <button class="btn-link" id="dismissAnnual">Dismiss</button></p>
+      <p style="margin:0 0 var(--space-6)"><button class="btn" id="update">Update your Travel Self</button></p>
+    </div>
+    <div class="field"><h4>Essence</h4><p id="rEssence"></p></div>
+    <div class="field"><h4>What you bring</h4><p id="rBring"></p></div>
+    <div class="field"><h4>You travel for</h4><p id="rFor"></p></div>
+    <div class="field"><h4>Comfort</h4><p id="rComfort"></p></div>
+    <div class="field"><h4>Time together</h4><p id="rTime"></p></div>
+    <div class="field"><h4>You bend on</h4><p id="rBend"></p></div>
+    <div class="field sting"><h4>You will feel it when</h4><p id="rSting"></p></div>
+
+    <p class="disclaimer">The Travel Self is not a psychological test. It compares what travellers have said about how and why they travel. It cannot predict whether two people will get along.</p>
+    <p style="margin-top:var(--space-4)">You can change any of this later.</p>
+  </div>
+
+  <hr class="rule">
+  <h2>The other fifteen</h2>
+  <p class="lede">Sixteen ways of moving through a journey. You will recognise more than one of them.</p>
+  <ul class="fifteen" id="fifteen"></ul>
+
+  <div class="nav-row">
+    <button class="btn-quiet" id="restart">Start again</button>
+  </div>
+</section>
+
+</main>
+
+<script>
+"use strict";
+
+/* ============================================================
+   DATA — single source of truth. Mirrors spec v2.0 §3, §4, §5.
+   ============================================================ */
+
+const AXES = [
+  { id:"pace", label:"Pace", naming:true, ink:"var(--terracotta)",
+    q:"How much ground do you want to cover?",
+    left:{name:"Slow", gloss:"fewer places, longer in each", word:"unhurried"},
+    right:{name:"Full-Tilt", gloss:"more places, keep moving", word:"full-tilt"},
+    echo:[
+      "One town. You would stay another night if you could.",
+      "Few places, and time enough to be bored in them.",
+      "Slowly — though you would not want to miss the thing an hour away.",
+      "Onward, but not through lunch.",
+      "More ground. You sleep well on buses.",
+      "Three towns, and you would have taken a fourth."
+    ],
+    feel:{ left:"the group decides to fit in one more town before dark.",
+           right:"it is four in the afternoon and everyone is still in the same square." } },
+
+  { id:"planning", label:"Planning", naming:true, ink:"var(--dusty-blue)",
+    q:"How much of it do you want settled before you go?",
+    left:{name:"Improviser", gloss:"decide as you arrive", word:"unplanned"},
+    right:{name:"Choreographer", gloss:"know the week in advance", word:"charted"},
+    echo:[
+      "No plan. That is the plan.",
+      "You will decide when you get there.",
+      "A loose idea, and the rest as it comes.",
+      "Enough booked to stop thinking about it.",
+      "You would like the week settled before you pack.",
+      "You have a document, and it has tabs."
+    ],
+    feel:{ left:"Tuesday was decided in March, and Tuesday turns out to be beautiful somewhere else.",
+           right:"nothing is booked and it is already Thursday." } },
+
+  { id:"social", label:"Social energy", naming:true, ink:"var(--honey)",
+    q:"How much company do you want around you?",
+    left:{name:"Quiet", gloss:"a few people, unhurried", word:"quiet"},
+    right:{name:"Table-Setter", gloss:"a full table, most nights", word:"sociable"},
+    echo:[
+      "A few people, and long silences that are not awkward.",
+      "Company, in small amounts.",
+      "You will join the table. You may not lead it.",
+      "You like a full table, and an early night.",
+      "Dinner with everyone, most nights.",
+      "You have already invited the people at the next table."
+    ],
+    feel:{ left:"the table has been going two hours and it is understood that you stay.",
+           right:"everyone goes up to their rooms straight after dinner." } },
+
+  { id:"rhythm", label:"Rhythm", naming:true, ink:"var(--olive)",
+    q:"When does your day come alive?",
+    left:{name:"Sunrise-Chaser", gloss:"first light", word:"dawn-led"},
+    right:{name:"Night-Owl", gloss:"after dark", word:"night-led"},
+    echo:[
+      "You have watched more than one town wake up.",
+      "The first hour is the good one.",
+      "Early — though you will stay up if something is happening.",
+      "Late — though you can be got out of bed.",
+      "The day starts properly after lunch.",
+      "You are still awake, and glad about it."
+    ],
+    feel:{ left:"the table is still going at midnight and you have a six o'clock in your head.",
+           right:"the group wants to be up at six and decide the day over breakfast." } },
+
+  { id:"comfort", label:"Comfort", naming:false, ink:"var(--deep-brown)",
+    q:"How much comfort do you want around you?",
+    left:{name:"Unfussy", gloss:"simple is fine", word:"unfussy"},
+    right:{name:"Considered", gloss:"where you stay matters", word:"considered"},
+    echo:[
+      "A bed is a bed.",
+      "You have slept in worse and thought nothing of it.",
+      "Simple is fine, as long as it is clean.",
+      "Comfortable, without needing a view.",
+      "Where you stay is part of the trip.",
+      "You would rather one good room than three nights saved."
+    ],
+    feel:{ left:"the third dinner in a row costs more than you would have chosen to spend.",
+           right:"the group settles on the cheaper option and nobody thinks to ask." } }
+];
+
+/* Weighting order — spec §6. Governs bend list order and the sting line. */
+const WEIGHT = ["rhythm","pace","comfort","planning","social"];
+
+const STRENGTH = [null,1,.72,.3,.3,.72,1];
+const POSLABEL = ["","Strongly","Clearly","Slightly","Slightly","Clearly","Strongly"];
+
+/* The sixteen. Key = pace|planning|social|rhythm, L = first pole, R = second. */
+const FAMILIES = {
+  LLLL:{name:"The Seeker",     bring:"the discovery nobody booked.",
+    essence:"You are up before the town is, and you do not yet know where you are going. That is the point. A day settled in advance feels to you like a day already spent, and the hours that stay with you are the ones you walked into without knowing."},
+  LLLR:{name:"The Drifter",    bring:"an ease with not knowing yet.",
+    essence:"You let the evening decide. You are unhurried, unscheduled and content in your own company, and you have never once regretted staying out an hour longer than was sensible. Where a day is going matters less to you than what it turns out to be."},
+  LRLL:{name:"The Naturalist", bring:"preparation, and the stillness to use it.",
+    essence:"You want the day to have a shape and the shape to start early. You have read about where you are going, you know what you hope to see, and you would rather wait two hours in one place than pass through four. Patience is your method, not a virtue you are performing."},
+  LRLR:{name:"The Astronomer", bring:"steadiness, and attention to what everyone else walked past.",
+    essence:"You like a journey with room around it — enough structure to trust the road, enough quiet to notice where it has taken you. You do not need to lead the group or fill its silences, but you need the day to have a plan and the evening to stay open."},
+  LLRL:{name:"The Regular",    bring:"a place that has started to know the group.",
+    essence:"By the third morning the café knows your order. You did not plan that and you could not repeat it on purpose — you simply go slowly, turn up early, and talk to whoever is there. You come home with people rather than photographs."},
+  LLRR:{name:"The Bohemian",   bring:"the night everyone talks about afterwards.",
+    essence:"The table is the destination. You are in no hurry, you have made no plan, and you assume the evening will produce whatever it produces — which, in your experience, it reliably does. A long dinner is not a break from the journey. It is the journey."},
+  LRRL:{name:"The Host",       bring:"a group that has eaten and knows the day by nine.",
+    essence:"You have thought about the day and you have thought about the people. Breakfast is where you gather them — unhurried, with a plan you are perfectly happy to be talked out of. You are organising, but nobody feels organised."},
+  LRRR:{name:"The Convener",   bring:"the evening that would not have happened by itself.",
+    essence:"You booked the table three days ago. Slow days, a long evening, everyone in one place at the end of it — that is a journey well spent, and you are willing to do the arranging that makes it happen rather than hoping it will."},
+  RLLL:{name:"The Scout",      bring:"the road ahead, checked before anyone else is awake.",
+    essence:"You are ahead, early, and working it out as you go. You would rather cover ground and adjust than settle a plan you may want to abandon by ten. You do not need company for this, though you will happily come back and report what is up there."},
+  RLLR:{name:"The Nomad",      bring:"the willingness to go now.",
+    essence:"You move fast and late and you do not much mind where you sleep. Plans feel like weight. You have crossed three towns in a day on no notice and thought nothing of it, and you are more comfortable than most people with not knowing about tomorrow."},
+  RRLL:{name:"The Pathfinder", bring:"a hard day that goes right.",
+    essence:"You know the route, the timings and where the difficulty is, and you would like to start early enough to get through it. You are not being rigid. You have simply found that a fast day only works when somebody has thought it through first."},
+  RRLR:{name:"The Navigator",  bring:"the problem that was solved before it arrived.",
+    essence:"You plan precisely, move quickly and keep your own counsel. The others discover on the second evening that you knew about the ferry, the closure and the shortcut, and had said nothing about any of it because nobody asked."},
+  RLRL:{name:"The Bugler",     bring:"momentum, at the hour when it is hardest to find.",
+    essence:"At six in the morning you are certain everyone would be happier awake, and often you are right. You have no plan — you have energy, and a conviction that the day is better started than discussed. People follow you before they have decided to."},
+  RLRR:{name:"The Catalyst",   bring:"the evening that turned.",
+    essence:"Nothing was going to happen tonight until you suggested it. You move fast, you make no plans, and you are the reason a quiet evening becomes the one people describe when they get home. You do not organise. You start."},
+  RRRL:{name:"The Conductor",  bring:"a full day that still ends on time.",
+    essence:"You set the tempo and you gather the people, and you are up early doing both. The day has a shape, everyone knows it, and it moves. You take real pleasure in a group that is running well and none at all in one that is drifting."},
+  RRRR:{name:"The Ringmaster", bring:"more journey per day than anyone thought possible.",
+    essence:"You want all of it and you have arranged all of it — the fast day, the full table, the late night. You are the one who booked the thing at eleven and got everybody there. Sleep, to you, is a scheduling matter."}
+};
+
+const TIME_TOGETHER = ["Most of the day","Some of it","Meals and evenings"];
+
+const PASSIONS = [
+  {n:"Food",             f:"table", l:"Markets, kitchens and long lunches."},
+  {n:"Festivals",        f:"table", l:"Processions, feast days, and whatever the town is doing that week."},
+  {n:"Local Connection", f:"table", l:"Time with the people who live there, not only the ones who host."},
+  {n:"Design",           f:"made",  l:"Buildings, objects, and how a place puts itself together."},
+  {n:"Culture",          f:"made",  l:"Museums, ruins, music, and the history under the street."},
+  {n:"Photography",      f:"made",  l:"Light, and the time it takes to wait for it."},
+  {n:"Learning",         f:"made",  l:"Courses, guides, languages, and being taught something."},
+  {n:"Shopping",         f:"made",  l:"Workshops, makers, and bringing something home."},
+  {n:"Nature",           f:"wild",  l:"Landscape, walking, weather, and being outside all day."},
+  {n:"Wildlife",         f:"wild",  l:"Animals and birds, and the patience they ask for."},
+  {n:"Adventure",        f:"wild",  l:"Height, distance, effort, and a little risk."},
+  {n:"Wellness",         f:"quiet", l:"Rest, treatment, sleep, and coming home slower than you left."},
+  {n:"Water",            f:"quiet", l:"Coastlines, swimming, rivers and hot springs."}
+];
+
+/* Family names are internal only — never rendered. Spec §4. */
+const FAMILY_LINE = {
+  table:"You measure a place by who you ended up eating with.",
+  made:"You read a place through what people there have made and kept.",
+  wild:"You want the part of a country that was not arranged for you.",
+  quiet:"You travel to come back to yourself."
+};
+const SPREAD_LINE = {
+  "made,table,wild":"You want all of it: the meal, the workshop, the weather.",
+  "made,quiet,table":"You like a place best when it is well made and someone is feeding you.",
+  "quiet,table,wild":"You go out for the whole day and come back to the table.",
+  "made,quiet,wild":"You want beauty and open country, and quiet at the end of it."
+};
+
+const STING_ALLBEND = "the group looks to you for a preference, and you do not have a strong one to give.";
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const state = { step:0, axis:{}, time:null, passions:[], lead:null };
+const TOTAL = 8;
+
+const $ = id => document.getElementById(id);
+const stageQ = $("stage-q");
+
+/* ============================================================
+   NARROWING PANEL
+   ============================================================ */
+const tilesEl = $("tiles");
+for (let i=0;i<16;i++){ const d=document.createElement("div"); d.className="tile"; tilesEl.appendChild(d); }
+
+const NARROW_COPY = [
+  ["All of them still yours.","Each answer rules some out."],
+  ["Eight remain.","Half the field, gone on one answer."],
+  ["Four remain.","Getting close now."],
+  ["Two remain.","One question decides it."],
+  ["One.","You will meet it at the end."]
+];
+
+function updateNarrowing(){
+  const answered = AXES.filter(a=>a.naming && state.axis[a.id]).length;
+  const remaining = 16 / Math.pow(2, answered);
+  [...tilesEl.children].forEach((t,i)=> t.classList.toggle("out", i >= remaining));
+  if (state.step >= 4 && answered === 4){
+    $("narrowLine").textContent = "One.";
+    $("narrowSub").textContent = state.step === 4
+      ? "You will meet it at the end."
+      : "Your self is settled. The rest is what it is for.";
+  } else {
+    $("narrowLine").textContent = NARROW_COPY[answered][0];
+    $("narrowSub").textContent  = NARROW_COPY[answered][1];
+  }
+}
+
+/* ============================================================
+   RENDERERS
+   ============================================================ */
+function renderAxis(ax){
+  const chosen = state.axis[ax.id];
+  const dots = [1,2,3,4,5,6].map(p=>{
+    const on = chosen === p;
+    const side = p<=3 ? ax.left.name : ax.right.name;
+    return `<button class="dot" role="radio" aria-checked="${on}" data-p="${p}"
+      tabindex="${on || (!chosen && p===1) ? 0 : -1}"
+      aria-label="${POSLABEL[p]} ${side}"
+      style="--ink:${ax.ink};background:${on?ax.ink:"transparent"};opacity:${on?STRENGTH[p]:1}"></button>`;
+  }).join("");
+
+  stageQ.innerHTML = `
+    <h2 class="qtext">${ax.q}</h2>
+    <p class="helper">With people you haven't travelled with before.</p>
+    <div class="poles">
+      <span class="pole"><b>${ax.left.name}</b><span>${ax.left.gloss}</span></span>
+      <span class="pole right"><b>${ax.right.name}</b><span>${ax.right.gloss}</span></span>
+    </div>
+    <div class="dots" role="radiogroup" aria-label="${ax.label}" id="dots">${dots}</div>
+    <div class="track"></div>
+    <p class="echo" id="echo">${chosen ? ax.echo[chosen-1] : ""}</p>`;
+
+  const group = $("dots");
+  group.addEventListener("click", e=>{
+    const b = e.target.closest(".dot"); if(!b) return;
+    state.axis[ax.id] = +b.dataset.p; renderAxis(ax); updateNarrowing(); syncNav();
+    $("dots").querySelector('[aria-checked="true"]').focus();
+  });
+  group.addEventListener("keydown", e=>{
+    const keys = {ArrowRight:1,ArrowDown:1,ArrowLeft:-1,ArrowUp:-1};
+    if(!(e.key in keys)) return;
+    e.preventDefault();
+    const cur = state.axis[ax.id] || 1;
+    const nxt = Math.min(6, Math.max(1, cur + keys[e.key]));
+    state.axis[ax.id] = nxt; renderAxis(ax); updateNarrowing(); syncNav();
+    $("dots").querySelector('[aria-checked="true"]').focus();
+  });
+}
+
+function renderTime(){
+  const opts = TIME_TOGETHER.map(o=>
+    `<li><button class="choice" role="radio" aria-checked="${state.time===o}" data-v="${o}">${o}</button></li>`).join("");
+  stageQ.innerHTML = `
+    <h2 class="qtext">When you travel with others, how much of the day do you want to spend together?</h2>
+    <p class="helper">This one shapes the group, not the comparison. Nobody is measured against it.</p>
+    <ul class="choices" role="radiogroup" aria-label="Time together">${opts}</ul>`;
+  stageQ.querySelector(".choices").addEventListener("click", e=>{
+    const b = e.target.closest(".choice"); if(!b) return;
+    state.time = b.dataset.v; renderTime(); syncNav();
+  });
+}
+
+function renderPassions(){
+  const cards = PASSIONS.map(p=>{
+    const on = state.passions.includes(p.n);
+    return `<li><button class="passion" aria-pressed="${on}" data-v="${p.n}"><b>${p.n}</b><span>${p.l}</span></button></li>`;
+  }).join("");
+  const n = state.passions.length;
+  stageQ.innerHTML = `
+    <h2 class="qtext">What draws you to a place?</h2>
+    <p class="helper">Choose three. These are shown to other members — never scored, never counted against you.</p>
+    <p class="count ${n===3?"full":""}" id="pcount">${n} of three chosen</p>
+    <ul class="passions">${cards}</ul>
+    <p class="refused" id="refused"></p>`;
+  stageQ.querySelector(".passions").addEventListener("click", e=>{
+    const b = e.target.closest(".passion"); if(!b) return;
+    const v = b.dataset.v;
+    if (state.passions.includes(v)) state.passions = state.passions.filter(x=>x!==v);
+    else if (state.passions.length === 3){
+      $("refused").textContent = "Three only. Something has to go.";
+      setTimeout(()=>{ const r=$("refused"); if(r) r.textContent=""; }, 3200);
+      return;
+    } else state.passions.push(v);
+    if (!state.passions.includes(state.lead)) state.lead = null;
+    renderPassions(); syncNav();
+  });
+}
+
+function renderLead(){
+  const opts = state.passions.map(p=>
+    `<li><button class="choice" role="radio" aria-checked="${state.lead===p}" data-v="${p}">${p}</button></li>`).join("");
+  stageQ.innerHTML = `
+    <h2 class="qtext">Which of these would most influence the journey you book?</h2>
+    <p class="helper">This orders what we show you first. It does not change your Travel Self.</p>
+    <ul class="choices" role="radiogroup" aria-label="Leading passion">${opts}</ul>`;
+  stageQ.querySelector(".choices").addEventListener("click", e=>{
+    const b = e.target.closest(".choice"); if(!b) return;
+    state.lead = b.dataset.v; renderLead(); syncNav();
+  });
+}
+
+function renderStep(){
+  if (state.step < 5) renderAxis(AXES[state.step]);
+  else if (state.step === 5) renderTime();
+  else if (state.step === 6) renderPassions();
+  else renderLead();
+  $("progress").textContent = `Question ${state.step+1} of ${TOTAL}`;
+  $("back").textContent = state.step === 0 ? "Back to the introduction" : "Back";
+  $("next").textContent = state.step === TOTAL-1 ? "See your Travel Self" : "Next";
+  updateNarrowing(); syncNav();
+  window.scrollTo({top:0, behavior:"instant"});
+}
+
+function answered(){
+  if (state.step < 5) return !!state.axis[AXES[state.step].id];
+  if (state.step === 5) return !!state.time;
+  if (state.step === 6) return state.passions.length === 3;
+  return !!state.lead;
+}
+function syncNav(){ $("next").disabled = !answered(); }
+
+/* ============================================================
+   COMPUTE
+   ============================================================ */
+function computeBends(){
+  return WEIGHT.filter(id => { const p = state.axis[id]; return p===3 || p===4; });
+}
+
+function bendLine(){
+  const bends = computeBends();
+  const Label = id => AXES.find(a=>a.id===id).label;
+  const lower = id => Label(id).toLowerCase();
+  if (bends.length === 0) return "Nothing. You are firmly placed on all five.";
+  if (bends.length <= 3)  return bends.map(Label).join(", ") + ".";
+  if (bends.length === 4){
+    const firm = WEIGHT.find(id => !bends.includes(id));
+    return `You adapt across most of a journey; ${lower(firm)} is the preference you hold to.`;
+  }
+  return "You adapt across all five, which makes you easier to travel with than most and harder to place.";
+}
+
+/* The sting: the highest-weighted axis on which you are firmly placed. */
+function stingLine(){
+  for (const id of WEIGHT){
+    const p = state.axis[id];
+    if (p===3 || p===4) continue;
+    const ax = AXES.find(a=>a.id===id);
+    return p<=2 ? ax.feel.left : ax.feel.right;
+  }
+  return STING_ALLBEND;
+}
+
+function motivationLine(){
+  const fams = state.passions.map(n => PASSIONS.find(p=>p.n===n).f);
+  const tally = {};
+  fams.forEach(f => tally[f] = (tally[f]||0) + 1);
+  const dominant = Object.keys(tally).find(f => tally[f] >= 2);
+  if (dominant) return FAMILY_LINE[dominant];
+  return SPREAD_LINE[[...new Set(fams)].sort().join(",")];
+}
+
+function familyKey(){
+  return AXES.filter(a=>a.naming).map(a => state.axis[a.id] <= 3 ? "L" : "R").join("");
+}
+
+function readoutFor(key){
+  return AXES.filter(a=>a.naming)
+    .map((a,i) => key[i]==="L" ? a.left.word : a.right.word)
+    .join(" · ");
+}
+
+function comfortPole(){
+  const c = state.axis.comfort;
+  return c <= 3 ? "Unfussy" : "Considered";
+}
+
+/* ============================================================
+   STORAGE — device-held. Spec v2.0 §5.
+   Falls back to memory only if the browser refuses storage
+   (private mode, blocked cookies). The page must still work.
+   ============================================================ */
+const KEY = "sawayatra.travelSelf";
+let memoryOnly = null;
+
+function save(){
+  const rec = { axis:state.axis, time:state.time, passions:state.passions,
+                lead:state.lead, updated:Date.now(),
+                promptDismissed: state.promptDismissed || null };
+  try { localStorage.setItem(KEY, JSON.stringify(rec)); }
+  catch(e){ memoryOnly = rec; }
+}
+function load(){
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (raw) return JSON.parse(raw);
+  } catch(e){}
+  return memoryOnly;
+}
+function restore(rec){
+  state.axis = rec.axis; state.time = rec.time;
+  state.passions = rec.passions; state.lead = rec.lead;
+  state.updated = rec.updated; state.promptDismissed = rec.promptDismissed;
+}
+const YEAR = 365 * 24 * 60 * 60 * 1000;
+function annualDue(){
+  if (!state.updated) return false;
+  if (state.promptDismissed && Date.now() - state.promptDismissed < YEAR) return false;
+  return Date.now() - state.updated > YEAR;
+}
+
+/* ============================================================
+   REVEAL
+   ============================================================ */
+function reveal(isReturn){
+  const key = familyKey();
+  const fam = FAMILIES[key];
+
+  $("rName").textContent    = fam.name;
+  $("rReadout").textContent = readoutFor(key);
+  $("rEssence").textContent = fam.essence;
+  $("rBring").textContent   = fam.bring.replace(/^./, c=>c.toUpperCase());
+  $("rFor").textContent     = motivationLine();
+  $("rComfort").textContent = comfortPole();
+  $("rTime").textContent    = state.time;
+  $("rBend").textContent    = bendLine();
+  $("rSting").textContent   = stingLine();
+
+  $("fifteen").innerHTML = Object.entries(FAMILIES).map(([k,f])=>
+    `<li class="${k===key?"you":""}"><b>${f.name}</b><span>${readoutFor(k)}</span></li>`).join("");
+
+  $("quiz").hidden = true;
+  $("intro").hidden = true;
+  $("result").hidden = false;
+
+  /* The control lives on the surface a member returns to, never on the
+     result screen. Spec v2.0 §5 — a member meeting their name for the
+     first time, with a control beside it offering to change the answer,
+     will use it within the minute. */
+  $("returnBlock").hidden = !isReturn;
+  $("annual").hidden = !(isReturn && annualDue());
+  $("restart").hidden = isReturn;
+
+  window.scrollTo({top:0, behavior:"instant"});
+  $("rName").setAttribute("tabindex","-1");
+  $("rName").focus();
+}
+
+/* ============================================================
+   WIRING
+   ============================================================ */
+$("begin").addEventListener("click", ()=>{
+  $("intro").hidden = true; $("quiz").hidden = false;
+  state.step = 0; renderStep();
+});
+$("next").addEventListener("click", ()=>{
+  if (!answered()) return;
+  if (state.step === TOTAL-1){ save(); reveal(false); }
+  else { state.step++; renderStep(); }
+});
+$("back").addEventListener("click", ()=>{
+  if (state.step === 0){ $("quiz").hidden = true; $("intro").hidden = false; window.scrollTo({top:0}); }
+  else { state.step--; renderStep(); }
+});
+$("restart").addEventListener("click", ()=>{
+  state.step = 0; state.axis = {}; state.time = null; state.passions = []; state.lead = null;
+  $("result").hidden = true; $("intro").hidden = false; window.scrollTo({top:0});
+});
+
+/* Update is not a retake: the existing answers are carried in. */
+$("update").addEventListener("click", ()=>{
+  $("result").hidden = true; $("quiz").hidden = false;
+  state.step = 0; renderStep();
+});
+$("dismissAnnual").addEventListener("click", ()=>{
+  state.promptDismissed = Date.now(); save();
+  $("annual").hidden = true;
+});
+
+/* A member with a stored Travel Self lands on their passport,
+   not the introduction. Spec v2.0 §10. */
+(function init(){
+  const rec = load();
+  if (rec && rec.lead){ restore(rec); reveal(true); }
+})();
+</script>
+</body>
+</html>

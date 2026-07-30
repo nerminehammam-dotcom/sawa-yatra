@@ -190,6 +190,8 @@
   background: var(--olive);
 }
 
+
+
 .joinCard .wayCopy {
   border-inline-start-color: var(--ink);
 }
@@ -224,6 +226,12 @@
   color: var(--pink);
   font-size: clamp(3.2rem, 5vw, 5rem);
   line-height: 0.93;
+}
+
+/* The join card is olive, not ink: pink on olive is 1.88:1 and fails AA even
+   for large text. Ink on olive is 4.78:1. */
+.wayCard.joinCard h3 {
+  color: var(--ink);
 }
 
 .wayCopy > p:not(.cardLabel) {

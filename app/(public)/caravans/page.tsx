@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { createPageMetadata } from "@/app/_metadata";
+import { RouteIndex } from "@/components/field/RouteIndex";
 import { andeanCaravan, andeanCaravanSections } from "@/content/andean-caravan";
 import { andeanCaravanHeroImage } from "@/content/andean-caravan-images";
 
@@ -9,6 +10,23 @@ import { CaravanRouteMap } from "./_components/CaravanRouteMap";
 import styles from "./caravans.module.css";
 
 export const metadata = createPageMetadata("/caravans");
+
+// Titles and ledes are taken verbatim from each caravan's own page; no route,
+// region or date detail has been inferred for routes that are not yet approved.
+const upcomingCaravans = [
+  {
+    title: "The Egyptian Caravan",
+    lede:
+      "This Caravan is coming soon. Route information will be added section by section when the approved details are ready.",
+    href: "/caravans/egyptian",
+  },
+  {
+    title: "The Indian Caravan",
+    lede:
+      "This Caravan is coming soon. Route information will be added section by section when the approved details are ready.",
+    href: "/caravans/indian",
+  },
+] as const;
 
 export default function CaravansPage() {
   return (
@@ -41,7 +59,6 @@ export default function CaravansPage() {
       </section>
 
       <section className={styles.flagship} aria-labelledby="andean-heading">
-        <p className={styles.number} aria-hidden="true">01</p>
         <div className={styles.flagshipTitle}>
           <p>Peru / Bolivia / Chile</p>
           <h2 id="andean-heading">{andeanCaravan.productName}</h2>
@@ -71,7 +88,38 @@ export default function CaravansPage() {
         </div>
       </section>
 
+      <section
+        className={styles.sections}
+        aria-labelledby="andean-sections-heading"
+      >
+        <header>
+          <p>The Andean Caravan / sections</p>
+          <h2 id="andean-sections-heading">
+            {andeanCaravanSections.length} connected ways to enter
+          </h2>
+        </header>
+        <RouteIndex />
+      </section>
+
       <CaravanRouteMap />
+
+      <section className={styles.upcoming} aria-labelledby="upcoming-heading">
+        <h2 className="sr-only" id="upcoming-heading">
+          Caravans in preparation
+        </h2>
+        {upcomingCaravans.map((caravan) => (
+          <article key={caravan.href}>
+            <div className={styles.upcomingTitle}>
+              <p>Coming soon</p>
+              <h3>{caravan.title}</h3>
+              <p>{caravan.lede}</p>
+            </div>
+            <div className={styles.actions}>
+              <Link href={caravan.href}>Read what is confirmed →</Link>
+            </div>
+          </article>
+        ))}
+      </section>
 
       <section className={styles.future} aria-labelledby="future-heading">
         <p>Collection architecture / future routes</p>

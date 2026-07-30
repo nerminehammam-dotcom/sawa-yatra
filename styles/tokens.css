@@ -1,5 +1,25 @@
 :root {
-  /* Master brief v2: this is a closed seven-colour system. */
+  /* Master brief v2: this is a closed seven-colour system.
+   *
+   * CONTRAST PAIRINGS (WCAG 2.1 ratios). `ink` is the only colour that pairs
+   * safely with the rest — every other two-colour combination fails AA for
+   * body text, and most fail the 3:1 large-text threshold too.
+   *
+   *              paper    ink  signal  sig-txt   clay    sun  olive   pink
+   *   paper        --   11.99   2.60x    4.67   3.19L  1.39x  2.51x  1.33x
+   *   ink       11.99      --    4.61    2.57x  3.75L   8.64   4.78   9.00
+   *   signal     2.60x   4.61      --    1.79x  1.23x  1.88x  1.04x  1.96x
+   *   sig-txt     4.67   2.57x   1.79x      --  1.46x  3.37L  1.86x  3.51L
+   *   clay       3.19L   3.75L   1.23x    1.46x    --   2.30x  1.27x  2.40x
+   *   sun        1.39x    8.64   1.88x    3.37L  2.30x     --  1.81x  1.04x
+   *   olive      2.51x    4.78   1.04x    1.86x  1.27x  1.81x     --   1.88x
+   *   pink       1.33x    9.00   1.96x    3.51L  2.40x  1.04x  1.88x     --
+   *
+   *   no mark = passes AA (>=4.5)   L = large text only (>=3)   x = fails both
+   *
+   * Before pairing two colours, check this table. pink-on-olive (1.88) shipped
+   * to production once because nothing recorded that it was illegal.
+   */
   --paper: #e7e1d6;
   --ink: #27231f;
   --signal: #f05a2a;
@@ -47,9 +67,10 @@
   --soft-blue: var(--olive);
   --hairline: var(--ink);
 
-  /* Locked existing type. */
+  /* Single-family type system: Fraunces for display and text.
+     The opsz axis (9-144) carries the register change, not a second family. */
   --font-display: "Fraunces", Georgia, serif;
-  --font-read: "Inter", system-ui, sans-serif;
+  --font-read: "Fraunces", Georgia, serif;
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -76,7 +97,11 @@
   --content-max: 1440px;
   --section-space: clamp(5rem, 10vw, 10rem);
   --page-gutter: clamp(1.25rem, 5vw, 6rem);
-  --nav-height: 76px;
+  /* SiteNavigation measures the real header into --site-header-height (ResizeObserver).
+     The fallback applies only to first paint and to routes that render no navigation.
+     Measured: 220px desktop, ~186px below 1025px. */
+  --nav-height-fallback: 220px;
+  --nav-height: var(--site-header-height, var(--nav-height-fallback));
   --grain-opacity: 0.07;
   --motion-fast: 180ms;
   --motion-route: 680ms;

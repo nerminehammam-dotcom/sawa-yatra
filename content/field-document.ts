@@ -100,6 +100,15 @@ export const fieldDocumentContent = {
     transfer:
       "After the Atacama, the route connects by air through Santiago to Balmaceda, continues through Coyhaique and the Carretera Austral to Villa O’Higgins, then follows the approved scenic return to Coyhaique and Balmaceda.",
   },
+  travelSelf: {
+    eyebrow: "How the matching works",
+    title: "Which one are you?",
+    body:
+      "Sawayatra matches travellers by how they travel, not by where they are going. Sixteen travelling selves; eight short questions reveal which one is yours.",
+    note: "Four minutes. Your answers are saved in this browser when you finish, and they are not sent to Sawayatra.",
+    actionLabel: "Meet your Travel Self",
+    actionHref: "/travel-self",
+  },
   regionalChapters: [
     {
       id: "peru",
@@ -135,3 +144,32 @@ export const fieldDocumentContent = {
     },
   ],
 } as const;
+
+/**
+ * Homepage sections that are designed but have no founder-approved copy yet.
+ * They render in development so the gap stays visible, and are filtered out of
+ * the production page by `approvedHomeSections`. Do not invent copy for these —
+ * supply it here with contentStatus "LOCKED" and it will appear automatically.
+ */
+export const reservedHomeSections = [
+  {
+    id: "cost",
+    eyebrow: "What it costs",
+    title: "To be confirmed",
+    body: "No indicative cost, deposit or payment schedule exists in approved content yet.",
+    needs: "An indicative price range for a single section and for the full 71-day route, plus deposit terms.",
+    contentStatus: "PLACEHOLDER",
+  },
+  {
+    id: "who-else",
+    eyebrow: "Who else is travelling",
+    title: "To be confirmed",
+    body: "Group information will be added only when it can be shown clearly, privately and with enough registrations to be useful.",
+    needs: "Either anonymised group composition, or founder-approved wording for what can be shown before departure.",
+    contentStatus: "PLACEHOLDER",
+  },
+] as const;
+
+export const approvedHomeSections = reservedHomeSections.filter(
+  (section) => section.contentStatus !== "PLACEHOLDER",
+);

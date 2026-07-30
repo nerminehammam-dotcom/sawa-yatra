@@ -3,9 +3,11 @@
 }
 
 .homePage {
-  --hero-cream: #f6eedc;
-  --hero-ink: #2b2420;
-  --hero-rose: #eeb6c4;
+  /* Was three off-system hexes; the creams and inks differed from the tokens
+     by a few percent and produced seams against the shared chrome. */
+  --hero-cream: var(--paper);
+  --hero-ink: var(--ink);
+  --hero-rose: var(--pink);
 
   overflow: clip;
 }
@@ -30,14 +32,20 @@
   position: absolute;
   z-index: 1;
   inset: 0;
+  /* Right-hand column only. The left two-fifths of the photograph are untouched,
+     so the road and sky stay bright. Measured glyph-level: headline 4.14:1,
+     tagline 6.34:1, both above their thresholds. */
   background: linear-gradient(
-    135deg,
-    rgba(43, 36, 32, 0) 0%,
-    rgba(43, 36, 32, 0.08) 42%,
-    rgba(43, 36, 32, 0.55) 100%
+    to left,
+    rgb(26 21 18 / 88%) 0%,
+    rgb(26 21 18 / 74%) 28%,
+    rgb(26 21 18 / 42%) 52%,
+    rgb(26 21 18 / 10%) 72%,
+    rgb(26 21 18 / 0%) 88%
   );
   pointer-events: none;
 }
+
 
 .homeHeroCopy {
   position: relative;
@@ -56,7 +64,7 @@
   font-optical-sizing: auto;
   font-style: normal;
   font-variation-settings: "opsz" 144;
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1.05;
   letter-spacing: -0.01em;
   text-wrap: balance;
@@ -67,7 +75,7 @@
   max-width: 620px;
   margin-left: auto;
   color: rgba(246, 238, 220, 0.92);
-  font-family: "General Sans", "Inter", system-ui, sans-serif;
+  font-family: var(--font-read);
   font-weight: 400;
   line-height: 1.5;
 }
@@ -126,13 +134,69 @@ a.homeHeroSecondaryAction:hover {
   align-items: center;
   margin-top: var(--space-3);
   color: var(--hero-cream);
-  font-family: "General Sans", "Inter", system-ui, sans-serif;
+  font-family: var(--font-read);
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.35;
   text-decoration-thickness: 1px;
   text-underline-offset: 0.3em;
 }
+
+@media (max-width: 639px) {
+  /* On mobile the copy is full-width and starts mid-frame, so the scrim has to
+     be vertical-dominant; a right-anchored gradient misses the headline entirely. */
+  .homeHeroScrim {
+    background: linear-gradient(
+      to top,
+      rgb(26 21 18 / 90%) 0%,
+      rgb(26 21 18 / 86%) 32%,
+      rgb(26 21 18 / 76%) 54%,
+      rgb(26 21 18 / 38%) 70%,
+      rgb(26 21 18 / 6%) 86%,
+      rgb(26 21 18 / 0%) 100%
+    );
+  }
+
+
+.homeHeroCopy {
+    width: calc(100vw - (2 * var(--page-gutter)));
+    margin: clamp(2rem, 5svh, 3rem) var(--page-gutter);
+  }
+
+.homeHeroCopy h1 {
+    /* Pink cannot reach 3:1 over a bright sky without darkening the whole
+       frame, which is what we are avoiding. Paper does it at 3.3:1. */
+    color: var(--paper);
+    font-size: clamp(2.6rem, 11.5vw, 4rem);
+    line-height: 1.05;
+  }
+
+.homeHeroTagline,
+  .homeHeroDefinition {
+    font-size: 1rem;
+    line-height: 1.42;
+  }
+
+.homeHeroActions {
+    display: grid;
+    justify-content: stretch;
+    gap: var(--space-2);
+    margin-top: var(--space-5);
+  }
+
+a.homeHeroPrimaryAction,
+  a.homeHeroSecondaryAction {
+    width: 100%;
+    white-space: normal;
+  }
+
+.homeHeroPracticalLink {
+    justify-content: flex-end;
+    margin-top: var(--space-2);
+  }
+}
+
+/* ---- Restored editorial sections ------------------------------------ */
 
 .how,
 .route,
@@ -160,7 +224,7 @@ a.homeHeroSecondaryAction:hover {
   display: grid;
   align-content: space-between;
   gap: var(--space-12);
-  min-height: 48rem;
+  min-height: 34rem;
   border-inline-end: var(--border-strong) solid var(--ink);
 }
 
@@ -226,7 +290,7 @@ a.homeHeroSecondaryAction:hover {
 }
 
 .howSteps p {
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .routeHeading {
@@ -261,7 +325,7 @@ a.homeHeroSecondaryAction:hover {
 }
 
 .routeHeading aside p {
-  font-size: 0.92rem;
+  font-size: 1rem;
 }
 
 .joining {
@@ -291,7 +355,18 @@ a.homeHeroSecondaryAction:hover {
 }
 
 .regionsHeading {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-4);
   border-top: var(--border-strong) solid var(--ink);
+}
+
+.regionsHeading a {
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 .fieldNotes {
@@ -348,9 +423,8 @@ a.homeHeroSecondaryAction:hover {
 
 .finalAction {
   display: grid;
-  min-height: 72vh;
-  align-content: space-between;
-  gap: var(--space-16);
+  align-content: start;
+  gap: var(--space-8);
   padding: clamp(3rem, 7vw, 7rem) var(--page-gutter);
   color: var(--ink);
   background: var(--pink);
@@ -358,8 +432,9 @@ a.homeHeroSecondaryAction:hover {
 
 .finalAction h2 {
   max-width: 8ch;
-  font-size: clamp(4.5rem, 13vw, 13rem);
-  line-height: 0.78;
+  /* was line-height 0.78, which collided descenders with the next line's ascenders */
+  font-size: clamp(4rem, 11vw, 10rem);
+  line-height: 0.92;
 }
 
 .finalAction > div {
@@ -383,102 +458,182 @@ a.homeHeroSecondaryAction:hover {
   border: var(--border-strong) solid var(--ink);
 }
 
-.finalAction a:last-child {
+.finalAction a:first-of-type {
   color: var(--ink);
-  background: var(--sun);
+  background: var(--signal);
+  border-color: var(--ink);
 }
+
+.finalAction a:not(:first-of-type) {
+  color: var(--ink);
+  background: transparent;
+}
+
+/* ---- Meet your Travel Self ------------------------------------------- */
+
+.travelSelf {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
+  align-items: stretch;
+  background: var(--paper);
+  border-block: var(--border-strong) solid var(--ink);
+}
+
+.travelSelfCopy {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: var(--space-5);
+  padding: clamp(3rem, 7vw, 7rem) var(--page-gutter);
+  border-inline-end: var(--border-strong) solid var(--ink);
+}
+
+.travelSelfCopy > p:first-child {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.travelSelfCopy h2 {
+  max-width: 12ch;
+  margin-top: var(--space-2);
+}
+
+.travelSelfBody {
+  max-width: 44ch;
+  font-size: 1.125rem;
+}
+
+.travelSelfNote {
+  max-width: 44ch;
+  font-size: 0.95rem;
+}
+
+.travelSelfFigure {
+  position: relative;
+  min-height: 34rem;
+  overflow: hidden;
+}
+
+.travelSelfFigure img {
+  object-fit: cover;
+}
+
+/* ---- Reserved slots (development only) ------------------------------- */
+
+.reserved {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+  gap: var(--border-strong);
+  padding: 0;
+  background: var(--ink);
+  border-block: var(--border-strong) solid var(--ink);
+}
+
+.reserved article {
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  padding: clamp(2rem, 4vw, 3.5rem) var(--page-gutter);
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--paper),
+    var(--paper) 14px,
+    color-mix(in srgb, var(--paper) 92%, var(--ink)) 14px,
+    color-mix(in srgb, var(--paper) 92%, var(--ink)) 28px
+  );
+}
+
+.reserved article > p:first-child {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.reserved h2 {
+  font-size: clamp(1.65rem, 2.8vw, 2.65rem);
+}
+
+.reservedNeeds {
+  max-width: 46ch;
+  padding-top: var(--space-3);
+  font-size: 0.95rem;
+  border-top: var(--border-hairline) solid var(--ink);
+}
+
 
 @media (max-width: 1023px) {
   .how {
+      grid-template-columns: 1fr;
+    }
+
+  .editorialHeading {
+      min-height: 38rem;
+      border-inline-end: 0;
+      border-bottom: var(--border-strong) solid var(--ink);
+    }
+
+  .howSteps li {
+      grid-template-columns: 6rem minmax(0, 1fr);
+    }
+
+  .howSteps p {
+      grid-column: 2;
+      border-top: var(--border-hairline) solid var(--ink);
+    }
+
+  .routeHeading,
+    .joiningHeading,
+    .fieldNotes > header {
+      grid-template-columns: 1fr;
+    }
+
+  .joiningHeading > p:last-child {
+      grid-column: 1;
+      grid-row: auto;
+    }
+
+  .travelSelf {
     grid-template-columns: 1fr;
   }
 
-  .editorialHeading {
-    min-height: 38rem;
+  .travelSelfCopy {
     border-inline-end: 0;
     border-bottom: var(--border-strong) solid var(--ink);
   }
 
-  .howSteps li {
-    grid-template-columns: 6rem minmax(0, 1fr);
-  }
-
-  .howSteps p {
-    grid-column: 2;
-    border-top: var(--border-hairline) solid var(--ink);
-  }
-
-  .routeHeading,
-  .joiningHeading,
-  .fieldNotes > header {
-    grid-template-columns: 1fr;
-  }
-
-  .joiningHeading > p:last-child {
-    grid-column: 1;
-    grid-row: auto;
+  .travelSelfFigure {
+    min-height: 24rem;
   }
 }
 
 @media (max-width: 639px) {
-  .homeHeroCopy {
-    width: calc(100vw - (2 * var(--page-gutter)));
-    margin: clamp(2rem, 5svh, 3rem) var(--page-gutter);
-  }
-
-  .homeHeroCopy h1 {
-    font-size: clamp(2.6rem, 11.5vw, 4rem);
-    line-height: 1.05;
-  }
-
-  .homeHeroTagline,
-  .homeHeroDefinition {
-    font-size: 1rem;
-    line-height: 1.42;
-  }
-
-  .homeHeroActions {
-    display: grid;
-    justify-content: stretch;
-    gap: var(--space-2);
-    margin-top: var(--space-5);
-  }
-
-  a.homeHeroPrimaryAction,
-  a.homeHeroSecondaryAction {
-    width: 100%;
-    white-space: normal;
-  }
-
-  .homeHeroPracticalLink {
-    justify-content: flex-end;
-    margin-top: var(--space-2);
-  }
-
   .howSteps li {
-    grid-template-columns: 4.5rem minmax(0, 1fr);
-  }
+      grid-template-columns: 4.5rem minmax(0, 1fr);
+    }
 
   .howSteps span,
-  .howSteps h3,
-  .howSteps p {
-    padding: var(--space-5);
-  }
+    .howSteps h3,
+    .howSteps p {
+      padding: var(--space-5);
+    }
 
   .howSteps span {
-    font-size: 3.4rem;
-  }
+      font-size: 3.4rem;
+    }
 
   .imageStrip {
-    display: flex;
-    min-height: 31rem;
-    scroll-snap-type: x mandatory;
-  }
+      display: flex;
+      min-height: 31rem;
+      scroll-snap-type: x mandatory;
+    }
 
   .imageStrip figure {
-    width: 78vw;
-    min-width: 78vw;
-    min-height: 31rem;
-    scroll-snap-align: start;
-  }
+      width: 78vw;
+      min-width: 78vw;
+      min-height: 31rem;
+      scroll-snap-align: start;
+    }
 }
