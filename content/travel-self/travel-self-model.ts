@@ -7,6 +7,24 @@ export type Family = 'Table' | 'Made' | 'Wild' | 'Quiet';
 
 export const HELPER_1_TO_5 = "With people you haven't travelled with before.";
 
+export const BEFORE_YOU_BEGIN = {
+  heading: "Before you begin",
+  groups: [
+    [
+      "Answer for the way you travel with people you have not travelled with before.",
+      "Not your solo self. Not the version of you on a family holiday.",
+    ],
+    [
+      "Each question has two ends and no middle.",
+      "That is deliberate. It depends is true of very nearly everyone, and it is the one answer that tells us nothing.",
+    ],
+    [
+      "You do not need to feel strongly.",
+      "Slightly more true is enough.",
+    ],
+  ],
+} as const;
+
 export const AXES = [
   {
     step: 1, key: 'pace', label: "Pace",
@@ -326,6 +344,17 @@ export const QUESTION_HEADINGS = {
   6: "When you travel with others, how much of the day do you want to spend together?",
   7: "What do you travel for?",
   8: "Which of these would most influence the journey you book?",
+} as const;
+
+export const STEP_LABELS = {
+  1: "Pace",
+  2: "Planning",
+  3: "Social energy",
+  4: "Rhythm",
+  5: "Comfort",
+  6: "Time together",
+  7: "Passions",
+  8: "Follow-up",
 } as const;
 
 export const NAV = {

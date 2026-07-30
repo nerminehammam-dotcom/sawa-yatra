@@ -518,6 +518,443 @@
   line-height: 1.45;
 }
 
+/* Travel Self v2.3 questionnaire. Kept separate from the approved introduction. */
+.travelSelfQ {
+  --q-hair: 1px;
+  min-height: calc(100dvh - var(--nav-height));
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.qWrap {
+  width: min(100%, 80rem);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 4vw, 3rem);
+}
+
+.qBand {
+  background: var(--tsq-surface);
+  border-bottom: var(--q-hair) solid var(--ink);
+}
+
+.qBand .qWrap {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  min-height: 6rem;
+  column-gap: clamp(0.9rem, 2.5vw, 2rem);
+  padding-block: 1rem;
+}
+
+.qCount {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.qBandLabel {
+  margin: 0;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.qTicks {
+  display: flex;
+  gap: 5px;
+}
+
+.qTicks span {
+  width: 26px;
+  height: 7px;
+  border: var(--q-hair) solid var(--ink);
+}
+
+.qTicks span[data-done] {
+  background: var(--ink);
+}
+
+.qTicks span[data-now] {
+  background: var(--paper);
+}
+
+.qColumns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(17rem, 27vw, 23rem);
+  align-items: start;
+  gap: clamp(1.75rem, 4vw, 3.25rem);
+  padding-block: 2.5rem 3rem;
+}
+
+.qDecision {
+  min-width: 0;
+}
+
+.qBefore {
+  margin-bottom: clamp(2.25rem, 5vw, 4rem);
+}
+
+.qBefore h2 {
+  margin: 0 0 1rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.qBeforeRows {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: var(--q-hair) solid var(--ink);
+  border-bottom: var(--q-hair) solid var(--ink);
+}
+
+.qBeforeRows > div {
+  padding: 1rem;
+  border-left: var(--q-hair) solid var(--ink);
+}
+
+.qBeforeRows > div:first-child {
+  border-left: 0;
+}
+
+.qBeforeRows p {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+
+.qBeforeRows p:first-child {
+  font-weight: 500;
+}
+
+.qBeforeRows p + p {
+  margin-top: 0.35rem;
+}
+
+.qStorageWarning {
+  margin: 0.85rem 0 0;
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+.qQuestion h2 {
+  max-width: 17ch;
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 3.6vw, 3.5rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.04;
+}
+
+.qQuestion h2:focus {
+  outline: none;
+}
+
+.qHelper {
+  max-width: 52ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.qPoles {
+  display: flex;
+  justify-content: space-between;
+  max-width: 34rem;
+  gap: 1.5rem;
+  margin: 1.75rem 0 1rem;
+}
+
+.qPoles strong,
+.qPoles small {
+  display: block;
+}
+
+.qPoles strong {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.qPoles small {
+  max-width: 18ch;
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+.qRightPole {
+  text-align: right;
+}
+
+.qScale {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(48px, 72px));
+  justify-content: space-between;
+  max-width: 34rem;
+  gap: clamp(2px, 1.5vw, 14px);
+}
+
+.qScalePosition {
+  display: grid;
+  width: 100%;
+  min-width: 48px;
+  aspect-ratio: 1;
+  place-items: center;
+  padding: 0;
+  appearance: none;
+  cursor: pointer;
+  border: 0;
+  background: none;
+}
+
+.qScalePosition::before {
+  width: 100%;
+  aspect-ratio: 1;
+  content: "";
+  border: var(--q-hair) solid var(--ink);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--tsq-axis) var(--q-weight), var(--paper));
+}
+
+.qScalePosition:hover::before {
+  border-width: 2px;
+}
+
+.qScalePosition:focus-visible {
+  border-radius: 50%;
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+.qScalePosition[aria-checked="true"]::before {
+  box-shadow: 0 0 0 4px var(--paper), 0 0 0 6px var(--ink);
+}
+
+.qEcho,
+.qPrompt {
+  max-width: 34ch;
+  min-height: 2.6em;
+  margin: 1.75rem 0 0;
+  line-height: 1.4;
+}
+
+.qEcho {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.2vw, 2.05rem);
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.25;
+}
+
+.qPrompt {
+  font-size: 1.0625rem;
+}
+
+.qChoices {
+  display: grid;
+  max-width: 34rem;
+  gap: 0.6rem;
+  margin-top: 1.75rem;
+}
+
+.qChoices button,
+.qPassions button {
+  min-height: 64px;
+  appearance: none;
+  cursor: pointer;
+  border: var(--q-hair) solid var(--ink);
+  border-radius: 0;
+  color: var(--ink);
+  background: transparent;
+  text-align: left;
+}
+
+.qChoices button {
+  padding: 0.9rem 1.25rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+}
+
+.qChoices button:hover,
+.qPassions button:hover {
+  border-width: 2px;
+}
+
+.qChoices button:focus-visible,
+.qPassions button:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+.qChoices button[aria-checked="true"],
+.qPassions button[aria-pressed="true"] {
+  border-width: 2px;
+  background: var(--tsq-surface);
+}
+
+.qPassions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 46rem;
+  gap: 0.6rem;
+  margin-top: 1.75rem;
+}
+
+.qPassions button {
+  display: grid;
+  align-content: center;
+  gap: 0.15rem;
+  padding: 0.75rem 1rem;
+}
+
+.qPassions strong {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.qPassions span {
+  font-size: 0.9375rem;
+  line-height: 1.4;
+}
+
+.qCounter {
+  margin: 1rem 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+}
+
+.qRefusal {
+  min-height: 1.75rem;
+  margin: 0.5rem 0 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-style: italic;
+}
+
+.qActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 34rem;
+  gap: 1rem;
+  margin-top: 1.875rem;
+}
+
+.qButton {
+  min-height: 56px;
+  padding: 0 1.9rem;
+  appearance: none;
+  cursor: pointer;
+  border: var(--q-hair) solid var(--ink);
+  border-radius: 0;
+  color: var(--ink);
+  background: transparent;
+  font: inherit;
+  font-size: 1.0625rem;
+  font-weight: 500;
+}
+
+.qButton:hover:not(:disabled) {
+  border-width: 2px;
+}
+
+.qButton:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+}
+
+.qNext {
+  background: var(--tsq-surface);
+}
+
+.qButton:disabled {
+  cursor: not-allowed;
+  background: transparent;
+  opacity: 0.45;
+}
+
+.qRail {
+  position: sticky;
+  top: calc(var(--nav-height) + 1.5rem);
+  align-self: start;
+  border: var(--q-hair) solid var(--ink);
+  background: var(--paper);
+}
+
+.qFigure {
+  margin: 0;
+}
+
+.qImage {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.qFieldFoot {
+  padding: 0.9rem 0.85rem;
+  border-top: var(--q-hair) solid var(--ink);
+}
+
+.qField {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 4px;
+  margin-bottom: 0.6rem;
+}
+
+.qField span {
+  aspect-ratio: 3 / 2;
+  border: var(--q-hair) solid var(--ink);
+  background: var(--signal);
+}
+
+.qField span:nth-child(5n + 2) {
+  background: var(--sun);
+}
+
+.qField span:nth-child(5n + 3) {
+  background: var(--olive);
+}
+
+.qField span:nth-child(5n + 4) {
+  background: var(--pink);
+}
+
+.qField span:nth-child(5n) {
+  background: var(--clay);
+}
+
+.qField span[data-out] {
+  background: transparent;
+  opacity: 0.28;
+}
+
+.qNarrowLine {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+
+.qNarrowDetail {
+  margin: 0.25rem 0 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
 .resultStage,
 .returningHeader {
   color: var(--ink);
@@ -738,6 +1175,82 @@
     position: static;
     grid-row: 1;
   }
+
+  .qBand .qWrap {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "count label"
+      "ticks ticks";
+    min-height: 0;
+    row-gap: 0.6rem;
+    padding-block: 0.9rem;
+  }
+
+  .qCount {
+    grid-area: count;
+    font-size: 2.4rem;
+  }
+
+  .qBandLabel {
+    grid-area: label;
+  }
+
+  .qTicks {
+    grid-area: ticks;
+  }
+
+  .qTicks span {
+    width: auto;
+    flex: 1;
+  }
+
+  .qColumns {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-block: 2rem 2.5rem;
+  }
+
+  .qRail {
+    position: static;
+    order: 2;
+    display: grid;
+    grid-template-columns: 38% 1fr;
+    align-items: stretch;
+  }
+
+  .qFigure {
+    display: grid;
+    grid-template-rows: 1fr;
+    border-right: var(--q-hair) solid var(--ink);
+  }
+
+  .qImage {
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 45%;
+  }
+
+  .qFieldFoot {
+    border-top: 0;
+  }
+
+  .qQuestion h2 {
+    font-size: clamp(2rem, 5.2vw, 2.9rem);
+  }
+
+  .qBeforeRows {
+    grid-template-columns: 1fr;
+  }
+
+  .qBeforeRows > div,
+  .qBeforeRows > div:first-child {
+    border-top: var(--q-hair) solid var(--ink);
+    border-left: 0;
+  }
+
+  .qBeforeRows > div:first-child {
+    border-top: 0;
+  }
 }
 
 @media (max-width: 639px) {
@@ -767,6 +1280,51 @@
 
   .annual {
     grid-template-columns: 1fr;
+  }
+
+  .qPassions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .qRail {
+    grid-template-columns: 1fr;
+  }
+
+  .qFigure {
+    display: none;
+  }
+
+  .qFieldFoot {
+    border-top: 0;
+  }
+
+  .qPoles {
+    flex-direction: column;
+    gap: 0.4rem;
+    margin: 1.5rem 0 0.85rem;
+  }
+
+  .qRightPole {
+    text-align: left;
+  }
+
+  .qActions {
+    flex-direction: column-reverse;
+  }
+
+  .qButton {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .qScale {
+    max-width: none;
+    gap: 2px;
+    margin-inline: -5px;
   }
 }
 

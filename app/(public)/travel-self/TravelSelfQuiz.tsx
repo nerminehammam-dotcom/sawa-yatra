@@ -39,6 +39,7 @@ import {
 } from "@/lib/travel-self/storage";
 
 import styles from "./travel-self.module.css";
+import { TravelSelfQuestionnaire } from "./TravelSelfQuestionnaire";
 
 type View = "intro" | "questionnaire" | "result" | "passport";
 type QuestionnaireReturnView = "intro" | "passport";
@@ -444,6 +445,10 @@ export function TravelSelfQuiz({ children }: { children?: ReactNode }) {
   }
 
   if (view === "questionnaire") {
+    if (hasServerIntroduction) {
+      return <TravelSelfQuestionnaire onExit={leaveQuestionnaire} />;
+    }
+
     const axis = step < 5 ? AXES[step] : null;
     const heading = axis?.question ?? (step === 5 ? COPY.timeTogether.question : step === 6 ? COPY.passions.question : COPY.followUp.question);
     return (
