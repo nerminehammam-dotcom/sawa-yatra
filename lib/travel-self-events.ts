@@ -1,4 +1,4 @@
-import type { PassionId } from "@/content/travel-self/travel-self-model";
+import type { PassionId } from "@/content/travel-self/travel-self-model-legacy";
 
 export type TravelSelfEvent =
   | { readonly name: "travel_self_started" }
