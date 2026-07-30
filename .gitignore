@@ -58,3 +58,10 @@ next-env.d.ts
 
 # local scratch: files staged for deletion
 /_to_delete/
+
+# agent scratch and local-only working docs
+/.agents/
+/skills-lock.json
+/docs/audit-01-typography.md
+/docs/sawayatra-travel-self.html
+/docs/Sawayatra_Travel_Self_v2_0.docx
