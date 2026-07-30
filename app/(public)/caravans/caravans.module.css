@@ -135,18 +135,19 @@
   border-inline-start: var(--border-strong) solid var(--ink);
 }
 
+/* One wide reading column. The 42rem floor with an 11ch heading broke the
+   sentence over four short lines and left the right half of the band empty. */
 .future {
   display: grid;
-  min-height: 42rem;
-  align-content: space-between;
-  gap: var(--space-12);
+  align-content: start;
+  gap: var(--space-8);
   padding: clamp(3rem, 7vw, 7rem) var(--page-gutter);
   color: var(--paper);
   background: var(--ink);
 }
 
 .future h2 {
-  max-width: 11ch;
+  max-width: 22ch;
 }
 
 .future > p:last-child {
@@ -276,8 +277,20 @@
 .upcoming .actions {
   grid-column: 2;
   grid-template-columns: 1fr;
+  align-content: center;
+  justify-items: start;
+  padding: clamp(2.5rem, 5vw, 4.5rem);
   border-top: 0;
   border-inline-start: var(--border-strong) solid var(--ink);
+}
+
+/* Inherited from .actions a, the link stretched to fill the whole cell, so a
+   single line of text sat in a full-height olive field. Contain it: the olive
+   marks the action, the cell keeps the page's paper. */
+.upcoming .actions a {
+  min-height: var(--touch-min);
+  padding: var(--space-4) var(--space-5);
+  border: var(--border-strong) solid var(--ink);
 }
 
 @media (max-width: 900px) {
@@ -287,7 +300,8 @@
 
   .upcoming .actions {
     grid-column: 1;
+    padding: 0 clamp(2.5rem, 5vw, 4.5rem) clamp(2.5rem, 5vw, 4.5rem);
     border-inline-start: 0;
-    border-top: var(--border-hairline) solid var(--ink);
+    border-top: 0;
   }
 }
