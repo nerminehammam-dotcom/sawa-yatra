@@ -147,8 +147,12 @@
   background: var(--cream);
 }
 
+/* `warning` resolves to the same ink as `pending` because the palette has no
+   fourth colour that clears 3:1 on cream. The dashed marker edge carries the
+   distinction. */
 .formStatus[data-tone="duplicate"] {
   border-color: var(--warning);
+  border-inline-start-style: dashed;
   background: var(--cream);
 }
 

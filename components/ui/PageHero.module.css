@@ -16,12 +16,13 @@
   background: var(--cream);
 }
 
+/* Was var(--soft-blue), which aliases to olive — see Section.module.css. */
 .butter {
-  --hero-ground: var(--soft-blue);
+  --hero-ground: var(--butter);
   --hero-ink: var(--warm-ink);
 
   color: var(--hero-ink);
-  background: var(--soft-blue);
+  background: var(--butter);
 }
 
 .brick {

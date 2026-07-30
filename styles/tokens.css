@@ -47,7 +47,7 @@
   --focus-ring-light: var(--ink);
   --focus-ring-dark: var(--paper);
   --error-text: var(--ink);
-  --error-border: var(--ink);
+  --error-border: var(--signal-text);
 
   --action: var(--action-bg);
   --action-on-deep: var(--paper);
@@ -55,10 +55,18 @@
   --hover: var(--ink);
   --visited: var(--ink);
   --disabled: var(--olive);
-  --success: var(--olive);
-  --warning: var(--sun);
+
+  /* Status colours must clear 3:1 against --paper to register as indicators.
+   * Only ink (11.99), signal-text (4.67) and clay (3.19) do; signal, olive,
+   * sun and pink all fail. That leaves three colours for four states, so
+   * `warning` shares ink with `info` and is separated by border style
+   * instead — see .formStatus[data-tone="duplicate"] in forms.module.css.
+   * Every status is also stated in text, never by colour alone.
+   */
+  --success: var(--clay);
+  --warning: var(--ink);
   --error: var(--error-border);
-  --info: var(--olive);
+  --info: var(--ink);
 
   --soft-butter: var(--sun);
   --soft-olive: var(--olive);
