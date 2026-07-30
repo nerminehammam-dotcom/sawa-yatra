@@ -1,11 +1,24 @@
+/* Two columns so the standfirst occupies the right half rather than leaving
+   it as dead pink. The band is sized by its content plus padding; the old
+   82svh floor left roughly half the section empty at desktop widths. */
 .hero {
   display: grid;
-  min-height: calc(82svh - var(--nav-height));
-  align-content: space-between;
-  gap: var(--space-12);
-  padding: clamp(3rem, 7vw, 7rem) var(--page-gutter);
+  grid-template-columns: minmax(0, 1.1fr) minmax(20rem, 0.9fr);
+  min-height: calc(58svh - var(--nav-height));
+  align-content: start;
+  gap: var(--space-12) var(--space-16);
+  padding: clamp(3.5rem, 8vw, 8rem) var(--page-gutter);
   background: var(--pink);
   border-bottom: var(--border-strong) solid var(--ink);
+}
+
+.hero > p:first-child {
+  grid-column: 1 / -1;
+}
+
+.hero > p:last-child {
+  grid-column: 2;
+  align-self: end;
 }
 
 .hero > p:first-child,
@@ -19,12 +32,12 @@
 }
 
 .hero h1 {
-  max-width: 9ch;
+  max-width: 13ch;
   line-height: 0.82;
 }
 
 .hero > p:last-child {
-  max-width: 44ch;
+  max-width: 42ch;
 }
 
 .observation {
@@ -176,9 +189,21 @@
 }
 
 @media (max-width: 900px) {
+  .hero,
   .observation,
   .principles {
     grid-template-columns: 1fr;
+  }
+
+  /* Back to a single reading column: eyebrow, heading, standfirst. */
+  .hero {
+    min-height: 0;
+  }
+
+  .hero > p:first-child,
+  .hero > p:last-child {
+    grid-column: 1;
+    align-self: auto;
   }
 
   .observation > div,

@@ -185,6 +185,17 @@
   border-radius: 0;
 }
 
+/* The list is centred in a full-bleed bar, so the outermost left and right
+   rules terminate in empty space instead of meeting anything — they read as
+   orphaned ticks. Keep the dividers between items only. */
+.mainItem:first-child .mainLink {
+  border-left: 0;
+}
+
+.mainItem:last-child .mainLink {
+  border-right: 0;
+}
+
 .mainLink:hover,
 .mainLink[aria-expanded="true"] {
   background: var(--nav-paper-deep);

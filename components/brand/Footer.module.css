@@ -5,9 +5,12 @@
   border-top: var(--border-strong) solid var(--signal);
 }
 
+/* Three tracks: brand, Explore, Legal. Legal used to sit under Explore inside
+   a single right-hand column, which left the right third empty and forced the
+   legal list to wrap. */
 .layout {
   display: grid;
-  grid-template-columns: minmax(18rem, 0.8fr) minmax(28rem, 1.2fr);
+  grid-template-columns: minmax(14rem, 0.8fr) minmax(24rem, 1.1fr) minmax(10rem, 0.6fr);
   align-items: start;
   gap: var(--space-16);
 }
@@ -24,9 +27,10 @@
   letter-spacing: 0.12em;
 }
 
+/* The wrapper carries no semantics, so dissolving its box lets the two navs
+   become tracks of .layout directly. Landmark roles are unaffected. */
 .orientation {
-  display: grid;
-  gap: var(--space-10);
+  display: contents;
 }
 
 .navigationLabel {
@@ -46,8 +50,10 @@
   list-style: none;
 }
 
+/* Legal has its own track now, so it reads as a single list rather than
+   wrapping three items across two columns. */
 .legal {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: 1fr;
 }
 
 .link {
@@ -70,6 +76,7 @@
 @media (max-width: 960px) {
   .layout {
     grid-template-columns: 1fr;
+    gap: var(--space-10);
   }
 
   .navigation,
