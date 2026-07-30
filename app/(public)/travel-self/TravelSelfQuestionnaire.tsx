@@ -53,14 +53,14 @@ const POLES = [1, 2, 3, 4, 5, 6] as const;
 const STEPS = [1, 2, 3, 4, 5, 6, 7, 8] as const;
 const POSITION_WEIGHT = ["100%", "62%", "26%", "26%", "62%", "100%"] as const;
 const QUESTION_IMAGES = {
-  1: "/assets/travel-self/travel-self-q01.png",
-  2: "/assets/travel-self/travel-self-q02.png",
-  3: "/assets/travel-self/travel-self-q03.png",
-  4: "/assets/travel-self/travel-self-q04.png",
-  5: "/assets/travel-self/travel-self-q05.png",
-  6: "/assets/travel-self/travel-self-q06.png",
-  7: "/assets/travel-self/travel-self-q07.png",
-  8: "/assets/travel-self/travel-self-q08.png",
+  1: "/assets/travel-self/travel-self-q01.webp",
+  2: "/assets/travel-self/travel-self-q02.webp",
+  3: "/assets/travel-self/travel-self-q03.webp",
+  4: "/assets/travel-self/travel-self-q04.webp",
+  5: "/assets/travel-self/travel-self-q05.webp",
+  6: "/assets/travel-self/travel-self-q06.webp",
+  7: "/assets/travel-self/travel-self-q07.webp",
+  8: "/assets/travel-self/travel-self-q08.webp",
 } as const;
 
 type QuestionnaireStyle = CSSProperties & {
