@@ -163,6 +163,9 @@ export const FRICTION_ALL_FLEXIBLE = "the group looks to you for a preference ab
 
 export const BEND_ORDER: Axis[] = ['rhythm','pace','comfort','planning','social'];
 export const NO_BENDS = "Nothing. You are firmly placed on all five.";
+export const BEND_FOUR = (firmAxis: string) =>
+  `You adapt across most of a journey; ${firmAxis} is the preference you hold to.`;
+export const BEND_FIVE = "You adapt across all five, which makes your preferences easier to accommodate and your name harder to place.";
 
 // readout word for each pole, in passport order pace · planning · social · rhythm
 export const READOUT_WORD = {
