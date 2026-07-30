@@ -280,6 +280,10 @@ export const PRIVACY_LINE = "Your answers are saved in this browser as you go. T
 export const NO_STORAGE_WARNING = "Closing or refreshing this page will clear your answers.";
 export const GUEST_BAND = "Your member details will appear here when you save this Travel Self to a profile.";
 export const MISSING_FIELD = "Not added";
+export const SEEKER_PLATE = {
+  src: "/assets/travel-self/travel-self-plate-the-seeker.jpg",
+  alt: "Painted detail for The Seeker: red boots standing in a desert of blue mesas beside a pale river",
+} as const;
 
 export const RAIL_PURPOSE: Record<number, string> = {
   5: "Now, what standard makes a journey right for you?",

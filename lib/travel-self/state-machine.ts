@@ -32,6 +32,7 @@ export type TravelSelfAction =
   | { readonly type: "answer-lead"; readonly value: PassionName }
   | { readonly type: "next" }
   | { readonly type: "back" }
+  | { readonly type: "edit" }
   | { readonly type: "reset" };
 
 export const INITIAL_TRAVEL_SELF_STATE: TravelSelfState = {
@@ -168,6 +169,11 @@ export function travelSelfReducer(
         ...state,
         step: (state.step - 1) as TravelSelfStep,
       };
+
+    case "edit":
+      return state.stage === "result"
+        ? { ...state, stage: "questionnaire", step: 1 }
+        : state;
 
     case "reset":
       return INITIAL_TRAVEL_SELF_STATE;

@@ -44,8 +44,10 @@ import {
   loadTravelSelfState,
   saveTravelSelfState,
 } from "@/lib/travel-self/storage-v23";
+import { scoreTravelSelfV23 } from "@/lib/travel-self/scoring-v23";
 
 import styles from "./travel-self.module.css";
+import { TravelSelfPassport } from "./TravelSelfPassport";
 
 const POLES = [1, 2, 3, 4, 5, 6] as const;
 const STEPS = [1, 2, 3, 4, 5, 6, 7, 8] as const;
@@ -429,6 +431,43 @@ export function TravelSelfQuestionnaire({ onExit }: { onExit: () => void }) {
     if (!isStepAnswered(state)) return;
     setRefusal("");
     answer({ type: "next" });
+  }
+
+  function changeAnswer() {
+    answer({ type: "edit" });
+    const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.set("stage", "questionnaire");
+    window.history.replaceState(
+      { travelSelfStage: "questionnaire" },
+      "",
+      nextUrl,
+    );
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }
+
+  const result = state.stage === "result"
+    ? scoreTravelSelfV23(state.answers)
+    : null;
+
+  useEffect(() => {
+    if (!result) return;
+    const nextUrl = new URL(window.location.href);
+    nextUrl.searchParams.set("stage", "result");
+    window.history.replaceState(
+      { travelSelfStage: "result" },
+      "",
+      nextUrl,
+    );
+    window.scrollTo({ top: 0, behavior: "auto" });
+  }, [result]);
+
+  if (result) {
+    return (
+      <TravelSelfPassport
+        result={result}
+        onChangeAnswer={changeAnswer}
+      />
+    );
   }
 
   const step = state.step;

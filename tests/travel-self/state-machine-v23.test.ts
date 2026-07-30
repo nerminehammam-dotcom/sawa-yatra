@@ -96,6 +96,15 @@ describe("Travel Self v2.3 state machine", () => {
     expect(state.answers.passions).toHaveLength(2);
   });
 
+  it("reopens a completed result without losing any answers", () => {
+    const result = travelSelfReducer(answerThroughStepEight(), { type: "next" });
+    const edited = travelSelfReducer(result, { type: "edit" });
+
+    expect(edited.stage).toBe("questionnaire");
+    expect(edited.step).toBe(1);
+    expect(edited.answers).toEqual(result.answers);
+  });
+
   it("marks answer and navigation transitions for persistence", () => {
     const started = travelSelfReducer(INITIAL_TRAVEL_SELF_STATE, { type: "start" });
     const answered = travelSelfReducer(started, {

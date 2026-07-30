@@ -256,7 +256,9 @@ export function TravelSelfQuiz({ children }: { children?: ReactNode }) {
 
       if (
         hasServerIntroduction &&
-        new URLSearchParams(window.location.search).get("stage") === "questionnaire"
+        ["questionnaire", "result"].includes(
+          new URLSearchParams(window.location.search).get("stage") ?? "",
+        )
       ) {
         setView("questionnaire");
       } else if (record) {
@@ -272,7 +274,7 @@ export function TravelSelfQuiz({ children }: { children?: ReactNode }) {
   useEffect(() => {
     const syncToHistory = (event: PopStateEvent) => {
       const stage = new URLSearchParams(window.location.search).get("stage");
-      if (stage === "questionnaire") {
+      if (stage === "questionnaire" || stage === "result") {
         setView("questionnaire");
         return;
       }
