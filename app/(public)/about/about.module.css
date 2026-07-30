@@ -153,11 +153,14 @@
   max-width: 42ch;
 }
 
+/* Actions sit to the right of the heading on its last baseline. Stacked
+   underneath they left the right half of the olive band empty, and the 44vh
+   floor stretched the band further than its content needed. */
 .action {
   display: grid;
-  min-height: 44vh;
-  align-content: space-between;
-  gap: var(--space-12);
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: var(--space-12) var(--space-16);
   padding: clamp(3rem, 7vw, 7rem) var(--page-gutter);
   background: var(--olive);
 }
@@ -165,6 +168,7 @@
 .action > div {
   display: flex;
   flex-wrap: wrap;
+  justify-self: end;
   gap: var(--space-4);
 }
 
@@ -204,6 +208,15 @@
   .hero > p:last-child {
     grid-column: 1;
     align-self: auto;
+  }
+
+  /* Not enough width to seat the actions beside the heading. */
+  .action {
+    grid-template-columns: 1fr;
+  }
+
+  .action > div {
+    justify-self: start;
   }
 
   .observation > div,
