@@ -72,13 +72,27 @@
 }
 
 
+/* The headline sits at the bottom of the FIRST SCREENFUL, not at the bottom
+   of the photograph.
+
+   Those were the same thing while the hero was exactly one screen tall. Once
+   the band grew to fit the picture, align-self: end put the headline at the
+   foot of a band taller than the window — so landing on the page showed sky
+   and nothing else. The height below is the lesser of one screenful and the
+   hero itself, so the line is always in view on arrival however tall the
+   photograph gets, and on phones, where the band never exceeds the window,
+   nothing changes. */
 .homeHeroCopy {
-  position: relative;
+  position: absolute;
   z-index: 3;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  display: grid;
+  align-content: end;
+  box-sizing: border-box;
   width: min(720px, 88vw);
-  margin: clamp(2.5rem, 7svh, 5rem) 6vw;
-  align-self: end;
-  justify-self: end;
+  height: min(calc(100svh - var(--site-header-height, 0px)), 100%);
+  padding: clamp(2.5rem, 7svh, 5rem) 6vw;
   text-align: right;
 }
 
@@ -110,9 +124,11 @@
     );
   }
 
+  /* Padding now, not margin — the copy is absolutely positioned and
+     box-sizing: border-box, so the gutter has to come from inside it. */
   .homeHeroCopy {
-    width: calc(100vw - (2 * var(--page-gutter)));
-    margin: clamp(2rem, 5svh, 3rem) var(--page-gutter);
+    width: 100vw;
+    padding: clamp(2rem, 5svh, 3rem) var(--page-gutter);
   }
 
   .homeHeroCopy h1 {
