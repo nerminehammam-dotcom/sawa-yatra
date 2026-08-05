@@ -572,12 +572,36 @@
 
 /* ---- The name ------------------------------------------------------- */
 
+/* The passage is placed in the page rather than run flush to the gutter.
+   That was the actual problem: a full-width block starting hard against the
+   left edge reads as a document, not a set page. It now sits in a narrow
+   column about a third of the way across, with a hairline holding its left
+   edge and a lot of empty paper around it. */
 .nameStory {
   display: grid;
-  gap: clamp(1.1rem, 1.6vw, 1.5rem);
-  padding: var(--section-space) var(--page-gutter);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.35fr) minmax(0, 0.75fr);
+  padding: clamp(7rem, 16vh, 14rem) var(--page-gutter);
   color: var(--ink);
   background: var(--paper);
+}
+
+.nameStoryColumn {
+  display: grid;
+  gap: clamp(1.15rem, 1.6vw, 1.6rem);
+  grid-column: 2;
+  padding-inline-start: clamp(1.5rem, 3vw, 3rem);
+  border-inline-start: 1px solid var(--ink);
+}
+
+@media (max-width: 900px) {
+  .nameStory {
+    grid-template-columns: 1fr;
+    padding-block: clamp(4rem, 12vh, 8rem);
+  }
+
+  .nameStoryColumn {
+    grid-column: 1;
+  }
 }
 
 /* One size, one measure, one weight. No lede, no drop cap, no closing
@@ -598,11 +622,11 @@
    hanging-punctuation — opening quotes sit in the margin so the left edge
    reads flush rather than subtly indented. */
 .nameStory p {
-  max-width: 66ch;
+  max-width: 48ch;
   font-family: var(--font-read);
-  font-size: clamp(1.0625rem, 1.1vw, 1.1875rem);
+  font-size: clamp(1.0625rem, 1.05vw, 1.1875rem);
   font-weight: 400;
-  line-height: 1.7;
+  line-height: 1.75;
   font-optical-sizing: auto;
   text-wrap: pretty;
   hanging-punctuation: first;

@@ -34,9 +34,11 @@ export default function HomePage() {
       </section>
 
       <section className={styles.nameStory}>
-        {content.nameStory.body.map((paragraph) => (
-          <p key={paragraph.slice(0, 24)}>{paragraph}</p>
-        ))}
+        <div className={styles.nameStoryColumn}>
+          {content.nameStory.body.map((paragraph) => (
+            <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+          ))}
+        </div>
       </section>
     </main>
   );
