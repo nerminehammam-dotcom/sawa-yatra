@@ -42,7 +42,7 @@
 .heroIndex,
 .chapterImage figcaption {
   font-family: var(--font-read);
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   line-height: 1.3;
@@ -142,7 +142,7 @@
 }
 
 .signal > span {
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.12em;
 }

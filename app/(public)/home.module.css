@@ -234,7 +234,7 @@ a.homeHeroPrimaryAction,
 .regionsHeading > p,
 .fieldNotes > header > p,
 .finalAction > p {
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -415,7 +415,7 @@ a.homeHeroPrimaryAction,
   bottom: 0;
   padding: var(--space-3) var(--space-4);
   color: var(--paper);
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   background: var(--ink);
@@ -489,7 +489,7 @@ a.homeHeroPrimaryAction,
 }
 
 .travelSelfCopy > p:first-child {
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -507,7 +507,7 @@ a.homeHeroPrimaryAction,
 
 .travelSelfNote {
   max-width: 44ch;
-  font-size: 0.95rem;
+  font-size: 1rem;
 }
 
 .travelSelfFigure {
@@ -546,7 +546,7 @@ a.homeHeroPrimaryAction,
 }
 
 .reserved article > p:first-child {
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -559,7 +559,7 @@ a.homeHeroPrimaryAction,
 .reservedNeeds {
   max-width: 46ch;
   padding-top: var(--space-3);
-  font-size: 0.95rem;
+  font-size: 1rem;
   border-top: var(--border-hairline) solid var(--ink);
 }
 

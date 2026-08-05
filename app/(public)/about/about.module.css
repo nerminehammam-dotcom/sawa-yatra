@@ -25,7 +25,7 @@
 .observation > div > p:first-child,
 .principles header > p,
 .founder > p:first-child {
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -64,7 +64,7 @@
   bottom: 0;
   padding: var(--space-3) var(--space-4);
   color: var(--paper);
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.08em;
   background: var(--ink);
@@ -132,7 +132,7 @@
 }
 
 .principles li p {
-  font-size: 0.92rem;
+  font-size: 1rem;
 }
 
 .founder {

@@ -17,7 +17,7 @@
 .panelEyebrow,
 .progress,
 .passport dt {
-  font-size: 0.75rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -89,7 +89,7 @@
   padding: 0.6rem 1.1rem;
   background: var(--tsi-paper);
   border: var(--tsi-hair) solid var(--tsi-ink);
-  font-size: 0.8125rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -334,7 +334,7 @@
 
 .poles small {
   margin-top: var(--space-1);
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.35;
 }
 
@@ -373,7 +373,7 @@
   border-radius: 50%;
   color: var(--ink);
   background: var(--paper);
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 500;
 }
 
@@ -432,7 +432,7 @@
 
 .selectionCount {
   margin-bottom: var(--space-6);
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 500;
 }
 
@@ -454,7 +454,7 @@
 }
 
 .passion span {
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.45;
 }
 
@@ -514,7 +514,7 @@
 
 .narrowDetail {
   margin-top: var(--space-2);
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.45;
 }
 
@@ -557,7 +557,7 @@
 
 .qBandLabel {
   margin: 0;
-  font-size: 0.9375rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.1em;
   line-height: 1.5;
@@ -625,7 +625,7 @@
 
 .qBeforeRows p {
   margin: 0;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.5;
 }
 
@@ -688,7 +688,7 @@
 
 .qPoles small {
   max-width: 18ch;
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.35;
 }
 
@@ -825,7 +825,7 @@
 }
 
 .qPassions span {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.4;
 }
 
@@ -983,7 +983,7 @@
 
 .passportHead > p:first-child {
   margin: 0 0 0.75rem;
-  font-size: 0.8125rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -1058,7 +1058,7 @@
 .passportFriction dt {
   margin: 0;
   padding-top: 0.25rem;
-  font-size: 0.8125rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -1116,7 +1116,7 @@
 .passportSaveNotice {
   min-height: 1.5em;
   margin: 0.75rem 0 0;
-  font-size: 0.9375rem;
+  font-size: 1rem;
 }
 
 .resultStage,
@@ -1139,7 +1139,7 @@
 
 .resultEyebrow {
   margin-bottom: var(--space-8);
-  font-size: 0.75rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -1271,7 +1271,7 @@
 }
 
 .otherFamilies li span {
-  font-size: 0.72rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1279,7 +1279,7 @@
 
 .otherFamilies li p {
   margin-top: var(--space-3);
-  font-size: 0.8rem;
+  font-size: 1.125rem;
   letter-spacing: 0.12em;
 }
 

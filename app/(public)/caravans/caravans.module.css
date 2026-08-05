@@ -20,7 +20,7 @@
 .flagshipTitle > p:first-child,
 .future > p:first-child,
 .heroImage figcaption {
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -224,7 +224,7 @@
 }
 
 .sections > header > p {
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -258,7 +258,7 @@
 }
 
 .upcomingTitle > p:first-child {
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   text-transform: uppercase;

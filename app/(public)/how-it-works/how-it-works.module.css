@@ -5,7 +5,7 @@
 .kicker,
 .eyebrow,
 .cardLabel {
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 0.12em;
   line-height: 1.35;
@@ -119,7 +119,10 @@
   display: inline-block;
   margin-inline: 0.16em;
   font-family: var(--font-read);
-  font-size: 0.72em;
+  /* .routeLine is clamp(1.2rem, 1.8vw, 1.7rem), so a flat 0.72em fell to
+     13.8px at the narrow end. max() keeps the proportion at large sizes and
+     holds the 16px floor at small ones. */
+  font-size: max(1rem, 0.72em);
 }
 
 .journeyFacts {
