@@ -580,58 +580,30 @@
   background: var(--paper);
 }
 
+/* One size, one measure, one weight. No lede, no drop cap, no closing
+   flourish — those were mine and they were wrong for this. nerminehammam.com
+   states the rule on its own pages: "Text is secondary, captions are precise,
+   and the gallery avoids decorative effects." A passage set quietly and
+   consistently, given room, is the register.
+
+   What stays is correction rather than ornament, and none of it is visible as
+   an effect:
+
+   font-optical-sizing — Fraunces is cut sturdier at reading size and finer at
+   display size. The h1 forces "opsz" 144 for the display cut; without this the
+   prose gets a shrunken headline instead of the text cut it was drawn for.
+
+   text-wrap: pretty — no paragraph left ending on a single stranded word.
+
+   hanging-punctuation — opening quotes sit in the margin so the left edge
+   reads flush rather than subtly indented. */
 .nameStory p {
-  max-width: 62ch;
+  max-width: 66ch;
   font-family: var(--font-read);
-  font-size: clamp(1.0625rem, 1.15vw, 1.2rem);
-  line-height: 1.65;
-
-  /* Fraunces carries an optical-size axis: the letterforms are cut sturdier
-     at reading size and finer at display size. The h1 forces "opsz" 144 for
-     the display cut; this asks the browser to drive the axis from the rendered
-     size instead, so the prose gets the text cut it was drawn for rather than
-     a shrunken headline. */
+  font-size: clamp(1.0625rem, 1.1vw, 1.1875rem);
+  font-weight: 400;
+  line-height: 1.7;
   font-optical-sizing: auto;
-
-  /* Only reworks the last lines, so no paragraph ends on a single stranded
-     word. Falls back to an ordinary rag where unsupported. */
   text-wrap: pretty;
-
-  /* Opening quotes and brackets hang into the margin so the letters line up
-     flush. Safari today; harmless everywhere else. */
   hanging-punctuation: first;
-}
-
-/* The opening paragraph carries the etymology and is the one that has to be
-   read, so it is set as a lede: a step larger, a shade tighter, on a narrower
-   measure than the paragraphs beneath it. */
-.nameStory p:first-child {
-  max-width: 52ch;
-  font-size: clamp(1.2rem, 1.6vw, 1.55rem);
-  line-height: 1.45;
-}
-
-/* Rubrication, essentially — the mark that says the reading starts here.
-   initial-letter sinks the S three lines and the text flows around it; no
-   float, no guessed margins. Ink, not a second colour: the palette is closed,
-   and a coloured cap on a body this quiet would shout.
-
-   Firefox does not support initial-letter, and because it comes through
-   ::first-letter the fallback is simply a normal-sized letter. Ornament that
-   disappears cleanly where it cannot render. */
-.nameStory p:first-child::first-letter {
-  -webkit-initial-letter: 3;
-  initial-letter: 3;
-  margin-inline-end: 0.09em;
-  font-family: var(--font-display);
-  font-variation-settings: "opsz" 144;
-  font-weight: 500;
-  color: var(--ink);
-}
-
-/* The sentence the whole passage walks toward. */
-.nameStory p:last-child {
-  max-width: 54ch;
-  font-size: clamp(1.15rem, 1.45vw, 1.4rem);
-  line-height: 1.5;
 }
