@@ -180,7 +180,7 @@
   text-transform: none;
 }
 
-.titleBlock h3 {
+.titleBlock h2 {
   font-size: clamp(3.2rem, 6vw, 6.6rem);
   letter-spacing: -0.05em;
 }

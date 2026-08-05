@@ -129,7 +129,10 @@ export function JoiningPointSelector({
           <p className={styles.number}>{active.number}</p>
           <div className={styles.titleBlock}>
             <p>{active.country}</p>
-            <h3 id={detailHeadingId}>{active.place}</h3>
+            {/* Was an h3, and this component sits directly under the page h1
+                on /joining-points, so the level was skipped. It is the only
+                consumer, so h2 is correct everywhere it renders. */}
+            <h2 id={detailHeadingId}>{active.place}</h2>
             <p className={styles.route}>{active.route}</p>
           </div>
           <dl className={styles.facts}>

@@ -53,7 +53,7 @@ export default function HopOnHopOffPage() {
         </aside>
       </section>
 
-      <CaravanRouteMap />
+      <CaravanRouteMap headingLevel={2} />
 
       <section className={styles.proposition} aria-labelledby="proposition-heading">
         <p aria-hidden="true">01—09</p>

@@ -14,7 +14,7 @@
   padding: clamp(2rem, 5vw, 5rem) var(--page-gutter) 0;
 }
 
-.heading h3 {
+.heading :is(h2, h3) {
   grid-column: 1;
   max-width: 10ch;
   font-size: clamp(3.5rem, 8vw, 8rem);
@@ -760,7 +760,7 @@
 }
 
 @media (max-width: 440px) {
-  .heading h3 {
+  .heading :is(h2, h3) {
     font-size: clamp(3.35rem, 16vw, 4.8rem);
   }
 

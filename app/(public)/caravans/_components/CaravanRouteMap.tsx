@@ -93,7 +93,19 @@ function stopStyleFor(
   };
 }
 
-export function CaravanRouteMap() {
+/**
+ * The map's own heading was a hard-coded h3. That is correct on /caravans and
+ * /departures, where an h2 precedes it, but on /caravans/andean/route-map and
+ * /caravans/andean-caravan/how-it-works it followed the h1 directly and skipped
+ * a level. The level is now the caller's to state; the default preserves the
+ * existing behaviour everywhere it was already right.
+ */
+interface CaravanRouteMapProps {
+  headingLevel?: 2 | 3;
+}
+
+export function CaravanRouteMap({ headingLevel = 3 }: CaravanRouteMapProps = {}) {
+  const MapHeading = `h${headingLevel}` as const;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [motionAllowed, setMotionAllowed] = useState(false);
@@ -214,7 +226,9 @@ export function CaravanRouteMap() {
     <section className={styles.root} aria-labelledby="caravan-route-map-heading">
       <header className={styles.heading}>
         <p className={styles.kicker}>The illustrated route</p>
-        <h3 id="caravan-route-map-heading">Follow the Andes south.</h3>
+        <MapHeading id="caravan-route-map-heading">
+          Follow the Andes south.
+        </MapHeading>
         <p>
           Peru, Bolivia and Chile are shown in their real geographic shapes.
           Zoom closer or choose any numbered stop to open its destination story.
