@@ -11,23 +11,6 @@ import styles from "./caravans.module.css";
 
 export const metadata = createPageMetadata("/caravans");
 
-// Titles and ledes are taken verbatim from each caravan's own page; no route,
-// region or date detail has been inferred for routes that are not yet approved.
-const upcomingCaravans = [
-  {
-    title: "The Egyptian Caravan",
-    lede:
-      "This Caravan is coming soon. Route information will be added section by section when the approved details are ready.",
-    href: "/caravans/egyptian",
-  },
-  {
-    title: "The Indian Caravan",
-    lede:
-      "This Caravan is coming soon. Route information will be added section by section when the approved details are ready.",
-    href: "/caravans/indian",
-  },
-] as const;
-
 export default function CaravansPage() {
   return (
     <main id="main-content" tabIndex={-1}>
@@ -102,24 +85,6 @@ export default function CaravansPage() {
       </section>
 
       <CaravanRouteMap />
-
-      <section className={styles.upcoming} aria-labelledby="upcoming-heading">
-        <h2 className="sr-only" id="upcoming-heading">
-          Caravans in preparation
-        </h2>
-        {upcomingCaravans.map((caravan) => (
-          <article key={caravan.href}>
-            <div className={styles.upcomingTitle}>
-              <p>Coming soon</p>
-              <h3>{caravan.title}</h3>
-              <p>{caravan.lede}</p>
-            </div>
-            <div className={styles.actions}>
-              <Link href={caravan.href}>Read what is confirmed →</Link>
-            </div>
-          </article>
-        ))}
-      </section>
 
       <section className={styles.future} aria-labelledby="future-heading">
         <p>Collection architecture / future routes</p>

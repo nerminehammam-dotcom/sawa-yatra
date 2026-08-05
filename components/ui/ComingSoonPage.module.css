@@ -69,9 +69,14 @@
   border-radius: 0;
 }
 
+/* Was var(--ink) at opacity 0.68, which paints #5c5751 on the #ccc6bc field
+   — 4.21:1 against a 4.5 threshold. Opacity is applied at paint, so
+   getComputedStyle reported the full-strength ink ratio and every automated
+   check passed it. Solid colour instead, so computed and painted agree and
+   the next audit can see the real number. 78% ink on paper = #514d47, 4.94:1. */
 .notify input::placeholder {
-  color: var(--ink);
-  opacity: 0.68;
+  color: color-mix(in srgb, var(--ink) 78%, var(--paper));
+  opacity: 1;
 }
 
 .notify button {

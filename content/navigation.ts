@@ -81,18 +81,6 @@ export const caravansNavigation = {
       href: "/caravans/andean",
       meta: "71 days, Lima to Patagonia",
     },
-    {
-      id: "indian-caravan",
-      label: "The Indian Caravan",
-      href: "/caravans/indian",
-      meta: "Coming soon",
-    },
-    {
-      id: "egyptian-caravan",
-      label: "The Egyptian Caravan",
-      href: "/caravans/egyptian",
-      meta: "In planning",
-    },
   ],
   join: [
     {

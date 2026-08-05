@@ -36,10 +36,6 @@ const approvedRouteDescriptions = {
   // app/(public)/caravans/andean-caravan/how-it-works/page.tsx. Not new copy.
   "hop-on-hop-off":
     "Choose where to join and leave the Andean Caravan, one continuous section at a time.",
-  "indian-caravan":
-    "The Indian Caravan is in development. Approved route information will be added when it is ready.",
-  "egyptian-caravan":
-    "The Egyptian Caravan is in development. Approved route information will be added when it is ready.",
   "who-else-is-travelling":
     "This section will show how each Caravan group is taking shape without naming individual members.",
   "andean-caravan":
@@ -86,8 +82,6 @@ export const routeMetadata = ([
     "/caravans/andean-caravan/how-it-works",
     "Hop on, hop off | Sawayatra",
   ],
-  ["indian-caravan", "/caravans/indian", "The Indian Caravan | Sawayatra"],
-  ["egyptian-caravan", "/caravans/egyptian", "The Egyptian Caravan | Sawayatra"],
   [
     "who-else-is-travelling",
     "/caravans/who-else-is-travelling",
@@ -146,8 +140,6 @@ export const routeMetadata = ([
     id === "do-it-yourself" ||
     id === "sign-in" ||
     id === "not-found" ||
-    id === "indian-caravan" ||
-    id === "egyptian-caravan" ||
     id === "who-else-is-travelling" ||
     id === "departure-dates" ||
     id === "journeys" ||
