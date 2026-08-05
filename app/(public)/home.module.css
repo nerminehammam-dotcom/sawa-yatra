@@ -16,28 +16,13 @@
   position: relative;
   display: grid;
   width: 100vw;
-  /* The photograph is 2560x1706 — an ordinary 3:2 landscape. A band that is
-     the full window width by the window height minus the header comes out at
-     roughly 2.4:1 on a laptop, so object-fit: cover was discarding about 39%
-     of the picture off the top and bottom, and it read as heavily zoomed.
+  /* One screen exactly. The hero opens complete — headline included — with
+     nothing of it below the fold.
 
-     The band is now at least as tall as its own width divided by the ratio
-     below, so the frame stays nearer the photograph's proportions. Raising
-     the ratio shows less of the picture and keeps the hero closer to one
-     screen; lowering it shows more and makes the hero taller. At 1.9 on a
-     1456px window it shows 79% of the photograph.
-
-     Capped at 1.5 so the frame can never be taller than the photograph
-     itself, which would letterbox it. On phones the band is already taller
-     than wide, so max() leaves it untouched. */
-  --hero-frame-ratio: 1.9;
-  min-height: min(
-    max(
-      calc(100svh - var(--site-header-height, 0px)),
-      calc(100vw / var(--hero-frame-ratio))
-    ),
-    calc(100vw / 1.5)
-  );
+     The photograph is 2560x1706, a 3:2 landscape, and this band is nearer
+     2.4:1, so cover has to discard about a third of its height. Which third
+     is the whole question, and it is set by --hero-focus-y below. */
+  min-height: calc(100svh - var(--site-header-height, 0px));
   overflow: hidden;
   color: var(--hero-cream);
   background: var(--hero-ink);
@@ -46,7 +31,15 @@
 .homeHeroImage {
   z-index: 0;
   object-fit: cover;
-  object-position: center;
+  /* Was center, which took the crop evenly off the top and the bottom — half
+     the sky and half the road. Weighting it low takes almost all of it off
+     the top, so what goes is sky and what stays is the horizon, the valley
+     and the road running out of the frame.
+
+     One number to move. Higher cuts more sky; 100% would cut it all and sit
+     the horizon at the top edge. Lower gives the sky back. */
+  --hero-focus-y: 82%;
+  object-position: center var(--hero-focus-y);
 }
 
 .homeHeroScrim {
@@ -73,15 +66,10 @@
 
 
 /* The headline sits at the bottom of the FIRST SCREENFUL, not at the bottom
-   of the photograph.
-
-   Those were the same thing while the hero was exactly one screen tall. Once
-   the band grew to fit the picture, align-self: end put the headline at the
-   foot of a band taller than the window — so landing on the page showed sky
-   and nothing else. The height below is the lesser of one screenful and the
-   hero itself, so the line is always in view on arrival however tall the
-   photograph gets, and on phones, where the band never exceeds the window,
-   nothing changes. */
+   of the photograph. Those are the same thing at the moment, because the hero
+   is exactly one screen tall — but they came apart once before, when a taller
+   band pushed the line below the fold and the page opened on empty sky. The
+   min() keeps them tied together whatever the band does next. */
 .homeHeroCopy {
   position: absolute;
   z-index: 3;
