@@ -1,7 +1,6 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useLayoutEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { contactQuestionFormContent } from "@/content/forms";
@@ -10,22 +9,21 @@ import {
   type ContactQuestionValues,
 } from "@/lib/forms/schemas";
 
+import { DataHandlingNotice } from "./DataHandlingNotice";
 import { Field } from "./Field";
 import { FormStatus } from "./FormStatus";
+import { useFormSubmission } from "./useFormSubmission";
 import styles from "./forms.module.css";
 
 interface ContactQuestionFormProps {
   initialJourneyContext?: string;
 }
 
-type ContactFormState = "idle" | "validation" | "unavailable";
-
 export function ContactQuestionForm({
   initialJourneyContext = "",
 }: ContactQuestionFormProps) {
-  const formRef = useRef<HTMLFormElement>(null);
-  const [submissionState, setSubmissionState] =
-    useState<ContactFormState>("idle");
+  const { state, submit, showValidationState, clearSettledState, setFormElement } =
+    useFormSubmission("contact-question");
   const {
     register,
     handleSubmit,
@@ -41,42 +39,25 @@ export function ContactQuestionForm({
     },
   });
 
-  useLayoutEffect(() => {
-    if (submissionState !== "validation") return;
-
-    formRef.current
-      ?.querySelector<HTMLElement>('[data-tone="validation"][role="alert"]')
-      ?.focus();
-  }, [submissionState]);
-
   return (
     <form
-      ref={formRef}
+      ref={setFormElement}
       className={styles.form}
       aria-label={contactQuestionFormContent.ariaLabel}
       noValidate
-      onChange={() => {
-        if (submissionState !== "idle") setSubmissionState("idle");
-      }}
+      onChange={clearSettledState}
       onSubmit={handleSubmit(
-        () => setSubmissionState("unavailable"),
-        () => setSubmissionState("validation"),
+        (values) => void submit(values),
+        () => showValidationState(),
       )}
     >
-      {submissionState === "validation" ? (
+      {state.status === "idle" ? null : (
         <FormStatus
-          tone="validation"
-          title="Check the form"
-          message="Correct the marked fields, then try again."
+          tone={state.status}
+          title={state.title}
+          message={state.message}
         />
-      ) : null}
-      {submissionState === "unavailable" ? (
-        <FormStatus
-          tone="network-error"
-          title={contactQuestionFormContent.unavailableTitle}
-          message={contactQuestionFormContent.unavailableMessage}
-        />
-      ) : null}
+      )}
 
       <Field
         id="contact-name"
@@ -146,7 +127,13 @@ export function ContactQuestionForm({
         )}
       </Field>
 
-      <button className={styles.primaryAction} type="submit">
+      <DataHandlingNotice />
+
+      <button
+        className={styles.primaryAction}
+        type="submit"
+        disabled={state.status === "pending"}
+      >
         {contactQuestionFormContent.actionLabel}
       </button>
     </form>

@@ -25,6 +25,7 @@ const localReceiptSchema = z
       "invitation-request",
       "journey-interest",
       "sign-in-interest",
+      "contact-question",
     ]),
     fingerprint: z.string().regex(/^[a-f0-9]{64}$/),
     result: z.literal("delivered"),

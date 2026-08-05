@@ -95,9 +95,7 @@ export const contactQuestionFormContent = {
   questionHint:
     "Do not include payment details, identity documents, health information or emergency contacts.",
   actionLabel: "Send question",
-  unavailableTitle: "Online delivery is not connected yet",
-  unavailableMessage:
-    "Your question was not sent or stored. Please use the email address shown on this page.",
+  pendingActionLabel: "Sending question…",
 } as const;
 
 export const formApiMessages = {
@@ -108,6 +106,8 @@ export const formApiMessages = {
       "Your enquiry has been sent. Sawayatra will read it and reply to the address you gave. This is an enquiry, not a booking.",
     "sign-in-interest":
       "Your interest has been sent. Member access is opening in stages, and Sawayatra will write to you when it does.",
+    "contact-question":
+      "Your question has been sent. Sawayatra will read it and reply to the address you gave.",
   },
   deliveryFailed:
     "This could not be sent just now, and nothing has been kept. Please try again in a moment, or write to Sawayatra directly.",

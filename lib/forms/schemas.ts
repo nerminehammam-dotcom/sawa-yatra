@@ -4,6 +4,7 @@ export const formKinds = [
   "invitation-request",
   "journey-interest",
   "sign-in-interest",
+  "contact-question",
 ] as const;
 
 export const formKindSchema = z.enum(formKinds);
@@ -89,12 +90,14 @@ export interface FormValuesByKind {
   "invitation-request": InvitationRequestValues;
   "journey-interest": JourneyInterestValues;
   "sign-in-interest": SignInInterestValues;
+  "contact-question": ContactQuestionValues;
 }
 
 export const formSchemas = {
   "invitation-request": invitationRequestSchema,
   "journey-interest": journeyInterestSchema,
   "sign-in-interest": signInInterestSchema,
+  "contact-question": contactQuestionSchema,
 } satisfies Record<FormKind, z.ZodType>;
 
 export function getFormSchema<K extends FormKind>(

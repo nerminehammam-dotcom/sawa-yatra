@@ -59,6 +59,7 @@ const subjectByKind: Record<FormKind, string> = {
   "invitation-request": "Invitation request",
   "journey-interest": "Journey interest",
   "sign-in-interest": "Member access interest",
+  "contact-question": "Question",
 };
 
 function escapeHtml(value: string): string {
