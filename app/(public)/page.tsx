@@ -55,7 +55,14 @@ export default function HomePage() {
             The photograph and the sentence, nothing else. Every way onward is
             in the header and the footer. */}
         <div className={styles.homeHeroCopy}>
-          <h1 id="home-heading">Go alone, arrive together.</h1>
+          {/* Three spans, one sentence. The text content is unchanged —
+              "Go alone, arrive together." — and the spaces between them are
+              real text nodes, so it reads and is announced as one line. */}
+          <h1 id="home-heading">
+            <span className={styles.homeHeroRoman}>Go alone,</span>{" "}
+            <span className={styles.homeHeroTurn}>arrive</span>{" "}
+            <span className={styles.homeHeroRoman}>together.</span>
+          </h1>
         </div>
       </section>
 

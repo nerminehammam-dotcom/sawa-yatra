@@ -84,17 +84,46 @@
   text-align: right;
 }
 
+/* Set in the manner of the reference: two weighted roman lines with the
+   turning word cut across them in italic, larger and lighter, pulled up into
+   the line above so the three overlap rather than stack.
+
+   All one colour. The contrast is roman against italic and heavy against
+   light, not pink against something else.
+
+   Note for anyone extending this: the font files here are subset to the opsz
+   and wght axes only. Fraunces also ships SOFT and WONK — WONK is what swaps
+   in the swash forms that give this kind of setting its curl — and neither is
+   present, so asking for them in font-variation-settings would silently do
+   nothing. */
 .homeHeroCopy h1 {
+  display: grid;
+  justify-items: end;
   color: var(--hero-rose);
   font-family: var(--font-display);
-  font-size: clamp(2.6rem, 6vw, 5.5rem);
   font-optical-sizing: auto;
+  line-height: 0.92;
+}
+
+.homeHeroRoman {
+  font-size: clamp(2.6rem, 6vw, 5.5rem);
   font-style: normal;
   font-variation-settings: "opsz" 144;
-  font-weight: 500;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
-  text-wrap: balance;
+  font-weight: 600;
+  letter-spacing: -0.022em;
+}
+
+.homeHeroTurn {
+  margin-block: -0.14em -0.1em;
+  /* Off the right edge, so the word sits across the block rather than aligning
+     with it. */
+  margin-inline-end: clamp(0.5rem, 3vw, 3.5rem);
+  font-size: clamp(3.4rem, 8vw, 7.6rem);
+  font-style: italic;
+  font-variation-settings: "opsz" 144;
+  font-weight: 300;
+  line-height: 0.85;
+  letter-spacing: -0.03em;
 }
 
 @media (max-width: 639px) {
@@ -123,8 +152,15 @@
     /* Pink cannot reach 3:1 over a bright sky without darkening the whole
        frame, which is what we are avoiding. Paper does it at 3.3:1. */
     color: var(--paper);
+  }
+
+  .homeHeroRoman {
     font-size: clamp(2.6rem, 11.5vw, 4rem);
-    line-height: 1.05;
+  }
+
+  .homeHeroTurn {
+    margin-inline-end: 0;
+    font-size: clamp(3.2rem, 14.5vw, 5rem);
   }
 }
 
