@@ -1,46 +1,51 @@
-import { developmentMockFormAdapter } from "@/lib/forms/adapters";
-import { archetypes } from "@/content/archetypes";
 import { andeanCaravanPublicEnquiryIds } from "@/content/andean-caravan";
+import { archetypes } from "@/content/archetypes";
 import { formApiMessages } from "@/content/forms";
+import {
+  resolveFormAdapter,
+  type FormDeliveryAdapter,
+} from "@/lib/forms/adapters";
 import {
   formKindSchema,
   getFormSchema,
   NOT_COMPLETED_TRAVEL_SELF,
   type FormKind,
-  type JourneyInterestValues,
   type FormValuesByKind,
+  type JourneyInterestValues,
 } from "@/lib/forms/schemas";
 
-const MAX_MOCK_PAYLOAD_BYTES = 12_000;
-const journeyIds: ReadonlySet<string> = new Set(
-  andeanCaravanPublicEnquiryIds,
-);
+const MAX_PAYLOAD_BYTES = 12_000;
+const journeyIds: ReadonlySet<string> = new Set(andeanCaravanPublicEnquiryIds);
 const travelSelfIds: ReadonlySet<string> = new Set(
   archetypes.map((archetype) => archetype.id),
 );
 
-const responseMessages: Record<FormKind, string> = formApiMessages;
+const responseMessages: Record<FormKind, string> = formApiMessages.byKind;
 
 const noStoreHeaders = {
   "Cache-Control": "no-store, max-age=0",
 };
 
-function mockError(
+type ErrorCode =
+  | "invalid-form-kind"
+  | "invalid-content-type"
+  | "invalid-json"
+  | "payload-too-large"
+  | "validation-error"
+  | "delivery-not-configured"
+  | "delivery-failed";
+
+function formError(
   status: number,
-  code:
-    | "invalid-form-kind"
-    | "invalid-content-type"
-    | "invalid-json"
-    | "payload-too-large"
-    | "validation-error"
-    | "mock-adapter-error",
+  code: ErrorCode,
   message: string,
+  mode: "development-mock" | "email" | "unavailable" = "unavailable",
   issues?: Array<{ path: string; message: string }>,
 ) {
   return Response.json(
     {
       ok: false as const,
-      mode: "development-mock" as const,
+      mode,
       sent: false as const,
       storedOnServer: false as const,
       code,
@@ -51,33 +56,35 @@ function mockError(
   );
 }
 
-async function acknowledgeMockSubmission<K extends FormKind>(
+/**
+ * Delivery is the only thing that makes a submission a success. If the adapter
+ * does not acknowledge, the visitor is told and can act on it. The one outcome
+ * never permitted here is a 200 for an enquiry that went nowhere.
+ */
+async function deliver<K extends FormKind>(
+  adapter: FormDeliveryAdapter,
   kind: K,
   values: FormValuesByKind[K],
 ) {
-  const adapterResult = await developmentMockFormAdapter.submit({
-    kind,
-    values,
-  });
+  const result = await adapter.submit({ kind, values });
 
-  if (
-    !adapterResult.acknowledged ||
-    adapterResult.sent ||
-    adapterResult.stored
-  ) {
-    return mockError(
-      503,
-      "mock-adapter-error",
-      "The development mock is unavailable. Nothing was sent or stored.",
+  if (!result.acknowledged || result.stored) {
+    return formError(
+      502,
+      result.reason === "not-configured"
+        ? "delivery-not-configured"
+        : "delivery-failed",
+      formApiMessages.deliveryFailed,
+      adapter.name,
     );
   }
 
   return Response.json(
     {
       ok: true as const,
-      mode: "development-mock" as const,
+      mode: adapter.name,
       kind,
-      sent: false as const,
+      sent: result.sent,
       storedOnServer: false as const,
       message: responseMessages[kind],
     },
@@ -93,33 +100,42 @@ export async function POST(
   const parsedKind = formKindSchema.safeParse(rawKind);
 
   if (!parsedKind.success) {
-    return mockError(
+    return formError(
       404,
       "invalid-form-kind",
       "This form endpoint is not available.",
     );
   }
 
+  const adapter = resolveFormAdapter();
+
+  if (!adapter) {
+    return formError(
+      503,
+      "delivery-not-configured",
+      formApiMessages.deliveryUnavailable,
+    );
+  }
+
   const contentType = request.headers.get("content-type") ?? "";
 
   if (!contentType.toLowerCase().startsWith("application/json")) {
-    return mockError(
+    return formError(
       415,
       "invalid-content-type",
-      "Send this mock request as JSON.",
+      "Send this request as JSON.",
+      adapter.name,
     );
   }
 
   const contentLength = Number(request.headers.get("content-length") ?? "0");
 
-  if (
-    Number.isFinite(contentLength) &&
-    contentLength > MAX_MOCK_PAYLOAD_BYTES
-  ) {
-    return mockError(
+  if (Number.isFinite(contentLength) && contentLength > MAX_PAYLOAD_BYTES) {
+    return formError(
       413,
       "payload-too-large",
-      "This mock request is too large. Shorten the text fields and try again.",
+      "This request is too large. Shorten the text fields and try again.",
+      adapter.name,
     );
   }
 
@@ -128,10 +144,11 @@ export async function POST(
   try {
     requestBody = await request.json();
   } catch {
-    return mockError(
+    return formError(
       400,
       "invalid-json",
-      "The mock request body could not be read as JSON.",
+      "The request body could not be read as JSON.",
+      adapter.name,
     );
   }
 
@@ -139,10 +156,11 @@ export async function POST(
   const validatedSubmission = getFormSchema(kind).safeParse(requestBody);
 
   if (!validatedSubmission.success) {
-    return mockError(
+    return formError(
       400,
       "validation-error",
       "Check the marked fields and try this action again.",
+      adapter.name,
       validatedSubmission.error.issues.map((issue) => ({
         path: issue.path.map(String).join("."),
         message: issue.message,
@@ -172,14 +190,15 @@ export async function POST(
     }
 
     if (referenceIssues.length > 0) {
-      return mockError(
+      return formError(
         400,
         "validation-error",
         "Check the marked fields and try this action again.",
+        adapter.name,
         referenceIssues,
       );
     }
   }
 
-  return acknowledgeMockSubmission(kind, validatedSubmission.data);
+  return deliver(adapter, kind, validatedSubmission.data);
 }

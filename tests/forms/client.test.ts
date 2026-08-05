@@ -2,7 +2,7 @@ import { webcrypto } from "node:crypto";
 
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-import { submitMockForm } from "@/lib/forms/client";
+import { submitForm } from "@/lib/forms/client";
 
 const validSignInInterest = {
   email: "traveller@example.com",
@@ -33,7 +33,7 @@ function createMemoryStorage(): Storage {
   };
 }
 
-describe("mock form browser client", () => {
+describe("form browser client", () => {
   beforeEach(() => {
     Object.defineProperty(window, "localStorage", {
       configurable: true,
@@ -56,19 +56,19 @@ describe("mock form browser client", () => {
         kind: "sign-in-interest",
         sent: false,
         storedOnServer: false,
-        message: "Development mock received the member-access interest.",
+        message: "Your interest has been sent.",
       }),
     });
     vi.stubGlobal("fetch", fetchMock);
 
-    const firstResult = await submitMockForm(
+    const firstResult = await submitForm(
       "sign-in-interest",
       validSignInInterest,
     );
     const storedReceipt = window.localStorage.getItem(
-      "sawayatra:r1:mock-form-receipts",
+      "sawayatra:form-receipts",
     );
-    const secondResult = await submitMockForm(
+    const secondResult = await submitForm(
       "sign-in-interest",
       validSignInInterest,
     );
@@ -82,7 +82,7 @@ describe("mock form browser client", () => {
   it("returns a visible network-error state without writing a receipt", async () => {
     vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("offline")));
 
-    const result = await submitMockForm(
+    const result = await submitForm(
       "sign-in-interest",
       validSignInInterest,
     );

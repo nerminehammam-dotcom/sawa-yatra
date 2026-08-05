@@ -1,6 +1,6 @@
 // @vitest-environment node
 
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 import { POST } from "@/app/api/forms/[kind]/route";
 
@@ -8,8 +8,8 @@ function routeContext(kind: string) {
   return { params: Promise.resolve({ kind }) };
 }
 
-describe("mock form route", () => {
-  it("explicitly acknowledges a valid request without sending or storing it", async () => {
+describe("form route", () => {
+  it("acknowledges a valid request via the development adapter", async () => {
     const request = new Request(
       "http://localhost/api/forms/invitation-request",
       {
@@ -87,7 +87,7 @@ describe("mock form route", () => {
     expect(response.status).toBe(404);
     await expect(response.json()).resolves.toMatchObject({
       code: "invalid-form-kind",
-      mode: "development-mock",
+      mode: "unavailable",
       sent: false,
       storedOnServer: false,
     });
@@ -120,5 +120,38 @@ describe("mock form route", () => {
         expect.objectContaining({ path: "travelSelfResult" }),
       ]),
     );
+  });
+
+  it("never returns a success when delivery is not configured in production", async () => {
+    const previousEnv = process.env.NODE_ENV;
+    vi.stubEnv("NODE_ENV", "production");
+
+    const request = new Request(
+      "http://localhost/api/forms/invitation-request",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: "A Traveller",
+          email: "traveller@example.com",
+          country: "Peru",
+          travelInterest: "A small-group journey.",
+          consent: true,
+        }),
+      },
+    );
+
+    const response = await POST(request, routeContext("invitation-request"));
+    const body = await response.json();
+
+    expect(response.status).toBe(503);
+    expect(body).toMatchObject({
+      ok: false,
+      code: "delivery-not-configured",
+      sent: false,
+      storedOnServer: false,
+    });
+
+    vi.stubEnv("NODE_ENV", previousEnv ?? "test");
   });
 });

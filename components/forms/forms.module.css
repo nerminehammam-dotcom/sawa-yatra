@@ -64,7 +64,7 @@
 .hint,
 .fieldError,
 .formStatus p,
-.mockNotice p {
+.handlingNotice p {
   margin: 0;
 }
 
@@ -112,7 +112,7 @@
 }
 
 .formStatus,
-.mockNotice,
+.handlingNotice,
 .journeyContext {
   padding: var(--space-4, 1rem);
   border: 1px solid var(--deep-brown);
@@ -156,7 +156,7 @@
   background: var(--cream);
 }
 
-.mockNotice {
+.handlingNotice {
   display: grid;
   gap: var(--space-1, 0.25rem);
   border-style: dashed;
@@ -243,7 +243,7 @@
 @media (forced-colors: active) {
   .control,
   .formStatus,
-  .mockNotice,
+  .handlingNotice,
   .journeyContext,
   .primaryAction {
     border-color: CanvasText;

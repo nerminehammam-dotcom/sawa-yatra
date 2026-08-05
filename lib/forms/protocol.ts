@@ -2,21 +2,29 @@ import { z } from "zod";
 
 import { formKindSchema } from "./schemas";
 
-export const mockFormSuccessResponseSchema = z
+export const formDeliveryModeSchema = z.enum(["development-mock", "email"]);
+
+export type FormDeliveryMode = z.infer<typeof formDeliveryModeSchema>;
+
+export const formSuccessResponseSchema = z
   .object({
     ok: z.literal(true),
-    mode: z.literal("development-mock"),
+    mode: formDeliveryModeSchema,
     kind: formKindSchema,
-    sent: z.literal(false),
+    /**
+     * True only when delivery actually succeeded. The client must never treat
+     * a response as a success on ok alone — see lib/forms/client.ts.
+     */
+    sent: z.boolean(),
     storedOnServer: z.literal(false),
     message: z.string(),
   })
   .strict();
 
-export const mockFormErrorResponseSchema = z
+export const formErrorResponseSchema = z
   .object({
     ok: z.literal(false),
-    mode: z.literal("development-mock"),
+    mode: formDeliveryModeSchema.or(z.literal("unavailable")),
     sent: z.literal(false),
     storedOnServer: z.literal(false),
     code: z.enum([
@@ -25,7 +33,8 @@ export const mockFormErrorResponseSchema = z
       "invalid-json",
       "payload-too-large",
       "validation-error",
-      "mock-adapter-error",
+      "delivery-not-configured",
+      "delivery-failed",
     ]),
     message: z.string(),
     issues: z
@@ -41,9 +50,5 @@ export const mockFormErrorResponseSchema = z
   })
   .strict();
 
-export type MockFormSuccessResponse = z.infer<
-  typeof mockFormSuccessResponseSchema
->;
-export type MockFormErrorResponse = z.infer<
-  typeof mockFormErrorResponseSchema
->;
+export type FormSuccessResponse = z.infer<typeof formSuccessResponseSchema>;
+export type FormErrorResponse = z.infer<typeof formErrorResponseSchema>;

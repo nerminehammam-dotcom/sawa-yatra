@@ -7,5 +7,5 @@ export {
   JourneyInterestForm,
   type JourneyFormReference,
 } from "./JourneyInterestForm";
-export { MockModeNotice } from "./MockModeNotice";
+export { DataHandlingNotice } from "./DataHandlingNotice";
 export { SignInInterestForm } from "./SignInInterestForm";

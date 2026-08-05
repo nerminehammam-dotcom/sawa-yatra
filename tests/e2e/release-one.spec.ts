@@ -1086,7 +1086,7 @@ test.describe("forms and holding states", () => {
     await page.keyboard.press("Enter");
 
     await expect(page.getByRole("status")).toContainText(
-      "Development mock complete",
+      "Sent",
     );
     await submit.focus();
     await page.keyboard.press("Enter");

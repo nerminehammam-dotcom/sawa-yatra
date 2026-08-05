@@ -5,9 +5,9 @@ import { z } from "zod";
 import { formUiContent } from "@/content/forms";
 
 import {
-  mockFormErrorResponseSchema,
-  mockFormSuccessResponseSchema,
-  type MockFormSuccessResponse,
+  formErrorResponseSchema,
+  formSuccessResponseSchema,
+  type FormSuccessResponse,
 } from "./protocol";
 import {
   getFormSchema,
@@ -15,7 +15,7 @@ import {
   type FormValuesByKind,
 } from "./schemas";
 
-const STORAGE_KEY = "sawayatra:r1:mock-form-receipts";
+const STORAGE_KEY = "sawayatra:form-receipts";
 const MAX_LOCAL_RECEIPTS = 24;
 
 const localReceiptSchema = z
@@ -27,24 +27,24 @@ const localReceiptSchema = z
       "sign-in-interest",
     ]),
     fingerprint: z.string().regex(/^[a-f0-9]{64}$/),
-    result: z.literal("mock-acknowledged"),
+    result: z.literal("delivered"),
     recordedAt: z.string().datetime(),
   })
   .strict();
 
 const localReceiptListSchema = z.array(localReceiptSchema);
 
-export type LocalMockReceipt = z.infer<typeof localReceiptSchema>;
+export type LocalFormReceipt = z.infer<typeof localReceiptSchema>;
 
-export type MockFormClientResult =
+export type FormClientResult =
   | {
       status: "success";
-      response: MockFormSuccessResponse;
+      response: FormSuccessResponse;
       localReceiptSaved: boolean;
     }
   | {
       status: "duplicate";
-      receipt: LocalMockReceipt;
+      receipt: LocalFormReceipt;
     }
   | {
       status: "validation-error";
@@ -55,7 +55,7 @@ export type MockFormClientResult =
       message: string;
     };
 
-function readLocalReceipts(): LocalMockReceipt[] {
+function readLocalReceipts(): LocalFormReceipt[] {
   try {
     const storedValue = window.localStorage.getItem(STORAGE_KEY);
 
@@ -72,7 +72,7 @@ function readLocalReceipts(): LocalMockReceipt[] {
   }
 }
 
-function writeLocalReceipt(receipt: LocalMockReceipt): boolean {
+function writeLocalReceipt(receipt: LocalFormReceipt): boolean {
   try {
     const nextReceipts = [
       receipt,
@@ -118,10 +118,10 @@ async function readJsonResponse(response: Response): Promise<unknown> {
   }
 }
 
-export async function submitMockForm<K extends FormKind>(
+export async function submitForm<K extends FormKind>(
   kind: K,
   input: FormValuesByKind[K],
-): Promise<MockFormClientResult> {
+): Promise<FormClientResult> {
   const validatedInput = getFormSchema(kind).safeParse(input);
 
   if (!validatedInput.success) {
@@ -158,7 +158,7 @@ export async function submitMockForm<K extends FormKind>(
     const responseBody = await readJsonResponse(response);
 
     if (!response.ok) {
-      const formError = mockFormErrorResponseSchema.safeParse(responseBody);
+      const formError = formErrorResponseSchema.safeParse(responseBody);
 
       if (formError.success && formError.data.code === "validation-error") {
         return {
@@ -173,12 +173,23 @@ export async function submitMockForm<K extends FormKind>(
       };
     }
 
-    const successResponse = mockFormSuccessResponseSchema.safeParse(responseBody);
+    const successResponse = formSuccessResponseSchema.safeParse(responseBody);
 
     if (!successResponse.success) {
       return {
         status: "network-error",
         message: formUiContent.clientErrors.unexpected,
+      };
+    }
+
+    // Belt and braces against the failure mode this whole layer exists to
+    // prevent: a 200 for an enquiry that was never delivered. The route
+    // already refuses to emit one, but if it ever did, the visitor must not
+    // be told it worked.
+    if (successResponse.data.mode === "email" && !successResponse.data.sent) {
+      return {
+        status: "network-error",
+        message: formUiContent.clientErrors.request,
       };
     }
 
@@ -189,7 +200,7 @@ export async function submitMockForm<K extends FormKind>(
         version: 1,
         kind,
         fingerprint,
-        result: "mock-acknowledged",
+        result: "delivered",
         recordedAt: new Date().toISOString(),
       });
     }

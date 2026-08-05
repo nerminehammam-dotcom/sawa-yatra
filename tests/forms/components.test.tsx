@@ -8,13 +8,13 @@ import {
   SignInInterestForm,
 } from "@/components/forms";
 import { useFormSubmission } from "@/components/forms/useFormSubmission";
-import { submitMockForm } from "@/lib/forms/client";
+import { submitForm } from "@/lib/forms/client";
 
 vi.mock("@/lib/forms/client", () => ({
-  submitMockForm: vi.fn(),
+  submitForm: vi.fn(),
 }));
 
-const mockSubmitMockForm = vi.mocked(submitMockForm);
+const mockSubmitForm = vi.mocked(submitForm);
 
 function ValidationFallbackHarness() {
   const { setFormElement, showValidationState } = useFormSubmission(
@@ -38,7 +38,7 @@ function ValidationFallbackHarness() {
 
 describe("Release 1 form components", () => {
   beforeEach(() => {
-    mockSubmitMockForm.mockReset();
+    mockSubmitForm.mockReset();
   });
 
   it("starts consent unchecked and exposes an actionable validation state", async () => {
@@ -136,9 +136,9 @@ describe("Release 1 form components", () => {
   it("does not move focus to pending or success status messages", async () => {
     const user = userEvent.setup();
     let resolveSubmission:
-      | ((result: Awaited<ReturnType<typeof submitMockForm>>) => void)
+      | ((result: Awaited<ReturnType<typeof submitForm>>) => void)
       | undefined;
-    mockSubmitMockForm.mockImplementation(
+    mockSubmitForm.mockImplementation(
       () =>
         new Promise((resolve) => {
           resolveSubmission = resolve;
@@ -155,7 +155,7 @@ describe("Release 1 form components", () => {
 
     const pendingStatus = await screen.findByRole("status");
     expect(pendingStatus).toHaveTextContent(
-      "Recording in the development mock",
+      "Sending",
     );
     expect(pendingStatus).not.toHaveFocus();
 
@@ -168,7 +168,7 @@ describe("Release 1 form components", () => {
           kind: "sign-in-interest",
           sent: false,
           storedOnServer: false,
-          message: "Development mock complete.",
+          message: "Sent.",
         },
         localReceiptSaved: false,
       });
@@ -176,7 +176,7 @@ describe("Release 1 form components", () => {
 
     await waitFor(() =>
       expect(screen.getByRole("status")).toHaveTextContent(
-        "Development mock complete",
+        "Sent",
       ),
     );
     expect(screen.getByRole("status")).not.toHaveFocus();
@@ -184,9 +184,9 @@ describe("Release 1 form components", () => {
 
   it("does not move focus to a network-error message", async () => {
     const user = userEvent.setup();
-    mockSubmitMockForm.mockResolvedValue({
+    mockSubmitForm.mockResolvedValue({
       status: "network-error",
-      message: "The development mock could not be reached.",
+      message: "This could not be sent — the connection did not hold.",
     });
     render(<SignInInterestForm />);
 
@@ -198,7 +198,7 @@ describe("Release 1 form components", () => {
     );
 
     const networkAlert = await screen.findByRole("alert");
-    expect(networkAlert).toHaveTextContent("Development mock unavailable");
+    expect(networkAlert).toHaveTextContent("Not sent");
     expect(networkAlert).not.toHaveFocus();
     expect(networkAlert).not.toHaveAttribute("tabindex");
   });

@@ -6,36 +6,39 @@ export const formUiContent = {
     body:
       "Required consent wording has not been supplied. This mock checkbox is not final legal consent.",
   },
-  mockNotice: {
-    ariaLabel: "Development mock notice",
-    title: "Development mock only",
+  /**
+   * Was a "Development mock only" panel telling the visitor the endpoint sends
+   * nothing. Now that submissions are delivered, it describes what actually
+   * happens to what they typed.
+   */
+  handlingNotice: {
+    ariaLabel: "What happens to your details",
+    title: "What happens to what you write here",
     body:
-      "This working endpoint sends nothing and stores nothing on the server. After a successful test, this browser stores only a one-way duplicate fingerprint and mock result—never the form values.",
+      "Your message is sent to Sawayatra by email and is not stored on this website. Your browser keeps a short note that you sent it, so you are not asked twice — that note holds no part of what you wrote.",
   },
   submission: {
-    pendingTitle: "Recording in the development mock",
-    pendingMessage: "Please wait while the mock endpoint checks this request.",
-    successTitle: "Development mock complete",
+    pendingTitle: "Sending",
+    pendingMessage: "One moment while this is sent.",
+    successTitle: "Sent",
     localReceiptSavedSuffix:
-      "This browser saved only a duplicate-detection fingerprint and mock result, not the form values.",
-    localReceiptUnavailableSuffix:
-      "Browser duplicate detection is unavailable, so no local receipt was saved.",
-    duplicateTitle: "Duplicate mock request",
+      "Your browser has noted that this was sent, so you will not be asked twice.",
+    localReceiptUnavailableSuffix: "",
+    duplicateTitle: "Already sent",
     duplicateMessage:
-      "This exact request already has a development-mock receipt in this browser. It was not sent again. The receipt contains a fingerprint and result, not the form values.",
+      "You have already sent this exact message from this browser, so it has not been sent again. If you meant to add something, change the message and send it once more.",
     validationTitle: "Check the form",
-    validationMessage:
-      "Correct the marked fields, then try this action again.",
-    networkErrorTitle: "Development mock unavailable",
+    validationMessage: "Correct the marked fields, then try this action again.",
+    networkErrorTitle: "Not sent",
   },
   clientErrors: {
     validation: "Check the marked fields and try this action again.",
     request:
-      "The development mock could not record this request. Try again; nothing was sent or stored.",
+      "This could not be sent, and nothing has been kept. Please try again in a moment.",
     unexpected:
-      "The development mock returned an unexpected response. Try again; nothing was stored in this browser.",
+      "Something unexpected came back and this may not have been sent. Please try again, or write to Sawayatra directly.",
     unreachable:
-      "The development mock could not be reached. Check the connection and try again; nothing was sent or stored.",
+      "This could not be sent — the connection did not hold. Nothing has been kept. Please check your connection and try again.",
   },
 } as const;
 
@@ -98,10 +101,16 @@ export const contactQuestionFormContent = {
 } as const;
 
 export const formApiMessages = {
-  "invitation-request":
-    "Development mock received the invitation request. Nothing was sent or stored on the server.",
-  "journey-interest":
-    "Development mock received the journey interest. Nothing was sent or stored on the server. In live mode, this request would be reviewed manually; it is not a booking.",
-  "sign-in-interest":
-    "Development mock received the member-access interest. Nothing was sent or stored on the server. Member access is opening in stages.",
+  byKind: {
+    "invitation-request":
+      "Your request has been sent. Sawayatra will read it and reply to the address you gave.",
+    "journey-interest":
+      "Your enquiry has been sent. Sawayatra will read it and reply to the address you gave. This is an enquiry, not a booking.",
+    "sign-in-interest":
+      "Your interest has been sent. Member access is opening in stages, and Sawayatra will write to you when it does.",
+  },
+  deliveryFailed:
+    "This could not be sent just now, and nothing has been kept. Please try again in a moment, or write to Sawayatra directly.",
+  deliveryUnavailable:
+    "This form is not able to send messages at the moment, so nothing has been kept. Please write to Sawayatra directly.",
 } as const;

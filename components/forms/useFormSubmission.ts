@@ -3,7 +3,7 @@
 import { useCallback, useLayoutEffect, useState } from "react";
 
 import { formUiContent } from "@/content/forms";
-import { submitMockForm } from "@/lib/forms/client";
+import { submitForm } from "@/lib/forms/client";
 import type { FormKind, FormValuesByKind } from "@/lib/forms/schemas";
 
 import type { FormStatusTone } from "./FormStatus";
@@ -50,7 +50,7 @@ export function useFormSubmission<K extends FormKind>(kind: K) {
         message: formUiContent.submission.pendingMessage,
       });
 
-      const result = await submitMockForm(kind, values);
+      const result = await submitForm(kind, values);
 
       switch (result.status) {
         case "success":

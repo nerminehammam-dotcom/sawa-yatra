@@ -12,7 +12,7 @@ import {
 import { ConsentField } from "./ConsentField";
 import { Field } from "./Field";
 import { FormStatus } from "./FormStatus";
-import { MockModeNotice } from "./MockModeNotice";
+import { DataHandlingNotice } from "./DataHandlingNotice";
 import styles from "./forms.module.css";
 import { useFormSubmission } from "./useFormSubmission";
 
@@ -138,7 +138,7 @@ export function InvitationRequestForm() {
         error={errors.consent?.message}
       />
 
-      <MockModeNotice />
+      <DataHandlingNotice />
 
       <button
         className={styles.primaryAction}

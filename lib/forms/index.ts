@@ -15,8 +15,8 @@ export {
 } from "./schemas";
 
 export {
-  mockFormErrorResponseSchema,
-  mockFormSuccessResponseSchema,
-  type MockFormErrorResponse,
-  type MockFormSuccessResponse,
+  formErrorResponseSchema,
+  formSuccessResponseSchema,
+  type FormErrorResponse,
+  type FormSuccessResponse,
 } from "./protocol";
