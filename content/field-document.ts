@@ -73,10 +73,17 @@ export const fieldDocumentContent = {
     image: andeanCaravanHeroImage,
   },
   interruption: "The caravan is already moving.",
-  /** Founder-supplied 5 August 2026, verbatim. */
+  /**
+   * Founder-supplied 5 August 2026, verbatim.
+   *
+   * body[0] is set as the statement; body[1] and body[2] run as two columns
+   * beneath it. `highlights` are phrases washed in the statement — each occurs
+   * exactly once in body[0], and they are the two meanings the name is made
+   * from. No word of the copy is altered by any of this.
+   */
   nameStory: {
-    mark: "Sawayatra",
-    label: "The name it was given",
+    label: "Where the name comes from",
+    highlights: ["to mean together", "the Sanskrit word for journey"],
     body: [
       "Sawayatra is a name woven from two ancient words. Sawa, used across the Arabic-speaking world to mean together, is rooted in an ancient Arabic word that speaks of harmony, alignment and making things level. Yatra, the Sanskrit word for journey, began as a spiritual pilgrimage—a journey of purpose and transformation—and today has come to mean any journey or voyage of discovery.",
       "Together, they express the idea that inspired this community: that the most meaningful journeys are not simply shared, but shared with people who move through the world in much the same way we do.",

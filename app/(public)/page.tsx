@@ -7,6 +7,32 @@ import styles from "./home.module.css";
 
 export const metadata = createPageMetadata("/");
 
+/**
+ * Wraps the given phrases in <mark> without altering a character of the copy.
+ * Each phrase must occur exactly once in the text; anything not found is
+ * skipped rather than approximated.
+ */
+function withHighlights(text: string, phrases: readonly string[]) {
+  const pattern = phrases
+    .filter((phrase) => text.includes(phrase))
+    .map((phrase) => phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
+    .join("|");
+
+  if (!pattern) {
+    return text;
+  }
+
+  return text
+    .split(new RegExp(`(${pattern})`))
+    .map((part, index) =>
+      phrases.includes(part) ? (
+        <mark key={`${part}-${index}`}>{part}</mark>
+      ) : (
+        part
+      ),
+    );
+}
+
 export default function HomePage() {
   const content = fieldDocumentContent;
 
@@ -34,12 +60,19 @@ export default function HomePage() {
       </section>
 
       <section className={styles.nameStory} aria-labelledby="name-heading">
-        <h2 className={styles.nameStoryMark} id="name-heading">
-          {content.nameStory.mark}
-        </h2>
-        <div className={styles.nameStoryColumn}>
-          <p className={styles.nameStoryLabel}>{content.nameStory.label}</p>
-          {content.nameStory.body.map((paragraph) => (
+        <p className={styles.nameStoryLabel} id="name-heading">
+          {content.nameStory.label}
+        </p>
+
+        <p className={styles.nameStoryStatement}>
+          {withHighlights(
+            content.nameStory.body[0],
+            content.nameStory.highlights,
+          )}
+        </p>
+
+        <div className={styles.nameStoryColumns}>
+          {content.nameStory.body.slice(1).map((paragraph) => (
             <p key={paragraph.slice(0, 24)}>{paragraph}</p>
           ))}
         </div>
