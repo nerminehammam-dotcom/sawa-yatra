@@ -48,11 +48,23 @@
   inset: 0;
   /* Right-hand column only, so the road and sky on the left stay bright.
 
-     The 4.14:1 and 6.34:1 recorded here previously held only at 1728px and
-     above, and the tagline they referred to no longer exists. The frame ratio
-     also changed on 5 August 2026, which moves the crop and therefore what
-     sits behind the headline. Treat this scrim as UNMEASURED until the
-     harness samples it. */
+     MEASURED 5 August 2026 by tools/audit/measure-hero-contrast.py, which
+     composites this gradient over the real crop of the real photograph and
+     samples the lightest 5% behind each line's actual glyph box.
+
+     Worst case 7.17:1 at 1280x800, against a 3.0 threshold for large text.
+     Every line at every width from 1280 to 2560 clears 7:1, which is the AAA
+     threshold for normal text, let alone large.
+
+     It used to fail badly and the reason is worth keeping. The old hero had a
+     tagline, a definition, two buttons and a link stacked below the headline,
+     which pushed the headline high into the frame where the sky is bright:
+     1.58-1.66:1 modelled, and an earlier audit measured 1.99:1. Removing all
+     of that dropped the headline to the foot of the frame, over dark land.
+     The fix was not this gradient. It was what sat underneath it.
+
+     So: if anything is ever added below the headline again, re-run the script
+     before assuming this still holds. */
   background: linear-gradient(
     to left,
     rgb(26 21 18 / 88%) 0%,
