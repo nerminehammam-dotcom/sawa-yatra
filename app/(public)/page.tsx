@@ -27,15 +27,11 @@ export default function HomePage() {
         <div className={styles.homeHeroScrim} aria-hidden="true" />
 
         <div className={styles.homeHeroCopy}>
+          {/* The tagline and the definition paragraph were removed on
+              5 August 2026. What they said — matched by how you travel, not
+              where — is now carried by the name story below, in better words.
+              The hero holds the line and the two ways in, nothing else. */}
           <h1 id="home-heading">Go alone, arrive together.</h1>
-          <p className={styles.homeHeroTagline}>
-            A members’ club that matches travellers by how they travel.
-          </p>
-          <p className={styles.homeHeroDefinition}>
-            Sawayatra is a members’ travel club that brings compatible
-            travellers together through shared journeys, beginning with the
-            annual Andean Caravan.
-          </p>
           <div className={styles.homeHeroActions}>
             <ButtonLink
               className={styles.homeHeroPrimaryAction}
