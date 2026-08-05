@@ -574,7 +574,7 @@
 
 .nameStory {
   display: grid;
-  gap: clamp(1.25rem, 2vw, 1.75rem);
+  gap: clamp(1.1rem, 1.6vw, 1.5rem);
   padding: var(--section-space) var(--page-gutter);
   color: var(--ink);
   background: var(--paper);
@@ -583,6 +583,55 @@
 .nameStory p {
   max-width: 62ch;
   font-family: var(--font-read);
-  font-size: clamp(1.0625rem, 1.35vw, 1.25rem);
-  line-height: 1.6;
+  font-size: clamp(1.0625rem, 1.15vw, 1.2rem);
+  line-height: 1.65;
+
+  /* Fraunces carries an optical-size axis: the letterforms are cut sturdier
+     at reading size and finer at display size. The h1 forces "opsz" 144 for
+     the display cut; this asks the browser to drive the axis from the rendered
+     size instead, so the prose gets the text cut it was drawn for rather than
+     a shrunken headline. */
+  font-optical-sizing: auto;
+
+  /* Only reworks the last lines, so no paragraph ends on a single stranded
+     word. Falls back to an ordinary rag where unsupported. */
+  text-wrap: pretty;
+
+  /* Opening quotes and brackets hang into the margin so the letters line up
+     flush. Safari today; harmless everywhere else. */
+  hanging-punctuation: first;
+}
+
+/* The opening paragraph carries the etymology and is the one that has to be
+   read, so it is set as a lede: a step larger, a shade tighter, on a narrower
+   measure than the paragraphs beneath it. */
+.nameStory p:first-child {
+  max-width: 52ch;
+  font-size: clamp(1.2rem, 1.6vw, 1.55rem);
+  line-height: 1.45;
+}
+
+/* Rubrication, essentially — the mark that says the reading starts here.
+   initial-letter sinks the S three lines and the text flows around it; no
+   float, no guessed margins. Ink, not a second colour: the palette is closed,
+   and a coloured cap on a body this quiet would shout.
+
+   Firefox does not support initial-letter, and because it comes through
+   ::first-letter the fallback is simply a normal-sized letter. Ornament that
+   disappears cleanly where it cannot render. */
+.nameStory p:first-child::first-letter {
+  -webkit-initial-letter: 3;
+  initial-letter: 3;
+  margin-inline-end: 0.09em;
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 144;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* The sentence the whole passage walks toward. */
+.nameStory p:last-child {
+  max-width: 54ch;
+  font-size: clamp(1.15rem, 1.45vw, 1.4rem);
+  line-height: 1.5;
 }
