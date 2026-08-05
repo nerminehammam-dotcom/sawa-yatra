@@ -1,9 +1,7 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import { createPageMetadata } from "@/app/_metadata";
 import { SignalStatement } from "@/components/field/SignalStatement";
-import { ButtonLink } from "@/components/ui/ButtonLink";
 import { fieldDocumentContent } from "@/content/field-document";
 
 import styles from "./home.module.css";
@@ -26,35 +24,13 @@ export default function HomePage() {
         />
         <div className={styles.homeHeroScrim} aria-hidden="true" />
 
+        {/* Stripped to the line alone on 5 August 2026. The tagline and the
+            definition paragraph went first — the name story below now says
+            both, at length — and then the two buttons and the practical link.
+            The photograph and the sentence, nothing else. Every way onward is
+            in the header and the footer. */}
         <div className={styles.homeHeroCopy}>
-          {/* The tagline and the definition paragraph were removed on
-              5 August 2026. What they said — matched by how you travel, not
-              where — is now carried by the name story below, in better words.
-              The hero holds the line and the two ways in, nothing else. */}
           <h1 id="home-heading">Go alone, arrive together.</h1>
-          <div className={styles.homeHeroActions}>
-            <ButtonLink
-              className={styles.homeHeroPrimaryAction}
-              href="/how-it-works"
-              surface="deep"
-            >
-              See how Sawayatra works
-            </ButtonLink>
-            <ButtonLink
-              className={styles.homeHeroSecondaryAction}
-              href="/caravans/andean"
-              surface="deep"
-              variant="secondary"
-            >
-              Explore the Andean Caravan
-            </ButtonLink>
-          </div>
-          <Link
-            className={styles.homeHeroPracticalLink}
-            href="/caravans/andean#honest-conditions-heading"
-          >
-            Altitude, physical demands and accommodation
-          </Link>
         </div>
       </section>
 

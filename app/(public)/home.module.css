@@ -25,8 +25,7 @@
      below, so the frame stays nearer the photograph's proportions. Raising
      the ratio shows less of the picture and keeps the hero closer to one
      screen; lowering it shows more and makes the hero taller. At 1.9 on a
-     1456px window: 79% of the photograph, and about 170px of scroll to reach
-     the buttons.
+     1456px window it shows 79% of the photograph.
 
      Capped at 1.5 so the frame can never be taller than the photograph
      itself, which would letterbox it. On phones the band is already taller
@@ -54,9 +53,13 @@
   position: absolute;
   z-index: 1;
   inset: 0;
-  /* Right-hand column only. The left two-fifths of the photograph are untouched,
-     so the road and sky stay bright. Measured glyph-level: headline 4.14:1,
-     tagline 6.34:1, both above their thresholds. */
+  /* Right-hand column only, so the road and sky on the left stay bright.
+
+     The 4.14:1 and 6.34:1 recorded here previously held only at 1728px and
+     above, and the tagline they referred to no longer exists. The frame ratio
+     also changed on 5 August 2026, which moves the crop and therefore what
+     sits behind the headline. Treat this scrim as UNMEASURED until the
+     harness samples it. */
   background: linear-gradient(
     to left,
     rgb(26 21 18 / 88%) 0%,
@@ -92,60 +95,6 @@
   text-wrap: balance;
 }
 
-.homeHeroActions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-end;
-  gap: var(--space-3);
-  /* Was space-6, which was spacing from the tagline paragraph. The actions
-     now follow the headline directly, and a 5.5rem display line at 1.05
-     needs more room beneath it than a line of body text did. */
-  margin-top: var(--space-10);
-}
-
-a.homeHeroPrimaryAction,
-a.homeHeroPrimaryAction:visited {
-  color: var(--hero-ink);
-  white-space: nowrap;
-  background: var(--signal);
-  border-color: var(--signal);
-}
-
-a.homeHeroPrimaryAction:hover {
-  color: var(--hero-cream);
-  background: var(--hero-ink);
-  border-color: var(--hero-cream);
-}
-
-a.homeHeroSecondaryAction,
-a.homeHeroSecondaryAction:visited {
-  color: var(--hero-cream);
-  white-space: nowrap;
-  background: var(--hero-ink);
-  border-color: var(--hero-cream);
-}
-
-a.homeHeroSecondaryAction:hover {
-  color: var(--hero-ink);
-  background: var(--hero-cream);
-  border-color: var(--hero-cream);
-}
-
-.homeHeroPracticalLink,
-.homeHeroPracticalLink:visited {
-  display: inline-flex;
-  min-height: var(--touch-min);
-  align-items: center;
-  margin-top: var(--space-3);
-  color: var(--hero-cream);
-  font-family: var(--font-read);
-  font-size: 1rem;
-  font-weight: 500;
-  line-height: 1.35;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.3em;
-}
-
 @media (max-width: 639px) {
   /* On mobile the copy is full-width and starts mid-frame, so the scrim has to
      be vertical-dominant; a right-anchored gradient misses the headline entirely. */
@@ -161,36 +110,17 @@ a.homeHeroSecondaryAction:hover {
     );
   }
 
-
-.homeHeroCopy {
+  .homeHeroCopy {
     width: calc(100vw - (2 * var(--page-gutter)));
     margin: clamp(2rem, 5svh, 3rem) var(--page-gutter);
   }
 
-.homeHeroCopy h1 {
+  .homeHeroCopy h1 {
     /* Pink cannot reach 3:1 over a bright sky without darkening the whole
        frame, which is what we are avoiding. Paper does it at 3.3:1. */
     color: var(--paper);
     font-size: clamp(2.6rem, 11.5vw, 4rem);
     line-height: 1.05;
-  }
-
-.homeHeroActions {
-    display: grid;
-    justify-content: stretch;
-    gap: var(--space-2);
-    margin-top: var(--space-5);
-  }
-
-a.homeHeroPrimaryAction,
-  a.homeHeroSecondaryAction {
-    width: 100%;
-    white-space: normal;
-  }
-
-.homeHeroPracticalLink {
-    justify-content: flex-end;
-    margin-top: var(--space-2);
   }
 }
 
