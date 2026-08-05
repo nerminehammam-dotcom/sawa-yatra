@@ -73,18 +73,8 @@ export const fieldDocumentContent = {
     image: andeanCaravanHeroImage,
   },
   interruption: "The caravan is already moving.",
-  /**
-   * Founder-supplied 5 August 2026, verbatim. The two glosses below are lifted
-   * word for word from the first paragraph — "Sawa … to mean together" and
-   * "Yatra, the Sanskrit word for journey" — so the display lockup asserts
-   * nothing the prose does not already say.
-   */
+  /** Founder-supplied 5 August 2026, verbatim. */
   nameStory: {
-    eyebrow: "The name",
-    roots: [
-      { word: "Sawa", origin: "Arabic", gloss: "together" },
-      { word: "yatra", origin: "Sanskrit", gloss: "journey" },
-    ],
     body: [
       "Sawayatra is a name woven from two ancient words. Sawa, used across the Arabic-speaking world to mean together, is rooted in an ancient Arabic word that speaks of harmony, alignment and making things level. Yatra, the Sanskrit word for journey, began as a spiritual pilgrimage—a journey of purpose and transformation—and today has come to mean any journey or voyage of discovery.",
       "Together, they express the idea that inspired this community: that the most meaningful journeys are not simply shared, but shared with people who move through the world in much the same way we do.",

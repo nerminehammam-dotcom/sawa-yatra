@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 import { createPageMetadata } from "@/app/_metadata";
-import { SignalStatement } from "@/components/field/SignalStatement";
 import { fieldDocumentContent } from "@/content/field-document";
 
 import styles from "./home.module.css";
@@ -34,29 +33,11 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className={styles.nameStory} aria-labelledby="name-story-heading">
-        <div className={styles.nameStoryLockup}>
-          <p className={styles.nameStoryEyebrow}>{content.nameStory.eyebrow}</p>
-          <h2 id="name-story-heading">
-            {content.nameStory.roots.map((root) => (
-              <span key={root.word} className={styles.nameStoryRoot}>
-                <span className={styles.nameStoryWord}>{root.word}</span>
-                <span className={styles.nameStoryGloss}>
-                  <span>{root.origin}</span>
-                  {root.gloss}
-                </span>
-              </span>
-            ))}
-          </h2>
-        </div>
-        <div className={styles.nameStoryProse}>
-          {content.nameStory.body.map((paragraph) => (
-            <p key={paragraph.slice(0, 24)}>{paragraph}</p>
-          ))}
-        </div>
+      <section className={styles.nameStory}>
+        {content.nameStory.body.map((paragraph) => (
+          <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+        ))}
       </section>
-
-      <SignalStatement>{content.interruption}</SignalStatement>
     </main>
   );
 }
