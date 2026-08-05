@@ -94,7 +94,7 @@ export const routeMetadata = ([
   ],
   ["joining-points", "/joining-points", "Joining points | Sawayatra"],
   ["start-here", "/start-here", "Start here | Sawayatra"],
-  ["how-it-works", "/how-it-works", "How it works | Sawayatra"],
+  ["how-it-works", "/how-it-works", "How Sawayatra works | Sawayatra"],
   ["travel-self", "/travel-self", "Meet your Travel Self | Sawayatra"],
   ["do-it-yourself", "/do-it-yourself", "Do It Yourself | Sawayatra"],
   ["departures", "/departures", "Departures | Sawayatra"],

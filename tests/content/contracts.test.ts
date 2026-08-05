@@ -148,7 +148,7 @@ describe("Release 1 content contracts", () => {
     expect(
       primaryNavigation.map(({ label, href }) => ({ label, href })),
     ).toEqual([
-      { label: "How it works", href: "/how-it-works" },
+      { label: "How Sawayatra works", href: "/how-it-works" },
       { label: "Meet your Travel Self", href: "/travel-self" },
       { label: "Caravans", href: "/caravans" },
       { label: "Journeys", href: "/journeys" },

@@ -4,7 +4,7 @@ import type { NavigationItem } from "@/lib/types";
 export const primaryNavigation = [
   {
     id: "how-it-works",
-    label: "How it works",
+    label: "How Sawayatra works",
     href: "/how-it-works",
     contentStatus: "LOCKED",
   },

@@ -227,7 +227,7 @@ test.describe("approved ordinary-site contrast corrections", () => {
 
       const primaryNavigation = page
         .getByRole("list", { name: "Primary navigation links" })
-        .getByRole("link", { name: "How it works", exact: true });
+        .getByRole("link", { name: "How Sawayatra works", exact: true });
       await primaryNavigation.hover();
       const underline = await primaryNavigation.evaluate(
         (element) => getComputedStyle(element, "::after").backgroundColor,

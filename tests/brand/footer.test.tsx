@@ -4,7 +4,7 @@ import { describe, expect, it } from "vitest";
 import { Footer } from "@/components/brand/Footer";
 
 const navigationLinks = [
-  { href: "/how-it-works", label: "How it works" },
+  { href: "/how-it-works", label: "How Sawayatra works" },
   { href: "/travel-self", label: "Meet your Travel Self" },
   { href: "/departures", label: "Departures" },
   { href: "/membership", label: "Membership" },

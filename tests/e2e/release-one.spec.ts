@@ -381,7 +381,7 @@ test.describe("Andean caravan scope", () => {
     });
     const primaryLinks = primaryList.locator(":scope > li > div > a");
     const expectedPrimaryNavigation = [
-      ["How it works", "/how-it-works"],
+      ["How Sawayatra works", "/how-it-works"],
       ["Meet your Travel Self", "/travel-self"],
       ["Departures", "/departures"],
       ["Membership", "/membership"],
@@ -804,14 +804,14 @@ test.describe("keyboard interaction", () => {
     await expect(dialog).toBeVisible();
     await expect(menuButton).toHaveAttribute("aria-expanded", "true");
     await expect(
-      dialog.getByRole("link", { name: "How it works" }),
+      dialog.getByRole("link", { name: "How Sawayatra works" }),
     ).toBeFocused();
     const mobilePrimaryLinks = dialog
       .getByRole("list", { name: "Primary navigation links" })
       .locator(":scope > li > div > a:first-child");
     await expect(mobilePrimaryLinks).toHaveCount(5);
     await expect(mobilePrimaryLinks).toHaveText([
-      "How it works",
+      "How Sawayatra works",
       "Meet your Travel Self",
       "Departures",
       "Membership",
