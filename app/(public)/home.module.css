@@ -91,11 +91,8 @@
    All one colour. The contrast is roman against italic and heavy against
    light, not pink against something else.
 
-   Note for anyone extending this: the font files here are subset to the opsz
-   and wght axes only. Fraunces also ships SOFT and WONK — WONK is what swaps
-   in the swash forms that give this kind of setting its curl — and neither is
-   present, so asking for them in font-variation-settings would silently do
-   nothing. */
+   The font files carry all four Fraunces axes: opsz, wght, SOFT and WONK.
+   WONK is the one that swaps in the swash forms. */
 .homeHeroCopy h1 {
   display: grid;
   justify-items: end;
@@ -120,7 +117,10 @@
   margin-inline-end: clamp(0.5rem, 3vw, 3.5rem);
   font-size: clamp(3.4rem, 8vw, 7.6rem);
   font-style: italic;
-  font-variation-settings: "opsz" 144;
+  /* WONK 1 swaps in the swash forms — the curling italic that gives this kind
+     of setting its flourish. SOFT 40 rounds the terminals a little so the word
+     sits softer against the two roman lines it cuts across. */
+  font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
   font-weight: 300;
   line-height: 0.85;
   letter-spacing: -0.03em;
