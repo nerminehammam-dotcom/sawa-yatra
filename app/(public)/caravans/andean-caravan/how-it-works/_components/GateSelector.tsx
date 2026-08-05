@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 
 import { Button } from "@/components/ui/Button";
+import { ANDEAN_CARAVAN_SEASON } from "@/content/andean-caravan";
 import { caravanSections, gateById } from "../_content";
 import styles from "./GateSelector.module.css";
 
@@ -335,7 +336,7 @@ export function GateSelector() {
                     <div><dt>Leaving gate</dt><dd>{leavingGate?.name}</dd></div>
                     <div><dt>Duration</dt><dd>{selectedDays} days</dd></div>
                     <div><dt>Departure</dt><dd>{selectedSections.length === caravanSections.length ? "Complete Caravan" : "Caravan sections"}</dd></div>
-                    <div><dt>Window</dt><dd>January–April 2027</dd></div>
+                    <div><dt>Window</dt><dd>{ANDEAN_CARAVAN_SEASON}</dd></div>
                     <div><dt>Countries</dt><dd>{selectedCountries.join(" · ")}</dd></div>
                     <div><dt>Maximum altitude</dt><dd>{selectedMaximumAltitude.toLocaleString("en-US")} m</dd></div>
                     <div><dt>Price</dt><dd>Price on request</dd></div>

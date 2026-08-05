@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { createPageMetadata } from "@/app/_metadata";
 import { Faq } from "@/components/ui/Faq";
+import { ANDEAN_CARAVAN_SEASON } from "@/content/andean-caravan";
 
 import { CaravanRouteMap } from "../../_components/CaravanRouteMap";
 import { approvedFaq } from "./_content";
@@ -35,7 +36,9 @@ export default function HopOnHopOffPage() {
     <main className={styles.page} id="main-content" tabIndex={-1}>
       <section className={styles.hero} aria-labelledby="page-heading">
         <div className={styles.heroCopy}>
-          <p className={styles.eyebrow}>The Andean Caravan · January–April 2027</p>
+          <p className={styles.eyebrow}>
+            The Andean Caravan · {ANDEAN_CARAVAN_SEASON}
+          </p>
           <h1 id="page-heading">Join the Caravan. Travel your section. Leave when it ends.</h1>
           <div className={styles.heroText}>
             <p>The Caravan follows one fixed north-to-south calendar. Travellers join and leave at designated gates along the route.</p>

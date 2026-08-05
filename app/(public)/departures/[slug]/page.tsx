@@ -13,6 +13,8 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import {
+  ANDEAN_CARAVAN_PUBLIC_DATE,
+  ANDEAN_CARAVAN_SEASON,
   andeanCaravanSectionBySlug,
   andeanCaravanSections,
   type AndeanCaravanSection,
@@ -34,8 +36,7 @@ import { absoluteUrl } from "@/lib/site-url";
 import styles from "./journey.module.css";
 
 const COMPLETE_SLUG = "the-andean-caravan";
-const publicDate =
-  "February–April 2028 · exact dates announced when the route is secured.";
+const publicDate = `${ANDEAN_CARAVAN_PUBLIC_DATE}.`;
 
 export const dynamicParams = false;
 
@@ -337,7 +338,7 @@ function CompleteCaravanPage() {
                   duration={`${section.durationDays} days`}
                   dateWindow={displayValue(
                     section.publicDateWindow,
-                    "February–April 2028",
+                    ANDEAN_CARAVAN_SEASON,
                   )}
                   groupSize={displayValue(section.group, "Group maximum varies")}
                   price={displayValue(section.price, "Price on request")}
@@ -467,7 +468,7 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
                 label: "Caravan window",
                 value: displayValue(
                   section.publicDateWindow,
-                  "February–April 2028",
+                  ANDEAN_CARAVAN_SEASON,
                 ),
               },
               { label: "Group", value: displayValue(section.group, "Varies") },

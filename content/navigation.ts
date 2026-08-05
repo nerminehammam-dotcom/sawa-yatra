@@ -1,3 +1,4 @@
+import { ANDEAN_CARAVAN_FIRST_DEPARTURE } from "@/content/andean-caravan";
 import type { NavigationItem } from "@/lib/types";
 
 export const primaryNavigation = [
@@ -61,8 +62,7 @@ export const utilityNavigation = [
 ] as const satisfies readonly NavigationItem[];
 
 export const announcementNavigation = {
-  message:
-    "The Andean Caravan is open for interest. First departure February 2028.",
+  message: `The Andean Caravan is open for interest. First departure ${ANDEAN_CARAVAN_FIRST_DEPARTURE}.`,
   action: {
     label: "Register your interest",
     href: "/register-interest",

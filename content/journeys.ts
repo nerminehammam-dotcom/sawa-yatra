@@ -1,3 +1,4 @@
+import { ANDEAN_CARAVAN_FIRST_DEPARTURE } from "@/content/andean-caravan";
 import { assetManifest } from "@/content/assets";
 import { TO_BE_CONFIRMED, type Journey } from "@/lib/types";
 
@@ -12,7 +13,7 @@ export const journeys = [
     country: "Chile",
     startDate: TO_BE_CONFIRMED,
     endDate: TO_BE_CONFIRMED,
-    dateLabel: "February 2027",
+    dateLabel: ANDEAN_CARAVAN_FIRST_DEPARTURE,
     durationDays: 8,
     capacity: 6,
     seatsRemaining: 2,

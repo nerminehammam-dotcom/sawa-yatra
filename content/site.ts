@@ -1,3 +1,4 @@
+import { ANDEAN_CARAVAN_PUBLIC_DATE } from "@/content/andean-caravan";
 import {
   invitationRequestFormContent,
   journeyInterestFormContent,
@@ -399,8 +400,7 @@ export const departuresPageContent = {
     travellerSingular: "traveller",
     travellerPlural: "travellers",
   },
-  draftDataNotice:
-    "February–April 2028 · exact dates announced when the route is secured.",
+  draftDataNotice: `${ANDEAN_CARAVAN_PUBLIC_DATE}.`,
   emptyState: {
     title: "No journeys match those filters.",
     body: "Clear the filters or meet your Travel Self to try another way in.",

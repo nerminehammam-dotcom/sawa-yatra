@@ -1,5 +1,18 @@
+/**
+ * Single source for every departure date shown anywhere on the site.
+ *
+ * Before this existed the site gave three different answers: the announcement
+ * banner said February 2028, the hop-on hop-off page said January–April 2027,
+ * and content/journeys.ts said February 2027. Founder-confirmed 5 August 2026:
+ * the season is February–April 2028. Change it here and nowhere else.
+ */
+export const ANDEAN_CARAVAN_FIRST_DEPARTURE = "February 2028" as const;
+export const ANDEAN_CARAVAN_SEASON = "February–April 2028" as const;
+export const ANDEAN_CARAVAN_SECURED_DATE_LINE =
+  "exact dates announced when the route is secured" as const;
+
 export const ANDEAN_CARAVAN_PUBLIC_DATE =
-  "February–April 2028 · exact dates announced when the route is secured" as const;
+  `${ANDEAN_CARAVAN_SEASON} · ${ANDEAN_CARAVAN_SECURED_DATE_LINE}` as const;
 
 export type AndeanCaravanGateId =
   | "lima"
@@ -109,7 +122,7 @@ export const andeanCaravanGateById = Object.fromEntries(
 ) as Readonly<Record<AndeanCaravanGateId, AndeanCaravanGate>>;
 
 const price = "Price on request" as const;
-const securedDateLine = "exact dates announced when the route is secured";
+const securedDateLine = ANDEAN_CARAVAN_SECURED_DATE_LINE;
 
 export const andeanCaravanSections = [
   {
