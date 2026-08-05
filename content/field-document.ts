@@ -75,6 +75,8 @@ export const fieldDocumentContent = {
   interruption: "The caravan is already moving.",
   /** Founder-supplied 5 August 2026, verbatim. */
   nameStory: {
+    mark: "Sawayatra",
+    label: "The name it was given",
     body: [
       "Sawayatra is a name woven from two ancient words. Sawa, used across the Arabic-speaking world to mean together, is rooted in an ancient Arabic word that speaks of harmony, alignment and making things level. Yatra, the Sanskrit word for journey, began as a spiritual pilgrimage—a journey of purpose and transformation—and today has come to mean any journey or voyage of discovery.",
       "Together, they express the idea that inspired this community: that the most meaningful journeys are not simply shared, but shared with people who move through the world in much the same way we do.",

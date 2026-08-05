@@ -572,35 +572,55 @@
 
 /* ---- The name ------------------------------------------------------- */
 
-/* The passage is placed in the page rather than run flush to the gutter.
-   That was the actual problem: a full-width block starting hard against the
-   left edge reads as a document, not a set page. It now sits in a narrow
-   column about a third of the way across, with a hairline holding its left
-   edge and a lot of empty paper around it. */
+/* Set to the reference the founder supplied: the name large on the left, a
+   short tracked line and the passage on the right. No rules, no cards, no
+   ornament — two columns of type and a great deal of empty paper. */
 .nameStory {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.35fr) minmax(0, 0.75fr);
-  padding: clamp(7rem, 16vh, 14rem) var(--page-gutter);
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: clamp(2.5rem, 7vw, 8rem);
+  align-items: start;
+  padding: clamp(7rem, 16vh, 13rem) var(--page-gutter);
   color: var(--ink);
   background: var(--paper);
 }
 
+/* The wordmark's own colour, at display size and the display cut. */
+.nameStoryMark {
+  margin: 0;
+  color: var(--signal-text);
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5.5vw, 5.25rem);
+  font-variation-settings: "opsz" 144;
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
 .nameStoryColumn {
   display: grid;
-  gap: clamp(1.15rem, 1.6vw, 1.6rem);
-  grid-column: 2;
-  padding-inline-start: clamp(1.5rem, 3vw, 3rem);
-  border-inline-start: 1px solid var(--ink);
+  gap: clamp(1.15rem, 1.5vw, 1.5rem);
+  max-width: 46ch;
+}
+
+/* The reference sets this at about 12px. Held at 1.125rem instead: small,
+   uppercase and letterspaced all at once is the first combination to become
+   unreadable, and this site is addressed to 55-75. */
+.nameStoryLabel {
+  margin-bottom: clamp(0.25rem, 0.5vw, 0.75rem);
+  color: var(--signal-text);
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 @media (max-width: 900px) {
   .nameStory {
     grid-template-columns: 1fr;
+    gap: clamp(1.75rem, 5vw, 2.5rem);
     padding-block: clamp(4rem, 12vh, 8rem);
-  }
-
-  .nameStoryColumn {
-    grid-column: 1;
   }
 }
 
@@ -621,12 +641,13 @@
 
    hanging-punctuation — opening quotes sit in the margin so the left edge
    reads flush rather than subtly indented. */
-.nameStory p {
-  max-width: 48ch;
+/* The reference sets its body noticeably larger than ordinary web body copy,
+   which is most of why it reads as composed rather than filled in. */
+.nameStoryColumn p {
   font-family: var(--font-read);
-  font-size: clamp(1.0625rem, 1.05vw, 1.1875rem);
+  font-size: clamp(1.15rem, 1.35vw, 1.35rem);
   font-weight: 400;
-  line-height: 1.75;
+  line-height: 1.55;
   font-optical-sizing: auto;
   text-wrap: pretty;
   hanging-punctuation: first;

@@ -33,8 +33,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className={styles.nameStory}>
+      <section className={styles.nameStory} aria-labelledby="name-heading">
+        <h2 className={styles.nameStoryMark} id="name-heading">
+          {content.nameStory.mark}
+        </h2>
         <div className={styles.nameStoryColumn}>
+          <p className={styles.nameStoryLabel}>{content.nameStory.label}</p>
           {content.nameStory.body.map((paragraph) => (
             <p key={paragraph.slice(0, 24)}>{paragraph}</p>
           ))}
