@@ -228,7 +228,7 @@ export const andeanDestinationDetails = {
     },
     source: {
       label: "INE Chile",
-      href: "https://www.ine.gob.cl/docs/default-source/geodatos-abiertos/publicaciones/ciudades-pueblos-aldeas-y-caserios/censo-2017/ciudades-pueblos-aldeas-y-caserios-2019.pdf?sfvrsn=24e81d36_4",
+      href: "https://www.ine.gob.cl/docs/default-source/geodatos-abiertos/publicaciones/ciudades-pueblos-aldeas-y-caserios/censo-2017/ciudades-pueblos-aldeas-y-caser%C3%ADos-2019.pdf?sfvrsn=24e81d36_4",
     },
   },
   coyhaique: {
@@ -248,7 +248,7 @@ export const andeanDestinationDetails = {
     },
     source: {
       label: "INE Chile",
-      href: "https://www.ine.gob.cl/docs/default-source/geodatos-abiertos/publicaciones/ciudades-pueblos-aldeas-y-caserios/censo-2017/ciudades-pueblos-aldeas-y-caserios-2019.pdf?sfvrsn=24e81d36_4",
+      href: "https://www.ine.gob.cl/docs/default-source/geodatos-abiertos/publicaciones/ciudades-pueblos-aldeas-y-caserios/censo-2017/ciudades-pueblos-aldeas-y-caser%C3%ADos-2019.pdf?sfvrsn=24e81d36_4",
     },
   },
   "villa-ohiggins": {
@@ -288,7 +288,7 @@ export const andeanDestinationDetails = {
     },
     source: {
       label: "INE Chile",
-      href: "https://www.ine.gob.cl/docs/default-source/geodatos-abiertos/publicaciones/ciudades-pueblos-aldeas-y-caserios/censo-2017/ciudades-pueblos-aldeas-y-caserios-2019.pdf?sfvrsn=24e81d36_4",
+      href: "https://www.ine.gob.cl/docs/default-source/geodatos-abiertos/publicaciones/ciudades-pueblos-aldeas-y-caserios/censo-2017/ciudades-pueblos-aldeas-y-caser%C3%ADos-2019.pdf?sfvrsn=24e81d36_4",
     },
   },
 } as const satisfies Record<

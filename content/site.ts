@@ -31,6 +31,10 @@ const approvedRouteDescriptions = {
     "Explore the Andean Caravan and its nine connected route sections through Peru, Bolivia and Chile.",
   "caravans-route-map":
     "Follow the illustrated Andean Caravan route through Peru, Bolivia and Chile.",
+  // Moved verbatim from the inline `metadata` object that previously shipped on
+  // app/(public)/caravans/andean-caravan/how-it-works/page.tsx. Not new copy.
+  "hop-on-hop-off":
+    "Choose where to join and leave the Andean Caravan, one continuous section at a time.",
   "indian-caravan":
     "The Indian Caravan is in development. Approved route information will be added when it is ready.",
   "egyptian-caravan":
@@ -75,6 +79,11 @@ export const routeMetadata = ([
     "caravans-route-map",
     "/caravans/andean/route-map",
     "Andean Caravan route map | Sawayatra",
+  ],
+  [
+    "hop-on-hop-off",
+    "/caravans/andean-caravan/how-it-works",
+    "Hop on, hop off | Sawayatra",
   ],
   ["indian-caravan", "/caravans/indian", "The Indian Caravan | Sawayatra"],
   ["egyptian-caravan", "/caravans/egyptian", "The Egyptian Caravan | Sawayatra"],

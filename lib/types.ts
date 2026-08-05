@@ -27,6 +27,7 @@ export type StaticRoute =
   | "/caravans"
   | "/caravans/andean"
   | "/caravans/andean/route-map"
+  | "/caravans/andean-caravan/how-it-works"
   | "/caravans/indian"
   | "/caravans/egyptian"
   | "/caravans/who-else-is-travelling"

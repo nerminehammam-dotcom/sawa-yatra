@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
+import { createPageMetadata } from "@/app/_metadata";
 import { Faq } from "@/components/ui/Faq";
 
 import { CaravanRouteMap } from "../../_components/CaravanRouteMap";
@@ -10,10 +11,9 @@ import { FindGateButton, JourneyDrawerButton } from "./_components/FindGateButto
 import { GateSelector } from "./_components/GateSelector";
 import styles from "./how-it-works.module.css";
 
-export const metadata: Metadata = {
-  title: "Hop on, hop off",
-  description: "Choose where to join and leave the Andean Caravan, one continuous section at a time.",
-};
+export const metadata: Metadata = createPageMetadata(
+  "/caravans/andean-caravan/how-it-works",
+);
 
 const rules = [
   ["You book sections, not days.", "Each section has its own beginning, ending and reason to exist."],
