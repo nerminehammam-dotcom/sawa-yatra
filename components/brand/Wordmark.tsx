@@ -1,7 +1,6 @@
 import Link from "next/link";
 
 import { classNames } from "@/components/ui/classNames";
-import { temporaryWordmark } from "@/content/assets";
 import { siteConfig } from "@/content/site";
 
 import styles from "./Wordmark.module.css";
@@ -26,10 +25,26 @@ export function Wordmark({
     !href && styles.text,
     className,
   );
+  /*
+   * The drawn wordmark, replacing the Fraunces setting on 5 August 2026.
+   * Served as a file rather than inlined: it appears twice per page, in the
+   * navigation and the footer, and 18KB inlined twice on every route is worse
+   * than one cached request. Decorative here — every caller either sets
+   * aria-label on the link or role="img" on the wrapper.
+   */
   const wordmark = (
-    <span className={styles.label} aria-hidden="true">
-      {temporaryWordmark.text}
-    </span>
+    /* next/image is deliberately not used. It does not optimise SVG without
+       dangerouslyAllowSVG, which loosens the image policy site-wide for no
+       gain on a file that is already vector and already minified. */
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      className={styles.label}
+      src="/assets/brand/sawayatra-wordmark.svg"
+      alt=""
+      width={1938}
+      height={526}
+      aria-hidden="true"
+    />
   );
 
   if (!href) {
