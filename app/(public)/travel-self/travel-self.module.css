@@ -170,6 +170,11 @@
   padding: clamp(3.5rem, 7vw, 6rem) var(--page-gutter);
 }
 
+.travelSelfIntro .introAssurances {
+  display: grid;
+  gap: var(--space-3);
+}
+
 .travelSelfIntro .introReassure {
   max-width: 46ch;
   margin: 0;

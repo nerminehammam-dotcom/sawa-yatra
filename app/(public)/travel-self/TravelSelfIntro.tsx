@@ -1,5 +1,7 @@
 import Image from "next/image";
 
+import { TRAVEL_SELF_COPY } from "@/content/travel-self/copy";
+
 import styles from "./travel-self.module.css";
 
 const PRIVACY_SENTENCE =
@@ -58,7 +60,14 @@ export function TravelSelfIntro() {
 
       <div className={styles.introAct}>
         <BeginButton />
-        <p className={styles.introReassure}>{PRIVACY_SENTENCE}</p>
+        <div className={styles.introAssurances}>
+          <p className={styles.introReassure}>{PRIVACY_SENTENCE}</p>
+          {/* The boundary belongs on the landing screen, before "Find out →",
+              because the headline ("Which one are you?") reads as a personality
+              test until this qualifies it. Same words the questionnaire already
+              carries in TRAVEL_SELF_COPY.boundary — just surfaced earlier. */}
+          <p className={styles.introReassure}>{TRAVEL_SELF_COPY.boundary}</p>
+        </div>
       </div>
     </div>
   );
