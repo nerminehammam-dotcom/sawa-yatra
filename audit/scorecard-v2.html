@@ -118,7 +118,7 @@ footer{padding-block:3rem;border-top:var(--hair) solid var(--ink);font-size:.92r
 <header class="masthead">
   <div class="wrap">
     <p class="kicker">Full site audit · version 2 · 6 August 2026</p>
-    <h1>Three down. Everything else still <i>waiting</i>.</h1>
+    <h1>Four down. Everything else still <i>waiting</i>.</h1>
     <p class="standfirst">Twenty aspects of the site, each with a score, the actual problem, and a
     specific fix. Version 2 re-measures everything after the photography work, records what moved,
     and corrects one thing version 1 got wrong. Every number came from a tool run today. Anything I
@@ -127,7 +127,7 @@ footer{padding-block:3rem;border-top:var(--hair) solid var(--ink);font-size:.92r
 </header>
 
 <div class="tiles wrap" style="padding-inline:0;max-width:none">
-  <div class="tile"><b>5.2</b><span>Average across 19 scored aspects · was 4.6</span></div>
+  <div class="tile"><b>5.3</b><span>Average across 19 scored aspects · was 4.6</span></div>
   <div class="tile"><b>7.5</b><span>Photography · was 3.5</span></div>
   <div class="tile t-bad"><b>2.0</b><span>Price, trust, legal and the enquiry flow · was 1.8</span></div>
   <div class="tile t-bad"><b>4</b><span>Blockers that stop a launch outright · unchanged</span></div>
@@ -183,7 +183,8 @@ footer{padding-block:3rem;border-top:var(--hair) solid var(--ink);font-size:.92r
       <tr><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">Visible captions</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">0</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)"><strong>48 of 70</strong></td></tr>
       <tr><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">Provenance statement</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">none</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)"><strong>on every gallery</strong></td></tr>
       <tr><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">Illegal colour pairings live on the site</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">5, undetected</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)"><strong>0, and the build now fails on a sixth</strong></td></tr>
-      <tr><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">Tests passing</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">119</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)"><strong>131</strong></td></tr>
+      <tr><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">Font weight on every page</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">264 KB</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)"><strong>179 KB</strong></td></tr>
+      <tr><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">Tests passing</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">119</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)"><strong>135</strong></td></tr>
     </tbody>
   </table>
 
@@ -364,26 +365,52 @@ const ITEMS = [
   get lost — the part nobody sees.`
 },
 {
-  n:"Typography", score:8, tag:"Design foundation", who:["me"],
-  problem:`One typeface doing everything — Fraunces, variable, with all four axes shipped
-  (<code>opsz</code>, <code>wght</code>, <code>SOFT</code>, <code>WONK</code>), so the swash italic
-  is available. A 16px floor is enforced across the site. Headings hold weight 500 or above, which
-  is the fix for the broken <em>e</em> on 1× displays.
-  <br><br>The cost: <strong>264 KB of font</strong> — <code>fraunces-latin-full-normal.woff2</code>
-  at 121,016 bytes and <code>fraunces-latin-full-italic.woff2</code> at 149,720. That is the full
-  Latin range across every axis, and both files load on every page. For comparison, the largest
-  single JavaScript chunk on the site is 327 KB, so the fonts are most of a bundle on their own.`,
-  fix:`<ol>
-  <li><strong>Subset to the characters actually used.</strong> The site is English with Spanish
-  place names — you need Latin basic plus a handful of accents, not the full range. <code>pyftsubset</code>
-  with <code>--unicodes</code> typically cuts 40–60%. Half a day, no visual change.</li>
-  <li><strong>Pin the axis ranges.</strong> You use <code>wght</code> 300–600, not 100–900, and
-  <code>opsz</code> 9–144 can narrow. Instance-limiting the variable axes saves more again.</li>
-  <li><strong>Load the italic lazily.</strong> It is 149 KB and appears in a handful of places.
-  <code>unicode-range</code> or a second <code>@font-face</code> gated to the pages that use it.</li>
-  </ol>`,
-  field:`I could only confirm the typeface on one of 27 travel sites — everyone else hides it in CSS.
-  Using one family with real optical sizing puts you ahead of the category by default.`
+  n:"Typography", score:10, tag:"Design foundation", who:["me"], done:true,
+  problem:`<strong>Fixed on 6 August 2026.</strong> One typeface doing everything — Fraunces,
+  variable, all four axes, so the swash italic is available. A 16px floor is enforced. Headings hold
+  weight 500 or above, which is the fix for the broken <em>e</em> on 1× displays. None of that
+  changed.
+  <br><br>What changed is the cost. It was <strong>264 KB of font on every page</strong>, more than
+  the largest JavaScript chunk on the site. It is now <strong>179 KB</strong>, and every byte
+  removed has a reason attached to it.`,
+  fix:`<p><strong>Done:</strong></p><ol>
+  <li><strong>The roman lost the SOFT and WONK axes entirely — 51% of that file, 61,568 bytes.</strong>
+  Those axes appear in exactly two CSS rules on the whole site, and <em>both also set
+  <code>font-style: italic</code></em>, so both have always been served by the italic file. The
+  roman had been carrying two axes that nothing ever moved off zero. That one finding is most of
+  this item.</li>
+  <li>The italic keeps SOFT only as far as 40, the single value the site uses.</li>
+  <li>The full four-axis masters moved to <code>tools/typography/masters/</code> where they are the
+  source and are never modified — the same arrangement as the photographs. One command rebuilds
+  what ships.</li>
+  <li>Dropped the deprecated <code>format("woff2-variations")</code> keyword, which some engines
+  reject outright, for plain <code>format("woff2")</code>.</li></ol>
+
+  <p><strong>One thing I did and then undid, which is worth knowing.</strong> I first narrowed the
+  weight axis to 300–700 for another 8,712 bytes. Then I measured what it cost: pinning a range
+  makes the instancer renormalise, and the worst outline movement went from 2.21 font units to
+  4.28. It also left <code>&lt;strong&gt;</code>, <code>&lt;b&gt;</code> and <code>&lt;th&gt;</code>
+  — bold by browser default and unstyled in fourteen component files — one decision away from
+  silently changing weight. Eight kilobytes was not worth either, so I put it back.</p>
+
+  <p><strong>Proven rather than assumed.</strong> Every glyph is compared against the master at 25
+  variable-font instances for the roman and 28 for the italic, with composites decomposed so an
+  accented letter built from components is not mistaken for a difference. Worst movement anywhere:
+  <strong>2.21 of the 2000 units in an em</strong> — 0.16 of a pixel at 144px display type, 0.018 at
+  16px body. The script prints that number on every run.</p>
+
+  <p><strong>Four tests hold it.</strong> Both faces present and neither grown back to master size;
+  no rule asking the roman for an axis it no longer carries; no content character outside the
+  subset; and the preloads still pointing at filenames that exist. Verified by adding a SOFT rule
+  without <code>font-style: italic</code> — the test named the file and the selector and failed.</p>
+
+  <p><strong>Left alone deliberately:</strong> <code>opsz</code> keeps its whole 9–144 range.
+  Narrowing it was measured and made the files <em>larger</em>, and optical sizing is the reason to
+  use this typeface at all.</p>`,
+  field:`I could confirm the typeface on only one of 27 travel sites — everyone else hides it in CSS
+  and most ship several unrelated families. One family with real optical sizing is already ahead of
+  the category; one family that has been measured down to what it actually uses is not something
+  any of them have done.`
 },
 {
   n:"Engineering and tests", score:8, tag:"Under the bonnet", who:["me"],
