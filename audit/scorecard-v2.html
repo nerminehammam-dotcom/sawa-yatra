@@ -118,7 +118,7 @@ footer{padding-block:3rem;border-top:var(--hair) solid var(--ink);font-size:.92r
 <header class="masthead">
   <div class="wrap">
     <p class="kicker">Full site audit · version 2 · 6 August 2026</p>
-    <h1>Two down. Everything else still <i>waiting</i>.</h1>
+    <h1>Three down. Everything else still <i>waiting</i>.</h1>
     <p class="standfirst">Twenty aspects of the site, each with a score, the actual problem, and a
     specific fix. Version 2 re-measures everything after the photography work, records what moved,
     and corrects one thing version 1 got wrong. Every number came from a tool run today. Anything I
@@ -127,7 +127,7 @@ footer{padding-block:3rem;border-top:var(--hair) solid var(--ink);font-size:.92r
 </header>
 
 <div class="tiles wrap" style="padding-inline:0;max-width:none">
-  <div class="tile"><b>5.1</b><span>Average across 19 scored aspects · was 4.6</span></div>
+  <div class="tile"><b>5.2</b><span>Average across 19 scored aspects · was 4.6</span></div>
   <div class="tile"><b>7.5</b><span>Photography · was 3.5</span></div>
   <div class="tile t-bad"><b>2.0</b><span>Price, trust, legal and the enquiry flow · was 1.8</span></div>
   <div class="tile t-bad"><b>4</b><span>Blockers that stop a launch outright · unchanged</span></div>
@@ -182,7 +182,8 @@ footer{padding-block:3rem;border-top:var(--hair) solid var(--ink);font-size:.92r
       <tr><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">Photographs cropped by a stylesheet</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">every gallery image</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)"><strong>none</strong></td></tr>
       <tr><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">Visible captions</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">0</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)"><strong>48 of 70</strong></td></tr>
       <tr><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">Provenance statement</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">none</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)"><strong>on every gallery</strong></td></tr>
-      <tr><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">Tests passing</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">119</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)"><strong>119</strong></td></tr>
+      <tr><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">Illegal colour pairings live on the site</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">5, undetected</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)"><strong>0, and the build now fails on a sixth</strong></td></tr>
+      <tr><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">Tests passing</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)">119</td><td style="padding:.55rem .8rem;border-bottom:1px solid var(--ink)"><strong>131</strong></td></tr>
     </tbody>
   </table>
 
@@ -320,24 +321,47 @@ footer{padding-block:3rem;border-top:var(--hair) solid var(--ink);font-size:.92r
 const ITEMS = [
 /* ============ CRAFT — high ============ */
 {
-  n:"Colour system and tokens", score:9, tag:"Design foundation", who:["me"],
-  problem:`There is almost nothing wrong here, and it is worth saying so plainly.
-  <code>styles/tokens.css</code> defines a closed seven-colour system and carries a full WCAG
-  pairing matrix in a comment — every two-colour combination, with the ratio, marked pass /
-  large-text-only / fail. It even records why the table exists: pink-on-olive at 1.88 shipped to
-  production once because nothing said it was illegal. I checked thirteen competitor sites and
-  <strong>not one of them had anything comparable.</strong>
-  <br><br>The one weakness: the table is a comment. Nothing enforces it. A stylesheet can still
-  set an illegal pair and the build will pass.`,
-  fix:`<ol>
-  <li>Leave the palette alone. It is working.</li>
-  <li>Add one test that parses <code>tokens.css</code>, extracts the hex values, and asserts every
-  pair actually used in the CSS clears its stated threshold. About two hours; then the comment
-  becomes a guarantee.</li>
-  <li>Add the two pairings I measured this session to the table so they are on record:
-  signal-text on pink 3.51, signal-text on sun 3.37 — both large-text-only.</li></ol>`,
-  field:`Nobody in the research had a documented palette contract. This is a genuine competitive
-  strength in the one place strengths usually get lost — the part nobody sees.`
+  n:"Colour system and tokens", score:10, tag:"Design foundation", who:["me"], done:true,
+  problem:`<strong>Enforced on 6 August 2026, and it caught five live failures on the way in.</strong>
+  <br><br>The matrix at the top of <code>styles/tokens.css</code> was already the best thing in the
+  codebase — a closed seven-colour system with every pairing, its ratio, and a pass / large-only /
+  fail mark, plus a note recording that pink-on-olive at 1.88 shipped once because nothing said it
+  was illegal. Nothing in thirteen competitor sites came close.
+  <br><br>But it was a comment, and a comment cannot stop the thing it warns about. Five rules were
+  already breaking it:
+  <ul>
+  <li><strong>2.60</strong> paper on signal — route-map zoom controls, on hover and focus</li>
+  <li><strong>2.60</strong> paper on signal — the journey hero action, on hover</li>
+  <li><strong>2.51</strong> paper on olive — route-map zoom controls, disabled</li>
+  <li><strong>3.75</strong> ink on clay — the archetype chip's selected state, at 1rem</li>
+  <li><strong>3.75</strong> ink on clay — the departure filter chip's pressed state, at 1rem</li>
+  </ul>
+  The first three fail at any text size. The last two are large-text-only pairings used on 16px
+  chips.`,
+  fix:`<p><strong>Done:</strong></p><ol>
+  <li>Two test files. <code>tokens-table.test.ts</code> checks the table against the actual colours —
+  all 56 cells present, every ratio correct to two decimals, every mark correct, symmetrical, and
+  every alias like <code>--terracotta</code> still landing inside the system.
+  <code>pairings.test.ts</code> scans every stylesheet and fails the build on any rule declaring an
+  illegal pair.</li>
+  <li><strong>Proved the guard bites</strong> rather than assuming it: I reintroduced pink-on-olive
+  deliberately, and the test named it at 1.88 and failed. Then removed it.</li>
+  <li>All five failures fixed. The signal and olive cases now use ink — which is what
+  <code>--action-text</code> and <code>--action-bg</code> already declared the action pairing to be,
+  so those rules were contradicting the tokens as well as the table. The two clay cases move to sun,
+  which is what every other selected state on the site uses.</li>
+  <li><strong>Corrected the comment itself.</strong> It claimed ink is the only colour that pairs
+  safely with the rest. Measured, ink is safe against five of seven, not all — ink on signal-text is
+  2.57 and ink on clay is 3.75 — and paper takes signal-text as well as ink, which the prose never
+  said. It now opens with the short version, the one you need at the moment of choosing.</li></ol>
+  <p><strong>The limit, stated in the test file rather than hidden:</strong> it only sees a pair when
+  a single rule sets both the colour and the background. Text inheriting its colour from an ancestor,
+  on a background painted elsewhere, needs the cascade and therefore a browser. A green run means no
+  stylesheet <em>declares</em> an illegal pairing — not that the whole site passes WCAG.</p>`,
+  field:`Nobody in twenty-seven travel sites or thirteen members' clubs had a documented palette
+  contract at all, let alone an enforced one. Four of those sites shipped visibly broken colour or
+  template output to production. This is a real competitive strength in the place strengths usually
+  get lost — the part nobody sees.`
 },
 {
   n:"Typography", score:8, tag:"Design foundation", who:["me"],
