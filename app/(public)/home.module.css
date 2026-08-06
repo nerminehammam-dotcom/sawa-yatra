@@ -635,16 +635,23 @@
   background: var(--paper);
 }
 
-/* The reference sets this near 12px. Held at 1.125rem: small, uppercase and
-   letterspaced at once is the first combination to fail with age-related
-   vision change, and this site is addressed to 55-75. */
-.nameStoryLabel {
-  margin-bottom: clamp(2rem, 4vw, 3.25rem);
-  font-size: 1.125rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-align: center;
-  text-transform: uppercase;
+/* Replaced the tracked label that used to sit here. Centred to match what it
+   replaced, and wrapping rather than shrinking on narrow screens so neither
+   label is ever truncated. */
+.nameStoryActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  justify-content: center;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+@media (max-width: 520px) {
+  .nameStoryActions {
+    display: grid;
+    justify-items: stretch;
+    width: 100%;
+  }
 }
 
 .nameStoryStatement {

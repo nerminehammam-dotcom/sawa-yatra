@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { createPageMetadata } from "@/app/_metadata";
+import { ButtonLink } from "@/components/ui/ButtonLink";
 import { fieldDocumentContent } from "@/content/field-document";
 
 import styles from "./home.module.css";
@@ -66,10 +67,21 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className={styles.nameStory} aria-labelledby="name-heading">
-        <p className={styles.nameStoryLabel} id="name-heading">
-          {content.nameStory.label}
-        </p>
+      <section className={styles.nameStory} aria-label="Sawayatra">
+        {/* The tracked label that sat here is gone; the two ways onward take
+            its place. They are the only navigation on the homepage outside
+            the header and footer. */}
+        <div className={styles.nameStoryActions}>
+          {content.nameStory.actions.map((action, index) => (
+            <ButtonLink
+              key={action.href}
+              href={action.href}
+              variant={index === 0 ? "primary" : "secondary"}
+            >
+              {action.label}
+            </ButtonLink>
+          ))}
+        </div>
 
         <p className={styles.nameStoryStatement}>
           {withHighlights(
