@@ -10,6 +10,7 @@ import { JourneyGallery } from "@/components/departures/JourneyGallery";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+import { FactStrip } from "@/components/ui/FactStrip";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import {
@@ -83,25 +84,6 @@ function textList(value: unknown): readonly string[] {
 
 function getSection(slug: string): AndeanCaravanSection | undefined {
   return andeanCaravanSectionBySlug[slug as AndeanCaravanSectionSlug];
-}
-
-function FactGrid({
-  label,
-  facts,
-}: {
-  label: string;
-  facts: ReadonlyArray<{ label: string; value: string }>;
-}) {
-  return (
-    <dl className={styles.facts} aria-label={label}>
-      {facts.map((fact) => (
-        <div key={fact.label}>
-          <dt>{fact.label}</dt>
-          <dd>{fact.value}</dd>
-        </div>
-      ))}
-    </dl>
-  );
 }
 
 function CopySection({
@@ -246,34 +228,20 @@ function CompleteCaravanPage() {
             priority
           />
         }
-      />
-
-      <Section
-        className={styles.factsSection}
-        ground="cream"
-        aria-labelledby="complete-facts-heading"
-      >
-        <Container>
-          <div className={styles.sectionHeadingInline}>
-            <Eyebrow kind="decision" tone="accent">Complete Caravan</Eyebrow>
-            <h2 id="complete-facts-heading">One continuous north-to-south journey.</h2>
-          </div>
-          <FactGrid
-            label="Complete Caravan facts"
+        facts={
+          <FactStrip
+            label="The complete Caravan at a glance"
             facts={[
               { label: "Duration", value: "71 days" },
               { label: "Countries", value: "Peru · Bolivia · Chile" },
               { label: "Direction", value: "North to south" },
-              {
-                label: "Group",
-                value: "12 most points · up to 16 on some sections",
-              },
+              { label: "Group", value: "12 most points · up to 16 on some sections" },
               { label: "Flights", value: "Four short flights" },
               { label: "Price", value: "Price on request" },
             ]}
           />
-        </Container>
-      </Section>
+        }
+      />
 
       <Section
         className={styles.routeSection}
@@ -439,6 +407,22 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
             </p>
           </div>
         }
+        facts={
+          <FactStrip
+            label={`${section.title} at a glance`}
+            facts={[
+              { label: "Duration", value: `${section.durationDays} days` },
+              { label: "Route", value: displayValue(section.route, "Route details") },
+              { label: "Altitude", value: displayValue(section.altitude, "Varies") },
+              { label: "Group", value: displayValue(section.group, "Varies") },
+              {
+                label: "Season",
+                value: displayValue(section.publicDateWindow, ANDEAN_CARAVAN_SEASON),
+              },
+              { label: "Price", value: displayValue(section.price, "Price on request") },
+            ]}
+          />
+        }
         media={
           <RisoArtwork
             asset={getAndeanCaravanImage(section.slug)}
@@ -448,36 +432,6 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
           />
         }
       />
-
-      <Section
-        className={styles.factsSection}
-        ground="cream"
-        aria-labelledby="section-facts-heading"
-      >
-        <Container>
-          <div className={styles.sectionHeadingInline}>
-            <Eyebrow kind="decision" tone="accent">Section details</Eyebrow>
-            <h2 id="section-facts-heading">Join here. Leave when this section ends.</h2>
-          </div>
-          <FactGrid
-            label={`${section.title} facts`}
-            facts={[
-              { label: "Route", value: displayValue(section.route, "Route details") },
-              { label: "Duration", value: `${section.durationDays} days` },
-              {
-                label: "Caravan window",
-                value: displayValue(
-                  section.publicDateWindow,
-                  ANDEAN_CARAVAN_SEASON,
-                ),
-              },
-              { label: "Group", value: displayValue(section.group, "Varies") },
-              { label: "Altitude", value: displayValue(section.altitude, "Varies") },
-              { label: "Price", value: displayValue(section.price, "Price on request") },
-            ]}
-          />
-        </Container>
-      </Section>
 
       <JourneyGallery journeySlug={section.slug} images={gallery.slice(1)} />
 

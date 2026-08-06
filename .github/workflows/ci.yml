@@ -1,0 +1,62 @@
+name: CI
+
+# Until this existed, nothing ran the test suite unless someone remembered to.
+# The suite is the reason several defects in this repository were found at all —
+# five illegal colour pairings, seventeen wrong alt strings, twenty-one grid
+# tracks that would scroll a phone sideways — and a suite nobody runs is a suite
+# that stops being true.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  # A second push to the same branch cancels the first. Nothing here is worth
+  # paying for twice.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          # Pinned rather than floating, and pinned to what Vercel actually
+          # builds with. Three different versions were in play before this:
+          # 22 in the sandbox, 24 on Vercel, 26 on the laptop, and package.json
+          # only said >=20.9.0. .nvmrc holds the same number.
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Types
+        run: npm run typecheck
+
+      - name: Unit tests
+        run: npm run test:unit
+
+      - name: Build
+        run: npm run build
+
+      # These are the checks that read the built output, so they have to come
+      # after the build. They report warnings and only fail on real defects —
+      # broken links, missing images, missing alt text, heading order.
+      - name: Site check
+        run: python3 tools/audit/check-site.py
+
+      - name: Fonts still match their masters
+        run: |
+          python3 -m pip install --quiet --break-system-packages fonttools brotli
+          python3 tools/typography/build-fonts.py --check

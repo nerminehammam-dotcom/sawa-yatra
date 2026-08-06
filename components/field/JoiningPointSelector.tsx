@@ -116,7 +116,7 @@ export function JoiningPointSelector({
             src={active.image.src}
             alt={active.image.alt}
             fill
-            sizes="(max-width: 767px) 100vw, 55vw"
+            sizes="(max-width: 767px) 100vw, (max-width: 1440px) 55vw, 792px"
             style={{
               objectPosition: `${active.image.focalPoint.x}% ${active.image.focalPoint.y}%`,
             }}

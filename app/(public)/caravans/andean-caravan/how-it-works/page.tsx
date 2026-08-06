@@ -100,7 +100,7 @@ export default function HopOnHopOffPage() {
             src="/assets/images/departures/andean/gallery/the-end-of-the-road/16-patagonia-36.jpg"
             alt="Patagonian lenga forest turning red and gold beside the road"
             fill
-            sizes="(max-width: 800px) 100vw, 50vw"
+            sizes="(max-width: 800px) 100vw, (max-width: 1440px) 50vw, 720px"
           />
         </div>
         <div className={styles.onceCopy}>
@@ -151,7 +151,7 @@ export default function HopOnHopOffPage() {
             src="/assets/images/departures/andean/gallery/the-end-of-the-road/07-patagoina-01.jpg"
             alt="A quiet road continuing through open Patagonian country"
             fill
-            sizes="(max-width: 800px) 100vw, 52vw"
+            sizes="(max-width: 800px) 100vw, (max-width: 1440px) 52vw, 749px"
           />
         </div>
         <div className={styles.closingCopy}>

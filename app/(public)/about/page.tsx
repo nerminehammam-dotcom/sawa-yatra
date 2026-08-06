@@ -54,7 +54,7 @@ export default function AboutPage() {
             src={fieldImage.src}
             alt={fieldImage.alt}
             fill
-            sizes="(max-width: 800px) 100vw, 58vw"
+            sizes="(max-width: 800px) 100vw, (max-width: 1440px) 58vw, 835px"
             style={{
               objectPosition: `${fieldImage.focalPoint?.x ?? 50}% ${fieldImage.focalPoint?.y ?? 50}%`,
             }}

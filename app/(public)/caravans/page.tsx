@@ -32,7 +32,7 @@ export default function CaravansPage() {
             alt={andeanCaravanHeroImage.alt}
             fill
             priority
-            sizes="(max-width: 800px) 100vw, 55vw"
+            sizes="(max-width: 800px) 100vw, (max-width: 1440px) 55vw, 792px"
             style={{
               objectPosition: `${andeanCaravanHeroImage.focalPoint?.x ?? 50}% 76%`,
             }}

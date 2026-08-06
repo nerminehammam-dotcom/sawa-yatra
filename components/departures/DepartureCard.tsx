@@ -56,8 +56,8 @@ export function DepartureCard({
         aspectRatio={featured ? "wide" : "card"}
         sizes={
           featured
-            ? "(max-width: 767px) 100vw, 55vw"
-            : "(max-width: 1023px) 100vw, 50vw"
+            ? "(max-width: 767px) 100vw, (max-width: 1440px) 55vw, 792px"
+            : "(max-width: 1023px) 100vw, (max-width: 1440px) 50vw, 720px"
         }
         priority={priority}
         className={styles.image}

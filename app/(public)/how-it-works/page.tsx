@@ -51,7 +51,7 @@ export default function HowItWorksPage() {
               alt="A broad Patagonian lake lies beneath a distant ridge of snow-covered mountains."
               fill
               priority
-              sizes="(max-width: 767px) 100vw, 92vw"
+              sizes="(max-width: 767px) 100vw, (max-width: 1440px) 92vw, 1325px"
             />
           </div>
           <div className={styles.featuredCopy}>
@@ -77,7 +77,7 @@ export default function HowItWorksPage() {
                 alt="A pale road crosses cultivated Andean fields beneath dark mountains and gathering clouds."
                 fill
                 loading="eager"
-                sizes="(max-width: 1023px) 100vw, 58vw"
+                sizes="(max-width: 1023px) 100vw, (max-width: 1440px) 58vw, 835px"
               />
             </div>
             <div className={styles.wayCopy}>
@@ -98,7 +98,7 @@ export default function HowItWorksPage() {
                 src="/assets/images/departures/andean/gallery/atacama/01-astro-01.jpg"
                 alt="Stars fill the night sky above rock formations in the Atacama Desert."
                 fill
-                sizes="(max-width: 1023px) 100vw, 58vw"
+                sizes="(max-width: 1023px) 100vw, (max-width: 1440px) 58vw, 835px"
               />
             </div>
             <div className={styles.wayCopy}>

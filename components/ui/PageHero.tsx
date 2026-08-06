@@ -10,6 +10,12 @@ export interface PageHeroProps {
   eyebrowKind?: "decorative" | "decision";
   title: ReactNode;
   intro?: ReactNode;
+  /**
+   * Rendered between the heading and the prose, which is the whole point:
+   * across twenty-seven operator sites a fact strip immediately under the H1,
+   * before any marketing copy, is close to a convention. See FactStrip.
+   */
+  facts?: ReactNode;
   actions?: ReactNode;
   media?: ReactNode;
   mediaLayout?: "overlay" | "split";
@@ -24,6 +30,7 @@ export function PageHero({
   eyebrowKind = "decorative",
   title,
   intro,
+  facts,
   actions,
   media,
   mediaLayout = "overlay",
@@ -55,6 +62,7 @@ export function PageHero({
           ) : null}
           <h1 className={classNames(styles.title, titleClassName)}>{title}</h1>
           {intro ? <div className={styles.intro}>{intro}</div> : null}
+          {facts}
           {actions ? <div className={styles.actions}>{actions}</div> : null}
         </div>
       </Container>

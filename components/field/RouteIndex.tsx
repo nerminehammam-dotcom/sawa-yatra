@@ -21,7 +21,7 @@ export function RouteIndex() {
                 src={image.src}
                 alt={image.alt}
                 fill
-                sizes="(max-width: 767px) 35vw, 18vw"
+                sizes="(max-width: 767px) 35vw, (max-width: 1440px) 18vw, 259px"
                 style={{
                   objectPosition: `${image.focalPoint?.x ?? 50}% ${image.focalPoint?.y ?? 50}%`,
                 }}

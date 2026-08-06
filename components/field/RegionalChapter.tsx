@@ -31,7 +31,7 @@ export function RegionalChapter({
           src={image.src}
           alt={image.alt}
           fill
-          sizes="(max-width: 767px) 100vw, 50vw"
+          sizes="(max-width: 767px) 100vw, (max-width: 1440px) 50vw, 720px"
           style={{
             objectPosition: `${image.focalPoint?.x ?? 50}% ${image.focalPoint?.y ?? 50}%`,
           }}

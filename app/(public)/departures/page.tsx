@@ -32,7 +32,7 @@ export default function DeparturesPage() {
           className={styles.introductionImage}
           asset={andeanCaravanHeroImage}
           aspectRatio="wide"
-          sizes="(max-width: 900px) 100vw, 52vw"
+          sizes="(max-width: 900px) 100vw, (max-width: 1440px) 52vw, 749px"
           priority
         />
       </section>
@@ -76,7 +76,7 @@ export default function DeparturesPage() {
                     className={styles.sectionImage}
                     asset={image}
                     aspectRatio="card"
-                    sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw"
+                    sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, (max-width: 1440px) 33vw, 475px"
                   />
                   <div className={styles.sectionCopy}>
                     <span>{String(section.sectionNumber).padStart(2, "0")}</span>

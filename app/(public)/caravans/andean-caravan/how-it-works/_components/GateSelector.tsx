@@ -293,7 +293,7 @@ export function GateSelector() {
                   src={expandedSection.image.src}
                   alt={expandedSection.image.alt}
                   fill
-                  sizes="(max-width: 900px) 100vw, 38vw"
+                  sizes="(max-width: 900px) 100vw, (max-width: 1440px) 38vw, 547px"
                   style={{ objectPosition: `${expandedSection.image.focalPoint?.x ?? 50}% ${expandedSection.image.focalPoint?.y ?? 50}%` }}
                 />
               </div>
