@@ -15,6 +15,16 @@ interface ComingSoonPageProps {
   lede: string;
   notificationSubject?: string;
   onwardLinks?: readonly OnwardLink[];
+  /** Status label. Defaults to "Coming soon"; register-interest overrides it,
+   *  because registering interest is an available action, not a future one. */
+  label?: string;
+  /** The full mailto subject line, when the default "notify me when … opens"
+   *  framing is wrong (again, register-interest). */
+  mailSubject?: string;
+  /** Copy for the email capture, so a page that is open for interest does not
+   *  say "we will write once, when this section opens." */
+  notifyIntro?: string;
+  submitLabel?: string;
 }
 
 const defaultOnwardLinks: readonly OnwardLink[] = [
@@ -40,15 +50,19 @@ export function ComingSoonPage({
   lede,
   notificationSubject = title,
   onwardLinks = defaultOnwardLinks,
+  label = "Coming soon",
+  mailSubject,
+  notifyIntro = "Leave your email and we will write once, when this section opens.",
+  submitLabel = "Tell me when it opens",
 }: ComingSoonPageProps) {
   const mailAction = `mailto:${contactEmail}?subject=${encodeURIComponent(
-    `Please notify me when ${notificationSubject} opens`,
+    mailSubject ?? `Please notify me when ${notificationSubject} opens`,
   )}`;
 
   return (
     <main className={styles.page} id="main-content" tabIndex={-1}>
       <div className={styles.wrap}>
-        <p className={styles.label}>Coming soon</p>
+        <p className={styles.label}>{label}</p>
         <h1>{title}</h1>
         <p className={styles.lede}>{lede}</p>
 
@@ -60,9 +74,7 @@ export function ComingSoonPage({
           method="post"
           encType="text/plain"
         >
-          <label htmlFor="coming-soon-email">
-            Leave your email and we will write once, when this section opens.
-          </label>
+          <label htmlFor="coming-soon-email">{notifyIntro}</label>
           <div className={styles.notifyRow}>
             <input
               id="coming-soon-email"
@@ -72,7 +84,7 @@ export function ComingSoonPage({
               autoComplete="email"
               required
             />
-            <button type="submit">Tell me when it opens</button>
+            <button type="submit">{submitLabel}</button>
           </div>
           <p className={styles.formNote}>
             This opens your email app. Nothing is stored on this website.
