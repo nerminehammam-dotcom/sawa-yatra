@@ -6,6 +6,7 @@ import { createPageMetadata } from "@/app/_metadata";
 import { RisoArtwork } from "@/components/brand/RisoArtwork";
 import { DepartureCard } from "@/components/departures/DepartureCard";
 import { CaravanRouteMap } from "@/components/departures/CaravanRouteMap";
+import { RouteStepper } from "@/components/departures/RouteStepper";
 import { JourneyGallery } from "@/components/departures/JourneyGallery";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Container } from "@/components/ui/Container";
@@ -501,6 +502,10 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
             </Link>
           ) : null}
         </Container>
+      </Section>
+
+      <Section ground="cream" className={styles.stepperSection} data-dense="true">
+        <RouteStepper slug={section.slug} />
       </Section>
 
       <Wayfinding title={section.title} />

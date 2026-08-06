@@ -469,3 +469,10 @@ a.heroAction:hover {
     border: 1px solid CanvasText;
   }
 }
+
+/* The stepper brings its own container and gutters, so this only supplies the
+   ground and removes the section's default padding. */
+.stepperSection {
+  padding: 0;
+  border-top: var(--border-hairline) solid var(--hairline);
+}

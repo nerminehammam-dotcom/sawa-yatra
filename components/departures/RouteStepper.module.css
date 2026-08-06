@@ -1,0 +1,119 @@
+/* Where you are on the road, and how to keep going.
+
+   Two panels side by side, because the shape of the thing is linear and the
+   layout should say so before the words do. Hairlines, no boxes. */
+
+.stepper {
+  display: grid;
+  max-width: var(--content-max);
+  gap: var(--space-6);
+  margin-inline: auto;
+  padding: var(--section-space) var(--page-gutter);
+}
+
+.counter {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.countries {
+  opacity: 0.7;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(min(20rem, 100%), 1fr));
+  gap: 0;
+  border-top: var(--border-strong) solid var(--ink);
+  border-bottom: var(--border-strong) solid var(--ink);
+}
+
+.step {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  margin: 0;
+  padding: var(--space-8) clamp(var(--space-4), 3vw, var(--space-10));
+  color: inherit;
+  border-inline-start: var(--border-hairline) solid var(--ink);
+  text-decoration: none;
+}
+
+.step:first-child {
+  border-inline-start: 0;
+}
+
+/* The forward step is the one most readers want, so it gets the weight. */
+.step:last-child {
+  background: var(--sun);
+}
+
+a.step:hover {
+  background: var(--pink);
+}
+
+a.step:hover .name {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+/* A terminus is not a link. It reads the same and does nothing, which is the
+   honest representation of the end of a road. */
+.terminus {
+  opacity: 0.72;
+}
+
+.direction {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.detail {
+  max-width: 34ch;
+  font-size: 1.0625rem;
+  line-height: 1.4;
+}
+
+.whole {
+  max-width: 60ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  font-style: italic;
+  line-height: 1.45;
+}
+
+@media (max-width: 767px) {
+  .steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .step {
+    border-inline-start: 0;
+    border-top: var(--border-hairline) solid var(--ink);
+  }
+
+  .step:first-child {
+    border-top: 0;
+  }
+}
+
+@media (forced-colors: active) {
+  .step:last-child,
+  a.step:hover {
+    background: Canvas;
+  }
+}
