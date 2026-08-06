@@ -403,6 +403,11 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
         intro={
           <div className={styles.heroIntro}>
             <p>{section.promise}</p>
+            <p className={styles.dualNature}>
+              Section {section.sectionNumber} of {andeanCaravanSections.length} on
+              the Andean Caravan. Travel it as a leg of the whole route, or on its
+              own.
+            </p>
             <p className={styles.publicDate}>
               {displayValue(section.publicDateWindow, publicDate)}
             </p>
@@ -455,8 +460,8 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
 
       {standalone.length > 0 ? (
         <CopySection
-          eyebrow="Standalone season"
-          title="A separate departure, not a place on the annual Caravan."
+          eyebrow="On its own"
+          title="Taken alone, it runs on its own season."
           paragraphs={standalone}
           ground="olive"
         />

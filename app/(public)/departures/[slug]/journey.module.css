@@ -43,6 +43,19 @@
   gap: var(--space-4);
 }
 
+/* States the dual nature at the top so it agrees with the RouteStepper at the
+   foot: a section is a leg of the Caravan you may also take on its own. This
+   replaced a later block that flatly called a section "a separate departure,
+   not a place on the annual Caravan," which contradicted the stepper. */
+.dualNature {
+  max-width: 44ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  font-style: italic;
+  line-height: 1.4;
+}
+
 .publicDate {
   width: fit-content;
   padding-block-start: var(--space-4);
