@@ -15,7 +15,7 @@ const principles = [
   {
     number: "01",
     title: "The route is real work",
-    body: "Distances, altitude, borders, ferries and transfer days belong in the story—not in hidden small print.",
+    body: "Distances, altitude, borders, ferries and transfer days belong in the story, not in hidden small print.",
   },
   {
     number: "02",

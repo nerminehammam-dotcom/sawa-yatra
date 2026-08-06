@@ -85,7 +85,7 @@ export const fieldDocumentContent = {
     label: "Where the name comes from",
     highlights: ["to mean together", "the Sanskrit word for journey"],
     body: [
-      "Sawayatra is a name woven from two ancient words. Sawa, used across the Arabic-speaking world to mean together, is rooted in an ancient Arabic word that speaks of harmony, alignment and making things level. Yatra, the Sanskrit word for journey, began as a spiritual pilgrimage—a journey of purpose and transformation—and today has come to mean any journey or voyage of discovery.",
+      "Sawayatra is a name woven from two ancient words. Sawa, used across the Arabic-speaking world to mean together, is rooted in an ancient Arabic word that speaks of harmony, alignment and making things level. Yatra, the Sanskrit word for journey, began as a spiritual pilgrimage, a journey of purpose and transformation, and today has come to mean any journey or voyage of discovery.",
       "Together, they express the idea that inspired this community: that the most meaningful journeys are not simply shared, but shared with people who move through the world in much the same way we do.",
       "Sawayatra is a new way to travel. A way to find people who share not just your destination, but your pace, your curiosity, your passions and your sense of discovery. We call it your Travel Self.",
     ],
@@ -102,7 +102,7 @@ export const fieldDocumentContent = {
       },
       {
         number: "02",
-        label: "Travel a section—or several",
+        label: "Travel a section, or several",
         body: "Each section connects directly to the next. The caravan continues south.",
       },
       {

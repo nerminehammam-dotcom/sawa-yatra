@@ -50,14 +50,14 @@ export default function HomePage() {
         <div className={styles.homeHeroScrim} aria-hidden="true" />
 
         {/* Stripped to the line alone on 5 August 2026. The tagline and the
-            definition paragraph went first — the name story below now says
-            both, at length — and then the two buttons and the practical link.
+            definition paragraph went first (the name story below now says
+            both, at length), then the two buttons and the practical link.
             The photograph and the sentence, nothing else. Every way onward is
             in the header and the footer. */}
         <div className={styles.homeHeroCopy}>
-          {/* Three spans, one sentence. The text content is unchanged —
-              "Go alone, arrive together." — and the spaces between them are
-              real text nodes, so it reads and is announced as one line. */}
+          {/* Three spans, one sentence. The text content is unchanged:
+              "Go alone, arrive together." The spaces between them are real
+              text nodes, so it reads and is announced as one line. */}
           <h1 id="home-heading">
             <span className={styles.homeHeroRoman}>Go alone,</span>{" "}
             <span className={styles.homeHeroTurn}>arrive</span>{" "}

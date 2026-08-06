@@ -26,7 +26,7 @@ export async function generateMetadata({
     url: absoluteUrl(`/travel-self/share/${rawKey}`),
     width: 1200,
     height: 630,
-    alt: `${family.name} — ${family.readout}`,
+    alt: `${family.name}, ${family.readout}`,
   };
 
   return {

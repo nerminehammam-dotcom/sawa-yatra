@@ -90,7 +90,7 @@ export default function CaravansPage() {
         <p>Collection architecture / future routes</p>
         <h2 id="future-heading">The field can grow. The facts have not been supplied yet.</h2>
         <p>
-          Clearly labelled placeholder — future caravan regions, dates and
+          Clearly labelled placeholder, future caravan regions, dates and
           operating details require approved source material before publication.
         </p>
       </section>

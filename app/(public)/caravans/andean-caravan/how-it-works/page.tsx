@@ -56,7 +56,7 @@ export default function HopOnHopOffPage() {
       <CaravanRouteMap headingLevel={2} />
 
       <section className={styles.proposition} aria-labelledby="proposition-heading">
-        <p aria-hidden="true">01—09</p>
+        <p aria-hidden="true">01–09</p>
         <h2 id="proposition-heading">One Caravan. Three countries. Nine ways to join.</h2>
         <p>Once a year, one moving group travels south from Peru through Bolivia and into Chilean Patagonia. You choose the doors.</p>
       </section>

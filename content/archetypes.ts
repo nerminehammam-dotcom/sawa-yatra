@@ -41,7 +41,7 @@ export const archetypes = [
       contentNote: "Visual-manual specimen copy; founder approval required.",
     },
     {
-      text: "Not your twin — the table that makes your journey better.",
+      text: "Not your twin. The table that makes your journey better.",
       contentStatus: "DRAFT",
       contentNote: "Visual-manual specimen copy; founder approval required.",
     },

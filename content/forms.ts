@@ -15,7 +15,7 @@ export const formUiContent = {
     ariaLabel: "What happens to your details",
     title: "What happens to what you write here",
     body:
-      "Your message is sent to Sawayatra by email and is not stored on this website. Your browser keeps a short note that you sent it, so you are not asked twice — that note holds no part of what you wrote.",
+      "Your message is sent to Sawayatra by email and is not stored on this website. Your browser keeps a short note that you sent it, so you are not asked twice. That note holds no part of what you wrote.",
   },
   submission: {
     pendingTitle: "Sending",
@@ -38,7 +38,7 @@ export const formUiContent = {
     unexpected:
       "Something unexpected came back and this may not have been sent. Please try again, or write to Sawayatra directly.",
     unreachable:
-      "This could not be sent — the connection did not hold. Nothing has been kept. Please check your connection and try again.",
+      "This could not be sent. The connection did not hold. Nothing has been kept. Please check your connection and try again.",
   },
 } as const;
 

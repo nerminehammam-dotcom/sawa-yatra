@@ -44,7 +44,7 @@ export const AXES = [
     echo: [
       "One town. You would stay another night if you could.",
       "Few places, and time enough to be bored in them.",
-      "Slowly — though you would not want to miss the thing an hour away.",
+      "Slowly, though you would not want to miss the thing an hour away.",
       "Onward, but not through lunch.",
       "More ground. You sleep well on buses.",
       "Three towns, and you would have taken a fourth.",
@@ -107,8 +107,8 @@ export const AXES = [
     echo: [
       "You have watched more than one town wake up.",
       "The first hour is the good one.",
-      "Early — though you will stay up if something is happening.",
-      "Late — though you can be got out of bed.",
+      "Early, though you will stay up if something is happening.",
+      "Late, though you can be got out of bed.",
       "The day starts properly after lunch.",
       "You are still awake, and glad about it.",
     ],

@@ -137,7 +137,7 @@ export const andeanCaravanSections = [
     promise: "Pacific light, pre-Inca cities, islands, desert cemeteries and the Nazca Lines.",
     publicDateWindow: `February 2028 · ${securedDateLine}`,
     standaloneWindows: [
-      "December–March — the only months the coast escapes the garúa fog.",
+      "December–March, the only months the coast escapes the garúa fog.",
     ],
     altitude: "Sea level, rising to 2,335 m on the final day",
     group: "Up to 16 travellers",
@@ -147,7 +147,7 @@ export const andeanCaravanSections = [
       "Peru's south coast contains a pre-Inca oracle city, an Inca palace with pigment still on its adobe walls, islands of sea lions and Humboldt penguins, a desert cemetery and the Nazca Lines seen from the air before the thermals start.",
     ],
     journeyShape: [
-      "Four days in Lima—Museo Larco, Pachacámac, Barranco and a food day beginning at Surquillo market—then south to Tambo Colorado and Paracas for the Ballestas and red-sand reserve.",
+      "Four days in Lima: Museo Larco, Pachacámac, Barranco and a food day beginning at Surquillo market. Then south to Tambo Colorado and Paracas for the Ballestas and red-sand reserve.",
       "Nazca brings the early overflight and Chauchilla before the long desert run to Arequipa along the Panamericana.",
     ],
     feature: [
@@ -170,7 +170,7 @@ export const andeanCaravanSections = [
     promise: "Volcanic architecture, mountain ritual, Colca Canyon and the ascent to Titicaca.",
     publicDateWindow: `February 2028 · ${securedDateLine}`,
     standaloneWindows: [
-      "April–November — dry conditions, active condors and clear volcano views.",
+      "April–November, dry conditions, active condors and clear volcano views.",
     ],
     altitude: "2,335 m → 3,600 m → 3,800 m, over a 4,910 m pass",
     group: "Up to 16 travellers",
@@ -202,7 +202,7 @@ export const andeanCaravanSections = [
     durationDays: 8,
     promise: "The archaeological road to Cusco, Machu Picchu and the Titicaca train.",
     publicDateWindow: `February 2028 · ${securedDateLine}`,
-    standaloneWindows: ["May–September — dry season and a clearer citadel."],
+    standaloneWindows: ["May–September, dry season and a clearer citadel."],
     altitude: "3,400–3,800 m",
     group: "Up to 16 travellers",
     countries: ["Peru"],
@@ -264,7 +264,7 @@ export const andeanCaravanSections = [
     durationDays: 9,
     promise: "Cable cars, Tiwanaku, the Yungas and the high emptiness of Sajama.",
     publicDateWindow: `March 2028 · ${securedDateLine}`,
-    standaloneWindows: ["May–October — the drier season."],
+    standaloneWindows: ["May–October, the drier season."],
     altitude: "3,600 m → 1,700 m → 4,200 m",
     group: "Up to 12 travellers",
     countries: ["Bolivia"],
@@ -452,7 +452,7 @@ export const andeanCaravan: AndeanCaravan = {
     "Each Caravan follows one route on one seasonal departure. Join for one section, combine several, or travel until the road ends.",
   ],
   overviewCopy: [
-    "The Andean Caravan is one moving journey from the Pacific coast of Peru to the end of the road in Patagonia—and then by a different northbound return to the final flight home.",
+    "The Andean Caravan is one moving journey from the Pacific coast of Peru to the end of the road in Patagonia, and then by a different northbound return to the final flight home.",
     "Join it for one section. Connect several. Or stay with the Caravan until the road ends.",
   ],
   completeCopy: [

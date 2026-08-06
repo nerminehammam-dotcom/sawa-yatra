@@ -74,7 +74,7 @@ export default async function StartHerePage({ searchParams }: StartHerePageProps
           <JourneyInterestForm
             journey={{
               id: `andean-caravan-${selected.id}`,
-              label: `The Andean Caravan — join at ${selected.place}`,
+              label: `The Andean Caravan, join at ${selected.place}`,
             }}
             availableTravelSelfIds={archetypes.map((archetype) => archetype.id)}
           />

@@ -6,7 +6,7 @@ import type {
 } from "@/lib/types";
 
 const DEMO_SCORE_NOTE =
-  "DRAFT DEMO ONLY — this score exists only to demonstrate deterministic interface behaviour and does not interpret the response.";
+  "DRAFT DEMO ONLY: this score exists only to demonstrate deterministic interface behaviour and does not interpret the response.";
 
 const demoOption = (
   id: string,
@@ -31,26 +31,26 @@ const placeholderQuestion = (
   scoreTargets: readonly [ArchetypeId, ArchetypeId, ArchetypeId, ArchetypeId],
 ): QuizQuestion => ({
   id: `question-${number}`,
-  prompt: `DRAFT / PLACEHOLDER — Founder-approved question ${number} to be supplied.`,
+  prompt: `DRAFT / PLACEHOLDER: Founder-approved question ${number} to be supplied.`,
   options: [
     demoOption(
       `question-${number}-option-1`,
-      `DRAFT / PLACEHOLDER — Founder-approved option 1 for question ${number} to be supplied.`,
+      `DRAFT / PLACEHOLDER: Founder-approved option 1 for question ${number} to be supplied.`,
       scoreTargets[0],
     ),
     demoOption(
       `question-${number}-option-2`,
-      `DRAFT / PLACEHOLDER — Founder-approved option 2 for question ${number} to be supplied.`,
+      `DRAFT / PLACEHOLDER: Founder-approved option 2 for question ${number} to be supplied.`,
       scoreTargets[1],
     ),
     demoOption(
       `question-${number}-option-3`,
-      `DRAFT / PLACEHOLDER — Founder-approved option 3 for question ${number} to be supplied.`,
+      `DRAFT / PLACEHOLDER: Founder-approved option 3 for question ${number} to be supplied.`,
       scoreTargets[2],
     ),
     demoOption(
       `question-${number}-option-4`,
-      `DRAFT / PLACEHOLDER — Founder-approved option 4 for question ${number} to be supplied.`,
+      `DRAFT / PLACEHOLDER: Founder-approved option 4 for question ${number} to be supplied.`,
       scoreTargets[3],
     ),
   ],
@@ -66,7 +66,7 @@ export const quizQuestions = [
     options: [
       demoOption(
         "question-1-option-1",
-        "I love it — let's see what we find",
+        "I love it. Let's see what we find",
         "slow-wanderer",
         "DRAFT",
       ),
@@ -84,7 +84,7 @@ export const quizQuestions = [
       ),
       demoOption(
         "question-1-option-4",
-        "DRAFT / PLACEHOLDER — Founder-approved option 4 to be supplied.",
+        "DRAFT / PLACEHOLDER: Founder-approved option 4 to be supplied.",
         "independent-joiner",
       ),
     ],
@@ -126,7 +126,7 @@ export const quizQuestions = [
 
 export const quizContent = {
   contentStatus: "DRAFT",
-  statusLabel: "DRAFT — interface demonstration only",
+  statusLabel: "DRAFT: interface demonstration only",
   intro: {
     eyebrow: "Meet your Travel Self",
     title: "You're not a demographic. You're a way of travelling.",

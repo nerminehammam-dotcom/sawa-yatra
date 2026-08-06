@@ -117,7 +117,7 @@ export const membershipTiers = [
 export const membershipContent = {
   hero: {
     eyebrow: "Membership",
-    title: "A small, vetted club — and a host who knows you.",
+    title: "A small, vetted club, and a host who knows you.",
     primaryAction: {
       label: "Request an invitation",
       href: "/request-invitation",

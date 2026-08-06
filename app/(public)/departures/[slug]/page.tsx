@@ -365,7 +365,7 @@ function CompleteCaravanPage() {
         title="Nine movements, one altitude curve and one changing group."
         paragraphs={[
           "The complete journey is not nine holidays placed end to end. It has one altitude curve, one seasonal logic and one changing group. People will join and leave along the way. Those who stay experience the Caravan gathering and releasing travellers as the landscape changes.",
-          "It moves overland—by van, Land Cruiser, train, boat and barge—with only four short flights, because the point is the ground between places, not the places alone.",
+          "It moves overland, by van, Land Cruiser, train, boat and barge, with only four short flights, because the point is the ground between places, not the places alone.",
         ]}
       />
 

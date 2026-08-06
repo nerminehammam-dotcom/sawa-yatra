@@ -103,21 +103,35 @@
   padding-block: clamp(1.5rem, 3vw, 2.5rem) clamp(2rem, 4vw, 3.5rem);
 }
 
+/* Heading and standfirst sat stacked, both starting at column 1, with the
+   right half of the grid empty. They now share a row: the question on the
+   left, the answer to "what is this" on the right, sitting on the heading's
+   last baseline. Same words, same order, no dead space. */
+.travelSelfIntro .introHead {
+  align-items: end;
+}
+
 .travelSelfIntro .introHead h1 {
-  grid-column: 1 / -1;
+  grid-column: 1 / span 7;
   margin: 0;
   font-family: var(--tsi-display);
   font-size: clamp(3.25rem, 5.5vw, 5rem);
+  font-optical-sizing: auto;
   font-weight: 400;
   line-height: 0.96;
   letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
+/* WONK 1 puts the swash italic on this one word. The axis was not in the
+   font files until 5 August 2026, so this asked for nothing and got nothing
+   before then. */
 .travelSelfIntro .introYou {
   display: inline-block;
   color: var(--tsi-signal-text);
   font-size: 1.1em;
   font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
   font-weight: 300;
   transform: rotate(-3.2deg) translateY(0.04em);
 }
@@ -129,15 +143,31 @@
 }
 
 .travelSelfIntro .introStandfirst {
-  max-width: 44ch;
-  grid-column: 1 / span 7;
-  align-self: start;
+  max-width: 34ch;
+  grid-column: 8 / -1;
+  align-self: end;
   justify-self: start;
-  margin: 0;
+  /* Sits on the heading's last baseline rather than its box, which is what
+     makes the two read as one line of thought instead of two blocks. */
+  margin: 0 0 0.35em;
   font-family: var(--tsi-display);
-  font-size: clamp(1.3rem, 1.8vw, 1.65rem);
-  line-height: 1.35;
+  font-size: clamp(1.25rem, 1.5vw, 1.5rem);
+  font-optical-sizing: auto;
+  line-height: 1.45;
   text-align: left;
+  text-wrap: pretty;
+}
+
+@media (max-width: 900px) {
+  .travelSelfIntro .introHead h1,
+  .travelSelfIntro .introStandfirst {
+    grid-column: 1 / -1;
+  }
+
+  .travelSelfIntro .introStandfirst {
+    max-width: 44ch;
+    margin-bottom: 0;
+  }
 }
 
 .travelSelfIntro .introOdds {

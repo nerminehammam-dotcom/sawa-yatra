@@ -7,7 +7,7 @@ import {
 } from "@/lib/types";
 
 const legalNotice =
-  "LEGAL REVIEW — This page is a placeholder. Approved copy must be supplied and professionally reviewed before launch.";
+  "LEGAL REVIEW: This page is a placeholder. Approved copy must be supplied and professionally reviewed before launch.";
 
 export const legalPages = [
   {
@@ -52,7 +52,7 @@ export const legalPageById = {
 
 export const cookieNoticeDecision = {
   required: TO_BE_CONFIRMED,
-  notice: "PLACEHOLDER — Cookie requirements and approved notice copy are to be confirmed.",
+  notice: "PLACEHOLDER: Cookie requirements and approved notice copy are to be confirmed.",
   contentStatus: "LEGAL REVIEW",
 } as const;
 
@@ -94,7 +94,7 @@ export const systemPageContent = {
   notFound: {
     eyebrow: "404",
     title: "Page not found",
-    body: "PLACEHOLDER — Founder-approved 404 message to be supplied.",
+    body: "PLACEHOLDER: Founder-approved 404 message to be supplied.",
     actions: [
       returnHomeAction,
       {

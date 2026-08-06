@@ -1,6 +1,6 @@
 export const TRAVEL_SELF_COPY = {
   title: "Your Travel Self",
-  standfirst: "Sawayatra is a members’ travel club that matches travellers by how they travel — not by age, not by destination. The Travel Self is how that works. Eight short questions about the way you move through a journey and what draws you to a place. Answer them once, and every journey on the site reads differently.",
+  standfirst: "Sawayatra is a members’ travel club that matches travellers by how they travel, not by age, not by destination. The Travel Self is how that works. Eight short questions about the way you move through a journey and what draws you to a place. Answer them once, and every journey on the site reads differently.",
   introduction: {
     heading: "You already know how you travel.",
     paragraphs: [
@@ -55,7 +55,7 @@ export const TRAVEL_SELF_COPY = {
   },
   passions: {
     question: "What draws you to a place?",
-    helper: "Choose three. These are shown to other members — never scored, never counted against you.",
+    helper: "Choose three. These are shown to other members, never scored, never counted against you.",
     refusal: "Three only. Something has to go.",
   },
   followUp: {
@@ -82,7 +82,7 @@ export const TRAVEL_SELF_COPY = {
   },
   changeLater: "You can change any of this later.",
   update: "Update your Travel Self",
-  annual: "You made this a year ago. Travel selves change — with age, with money, and with who you are travelling with.",
+  annual: "You made this a year ago. Travel selves change, with age, with money, and with who you are travelling with.",
   dismiss: "Dismiss",
   others: {
     heading: "The other fifteen",

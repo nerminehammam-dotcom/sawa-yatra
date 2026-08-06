@@ -34,7 +34,7 @@ export const AXES = [
     lines: [
       "One town. You would stay another night if you could.",
       "Few places, and time enough to be bored in them.",
-      "Slowly — though you would not want to miss the thing an hour away.",
+      "Slowly, though you would not want to miss the thing an hour away.",
       "Onward, but not through lunch.",
       "More ground. Another stop still sounds like a good idea.",
       "Three towns, and you would have taken a fourth.",
@@ -79,8 +79,8 @@ export const AXES = [
     lines: [
       "You have watched more than one town wake up.",
       "The first hour is the good one.",
-      "Early — though you will stay up if something is happening.",
-      "Late — though you can be got out of bed.",
+      "Early, though you will stay up if something is happening.",
+      "Late, though you can be got out of bed.",
       "The day starts properly after lunch.",
       "You are still awake, and glad about it.",
     ],
@@ -127,7 +127,7 @@ export const PASSIONS: { name: string; family: Family; note: string }[] = [
   { name: "Wellness", family: 'Quiet', note: "Rest, treatment, sleep, and coming home slower than you left." },
   { name: "Water", family: 'Quiet', note: "Coastlines, swimming, rivers and hot springs." },
 ];
-export const PASSIONS_HELPER = "Choose three. These are shown to other members — never scored, never counted against you.";
+export const PASSIONS_HELPER = "Choose three. These are shown to other members, never scored, never counted against you.";
 export const PASSIONS_REFUSAL = "Three only. Something has to go.";
 export const FOLLOW_UP_HELPER = "This orders what we show you first. It does not change your Travel Self.";
 export const SUBMIT_LABEL = "See your Travel Self";
@@ -197,31 +197,31 @@ export const ARCHETYPES: { name: string; readout: string; essence: string; bring
   {
     name: "The Astronomer",
     readout: "unhurried · charted · quiet · night-led",
-    essence: "You like a journey with room around it — enough structure to trust the road, enough quiet to notice where it has taken you. You do not need to lead the group or fill its silences, but you need the day to have a plan and the evening to stay open.",
+    essence: "You like a journey with room around it, enough structure to trust the road, enough quiet to notice where it has taken you. You do not need to lead the group or fill its silences, but you need the day to have a plan and the evening to stay open.",
     bring: "steadiness, and attention to what everyone else walked past.",
   },
   {
     name: "The Regular",
     readout: "unhurried · unplanned · sociable · dawn-led",
-    essence: "By the third morning the café knows your order. You did not plan that and you could not repeat it on purpose—you simply go slowly, turn up early, and talk to whoever is there. You come home with names, invitations and a place that remembers you.",
+    essence: "By the third morning the café knows your order. You did not plan that and you could not repeat it on purpose, you simply go slowly, turn up early, and talk to whoever is there. You come home with names, invitations and a place that remembers you.",
     bring: "a place that has started to know the group.",
   },
   {
     name: "The Bohemian",
     readout: "unhurried · unplanned · sociable · night-led",
-    essence: "The table is the destination. You are in no hurry, you have made no plan, and you assume the evening will produce whatever it produces — which, in your experience, it reliably does. A long dinner is not a break from the journey. It is the journey.",
+    essence: "The table is the destination. You are in no hurry, you have made no plan, and you assume the evening will produce whatever it produces, which, in your experience, it reliably does. A long dinner is not a break from the journey. It is the journey.",
     bring: "the night everyone talks about afterwards.",
   },
   {
     name: "The Host",
     readout: "unhurried · charted · sociable · dawn-led",
-    essence: "You have thought about the day and you have thought about the people. Breakfast is where you gather them — unhurried, with a plan you are perfectly happy to be talked out of. You are organising, but nobody feels organised.",
+    essence: "You have thought about the day and you have thought about the people. Breakfast is where you gather them, unhurried, with a plan you are perfectly happy to be talked out of. You are organising, but nobody feels organised.",
     bring: "a group that has eaten and knows the day by nine.",
   },
   {
     name: "The Convener",
     readout: "unhurried · charted · sociable · night-led",
-    essence: "You booked the table three days ago. Slow days, a long evening, everyone in one place at the end of it — that is a journey well spent, and you are willing to do the arranging that makes it happen rather than hoping it will.",
+    essence: "You booked the table three days ago. Slow days, a long evening, everyone in one place at the end of it, that is a journey well spent, and you are willing to do the arranging that makes it happen rather than hoping it will.",
     bring: "the evening that would not have happened by itself.",
   },
   {
@@ -251,7 +251,7 @@ export const ARCHETYPES: { name: string; readout: string; essence: string; bring
   {
     name: "The Bugler",
     readout: "full-tilt · unplanned · sociable · dawn-led",
-    essence: "At six in the morning you are certain everyone would be happier awake, and often you are right. You have no plan — you have energy, and a conviction that the day is better started than discussed. People follow you before they have decided to.",
+    essence: "At six in the morning you are certain everyone would be happier awake, and often you are right. You have no plan, you have energy, and a conviction that the day is better started than discussed. People follow you before they have decided to.",
     bring: "momentum, at the hour when it is hardest to find.",
   },
   {
@@ -269,7 +269,7 @@ export const ARCHETYPES: { name: string; readout: string; essence: string; bring
   {
     name: "The Ringmaster",
     readout: "full-tilt · charted · sociable · night-led",
-    essence: "You want all of it and you have arranged all of it — the fast day, the full table, the late night. You are the one who booked the thing at eleven and got everybody there. Sleep, to you, is a scheduling matter.",
+    essence: "You want all of it and you have arranged all of it, the fast day, the full table, the late night. You are the one who booked the thing at eleven and got everybody there. Sleep, to you, is a scheduling matter.",
     bring: "more journey per day than anyone thought possible.",
   },
 ];

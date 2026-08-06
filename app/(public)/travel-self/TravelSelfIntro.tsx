@@ -25,9 +25,13 @@ export function TravelSelfIntro() {
         <h1>
           Which one are <span className={styles.introYou}>you</span>?
         </h1>
+        {/* Was "…reveal which — through how you travel and what you travel
+            for." The em dash carried the sentence, so removing it needed a
+            rewrite rather than a comma. Same claim, same length, two clauses
+            instead of an aside. */}
         <p className={styles.introStandfirst}>
           One of sixteen travelling selves. Eight short questions reveal which
-          — through how you travel and what you travel for.
+          one is yours: how you travel, and what you travel for.
         </p>
       </div>
 
@@ -48,7 +52,7 @@ export function TravelSelfIntro() {
         <div className={styles.introOdds}>
           <TravelSelfTiles />
           <p>
-            Sixteen travelling selves. One of them is already yours — you just
+            Sixteen travelling selves. One of them is already yours. You just
             haven&apos;t been told which.
           </p>
         </div>

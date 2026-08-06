@@ -132,7 +132,7 @@ export const routeMetadata = ([
       ? approvedRouteDescriptions[
           id as keyof typeof approvedRouteDescriptions
         ]
-      : `PLACEHOLDER — Founder-approved ${id} meta description to be supplied.`,
+      : `PLACEHOLDER: Founder-approved ${id} meta description to be supplied.`,
   descriptionStatus:
     id in approvedRouteDescriptions ? "LOCKED" : "PLACEHOLDER",
   canonicalPath: path,
@@ -161,7 +161,7 @@ export const homeContent = {
     eyebrow: "A members' travel club",
     title: "Go alone, arrive together.",
     accentWord: "arrive",
-    lead: "Good travel isn't about going with anyone. It's about going with the right people — found for you, and introduced only when it's mutual.",
+    lead: "Good travel isn't about going with anyone. It's about going with the right people, found for you, and introduced only when it's mutual.",
     primaryAction: {
       label: "Meet your Travel Self",
       href: "/travel-self",
@@ -210,7 +210,7 @@ export const homeContent = {
         id: "tell-us",
         number: "01",
         title: "Tell us how you travel",
-        body: "Not a form — a conversation. Your pace, your mornings, your non-negotiables. How you move, not where you've been.",
+        body: "Not a form. A conversation. Your pace, your mornings, your non-negotiables. How you move, not where you've been.",
         contentStatus: "DRAFT",
       },
       {
@@ -261,8 +261,8 @@ export const homeContent = {
   },
   membershipBand: {
     eyebrow: "Membership",
-    title: "A small, vetted club — and a host who knows you.",
-    safetyMechanismLine: "DRAFT / PLACEHOLDER — Verified mechanism copy to be supplied.",
+    title: "A small, vetted club, and a host who knows you.",
+    safetyMechanismLine: "DRAFT / PLACEHOLDER: Verified mechanism copy to be supplied.",
     action: {
       label: "Request an invitation",
       href: "/request-invitation",
@@ -278,7 +278,7 @@ export const howItWorksContent = {
     eyebrow: "How it works",
     title: "You do the travelling. We do the looking.",
     accentWord: "looking.",
-    lead: "No search bar, no swiping, no strangers to sift through. You tell us how you travel — and the host quietly finds the people you'd be glad to meet.",
+    lead: "No search bar, no swiping, no strangers to sift through. You tell us how you travel, and the host quietly finds the people you'd be glad to meet.",
     contentStatus: "DRAFT",
   },
   stepsEyebrow: "The mechanism",
@@ -288,7 +288,7 @@ export const howItWorksContent = {
       id: "tell-us",
       number: "01",
       title: "Tell us how you travel",
-      body: "Not a form — a conversation. Your pace, your mornings, your non-negotiables. How you move, not where you've been.",
+      body: "Not a form. A conversation. Your pace, your mornings, your non-negotiables. How you move, not where you've been.",
       contentStatus: "DRAFT",
     },
     {
@@ -302,7 +302,7 @@ export const howItWorksContent = {
       id: "everyone-says-yes",
       number: "03",
       title: "Everyone says yes first",
-      body: "We share Travel Selves, not names. Only when everyone says yes do we make the introduction — Travel Self first, then names.",
+      body: "We share Travel Selves, not names. Only when everyone says yes do we make the introduction, Travel Self first, then names.",
       contentStatus: "DRAFT",
       contentNote: "Publish only after this operating mechanism is verified.",
     },
@@ -341,7 +341,7 @@ export const howItWorksContent = {
     items: [
       {
         id: "verified-mechanism-placeholder",
-        title: "DRAFT / PLACEHOLDER — Verified mechanism to be supplied.",
+        title: "DRAFT / PLACEHOLDER: Verified mechanism to be supplied.",
         body: TO_BE_CONFIRMED,
         contentStatus: "PLACEHOLDER",
       },
@@ -443,7 +443,7 @@ export const journeyDetailContent = {
     held: "What is held",
     included: "What is included",
   },
-  tablePrivacyLine: "Travel Selves only — never member names or photographs.",
+  tablePrivacyLine: "Travel Selves only, never member names or photographs.",
   tablePlaceholder: "To be confirmed",
   tablePlaceholderNote:
     "Travel Self details for this demo journey have not been supplied.",
@@ -462,7 +462,7 @@ export const aboutContent = {
     eyebrow: "About",
     title: "We started with a simple, stubborn idea.",
     accentWord: "idea.",
-    lead: "That the best part of any journey was never the place. It was the company — and that finding the right company shouldn't be left to luck.",
+    lead: "That the best part of any journey was never the place. It was the company, and that finding the right company shouldn't be left to luck.",
     assetId: "about-founder",
     contentStatus: "DRAFT",
   },
@@ -492,7 +492,7 @@ export const aboutContent = {
   values: [
     ...Array.from({ length: 5 }, (_, index) => ({
       id: `value-placeholder-${index + 1}`,
-      title: `PLACEHOLDER — Founder-approved value ${index + 1} to be supplied.`,
+      title: `PLACEHOLDER: Founder-approved value ${index + 1} to be supplied.`,
       body: TO_BE_CONFIRMED,
       contentStatus: "PLACEHOLDER" as const,
     })),
@@ -504,7 +504,7 @@ export const aboutContent = {
       contentNote: "Value name is locked; founder-approved explanation is required.",
     },
   ],
-  closingLine: "The table's set — come find your seat.",
+  closingLine: "The table's set, come find your seat.",
   action: {
     label: "Request an invitation",
     href: "/request-invitation",
@@ -537,7 +537,7 @@ export const signInContent = {
 export const requestInvitationContent = {
   eyebrow: "Membership",
   title: "Request an invitation",
-  lead: "PLACEHOLDER — Founder-approved invitation-request introduction to be supplied.",
+  lead: "PLACEHOLDER: Founder-approved invitation-request introduction to be supplied.",
   form: invitationRequestFormContent,
   contentStatus: "DRAFT",
   contentNote: "Consent and follow-up copy require approval before launch.",
