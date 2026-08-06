@@ -55,43 +55,81 @@
   box-sizing: border-box;
 }
 
+/* Same container as the opening block and the action row, so the three
+   sections of this page line up with each other and with How Sawayatra Works. */
 .travelSelfIntro .introGrid {
   display: grid;
-  max-width: 84rem;
+  max-width: var(--content-max);
   grid-template-columns: repeat(12, minmax(0, 1fr));
   column-gap: clamp(1rem, 2.5vw, 2rem);
   margin-inline: auto;
-  padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+  padding-inline: var(--page-gutter);
 }
 
-/* A flat paper panel on the left, the painting flush to the right, and the
-   question set across the seam so each line begins on paper and finishes on
-   the painting.
-
-   Every number here is load-bearing and was chosen from measurement, not by
-   eye — see tools/audit/measure-travel-self-straddle.py, which reproduces this
-   arithmetic against the real 2400x1600 file.
-
-   24% panel puts the seam 59% of the way through the first line and 45%
-   through the second, so both genuinely cross. The lines reach 17% and 18%
-   into the painting, which is the pale strip left of everything: the cactus
-   begins at 3% but not until half the height, and the aeroplane occupies 11%
-   to 35% only above a fifth of the height.
-
-   20% top drops the type into the clear band between the two. Measured over
-   the exact rectangles the glyphs occupy, ink holds 4.12:1 against the
-   darkest and lightest 5% of what is behind it. Signal orange does not: it
-   reaches 1.6:1 against the same pixels, because it sits at almost the same
-   luminance as the salmon in the cloud. So the emphasis on "you" is carried
-   by the swash italic instead of by colour, and the orange stays on the paper
-   side. */
-.travelSelfIntro .introStraddle {
-  position: relative;
+/* Same opening as How Sawayatra Works: a block of colour carrying the whole
+   heading, then the picture full bleed beneath it. The measurements are copied
+   from how-it-works.module.css deliberately, so the two pages read as one
+   system rather than as two designs that happen to share a palette. */
+.travelSelfIntro .introOpening {
   display: grid;
-  max-width: 84rem;
-  grid-template-columns: 24% 76%;
-  margin-inline: auto;
-  background: var(--tsi-paper);
+  min-height: min(72vh, 48rem);
+  align-items: end;
+  padding: clamp(5rem, 10vw, 9rem) var(--page-gutter);
+  background: var(--tsi-sun);
+  border-bottom: var(--border-strong) solid var(--tsi-ink);
+}
+
+.travelSelfIntro .introOpeningInner {
+  display: grid;
+  max-width: var(--content-max);
+  gap: var(--space-8);
+}
+
+.travelSelfIntro .introKicker {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.travelSelfIntro .introTitle {
+  max-width: 12ch;
+  margin: 0;
+  font-family: var(--tsi-display);
+  font-size: clamp(4rem, 10vw, 9rem);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 0.9;
+}
+
+/* WONK 1 puts the swash italic on this one word. The axis was not in the font
+   files until 5 August 2026, so this asked for nothing and got nothing before
+   then.
+
+   Signal orange against --sun measures 3.37:1. That clears the large-text
+   threshold of 3.0 and nothing else, so it is only ever allowed on this
+   heading, which is 4rem at its smallest. Do not reuse it on body copy. */
+.travelSelfIntro .introYou {
+  color: var(--tsi-signal-text);
+  font-style: italic;
+  font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
+  font-weight: 300;
+}
+
+.travelSelfIntro .introStandfirst {
+  max-width: 54ch;
+  margin: 0;
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.5;
+}
+
+/* Edge to edge, no border, no container. The painting is the page here. */
+.travelSelfIntro .introPlate {
+  margin: 0;
+  line-height: 0;
 }
 
 .travelSelfIntro .introArtwork {
@@ -99,83 +137,20 @@
   width: 100%;
   height: auto;
   max-width: none;
-  grid-column: 2;
 }
 
-.travelSelfIntro .introTitle {
-  position: absolute;
-  z-index: 1;
-  inset-block-start: 20%;
-  inset-inline-start: 5%;
-  margin: 0;
-  color: var(--tsi-ink);
-  font-family: var(--tsi-display);
-  font-size: clamp(2.6rem, 7.4vw, 7.2rem);
-  font-optical-sizing: auto;
-  font-weight: 400;
-  letter-spacing: -0.025em;
-  line-height: 0.86;
-}
-
-.travelSelfIntro .introTitle span {
-  display: block;
-  white-space: nowrap;
-}
-
-.travelSelfIntro .introTitle span + span {
-  padding-inline-start: 0.9em;
-}
-
-/* WONK 1 puts the swash italic on this one word. The axis was not in the
-   font files until 5 August 2026, so this asked for nothing and got nothing
-   before then. */
-.travelSelfIntro .introYou {
-  font-style: italic;
-  font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
-  font-weight: 300;
-}
-
-.travelSelfIntro .introChip {
-  position: absolute;
-  inset-block-end: clamp(1.25rem, 3vw, 2.5rem);
-  inset-inline-start: 5%;
-  z-index: 1;
-  margin: 0;
-  padding: 0.55rem 1rem;
-  color: var(--tsi-paper);
-  background: var(--tsi-signal-text);
-  font-size: 1.125rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.travelSelfIntro .introLede {
-  align-items: start;
-  row-gap: 0;
-  padding-block: clamp(4rem, 6vw, 5.5rem) clamp(3.5rem, 5vw, 4.5rem);
-}
-
-.travelSelfIntro .introStandfirst {
-  max-width: 34ch;
-  grid-column: 1 / span 7;
-  margin: 0;
-  font-family: var(--tsi-display);
-  font-size: clamp(1.35rem, 1.8vw, 1.75rem);
-  font-optical-sizing: auto;
-  line-height: 1.4;
-  text-align: left;
-  text-wrap: pretty;
-}
-
-.travelSelfIntro .introLede .introAct {
-  align-self: start;
-  grid-column: 9 / -1;
-  padding-left: clamp(1.5rem, 3vw, 3rem);
-  border-left: var(--tsi-hair) solid var(--tsi-ink);
+.travelSelfIntro .introAct {
+  display: grid;
+  max-width: var(--content-max);
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  margin-inline: auto;
+  padding: clamp(3.5rem, 7vw, 6rem) var(--page-gutter);
 }
 
 .travelSelfIntro .introReassure {
+  max-width: 46ch;
   margin: 0;
   font-size: 1.0625rem;
   line-height: 1.55;
@@ -1286,48 +1261,15 @@
 }
 
 @media (max-width: 899px) {
-  /* No seam to cross. The panel collapses, the painting goes full width, and
-     the question sits above it on paper, where nothing is behind it at all. */
-  .travelSelfIntro .introStraddle {
-    display: block;
-    padding-block-start: clamp(1.5rem, 5vw, 2.5rem);
-  }
-
-  .travelSelfIntro .introTitle {
-    position: static;
-    padding-inline: clamp(1.25rem, 4vw, 3.5rem);
-    padding-block-end: clamp(1.25rem, 4vw, 2rem);
-    font-size: clamp(2.6rem, 10vw, 4.5rem);
-  }
-
-  .travelSelfIntro .introTitle span {
-    white-space: normal;
-  }
-
-  .travelSelfIntro .introChip {
-    inset-inline-start: clamp(1.25rem, 4vw, 3.5rem);
-    inset-block-end: clamp(0.75rem, 3vw, 1.5rem);
-  }
-
-  .travelSelfIntro .introStandfirst,
-  .travelSelfIntro .introAct,
   .travelSelfIntro .introBoundary {
     grid-column: 1 / -1;
   }
 
-  .travelSelfIntro .introStandfirst {
-    max-width: 44ch;
-    justify-self: start;
-    margin-top: 0;
-    text-align: left;
-  }
-
-  .travelSelfIntro .introLede .introAct {
-    grid-column: 1 / -1;
-    margin-top: 2.5rem;
-    padding: 2.5rem 0 0;
-    border-top: var(--tsi-hair) solid var(--tsi-ink);
-    border-left: 0;
+  /* The button and its reassurance stop sharing a row: at this width the
+     sentence would be squeezed to four or five words a line. */
+  .travelSelfIntro .introAct {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.5rem;
   }
 
   .travelSelfIntro .introBegin {

@@ -103,53 +103,40 @@ straight into CI.
 
 ---
 
-## Travel Self headline, where it crosses onto the painting
+## Travel Self opening
 
-Measured 6 August 2026 with `tools/audit/measure-travel-self-straddle.py`.
-Same method as the hero: no browser, no screenshot. The script reproduces the
-layout arithmetic from `travel-self.module.css` against the real 2400x1600
-`public/assets/images/travel-self/intro.jpg`, works out the exact rectangle
-each headline line occupies inside the image, and measures the contrast of the
-candidate colours against the darkest and lightest 5% of those pixels. Both
-tails are checked, because a dark cactus and a bright cloud fail in opposite
-directions.
+Measured 6 August 2026.
 
-Geometry: 24% paper panel, 76% artwork, headline at 5% inset-inline-start and
-20% inset-block-start, `clamp(2.6rem, 7.4vw, 7.2rem)` at line-height 0.86,
-second line indented 0.9em.
+The page now opens the way How Sawayatra Works opens: a `--sun` block carrying
+the kicker, heading and standfirst, then the painting full bleed beneath it.
+Nothing is set over the artwork any more, so there is nothing on this page that
+needs compositing to measure.
 
-| viewport | line | seam falls at | worst ink | worst signal-text |
-| --- | --- | --- | --- | --- |
-| 1280 | Which one | 67% through | 4.61 | 1.80 |
-| 1280 | are you? | 54% through | 4.12 | 1.60 |
-| 1440 | Which one | 62% through | 4.62 | 1.80 |
-| 1440 | are you? | 49% through | 4.12 | 1.61 |
-| 1512 | Which one | 59% through | 4.62 | 1.80 |
-| 1512 | are you? | 45% through | 4.18 | 1.63 |
-| 1728 | Which one | 58% through | 4.64 | 1.81 |
-| 1728 | are you? | 43% through | 4.19 | 1.63 |
-| 1920 | Which one | 58% through | 4.64 | 1.81 |
-| 1920 | are you? | 43% through | 4.19 | 1.63 |
+| foreground | on `--sun` #e5bc4f | verdict |
+| --- | --- | --- |
+| `--ink` #27231f | 8.64:1 | passes at any size |
+| `--signal-text` #b03a0c | 3.37:1 | large text only |
+| `--signal` #f05a2a | 1.88:1 | fails |
+| `--paper` #e7e1d6 | 1.39:1 | fails |
 
-Worst case shipped: **4.12:1** for `--ink` #27231f. Threshold for large text
-is 3.0.
+The swash "you" is `--signal-text` at 3.37:1. The heading is
+`clamp(4rem, 10vw, 9rem)`, so it is large text by a wide margin, but 3.37 is
+the whole budget: that colour must not be reused on this background at body
+size.
 
-### Why the headline is not signal orange
+### Superseded: the straddle composition
 
-The reference for this composition sets the type in burnt orange across both
-the flat panel and the photograph. That was tried first and rejected on
-measurement, not on taste. `--signal-text` #b03a0c reaches **1.60:1** at worst
-here, and the `--scan` mode shows it never clears 3.0 at any vertical offset
-from 8% to 50%: its relative luminance is close to the salmon in the painted
-cloud, so it disappears into it. The emphasis on "you" is carried by the WONK
-swash italic instead, and the orange stays on the paper side of the seam in
-the chip, where it sits on a known flat colour.
+An earlier version of this page set the heading across the seam between a paper
+panel and the painting, and `tools/audit/measure-travel-self-straddle.py`
+measured it at 4.12:1 for ink. Both the layout and the script were removed the
+same day when the page was brought into line with How Sawayatra Works.
+
+One finding from that work is worth keeping, because it constrains anything
+later set over this artwork: **`--signal-text` cannot be used on top of
+`intro.jpg`.** It measured 1.60:1 at worst and never cleared 3.0 at any
+vertical offset from 8% to 50% down the image, because its relative luminance
+is close to the salmon in the painted cloud.
 
 ### Still unmeasured on this element
 
-- Below 900px the panel collapses and the headline sits on plain paper above
-  the artwork, with nothing behind it. Not modelled, and does not need to be.
-- Real browser rendering, as with the hero. Composite of the same inputs, not
-  a screenshot of the output.
-- Pair kerning is not applied, so line widths — and therefore the "seam falls
-  at" column — are within about a percent.
+- Real browser rendering. These are colour-pair calculations, not screenshots.

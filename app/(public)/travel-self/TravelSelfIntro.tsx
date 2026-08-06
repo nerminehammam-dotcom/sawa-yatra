@@ -20,41 +20,38 @@ function BeginButton() {
 export function TravelSelfIntro() {
   return (
     <div className={styles.travelSelfIntro}>
-      <div className={styles.introStraddle}>
+      <section className={styles.introOpening}>
+        <div className={styles.introOpeningInner}>
+          <p className={styles.introKicker}>Before you join</p>
+          <h1 className={styles.introTitle}>
+            Which one are <i className={styles.introYou}>you</i>?
+          </h1>
+          {/* Was "…reveal which — through how you travel and what you travel
+              for." The em dash carried the sentence, so removing it needed a
+              rewrite rather than a comma. Same claim, same length, two clauses
+              instead of an aside. */}
+          <p className={styles.introStandfirst}>
+            One of sixteen travelling selves. Eight short questions reveal
+            which one is yours: how you travel, and what you travel for.
+          </p>
+        </div>
+      </section>
+
+      <figure className={styles.introPlate}>
         <Image
           alt="Painted travel poster: a vicuña in dry grass beneath blue and red rock towers, pink cloud across a sage sky, a propeller plane at upper left, and the word Sawayatra set into the cloud"
           className={styles.introArtwork}
-          height={1280}
+          height={1600}
           priority
-          sizes="(max-width: 900px) 100vw, 64rem"
+          sizes="100vw"
           src="/assets/images/travel-self/intro.jpg"
-          width={1920}
+          width={2400}
         />
-        {/* Two lines, not one: the break is what lets each of them start on
-            paper and finish on the painting. */}
-        <h1 className={styles.introTitle}>
-          <span>Which one</span>
-          <span>
-            are <i className={styles.introYou}>you</i>?
-          </span>
-        </h1>
-        <p className={styles.introChip}>Travel Self · before you join</p>
-      </div>
+      </figure>
 
-      <div className={`${styles.introGrid} ${styles.introLede}`}>
-        {/* Was "…reveal which — through how you travel and what you travel
-            for." The em dash carried the sentence, so removing it needed a
-            rewrite rather than a comma. Same claim, same length, two clauses
-            instead of an aside. */}
-        <p className={styles.introStandfirst}>
-          One of sixteen travelling selves. Eight short questions reveal which
-          one is yours: how you travel, and what you travel for.
-        </p>
-
-        <div className={styles.introAct}>
-          <BeginButton />
-          <p className={styles.introReassure}>{PRIVACY_SENTENCE}</p>
-        </div>
+      <div className={styles.introAct}>
+        <BeginButton />
+        <p className={styles.introReassure}>{PRIVACY_SENTENCE}</p>
       </div>
 
       <div className={`${styles.introGrid} ${styles.introClosing}`}>
