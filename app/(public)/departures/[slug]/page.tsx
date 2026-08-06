@@ -587,13 +587,22 @@ export async function generateMetadata({
     title: { absolute: title },
     description,
     alternates: { canonical: canonicalUrl },
+    // Built field by field rather than spread from the shared metadata, and
+    // that is the whole point: the shared object carries an `images` key, and
+    // an explicit `images` beats the file convention. Leaving it in pinned all
+    // ten sections to one card, so a link to Silver & Bone and a link to the
+    // home page arrived in a message looking identical. With no `images` key
+    // anywhere in this object, Next fills it from opengraph-image.tsx in this
+    // segment, which composes the section's own photograph. Do not spread
+    // baseMetadata.openGraph back in here.
     openGraph: {
-      ...baseMetadata.openGraph,
+      type: "website",
+      siteName: siteConfig.name,
       title,
       description,
       url: canonicalUrl,
     },
-    twitter: { ...baseMetadata.twitter, title, description },
+    twitter: { card: "summary_large_image", title, description },
   };
 }
 
