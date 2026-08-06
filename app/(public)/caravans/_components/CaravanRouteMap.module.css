@@ -102,14 +102,20 @@
   border: 0;
 }
 
+/* ink, not paper. paper on signal measures 2.60:1 and fails both WCAG
+   thresholds; ink on signal is 4.61 and is what --action-text/--action-bg
+   already say the action pairing is. Caught by tests/design/pairings.test.ts. */
 .zoomControls button:hover:not(:disabled),
 .zoomControls button:focus-visible {
-  color: var(--paper);
+  color: var(--ink);
   background: var(--signal);
 }
 
+/* paper on olive is 2.51:1. Disabled controls are exempt under WCAG 1.4.3,
+   but there is no reason to take the exemption when ink on olive is 4.78 and
+   looks the same. */
 .zoomControls button:disabled {
-  color: var(--paper);
+  color: var(--ink);
   background: var(--olive);
 }
 

@@ -58,8 +58,11 @@ a.heroAction:visited {
   background: transparent;
 }
 
+/* ink, not cream. cream resolves to paper, and paper on signal is 2.60:1,
+   which fails at every text size. ink on signal is 4.61 and is what
+   --action-text/--action-bg already declare the action pairing to be. */
 a.heroAction:hover {
-  color: var(--cream);
+  color: var(--ink);
   background: var(--brick);
 }
 

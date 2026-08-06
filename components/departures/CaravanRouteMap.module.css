@@ -100,8 +100,11 @@
   border: 0;
 }
 
+/* paper on olive is 2.51:1. Disabled controls are exempt under WCAG 1.4.3,
+   but there is no reason to take the exemption when ink on olive is 4.78 and
+   looks the same. */
 .zoomControls button:disabled {
-  color: var(--paper);
+  color: var(--ink);
   background: var(--olive);
 }
 

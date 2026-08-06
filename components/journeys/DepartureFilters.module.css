@@ -61,10 +61,13 @@
   border-color: var(--brick);
 }
 
+/* sun, not clay. terracotta resolves to clay, and ink on clay is 3.75:1 —
+   large-text only, on a filter chip set at normal size. ink on sun is 8.64,
+   and sun is what every other selected state on the site uses. */
 .chip[aria-pressed="true"] {
   color: var(--ink);
-  background: var(--terracotta);
-  border-color: var(--terracotta);
+  background: var(--sun);
+  border-color: var(--sun);
 }
 
 @media (min-width: 640px) {

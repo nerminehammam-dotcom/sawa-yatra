@@ -1,9 +1,23 @@
 :root {
   /* Master brief v2: this is a closed seven-colour system.
    *
-   * CONTRAST PAIRINGS (WCAG 2.1 ratios). `ink` is the only colour that pairs
-   * safely with the rest — every other two-colour combination fails AA for
-   * body text, and most fail the 3:1 large-text threshold too.
+   * CONTRAST PAIRINGS (WCAG 2.1 ratios).
+   *
+   * WHAT MAY CARRY BODY TEXT ON WHAT (>= 4.5). This is the short version, and
+   * it is the version to read at the moment of choosing:
+   *
+   *   ink          on paper, signal, sun, olive or pink
+   *   paper        on ink or signal-text
+   *   signal-text  on paper only
+   *   signal, sun, olive, pink   on ink only
+   *   clay         on nothing at all
+   *
+   * Two pairings look plausible and are not. ink on signal-text is 2.57 — two
+   * dark colours are not a pairing. ink on clay is 3.75, which is large text
+   * only, and a chip or a label is not large text.
+   *
+   * The full matrix follows. Every pairing that does not involve ink or paper
+   * fails AA for body text, and most fail the 3:1 large-text threshold too.
    *
    *              paper    ink  signal  sig-txt   clay    sun  olive   pink
    *   paper        --   11.99   2.60x    4.67   3.19L  1.39x  2.51x  1.33x

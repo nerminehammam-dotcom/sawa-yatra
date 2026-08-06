@@ -32,10 +32,13 @@ button.root {
   border-color: var(--brick);
 }
 
+/* sun, not clay. The chip is 1rem — normal-size text — and ink on clay is
+   3.75:1, which is large-text only. ink on sun is 8.64, and sun is already what
+   every other selected state on the site uses. */
 .selected {
   color: var(--ink);
-  background: var(--terracotta);
-  border-color: var(--terracotta);
+  background: var(--sun);
+  border-color: var(--sun);
 }
 
 .interactive:disabled {
