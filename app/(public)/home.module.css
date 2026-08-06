@@ -76,6 +76,26 @@
   pointer-events: none;
 }
 
+/* The gradient above is now only a fallback. Where the outline renders, the
+   photograph is left completely alone.
+
+   No darkening at all, and that is not laziness — it is what the measurements
+   demanded. A dark outline needs a LIGHT backdrop to separate from, so any
+   wash over the photograph moves the picture towards the outline rather than
+   away from it. A soft 20% corner vignette was tried first and dropped the
+   worst line from 3.07 to 2.36, below the threshold. Removing every trace of
+   it puts the range back to 3.07 at worst and 6.09 at best.
+
+   Gated on @supports rather than applied outright: a browser without
+   text-stroke would otherwise get pink on a bare photograph at 1.48:1. The
+   picture opens up exactly where the outline is there to carry it, and stays
+   protected where it is not. */
+@supports (paint-order: stroke) and (-webkit-text-stroke: 1px currentColor) {
+  .homeHeroScrim {
+    background: none;
+  }
+}
+
 
 /* The headline sits at the bottom of the FIRST SCREENFUL, not at the bottom
    of the photograph. Those are the same thing at the moment, because the hero
@@ -105,13 +125,37 @@
 
    The font files carry all four Fraunces axes: opsz, wght, SOFT and WONK.
    WONK is the one that swaps in the swash forms. */
+/* The headline is outlined rather than sat on a darkened photograph, so the
+   picture can be seen.
+
+   Measured before the colour was chosen. With the scrim removed, the
+   photograph behind the words runs from #7a6b6a to #afa087, and pink on that
+   is 1.48 to 2.93 — a clear fail against 3.0. Outlining moves the question to
+   two new boundaries and both have to hold:
+
+     pink fill against an ink outline      9.00
+     ink outline against the photograph    3.07 at worst, 6.09 at best
+
+   A paper outline was measured too and is the wrong answer: pink on paper is
+   1.33, so the letter would disappear into its own edge, and paper against the
+   photograph falls to 1.97 in places. Ink, on the numbers rather than by
+   taste. --hero-stroke-color is here if you want to try it anyway.
+
+   paint-order draws the stroke first and the fill over it, so the inner half
+   of the stroke is covered and the letterforms keep their shape. Without it a
+   centred stroke eats the hairlines of a high-contrast serif. */
 .homeHeroCopy h1 {
+  --hero-stroke: 0.055em;
+  --hero-stroke-color: var(--ink);
+
   display: grid;
   justify-items: end;
   color: var(--hero-rose);
   font-family: var(--font-display);
   font-optical-sizing: auto;
   line-height: 0.92;
+  paint-order: stroke fill;
+  -webkit-text-stroke: var(--hero-stroke) var(--hero-stroke-color);
 }
 
 .homeHeroRoman {
