@@ -144,15 +144,16 @@ describe("Release 1 content contracts", () => {
   it("keeps Open Seats and dead links out of navigation", () => {
     const navigation = [...primaryNavigation, ...utilityNavigation];
 
+    // Primary nav trimmed to operational destinations on 7 August 2026.
+    // Journeys, Create your own journey and Departure dates moved to the footer
+    // (comingLaterNavigation) — they are not yet open and pointed the primary
+    // nav at "coming soon" pages.
     expect(
       primaryNavigation.map(({ label, href }) => ({ label, href })),
     ).toEqual([
       { label: "How Sawayatra works", href: "/how-it-works" },
       { label: "Meet your Travel Self", href: "/travel-self" },
       { label: "Caravans", href: "/caravans" },
-      { label: "Journeys", href: "/journeys" },
-      { label: "Create your own journey", href: "/create-your-own-journey" },
-      { label: "Departure dates", href: "/departure-dates" },
     ]);
     expect(
       utilityNavigation.map(({ label, href }) => ({ label, href })),
