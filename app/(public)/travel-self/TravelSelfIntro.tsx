@@ -34,6 +34,13 @@ export function TravelSelfIntro() {
             One of sixteen travelling selves. Eight short questions reveal
             which one is yours: how you travel, and what you travel for.
           </p>
+          <p className={styles.introBoundary}>
+            <span>
+              You can read every route on this site without answering a single
+              question.
+            </span>
+            <span>This is only for when you want to join one.</span>
+          </p>
         </div>
       </section>
 
@@ -52,16 +59,6 @@ export function TravelSelfIntro() {
       <div className={styles.introAct}>
         <BeginButton />
         <p className={styles.introReassure}>{PRIVACY_SENTENCE}</p>
-      </div>
-
-      <div className={`${styles.introGrid} ${styles.introClosing}`}>
-        <p className={styles.introBoundary}>
-          <span>
-            You can read every route on this site without answering a single
-            question.
-          </span>
-          <span>This is only for when you want to join one.</span>
-        </p>
       </div>
     </div>
   );

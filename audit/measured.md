@@ -112,17 +112,30 @@ the kicker, heading and standfirst, then the painting full bleed beneath it.
 Nothing is set over the artwork any more, so there is nothing on this page that
 needs compositing to measure.
 
-| foreground | on `--sun` #e5bc4f | verdict |
-| --- | --- | --- |
-| `--ink` #27231f | 8.64:1 | passes at any size |
-| `--signal-text` #b03a0c | 3.37:1 | large text only |
-| `--signal` #f05a2a | 1.88:1 | fails |
-| `--paper` #e7e1d6 | 1.39:1 | fails |
+The ground is `--pink` #eeb6c4, not `--sun`. How Sawayatra Works owns the
+yellow opening, and the painting below this block is built on pink cloud.
 
-The swash "you" is `--signal-text` at 3.37:1. The heading is
-`clamp(4rem, 10vw, 9rem)`, so it is large text by a wide margin, but 3.37 is
+| foreground | on `--pink` #eeb6c4 | verdict |
+| --- | --- | --- |
+| `--ink` #27231f | 9.00:1 | passes at any size |
+| `--signal-text` #b03a0c | 3.51:1 | large text only |
+| `--signal` #f05a2a | 1.96:1 | fails |
+| `--paper` #e7e1d6 | 1.33:1 | fails |
+
+The swash "you" is `--signal-text` at 3.51:1. The heading is
+`clamp(4rem, 10vw, 9rem)`, so it is large text by a wide margin, but 3.51 is
 the whole budget: that colour must not be reused on this background at body
 size.
+
+The block has to carry ink body copy *and* an orange accent word, and per the
+pairing table in `styles/tokens.css` only two grounds do both: sun (3.37 for
+signal-text) and pink (3.51). Olive takes ink at 4.78 but kills the orange at
+1.86. Clay fails ink for body copy at 3.75. So pink was the only alternative
+to yellow that kept both.
+
+The line beginning "You can read every route" moved out of its own sun panel
+at the foot of the page and into this block, under a hairline. Ink on pink,
+9.00:1.
 
 ### Superseded: the straddle composition
 
