@@ -7,14 +7,6 @@ import styles from "./how-it-works.module.css";
 
 export const metadata = createPageMetadata("/how-it-works");
 
-const participationStates = [
-  "Interest sent",
-  "Awaiting response",
-  "Interest accepted",
-  "Introduction opened",
-  "Not moving forward",
-] as const;
-
 const consentSteps = [
   "Find a journey",
   "Express interest privately",
@@ -55,9 +47,12 @@ export default function HowItWorksPage() {
             />
           </div>
           <div className={styles.featuredCopy}>
-            <h3>Caravan</h3>
+            <p className={styles.cardLabel}>Open for interest</p>
+            <h3>Caravan — hop on, hop off</h3>
             <p className={styles.panelSummary}>
-              Join one section, combine several, or travel until the road ends.
+              One long overland route, travelled together. Join for a single
+              section, combine several, or ride the whole 71-day road. One
+              departure a year.
             </p>
             <ButtonLink
               className={styles.featuredAction}
@@ -81,13 +76,15 @@ export default function HowItWorksPage() {
               />
             </div>
             <div className={styles.wayCopy}>
-              <h3>Join a Journey</h3>
+              <p className={styles.cardLabel}>Coming later</p>
+              <h3>Join a journey with others</h3>
               <p className={styles.panelSummary}>
-                Available now: the Andean Caravan, with nine consecutive
-                sections and one complete route.
+                Shorter journeys, one country at a time, discovered and joined
+                with other members. In development now, opening after the
+                Caravan.
               </p>
-              <ButtonLink href="/caravans/andean" surface="deep">
-                Browse available journeys <span aria-hidden="true">→</span>
+              <ButtonLink href="/journeys" surface="deep">
+                See what&apos;s coming <span aria-hidden="true">→</span>
               </ButtonLink>
             </div>
           </article>
@@ -102,18 +99,15 @@ export default function HowItWorksPage() {
               />
             </div>
             <div className={styles.wayCopy}>
-              <p className={styles.cardLabel}>Future membership pathway</p>
-              <h3>Create Your Own</h3>
+              <p className={styles.cardLabel}>Coming later</p>
+              <h3>Create your own</h3>
               <p className={styles.panelSummary}>
                 A later way for members to propose a destination, dates and
                 travel style, then invite compatible members to join.
               </p>
               <div className={styles.cardActionGroup}>
-                <ButtonLink
-                  href="/request-invitation?intent=create-journey&amp;returnTo=%2Fdo-it-yourself"
-                  surface="deep"
-                >
-                  Ask about future access <span aria-hidden="true">→</span>
+                <ButtonLink href="/register-interest" surface="deep">
+                  Register your interest <span aria-hidden="true">→</span>
                 </ButtonLink>
                 <p className={styles.requirement}>Not yet available.</p>
               </div>
@@ -138,8 +132,8 @@ export default function HowItWorksPage() {
             comfort and interests. It helps Sawayatra suggest journeys and
             travelling companions that are more likely to suit you.
           </p>
-          <ButtonLink href="/request-invitation?intent=create-travel-self&amp;returnTo=%2Ftravel-self">
-            Create Your Travel Self <span aria-hidden="true">→</span>
+          <ButtonLink href="/travel-self">
+            Meet your Travel Self <span aria-hidden="true">→</span>
           </ButtonLink>
           <p className={styles.note}>
             You can explore freely. A completed Travel Self is required only when
@@ -172,15 +166,6 @@ export default function HowItWorksPage() {
             </li>
           ))}
         </ol>
-
-        <div className={styles.interestStates}>
-          <p className={styles.stateLabel}>Planned interest states</p>
-          <ul>
-            {participationStates.map((state) => (
-              <li key={state}>{state}</li>
-            ))}
-          </ul>
-        </div>
       </section>
 
     </main>

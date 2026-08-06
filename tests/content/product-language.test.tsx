@@ -7,7 +7,11 @@ import HowItWorksPage from "@/app/(public)/how-it-works/page";
 afterEach(cleanup);
 
 describe("public product language", () => {
-  it("describes the available Andean Caravan without promising member inventory", () => {
+  it("keeps the three ways distinct — the Caravan is open, the others are later", () => {
+    // Updated 7 August 2026. The "Join a Journey" card used to say "Available
+    // now: the Andean Caravan…", collapsing two of the three ways into the same
+    // product. Way 2 is now its own, later, thing (joining others' journeys) and
+    // points at /journeys, not the Caravan.
     render(<HowItWorksPage />);
 
     expect(screen.queryByText(/Browse Member Journeys/iu)).not.toBeInTheDocument();
@@ -15,29 +19,35 @@ describe("public product language", () => {
       screen.queryByText(/journeys created by other members/iu),
     ).not.toBeInTheDocument();
 
+    // Way 1 — the Caravan, open for interest.
     expect(
-      screen.getByText(
-        "Available now: the Andean Caravan, with nine consecutive sections and one complete route.",
-      ),
+      screen.getByRole("link", { name: /Explore the Andean Caravan/u }),
+    ).toHaveAttribute("href", "/caravans/andean");
+
+    // Way 2 — joining others' journeys is distinct and later, not the Caravan.
+    expect(
+      screen.getByRole("heading", { name: "Join a journey with others" }),
     ).toBeVisible();
     expect(
-      screen.getByRole("link", { name: "Browse available journeys" }),
-    ).toHaveAttribute("href", "/caravans/andean");
+      screen.getByRole("link", { name: /See what.s coming/u }),
+    ).toHaveAttribute("href", "/journeys");
   });
 
-  it("marks Create Your Own and member-created journeys as future pathways", () => {
+  it("marks Create Your Own as a later pathway, and drops the system-label list", () => {
     render(<HowItWorksPage />);
 
-    expect(screen.getByText("Future membership pathway")).toBeVisible();
+    expect(screen.getByRole("heading", { name: "Create your own" })).toBeVisible();
     expect(screen.getByText("Not yet available.")).toBeVisible();
     expect(
-      screen.getByRole("link", { name: "Ask about future access" }),
-    ).toHaveAttribute(
-      "href",
-      "/request-invitation?intent=create-journey&returnTo=%2Fdo-it-yourself",
-    );
+      screen.getByRole("link", { name: /Register your interest/u }),
+    ).toHaveAttribute("href", "/register-interest");
     expect(screen.getByText("Future member-created journeys")).toBeVisible();
-    expect(screen.getByText("Planned interest states")).toBeVisible();
+
+    // Both later cards carry the same honest status chip.
+    expect(screen.getAllByText("Coming later").length).toBeGreaterThanOrEqual(2);
+
+    // The internal "Planned interest states" system labels were removed.
+    expect(screen.queryByText("Planned interest states")).not.toBeInTheDocument();
   });
 
   it("defines Sawayatra as a travel club that begins with its first route", () => {
