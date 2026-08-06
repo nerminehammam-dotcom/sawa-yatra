@@ -97,28 +97,35 @@
 }
 
 
-/* The headline sits at the bottom of the FIRST SCREENFUL, not at the bottom
-   of the photograph. Those are the same thing at the moment, because the hero
-   is exactly one screen tall — but they came apart once before, when a taller
-   band pushed the line below the fold and the page opened on empty sky. The
-   min() keeps them tied together whatever the band does next. */
+/* The headline sits high in the sky, on one line, across the frame.
+
+   It was bottom-right in three lines until 6 August 2026. Moving it up was
+   measured, not guessed, and the outline is what made it possible: a dark edge
+   wants a bright backdrop, so the sky went from the worst place on this
+   photograph to the best.
+
+     high in the frame, 6-32%    9.1 to 9.3
+     the horizon, around 50%     7.7 to 8.5
+     where it used to sit, 88%   3.1 to 5.3
+
+   Roughly three times the separation, and the sky is the emptiest part of the
+   picture, so nothing is covered up. */
 .homeHeroCopy {
   position: absolute;
   z-index: 3;
   inset-block-start: 0;
-  inset-inline-end: 0;
+  inset-inline: 0;
   display: grid;
-  align-content: end;
+  align-content: start;
   box-sizing: border-box;
-  width: min(720px, 88vw);
-  height: min(calc(100svh - var(--site-header-height, 0px)), 100%);
-  padding: clamp(2.5rem, 7svh, 5rem) 6vw;
-  text-align: right;
+  width: 100%;
+  padding: clamp(1.75rem, 8svh, 5.5rem) 6vw 0;
+  text-align: center;
 }
 
-/* Set in the manner of the reference: two weighted roman lines with the
-   turning word cut across them in italic, larger and lighter, pulled up into
-   the line above so the three overlap rather than stack.
+/* One line across the frame. The three-line setting with the italic cutting
+   across it is gone: it only worked stacked, and the scale gained by going to
+   a single line is worth more.
 
    All one colour. The contrast is roman against italic and heavy against
    light, not pink against something else.
@@ -148,9 +155,13 @@
   --hero-stroke: 0.034em;
   --hero-stroke-color: var(--ink);
 
-  display: grid;
-  justify-items: end;
+  /* Measured: the whole line fits inside 88vw at 9.58vw. Set to 9vw for
+     about 6% of headroom, because pair kerning is not in that calculation and
+     the swash italic runs a little wider than its advance width. nowrap is
+     the belt to that braces — the line must never break. */
+  margin: 0;
   color: var(--hero-rose);
+  white-space: nowrap;
   font-family: var(--font-display);
   font-optical-sizing: auto;
   line-height: 0.92;
@@ -159,7 +170,7 @@
 }
 
 .homeHeroRoman {
-  font-size: clamp(2.6rem, 6vw, 5.5rem);
+  font-size: 9vw;
   font-style: normal;
   font-variation-settings: "opsz" 144;
   font-weight: 600;
@@ -167,11 +178,7 @@
 }
 
 .homeHeroTurn {
-  margin-block: -0.14em -0.1em;
-  /* Off the right edge, so the word sits across the block rather than aligning
-     with it. */
-  margin-inline-end: clamp(0.5rem, 3vw, 3.5rem);
-  font-size: clamp(3.4rem, 8vw, 7.6rem);
+  font-size: 9.4vw;
   font-style: italic;
   /* WONK 1 swaps in the swash forms — the curling italic that gives this kind
      of setting its flourish. SOFT 40 rounds the terminals a little so the word
@@ -183,6 +190,19 @@
 }
 
 @media (max-width: 639px) {
+  /* One line does not survive a phone: 9vw of 390px is 35px, too small to be
+     a headline. Below 640px it wraps to three lines at a usable size, and the
+     copy moves back to the foot of the frame where there is room for them. */
+  .homeHeroCopy h1 {
+    white-space: normal;
+    text-wrap: balance;
+  }
+
+  .homeHeroRoman,
+  .homeHeroTurn {
+    font-size: clamp(2.6rem, 11.5vw, 4rem);
+  }
+
   /* On mobile the copy is full-width and starts mid-frame, so the scrim has to
      be vertical-dominant; a right-anchored gradient misses the headline entirely. */
   .homeHeroScrim {
@@ -197,11 +217,12 @@
     );
   }
 
-  /* Padding now, not margin — the copy is absolutely positioned and
-     box-sizing: border-box, so the gutter has to come from inside it. */
   .homeHeroCopy {
     width: 100vw;
+    height: min(calc(100svh - var(--site-header-height, 0px)), 100%);
+    align-content: end;
     padding: clamp(2rem, 5svh, 3rem) var(--page-gutter);
+    text-align: left;
   }
 
   .homeHeroCopy h1 {
