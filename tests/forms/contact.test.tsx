@@ -29,9 +29,15 @@ describe("ContactQuestionForm", () => {
     expect(screen.getByText("Question is required.")).toBeVisible();
   });
 
-  it("reports unavailable delivery without sending, storing or clearing text", async () => {
+  /**
+   * Until 5 August 2026 this form never submitted: it validated, then said
+   * delivery was not connected. It now posts like the other three, so the
+   * contract under test is the opposite of what it used to be — it must
+   * actually send, and a failure must never cost the visitor their text.
+   */
+  it("posts the question, and on failure keeps the text and stores nothing", async () => {
     const user = userEvent.setup();
-    const fetchMock = vi.fn();
+    const fetchMock = vi.fn().mockRejectedValue(new Error("offline"));
     const storageSpy = vi.spyOn(Storage.prototype, "setItem");
     vi.stubGlobal("fetch", fetchMock);
     render(<ContactQuestionForm initialJourneyContext="Atacama" />);
@@ -47,9 +53,18 @@ describe("ContactQuestionForm", () => {
     );
     await user.click(screen.getByRole("button", { name: "Send question" }));
 
-    expect(screen.getByRole("alert")).toHaveTextContent(
-      "Your question was not sent or stored.",
+    await waitFor(() =>
+      expect(screen.getByRole("alert")).toHaveTextContent("Not sent"),
     );
+
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(fetchMock.mock.calls[0][0]).toBe("/api/forms/contact-question");
+    expect(fetchMock.mock.calls[0][1]).toMatchObject({ method: "POST" });
+
+    // Nothing kept locally when nothing was delivered.
+    expect(storageSpy).not.toHaveBeenCalled();
+
+    // And the visitor does not have to retype any of it.
     expect(screen.getByLabelText(/^Name/u)).toHaveValue("Nermine Hammam");
     expect(screen.getByLabelText(/^Email address/u)).toHaveValue(
       "nerminehammam@gmail.com",
@@ -57,7 +72,5 @@ describe("ContactQuestionForm", () => {
     expect(screen.getByLabelText(/^What would you like to ask/u)).toHaveValue(
       "Can I join this section without continuing to Patagonia?",
     );
-    expect(fetchMock).not.toHaveBeenCalled();
-    expect(storageSpy).not.toHaveBeenCalled();
   });
 });

@@ -33,8 +33,7 @@ const releaseOneRoutes = [
   "/caravans",
   "/caravans/andean",
   "/caravans/andean/route-map",
-  "/caravans/indian",
-  "/caravans/egyptian",
+  "/caravans/andean-caravan/how-it-works",
   "/caravans/who-else-is-travelling",
   "/caravans/the-andean-caravan",
   "/joining-points",
@@ -178,7 +177,8 @@ describe("Release 1 content contracts", () => {
   });
 
   it("keeps the complete Caravans menu intact and canonical", () => {
-    expect(caravansNavigation.choose).toHaveLength(3);
+    // Was 3. The Indian and Egyptian Caravans were removed on 5 August 2026.
+    expect(caravansNavigation.choose).toHaveLength(1);
     expect(caravansNavigation.join).toHaveLength(3);
     expect(caravansNavigation.choose[0].href).toBe("/caravans/andean");
     expect(caravansNavigation.join[1].href).toBe("/caravans/andean/route-map");
@@ -326,11 +326,14 @@ describe("Release 1 content contracts", () => {
     expect(treatments.every((treatment) => treatment === "true")).toBe(true);
   });
 
-  it("collects only the three permitted non-sensitive form shapes", () => {
+  it("collects only the four permitted non-sensitive form shapes", () => {
+    // contact-question joined the set on 5 August 2026, when /contact stopped
+    // validating a question and then discarding it.
     expect(Object.keys(formSchemas)).toEqual([
       "invitation-request",
       "journey-interest",
       "sign-in-interest",
+      "contact-question",
     ]);
     expect(Object.keys(formSchemas["invitation-request"].shape)).toEqual([
       "name",
