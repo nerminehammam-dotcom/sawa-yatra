@@ -145,7 +145,7 @@
    of the stroke is covered and the letterforms keep their shape. Without it a
    centred stroke eats the hairlines of a high-contrast serif. */
 .homeHeroCopy h1 {
-  --hero-stroke: 0.055em;
+  --hero-stroke: 0.034em;
   --hero-stroke-color: var(--ink);
 
   display: grid;
