@@ -1,0 +1,57 @@
+/* One photograph, at its own shape.
+
+   The whole mechanism is two lines: a fixed height on the image and a width of
+   auto. Everything else here is spacing.
+
+   This is how a print gallery hangs work — a common centre line, and each
+   frame as wide as it happens to be. Fraenkel Gallery pin the height at 900px
+   and let width run from 619 to 1170; Panos pin the width and let the height
+   run from 221 to 707. Nobody serious pins both.
+
+   Three things are deliberately absent, and should stay absent:
+     - no border-radius. Prints have square corners. A rounded corner says
+       "card", "product", "interface".
+     - no outline, no coloured band, no overlay. Nothing is drawn on top of a
+       photograph. The seven-colour palette is for type, rules and grounds.
+     - no object-fit. There is nothing to fit, because nothing is being cropped. */
+
+.plate {
+  min-width: 0;
+  max-width: 100%;
+  margin: 0;
+}
+
+.image {
+  display: block;
+  height: var(--plate-height, 26rem);
+  width: auto;
+  max-width: 100%;
+  border: var(--border-hairline) solid var(--hairline);
+}
+
+/* Below the two-column breakpoint the common height stops working: a 0.92:1
+   portrait at a shared height is wider than the screen. So the rule inverts —
+   width leads, height follows, and the aspect ratio carries the shape. */
+@media (max-width: 767px) {
+  .image {
+    height: auto;
+    width: 100%;
+    aspect-ratio: var(--plate-ratio);
+  }
+}
+
+.caption {
+  max-width: 40ch;
+  margin-top: var(--space-3);
+  color: var(--deep-brown);
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.35;
+}
+
+@media (forced-colors: active) {
+  .image {
+    border: 1px solid CanvasText;
+  }
+}

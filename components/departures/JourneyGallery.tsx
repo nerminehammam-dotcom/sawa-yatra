@@ -1,8 +1,9 @@
 import type { RisoAsset } from "@/components/brand/RisoArtwork";
-import { RisoArtwork } from "@/components/brand/RisoArtwork";
+import { PHOTOGRAPH_CREDIT } from "@/content/photograph-plates";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 
+import { JourneyPlate } from "./JourneyPlate";
 import styles from "./JourneyGallery.module.css";
 
 interface JourneyGalleryProps {
@@ -29,18 +30,22 @@ export function JourneyGallery({
           <h2 id={headingId}>Photographs from the route</h2>
           <p>Scenes from this section of the Andean Caravan.</p>
         </div>
+
         <ul className={styles.gallery}>
-          {images.map((asset) => (
+          {images.map((asset, index) => (
             <li className={styles.item} key={asset.src}>
-              <RisoArtwork
-                asset={asset}
-                aspectRatio="auto"
-                className={styles.artwork}
-                sizes="(max-width: 767px) 100vw, (max-width: 1023px) 50vw, 34vw"
-              />
+              <JourneyPlate asset={asset} priority={index === 0} />
             </li>
           ))}
         </ul>
+
+        {/*
+          Cookson Adventures were the only operator in twenty-seven surveyed who
+          made any claim about owning their imagery. For a club founded by a
+          photographic artist whose photographs are the product, this is not a
+          claim — it is a fact, and it costs one line.
+        */}
+        <p className={styles.credit}>{PHOTOGRAPH_CREDIT}</p>
       </Container>
     </Section>
   );

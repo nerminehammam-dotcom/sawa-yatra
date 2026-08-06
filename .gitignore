@@ -69,3 +69,6 @@ next-env.d.ts
 /Preview site.command
 /Push to GitHub.command
 __pycache__/
+
+# One-off compression comparison crops. Regenerate with tools/photography if needed.
+/audit/quality-proof/

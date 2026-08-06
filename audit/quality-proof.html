@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sawayatra — is the compression acceptable?</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#e7e1d6;--ink:#27231f;--signal:#f05a2a;--signal-text:#b03a0c;--clay:#a96f47;
+--sun:#e5bc4f;--olive:#98904f;--pink:#eeb6c4;--hair:1px;--g:clamp(1.25rem,5vw,5rem)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Fraunces",Georgia,serif;
+font-size:17px;line-height:1.55;font-optical-sizing:auto}
+.wrap{max-width:1320px;margin-inline:auto;padding-inline:var(--g)}
+.mast{background:var(--sun);border-bottom:2px solid var(--ink);padding-block:clamp(2.5rem,6vw,4.5rem)}
+.kick{margin:0 0 1rem;font-size:1rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+h1{margin:0;font-size:clamp(2.2rem,6vw,4.5rem);font-weight:400;line-height:.95;letter-spacing:-.025em;max-width:20ch}
+h1 i{font-style:italic;font-weight:300;font-variation-settings:"opsz" 144,"SOFT" 40,"WONK" 1;color:var(--signal-text)}
+.stand{max-width:62ch;margin:1.5rem 0 0;font-size:1.12rem}
+section{padding-block:clamp(2.5rem,5vw,4rem);border-top:2px solid var(--ink)}
+h2{font-size:clamp(1.7rem,3.4vw,2.6rem);font-weight:400;line-height:1;margin:0 0 .6rem;letter-spacing:-.02em}
+.lede{max-width:68ch;margin:0 0 2rem}
+.pair{margin-bottom:3rem}
+.pair h3{margin:0 0 .2rem;font-size:1.35rem;font-weight:400}
+.pair .sub{margin:0 0 1rem;font-size:.92rem;opacity:.75}
+.viewer{position:relative;display:inline-block;max-width:100%;border:var(--hair) solid var(--ink);line-height:0;background:#000}
+.viewer img{display:block;width:620px;max-width:100%;height:auto}
+.viewer img+img{position:absolute;inset:0;width:100%}
+.viewer[data-show="proposed"] .m{opacity:0}
+.viewer[data-show="master"] .p{opacity:0}
+.switch{display:flex;gap:.4rem;margin:.75rem 0 0;flex-wrap:wrap}
+.switch button{font:inherit;font-size:.9rem;padding:.45rem .9rem;min-height:44px;cursor:pointer;
+background:transparent;color:var(--ink);border:var(--hair) solid var(--ink);border-radius:0}
+.switch button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.switch button:focus-visible{outline:2px solid var(--signal-text);outline-offset:3px}
+.note{margin:.6rem 0 0;font-size:.88rem;max-width:64ch;opacity:.8}
+table{border-collapse:collapse;width:100%;max-width:980px;font-size:.95rem;margin-top:1rem}
+th,td{text-align:left;padding:.55rem .8rem;border-bottom:var(--hair) solid var(--ink)}
+th{font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;border-bottom-width:2px}
+td.n{font-variant-numeric:tabular-nums}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:rgba(39,35,31,.07);padding:.1em .35em}
+.callout{background:var(--ink);color:var(--paper);padding:clamp(1.25rem,3vw,2rem);margin:2rem 0 0;max-width:78ch}
+.callout h3{margin:0 0 .6rem;color:var(--sun);font-weight:400;font-size:1.3rem}
+.callout p{margin:0 0 .8rem;color:rgba(231,225,214,.9)}
+.callout p:last-child{margin-bottom:0}
+ul{max-width:70ch}li{margin-bottom:.5rem}
+footer{padding-block:2.5rem;font-size:.9rem;border-top:var(--hair) solid var(--ink)}
+</style>
+</head>
+<body>
+
+<header class="mast"><div class="wrap">
+<p class="kick">Before I touch a single file · 6 August 2026</p>
+<h1>Look at these four and tell me if the compression is <i>acceptable</i>.</h1>
+<p class="stand">Each pair is a 620×420 crop at 1:1 — no scaling, actual pixels — taken from the
+hardest part of the hardest photographs you have. Click to switch between your master and what I
+propose to ship. If you can see a difference that matters, say so and I will raise the quality.</p>
+</div></header>
+
+<section class="wrap">
+<h2>The four hardest cases</h2>
+<p class="lede">Star fields, sky gradients, dense street detail and altiplano texture. These are the
+four things JPEG is worst at. If they hold, everything else holds.</p>
+
+<div class="pair">
+  <h3>Atacama, star field</h3>
+  <p class="sub">Sensor noise plus thousands of point sources — the single worst case for any
+  compressor. Crop from 840,136.</p>
+  <div class="viewer" data-show="proposed">
+    <img class="p" src="quality-proof/astro-2-proposed.png" alt="Proposed: Atacama star field at 1:1">
+    <img class="m" src="quality-proof/astro-1-master.png" alt="Master: Atacama star field at 1:1">
+  </div>
+  <div class="switch">
+    <button data-v="proposed" aria-pressed="true">Proposed · 410 KB</button>
+    <button data-v="master" aria-pressed="false">Your master · 53.6 MB</button>
+  </div>
+</div>
+
+<div class="pair">
+  <h3>Patagonia, sky gradient</h3>
+  <p class="sub">Smooth tonal transitions, where banding shows first. Crop from 600,293.</p>
+  <div class="viewer" data-show="proposed">
+    <img class="p" src="quality-proof/patagonia-sky-2-proposed.png" alt="Proposed: Patagonian sky at 1:1">
+    <img class="m" src="quality-proof/patagonia-sky-1-master.png" alt="Master: Patagonian sky at 1:1">
+  </div>
+  <div class="switch">
+    <button data-v="proposed" aria-pressed="true">Proposed · 421 KB</button>
+    <button data-v="master" aria-pressed="false">Your master · 53.3 MB</button>
+  </div>
+</div>
+
+<div class="pair">
+  <h3>Lima, fine detail</h3>
+  <p class="sub">High-frequency architectural and street detail across the whole frame.
+  Crop from 800,840.</p>
+  <div class="viewer" data-show="proposed">
+    <img class="p" src="quality-proof/lima-detail-2-proposed.png" alt="Proposed: Lima detail at 1:1">
+    <img class="m" src="quality-proof/lima-detail-1-master.png" alt="Master: Lima detail at 1:1">
+  </div>
+  <div class="switch">
+    <button data-v="proposed" aria-pressed="true">Proposed · 708 KB</button>
+    <button data-v="master" aria-pressed="false">Your master · 71.2 MB</button>
+  </div>
+</div>
+
+<div class="pair">
+  <h3>The Uyuni–La Paz road, altiplano texture</h3>
+  <p class="sub">Broken ground and dry vegetation — dense random detail, no clean edges.
+  Crop from 920,944.</p>
+  <div class="viewer" data-show="proposed">
+    <img class="p" src="quality-proof/altiplano-2-proposed.png" alt="Proposed: altiplano texture at 1:1">
+    <img class="m" src="quality-proof/altiplano-1-master.png" alt="Master: altiplano texture at 1:1">
+  </div>
+  <div class="switch">
+    <button data-v="proposed" aria-pressed="true">Proposed · 689 KB</button>
+    <button data-v="master" aria-pressed="false">Your master · 65.5 MB</button>
+  </div>
+</div>
+</section>
+
+<section class="wrap">
+<h2>The numbers behind it</h2>
+<p class="lede">Structural similarity against your master, averaged across red, green and blue.
+1.0 would be identical. I tested four quality settings and two colour-sampling modes.</p>
+<table>
+<thead><tr><th>Photograph</th><th>q82 · 4:4:4</th><th>q82 · 4:2:0</th><th>q78 · 4:2:0</th><th>q72 · 4:2:0</th></tr></thead>
+<tbody>
+<tr><td>Atacama star field</td><td class="n">0.8693</td><td class="n"><strong>0.8688</strong></td><td class="n">0.8473</td><td class="n">0.8206</td></tr>
+<tr><td>Patagonian sky</td><td class="n">0.9071</td><td class="n"><strong>0.9064</strong></td><td class="n">0.8926</td><td class="n">0.8759</td></tr>
+<tr><td>Lima detail</td><td class="n">0.9533</td><td class="n"><strong>0.9530</strong></td><td class="n">0.9402</td><td class="n">0.9224</td></tr>
+<tr><td>Altiplano</td><td class="n">0.9288</td><td class="n"><strong>0.9276</strong></td><td class="n">0.9129</td><td class="n">0.8936</td></tr>
+<tr><td>File size, star field</td><td class="n">436 KB</td><td class="n"><strong>410 KB</strong></td><td class="n">346 KB</td><td class="n">282 KB</td></tr>
+</tbody>
+</table>
+<p class="note"><strong>The column in bold is what I propose.</strong> Dropping the colour sampling
+from 4:4:4 to 4:2:0 costs 0.0005 of structural similarity — literally nothing — and saves 6 to 10
+per cent. Dropping quality below 82 starts to cost something real on the star field, which is why
+I stopped there.</p>
+
+<div class="callout">
+<h3>One thing I got wrong, and you should know it</h3>
+<p>When I wrote the scorecard I implied the image weights were hurting your visitors. I have now
+measured what a visitor actually downloads, and that was overstated.</p>
+<p>Next.js re-encodes every photograph to AVIF or WebP at the width the browser asks for. At the
+sizes that dominate real traffic the difference between today's files and the new ones is almost
+nothing: <strong>640px wide, 23 KB today against 22 KB proposed. 1024px wide, 75 KB against
+75 KB.</strong> Only at the largest size, 1920px, does it matter — 347 KB against 302 KB, about
+13 per cent.</p>
+<p>So the honest case for doing this is not visitor speed. It is that your repository drops from
+49 MB to about 30 MB, builds get faster, every file finally comes from a known master at a known
+setting instead of eleven different hand exports, and the largest renditions get meaningfully
+lighter. <strong>The real speed lever is elsewhere</strong> — making sure each photograph asks the
+browser for the width it is actually displayed at — and I will audit that separately.</p>
+</div>
+</section>
+
+<section class="wrap">
+<h2>What the pipeline will and will not do</h2>
+<ul>
+<li><strong>Never writes to your master folders.</strong> They are read-only to this script, and
+they stay ignored by git, so they never leave your machine.</li>
+<li><strong>Never crops.</strong> Your masters run from 0.92 to 1.94 in aspect ratio — every one of
+those frames is a decision you already made. The script scales the long edge to 2000px and touches
+nothing else. No entropy cropping, no face detection, no straightening.</li>
+<li><strong>2000px, and here is why that exact number:</strong> <code>next.config.ts</code> caps the
+widths it will ever request at 1920. So 2000 is the smallest source that never limits what a
+visitor can be served, and anything larger is weight nobody will ever see.</li>
+<li><strong>Re-runnable.</strong> It fingerprints each master, so re-running only regenerates what
+you have actually re-edited.</li>
+<li><strong>Dry run by default.</strong> It prints exactly what it would do and writes nothing
+until you add <code>--write</code>.</li>
+</ul>
+<footer>Crops generated 6 August 2026 with sharp 0.34 / libvips 8.17.3 · measurements in
+<code>audit/quality-proof/</code> · nothing on the site has been changed.</footer>
+</section>
+
+<script>
+document.querySelectorAll('.pair').forEach(pair => {
+  const viewer = pair.querySelector('.viewer');
+  const buttons = [...pair.querySelectorAll('.switch button')];
+  const set = v => {
+    viewer.dataset.show = v;
+    buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === v)));
+  };
+  buttons.forEach(b => b.addEventListener('click', () => set(b.dataset.v)));
+  viewer.addEventListener('click', () => set(viewer.dataset.show === 'proposed' ? 'master' : 'proposed'));
+  viewer.style.cursor = 'pointer';
+});
+</script>
+</body>
+</html>

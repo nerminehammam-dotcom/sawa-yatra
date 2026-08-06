@@ -1,0 +1,759 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sawayatra — the photographic edit</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#e7e1d6;--ink:#27231f;--signal:#f05a2a;--signal-text:#b03a0c;--clay:#a96f47;
+--sun:#e5bc4f;--olive:#98904f;--pink:#eeb6c4;--hair:1px;--g:clamp(1.25rem,5vw,5rem)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Fraunces",Georgia,serif;
+font-size:17px;line-height:1.55;font-optical-sizing:auto}
+.wrap{max-width:1440px;margin-inline:auto;padding-inline:var(--g)}
+.mast{background:var(--olive);color:var(--paper);border-bottom:2px solid var(--ink);padding-block:clamp(3rem,6vw,5rem)}
+.kick{margin:0 0 1rem;font-size:1rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500}
+h1{margin:0;font-size:clamp(2.4rem,6.5vw,5rem);font-weight:400;line-height:.94;letter-spacing:-.025em;max-width:18ch}
+h1 i{font-style:italic;font-weight:300;font-variation-settings:"opsz" 144,"SOFT" 40,"WONK" 1;color:var(--sun)}
+.stand{max-width:60ch;margin:1.5rem 0 0;font-size:1.15rem}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));border-bottom:2px solid var(--ink)}
+.tile{padding:1.5rem;border-left:var(--hair) solid var(--ink)}.tile:first-child{border-left:0}
+.tile b{display:block;font-size:clamp(2rem,4vw,3rem);line-height:1;font-weight:400}
+.tile span{display:block;margin-top:.5rem;font-size:.9rem;line-height:1.35}
+h2{font-size:clamp(1.8rem,3.6vw,2.8rem);font-weight:400;line-height:1;margin:0 0 .5rem;letter-spacing:-.02em}
+.lede{max-width:66ch;margin:0 0 2.5rem}
+section.block{padding-block:clamp(2.5rem,5vw,4rem);border-top:2px solid var(--ink)}
+.sec{margin-bottom:3.5rem}
+.sechead h3{margin:0;font-size:1.7rem;font-weight:400;letter-spacing:-.01em}
+.sechead p{margin:.2rem 0 1.25rem;font-size:.95rem;letter-spacing:.04em}
+.secnote{max-width:70ch;margin:-.5rem 0 1.25rem;padding:.75rem 1rem;background:var(--sun);border:var(--hair) solid var(--ink);font-size:.95rem}
+/* THE FRAENKEL MODEL: one fixed height, width free. This page is the demo. */
+.strip{display:flex;flex-wrap:wrap;gap:1.75rem 1.5rem;align-items:flex-start}
+.plate{margin:0;max-width:100%}
+.plate img{display:block;height:240px;width:auto;max-width:100%;border:var(--hair) solid var(--ink)}
+figcaption{margin-top:.55rem;max-width:34ch;font-size:.86rem;line-height:1.35}
+figcaption b{display:block;font-weight:400;font-style:italic;font-size:1rem}
+figcaption b.unk{color:var(--signal-text)}
+figcaption .f{display:block;font-family:ui-monospace,Menlo,monospace;font-size:.72rem;opacity:.62;margin-top:.15rem}
+figcaption .m{display:block;font-size:.75rem;opacity:.72}
+.flags{display:flex;flex-wrap:wrap;gap:.3rem;margin-top:.35rem}
+.w{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;padding:.18rem .5rem;border:var(--hair) solid var(--ink)}
+.w.heavy{background:var(--sun)}.w.ask{background:var(--pink)}.w.dup{background:var(--clay);color:var(--paper)}
+.w.bad{background:var(--signal)}.w.thin{background:var(--pink)}
+table{border-collapse:collapse;width:100%;max-width:900px;font-size:.95rem}
+th,td{text-align:left;padding:.6rem .8rem;border-bottom:var(--hair) solid var(--ink);vertical-align:top}
+th{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;font-weight:500;border-bottom-width:2px}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.86em;background:rgba(39,35,31,.07);padding:.1em .35em}
+ol,ul{max-width:70ch} li{margin-bottom:.6rem}
+.rec{background:var(--ink);color:var(--paper);padding:clamp(1.5rem,3vw,2.5rem);margin-top:2rem}
+.rec h3{margin:0 0 .75rem;font-weight:400;font-size:1.4rem;color:var(--sun)}
+.rec p,.rec li{color:rgba(231,225,214,.9)}
+footer{padding-block:3rem;font-size:.9rem;border-top:var(--hair) solid var(--ink)}
+@media(max-width:700px){.plate img{height:170px}}
+</style></head><body>
+
+<header class="mast"><div class="wrap">
+<p class="kick">The photographic edit · 6 August 2026</p>
+<h1>Sixty-nine photographs, and where they <i>actually</i> are.</h1>
+<p class="stand">Every image on the site, shown at its own true shape — no crop, one fixed height,
+width free. That is the layout I want to move the galleries to, so this page is also the
+demonstration. Nothing has been changed yet.</p>
+</div></header>
+
+<div class="tiles wrap" style="padding-inline:0;max-width:none">
+<div class="tile"><b>69</b><span>Master photographs across four country folders</span></div>
+<div class="tile"><b>83</b><span>Files shipping on the site today</span></div>
+<div class="tile"><b>12</b><span>Are the same photograph shipped twice</span></div>
+<div class="tile"><b>2</b><span>Section cards show the wrong section</span></div>
+</div>
+
+<section class="block wrap">
+<h2>What I found</h2>
+<p class="lede">Three things, in order of how much they matter.</p>
+<ol>
+<li><strong>Two section cards show a photograph from a different section.</strong> The card for
+<em>Silver &amp; Bone</em> is a Thin Air &amp; Cloud Forest picture; the card for <em>The Stone
+Road</em> is a White City &amp; Deep Canyon picture. A visitor choosing where to join the Caravan is
+being shown the wrong place.</li>
+<li><strong>Twelve photographs ship twice.</strong> Every section card and both home images are a
+second copy of a gallery photograph under a new filename. <code>home/hero.jpg</code> and
+<code>home/patagonia-road.jpg</code> are the same picture as each other <em>and</em> as
+<code>the-end-of-the-road/07-patagoina-01</code> — the same Patagonian road appears three times.
+And inside Both Shores, two files with nearly the same name are visually identical.</li>
+<li><strong>The edit is very uneven.</strong> Patagonia has 21 photographs. Atacama has 4. That is
+not a considered edit, it is whatever survived the import — and it makes the Caravan feel like a
+Patagonia trip with some Andes attached.</li>
+</ol>
+<div class="rec"><h3>What I'd do about it</h3>
+<ul>
+<li>Fix the two wrong cards first. Ten minutes, and it is a factual error.</li>
+<li>Stop shipping duplicates. One photograph, one file, referenced from wherever it is needed.
+That is 12 fewer files and no visual change at all.</li>
+<li>Rebalance towards 6–8 per section. Patagonia loses about half — <strong>your call which
+half</strong> — and the four thin sections want more. If there are more Atacama and Bolivia frames
+on your drive that never made it into these folders, this is the moment.</li>
+</ul></div>
+</section>
+
+<section class="block wrap">
+<h2>Every section, as it stands</h2>
+<p class="lede">Shown the way the galleries should work: a common height, each photograph keeping
+its own width. Portraits stay portrait, panoramas stay panoramic, nothing is cut.</p>
+<section class="sec">
+      <header class="sechead"><h3>Desert &amp; Coast</h3><p>Lima · Paracas · Peru · 6 photographs </p></header>
+      
+      <div class="strip"><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/desert-coast/01-lima-01.jpg" alt="" loading="lazy" style="aspect-ratio:0.9408">
+      <figcaption>
+        <b class="">Lima, Peru · 2025</b>
+        <span class="f">01-lima-01.jpg</span>
+        <span class="m">2258×2400 · 713 KB · master 3763×4000 65.8 MB</span>
+        <span class="flags"><span class="w heavy">713 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/desert-coast/02-lima-02.jpg" alt="" loading="lazy" style="aspect-ratio:1.0000">
+      <figcaption>
+        <b class="">Lima, Peru · 2025</b>
+        <span class="f">02-lima-02.jpg</span>
+        <span class="m">2400×2400 · 542 KB · master 4000×4000 60.5 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/desert-coast/03-lima-05.jpg" alt="" loading="lazy" style="aspect-ratio:1.0000">
+      <figcaption>
+        <b class="">Lima, Peru · 2025</b>
+        <span class="f">03-lima-05.jpg</span>
+        <span class="m">2400×2400 · 566 KB · master 4000×4000 60.9 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/desert-coast/04-lima-08.jpg" alt="" loading="lazy" style="aspect-ratio:1.0000">
+      <figcaption>
+        <b class="">Lima, Peru · 2025</b>
+        <span class="f">04-lima-08.jpg</span>
+        <span class="m">2400×2400 · 402 KB · master 4000×4000 59.7 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/desert-coast/05-lima-017a.jpg" alt="" loading="lazy" style="aspect-ratio:1.0000">
+      <figcaption>
+        <b class="">Lima, Peru · 2025</b>
+        <span class="f">05-lima-017a.jpg</span>
+        <span class="m">2400×2400 · 1037 KB · master 4000×4000 71.2 MB</span>
+        <span class="flags"><span class="w heavy">1037 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/desert-coast/06-lima-017ae.jpg" alt="" loading="lazy" style="aspect-ratio:1.0000">
+      <figcaption>
+        <b class="">Lima, Peru · 2025</b>
+        <span class="f">06-lima-017ae.jpg</span>
+        <span class="m">2400×2400 · 636 KB · master 4000×4000 65.9 MB</span>
+        <span class="flags"><span class="w heavy">636 KB</span></span>
+      </figcaption></figure></div>
+    </section><section class="sec">
+      <header class="sechead"><h3>The White City &amp; the Deep Canyon</h3><p>Arequipa · Colca · Peru · 6 photographs </p></header>
+      
+      <div class="strip"><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/white-city-deep-canyon/01-z8n0729-enhanced-nr-copy.jpg" alt="" loading="lazy" style="aspect-ratio:1.6140">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">01-z8n0729-enhanced-nr-copy.jpg</span>
+        <span class="m">2400×1487 · 555 KB · master 4000×2478 44.5 MB</span>
+        <span class="flags"><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/white-city-deep-canyon/02-z8n0934.jpg" alt="" loading="lazy" style="aspect-ratio:1.5769">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">02-z8n0934.jpg</span>
+        <span class="m">2400×1522 · 412 KB · master 4000×2537 50.2 MB</span>
+        <span class="flags"><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/white-city-deep-canyon/03-z8n7811-copy.jpg" alt="" loading="lazy" style="aspect-ratio:1.6249">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">03-z8n7811-copy.jpg</span>
+        <span class="m">2400×1477 · 857 KB · master 4000×2461 50.9 MB</span>
+        <span class="flags"><span class="w heavy">857 KB</span><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/white-city-deep-canyon/04-london-0j.jpg" alt="" loading="lazy" style="aspect-ratio:1.7180">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">04-london-0j.jpg</span>
+        <span class="m">2400×1397 · 552 KB · master 4000×2328 46.1 MB</span>
+        <span class="flags"><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/white-city-deep-canyon/05-london-0ps.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">05-london-0ps.jpg</span>
+        <span class="m">2400×1600 · 475 KB · master 4000×2667 52.7 MB</span>
+        <span class="flags"><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/white-city-deep-canyon/06-london-02.jpg" alt="" loading="lazy" style="aspect-ratio:1.5769">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">06-london-02.jpg</span>
+        <span class="m">2400×1522 · 434 KB · master 4000×2537 49.0 MB</span>
+        <span class="flags"><span class="w ask">place?</span></span>
+      </figcaption></figure></div>
+    </section><section class="sec">
+      <header class="sechead"><h3>The Stone Road</h3><p>Cusco · Peru · 5 photographs </p></header>
+      
+      <div class="strip"><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-stone-road/01-cuscco-01.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Cusco, Peru · 2025</b>
+        <span class="f">01-cuscco-01.jpg</span>
+        <span class="m">2400×1600 · 440 KB · master 4000×2667 31.2 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-stone-road/02-cusco-13.jpg" alt="" loading="lazy" style="aspect-ratio:1.5926">
+      <figcaption>
+        <b class="">Cusco, Peru · 2025</b>
+        <span class="f">02-cusco-13.jpg</span>
+        <span class="m">2400×1507 · 746 KB · master 4000×2511 49.9 MB</span>
+        <span class="flags"><span class="w heavy">746 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-stone-road/03-cusco-15.jpg" alt="" loading="lazy" style="aspect-ratio:0.9175">
+      <figcaption>
+        <b class="">Cusco, Peru · 2025</b>
+        <span class="f">03-cusco-15.jpg</span>
+        <span class="m">2202×2400 · 1583 KB · master 3670×4000 74.8 MB</span>
+        <span class="flags"><span class="w heavy">1583 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-stone-road/04-cusco-19.jpg" alt="" loading="lazy" style="aspect-ratio:1.4510">
+      <figcaption>
+        <b class="">Cusco, Peru · 2025</b>
+        <span class="f">04-cusco-19.jpg</span>
+        <span class="m">2400×1654 · 544 KB · master 4000×2756 54.0 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-stone-road/05-z8n9873-copy.jpg" alt="" loading="lazy" style="aspect-ratio:1.0000">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">05-z8n9873-copy.jpg</span>
+        <span class="m">2400×2400 · 1120 KB · master 4000×4000 79.6 MB</span>
+        <span class="flags"><span class="w heavy">1120 KB</span><span class="w ask">place?</span></span>
+      </figcaption></figure></div>
+    </section><section class="sec">
+      <header class="sechead"><h3>Both Shores</h3><p>Lake Titicaca · Peru / Bolivia · 6 photographs </p></header>
+      <p class="secnote">Two of these are the same photograph: <code>01-drive-la-paz-puno-05</code> and <code>06-drive-la-paz-puno-05</code> come from two different master folders with almost the same name, and are visually identical.</p>
+      <div class="strip"><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/both-shores/01-drive-la-paz-puno-05.jpg" alt="" loading="lazy" style="aspect-ratio:1.5316">
+      <figcaption>
+        <b class="">The La Paz–Puno road · 2025</b>
+        <span class="f">01-drive-la-paz-puno-05.jpg</span>
+        <span class="m">2400×1567 · 632 KB · master 4000×2610 53.8 MB</span>
+        <span class="flags"><span class="w heavy">632 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/both-shores/02-drive-la-paz-puno-09.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">The La Paz–Puno road · 2025</b>
+        <span class="f">02-drive-la-paz-puno-09.jpg</span>
+        <span class="m">2400×1600 · 407 KB · master 4000×2667 49.1 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/both-shores/03-drive-la-paz-puno-10.jpg" alt="" loading="lazy" style="aspect-ratio:1.2468">
+      <figcaption>
+        <b class="">The La Paz–Puno road · 2025</b>
+        <span class="f">03-drive-la-paz-puno-10.jpg</span>
+        <span class="m">2400×1925 · 927 KB · master 4000×3208 60.8 MB</span>
+        <span class="flags"><span class="w heavy">927 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/both-shores/04-drive-la-paz-puno-01.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">The La Paz–Puno road · 2025</b>
+        <span class="f">04-drive-la-paz-puno-01.jpg</span>
+        <span class="m">2400×1600 · 841 KB · master 4000×2667 56.1 MB</span>
+        <span class="flags"><span class="w heavy">841 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/both-shores/05-drive-la-paz-puno-04.jpg" alt="" loading="lazy" style="aspect-ratio:1.5484">
+      <figcaption>
+        <b class="">The La Paz–Puno road · 2025</b>
+        <span class="f">05-drive-la-paz-puno-04.jpg</span>
+        <span class="m">2400×1550 · 473 KB · master 4000×2584 48.0 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/both-shores/06-drive-la-paz-puno-05.jpg" alt="" loading="lazy" style="aspect-ratio:1.5326">
+      <figcaption>
+        <b class="">The La Paz–Puno road · 2025</b>
+        <span class="f">06-drive-la-paz-puno-05.jpg</span>
+        <span class="m">2400×1566 · 764 KB · master 4000×2610 53.8 MB</span>
+        <span class="flags"><span class="w heavy">764 KB</span></span>
+      </figcaption></figure></div>
+    </section><section class="sec">
+      <header class="sechead"><h3>Thin Air &amp; Cloud Forest</h3><p>La Paz · Yungas · Bolivia · 7 photographs </p></header>
+      
+      <div class="strip"><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/thin-air-cloud-forest/01-la-paz-05.jpg" alt="" loading="lazy" style="aspect-ratio:1.3754">
+      <figcaption>
+        <b class="">La Paz, Bolivia · 2025</b>
+        <span class="f">01-la-paz-05.jpg</span>
+        <span class="m">2400×1745 · 617 KB · master 4000×2908 54.7 MB</span>
+        <span class="flags"><span class="w heavy">617 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/thin-air-cloud-forest/02-la-paz-09-copy-2.jpg" alt="" loading="lazy" style="aspect-ratio:1.4151">
+      <figcaption>
+        <b class="">La Paz, Bolivia · 2025</b>
+        <span class="f">02-la-paz-09-copy-2.jpg</span>
+        <span class="m">2400×1696 · 888 KB · master 4000×2827 58.4 MB</span>
+        <span class="flags"><span class="w heavy">888 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/thin-air-cloud-forest/03-drive-uyuni-lapaz-03.jpg" alt="" loading="lazy" style="aspect-ratio:1.5852">
+      <figcaption>
+        <b class="">The Uyuni–La Paz road · 2025</b>
+        <span class="f">03-drive-uyuni-lapaz-03.jpg</span>
+        <span class="m">2400×1514 · 598 KB · master 4000×2523 50.6 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/thin-air-cloud-forest/04-drive-uyuni-lapaz-04.jpg" alt="" loading="lazy" style="aspect-ratio:1.9124">
+      <figcaption>
+        <b class="">The Uyuni–La Paz road · 2025</b>
+        <span class="f">04-drive-uyuni-lapaz-04.jpg</span>
+        <span class="m">2400×1255 · 629 KB · master 4000×2092 42.5 MB</span>
+        <span class="flags"><span class="w heavy">629 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/thin-air-cloud-forest/05-drive-uyuni-lapaz-010.jpg" alt="" loading="lazy" style="aspect-ratio:1.4432">
+      <figcaption>
+        <b class="">The Uyuni–La Paz road · 2025</b>
+        <span class="f">05-drive-uyuni-lapaz-010.jpg</span>
+        <span class="m">2400×1663 · 713 KB · master 4000×2772 56.9 MB</span>
+        <span class="flags"><span class="w heavy">713 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/thin-air-cloud-forest/06-drive-uyuni-lapaz-011.jpg" alt="" loading="lazy" style="aspect-ratio:1.7217">
+      <figcaption>
+        <b class="">The Uyuni–La Paz road · 2025</b>
+        <span class="f">06-drive-uyuni-lapaz-011.jpg</span>
+        <span class="m">2400×1394 · 521 KB · master 4000×2323 45.8 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/thin-air-cloud-forest/07-drive-uyuni-lapaz-300.jpg" alt="" loading="lazy" style="aspect-ratio:1.1650">
+      <figcaption>
+        <b class="">The Uyuni–La Paz road · 2025</b>
+        <span class="f">07-drive-uyuni-lapaz-300.jpg</span>
+        <span class="m">2400×2060 · 1070 KB · master 4000×3434 65.5 MB</span>
+        <span class="flags"><span class="w heavy">1070 KB</span></span>
+      </figcaption></figure></div>
+    </section><section class="sec">
+      <header class="sechead"><h3>Silver &amp; Bone</h3><p>Potosí · the altiplano · Bolivia · 10 photographs </p></header>
+      
+      <div class="strip"><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/silver-and-bone/01-bolivia-01-3.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="unk">Bolivia · 2025</b>
+        <span class="f">01-bolivia-01-3.jpg</span>
+        <span class="m">2400×1600 · 388 KB · master 4000×2667 48.5 MB</span>
+        <span class="flags"><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/silver-and-bone/02-bolivia-01a.jpg" alt="" loading="lazy" style="aspect-ratio:1.4751">
+      <figcaption>
+        <b class="unk">Bolivia · 2025</b>
+        <span class="f">02-bolivia-01a.jpg</span>
+        <span class="m">2400×1627 · 535 KB · master 4000×2711 53.6 MB</span>
+        <span class="flags"><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/silver-and-bone/03-bolivia-02a.jpg" alt="" loading="lazy" style="aspect-ratio:1.6563">
+      <figcaption>
+        <b class="unk">Bolivia · 2025</b>
+        <span class="f">03-bolivia-02a.jpg</span>
+        <span class="m">2400×1449 · 478 KB · master 4000×2415 47.4 MB</span>
+        <span class="flags"><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/silver-and-bone/04-bolivia-03a.jpg" alt="" loading="lazy" style="aspect-ratio:1.6484">
+      <figcaption>
+        <b class="unk">Bolivia · 2025</b>
+        <span class="f">04-bolivia-03a.jpg</span>
+        <span class="m">2400×1456 · 830 KB · master 4000×2426 49.9 MB</span>
+        <span class="flags"><span class="w heavy">830 KB</span><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/silver-and-bone/05-bolivia-04a.jpg" alt="" loading="lazy" style="aspect-ratio:1.6854">
+      <figcaption>
+        <b class="unk">Bolivia · 2025</b>
+        <span class="f">05-bolivia-04a.jpg</span>
+        <span class="m">2400×1424 · 536 KB · master 4000×2373 48.1 MB</span>
+        <span class="flags"><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/silver-and-bone/06-bolivia-07a.jpg" alt="" loading="lazy" style="aspect-ratio:1.6925">
+      <figcaption>
+        <b class="unk">Bolivia · 2025</b>
+        <span class="f">06-bolivia-07a.jpg</span>
+        <span class="m">2400×1418 · 776 KB · master 4000×2363 48.3 MB</span>
+        <span class="flags"><span class="w heavy">776 KB</span><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/silver-and-bone/07-drive-uyuni-lapaz-09.jpg" alt="" loading="lazy" style="aspect-ratio:1.6783">
+      <figcaption>
+        <b class="">The Uyuni–La Paz road · 2025</b>
+        <span class="f">07-drive-uyuni-lapaz-09.jpg</span>
+        <span class="m">2400×1430 · 536 KB · master 4000×2383 48.3 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/silver-and-bone/08-drive-uyuni-lapaz-012.jpg" alt="" loading="lazy" style="aspect-ratio:1.6011">
+      <figcaption>
+        <b class="">The Uyuni–La Paz road · 2025</b>
+        <span class="f">08-drive-uyuni-lapaz-012.jpg</span>
+        <span class="m">2400×1499 · 550 KB · master 4000×2498 49.5 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/silver-and-bone/09-drive-uyuni-lapaz-013-2.jpg" alt="" loading="lazy" style="aspect-ratio:1.9355">
+      <figcaption>
+        <b class="">The Uyuni–La Paz road · 2025</b>
+        <span class="f">09-drive-uyuni-lapaz-013-2.jpg</span>
+        <span class="m">2400×1240 · 270 KB · master 4000×2067 39.2 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/silver-and-bone/10-drive-uyuni-lapaz-29.jpg" alt="" loading="lazy" style="aspect-ratio:1.8883">
+      <figcaption>
+        <b class="">The Uyuni–La Paz road · 2025</b>
+        <span class="f">10-drive-uyuni-lapaz-29.jpg</span>
+        <span class="m">2400×1271 · 663 KB · master 4000×2119 45.0 MB</span>
+        <span class="flags"><span class="w heavy">663 KB</span></span>
+      </figcaption></figure></div>
+    </section><section class="sec">
+      <header class="sechead"><h3>The Mirror</h3><p>Salar de Uyuni · Bolivia · 5 photographs </p></header>
+      
+      <div class="strip"><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-mirror/01-uyuni-01.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Salar de Uyuni, Bolivia · 2025</b>
+        <span class="f">01-uyuni-01.jpg</span>
+        <span class="m">2400×1600 · 617 KB · master 4000×2667 51.0 MB</span>
+        <span class="flags"><span class="w heavy">617 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-mirror/02-uyuni-04.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Salar de Uyuni, Bolivia · 2025</b>
+        <span class="f">02-uyuni-04.jpg</span>
+        <span class="m">2400×1600 · 440 KB · master 4000×2667 49.5 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-mirror/03-uyuni-05.jpg" alt="" loading="lazy" style="aspect-ratio:1.8462">
+      <figcaption>
+        <b class="">Salar de Uyuni, Bolivia · 2025</b>
+        <span class="f">03-uyuni-05.jpg</span>
+        <span class="m">2400×1300 · 483 KB · master 4000×2167 40.2 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-mirror/04-bolivia-11a.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="unk">Bolivia · 2025</b>
+        <span class="f">04-bolivia-11a.jpg</span>
+        <span class="m">2400×1600 · 284 KB · master 4000×2667 46.4 MB</span>
+        <span class="flags"><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-mirror/05-drive-uyuni-lapaz-07-2.jpg" alt="" loading="lazy" style="aspect-ratio:1.6807">
+      <figcaption>
+        <b class="">The Uyuni–La Paz road · 2025</b>
+        <span class="f">05-drive-uyuni-lapaz-07-2.jpg</span>
+        <span class="m">2400×1428 · 441 KB · master 4000×2380 46.4 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure></div>
+    </section><section class="sec">
+      <header class="sechead"><h3>Atacama</h3><p>Northern Chile · Chile · 4 photographs <span class="w thin">only 4 photographs — the thinnest section</span></p></header>
+      
+      <div class="strip"><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/atacama/01-astro-01.jpg" alt="" loading="lazy" style="aspect-ratio:1.4724">
+      <figcaption>
+        <b class="">Atacama, Chile · 2025</b>
+        <span class="f">01-astro-01.jpg</span>
+        <span class="m">2400×1630 · 704 KB · master 4000×2717 53.6 MB</span>
+        <span class="flags"><span class="w heavy">704 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/atacama/02-astro-02.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Atacama, Chile · 2025</b>
+        <span class="f">02-astro-02.jpg</span>
+        <span class="m">2400×1600 · 651 KB · master 4000×2667 53.4 MB</span>
+        <span class="flags"><span class="w heavy">651 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/atacama/03-z8n5462.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">03-z8n5462.jpg</span>
+        <span class="m">2400×1600 · 484 KB · master 4000×2667 50.3 MB</span>
+        <span class="flags"><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/atacama/04-dsc536-6.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">04-dsc536-6.jpg</span>
+        <span class="m">2400×1600 · 932 KB · master 4000×2667 55.4 MB</span>
+        <span class="flags"><span class="w heavy">932 KB</span><span class="w ask">place?</span></span>
+      </figcaption></figure></div>
+    </section><section class="sec">
+      <header class="sechead"><h3>The End of the Road</h3><p>Patagonia · Chile · 21 photographs <span class="w heavy">21 photographs — far more than any other section</span></p></header>
+      
+      <div class="strip"><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/01-patagonia-62.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Patagonia, Chile · 2025</b>
+        <span class="f">01-patagonia-62.jpg</span>
+        <span class="m">2400×1600 · 418 KB · master 4000×2667 52.1 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/02-patagonia-13.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Patagonia, Chile · 2025</b>
+        <span class="f">02-patagonia-13.jpg</span>
+        <span class="m">2400×1600 · 690 KB · master 4000×2667 53.3 MB</span>
+        <span class="flags"><span class="w heavy">690 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/03-patagonia-10.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Patagonia, Chile · 2025</b>
+        <span class="f">03-patagonia-10.jpg</span>
+        <span class="m">2400×1600 · 206 KB · master 4000×2667 45.2 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/04-patagonia-8.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Patagonia, Chile · 2025</b>
+        <span class="f">04-patagonia-8.jpg</span>
+        <span class="m">2400×1600 · 657 KB · master 4000×2667 53.9 MB</span>
+        <span class="flags"><span class="w heavy">657 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/05-patagonia-04.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Patagonia, Chile · 2025</b>
+        <span class="f">05-patagonia-04.jpg</span>
+        <span class="m">2400×1600 · 476 KB · master 8256×5504 260.0 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/06-paragonia-02.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Patagonia, Chile · 2025</b>
+        <span class="f">06-paragonia-02.jpg</span>
+        <span class="m">2400×1600 · 351 KB · master 8256×5504 260.0 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/07-patagoina-01.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Patagonia, Chile · 2025</b>
+        <span class="f">07-patagoina-01.jpg</span>
+        <span class="m">2400×1600 · 514 KB · master 8256×5504 19.8 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/08-patagonia-03.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Patagonia, Chile · 2025</b>
+        <span class="f">08-patagonia-03.jpg</span>
+        <span class="m">2400×1600 · 620 KB · master 8256×5504 260.0 MB</span>
+        <span class="flags"><span class="w heavy">620 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/09-patagonia-41.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Patagonia, Chile · 2025</b>
+        <span class="f">09-patagonia-41.jpg</span>
+        <span class="m">2400×1600 · 648 KB · master 4000×2667 50.1 MB</span>
+        <span class="flags"><span class="w heavy">648 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/10-z8n7627-copy.jpg" alt="" loading="lazy" style="aspect-ratio:1.5656">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">10-z8n7627-copy.jpg</span>
+        <span class="m">2400×1533 · 407 KB · master 7539×4815 10.1 MB</span>
+        <span class="flags"><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/11-patagonia-50.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Patagonia, Chile · 2025</b>
+        <span class="f">11-patagonia-50.jpg</span>
+        <span class="m">2400×1600 · 828 KB · master 4000×2667 54.5 MB</span>
+        <span class="flags"><span class="w heavy">828 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/12-z8n7909-copy.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">12-z8n7909-copy.jpg</span>
+        <span class="m">2400×1600 · 379 KB · master 8256×5504 10.9 MB</span>
+        <span class="flags"><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/13-chile-016.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="unk">Chile · 2025</b>
+        <span class="f">13-chile-016.jpg</span>
+        <span class="m">2400×1600 · 305 KB · master 8256×5504 260.1 MB</span>
+        <span class="flags"><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/14-patagonia-5.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Patagonia, Chile · 2025</b>
+        <span class="f">14-patagonia-5.jpg</span>
+        <span class="m">2400×1600 · 127 KB · master 4000×2667 28.6 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/15-naila-06.jpg" alt="" loading="lazy" style="aspect-ratio:1.3370">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">15-naila-06.jpg</span>
+        <span class="m">2400×1795 · 1110 KB · master 4678×3499 93.7 MB</span>
+        <span class="flags"><span class="w heavy">1110 KB</span><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/16-patagonia-36.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Patagonia, Chile · 2025</b>
+        <span class="f">16-patagonia-36.jpg</span>
+        <span class="m">2400×1600 · 642 KB · master 4000×2667 51.7 MB</span>
+        <span class="flags"><span class="w heavy">642 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/17-patagonia-37.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Patagonia, Chile · 2025</b>
+        <span class="f">17-patagonia-37.jpg</span>
+        <span class="m">2400×1600 · 216 KB · master 4000×2667 42.6 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/18-patagonia-33.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Patagonia, Chile · 2025</b>
+        <span class="f">18-patagonia-33.jpg</span>
+        <span class="m">2400×1600 · 722 KB · master 4000×2667 54.1 MB</span>
+        <span class="flags"><span class="w heavy">722 KB</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/19-chile-011.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="unk">Chile · 2025</b>
+        <span class="f">19-chile-011.jpg</span>
+        <span class="m">2400×1600 · 608 KB · master 8256×5504 260.0 MB</span>
+        <span class="flags"><span class="w heavy">608 KB</span><span class="w ask">place?</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/20-patagonia-2.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="">Patagonia, Chile · 2025</b>
+        <span class="f">20-patagonia-2.jpg</span>
+        <span class="m">2400×1600 · 529 KB · master 4000×2667 51.2 MB</span>
+        <span class="flags"></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/gallery/the-end-of-the-road/21-naila-03.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">21-naila-03.jpg</span>
+        <span class="m">2400×1600 · 190 KB · master 8256×5504 866.8 MB</span>
+        <span class="flags"><span class="w ask">place?</span></span>
+      </figcaption></figure></div>
+    </section>
+</section>
+
+<section class="block wrap">
+<h2>The section cards and the home images</h2>
+<p class="lede">These are the duplicates. Orange means the card shows the wrong section.</p>
+<div class="strip"><figure class="plate">
+      <img src="../public/assets/images/departures/andean/andean-caravan.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">andean-caravan.jpg</span>
+        <span class="m">1800×1200 · 385 KB</span>
+        <span class="flags"><span class="w ask">place?</span><span class="w dup">also in the-end-of-the-road</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/atacama.jpg" alt="" loading="lazy" style="aspect-ratio:1.4730">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">atacama.jpg</span>
+        <span class="m">1800×1222 · 555 KB</span>
+        <span class="flags"><span class="w ask">place?</span><span class="w dup">also in atacama</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/both-shores.jpg" alt="" loading="lazy" style="aspect-ratio:1.2474">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">both-shores.jpg</span>
+        <span class="m">1800×1443 · 767 KB</span>
+        <span class="flags"><span class="w heavy">767 KB</span><span class="w ask">place?</span><span class="w dup">also in both-shores</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/desert-coast.jpg" alt="" loading="lazy" style="aspect-ratio:1.0000">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">desert-coast.jpg</span>
+        <span class="m">1800×1800 · 577 KB</span>
+        <span class="flags"><span class="w ask">place?</span><span class="w dup">also in desert-coast</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/silver-and-bone.jpg" alt="" loading="lazy" style="aspect-ratio:1.4435">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">silver-and-bone.jpg</span>
+        <span class="m">1800×1247 · 579 KB</span>
+        <span class="flags"><span class="w ask">place?</span><span class="w bad">shows thin-air-cloud-forest</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/the-end-of-the-road.jpg" alt="" loading="lazy" style="aspect-ratio:1.5013">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">the-end-of-the-road.jpg</span>
+        <span class="m">1800×1199 · 344 KB</span>
+        <span class="flags"><span class="w ask">place?</span><span class="w dup">also in the-end-of-the-road</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/the-mirror.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">the-mirror.jpg</span>
+        <span class="m">1800×1200 · 533 KB</span>
+        <span class="flags"><span class="w ask">place?</span><span class="w dup">also in the-mirror</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/the-stone-road.jpg" alt="" loading="lazy" style="aspect-ratio:1.7192">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">the-stone-road.jpg</span>
+        <span class="m">1800×1047 · 458 KB</span>
+        <span class="flags"><span class="w ask">place?</span><span class="w bad">shows white-city-deep-canyon</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/thin-air-cloud-forest.jpg" alt="" loading="lazy" style="aspect-ratio:1.4151">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">thin-air-cloud-forest.jpg</span>
+        <span class="m">1800×1272 · 726 KB</span>
+        <span class="flags"><span class="w heavy">726 KB</span><span class="w ask">place?</span><span class="w dup">also in thin-air-cloud-forest</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/departures/andean/white-city-deep-canyon.jpg" alt="" loading="lazy" style="aspect-ratio:1.5776">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">white-city-deep-canyon.jpg</span>
+        <span class="m">1800×1141 · 366 KB</span>
+        <span class="flags"><span class="w ask">place?</span><span class="w dup">also in white-city-deep-canyon</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/home/hero.jpg" alt="" loading="lazy" style="aspect-ratio:1.5006">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">hero.jpg</span>
+        <span class="m">2560×1706 · 476 KB</span>
+        <span class="flags"><span class="w ask">place?</span><span class="w dup">also in the-end-of-the-road</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/home/patagonia-road.jpg" alt="" loading="lazy" style="aspect-ratio:1.5006">
+      <figcaption>
+        <b class="">Patagonia, Chile · 2025</b>
+        <span class="f">patagonia-road.jpg</span>
+        <span class="m">2560×1706 · 453 KB</span>
+        <span class="flags"><span class="w dup">also in the-end-of-the-road</span></span>
+      </figcaption></figure><figure class="plate">
+      <img src="../public/assets/images/travel-self/intro.jpg" alt="" loading="lazy" style="aspect-ratio:1.5000">
+      <figcaption>
+        <b class="unk">— place not derivable from the filename — · 2025</b>
+        <span class="f">intro.jpg</span>
+        <span class="m">2400×1600 · 694 KB</span>
+        <span class="flags"><span class="w heavy">694 KB</span><span class="w ask">place?</span></span>
+      </figcaption></figure></div>
+</section>
+
+<section class="block wrap">
+<h2>Where I need you</h2>
+<p class="lede">Captions are going to read <em>place, country, year</em>. I can derive that from the
+filename for 49 of the 83 images. For these 34 I cannot, because
+the filename is a camera number or a word I can't place. Write the place next to each family and I
+will do the rest.</p>
+<table><thead><tr><th>Filename family</th><th>How many</th><th>Files</th><th>Place (write here)</th></tr></thead>
+<tbody><tr><td><code>bolivia-a</code></td><td>6</td><td>02-bolivia-01a.jpg, 03-bolivia-02a.jpg, 04-bolivia-03a.jpg, 04-bolivia-11a.jpg, 05-bolivia-04a.jpg, 06-bolivia-07a.jpg</td><td></td></tr><tr><td><code>zn-copy</code></td><td>4</td><td>03-z8n7811-copy.jpg, 05-z8n9873-copy.jpg, 10-z8n7627-copy.jpg, 12-z8n7909-copy.jpg</td><td></td></tr><tr><td><code>zn</code></td><td>2</td><td>02-z8n0934.jpg, 03-z8n5462.jpg</td><td></td></tr><tr><td><code>chile</code></td><td>2</td><td>13-chile-016.jpg, 19-chile-011.jpg</td><td></td></tr><tr><td><code>naila</code></td><td>2</td><td>15-naila-06.jpg, 21-naila-03.jpg</td><td></td></tr><tr><td><code>andean-caravan</code></td><td>1</td><td>andean-caravan.jpg</td><td></td></tr><tr><td><code>atacama</code></td><td>1</td><td>atacama.jpg</td><td></td></tr><tr><td><code>both-shores</code></td><td>1</td><td>both-shores.jpg</td><td></td></tr><tr><td><code>desert-coast</code></td><td>1</td><td>desert-coast.jpg</td><td></td></tr><tr><td><code>dsc</code></td><td>1</td><td>04-dsc536-6.jpg</td><td></td></tr><tr><td><code>bolivia</code></td><td>1</td><td>01-bolivia-01-3.jpg</td><td></td></tr><tr><td><code>zn-enhanced-nr-copy</code></td><td>1</td><td>01-z8n0729-enhanced-nr-copy.jpg</td><td></td></tr><tr><td><code>london-j</code></td><td>1</td><td>04-london-0j.jpg</td><td></td></tr><tr><td><code>london-ps</code></td><td>1</td><td>05-london-0ps.jpg</td><td></td></tr><tr><td><code>london</code></td><td>1</td><td>06-london-02.jpg</td><td></td></tr><tr><td><code>silver-and-bone</code></td><td>1</td><td>silver-and-bone.jpg</td><td></td></tr><tr><td><code>the-end-of-the-road</code></td><td>1</td><td>the-end-of-the-road.jpg</td><td></td></tr><tr><td><code>the-mirror</code></td><td>1</td><td>the-mirror.jpg</td><td></td></tr><tr><td><code>the-stone-road</code></td><td>1</td><td>the-stone-road.jpg</td><td></td></tr><tr><td><code>thin-air-cloud-forest</code></td><td>1</td><td>thin-air-cloud-forest.jpg</td><td></td></tr><tr><td><code>white-city-deep-canyon</code></td><td>1</td><td>white-city-deep-canyon.jpg</td><td></td></tr><tr><td><code>hero</code></td><td>1</td><td>hero.jpg</td><td></td></tr><tr><td><code>intro</code></td><td>1</td><td>intro.jpg</td><td></td></tr></tbody></table>
+<p style="margin-top:1.5rem;max-width:70ch"><strong>Also worth confirming:</strong> everything is
+captioned 2025, taken from the folder names — the <code>atacama</code> folder has no year on it.
+And <code>london</code> appears on three Peru photographs used in the Arequipa section, which I
+assume is not the city.</p>
+</section>
+
+<section class="block wrap">
+<h2>What happens once you've decided</h2>
+<ol>
+<li><strong>A pipeline script.</strong> Your masters stay exactly where they are, untouched and
+still ignored by git. One command reads them and writes what ships: 2000px on the long edge, AVIF
+and WebP with a JPEG fallback, each photograph keeping its own ratio. Re-runnable, so a re-edited
+master just gets regenerated.</li>
+<li><strong>Proof before commitment.</strong> Before anything replaces what's live I'll show you
+1:1 crops of the astro frames and the Patagonian gradients at the new setting, so you judge the
+compression rather than taking my word for it.</li>
+<li><strong>The galleries stop cropping.</strong> Fixed height, free width, no rounded corners, and
+the terracotta and blue bands currently painted over every first and third image are removed.</li>
+<li><strong>Captions get rendered.</strong> Place and year under the plate, a full description in
+the alt text for screen readers, and one provenance line stating every photograph on the site was
+made on this route.</li>
+</ol>
+<footer>Generated 6 August 2026 · reads the real files in <code>public/assets/images</code> ·
+masters inspected in place, never written to.</footer>
+</section>
+</body></html>
