@@ -40,6 +40,23 @@ const approvedRouteDescriptions = {
     "This section will show how each Caravan group is taking shape without naming individual members.",
   "andean-caravan":
     "Follow the complete Andean Caravan route through Peru, Bolivia, the Atacama and the Carretera Austral.",
+  /*
+   * Added 6 August 2026. Both pages carried placeholder descriptions, and
+   * createPageMetadata marks any such route noIndex while sitemap.ts drops it,
+   * so How Sawayatra works and Meet your Travel Self could not be found in
+   * search at all. Meet your Travel Self is the one thing no competitor has.
+   *
+   * Each sentence is condensed from what the page already says, not written
+   * fresh: /how-it-works opens "Browse the Andean Caravan openly. Connect
+   * privately. Nothing is revealed until the interest is mutual." and
+   * /travel-self opens "One of sixteen travelling selves. Eight short
+   * questions reveal which one is yours: how you travel, and what you travel
+   * for." Both are marked DRAFT rather than LOCKED, pending approval.
+   */
+  "how-it-works":
+    "Browse the Andean Caravan openly and connect privately. Nothing is revealed until the interest is mutual.",
+  "travel-self":
+    "Sawayatra matches travellers by how they travel, not by where they are going. Eight short questions reveal which of sixteen travelling selves is yours.",
   "joining-points":
     "Compare the designated places where travellers can enter and leave the Andean Caravan.",
   "start-here":

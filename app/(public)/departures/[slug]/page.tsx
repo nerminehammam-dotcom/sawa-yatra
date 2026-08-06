@@ -522,7 +522,11 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
         aria-label="Adjacent Caravan sections"
       >
         <Container className={styles.adjacentLinks}>
-          <Link href={`/departures/${COMPLETE_SLUG}`}>
+          {/* Was /departures/the-andean-caravan, which next.config.ts 301s to
+              /caravans/andean. This link appears on all nine section pages, so
+              that was nine unnecessary redirect hops. Pointing at the
+              destination directly. */}
+          <Link href="/caravans/andean">
             <span>All nine sections</span>
             <strong>The Andean Caravan</strong>
           </Link>

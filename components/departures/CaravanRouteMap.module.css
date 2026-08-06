@@ -115,9 +115,10 @@
   text-transform: none;
 }
 
+/* Was min-height 2.25rem (36px), under the 44px minimum. */
 .zoomControls .resetZoom {
   grid-column: 1 / -1;
-  min-height: 2.25rem;
+  min-height: var(--touch-min);
   color: var(--ink);
   font-size: 1rem;
   letter-spacing: normal;
@@ -230,8 +231,10 @@
 
 .stopButton {
   display: grid;
-  width: 2.55rem;
-  height: 2.55rem;
+  /* Was 2.55rem (40.8px), under the 44px minimum for a touch target. The site
+     already carries --touch-min at 48px; this rule was simply not using it. */
+  width: var(--touch-min);
+  height: var(--touch-min);
   place-items: center;
   color: var(--paper);
   font-size: 1rem;

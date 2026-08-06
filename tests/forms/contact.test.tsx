@@ -58,8 +58,9 @@ describe("ContactQuestionForm", () => {
     );
 
     expect(fetchMock).toHaveBeenCalledTimes(1);
-    expect(fetchMock.mock.calls[0][0]).toBe("/api/forms/contact-question");
-    expect(fetchMock.mock.calls[0][1]).toMatchObject({ method: "POST" });
+    const [url, init] = fetchMock.mock.calls[0] ?? [];
+    expect(url).toBe("/api/forms/contact-question");
+    expect(init).toMatchObject({ method: "POST" });
 
     // Nothing kept locally when nothing was delivered.
     expect(storageSpy).not.toHaveBeenCalled();
