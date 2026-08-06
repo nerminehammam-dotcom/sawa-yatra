@@ -64,17 +64,34 @@
   padding-inline: clamp(1.25rem, 4vw, 3.5rem);
 }
 
-.travelSelfIntro .introPlate {
-  /* Pulled up so the headline above crosses its top edge. The artwork carries
-     its own cream deckled border, so the first part of the overlap lands on
-     paper rather than on the painting. */
-  margin-top: calc(-1 * clamp(1.5rem, 4.5vw, 5rem));
+/* A flat paper panel on the left, the painting flush to the right, and the
+   question set across the seam so each line begins on paper and finishes on
+   the painting.
+
+   Every number here is load-bearing and was chosen from measurement, not by
+   eye — see tools/audit/measure-travel-self-straddle.py, which reproduces this
+   arithmetic against the real 2400x1600 file.
+
+   24% panel puts the seam 59% of the way through the first line and 45%
+   through the second, so both genuinely cross. The lines reach 17% and 18%
+   into the painting, which is the pale strip left of everything: the cactus
+   begins at 3% but not until half the height, and the aeroplane occupies 11%
+   to 35% only above a fifth of the height.
+
+   20% top drops the type into the clear band between the two. Measured over
+   the exact rectangles the glyphs occupy, ink holds 4.12:1 against the
+   darkest and lightest 5% of what is behind it. Signal orange does not: it
+   reaches 1.6:1 against the same pixels, because it sits at almost the same
+   luminance as the salmon in the cloud. So the emphasis on "you" is carried
+   by the swash italic instead of by colour, and the orange stays on the paper
+   side. */
+.travelSelfIntro .introStraddle {
   position: relative;
-  display: flex;
-  justify-content: center;
-  padding: clamp(1rem, 2vw, 1.75rem) 0 clamp(2.5rem, 5vw, 4rem);
+  display: grid;
+  max-width: 84rem;
+  grid-template-columns: 24% 76%;
+  margin-inline: auto;
   background: var(--tsi-paper);
-  border-bottom: var(--tsi-hair) solid var(--tsi-ink);
 }
 
 .travelSelfIntro .introArtwork {
@@ -82,73 +99,55 @@
   width: 100%;
   height: auto;
   max-width: none;
-  border: var(--tsi-hair) solid var(--tsi-ink);
+  grid-column: 2;
 }
 
-.travelSelfIntro .introChip {
+.travelSelfIntro .introTitle {
   position: absolute;
-  bottom: -18px;
-  left: clamp(1.25rem, 4vw, 3.5rem);
+  z-index: 1;
+  inset-block-start: 20%;
+  inset-inline-start: 5%;
   margin: 0;
-  padding: 0.6rem 1.1rem;
-  background: var(--tsi-paper);
-  border: var(--tsi-hair) solid var(--tsi-ink);
-  font-size: 1.125rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  transform: rotate(-1.4deg);
-}
-
-.travelSelfIntro .introHead {
-  position: relative;
-  z-index: 2;
-  row-gap: clamp(1.5rem, 2.5vw, 2.25rem);
-  padding-block: clamp(1.5rem, 3vw, 2.5rem) clamp(2rem, 4vw, 3.5rem);
-}
-
-/* The standfirst sits small and high on the right; the question sits large
-   and low on the left, and crosses onto the artwork below it.
-
-   The order is deliberate. Whatever is lowest in this block is what overlaps
-   the poster, and it has to be the headline — the artwork already has
-   SAWAYATRA painted into the cloud between 45% and 90% across, so anything
-   descending on the right lands on top of it. The headline is confined to the
-   left eight columns for the same reason.
-
-   Measured over the left 58% of the artwork, which is cream deckle and pale
-   sky down to a quarter of its height: ink reads 13.8 to 14.4 there, and
-   signal-text 5.4 to 5.6. Both have room to spare. */
-.travelSelfIntro .introHead {
-  align-items: start;
-  padding-block-end: 0;
-  row-gap: clamp(0.75rem, 2vw, 1.75rem);
-}
-
-.travelSelfIntro .introHead h1 {
-  grid-column: 1 / span 8;
-  grid-row: 2;
-  margin: 0;
+  color: var(--tsi-ink);
   font-family: var(--tsi-display);
-  font-size: clamp(3.25rem, 5.5vw, 5rem);
+  font-size: clamp(2.6rem, 7.4vw, 7.2rem);
   font-optical-sizing: auto;
   font-weight: 400;
-  line-height: 0.96;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
+  letter-spacing: -0.025em;
+  line-height: 0.86;
+}
+
+.travelSelfIntro .introTitle span {
+  display: block;
+  white-space: nowrap;
+}
+
+.travelSelfIntro .introTitle span + span {
+  padding-inline-start: 0.9em;
 }
 
 /* WONK 1 puts the swash italic on this one word. The axis was not in the
    font files until 5 August 2026, so this asked for nothing and got nothing
    before then. */
 .travelSelfIntro .introYou {
-  display: inline-block;
-  color: var(--tsi-signal-text);
-  font-size: 1.1em;
   font-style: italic;
   font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
   font-weight: 300;
-  transform: rotate(-3.2deg) translateY(0.04em);
+}
+
+.travelSelfIntro .introChip {
+  position: absolute;
+  inset-block-end: clamp(1.25rem, 3vw, 2.5rem);
+  inset-inline-start: 5%;
+  z-index: 1;
+  margin: 0;
+  padding: 0.55rem 1rem;
+  color: var(--tsi-paper);
+  background: var(--tsi-signal-text);
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .travelSelfIntro .introLede {
@@ -159,89 +158,27 @@
 
 .travelSelfIntro .introStandfirst {
   max-width: 34ch;
-  grid-column: 8 / -1;
-  grid-row: 1;
-  align-self: start;
-  justify-self: start;
-  /* Sits on the heading's last baseline rather than its box, which is what
-     makes the two read as one line of thought instead of two blocks. */
-  margin: 0 0 0.35em;
+  grid-column: 1 / span 7;
+  margin: 0;
   font-family: var(--tsi-display);
-  font-size: clamp(1.25rem, 1.5vw, 1.5rem);
+  font-size: clamp(1.35rem, 1.8vw, 1.75rem);
   font-optical-sizing: auto;
-  line-height: 1.45;
+  line-height: 1.4;
   text-align: left;
   text-wrap: pretty;
 }
 
-@media (max-width: 900px) {
-  /* One column, and the headline goes back on top. There is no room for the
-     two-block composition, and no room to overlap without landing on the
-     painting. */
-  .travelSelfIntro .introHead h1 {
-    grid-column: 1 / -1;
-    grid-row: 1;
-  }
-
-  .travelSelfIntro .introStandfirst {
-    grid-column: 1 / -1;
-    grid-row: 2;
-    max-width: 44ch;
-    margin-bottom: 0;
-  }
-
-  .travelSelfIntro .introHead {
-    padding-block-end: clamp(1.5rem, 4vw, 2.5rem);
-  }
-
-  .travelSelfIntro .introPlate {
-    margin-top: 0;
-  }
-}
-
-.travelSelfIntro .introOdds {
-  grid-column: 1 / span 8;
-  padding-right: clamp(1.5rem, 4vw, 4rem);
-}
-
 .travelSelfIntro .introLede .introAct {
-  align-self: stretch;
+  align-self: start;
   grid-column: 9 / -1;
   padding-left: clamp(1.5rem, 3vw, 3rem);
   border-left: var(--tsi-hair) solid var(--tsi-ink);
 }
 
-.travelSelfIntro .introTiles {
-  display: grid;
-  grid-template-columns: repeat(16, 1fr);
-  gap: 5px;
-  margin-bottom: 1.25rem;
-}
-
-.travelSelfIntro .introTiles span {
-  aspect-ratio: 2 / 3;
-  background: var(--tsi-c);
-  border: var(--tsi-hair) solid var(--tsi-ink);
-  transition: box-shadow 0.7s ease, border-width 0.7s ease;
-}
-
-.travelSelfIntro .introTiles span[data-on] {
-  border-width: 2px;
-  box-shadow: inset 0 0 0 4px var(--tsi-paper);
-}
-
-.travelSelfIntro .introOdds p,
 .travelSelfIntro .introReassure {
   margin: 0;
   font-size: 1.0625rem;
   line-height: 1.55;
-}
-
-.travelSelfIntro .introOdds p {
-  max-width: 42ch;
-  font-family: var(--tsi-display);
-  font-size: clamp(1.3rem, 1.7vw, 1.6rem);
-  line-height: 1.35;
 }
 
 .travelSelfIntro .introBegin {
@@ -1342,12 +1279,6 @@
   letter-spacing: 0.12em;
 }
 
-@media (min-width: 900px) {
-  .travelSelfIntro .introHead h1 {
-    white-space: nowrap;
-  }
-}
-
 @media (min-width: 1100px) {
   .travelSelfIntro .introBoundary span {
     white-space: nowrap;
@@ -1355,22 +1286,40 @@
 }
 
 @media (max-width: 899px) {
-  .travelSelfIntro .introHead h1,
+  /* No seam to cross. The panel collapses, the painting goes full width, and
+     the question sits above it on paper, where nothing is behind it at all. */
+  .travelSelfIntro .introStraddle {
+    display: block;
+    padding-block-start: clamp(1.5rem, 5vw, 2.5rem);
+  }
+
+  .travelSelfIntro .introTitle {
+    position: static;
+    padding-inline: clamp(1.25rem, 4vw, 3.5rem);
+    padding-block-end: clamp(1.25rem, 4vw, 2rem);
+    font-size: clamp(2.6rem, 10vw, 4.5rem);
+  }
+
+  .travelSelfIntro .introTitle span {
+    white-space: normal;
+  }
+
+  .travelSelfIntro .introChip {
+    inset-inline-start: clamp(1.25rem, 4vw, 3.5rem);
+    inset-block-end: clamp(0.75rem, 3vw, 1.5rem);
+  }
+
   .travelSelfIntro .introStandfirst,
-  .travelSelfIntro .introOdds,
   .travelSelfIntro .introAct,
   .travelSelfIntro .introBoundary {
     grid-column: 1 / -1;
   }
 
   .travelSelfIntro .introStandfirst {
+    max-width: 44ch;
     justify-self: start;
     margin-top: 0;
     text-align: left;
-  }
-
-  .travelSelfIntro .introOdds {
-    padding-right: 0;
   }
 
   .travelSelfIntro .introLede .introAct {
@@ -1384,10 +1333,6 @@
   .travelSelfIntro .introBegin {
     width: 100%;
     justify-content: center;
-  }
-
-  .travelSelfIntro .introTiles {
-    grid-template-columns: repeat(8, 1fr);
   }
 
   .questionGrid {
@@ -1581,10 +1526,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .travelSelfIntro .introTiles span {
-    transition: none;
-  }
-
   .tiles span {
     transition: none;
   }
