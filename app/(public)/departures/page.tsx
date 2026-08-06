@@ -71,7 +71,16 @@ export default function DeparturesPage() {
 
             return (
               <li key={section.id}>
-                <Link className={styles.sectionCard} href={`/departures/${section.slug}`}>
+                {/* Concise accessible name for the whole-card link. Without it,
+                    a screen-reader user listing links hears the entire card
+                    dumped as link text — number, promise, every fact — for all
+                    nine. aria-label overrides the link's name without hiding the
+                    h3, so the section titles still appear in the heading outline. */}
+                <Link
+                  className={styles.sectionCard}
+                  href={`/departures/${section.slug}`}
+                  aria-label={`Section ${section.sectionNumber}, ${section.title} — ${section.durationDays} days, ${section.route}`}
+                >
                   <RisoArtwork
                     className={styles.sectionImage}
                     asset={image}
