@@ -59,8 +59,6 @@ const approvedRouteDescriptions = {
     "Sawayatra matches travellers by how they travel, not by where they are going. Eight short questions reveal which of sixteen travelling selves is yours.",
   "joining-points":
     "Compare the designated places where travellers can enter and leave the Andean Caravan.",
-  "start-here":
-    "Choose a joining point and begin an enquiry about the Andean Caravan.",
   "do-it-yourself":
     "Create your own Sawayatra journey. The Do It Yourself experience is coming later.",
   departures:
@@ -110,7 +108,6 @@ export const routeMetadata = ([
     "The Andean Caravan | Sawayatra",
   ],
   ["joining-points", "/joining-points", "Joining points | Sawayatra"],
-  ["start-here", "/start-here", "Start here | Sawayatra"],
   ["how-it-works", "/how-it-works", "How Sawayatra works | Sawayatra"],
   ["travel-self", "/travel-self", "Meet your Travel Self | Sawayatra"],
   ["do-it-yourself", "/do-it-yourself", "Do It Yourself | Sawayatra"],

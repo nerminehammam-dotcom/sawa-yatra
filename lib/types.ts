@@ -31,7 +31,6 @@ export type StaticRoute =
   | "/caravans/who-else-is-travelling"
   | "/caravans/the-andean-caravan"
   | "/joining-points"
-  | "/start-here"
   | "/travel-self"
   | "/departures"
   | "/departure-dates"

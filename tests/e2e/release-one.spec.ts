@@ -31,7 +31,6 @@ const publicRoutes = [
   "/membership",
   "/about",
   "/contact",
-  "/start-here",
   "/sign-in",
   "/request-invitation",
   "/privacy",
@@ -1013,10 +1012,6 @@ test.describe("forms and holding states", () => {
       {
         route: "/request-invitation",
         action: "Request an invitation",
-      },
-      {
-        route: "/start-here",
-        action: "Ask to join this table",
       },
       {
         route: "/departures/desert-coast",

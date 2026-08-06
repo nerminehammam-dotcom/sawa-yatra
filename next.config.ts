@@ -44,6 +44,15 @@ const nextConfig: NextConfig = {
         destination: "/caravans/andean",
         statusCode: 301,
       },
+      {
+        // /start-here was a joining-point enquiry page that had been disabled
+        // with an unconditional notFound(); it rendered only a spinner and no
+        // heading. Its stated job — "choose a joining point" — is exactly what
+        // /joining-points does, so it redirects there. (7 August 2026)
+        source: "/start-here",
+        destination: "/joining-points",
+        statusCode: 301,
+      },
     ];
   },
   async headers() {

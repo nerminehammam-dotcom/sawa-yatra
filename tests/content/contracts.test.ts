@@ -37,7 +37,6 @@ const releaseOneRoutes = [
   "/caravans/who-else-is-travelling",
   "/caravans/the-andean-caravan",
   "/joining-points",
-  "/start-here",
   "/how-it-works",
   "/travel-self",
   "/do-it-yourself",
@@ -121,7 +120,8 @@ describe("Release 1 content contracts", () => {
     expect(urls).toContain("/caravans/andean");
     expect(urls).not.toContain("/caravans/the-andean-caravan");
     expect(urls).not.toContain("/joining-points");
-    expect(urls).toContain("/start-here");
+    // /start-here was retired on 7 August 2026 (301 → /joining-points).
+    expect(urls).not.toContain("/start-here");
     expect(urls).toContain("/contact");
     expect(urls).not.toContain("/do-it-yourself");
     expect(urls).toContain("/who-we-are");

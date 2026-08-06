@@ -15,7 +15,6 @@ const crossBrowserRoutes = [
   "/membership",
   "/about",
   "/contact",
-  "/start-here",
   "/sign-in",
   "/request-invitation",
   "/privacy",
