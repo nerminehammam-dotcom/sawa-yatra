@@ -234,10 +234,12 @@ export interface LegalPagePlaceholder extends ContentStatusRecord {
   readonly id: "privacy" | "terms" | "accessibility";
   readonly path: Extract<StaticRoute, "/privacy" | "/terms" | "/accessibility">;
   readonly title: string;
-  readonly reviewLabel: "LEGAL REVIEW";
+  // Widened from the literal "LEGAL REVIEW" / TO_BE_CONFIRMED on 7 August 2026
+  // when the visitor-facing scaffolding was replaced with honest holding copy.
+  readonly reviewLabel: string;
   readonly notice: string;
   readonly body: readonly string[];
-  readonly lastReviewed: typeof TO_BE_CONFIRMED;
+  readonly lastReviewed: string;
 }
 
 export interface SystemPageContent extends ContentStatusRecord {

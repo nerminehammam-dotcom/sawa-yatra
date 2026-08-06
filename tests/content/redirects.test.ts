@@ -41,6 +41,11 @@ describe("legacy Caravan redirects", () => {
         destination: "/caravans/andean",
         statusCode: 301,
       },
+      {
+        source: "/start-here",
+        destination: "/joining-points",
+        statusCode: 301,
+      },
     ]);
 
     expect(

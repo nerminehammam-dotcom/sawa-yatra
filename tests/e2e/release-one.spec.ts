@@ -1010,10 +1010,6 @@ test.describe("forms and holding states", () => {
 
     const surfaces = [
       {
-        route: "/request-invitation",
-        action: "Request an invitation",
-      },
-      {
         route: "/departures/desert-coast",
         action: "Ask to join this table",
       },

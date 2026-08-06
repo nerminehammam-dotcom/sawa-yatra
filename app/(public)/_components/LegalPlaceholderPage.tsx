@@ -1,7 +1,6 @@
 import styles from "@/app/system.module.css";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Container } from "@/components/ui/Container";
-import { ContentStatusLabel } from "@/components/ui/ContentStatusLabel";
 import { systemUiContent } from "@/content/legal-placeholders";
 import type { LegalPagePlaceholder } from "@/lib/types";
 
@@ -22,9 +21,6 @@ export function LegalPlaceholderPage({
     >
       <Container size="narrow" className={styles.legalDocument}>
         <header className={styles.legalHeader}>
-          <div className={styles.statusRow}>
-            <ContentStatusLabel status={content.contentStatus} />
-          </div>
           <p className={`${styles.eyebrow} ${styles.statusEyebrow}`}>
             {content.reviewLabel.charAt(0) + content.reviewLabel.slice(1).toLocaleLowerCase("en")}
           </p>

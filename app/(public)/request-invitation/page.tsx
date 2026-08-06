@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 
 import styles from "@/app/system.module.css";
 import { createPageMetadata } from "@/app/_metadata";
-import { InvitationRequestForm } from "@/components/forms";
+import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Container } from "@/components/ui/Container";
-import { ContentStatusLabel } from "@/components/ui/ContentStatusLabel";
 import { requestInvitationContent } from "@/content/site";
 
 export const metadata: Metadata = createPageMetadata("/request-invitation");
@@ -19,9 +18,6 @@ export default function RequestInvitationPage() {
     >
       <Container>
         <header className={styles.formHeader}>
-          <div className={styles.statusRow}>
-            <ContentStatusLabel status={requestInvitationContent.contentStatus} />
-          </div>
           <p className={styles.eyebrow}>{requestInvitationContent.eyebrow}</p>
           <h1 className={styles.formTitle} id="request-invitation-title">
             {requestInvitationContent.title}
@@ -31,7 +27,14 @@ export default function RequestInvitationPage() {
 
         <div className={styles.invitationLayout}>
           <div className={styles.formCard}>
-            <InvitationRequestForm />
+            <p className={styles.formLead}>
+              There is nothing to fill in here yet. When invitations open, this
+              is where you will ask for one. Until then, leaving your interest is
+              the only thing that helps, and it is one step.
+            </p>
+            <ButtonLink href="/register-interest" variant="primary">
+              Register your interest
+            </ButtonLink>
           </div>
         </div>
       </Container>

@@ -6,38 +6,50 @@ import {
   type SystemPageContent,
 } from "@/lib/types";
 
+// Honest holding copy, rewritten 7 August 2026. The pages previously showed
+// internal scaffolding to visitors — "LEGAL REVIEW: This page is a placeholder.
+// Approved copy must be supplied…" and a body of "To be confirmed". None of the
+// text below is legal copy or a compliance claim; it is a plain, honest notice
+// that the real document is being prepared and reviewed before any data is
+// collected. The professionally-drafted policies still replace it before launch.
 const legalNotice =
-  "LEGAL REVIEW: This page is a placeholder. Approved copy must be supplied and professionally reviewed before launch.";
+  "This page is being prepared and professionally reviewed. It will be published before Sawayatra collects any personal information or takes any reservation. Until then, anything you send is emailed to Sawayatra and is not stored on this website.";
 
 export const legalPages = [
   {
     id: "privacy",
     path: "/privacy",
     title: "Privacy",
-    reviewLabel: "LEGAL REVIEW",
+    reviewLabel: "Before launch",
     notice: legalNotice,
-    body: ["To be confirmed"],
-    lastReviewed: TO_BE_CONFIRMED,
+    body: [
+      "Sawayatra's privacy policy will appear here: what is collected, why, how long it is kept, and your rights over it. We would rather show you nothing than publish a policy we have not properly prepared.",
+    ],
+    lastReviewed: "Not yet published",
     contentStatus: "LEGAL REVIEW",
   },
   {
     id: "terms",
     path: "/terms",
     title: "Terms",
-    reviewLabel: "LEGAL REVIEW",
+    reviewLabel: "Before launch",
     notice: legalNotice,
-    body: ["To be confirmed"],
-    lastReviewed: TO_BE_CONFIRMED,
+    body: [
+      "Sawayatra's terms will appear here before any booking or payment is possible. None is taken through this site today.",
+    ],
+    lastReviewed: "Not yet published",
     contentStatus: "LEGAL REVIEW",
   },
   {
     id: "accessibility",
     path: "/accessibility",
     title: "Accessibility",
-    reviewLabel: "LEGAL REVIEW",
+    reviewLabel: "Before launch",
     notice: legalNotice,
-    body: ["To be confirmed"],
-    lastReviewed: TO_BE_CONFIRMED,
+    body: [
+      "Sawayatra's accessibility statement will appear here. The site is built with WCAG 2.2 AA as the standard; the formal statement is being finalised.",
+    ],
+    lastReviewed: "Not yet published",
     contentStatus: "LEGAL REVIEW",
   },
 ] as const satisfies readonly LegalPagePlaceholder[];
@@ -94,7 +106,7 @@ export const systemPageContent = {
   notFound: {
     eyebrow: "404",
     title: "Page not found",
-    body: "PLACEHOLDER: Founder-approved 404 message to be supplied.",
+    body: "The page you were looking for isn't here — it may have moved, or the link may be wrong. You can pick the road back up below.",
     actions: [
       returnHomeAction,
       {
@@ -104,7 +116,7 @@ export const systemPageContent = {
         contentStatus: "LOCKED",
       },
     ],
-    contentStatus: "PLACEHOLDER",
+    contentStatus: "LOCKED",
   },
   error: {
     eyebrow: "Something went wrong",
