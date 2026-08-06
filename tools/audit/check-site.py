@@ -165,8 +165,8 @@ def check_responsive() -> None:
 
     for path in css_files:
         source = open(path).read()
-        # Strip media-query blocks that already target small screens; a fixed
-        # width inside a max-width query is deliberate.
+        rel = os.path.relpath(path, ROOT)
+
         for match in re.finditer(
             r"(?<![-\w])(min-width|width)\s*:\s*(\d+(?:\.\d+)?)(px|rem)\s*;", source
         ):
@@ -175,7 +175,12 @@ def check_responsive() -> None:
             if px <= narrowest:
                 continue
             line = source[: match.start()].count("\n") + 1
-            rel = os.path.relpath(path, ROOT)
+            # The route map canvas is deliberately wider than the viewport: it
+            # sits inside a container with overflow: hidden and is panned and
+            # zoomed rather than reflowed. See the comment at each site.
+            enclosing = source[: match.start()].rsplit("{", 1)[0]
+            if ".mapCanvas" in enclosing.rsplit("}", 1)[-1]:
+                continue
             if px > ipad:
                 risky.append(("iPad portrait and below", rel, line, prop, px))
             else:
@@ -183,13 +188,19 @@ def check_responsive() -> None:
 
         # grid-template-columns with fixed minimums is the usual cause of a
         # horizontal scrollbar on a phone.
-        for match in re.finditer(r"minmax\(\s*(\d+(?:\.\d+)?)(px|rem)", source):
+        #
+        # minmax(min(24rem, 100%), …) is the safe form and is not flagged: the
+        # track keeps its intended minimum wherever there is room for it, and
+        # collapses to the container below that, so it can never force a
+        # horizontal scrollbar. That is the fix applied across the site on
+        # 6 August 2026, so anything still reported here is genuinely new.
+        for match in re.finditer(
+            r"minmax\(\s*(?!min\()(\d+(?:\.\d+)?)(px|rem)", source
+        ):
             px = float(match.group(1)) * (16 if match.group(2) == "rem" else 1)
             if px > narrowest:
                 line = source[: match.start()].count("\n") + 1
-                risky.append(
-                    ("phones", os.path.relpath(path, ROOT), line, "minmax floor", px)
-                )
+                risky.append(("phones", rel, line, "minmax floor", px))
 
     for scope, rel, line, prop, px in sorted(risky, key=lambda r: -r[4]):
         warn("responsive", f"{rel}:{line} {prop} {px:.0f}px, wider than {scope}")

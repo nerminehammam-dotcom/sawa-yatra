@@ -125,7 +125,7 @@
 
 .detail {
   display: grid;
-  grid-template-columns: minmax(0, 1.18fr) minmax(24rem, 0.82fr);
+  grid-template-columns: minmax(0, 1.18fr) minmax(min(24rem, 100%), 0.82fr);
   min-height: 48rem;
 }
 

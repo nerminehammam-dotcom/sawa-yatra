@@ -133,7 +133,7 @@
 
   .splitMedia {
     display: grid;
-    grid-template-columns: minmax(25rem, 0.92fr) minmax(0, 1.08fr);
+    grid-template-columns: minmax(min(25rem, 100%), 0.92fr) minmax(0, 1.08fr);
     color: var(--hero-ink);
     background: var(--hero-ground);
   }

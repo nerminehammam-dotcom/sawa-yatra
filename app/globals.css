@@ -119,7 +119,34 @@ a:visited:not([class]) {
   color: var(--visited);
 }
 
-:where(a, button, input, select, textarea, summary):focus-visible {
+/* One focus ring for the whole site.
+
+   `currentColor` is not a guess. tests/design/pairings.test.ts now fails the
+   build on any rule that sets a text colour on a background below 3:1, so the
+   text colour of a focusable element is guaranteed to clear 3:1 against what it
+   sits on — which is exactly what WCAG 2.4.11 asks of a focus indicator. The
+   ring inherits that guarantee for free. Components that need a different
+   colour set --focus-ring rather than writing their own outline.
+
+   `:where()` keeps this at zero specificity so a component can override it
+   without !important. The cost is that a component can also destroy it, which
+   is what tests/design/accessibility.test.ts watches for.
+
+   [tabindex] is included because roving-tabindex widgets and skip targets are
+   focusable without being one of the listed elements. -1 is excluded: those are
+   focused programmatically, to move a screen reader, and a ring appearing on a
+   heading nobody tabbed to is noise. */
+:where(
+  a[href],
+  button,
+  input,
+  select,
+  textarea,
+  summary,
+  details,
+  [contenteditable]:not([contenteditable="false"]),
+  [tabindex]:not([tabindex="-1"])
+):focus-visible {
   outline: 3px solid var(--focus-ring, currentColor);
   outline-offset: 4px;
   box-shadow: none;

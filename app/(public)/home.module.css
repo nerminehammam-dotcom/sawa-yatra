@@ -345,7 +345,7 @@
 
 .routeHeading {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(22rem, 0.65fr);
+  grid-template-columns: minmax(0, 1.35fr) minmax(min(22rem, 100%), 0.65fr);
   gap: var(--space-16);
   align-items: end;
 }
@@ -574,7 +574,7 @@
 
 .reserved {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
   gap: var(--border-strong);
   padding: 0;
   background: var(--ink);
@@ -874,7 +874,7 @@
 
 .routeHeading {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(22rem, 0.65fr);
+  grid-template-columns: minmax(0, 1.35fr) minmax(min(22rem, 100%), 0.65fr);
   gap: var(--space-16);
   align-items: end;
 }
@@ -1103,7 +1103,7 @@
 
 .reserved {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
   gap: var(--border-strong);
   padding: 0;
   background: var(--ink);

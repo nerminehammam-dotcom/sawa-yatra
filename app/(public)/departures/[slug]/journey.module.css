@@ -394,7 +394,7 @@ a.heroAction:hover {
 
 @media (min-width: 768px) {
   .routeHeader {
-    grid-template-columns: minmax(0, 1fr) minmax(22rem, 0.9fr);
+    grid-template-columns: minmax(0, 1fr) minmax(min(22rem, 100%), 0.9fr);
     align-items: stretch;
   }
 

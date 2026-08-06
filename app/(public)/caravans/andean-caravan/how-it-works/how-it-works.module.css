@@ -150,7 +150,7 @@
 
 .joining {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(22rem, 1.1fr);
+  grid-template-columns: minmax(0, 0.9fr) minmax(min(22rem, 100%), 1.1fr);
   gap: var(--space-12);
   padding: var(--section-space) var(--page-gutter);
   background: var(--olive);

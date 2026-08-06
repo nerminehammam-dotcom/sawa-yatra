@@ -10,7 +10,7 @@
    legal list to wrap. */
 .layout {
   display: grid;
-  grid-template-columns: minmax(14rem, 0.8fr) minmax(24rem, 1.1fr) minmax(10rem, 0.6fr);
+  grid-template-columns: minmax(14rem, 0.8fr) minmax(min(24rem, 100%), 1.1fr) minmax(10rem, 0.6fr);
   align-items: start;
   gap: var(--space-16);
 }
