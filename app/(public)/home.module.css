@@ -155,10 +155,15 @@
   --hero-stroke: 0.034em;
   --hero-stroke-color: var(--ink);
 
-  /* Measured: the whole line fits inside 88vw at 9.58vw. Set to 9vw for
-     about 6% of headroom, because pair kerning is not in that calculation and
-     the swash italic runs a little wider than its advance width. nowrap is
-     the belt to that braces — the line must never break. */
+  /* 9.58vw is the size at which the line exactly fills 88vw, and 9vw was
+     shipped first. Too big. This sits between that and the 88px it topped
+     out at when it was three lines stacked: about 82px at 1280 and 92px at
+     1440, spanning roughly 59vw rather than the full frame.
+
+     Capped at 7.5rem so it stops growing on very wide screens. Without the
+     cap a 2560px monitor got 230px, which is a poster, not a headline.
+
+     nowrap is the safety net — the line must never break. */
   margin: 0;
   color: var(--hero-rose);
   white-space: nowrap;
@@ -170,7 +175,7 @@
 }
 
 .homeHeroRoman {
-  font-size: 9vw;
+  font-size: clamp(2.4rem, 6.4vw, 7.5rem);
   font-style: normal;
   font-variation-settings: "opsz" 144;
   font-weight: 600;
@@ -178,7 +183,7 @@
 }
 
 .homeHeroTurn {
-  font-size: 9.4vw;
+  font-size: clamp(2.5rem, 6.7vw, 7.85rem);
   font-style: italic;
   /* WONK 1 swaps in the swash forms — the curling italic that gives this kind
      of setting its flourish. SOFT 40 rounds the terminals a little so the word
