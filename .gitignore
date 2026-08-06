@@ -68,3 +68,4 @@ next-env.d.ts
 /docs/Sawayatra-prelaunch-plan.docx
 /Preview site.command
 /Push to GitHub.command
+__pycache__/
