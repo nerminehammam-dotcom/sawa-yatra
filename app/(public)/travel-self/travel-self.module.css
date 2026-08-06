@@ -65,6 +65,10 @@
 }
 
 .travelSelfIntro .introPlate {
+  /* Pulled up so the headline above crosses its top edge. The artwork carries
+     its own cream deckled border, so the first part of the overlap lands on
+     paper rather than on the painting. */
+  margin-top: calc(-1 * clamp(1.5rem, 4.5vw, 5rem));
   position: relative;
   display: flex;
   justify-content: center;
@@ -103,16 +107,27 @@
   padding-block: clamp(1.5rem, 3vw, 2.5rem) clamp(2rem, 4vw, 3.5rem);
 }
 
-/* Heading and standfirst sat stacked, both starting at column 1, with the
-   right half of the grid empty. They now share a row: the question on the
-   left, the answer to "what is this" on the right, sitting on the heading's
-   last baseline. Same words, same order, no dead space. */
+/* The standfirst sits small and high on the right; the question sits large
+   and low on the left, and crosses onto the artwork below it.
+
+   The order is deliberate. Whatever is lowest in this block is what overlaps
+   the poster, and it has to be the headline — the artwork already has
+   SAWAYATRA painted into the cloud between 45% and 90% across, so anything
+   descending on the right lands on top of it. The headline is confined to the
+   left eight columns for the same reason.
+
+   Measured over the left 58% of the artwork, which is cream deckle and pale
+   sky down to a quarter of its height: ink reads 13.8 to 14.4 there, and
+   signal-text 5.4 to 5.6. Both have room to spare. */
 .travelSelfIntro .introHead {
-  align-items: end;
+  align-items: start;
+  padding-block-end: 0;
+  row-gap: clamp(0.75rem, 2vw, 1.75rem);
 }
 
 .travelSelfIntro .introHead h1 {
-  grid-column: 1 / span 7;
+  grid-column: 1 / span 8;
+  grid-row: 2;
   margin: 0;
   font-family: var(--tsi-display);
   font-size: clamp(3.25rem, 5.5vw, 5rem);
@@ -145,7 +160,8 @@
 .travelSelfIntro .introStandfirst {
   max-width: 34ch;
   grid-column: 8 / -1;
-  align-self: end;
+  grid-row: 1;
+  align-self: start;
   justify-self: start;
   /* Sits on the heading's last baseline rather than its box, which is what
      makes the two read as one line of thought instead of two blocks. */
@@ -159,14 +175,27 @@
 }
 
 @media (max-width: 900px) {
-  .travelSelfIntro .introHead h1,
-  .travelSelfIntro .introStandfirst {
+  /* One column, and the headline goes back on top. There is no room for the
+     two-block composition, and no room to overlap without landing on the
+     painting. */
+  .travelSelfIntro .introHead h1 {
     grid-column: 1 / -1;
+    grid-row: 1;
   }
 
   .travelSelfIntro .introStandfirst {
+    grid-column: 1 / -1;
+    grid-row: 2;
     max-width: 44ch;
     margin-bottom: 0;
+  }
+
+  .travelSelfIntro .introHead {
+    padding-block-end: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .travelSelfIntro .introPlate {
+    margin-top: 0;
   }
 }
 
