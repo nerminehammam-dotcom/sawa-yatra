@@ -28,7 +28,7 @@ export default function RootLayout({
       <head>
         <link
           rel="preload"
-          href="/assets/fonts/fraunces-latin-full-normal.woff2"
+          href="/assets/fonts/fraunces-normal.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
@@ -38,7 +38,7 @@ export default function RootLayout({
             arrives late and that word reflows after the rest has painted. */}
         <link
           rel="preload"
-          href="/assets/fonts/fraunces-latin-full-italic.woff2"
+          href="/assets/fonts/fraunces-italic.woff2"
           as="font"
           type="font/woff2"
           crossOrigin="anonymous"
