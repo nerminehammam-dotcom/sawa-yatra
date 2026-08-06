@@ -5,10 +5,10 @@
     "section": "atacama",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1359,
     "place": "Atacama, Chile",
-    "alt": "",
-    "width": 2400,
-    "height": 1630
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/atacama/02-astro-02.jpg",
@@ -16,10 +16,10 @@
     "section": "atacama",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "Atacama, Chile",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/atacama/03-z8n5462.jpg",
@@ -27,10 +27,10 @@
     "section": "atacama",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/atacama/04-dsc536-6.jpg",
@@ -38,10 +38,10 @@
     "section": "atacama",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/both-shores/01-drive-la-paz-puno-05.jpg",
@@ -49,10 +49,10 @@
     "section": "both-shores",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1305,
     "place": "The La Paz to Puno road",
-    "alt": "",
-    "width": 2400,
-    "height": 1567
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/both-shores/02-drive-la-paz-puno-09.jpg",
@@ -60,10 +60,10 @@
     "section": "both-shores",
     "country": "Peru",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "The La Paz to Puno road",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/both-shores/03-drive-la-paz-puno-10.jpg",
@@ -71,10 +71,10 @@
     "section": "both-shores",
     "country": "Peru",
     "year": 2025,
+    "width": 2000,
+    "height": 1604,
     "place": "The La Paz to Puno road",
-    "alt": "",
-    "width": 2400,
-    "height": 1925
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/both-shores/04-drive-la-paz-puno-01.jpg",
@@ -82,10 +82,10 @@
     "section": "both-shores",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "The La Paz to Puno road",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/both-shores/05-drive-la-paz-puno-04.jpg",
@@ -93,10 +93,10 @@
     "section": "both-shores",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1292,
     "place": "The La Paz to Puno road",
-    "alt": "",
-    "width": 2400,
-    "height": 1550
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/both-shores/06-drive-la-paz-puno-05.jpg",
@@ -104,10 +104,10 @@
     "section": "both-shores",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1305,
     "place": "The La Paz to Puno road",
-    "alt": "",
-    "width": 2400,
-    "height": 1566
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/desert-coast/01-lima-01.jpg",
@@ -115,10 +115,10 @@
     "section": "desert-coast",
     "country": "Peru",
     "year": 2025,
+    "width": 1882,
+    "height": 2000,
     "place": "Lima, Peru",
-    "alt": "",
-    "width": 2258,
-    "height": 2400
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/desert-coast/02-lima-02.jpg",
@@ -126,10 +126,10 @@
     "section": "desert-coast",
     "country": "Peru",
     "year": 2025,
+    "width": 2000,
+    "height": 2000,
     "place": "Lima, Peru",
-    "alt": "",
-    "width": 2400,
-    "height": 2400
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/desert-coast/03-lima-05.jpg",
@@ -137,10 +137,10 @@
     "section": "desert-coast",
     "country": "Peru",
     "year": 2025,
+    "width": 2000,
+    "height": 2000,
     "place": "Lima, Peru",
-    "alt": "",
-    "width": 2400,
-    "height": 2400
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/desert-coast/04-lima-08.jpg",
@@ -148,10 +148,10 @@
     "section": "desert-coast",
     "country": "Peru",
     "year": 2025,
+    "width": 2000,
+    "height": 2000,
     "place": "Lima, Peru",
-    "alt": "",
-    "width": 2400,
-    "height": 2400
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/desert-coast/05-lima-017a.jpg",
@@ -159,10 +159,10 @@
     "section": "desert-coast",
     "country": "Peru",
     "year": 2025,
+    "width": 2000,
+    "height": 2000,
     "place": "Lima, Peru",
-    "alt": "",
-    "width": 2400,
-    "height": 2400
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/desert-coast/06-lima-017ae.jpg",
@@ -170,10 +170,10 @@
     "section": "desert-coast",
     "country": "Peru",
     "year": 2025,
+    "width": 2000,
+    "height": 2000,
     "place": "Lima, Peru",
-    "alt": "",
-    "width": 2400,
-    "height": 2400
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/silver-and-bone/01-bolivia-01-3.jpg",
@@ -181,10 +181,10 @@
     "section": "silver-and-bone",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/silver-and-bone/02-bolivia-01a.jpg",
@@ -192,10 +192,10 @@
     "section": "silver-and-bone",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1356,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1627
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/silver-and-bone/03-bolivia-02a.jpg",
@@ -203,10 +203,10 @@
     "section": "silver-and-bone",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1208,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1449
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/silver-and-bone/04-bolivia-03a.jpg",
@@ -214,10 +214,10 @@
     "section": "silver-and-bone",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1213,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1456
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/silver-and-bone/05-bolivia-04a.jpg",
@@ -225,10 +225,10 @@
     "section": "silver-and-bone",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1187,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1424
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/silver-and-bone/06-bolivia-07a.jpg",
@@ -236,10 +236,10 @@
     "section": "silver-and-bone",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1182,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1418
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/silver-and-bone/07-drive-uyuni-lapaz-09.jpg",
@@ -247,10 +247,10 @@
     "section": "silver-and-bone",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1192,
     "place": "The Uyuni to La Paz road",
-    "alt": "",
-    "width": 2400,
-    "height": 1430
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/silver-and-bone/08-drive-uyuni-lapaz-012.jpg",
@@ -258,10 +258,10 @@
     "section": "silver-and-bone",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1249,
     "place": "The Uyuni to La Paz road",
-    "alt": "",
-    "width": 2400,
-    "height": 1499
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/silver-and-bone/09-drive-uyuni-lapaz-013-2.jpg",
@@ -269,10 +269,10 @@
     "section": "silver-and-bone",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1034,
     "place": "The Uyuni to La Paz road",
-    "alt": "",
-    "width": 2400,
-    "height": 1240
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/silver-and-bone/10-drive-uyuni-lapaz-29.jpg",
@@ -280,10 +280,10 @@
     "section": "silver-and-bone",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1060,
     "place": "The Uyuni to La Paz road",
-    "alt": "",
-    "width": 2400,
-    "height": 1271
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/01-patagonia-62.jpg",
@@ -291,10 +291,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "Patagonia, Chile",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/02-patagonia-13.jpg",
@@ -302,10 +302,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "Patagonia, Chile",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/03-patagonia-10.jpg",
@@ -313,10 +313,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "Patagonia, Chile",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/04-patagonia-8.jpg",
@@ -324,10 +324,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "Patagonia, Chile",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/05-patagonia-04.jpg",
@@ -335,10 +335,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1333,
     "place": "Patagonia, Chile",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/06-paragonia-02.jpg",
@@ -346,10 +346,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1333,
     "place": "Patagonia, Chile",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/07-patagoina-01.jpg",
@@ -357,10 +357,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1333,
     "place": "Patagonia, Chile",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/08-patagonia-03.jpg",
@@ -368,10 +368,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1333,
     "place": "Patagonia, Chile",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/09-patagonia-41.jpg",
@@ -379,10 +379,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "Patagonia, Chile",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/10-z8n7627-copy.jpg",
@@ -390,10 +390,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1277,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1533
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/11-patagonia-50.jpg",
@@ -401,10 +401,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "Patagonia, Chile",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/12-z8n7909-copy.jpg",
@@ -412,10 +412,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1333,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/13-chile-016.jpg",
@@ -423,10 +423,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1333,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/14-patagonia-5.jpg",
@@ -434,10 +434,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "Patagonia, Chile",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/15-naila-06.jpg",
@@ -445,10 +445,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1496,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1795
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/16-patagonia-36.jpg",
@@ -456,10 +456,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "Patagonia, Chile",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/17-patagonia-37.jpg",
@@ -467,10 +467,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "Patagonia, Chile",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/18-patagonia-33.jpg",
@@ -478,10 +478,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "Patagonia, Chile",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/19-chile-011.jpg",
@@ -489,10 +489,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1333,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/20-patagonia-2.jpg",
@@ -500,10 +500,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "Patagonia, Chile",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-end-of-the-road/21-naila-03.jpg",
@@ -511,10 +511,10 @@
     "section": "the-end-of-the-road",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1333,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-mirror/01-uyuni-01.jpg",
@@ -522,10 +522,10 @@
     "section": "the-mirror",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "Salar de Uyuni, Bolivia",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-mirror/02-uyuni-04.jpg",
@@ -533,10 +533,10 @@
     "section": "the-mirror",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "Salar de Uyuni, Bolivia",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-mirror/03-uyuni-05.jpg",
@@ -544,10 +544,10 @@
     "section": "the-mirror",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1084,
     "place": "Salar de Uyuni, Bolivia",
-    "alt": "",
-    "width": 2400,
-    "height": 1300
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-mirror/04-bolivia-11a.jpg",
@@ -555,10 +555,10 @@
     "section": "the-mirror",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-mirror/05-drive-uyuni-lapaz-07-2.jpg",
@@ -566,10 +566,10 @@
     "section": "the-mirror",
     "country": "Chile",
     "year": 2025,
+    "width": 2000,
+    "height": 1190,
     "place": "The Uyuni to La Paz road",
-    "alt": "",
-    "width": 2400,
-    "height": 1428
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-stone-road/01-cuscco-01.jpg",
@@ -577,10 +577,10 @@
     "section": "the-stone-road",
     "country": "Peru",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "Cusco, Peru",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-stone-road/02-cusco-13.jpg",
@@ -588,10 +588,10 @@
     "section": "the-stone-road",
     "country": "Peru",
     "year": 2025,
+    "width": 2000,
+    "height": 1256,
     "place": "Cusco, Peru",
-    "alt": "",
-    "width": 2400,
-    "height": 1507
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-stone-road/03-cusco-15.jpg",
@@ -599,10 +599,10 @@
     "section": "the-stone-road",
     "country": "Peru",
     "year": 2025,
+    "width": 1835,
+    "height": 2000,
     "place": "Cusco, Peru",
-    "alt": "",
-    "width": 2202,
-    "height": 2400
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-stone-road/04-cusco-19.jpg",
@@ -610,10 +610,10 @@
     "section": "the-stone-road",
     "country": "Peru",
     "year": 2025,
+    "width": 2000,
+    "height": 1378,
     "place": "Cusco, Peru",
-    "alt": "",
-    "width": 2400,
-    "height": 1654
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/the-stone-road/05-z8n9873-copy.jpg",
@@ -621,10 +621,10 @@
     "section": "the-stone-road",
     "country": "Peru",
     "year": 2025,
+    "width": 2000,
+    "height": 2000,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 2400
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/thin-air-cloud-forest/01-la-paz-05.jpg",
@@ -632,10 +632,10 @@
     "section": "thin-air-cloud-forest",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1454,
     "place": "La Paz, Bolivia",
-    "alt": "",
-    "width": 2400,
-    "height": 1745
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/thin-air-cloud-forest/02-la-paz-09-copy-2.jpg",
@@ -643,10 +643,10 @@
     "section": "thin-air-cloud-forest",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1414,
     "place": "La Paz, Bolivia",
-    "alt": "",
-    "width": 2400,
-    "height": 1696
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/thin-air-cloud-forest/03-drive-uyuni-lapaz-03.jpg",
@@ -654,10 +654,10 @@
     "section": "thin-air-cloud-forest",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1262,
     "place": "The Uyuni to La Paz road",
-    "alt": "",
-    "width": 2400,
-    "height": 1514
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/thin-air-cloud-forest/04-drive-uyuni-lapaz-04.jpg",
@@ -665,10 +665,10 @@
     "section": "thin-air-cloud-forest",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1046,
     "place": "The Uyuni to La Paz road",
-    "alt": "",
-    "width": 2400,
-    "height": 1255
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/thin-air-cloud-forest/05-drive-uyuni-lapaz-010.jpg",
@@ -676,10 +676,10 @@
     "section": "thin-air-cloud-forest",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1386,
     "place": "The Uyuni to La Paz road",
-    "alt": "",
-    "width": 2400,
-    "height": 1663
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/thin-air-cloud-forest/06-drive-uyuni-lapaz-011.jpg",
@@ -687,10 +687,10 @@
     "section": "thin-air-cloud-forest",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1162,
     "place": "The Uyuni to La Paz road",
-    "alt": "",
-    "width": 2400,
-    "height": 1394
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/thin-air-cloud-forest/07-drive-uyuni-lapaz-300.jpg",
@@ -698,10 +698,10 @@
     "section": "thin-air-cloud-forest",
     "country": "Bolivia",
     "year": 2025,
+    "width": 2000,
+    "height": 1717,
     "place": "The Uyuni to La Paz road",
-    "alt": "",
-    "width": 2400,
-    "height": 2060
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/white-city-deep-canyon/01-z8n0729-enhanced-nr-copy.jpg",
@@ -709,10 +709,10 @@
     "section": "white-city-deep-canyon",
     "country": "Peru",
     "year": 2025,
+    "width": 2000,
+    "height": 1239,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1487
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/white-city-deep-canyon/02-z8n0934.jpg",
@@ -720,10 +720,10 @@
     "section": "white-city-deep-canyon",
     "country": "Peru",
     "year": 2025,
+    "width": 2000,
+    "height": 1269,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1522
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/white-city-deep-canyon/03-z8n7811-copy.jpg",
@@ -731,10 +731,10 @@
     "section": "white-city-deep-canyon",
     "country": "Peru",
     "year": 2025,
+    "width": 2000,
+    "height": 1231,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1477
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/white-city-deep-canyon/04-london-0j.jpg",
@@ -742,10 +742,10 @@
     "section": "white-city-deep-canyon",
     "country": "Peru",
     "year": 2025,
+    "width": 2000,
+    "height": 1164,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1397
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/white-city-deep-canyon/05-london-0ps.jpg",
@@ -753,10 +753,10 @@
     "section": "white-city-deep-canyon",
     "country": "Peru",
     "year": 2025,
+    "width": 2000,
+    "height": 1334,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1600
+    "alt": ""
   },
   {
     "out": "departures/andean/gallery/white-city-deep-canyon/06-london-02.jpg",
@@ -764,9 +764,9 @@
     "section": "white-city-deep-canyon",
     "country": "Peru",
     "year": 2025,
+    "width": 2000,
+    "height": 1269,
     "place": "",
-    "alt": "",
-    "width": 2400,
-    "height": 1522
+    "alt": ""
   }
 ]

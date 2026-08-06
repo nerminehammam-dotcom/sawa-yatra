@@ -24,6 +24,10 @@ import os
 import re
 import sys
 
+from PIL import Image
+
+Image.MAX_IMAGE_PIXELS = None  # the masters are up to 8256 x 5504
+
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 MANIFEST = os.path.join(ROOT, "tools/photography/photographs.json")
 SHIPPED_ROOT = os.path.join(ROOT, "public/assets/images")
@@ -132,12 +136,24 @@ def main() -> int:
         for out in sorted(set(outs)):
             previous = existing.get(out, {})
             section = out.split("gallery/")[1].split("/")[0] if "/gallery/" in out else None
+
+            # The true dimensions of the file that ships. These are what let the
+            # galleries lay a photograph out at its own shape instead of
+            # cropping it, so they are read from the file every scan rather than
+            # carried forward — they change whenever the pipeline reruns.
+            shipped_path = os.path.join(SHIPPED_ROOT, out)
+            width = height = None
+            if os.path.exists(shipped_path):
+                width, height = Image.open(shipped_path).size
+
             entries.append({
                 "out": out,
                 "master": master["master"],
                 "section": section,
                 "country": master["country"],
                 "year": master["year"],
+                "width": width,
+                "height": height,
                 # Never overwritten by a re-scan.
                 "place": previous.get("place") or place_for(master["stem"]),
                 "alt": previous.get("alt", ""),
@@ -149,7 +165,7 @@ def main() -> int:
         handle.write("\n")
 
     needs_place = [e for e in entries if not e["place"]]
-    needs_alt = [e for e in entries if not e["alt"]]
+    no_dimensions = [e for e in entries if not e["width"]]
 
     print(f"  masters found        : {len(masters)}")
     print(f"  manifest entries     : {len(entries)}")
@@ -157,7 +173,10 @@ def main() -> int:
     for path in unmatched:
         print(f"      {path}")
     print(f"  entries needing a place : {len(needs_place)}")
-    print(f"  entries needing alt text: {len(needs_alt)}")
+    if no_dimensions:
+        print(f"  NO SHIPPED FILE YET     : {len(no_dimensions)}")
+        for entry in no_dimensions:
+            print(f"      {entry['out']}")
     print(f"\n  written to {os.path.relpath(MANIFEST, ROOT)}")
     return 0
 

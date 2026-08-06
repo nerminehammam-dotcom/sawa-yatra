@@ -61,32 +61,34 @@ demonstration. Nothing has been changed yet.</p>
 <div class="tiles wrap" style="padding-inline:0;max-width:none">
 <div class="tile"><b>69</b><span>Master photographs across four country folders</span></div>
 <div class="tile"><b>83</b><span>Files shipping on the site today</span></div>
-<div class="tile"><b>12</b><span>Are the same photograph shipped twice</span></div>
-<div class="tile"><b>2</b><span>Section cards show the wrong section</span></div>
+<div class="tile"><b>12</b><span>Duplicate files, now deleted</span></div>
+<div class="tile"><b>49→29</b><span>Megabytes of photographs, after the pipeline</span></div>
 </div>
 
 <section class="block wrap">
 <h2>What I found</h2>
 <p class="lede">Three things, in order of how much they matter.</p>
 <ol>
-<li><strong>Two section cards show a photograph from a different section.</strong> The card for
-<em>Silver &amp; Bone</em> is a Thin Air &amp; Cloud Forest picture; the card for <em>The Stone
-Road</em> is a White City &amp; Deep Canyon picture. A visitor choosing where to join the Caravan is
-being shown the wrong place.</li>
-<li><strong>Twelve photographs ship twice.</strong> Every section card and both home images are a
-second copy of a gallery photograph under a new filename. <code>home/hero.jpg</code> and
-<code>home/patagonia-road.jpg</code> are the same picture as each other <em>and</em> as
-<code>the-end-of-the-road/07-patagoina-01</code> — the same Patagonian road appears three times.
-And inside Both Shores, two files with nearly the same name are visually identical.</li>
+<li><strong>Correction, 6 August 2026.</strong> I first reported that two section cards showed a
+photograph from the wrong section. That was wrong, and I should have checked before saying it.
+Those two files — <code>silver-and-bone.jpg</code> and <code>the-stone-road.jpg</code> — were not
+referenced by anything. The real cards are generated from the first photograph in each section's
+own gallery and were always correct. What was actually true is the next point.</li>
+<li><strong>Twelve files were dead weight, and nine of them were not referenced at all.</strong>
+Every one was a second copy of a gallery photograph under a new filename. Nine were orphans no page
+ever asked for. Three were live but pointless — <code>home/hero.jpg</code> was byte-identical to
+<code>the-end-of-the-road/07-patagoina-01</code>, and so was
+<code>home/patagonia-road.jpg</code>, so the same Patagonian road existed three times over. All
+twelve are now deleted and the three live references point at the gallery originals. And inside
+Both Shores, two files with nearly the same name are still visually identical — that one is a real
+edit decision and it is yours.</li>
 <li><strong>The edit is very uneven.</strong> Patagonia has 21 photographs. Atacama has 4. That is
 not a considered edit, it is whatever survived the import — and it makes the Caravan feel like a
 Patagonia trip with some Andes attached.</li>
 </ol>
 <div class="rec"><h3>What I'd do about it</h3>
 <ul>
-<li>Fix the two wrong cards first. Ten minutes, and it is a factual error.</li>
-<li>Stop shipping duplicates. One photograph, one file, referenced from wherever it is needed.
-That is 12 fewer files and no visual change at all.</li>
+<li><strong>Done, 6 August 2026.</strong> Twelve duplicate files deleted, three references repointed at the gallery originals, and all seventy photographs regenerated from your masters at 2000px. 49 MB down to 29 MB, and the number of files over 600 KB went from 35 to 6.</li>
 <li>Rebalance towards 6–8 per section. Patagonia loses about half — <strong>your call which
 half</strong> — and the four thin sections want more. If there are more Atacama and Bolivia frames
 on your drive that never made it into these folders, this is the moment.</li>

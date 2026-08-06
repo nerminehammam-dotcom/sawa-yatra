@@ -24,7 +24,7 @@ const galleryImage = (
   image(`gallery/${sectionSlug}/${filename}`, alt, focalPoint);
 
 export const andeanCaravanHeroImage = image(
-  "andean-caravan.jpg",
+  "gallery/the-end-of-the-road/01-patagonia-62.jpg",
   "A motorcyclist follows a gravel road towards snow-covered Patagonian peaks.",
   { x: 52, y: 61 },
 );

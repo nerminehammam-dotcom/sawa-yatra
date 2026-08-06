@@ -201,7 +201,7 @@ export const andeanDestinationDetails = {
     populationContext: "Greater Santiago · 2017 census",
     orientation: ["Historic civic centre and markets", "Neighbourhood streets and Andean viewpoints"],
     image: {
-      src: `${imageRoot}/atacama.jpg`,
+      src: `${imageRoot}/gallery/atacama/01-astro-01.jpg`,
       alt: "A star-filled Atacama landscape on the northern Chile section of the route.",
       caption: "Northern Chile to Santiago · Sawayatra route photograph",
       focalPoint: { x: 50, y: 45 },

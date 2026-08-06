@@ -95,7 +95,7 @@ export default function HowItWorksPage() {
           <article className={styles.wayCard}>
             <div className={`${styles.wayImage} ${styles.atacamaImage}`}>
               <Image
-                src="/assets/images/departures/andean/atacama.jpg"
+                src="/assets/images/departures/andean/gallery/atacama/01-astro-01.jpg"
                 alt="Stars fill the night sky above rock formations in the Atacama Desert."
                 fill
                 sizes="(max-width: 1023px) 100vw, 58vw"

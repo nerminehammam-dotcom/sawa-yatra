@@ -42,7 +42,7 @@ export default function HomePage() {
       <section className={styles.homeHero} aria-labelledby="home-heading">
         <Image
           className={styles.homeHeroImage}
-          src="/assets/images/home/hero.jpg"
+          src="/assets/images/departures/andean/gallery/the-end-of-the-road/07-patagoina-01.jpg"
           alt="A quiet road runs through open Patagonian grassland beneath a pale blue sky."
           fill
           preload
