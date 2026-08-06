@@ -1,11 +1,11 @@
 import { ANDEAN_CARAVAN_FIRST_DEPARTURE } from "@/content/andean-caravan";
 import type { NavigationItem } from "@/lib/types";
 
-// Primary nav carries only operational, readable destinations. Journeys,
-// Create your own journey and Departure dates are "coming later" and moved to
-// the footer (see PublicShell) on 7 August 2026 — half the primary nav pointing
-// at "coming soon" pages made the whole thing read as unfinished. The Caravans
-// item opens the mega-menu that leads to the Andean Caravan and its sections.
+// Journeys, Create your own journey and Departure dates are kept in the primary
+// nav at the founder's request (7 August 2026): she is building those pages and
+// wants them visible to work on the page design, with content landing shortly.
+// They currently resolve to honest "coming soon" pages. Revisit whether they
+// belong in the primary nav once their content is in.
 export const primaryNavigation = [
   {
     id: "how-it-works",
@@ -25,10 +25,6 @@ export const primaryNavigation = [
     href: "/caravans",
     contentStatus: "LOCKED",
   },
-] as const satisfies readonly NavigationItem[];
-
-// Reachable from the footer, honestly labelled as not yet open.
-export const comingLaterNavigation = [
   {
     id: "journeys",
     label: "Journeys",
@@ -115,7 +111,6 @@ export const caravansNavigation = {
 
 export const footerNavigation = [
   ...primaryNavigation,
-  ...comingLaterNavigation,
   {
     id: "privacy",
     label: "Privacy",
