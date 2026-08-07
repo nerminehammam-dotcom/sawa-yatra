@@ -68,7 +68,7 @@ export function TravelSelfIntro() {
           fill
           priority
           sizes="(max-width: 899px) 100vw, (max-width: 1440px) 52vw, 749px"
-          src="/assets/images/travel-self/intro.jpg"
+          src="/assets/images/travel-self/intro-sawayatra.jpg"
         />
       </figure>
     </div>
