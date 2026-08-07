@@ -147,8 +147,10 @@
   fill: var(--pink);
 }
 
+/* Olive, not clay (7 August 2026) — matches the primary route map so the three
+   countries read sun / pink / olive everywhere. Ink labels on olive: 4.78:1. */
 .countryShapes .chile {
-  fill: var(--clay);
+  fill: var(--olive);
 }
 
 .countryLabels text {

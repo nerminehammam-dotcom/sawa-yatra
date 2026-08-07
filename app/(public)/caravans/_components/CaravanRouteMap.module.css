@@ -158,8 +158,10 @@
   fill: var(--pink);
 }
 
+/* Olive since 7 August 2026, not clay: the brown the founder disliked. The
+   three countries now read sun / pink / olive. Ink labels on olive are 4.78:1. */
 .countryShapes .chile {
-  fill: var(--clay);
+  fill: var(--olive);
 }
 
 .countryLabels text {

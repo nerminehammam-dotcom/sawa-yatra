@@ -5,7 +5,7 @@
   gap: var(--space-12);
   padding: clamp(3rem, 7vw, 7rem) var(--page-gutter);
   color: var(--ink);
-  background: var(--sun);
+  background: var(--blue);
   border-bottom: var(--border-strong) solid var(--ink);
 }
 

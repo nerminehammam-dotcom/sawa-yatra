@@ -77,7 +77,7 @@
   align-content: space-between;
   gap: clamp(1.75rem, 4vh, 3.5rem);
   padding: clamp(2.5rem, 6vh, 4.5rem) clamp(2rem, 4.5vw, 4.5rem);
-  background: var(--tsi-pink);
+  background: var(--tsi-olive);
   border-inline-end: var(--border-strong) solid var(--tsi-ink);
 }
 
@@ -115,11 +115,11 @@
    files until 5 August 2026, so this asked for nothing and got nothing before
    then.
 
-   Signal orange against --pink measures 3.51:1. That clears the large-text
-   threshold of 3.0 and little else, so it is only ever allowed on this
-   heading, which is 4rem at its smallest. Do not reuse it on body copy. */
+   Ink, not orange, since 7 August 2026: the intro ground moved from pink to
+   olive, and signal-text on olive is 1.86:1 — illegal. Only ink reads on olive
+   (4.78:1), so the emphasis is now carried by the swash italic alone. */
 .travelSelfIntro .introYou {
-  color: var(--tsi-signal-text);
+  color: var(--tsi-ink);
   font-style: italic;
   font-variation-settings: "opsz" 144, "SOFT" 40, "WONK" 1;
   font-weight: 300;
