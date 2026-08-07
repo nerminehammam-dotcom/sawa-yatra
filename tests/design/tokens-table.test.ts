@@ -31,8 +31,8 @@ describe("the documented contrast table", () => {
       );
     }
 
-    // Eight distinct colours. If two tokens ever resolve to the same hex the
-    // system has quietly become a seven-colour system with a spare name.
+    // Nine distinct colours. If two tokens ever resolve to the same hex the
+    // system has quietly become an eight-colour system with a spare name.
     const distinct = new Set(BASE_COLOURS.map((c) => tokens.get(`--${c}`)!.toLowerCase()));
     expect(distinct.size).toBe(BASE_COLOURS.length);
   });
@@ -116,13 +116,14 @@ describe("the documented contrast table", () => {
 
     expect(Object.fromEntries(BASE_COLOURS.map((c) => [c, safeAgainst(c)]))).toEqual({
       paper: ["ink", "signal-text"],
-      ink: ["paper", "signal", "sun", "olive", "pink"],
+      ink: ["paper", "signal", "sun", "olive", "pink", "blue"],
       signal: ["ink"],
       "signal-text": ["paper"],
       clay: [],
       sun: ["ink"],
       olive: ["ink"],
       pink: ["ink"],
+      blue: ["ink"],
     });
 
     // The two traps this table exists to stop. Both look plausible.
@@ -143,7 +144,7 @@ describe("the documented contrast table", () => {
     expect(clearing.sort()).toEqual(["clay", "ink", "signal-text"]);
   });
 
-  it("maps every alias back to one of the eight", () => {
+  it("maps every alias back to one of the nine", () => {
     // --terracotta, --dusty-blue, --brick and friends exist for compatibility.
     // Each must still land on a colour in the system, not drift off on its own.
     const byHex = paletteByHex();

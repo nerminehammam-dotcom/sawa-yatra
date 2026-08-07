@@ -1,15 +1,17 @@
 :root {
-  /* Master brief v2: this is a closed seven-colour system.
+  /* Master brief v2, extended: a closed eight-colour system. Dusty blue is the
+   * cool note added 7 August 2026 — a greyed blue that reads as words on ink
+   * and carries ink as a ground, and colour-blocks against the warm spots.
    *
    * CONTRAST PAIRINGS (WCAG 2.1 ratios).
    *
    * WHAT MAY CARRY BODY TEXT ON WHAT (>= 4.5). This is the short version, and
    * it is the version to read at the moment of choosing:
    *
-   *   ink          on paper, signal, sun, olive or pink
+   *   ink          on paper, signal, sun, olive, pink or blue
    *   paper        on ink or signal-text
    *   signal-text  on paper only
-   *   signal, sun, olive, pink   on ink only
+   *   signal, sun, olive, pink, blue   on ink only
    *   clay         on nothing at all
    *
    * Two pairings look plausible and are not. ink on signal-text is 2.57 — two
@@ -19,15 +21,16 @@
    * The full matrix follows. Every pairing that does not involve ink or paper
    * fails AA for body text, and most fail the 3:1 large-text threshold too.
    *
-   *              paper    ink  signal  sig-txt   clay    sun  olive   pink
-   *   paper        --   11.99   2.60x    4.67   3.19L  1.39x  2.51x  1.33x
-   *   ink       11.99      --    4.61    2.57x  3.75L   8.64   4.78   9.00
-   *   signal     2.60x   4.61      --    1.79x  1.23x  1.88x  1.04x  1.96x
-   *   sig-txt     4.67   2.57x   1.79x      --  1.46x  3.37L  1.86x  3.51L
-   *   clay       3.19L   3.75L   1.23x    1.46x    --   2.30x  1.27x  2.40x
-   *   sun        1.39x    8.64   1.88x    3.37L  2.30x     --  1.81x  1.04x
-   *   olive      2.51x    4.78   1.04x    1.86x  1.27x  1.81x     --   1.88x
-   *   pink       1.33x    9.00   1.96x    3.51L  2.40x  1.04x  1.88x     --
+   *              paper    ink  signal  sig-txt   clay    sun  olive   pink   blue
+   *   paper        --   11.99   2.60x    4.67   3.19L  1.39x  2.51x  1.33x  1.96x
+   *   ink       11.99      --    4.61    2.57x  3.75L   8.64   4.78   9.00   6.13
+   *   signal     2.60x   4.61      --    1.79x  1.23x  1.88x  1.04x  1.96x  1.33x
+   *   sig-txt     4.67   2.57x   1.79x      --  1.46x  3.37L  1.86x  3.51L  2.39x
+   *   clay       3.19L   3.75L   1.23x    1.46x    --   2.30x  1.27x  2.40x  1.63x
+   *   sun        1.39x    8.64   1.88x    3.37L  2.30x     --  1.81x  1.04x  1.41x
+   *   olive      2.51x    4.78   1.04x    1.86x  1.27x  1.81x     --   1.88x  1.28x
+   *   pink       1.33x    9.00   1.96x    3.51L  2.40x  1.04x  1.88x     --   1.47x
+   *   blue       1.96x    6.13   1.33x    2.39x  1.63x  1.41x  1.28x  1.47x     --
    *
    *   no mark = passes AA (>=4.5)   L = large text only (>=3)   x = fails both
    *
@@ -42,6 +45,7 @@
   --sun: #e5bc4f;
   --olive: #98904f;
   --pink: #eeb6c4;
+  --blue: #7ea8c0;
 
   /* Compatibility names point back to the approved system. */
   --cream: var(--paper);

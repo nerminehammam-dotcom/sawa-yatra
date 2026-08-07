@@ -24,6 +24,7 @@ export const BASE_COLOURS = [
   "sun",
   "olive",
   "pink",
+  "blue",
 ] as const;
 
 export type BaseColour = (typeof BASE_COLOURS)[number];
@@ -147,6 +148,7 @@ const HEADER_TO_COLOUR: Record<string, BaseColour> = {
   sun: "sun",
   olive: "olive",
   pink: "pink",
+  blue: "blue",
 };
 
 /**
@@ -164,7 +166,7 @@ export function documentedMatrix(): DocumentedCell[] {
     throw new Error("Could not find the contrast table header in styles/tokens.css");
   }
 
-  const columns = (header.match(/paper|ink|signal|sig-txt|clay|sun|olive|pink/g) ?? []).map(
+  const columns = (header.match(/paper|ink|signal|sig-txt|clay|sun|olive|pink|blue/g) ?? []).map(
     (name) => HEADER_TO_COLOUR[name],
   );
 
@@ -172,7 +174,7 @@ export function documentedMatrix(): DocumentedCell[] {
   for (let i = headerIndex + 1; i < lines.length; i += 1) {
     const line = lines[i];
     const rowMatch = line
-      ? /^\s*\*\s+(paper|ink|signal|sig-txt|clay|sun|olive|pink)\s+(.*)$/.exec(line)
+      ? /^\s*\*\s+(paper|ink|signal|sig-txt|clay|sun|olive|pink|blue)\s+(.*)$/.exec(line)
       : null;
     if (!rowMatch?.[1] || rowMatch[2] === undefined) {
       if (cells.length > 0) break;
