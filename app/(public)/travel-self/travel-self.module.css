@@ -168,10 +168,17 @@
   margin: 0;
   overflow: hidden;
   line-height: 0;
+  background: var(--tsi-paper);
 }
 
+/* Contain, not cover (7 August 2026): the artwork is a composed poster — the
+   word SAWAYATRA and the whole scene — so cropping it to fill (which a photo
+   tolerates) cut the word and the edges and looked sloppy. Shown whole on the
+   paper ground it reads as a framed print, elegant, and nothing is lost at any
+   screen width. This is why it can't share the Departures image treatment: that
+   is a photograph, this is a painting. */
 .travelSelfIntro .introArtwork {
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
 }
 
