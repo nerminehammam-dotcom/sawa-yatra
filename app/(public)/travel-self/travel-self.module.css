@@ -45,11 +45,12 @@
   --tsi-display: var(--font-display, "Fraunces", Georgia, serif);
   --tsi-hair: 1px;
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-  /* Shorter (was 44rem) so the painting shows more of itself, and the closing
-     line is rust-red like the Departures hero — a consistent accent across the
-     heroes, even though this title is ink on olive. The divider stays 2px ink. */
-  min-height: min(84vh, 40rem);
+  /* Geometry matched to the Departures/Andean split hero so the two read as one
+     system: identical 0.9 / 1.1 columns (the wider image box), the same height,
+     and the same copy rhythm. The closing line is rust-red; the title stays ink
+     on olive because olive carries nothing else legibly. */
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  min-height: min(42rem, calc(100dvh - 9.75rem));
   color: var(--tsi-ink);
   background: var(--tsi-paper);
   border-bottom: 4px solid var(--tsi-signal-text);
@@ -77,9 +78,9 @@
    this is the better of the two on both counts. */
 .travelSelfIntro .introCopy {
   display: grid;
-  align-content: space-between;
-  gap: clamp(1.75rem, 4vh, 3.5rem);
-  padding: clamp(2.5rem, 6vh, 4.5rem) clamp(2rem, 4.5vw, 4.5rem);
+  align-content: center;
+  gap: var(--space-6);
+  padding: clamp(2.5rem, 6vh, 4.5rem) var(--page-gutter);
   background: var(--tsi-olive);
   border-inline-end: var(--border-strong) solid var(--tsi-ink);
 }
