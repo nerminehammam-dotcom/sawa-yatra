@@ -481,6 +481,9 @@
 }
 
 .finalAction h2 {
+  /* Deep-orange on the pink final-call ground (3.5:1, display) — the closing
+     headline carries colour like the page heroes, not flat ink. */
+  color: var(--signal-text);
   max-width: 8ch;
   /* was line-height 0.78, which collided descenders with the next line's ascenders */
   font-size: clamp(4rem, 11vw, 10rem);
@@ -1010,6 +1013,9 @@
 }
 
 .finalAction h2 {
+  /* Deep-orange on the pink final-call ground (3.5:1, display) — the closing
+     headline carries colour like the page heroes, not flat ink. */
+  color: var(--signal-text);
   max-width: 8ch;
   /* was line-height 0.78, which collided descenders with the next line's ascenders */
   font-size: clamp(4rem, 11vw, 10rem);
