@@ -5,6 +5,7 @@ import { andeanCaravanSections } from "@/content/andean-caravan";
 import { getAndeanCaravanImage } from "@/content/andean-caravan-images";
 
 import styles from "./FieldDocument.module.css";
+import { Arrow } from "@/components/ui/Arrow";
 
 export function RouteIndex() {
   return (
@@ -46,7 +47,7 @@ export function RouteIndex() {
               href={`/departures/${section.slug}`}
               aria-label={`View ${section.title}`}
             >
-              View section <span aria-hidden="true">↗</span>
+              View section <Arrow direction="up-right" />
             </Link>
           </li>
         );

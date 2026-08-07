@@ -1,3 +1,4 @@
+import { Arrow } from "@/components/ui/Arrow";
 import type { Metadata } from "next";
 import Link from "next/link";
 
@@ -49,7 +50,7 @@ export default function DeparturesPage() {
           <div><dt>Group</dt><dd>{andeanCaravan.group}</dd></div>
           <div><dt>Price</dt><dd>{andeanCaravan.price}</dd></div>
         </dl>
-        <Link href="/caravans/andean">Explore the complete Caravan →</Link>
+        <Link href="/caravans/andean">Explore the complete Caravan <Arrow /></Link>
       </section>
 
       <div className={styles.map} id="full-route-map">
@@ -97,7 +98,7 @@ export default function DeparturesPage() {
                       <div><dt>Join / leave</dt><dd>{joinNames} / {leaveName}</dd></div>
                       <div><dt>Date</dt><dd>{section.publicDateWindow}</dd></div>
                     </dl>
-                    <strong>View section →</strong>
+                    <strong>View section <Arrow /></strong>
                   </div>
                 </Link>
               </li>
@@ -111,7 +112,7 @@ export default function DeparturesPage() {
           <h2 id="joining-heading">Joining & Leaving Points</h2>
           <p>Compare every gateway, airport, time commitment and next natural leaving point in one place.</p>
         </div>
-        <Link href="/caravans/andean-caravan/how-it-works">Compare joining points →</Link>
+        <Link href="/caravans/andean-caravan/how-it-works">Compare joining points <Arrow /></Link>
       </section>
 
       <section className={styles.information} id="dates-availability" aria-labelledby="dates-heading">
@@ -145,7 +146,7 @@ export default function DeparturesPage() {
       <section className={styles.ask} aria-labelledby="ask-heading">
         <p>Ask about a section</p>
         <h2 id="ask-heading">Start with the part of the route you can already imagine.</h2>
-        <Link href={contactHref("Departures")}>Ask a question →</Link>
+        <Link href={contactHref("Departures")}>Ask a question <Arrow /></Link>
       </section>
     </main>
   );

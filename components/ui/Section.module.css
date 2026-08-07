@@ -14,8 +14,9 @@
   background: var(--cream);
 }
 
-/* Was var(--soft-blue), which aliases to olive — this ground rendered
-   identically to .olive below. ink-on-sun is 8.64, well clear of AA. */
+/* A "butter" ground uses the butter (sun) token. It once used --soft-blue by
+   mistake, which then aliased to olive, so this rendered identically to .olive
+   below. (--soft-blue is real blue now.) ink-on-sun is 8.64, well clear of AA. */
 .butter {
   color: var(--warm-ink);
   background: var(--butter);

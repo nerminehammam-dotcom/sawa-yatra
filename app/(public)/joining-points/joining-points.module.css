@@ -19,7 +19,7 @@
 
 .hero h1 {
   max-width: 14ch;
-  font-size: clamp(3.5rem, 7vw, 7rem);
+  font-size: var(--fs-heading);
   line-height: 0.86;
 }
 

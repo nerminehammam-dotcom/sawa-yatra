@@ -81,8 +81,8 @@ export const membershipTiers = [
       ),
     ],
     action: {
-      label: "Request an invitation",
-      href: "/request-invitation",
+      label: "Register your interest",
+      href: "/register-interest",
       style: "primary",
       contentStatus: "LOCKED",
     },
@@ -103,8 +103,8 @@ export const membershipTiers = [
       ),
     ],
     action: {
-      label: "Request an invitation",
-      href: "/request-invitation",
+      label: "Register your interest",
+      href: "/register-interest",
       style: "primary",
       contentStatus: "LOCKED",
     },
@@ -119,8 +119,8 @@ export const membershipContent = {
     eyebrow: "Membership",
     title: "A small, vetted club, and a host who knows you.",
     primaryAction: {
-      label: "Request an invitation",
-      href: "/request-invitation",
+      label: "Register your interest",
+      href: "/register-interest",
       style: "primary",
       contentStatus: "LOCKED",
     },

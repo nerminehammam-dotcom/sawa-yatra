@@ -1,4 +1,5 @@
 "use client";
+import { Arrow } from "@/components/ui/Arrow";
 
 import Image from "next/image";
 import type { CSSProperties, KeyboardEvent } from "react";
@@ -552,7 +553,7 @@ export function CaravanRouteMap({ headingLevel = 3 }: CaravanRouteMapProps = {})
                 <strong>
                   {String(nextIndex + 1).padStart(2, "0")} · {"mapLabel" in nextStop ? nextStop.mapLabel : nextStop.name}
                 </strong>
-                <span aria-hidden="true">→</span>
+                <Arrow />
               </button>
 
               <div className={styles.progressGroup}>
@@ -589,7 +590,7 @@ export function CaravanRouteMap({ headingLevel = 3 }: CaravanRouteMapProps = {})
                   <span className={styles.motionNote}>Manual route</span>
                 )}
                 <button type="button" onClick={() => moveBy(1)} aria-label="Next stop">
-                  <span aria-hidden="true">→</span>
+                  <Arrow />
                 </button>
               </div>
 

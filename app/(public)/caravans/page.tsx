@@ -8,6 +8,7 @@ import { andeanCaravanHeroImage } from "@/content/andean-caravan-images";
 
 import { CaravanRouteMap } from "./_components/CaravanRouteMap";
 import styles from "./caravans.module.css";
+import { Arrow } from "@/components/ui/Arrow";
 
 export const metadata = createPageMetadata("/caravans");
 
@@ -31,7 +32,7 @@ export default function CaravansPage() {
             src={andeanCaravanHeroImage.src}
             alt={andeanCaravanHeroImage.alt}
             fill
-            priority
+            preload
             sizes="(max-width: 800px) 100vw, (max-width: 1440px) 55vw, 792px"
             style={{
               objectPosition: `${andeanCaravanHeroImage.focalPoint?.x ?? 50}% 76%`,
@@ -66,8 +67,8 @@ export default function CaravansPage() {
           </div>
         </dl>
         <div className={styles.actions}>
-          <Link href="/caravans/andean">Follow the complete route →</Link>
-          <Link href="/caravans/andean-caravan/how-it-works">Compare joining points ↗</Link>
+          <Link href="/caravans/andean">Follow the complete route <Arrow /></Link>
+          <Link href="/caravans/andean-caravan/how-it-works">Compare joining points <Arrow direction="up-right" /></Link>
         </div>
       </section>
 

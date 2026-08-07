@@ -5,6 +5,7 @@ import { membershipContent } from "@/content/membership";
 import { contactHref } from "@/lib/contact";
 
 import styles from "./membership.module.css";
+import { Arrow } from "@/components/ui/Arrow";
 
 export const metadata = createPageMetadata("/membership");
 
@@ -19,7 +20,7 @@ export default function MembershipPage() {
           the travelling room small.
         </p>
         <Link href={contactHref("Membership")}>
-          Ask about membership →
+          Ask about membership <Arrow />
         </Link>
       </section>
       <section className={styles.note} aria-labelledby="membership-note-heading">

@@ -89,5 +89,11 @@ export const TRAVEL_SELF_COPY = {
     introduction: "Sixteen ways of moving through a journey. You will recognise more than one of them.",
     ownMarker: "Your Travel Self",
   },
+  onward: {
+    heading: "Now you know how you travel.",
+    body: "Membership is not open yet. Register your interest and we will write to you first — when dates, joining points and membership open. No account, no payment.",
+    register: "Register your interest",
+    explore: "See the Andean Caravan",
+  },
   sharePronunciation: "sa · wa · ya · tra",
 } as const;

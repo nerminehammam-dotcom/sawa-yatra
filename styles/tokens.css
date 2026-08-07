@@ -39,6 +39,10 @@
    */
   --paper: #e7e1d6;
   --ink: #27231f;
+  /* --signal is a FILL behind ink, or a large graphic mark — never a foreground.
+   * It fails 3:1 on paper (2.60), so it must not be text, icon, hairline or a
+   * focus ring on the cream canvas. (CI checks declared pairs, not colour
+   * inherited from an ancestor — so this one is on you.) */
   --signal: #f05a2a;
   --signal-text: #b03a0c;
   --clay: #a96f47;
@@ -55,7 +59,7 @@
   --burnt: var(--signal);
   --honey: var(--sun);
   --deep-brown: var(--ink);
-  --dusty-blue: var(--olive);
+  --dusty-blue: var(--blue); /* fixed 7 Aug 2026: was aliased to --olive, so a token named "blue" rendered green. Now the real greyed blue. */
   --dusty-rose: var(--pink);
   --warm-ink: var(--ink);
   --olive-text: var(--ink);
@@ -72,7 +76,7 @@
   --focus: var(--focus-ring-light);
   --hover: var(--ink);
   --visited: var(--ink);
-  --disabled: var(--olive);
+  --disabled: #98904f; /* own token (was aliased to --olive) so a palette change to olive can't silently restyle disabled controls; retune to a muted grey if a clearer disabled look is wanted. */
 
   /* Status colours must clear 3:1 against --paper to register as indicators.
    * Only ink (11.99), signal-text (4.67) and clay (3.19) do; signal, olive,
@@ -90,13 +94,36 @@
   --soft-olive: var(--olive);
   --soft-honey: var(--sun);
   --soft-rose: var(--pink);
-  --soft-blue: var(--olive);
+  --soft-blue: var(--blue); /* fixed: was --olive (see --dusty-blue). Genuine-olive soft grounds use --soft-olive. */
   --hairline: var(--ink);
 
   /* Single-family type system: Fraunces for display and text.
      The opsz axis (9-144) carries the register change, not a second family. */
-  --font-display: "Fraunces", Georgia, serif;
-  --font-read: "Fraunces", Georgia, serif;
+  --font-display: var(--font-fraunces, Georgia, serif);
+  --font-read: var(--font-fraunces, Georgia, serif);
+
+  /* Type scale (added 2026-08-07). One ramp for the whole site; the opsz axis
+     carries the display/text register, so these are just sizes. Values match the
+     established h1/h2/h3 ramp and the dominant module sizes, so adopting a token
+     is visually a no-op — the point is to collapse ~95 bespoke `font-size:
+     clamp()` values onto a shared set. Modules should migrate onto these; the
+     long tail is staged for a rendered pass (see docs/sawayatra-design-audit.md §2). */
+  --fs-display-1: clamp(3.6rem, 9.5vw, 9.5rem); /* hero / h1 */
+  --fs-display-2: clamp(2.6rem, 6vw, 6.25rem); /* section head / h2 */
+  --fs-display-3: clamp(2rem, 3.8vw, 4rem); /* sub-section */
+  --fs-hero: clamp(3rem, 5.2vw, 6rem); /* split-hero headline (CYOJ / how-it-works / departures) */
+  --fs-heading: clamp(3rem, 6vw, 6rem); /* in-page section heading */
+  --fs-card: clamp(3.2rem, 5vw, 5rem); /* large display card title (featured / way cards) */
+  --fs-title: clamp(1.65rem, 2.8vw, 2.65rem); /* h3 / smaller card title */
+  --fs-lead: clamp(1.15rem, 1.6vw, 1.5rem); /* standfirst / lead */
+  --fs-body: clamp(1.05rem, 1.4vw, 1.3rem); /* long-form body in modules */
+  --fs-small: 1rem; /* smallest readable — decision facts, per audit-01 */
+  --fs-eyebrow: 0.875rem; /* decorative label floor */
+
+  --leading-tight: 1.06; /* display */
+  --leading-title: 1.12; /* h3 */
+  --leading-body: 1.62; /* body copy — one value (was 1.5 / 1.55 / 1.6 / 1.62) */
+  --tracking-eyebrow: 0.12em; /* cap for uppercase labels */
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;

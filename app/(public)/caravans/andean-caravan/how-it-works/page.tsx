@@ -11,6 +11,7 @@ import { approvedFaq } from "./_content";
 import { FindGateButton, JourneyDrawerButton } from "./_components/FindGateButton";
 import { GateSelector } from "./_components/GateSelector";
 import styles from "./how-it-works.module.css";
+import { Arrow } from "@/components/ui/Arrow";
 
 export const metadata: Metadata = createPageMetadata(
   "/caravans/andean-caravan/how-it-works",
@@ -137,7 +138,7 @@ export default function HopOnHopOffPage() {
           <h3>One route, two propositions.</h3>
           <p><strong>The Mirror</strong> runs January–March, when water erases the Salar’s horizon.</p>
           <p><strong>The White Desert</strong> runs May–October, with dry crust and fuller access.</p>
-          <Link href="/journeys">Browse standalone journeys →</Link>
+          <Link href="/journeys">Browse standalone journeys <Arrow /></Link>
         </div>
       </section>
 

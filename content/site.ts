@@ -302,8 +302,8 @@ export const homeContent = {
     title: "A small, vetted club, and a host who knows you.",
     safetyMechanismLine: "DRAFT / PLACEHOLDER: Verified mechanism copy to be supplied.",
     action: {
-      label: "Request an invitation",
-      href: "/request-invitation",
+      label: "Register your interest",
+      href: "/register-interest",
       style: "primary",
       contentStatus: "LOCKED",
     },
@@ -399,8 +399,8 @@ export const travelSelfPageContent = {
   saveNotice:
     "You can take the draft taster without an account. Saving or continuing requires an invitation request or member access.",
   requestAction: {
-    label: "Request an invitation",
-    href: "/request-invitation",
+    label: "Register your interest",
+    href: "/register-interest",
     style: "primary",
     contentStatus: "LOCKED",
   },
@@ -544,8 +544,8 @@ export const aboutContent = {
   ],
   closingLine: "The table's set, come find your seat.",
   action: {
-    label: "Request an invitation",
-    href: "/request-invitation",
+    label: "Register your interest",
+    href: "/register-interest",
     style: "primary",
     contentStatus: "LOCKED",
   },
@@ -558,8 +558,8 @@ export const signInContent = {
   body: "Authentication is not active in Release 1.",
   interestForm: signInInterestFormContent,
   requestAction: {
-    label: "Request an invitation",
-    href: "/request-invitation",
+    label: "Register your interest",
+    href: "/register-interest",
     style: "secondary",
     contentStatus: "LOCKED",
   },

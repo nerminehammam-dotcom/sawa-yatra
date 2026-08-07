@@ -3,6 +3,7 @@ import Image from "next/image";
 import { TRAVEL_SELF_COPY } from "@/content/travel-self/copy";
 
 import styles from "./travel-self.module.css";
+import { Arrow } from "@/components/ui/Arrow";
 
 const PRIVACY_SENTENCE =
   "Four minutes. Your answers are saved in this browser when you finish, and they are not sent to Sawayatra.";
@@ -14,7 +15,7 @@ function BeginButton() {
       data-travel-self-begin
       type="button"
     >
-      Find out <span aria-hidden="true">→</span>
+      Find out <Arrow />
     </button>
   );
 }
@@ -66,7 +67,7 @@ export function TravelSelfIntro() {
           alt="Painted travel poster: a vicuña in dry grass beneath blue and red rock towers, pink cloud across a sage sky, a propeller plane at upper left, and the word Sawayatra set into the cloud"
           className={styles.introArtwork}
           fill
-          priority
+          preload
           sizes="(max-width: 899px) 100vw, (max-width: 1440px) 52vw, 749px"
           src="/assets/images/travel-self/intro-sawayatra.jpg"
         />

@@ -41,13 +41,13 @@
 .introductionCopy h1 {
   color: var(--signal-text);
   max-width: 16ch;
-  font-size: clamp(3rem, 5.2vw, 6rem);
+  font-size: var(--fs-hero);
   line-height: 0.92;
 }
 
 .introductionCopy > p:last-child {
   max-width: 42ch;
-  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+  font-size: var(--fs-body);
 }
 
 .introductionImage {

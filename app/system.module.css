@@ -46,13 +46,13 @@
 .title {
   max-width: 13ch;
   margin-bottom: var(--space-8);
-  font-size: clamp(3rem, 8vw, 7rem);
+  font-size: var(--fs-heading);
 }
 
 .copy {
   max-width: 48ch;
   color: var(--deep-brown);
-  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  font-size: var(--fs-lead);
 }
 
 .actions {
@@ -117,14 +117,14 @@
 
 .formTitle {
   max-width: 14ch;
-  font-size: clamp(3rem, 7vw, 6.75rem);
+  font-size: var(--fs-heading);
 }
 
 .formLead {
   max-width: 48ch;
   margin-top: var(--space-6);
   color: var(--deep-brown);
-  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  font-size: var(--fs-lead);
 }
 
 .formLayout {
@@ -179,7 +179,7 @@
 
 .legalTitle {
   max-width: 12ch;
-  font-size: clamp(3rem, 8vw, 6.5rem);
+  font-size: var(--fs-heading);
 }
 
 .legalNotice {

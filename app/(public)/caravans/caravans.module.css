@@ -38,7 +38,7 @@
   width: 100%;
   max-width: 100%;
   align-self: center;
-  font-size: clamp(4rem, 6vw, 7rem);
+  font-size: var(--fs-heading);
   line-height: 0.9;
   text-wrap: initial;
 }

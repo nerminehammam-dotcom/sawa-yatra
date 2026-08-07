@@ -8,6 +8,7 @@ import type { JoiningPointRecord } from "@/content/field-document";
 import { contactHref } from "@/lib/contact";
 
 import styles from "./JoiningPointSelector.module.css";
+import { Arrow } from "@/components/ui/Arrow";
 
 export function JoiningPointSelector({
   points,
@@ -74,7 +75,7 @@ export function JoiningPointSelector({
             aria-controls={detailId}
             onClick={() => selectPoint(activeIndex + 1)}
           >
-            Next <span aria-hidden="true">→</span>
+            Next <Arrow />
           </button>
         </div>
         <p className={styles.railHint}>
@@ -156,9 +157,9 @@ export function JoiningPointSelector({
             </div>
           </dl>
           <div className={styles.actions}>
-            <Link href={`/departures/${active.sectionSlug}`}>View this section →</Link>
+            <Link href={`/departures/${active.sectionSlug}`}>View this section <Arrow /></Link>
             <Link href={contactHref(`Joining point: ${active.place}`)}>
-              Ask about joining here ↗
+              Ask about joining here <Arrow direction="up-right" />
             </Link>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import { Arrow } from "@/components/ui/Arrow";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -186,7 +187,7 @@ function InterestSection({ title }: { title: string }) {
             className={styles.askLink}
             href={contactHref(title)}
           >
-            Ask a question →
+            Ask a question <Arrow />
           </Link>
         </div>
       </Container>

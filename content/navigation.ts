@@ -64,14 +64,21 @@ export const utilityNavigation = [
     href: "/partners",
     contentStatus: "LOCKED",
   },
+  {
+    // Persistent join CTA in the header + mobile menu, so the action survives
+    // the dismissable announcement banner. Points at the working capture
+    // (/register-interest), not the "not open yet" /request-invitation holding
+    // page. Consider promoting this to a prominent button once placement is
+    // reviewed.
+    id: "register-interest",
+    label: "Register your interest",
+    href: "/register-interest",
+    contentStatus: "LOCKED",
+  },
 ] as const satisfies readonly NavigationItem[];
 
 export const announcementNavigation = {
   message: `The Andean Caravan is open for interest. First departure ${ANDEAN_CARAVAN_FIRST_DEPARTURE}.`,
-  action: {
-    label: "Register your interest",
-    href: "/register-interest",
-  },
   signIn: {
     label: "Sign in",
     href: "/sign-in",

@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 import { createPageMetadata } from "@/app/_metadata";
+import { Arrow } from "@/components/ui/Arrow";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 
 import styles from "./how-it-works.module.css";
@@ -17,9 +18,10 @@ const consentSteps = [
 export default function HowItWorksPage() {
   return (
     <main className={styles.page} id="main-content" tabIndex={-1}>
-      {/* 1. Opening */}
-      <section className={styles.opening} aria-labelledby="how-heading">
-        <div className={styles.openingInner}>
+      {/* 1. Opening — split hero, geometry matched to the Andean /
+          Create-your-own-journey hero. */}
+      <section className={styles.hero} aria-labelledby="how-heading">
+        <div className={styles.heroCopy}>
           <p className={styles.kicker}>A simple arrangement</p>
           <h1 id="how-heading">How Sawayatra works</h1>
           <p className={styles.openingLine}>
@@ -27,6 +29,15 @@ export default function HowItWorksPage() {
             revealed until the interest is mutual.
           </p>
         </div>
+        <figure className={styles.heroImage}>
+          <Image
+            src="/assets/images/how-it-works/masthead.jpg"
+            alt="Painted travel poster: the word Sawayatra in red across an Andean valley of red, orange and white wildflowers below green hills and a mountain, under tall cream clouds and a stylised red sun."
+            fill
+            sizes="(max-width: 767px) 100vw, (max-width: 1440px) 55vw, 792px"
+            preload
+          />
+        </figure>
       </section>
 
       {/* 2. Three ways to travel */}
@@ -42,7 +53,7 @@ export default function HowItWorksPage() {
               src="/assets/images/departures/andean/gallery/the-end-of-the-road/09-patagonia-41.jpg"
               alt="A broad Patagonian lake lies beneath a distant ridge of snow-covered mountains."
               fill
-              priority
+              preload
               sizes="(max-width: 767px) 100vw, (max-width: 1440px) 92vw, 1325px"
             />
           </div>
@@ -59,7 +70,7 @@ export default function HowItWorksPage() {
               href="/caravans/andean"
               surface="deep"
             >
-              Explore the Andean Caravan <span aria-hidden="true">→</span>
+              Explore the Andean Caravan <Arrow />
             </ButtonLink>
           </div>
         </article>
@@ -84,7 +95,7 @@ export default function HowItWorksPage() {
                 Caravan.
               </p>
               <ButtonLink href="/journeys" surface="deep">
-                See what&apos;s coming <span aria-hidden="true">→</span>
+                See what&apos;s coming <Arrow />
               </ButtonLink>
             </div>
           </article>
@@ -107,7 +118,7 @@ export default function HowItWorksPage() {
               </p>
               <div className={styles.cardActionGroup}>
                 <ButtonLink href="/register-interest" surface="deep">
-                  Register your interest <span aria-hidden="true">→</span>
+                  Register your interest <Arrow />
                 </ButtonLink>
                 <p className={styles.requirement}>Not yet available.</p>
               </div>
@@ -133,7 +144,7 @@ export default function HowItWorksPage() {
             travelling companions that are more likely to suit you.
           </p>
           <ButtonLink href="/travel-self">
-            Meet your Travel Self <span aria-hidden="true">→</span>
+            Meet your Travel Self <Arrow />
           </ButtonLink>
           <p className={styles.note}>
             You can explore freely. A completed Travel Self is required only when

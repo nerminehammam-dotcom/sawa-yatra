@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 import { routeMetadataByPath, siteConfig } from "@/content/site";
-import { siteUrl } from "@/lib/site-url";
+import { absoluteUrl, siteUrl } from "@/lib/site-url";
 
 import { createPageMetadata } from "./_metadata";
+import { fraunces } from "./fonts";
 import "./globals.css";
 
 const homeMetadata = routeMetadataByPath["/"];
@@ -18,33 +19,55 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: "#e7e1d6",
+};
+
+// Organization + WebSite structured data (JSON-LD). Uses siteUrl, so it is
+// correct once NEXT_PUBLIC_SITE_URL is set at launch; pre-launch it mirrors the
+// rest of the metadata (localhost) and the site is noindex anyway.
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}#organization`,
+      name: siteConfig.name,
+      url: siteUrl,
+      logo: absoluteUrl("/icon"),
+      description: siteConfig.descriptor,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      name: siteConfig.name,
+      url: siteUrl,
+      publisher: { "@id": `${siteUrl}#organization` },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
-      <head>
-        <link
-          rel="preload"
-          href="/assets/fonts/fraunces-normal.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
+    // next/font (app/fonts.ts) self-hosts Fraunces, preloads both faces, and
+    // supplies a metric-matched fallback via --font-fraunces — so the manual
+    // <head> preloads and @font-face are no longer needed.
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={fraunces.variable}
+    >
+      <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        {/* The home headline sets one word in italic above the fold, so the
-            italic face is now render-blocking in practice. Without this it
-            arrives late and that word reflows after the rest has painted. */}
-        <link
-          rel="preload"
-          href="/assets/fonts/fraunces-italic.woff2"
-          as="font"
-          type="font/woff2"
-          crossOrigin="anonymous"
-        />
-      </head>
-      <body>{children}</body>
+        {children}
+      </body>
     </html>
   );
 }

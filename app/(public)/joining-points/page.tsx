@@ -6,6 +6,7 @@ import { joiningPoints } from "@/content/field-document";
 import { contactHref } from "@/lib/contact";
 
 import styles from "./joining-points.module.css";
+import { Arrow } from "@/components/ui/Arrow";
 
 export const metadata = createPageMetadata("/joining-points");
 
@@ -20,7 +21,7 @@ export default function JoiningPointsPage() {
             Every gateway shows the practical span from entry to the next
             natural leaving point. The caravan continues beyond your section.
           </p>
-          <Link href="/how-it-works">How the caravan works →</Link>
+          <Link href="/how-it-works">How the caravan works <Arrow /></Link>
         </div>
       </header>
       <JoiningPointSelector
@@ -31,7 +32,7 @@ export default function JoiningPointsPage() {
         <p>Need a calm way into the route?</p>
         <h2 id="joining-final-heading">Start with the place, not a package.</h2>
         <Link href={contactHref("Joining points")}>
-          Ask about a joining point ↗
+          Ask about a joining point <Arrow direction="up-right" />
         </Link>
       </section>
     </main>

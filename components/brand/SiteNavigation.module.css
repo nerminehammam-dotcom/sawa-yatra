@@ -481,3 +481,10 @@
     transition: none;
   }
 }
+
+/* The Register-your-interest CTA rendered as a full-width button inside the
+   mobile sheet needs its own horizontal padding (the sheet links carried theirs
+   on .sheetLink). */
+.sheetCtaItem {
+  padding: var(--space-4) 1.375rem var(--space-2);
+}

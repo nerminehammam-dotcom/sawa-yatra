@@ -27,7 +27,7 @@
 .hero > p:last-of-type,
 .note p {
   max-width: 42ch;
-  font-size: clamp(1.05rem, 1.5vw, 1.3rem);
+  font-size: var(--fs-body);
 }
 
 .hero a {

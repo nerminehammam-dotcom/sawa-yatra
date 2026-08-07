@@ -1,3 +1,4 @@
+import { Arrow } from "@/components/ui/Arrow";
 import Link from "next/link";
 
 import {
@@ -92,7 +93,7 @@ export function DepartureCard({
         <div className={styles.footer}>
           <span className={styles.price}>{price}</span>
           <span className={styles.viewLink} aria-hidden="true">
-            View journey <span className={styles.arrow}>→</span>
+            View journey <Arrow />
           </span>
         </div>
       </div>

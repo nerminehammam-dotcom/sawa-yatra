@@ -32,13 +32,13 @@
 .heroCopy h1 {
   color: var(--signal-text);
   max-width: 16ch;
-  font-size: clamp(3rem, 5.2vw, 6rem);
+  font-size: var(--fs-hero);
   line-height: 0.92;
 }
 
 .heroCopy > p:last-child {
   max-width: 44ch;
-  font-size: clamp(1.05rem, 1.4vw, 1.3rem);
+  font-size: var(--fs-body);
 }
 
 .heroImage {
@@ -126,7 +126,7 @@
 
 .status > p:not(:first-child) {
   max-width: 60ch;
-  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  font-size: var(--fs-body);
   line-height: 1.5;
 }
 

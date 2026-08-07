@@ -29,7 +29,7 @@
 
 .heroTitle {
   max-width: 10ch;
-  font-size: clamp(3.2rem, 5.3vw, 5.8rem);
+  font-size: var(--fs-heading);
 }
 
 .completeHeroTitle {

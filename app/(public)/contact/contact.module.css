@@ -19,7 +19,7 @@
 .supportSection h2 {
   max-width: 16ch;
   color: var(--warm-ink);
-  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-size: var(--fs-title);
   line-height: 1.08;
 }
 

@@ -4,6 +4,7 @@ import { createPageMetadata } from "@/app/_metadata";
 import { contactEmail } from "@/lib/contact";
 
 import styles from "./create-your-own-journey.module.css";
+import { Arrow } from "@/components/ui/Arrow";
 
 export const metadata = createPageMetadata("/create-your-own-journey");
 
@@ -31,7 +32,7 @@ export default function CreateYourOwnJourneyPage() {
             alt="Painted travel poster: a propeller plane over pink clouds, two pyramids beyond pink dunes, a saguaro cactus, a camel and a pale llama among desert flowers."
             fill
             sizes="(max-width: 767px) 100vw, (max-width: 1440px) 55vw, 792px"
-            priority
+            preload
           />
         </figure>
       </section>
@@ -80,7 +81,7 @@ export default function CreateYourOwnJourneyPage() {
           standard a Caravan is held to. That is the only reason it is not open
           yet. Leave your email and we will write to you first.
         </p>
-        <a href={registerHref}>Register your interest →</a>
+        <a href={registerHref}>Register your interest <Arrow /></a>
       </section>
     </main>
   );

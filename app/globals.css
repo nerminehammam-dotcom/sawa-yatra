@@ -1,33 +1,10 @@
 @import "../styles/tokens.css";
 
-/* Variable Fraunces: opsz 9-144, wght 100-900. Replaces four static instances
-   and unlocks the `opsz` axis the display styles rely on.
-
-   Built by tools/typography/build-fonts.py from the full four-axis masters in
-   tools/typography/masters/, which are never modified. The roman drops the SOFT
-   and WONK axes entirely — nothing roman ever moves them off zero — and the
-   italic keeps SOFT only as far as 40, the one value the site uses. 270,736
-   bytes down to 183,580, and no outline moves more than 2.21 of the 2000 units
-   in an em: 0.16 of a pixel on the largest type here, 0.018 on body copy.
-
-   The src says format("woff2"), not the older format("woff2-variations"). That
-   keyword is a deprecated draft some engines reject outright, and every browser
-   with variable-font support reads variations from plain woff2. */
-@font-face {
-  font-family: "Fraunces";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url("/assets/fonts/fraunces-normal.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Fraunces";
-  font-style: italic;
-  font-display: swap;
-  font-weight: 100 900;
-  src: url("/assets/fonts/fraunces-italic.woff2") format("woff2");
-}
+/* Fraunces (variable, opsz 9-144, wght 100-900, roman + italic) is now loaded
+   via next/font/local in app/fonts.ts, which self-hosts it, preloads both faces
+   and generates a metric-matched fallback (Times New Roman, adjusted) so the
+   font swap no longer reflows the page. The family is exposed as --font-fraunces
+   and consumed by --font-display / --font-read in styles/tokens.css. */
 
 *,
 *::before,
@@ -39,6 +16,9 @@ html {
   min-width: 320px;
   min-height: 100%;
   background: var(--paper);
+  /* Keep native controls (selects, date pickers, autofill, scrollbars) on the
+     light paper canvas even when the OS is in dark mode. */
+  color-scheme: light;
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--nav-height) + var(--space-4));
   text-size-adjust: 100%;
@@ -54,7 +34,7 @@ body {
   font-optical-sizing: auto;
   font-size: clamp(1rem, 0.94rem + 0.22vw, 1.125rem);
   font-weight: 400;
-  line-height: 1.62;
+  line-height: var(--leading-body);
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -169,23 +149,23 @@ h4 {
   /* 500, not 400: below this the display cut's `e` crossbar falls under one
      device pixel on 1x displays and the letter reads as a `c`. */
   font-weight: 500;
-  line-height: 1.06;
+  line-height: var(--leading-tight);
   text-wrap: balance;
 }
 
 h1 {
-  font-size: clamp(3.6rem, 9.5vw, 9.5rem);
+  font-size: var(--fs-display-1);
   letter-spacing: -0.035em;
 }
 
 h2 {
-  font-size: clamp(2.6rem, 6vw, 6.25rem);
+  font-size: var(--fs-display-2);
   letter-spacing: -0.025em;
 }
 
 h3 {
-  font-size: clamp(1.65rem, 2.8vw, 2.65rem);
-  line-height: 1.12;
+  font-size: var(--fs-title);
+  line-height: var(--leading-title);
   letter-spacing: -0.015em;
 }
 

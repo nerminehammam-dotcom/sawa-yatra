@@ -18,6 +18,8 @@ import {
   utilityNavigation,
 } from "@/content/navigation";
 
+import { ButtonLink } from "@/components/ui/ButtonLink";
+
 import styles from "./SiteNavigation.module.css";
 import { Wordmark } from "./Wordmark";
 
@@ -214,12 +216,9 @@ export function SiteNavigation() {
     <header ref={rootRef} className={styles.root} id="site-top" tabIndex={-1}>
       {isBannerVisible ? (
         <div className={styles.banner}>
-          <p>
-            {announcementNavigation.message}{" "}
-            <Link href={announcementNavigation.action.href}>
-              {announcementNavigation.action.label}
-            </Link>
-          </p>
+          {/* The join CTA now lives as a persistent button in the brand row,
+              so the banner is a plain announcement and no longer repeats it. */}
+          <p>{announcementNavigation.message}</p>
           <div className={styles.bannerActions}>
             <Link className={styles.bannerSignIn} href={announcementNavigation.signIn.href}>
               {announcementNavigation.signIn.label}
@@ -239,12 +238,23 @@ export function SiteNavigation() {
       <div className={styles.brandRow}>
         <Wordmark className={styles.wordmark} size="large" />
         <nav className={styles.utility} aria-label="Club pages">
-          {utilityNavigation.map((item, index) => (
-            <span className={styles.utilityItem} key={item.id}>
-              {index > 0 ? <span className={styles.utilityRule} aria-hidden="true" /> : null}
-              <Link href={item.href}>{item.label}</Link>
-            </span>
-          ))}
+          {utilityNavigation.map((item, index) => {
+            const isCta = item.id === "register-interest";
+            return (
+              <span className={styles.utilityItem} key={item.id}>
+                {index > 0 && !isCta ? (
+                  <span className={styles.utilityRule} aria-hidden="true" />
+                ) : null}
+                {isCta ? (
+                  <ButtonLink href={item.href} variant="primary">
+                    {item.label}
+                  </ButtonLink>
+                ) : (
+                  <Link href={item.href}>{item.label}</Link>
+                )}
+              </span>
+            );
+          })}
         </nav>
         <button
           ref={menuButtonRef}
@@ -422,13 +432,26 @@ export function SiteNavigation() {
                 </li>
               ),
             )}
-            {utilityNavigation.map((item) => (
-              <li key={item.id}>
-                <Link className={styles.sheetLink} href={item.href} onClick={closeSheet}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {utilityNavigation.map((item) =>
+              item.id === "register-interest" ? (
+                <li key={item.id} className={styles.sheetCtaItem}>
+                  <ButtonLink
+                    href={item.href}
+                    variant="primary"
+                    fullWidth
+                    onClick={closeSheet}
+                  >
+                    {item.label}
+                  </ButtonLink>
+                </li>
+              ) : (
+                <li key={item.id}>
+                  <Link className={styles.sheetLink} href={item.href} onClick={closeSheet}>
+                    {item.label}
+                  </Link>
+                </li>
+              ),
+            )}
             <li>
               <Link
                 className={styles.sheetLink}

@@ -13,6 +13,7 @@ import {
 } from "react";
 
 import { Button } from "@/components/ui/Button";
+import { ButtonLink } from "@/components/ui/ButtonLink";
 import { Container } from "@/components/ui/Container";
 import {
   AXES,
@@ -545,6 +546,18 @@ export function TravelSelfQuiz({ children }: { children?: ReactNode }) {
               </li>
             ))}
           </ul>
+        </section>
+        <section className={styles.onward} aria-labelledby="onward-title">
+          <h2 id="onward-title">{COPY.onward.heading}</h2>
+          <p>{COPY.onward.body}</p>
+          <div className={styles.onwardActions}>
+            <ButtonLink href="/register-interest" variant="primary">
+              {COPY.onward.register}
+            </ButtonLink>
+            <ButtonLink href="/caravans/andean" variant="secondary">
+              {COPY.onward.explore}
+            </ButtonLink>
+          </div>
         </section>
       </Container>
     </div>

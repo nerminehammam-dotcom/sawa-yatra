@@ -3,6 +3,7 @@ import Link from "next/link";
 import { andeanCaravanSections } from "@/content/andean-caravan";
 
 import styles from "./RouteStepper.module.css";
+import { Arrow } from "@/components/ui/Arrow";
 
 interface RouteStepperProps {
   /** The section being read, or undefined on the complete-route page. */
@@ -67,7 +68,7 @@ export function RouteStepper({ slug }: RouteStepperProps) {
         {next ? (
           <Link className={styles.step} href={`/departures/${next.slug}`} rel="next">
             <span className={styles.direction}>
-              Continues to <span aria-hidden="true">→</span>
+              Continues to <Arrow />
             </span>
             <span className={styles.name}>{next.title}</span>
             <span className={styles.detail}>

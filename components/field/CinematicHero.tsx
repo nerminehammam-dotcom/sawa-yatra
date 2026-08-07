@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { RisoAsset } from "@/components/brand/RisoArtwork";
 
 import styles from "./FieldDocument.module.css";
+import { Arrow } from "@/components/ui/Arrow";
 
 interface CinematicHeroProps {
   eyebrow: string;
@@ -27,7 +28,7 @@ export function CinematicHero({
         src={image.src}
         alt={image.alt}
         fill
-        priority
+        preload
         sizes="100vw"
         style={{
           objectPosition: `${image.focalPoint?.x ?? 50}% ${image.focalPoint?.y ?? 50}%`,
@@ -42,7 +43,7 @@ export function CinematicHero({
         <h1 id="home-field-heading">{title}</h1>
         <div className={styles.heroActions}>
           <Link className={styles.primaryAction} href={primary.href}>
-            {primary.label} <span aria-hidden="true">→</span>
+            {primary.label} <Arrow />
           </Link>
           <Link className={styles.secondaryAction} href={secondary.href}>
             {secondary.label}

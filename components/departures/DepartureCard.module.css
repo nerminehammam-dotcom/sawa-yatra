@@ -99,7 +99,7 @@
 
 .intro h3 {
   max-width: 17ch;
-  font-size: clamp(2.1rem, 2.9vw, 2.8rem);
+  font-size: var(--fs-title);
   line-height: 1.06;
 }
 

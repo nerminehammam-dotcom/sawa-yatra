@@ -6,6 +6,7 @@ import { getAndeanCaravanGallery } from "@/content/andean-caravan-images";
 import { contactHref } from "@/lib/contact";
 
 import styles from "./about.module.css";
+import { Arrow } from "@/components/ui/Arrow";
 
 export const metadata = createPageMetadata("/about");
 
@@ -91,9 +92,9 @@ export default function AboutPage() {
       <section className={styles.action} aria-labelledby="about-action-heading">
         <h2 id="about-action-heading">Begin with the first route.</h2>
         <div>
-          <Link href="/caravans/andean">Explore the Andean Caravan →</Link>
+          <Link href="/caravans/andean">Explore the Andean Caravan <Arrow /></Link>
           <Link href={contactHref()}>
-            Ask a question ↗
+            Ask a question <Arrow direction="up-right" />
           </Link>
         </div>
       </section>

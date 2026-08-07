@@ -34,8 +34,8 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "desert-coast",
       "01-lima-01.jpg",
-      "A woman stands in the pale green doorway of a Lima building.",
-      { x: 78, y: 54 },
+      "A man in white friar's robes stands in a green doorway in Lima, holding a phone, an ornate iron street lamp on the wall beside him.",
+      { x: 41, y: 63 },
     ),
     galleryImage(
       "desert-coast",
@@ -90,7 +90,7 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "white-city-deep-canyon",
       "04-london-0j.jpg",
-      "Green Andean ridges rise beneath fast-moving clouds.",
+      "A field of yellow wildflowers below green terraced mountains under a heavy grey sky in the southern Peruvian Andes.",
       { x: 52, y: 48 },
     ),
     galleryImage(
@@ -102,8 +102,8 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "white-city-deep-canyon",
       "06-london-02.jpg",
-      "A lone walker follows a green highland road under a heavy sky.",
-      { x: 69, y: 59 },
+      "An Andean woman in a hat walks a roadside path past green highland fields under a heavy grey sky.",
+      { x: 48, y: 62 },
     ),
   ],
   "the-stone-road": [

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { ANDEAN_CARAVAN_SEASON } from "@/content/andean-caravan";
 import { caravanSections, gateById } from "../_content";
 import styles from "./GateSelector.module.css";
+import { Arrow } from "@/components/ui/Arrow";
 
 const focusableSelector =
   'a[href], button:not([disabled]), select:not([disabled]), input:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
@@ -160,7 +161,9 @@ export function GateSelector() {
             ))}
           </select>
         </label>
-        <span className={styles.choiceArrow} aria-hidden="true">→</span>
+        <span className={styles.choiceArrow} aria-hidden="true">
+          <Arrow />
+        </span>
         <label>
           <span>Leaving gate</span>
           <select

@@ -19,7 +19,7 @@ export const assetManifest = {
     isPlaceholder: true,
     contentStatus: "PLACEHOLDER",
     contentNote:
-      "Founder-owned or commissioned land photography and approved alt text are required before launch.",
+      "Legacy/unused slot: the home hero renders a real founder photograph directly in app/(public)/page.tsx (the-end-of-the-road/07-patagoina-01.jpg). Founder-owned, made on the route.",
   },
   "about-founder": {
     id: "about-founder",
@@ -30,7 +30,7 @@ export const assetManifest = {
     isPlaceholder: true,
     contentStatus: "PLACEHOLDER",
     contentNote:
-      "Founder portrait, identity details and approved alt text have not been supplied.",
+      "No founder portrait ships yet; /who-we-are currently uses a route field-note photograph instead. Supply a portrait and alt text if a human presence is wanted (design audit §4).",
   },
   "journey-patagonia-card": {
     id: "journey-patagonia-card",
@@ -92,10 +92,10 @@ export const assetManifest = {
     alt: "A lone traveller follows a mountain path toward a welcoming outdoor table.",
     treatment: "duotone",
     role: "social",
-    isPlaceholder: true,
-    contentStatus: "PLACEHOLDER",
+    isPlaceholder: false,
+    contentStatus: "LOCKED",
     contentNote:
-      "Temporary AI-generated Release 1 social artwork; replace with commissioned brand artwork before launch.",
+      "Founder-approved AI-generated brand artwork for social / OG cards. Intentional — not a placeholder.",
   },
   favicon: {
     id: "favicon",
@@ -113,7 +113,7 @@ export const assetManifest = {
 export const temporaryWordmark = {
   text: "Sawayatra",
   fontFamily: "Fraunces",
-  contentStatus: "PLACEHOLDER",
+  contentStatus: "DRAFT",
   contentNote:
-    "Temporary Fraunces wordmark with a decorative route-through-a-gate mark for Release 1; the final logo must replace it without changing layout contracts.",
+    "A traced SVG wordmark in brand red now ships (public/assets/brand/sawayatra-wordmark.svg, via components/brand/Wordmark.tsx). A final commissioned logo may still replace it without changing layout contracts. This object is currently unused.",
 } as const;
