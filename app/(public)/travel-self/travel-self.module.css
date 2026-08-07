@@ -46,10 +46,13 @@
   --tsi-hair: 1px;
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
-  min-height: min(84vh, 44rem);
+  /* Shorter (was 44rem) so the painting shows more of itself, and the closing
+     line is rust-red like the Departures hero — a consistent accent across the
+     heroes, even though this title is ink on olive. The divider stays 2px ink. */
+  min-height: min(84vh, 40rem);
   color: var(--tsi-ink);
   background: var(--tsi-paper);
-  border-bottom: var(--border-strong) solid var(--tsi-ink);
+  border-bottom: 4px solid var(--tsi-signal-text);
   font-size: 1.1875rem;
   line-height: 1.6;
 }
