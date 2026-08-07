@@ -26,6 +26,7 @@
 }
 
 .hero h1 {
+  color: var(--signal-text);
   max-width: 13ch;
   font-size: clamp(3.4rem, 5.4vw, 6.25rem);
   line-height: 0.95;

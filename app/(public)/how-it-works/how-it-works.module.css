@@ -35,7 +35,11 @@
   gap: var(--space-8);
 }
 
+/* Deep-orange, not ink (7 August 2026): a display duet on sun (3.37:1, large
+   text only — this heading never drops below 4rem). The titles across the site
+   carry colour now rather than all reading as black. */
 .opening h1 {
+  color: var(--signal-text);
   max-width: 10ch;
   font-size: clamp(4rem, 10vw, 9rem);
   line-height: 0.9;

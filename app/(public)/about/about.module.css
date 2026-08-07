@@ -1,8 +1,10 @@
 /* Two columns so the standfirst occupies the right half rather than leaving
    it as a dead band. Sized by content plus padding; the old 82svh floor left
    roughly half the section empty at desktop widths.
-   Ground is dusty blue (7 August 2026): pink was carrying three page openings,
-   so Who we are takes the new cool note. Ink on blue is 6.13:1. */
+   Dark ground with a dusty-blue title (7 August 2026): the editorial page gets
+   the boldest risograph treatment — a bright blue headline on near-black
+   (6.13:1) over paper body copy (11.99:1). This is where the new blue sings,
+   and it keeps pink off a third page opening without adding more yellow. */
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(20rem, 0.9fr);
@@ -10,7 +12,8 @@
   align-content: start;
   gap: var(--space-12) var(--space-16);
   padding: clamp(3.5rem, 8vw, 8rem) var(--page-gutter);
-  background: var(--blue);
+  color: var(--paper);
+  background: var(--ink);
   border-bottom: var(--border-strong) solid var(--ink);
 }
 
@@ -34,6 +37,7 @@
 }
 
 .hero h1 {
+  color: var(--blue);
   max-width: 13ch;
   line-height: 0.82;
 }

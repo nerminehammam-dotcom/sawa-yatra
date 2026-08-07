@@ -35,6 +35,7 @@
    with a tight line-height, so the longer sentence wraps to two or three lines
    and fits the panel. */
 .introductionCopy h1 {
+  color: var(--signal-text);
   max-width: 16ch;
   font-size: clamp(3rem, 5.2vw, 6rem);
   line-height: 0.92;
