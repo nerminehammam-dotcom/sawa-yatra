@@ -28,9 +28,16 @@
   text-transform: uppercase;
 }
 
+/* Fixed 7 August 2026. Was clamp(4rem, 8vw, 8.5rem) in a max-width: 10ch
+   column, so on a wide screen "Choose where the road becomes yours." rendered
+   at ~136px and wrapped to five or six lines, overflowing the fixed-height
+   hero. Now matched to the /caravans hero: a smaller clamp at a fuller width
+   with a tight line-height, so the longer sentence wraps to two or three lines
+   and fits the panel. */
 .introductionCopy h1 {
-  max-width: 10ch;
-  font-size: clamp(4rem, 8vw, 8.5rem);
+  max-width: 16ch;
+  font-size: clamp(3rem, 5.2vw, 6rem);
+  line-height: 0.92;
 }
 
 .introductionCopy > p:last-child {
