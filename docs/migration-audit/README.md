@@ -1,12 +1,14 @@
 # Andean Caravan migration audit
 
-Status: **Phase 1 complete — founder approval pending**
+Status: **Phase 1 approved; Phase 2 structured model complete**
 
 Branch: `migration/andean-caravan-v1-3`
 
 Rollback commit: `8dddebe5b25307513b9923869f726cb7b305fe2e`
 
 Audit date: 9 August 2026
+
+Founder approval recorded: 10 August 2026
 
 This directory is working material only. It is outside `app`, `pages` and
 `public`, is not linked by the application, and is absent from the browser-facing
@@ -36,20 +38,25 @@ performance reports were added.
 - `baselines/` — full-page and first-viewport captures at 1440, 1024 and 390
 - `performance/` — three compressed raw Lighthouse JSON runs per audited scenario
 
-## Human stop
+## Founder decision
 
-Phase 2 must not begin until the founder explicitly approves:
+The founder approved the following on 10 August 2026:
 
-1. this audit;
+1. the Phase 1 audit;
 2. the proposed URL architecture;
-3. the Journeys branch; and
-4. any necessary configuration change.
+3. one unlabelled Andean Caravan entry in Journeys; and
+4. proceeding to Phase 2.
 
-Recommended Journeys branch: **one unlabelled Andean Caravan entry**. There are
-no member-created journeys on the launch surface, so a two-sided taxonomy would
-publish an empty category.
+The approved Journeys branch is **one unlabelled Andean Caravan entry**. There
+are no member-created journeys on the launch surface, so a two-sided taxonomy
+would publish an empty category.
 
-Configuration issue requiring a later decision: production-equivalent enquiry
-delivery is not configured. The required email variables exist only as empty
-entries. The migration must not instruct visitors to submit an enquiry until a
-real delivery path passes an approved preview test.
+Production-equivalent enquiry delivery remains an approved tracked launch
+blocker. See [Launch blockers](./launch-blockers.md).
+
+## Phase 2 result
+
+The canonical 71-day model, schema, validation rules, recovery-role
+normalisation and server-only public projection are recorded in
+[Phase 2 structured model](./phase-2-structured-model.md). Visible pages remain
+on the pre-migration content until the Phase 3 specimen is approved.
