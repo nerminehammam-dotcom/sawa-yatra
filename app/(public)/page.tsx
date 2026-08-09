@@ -43,7 +43,7 @@ export default function HomePage() {
         <Image
           className={styles.homeHeroImage}
           src="/assets/images/departures/andean/gallery/the-end-of-the-road/07-patagoina-01.jpg"
-          alt="A quiet road runs through open Patagonian grassland beneath a pale blue sky."
+          alt="Quiet road running through open Patagonian grassland beneath a pale blue sky."
           fill
           preload
           sizes="100vw"

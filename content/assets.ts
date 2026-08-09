@@ -13,7 +13,7 @@ export const assetManifest = {
   "home-hero": {
     id: "home-hero",
     src: "/assets/images/home-hero-placeholder.svg",
-    alt: "To be confirmed",
+    alt: "",
     treatment: "duotone",
     role: "hero",
     isPlaceholder: true,
@@ -35,7 +35,7 @@ export const assetManifest = {
   "journey-patagonia-card": {
     id: "journey-patagonia-card",
     src: "/assets/images/journeys/patagonia-slowly-card-placeholder.svg",
-    alt: "To be confirmed",
+    alt: "",
     treatment: "duotone",
     role: "card",
     isPlaceholder: true,
@@ -53,7 +53,7 @@ export const assetManifest = {
   "journey-carretera-card": {
     id: "journey-carretera-card",
     src: "/assets/images/journeys/carretera-austral-card-placeholder.svg",
-    alt: "To be confirmed",
+    alt: "",
     treatment: "true",
     role: "card",
     isPlaceholder: true,
@@ -71,7 +71,7 @@ export const assetManifest = {
   "journey-atacama-card": {
     id: "journey-atacama-card",
     src: "/assets/images/journeys/atacama-stars-card-placeholder.svg",
-    alt: "To be confirmed",
+    alt: "",
     treatment: "duotone",
     role: "card",
     isPlaceholder: true,
@@ -89,7 +89,7 @@ export const assetManifest = {
   "social-fallback": {
     id: "social-fallback",
     src: "/assets/images/social-sawayatra-r1.webp",
-    alt: "A lone traveller follows a mountain path toward a welcoming outdoor table.",
+    alt: "Lone traveller following a mountain path toward a welcoming outdoor table.",
     treatment: "duotone",
     role: "social",
     isPlaceholder: false,

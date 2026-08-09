@@ -150,7 +150,7 @@ export default function HopOnHopOffPage() {
         <div className={styles.closingImage}>
           <Image
             src="/assets/images/departures/andean/gallery/the-end-of-the-road/07-patagoina-01.jpg"
-            alt="A quiet road continuing through open Patagonian country"
+            alt="Quiet road continuing through open Patagonian country"
             fill
             sizes="(max-width: 800px) 100vw, (max-width: 1440px) 52vw, 749px"
           />

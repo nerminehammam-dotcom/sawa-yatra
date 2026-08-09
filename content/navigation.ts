@@ -1,28 +1,18 @@
-import { ANDEAN_CARAVAN_FIRST_DEPARTURE } from "@/content/andean-caravan";
 import type { NavigationItem } from "@/lib/types";
+import { ANDEAN_CARAVAN_FIRST_DEPARTURE } from "@/content/andean-caravan";
 
-// Journeys, Create your own journey and Departure dates are kept in the primary
-// nav at the founder's request (7 August 2026): she is building those pages and
-// wants them visible to work on the page design, with content landing shortly.
-// They currently resolve to honest "coming soon" pages. Revisit whether they
-// belong in the primary nav once their content is in.
+// Primary navigation per Membership/Identity spec v3.1 §2.3 — exactly four
+// items, in this order. The Caravan is named the way a maker names one model.
+// "Create your own" is no longer a destination: it is the Start one button on
+// /journeys, honestly disabled in Release 1 (build command §3.B). "Departure
+// dates" is likewise absorbed into Journeys (Leaving on a date / Still
+// forming). The id "caravans" is retained on the first item because
+// SiteNavigation keys its mega-panel off that id.
 export const primaryNavigation = [
   {
-    id: "how-it-works",
-    label: "How Sawayatra works",
-    href: "/how-it-works",
-    contentStatus: "LOCKED",
-  },
-  {
-    id: "travel-self",
-    label: "Meet your Travel Self",
-    href: "/travel-self",
-    contentStatus: "LOCKED",
-  },
-  {
     id: "caravans",
-    label: "Caravans",
-    href: "/caravans",
+    label: "The Andean Caravan",
+    href: "/caravans/andean",
     contentStatus: "LOCKED",
   },
   {
@@ -32,24 +22,27 @@ export const primaryNavigation = [
     contentStatus: "LOCKED",
   },
   {
-    id: "create-your-own-journey",
-    label: "Create your own journey",
-    href: "/create-your-own-journey",
+    id: "how-it-works",
+    label: "How it works",
+    href: "/how-it-works",
     contentStatus: "LOCKED",
   },
   {
-    id: "departure-dates",
-    label: "Departure dates",
-    href: "/departure-dates",
+    // Canonical route: next.config.ts 301s /membership → /members.
+    id: "membership",
+    label: "Membership",
+    href: "/members",
     contentStatus: "LOCKED",
   },
 ] as const satisfies readonly NavigationItem[];
 
 export const utilityNavigation = [
   {
-    id: "members",
-    label: "Members",
-    href: "/members",
+    // Kept reachable outside the four-item primary nav (§2.3): the Travel
+    // Self questionnaire remains the visitor's private on-ramp (rule 4.1).
+    id: "travel-self",
+    label: "Meet your Travel Self",
+    href: "/travel-self",
     contentStatus: "LOCKED",
   },
   {
@@ -68,8 +61,7 @@ export const utilityNavigation = [
     // Persistent join CTA in the header + mobile menu, so the action survives
     // the dismissable announcement banner. Points at the working capture
     // (/register-interest), not the "not open yet" /request-invitation holding
-    // page. Consider promoting this to a prominent button once placement is
-    // reviewed.
+    // page.
     id: "register-interest",
     label: "Register your interest",
     href: "/register-interest",
@@ -118,6 +110,12 @@ export const caravansNavigation = {
 
 export const footerNavigation = [
   ...primaryNavigation,
+  {
+    id: "travel-self",
+    label: "Meet your Travel Self",
+    href: "/travel-self",
+    contentStatus: "LOCKED",
+  },
   {
     id: "privacy",
     label: "Privacy",

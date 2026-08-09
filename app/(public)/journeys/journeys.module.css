@@ -1,0 +1,148 @@
+.page {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--section-space) var(--page-gutter);
+  display: grid;
+  gap: var(--space-16);
+}
+
+.header {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.header h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-2);
+  line-height: var(--leading-title);
+  color: var(--ink);
+}
+
+.lede {
+  font-size: var(--fs-lead);
+  line-height: var(--leading-body);
+  max-width: var(--measure);
+  color: var(--ink);
+}
+
+.group {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.group h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-display-3);
+  line-height: var(--leading-title);
+  color: var(--ink);
+}
+
+.groupNote {
+  font-size: var(--fs-body);
+  color: var(--ink);
+  max-width: var(--measure);
+  margin-top: calc(var(--space-2) * -1);
+}
+
+.cardList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-5);
+}
+
+.card {
+  border: var(--border-hairline);
+  border-radius: var(--radius-card);
+  background: var(--paper);
+  padding: var(--card-inset);
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+}
+
+.cardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.duration {
+  font-size: var(--fs-small);
+  color: var(--ink);
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: var(--fs-title);
+  line-height: var(--leading-title);
+}
+
+.cardTitle a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.cardTitle a:hover {
+  text-decoration: underline;
+}
+
+.cardRoute {
+  font-size: var(--fs-body);
+  color: var(--ink);
+}
+
+.cardDate {
+  font-size: var(--fs-small);
+  color: var(--ink);
+}
+
+.windowList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-2);
+  font-size: var(--fs-small);
+}
+
+.formingEmpty {
+  border: var(--border-hairline);
+  border-radius: var(--radius-card);
+  padding: var(--card-inset);
+  background: var(--soft-butter);
+  max-width: var(--measure);
+}
+
+.formingEmpty p {
+  font-size: var(--fs-body);
+  line-height: var(--leading-body);
+  color: var(--ink);
+}
+
+.startOne {
+  display: grid;
+  gap: var(--space-3);
+  justify-items: start;
+}
+
+.startOneButton {
+  font-family: var(--font-read);
+  font-size: var(--fs-body);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-pill);
+  border: var(--border-strong);
+  background: var(--paper);
+  color: var(--disabled);
+  cursor: not-allowed;
+  min-height: var(--touch-min);
+}
+
+.startOneNote {
+  font-size: var(--fs-small);
+  color: var(--ink);
+  max-width: var(--measure-narrow);
+}

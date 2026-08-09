@@ -5,7 +5,9 @@ import {
   RisoArtwork,
   type RisoAsset,
 } from "@/components/brand/RisoArtwork";
+import { ProvenanceBadge } from "@/components/journeys/ProvenanceBadge";
 import { classNames } from "@/components/ui/classNames";
+import type { Provenance } from "@/lib/journeys/model";
 
 import styles from "./DepartureCard.module.css";
 
@@ -18,6 +20,12 @@ export interface DepartureCardProps {
   groupSize: string;
   price: string;
   asset: RisoAsset;
+  /**
+   * §2.2 / rule 1.4 — provenance renders as a badge on every journey card:
+   * who stands behind this journey. Defaults to Sawayatra for the Caravan
+   * sections; partner inventory must pass its own.
+   */
+  provenance?: Provenance;
   sequence?: string;
   eyebrow?: string;
   className?: string;
@@ -35,6 +43,7 @@ export function DepartureCard({
   groupSize,
   price,
   asset,
+  provenance = "sawayatra",
   sequence,
   eyebrow,
   className,
@@ -75,6 +84,7 @@ export function DepartureCard({
           </div>
           <h3>{title}</h3>
           <p className={styles.route}>{route}</p>
+          <ProvenanceBadge provenance={provenance} />
         </div>
         <dl className={styles.facts}>
           <div>

@@ -44,8 +44,8 @@
   max-width: 40ch;
   margin-top: var(--space-3);
   color: var(--deep-brown);
-  font-family: var(--font-display);
-  font-size: 1rem;
+  font-family: var(--font-read);
+  font-size: var(--fs-small);
   font-style: italic;
   line-height: 1.35;
 }

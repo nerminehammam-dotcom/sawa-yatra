@@ -67,11 +67,11 @@
      before assuming this still holds. */
   background: linear-gradient(
     to left,
-    rgb(26 21 18 / 88%) 0%,
-    rgb(26 21 18 / 74%) 28%,
-    rgb(26 21 18 / 42%) 52%,
-    rgb(26 21 18 / 10%) 72%,
-    rgb(26 21 18 / 0%) 88%
+    color-mix(in srgb, var(--ink) 88%, transparent) 0%,
+    color-mix(in srgb, var(--ink) 74%, transparent) 28%,
+    color-mix(in srgb, var(--ink) 42%, transparent) 52%,
+    color-mix(in srgb, var(--ink) 10%, transparent) 72%,
+    color-mix(in srgb, var(--ink) 0%, transparent) 88%
   );
   pointer-events: none;
 }
@@ -175,7 +175,7 @@
 }
 
 .homeHeroRoman {
-  font-size: clamp(2.4rem, 6.4vw, 7.5rem);
+  font-size: var(--fs-display-2);
   font-style: normal;
   /* opsz is left to font-optical-sizing: auto (the initial value) so the
      optical size tracks the rendered size. Pinning "opsz" 144 drew hairline
@@ -185,14 +185,14 @@
 }
 
 .homeHeroTurn {
-  font-size: clamp(2.5rem, 6.7vw, 7.85rem);
+  font-size: var(--fs-display-2);
   font-style: italic;
   /* WONK 1 swaps in the swash forms — the curling italic that gives this kind
      of setting its flourish. SOFT 40 rounds the terminals a little so the word
      sits softer against the two roman lines it cuts across. */
   /* SOFT + WONK only; opsz tracks the rendered size via font-optical-sizing. */
   font-variation-settings: "SOFT" 40, "WONK" 1;
-  font-weight: 300;
+  font-weight: 500;
   line-height: 0.85;
   letter-spacing: -0.03em;
 }
@@ -208,7 +208,7 @@
 
   .homeHeroRoman,
   .homeHeroTurn {
-    font-size: clamp(2.6rem, 11.5vw, 4rem);
+    font-size: var(--fs-display-2);
   }
 
   /* On mobile the copy is full-width and starts mid-frame, so the scrim has to
@@ -216,12 +216,12 @@
   .homeHeroScrim {
     background: linear-gradient(
       to top,
-      rgb(26 21 18 / 90%) 0%,
-      rgb(26 21 18 / 86%) 32%,
-      rgb(26 21 18 / 76%) 54%,
-      rgb(26 21 18 / 38%) 70%,
-      rgb(26 21 18 / 6%) 86%,
-      rgb(26 21 18 / 0%) 100%
+      color-mix(in srgb, var(--ink) 90%, transparent) 0%,
+      color-mix(in srgb, var(--ink) 86%, transparent) 32%,
+      color-mix(in srgb, var(--ink) 76%, transparent) 54%,
+      color-mix(in srgb, var(--ink) 38%, transparent) 70%,
+      color-mix(in srgb, var(--ink) 6%, transparent) 86%,
+      color-mix(in srgb, var(--ink) 0%, transparent) 100%
     );
   }
 
@@ -240,12 +240,12 @@
   }
 
   .homeHeroRoman {
-    font-size: clamp(2.6rem, 11.5vw, 4rem);
+    font-size: var(--fs-display-2);
   }
 
   .homeHeroTurn {
     margin-inline-end: 0;
-    font-size: clamp(3.2rem, 14.5vw, 5rem);
+    font-size: var(--fs-display-1-compact);
   }
 }
 
@@ -287,9 +287,9 @@
 .regionsHeading > p,
 .fieldNotes > header > p,
 .finalAction > p {
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
 
@@ -299,7 +299,7 @@
 
 .editorialHeading a {
   color: var(--ink);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
@@ -343,7 +343,7 @@
 }
 
 .howSteps p {
-  font-size: 1rem;
+  font-size: var(--fs-small);
 }
 
 .routeHeading {
@@ -373,12 +373,12 @@
 
 .routeHeading aside strong {
   color: var(--paper);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   letter-spacing: normal;
 }
 
 .routeHeading aside p {
-  font-size: 1rem;
+  font-size: var(--fs-small);
 }
 
 .joining {
@@ -416,7 +416,7 @@
 
 .regionsHeading a {
   color: var(--ink);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
@@ -468,9 +468,9 @@
   bottom: 0;
   padding: var(--space-3) var(--space-4);
   color: var(--paper);
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-eyebrow);
   background: var(--ink);
 }
 
@@ -489,7 +489,7 @@
   color: var(--signal-text);
   max-width: 8ch;
   /* was line-height 0.78, which collided descenders with the next line's ascenders */
-  font-size: clamp(4rem, 11vw, 10rem);
+  font-size: var(--fs-display-1);
   line-height: 0.92;
 }
 
@@ -505,7 +505,7 @@
   align-items: center;
   padding: var(--space-4) var(--space-5);
   color: var(--paper);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-decoration: none;
@@ -545,9 +545,9 @@
 }
 
 .travelSelfCopy > p:first-child {
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
 
@@ -558,12 +558,12 @@
 
 .travelSelfBody {
   max-width: 44ch;
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
 }
 
 .travelSelfNote {
   max-width: 44ch;
-  font-size: 1rem;
+  font-size: var(--fs-small);
 }
 
 .travelSelfFigure {
@@ -602,9 +602,9 @@
 }
 
 .reserved article > p:first-child {
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
 
@@ -615,7 +615,7 @@
 .reservedNeeds {
   max-width: 46ch;
   padding-top: var(--space-3);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   border-top: var(--border-hairline) solid var(--ink);
 }
 
@@ -677,7 +677,7 @@
     }
 
   .howSteps span {
-      font-size: 3.4rem;
+      font-size: var(--fs-display-2);
     }
 
   .imageStrip {
@@ -735,7 +735,7 @@
   font-family: var(--font-display);
   font-size: var(--fs-title);
   font-optical-sizing: auto;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.24;
   letter-spacing: -0.015em;
   text-wrap: pretty;
@@ -763,7 +763,7 @@
 
 .nameStoryColumns p {
   font-family: var(--font-read);
-  font-size: clamp(1.0625rem, 1.05vw, 1.15rem);
+  font-size: var(--fs-body);
   font-optical-sizing: auto;
   font-weight: 400;
   line-height: 1.6;
@@ -819,9 +819,9 @@
 .regionsHeading > p,
 .fieldNotes > header > p,
 .finalAction > p {
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
 
@@ -831,7 +831,7 @@
 
 .editorialHeading a {
   color: var(--ink);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
@@ -875,7 +875,7 @@
 }
 
 .howSteps p {
-  font-size: 1rem;
+  font-size: var(--fs-small);
 }
 
 .routeHeading {
@@ -905,12 +905,12 @@
 
 .routeHeading aside strong {
   color: var(--paper);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   letter-spacing: normal;
 }
 
 .routeHeading aside p {
-  font-size: 1rem;
+  font-size: var(--fs-small);
 }
 
 .joining {
@@ -948,7 +948,7 @@
 
 .regionsHeading a {
   color: var(--ink);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
@@ -1000,9 +1000,9 @@
   bottom: 0;
   padding: var(--space-3) var(--space-4);
   color: var(--paper);
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-eyebrow);
   background: var(--ink);
 }
 
@@ -1021,7 +1021,7 @@
   color: var(--signal-text);
   max-width: 8ch;
   /* was line-height 0.78, which collided descenders with the next line's ascenders */
-  font-size: clamp(4rem, 11vw, 10rem);
+  font-size: var(--fs-display-1);
   line-height: 0.92;
 }
 
@@ -1037,7 +1037,7 @@
   align-items: center;
   padding: var(--space-4) var(--space-5);
   color: var(--paper);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-decoration: none;
@@ -1077,9 +1077,9 @@
 }
 
 .travelSelfCopy > p:first-child {
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
 
@@ -1090,12 +1090,12 @@
 
 .travelSelfBody {
   max-width: 44ch;
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
 }
 
 .travelSelfNote {
   max-width: 44ch;
-  font-size: 1rem;
+  font-size: var(--fs-small);
 }
 
 .travelSelfFigure {
@@ -1134,9 +1134,9 @@
 }
 
 .reserved article > p:first-child {
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
 
@@ -1147,7 +1147,7 @@
 .reservedNeeds {
   max-width: 46ch;
   padding-top: var(--space-3);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   border-top: var(--border-hairline) solid var(--ink);
 }
 
@@ -1209,7 +1209,7 @@
     }
 
   .howSteps span {
-      font-size: 3.4rem;
+      font-size: var(--fs-display-2);
     }
 
   .imageStrip {

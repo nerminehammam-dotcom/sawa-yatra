@@ -32,9 +32,9 @@
 
 .fact dt {
   margin: 0 0 var(--space-1);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-eyebrow);
   line-height: 1.2;
   text-transform: uppercase;
   opacity: 0.72;
@@ -43,8 +43,9 @@
 .fact dd {
   max-width: 30ch;
   margin: 0;
-  font-family: var(--font-display);
+  font-family: var(--font-read);
   font-size: var(--fs-body);
+  font-variant-numeric: tabular-nums;
   line-height: 1.3;
 }
 

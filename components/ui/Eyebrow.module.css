@@ -1,7 +1,7 @@
 .root {
   color: inherit;
   font-family: var(--font-read);
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
   line-height: 1.35;
   letter-spacing: 0.12em;
@@ -9,7 +9,7 @@
 }
 
 .decision {
-  font-size: 1rem;
+  font-size: var(--fs-small);
   letter-spacing: normal;
   text-transform: none;
 }

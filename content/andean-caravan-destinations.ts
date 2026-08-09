@@ -42,7 +42,7 @@ export const andeanDestinationDetails = {
     orientation: ["Historic centre and working streets", "Pacific cliffs and coastal neighbourhoods"],
     image: {
       src: `${imageRoot}/gallery/desert-coast/01-lima-01.jpg`,
-      alt: "A woman stands in the pale green doorway of a Lima building.",
+      alt: "Woman standing in the pale green doorway of a Lima building.",
       caption: "Lima · Sawayatra route photograph",
       focalPoint: { x: 78, y: 54 },
     },
@@ -62,7 +62,7 @@ export const andeanDestinationDetails = {
     orientation: ["Sillar architecture and historic centre", "Markets, courtyards and volcanic horizons"],
     image: {
       src: `${imageRoot}/gallery/white-city-deep-canyon/01-z8n0729-enhanced-nr-copy.jpg`,
-      alt: "A woman stands in a red doorway in a Peruvian highland town.",
+      alt: "Woman standing in a red doorway in a Peruvian highland town.",
       caption: "Arequipa section · Sawayatra route photograph",
       focalPoint: { x: 76, y: 53 },
     },
@@ -82,7 +82,7 @@ export const andeanDestinationDetails = {
     orientation: ["Layered Inca and colonial streets", "Markets, workshops and highland viewpoints"],
     image: {
       src: `${imageRoot}/gallery/the-stone-road/01-cuscco-01.jpg`,
-      alt: "A woman walks along a white-walled street in Cusco.",
+      alt: "Woman walking along a white-walled street in Cusco.",
       caption: "Cusco · Sawayatra route photograph",
       focalPoint: { x: 72, y: 55 },
     },
@@ -102,7 +102,7 @@ export const andeanDestinationDetails = {
     orientation: ["Open-water crossings and reed shorelines", "Island and lakeside community life"],
     image: {
       src: `${imageRoot}/gallery/both-shores/02-drive-la-paz-puno-09.jpg`,
-      alt: "A small handwritten word marks a white roadside wall near Lake Titicaca.",
+      alt: "Small handwritten word marking a white roadside wall near Lake Titicaca.",
       caption: "Lake Titicaca road · Sawayatra route photograph",
       focalPoint: { x: 50, y: 51 },
     },
@@ -122,7 +122,7 @@ export const andeanDestinationDetails = {
     orientation: ["Markets and steep neighbourhood streets", "Cable-car views across the urban basin"],
     image: {
       src: `${imageRoot}/gallery/thin-air-cloud-forest/02-la-paz-09-copy-2.jpg`,
-      alt: "A passenger boards a painted bus on a steep street in La Paz.",
+      alt: "Passenger boarding a painted bus on a steep street in La Paz.",
       caption: "La Paz · Sawayatra route photograph",
       focalPoint: { x: 73, y: 54 },
     },
@@ -142,7 +142,7 @@ export const andeanDestinationDetails = {
     orientation: ["Whitewashed historic centre", "Courtyards, markets and surrounding hills"],
     image: {
       src: `${imageRoot}/gallery/silver-and-bone/10-drive-uyuni-lapaz-29.jpg`,
-      alt: "A market worker sorts flowers and fabric by hand in Bolivia.",
+      alt: "Market worker sorting flowers and fabric by hand in Bolivia.",
       caption: "Bolivia · Sawayatra route photograph",
       focalPoint: { x: 67, y: 52 },
     },
@@ -162,7 +162,7 @@ export const andeanDestinationDetails = {
     orientation: ["Rail history and the salar gateway", "Salt, lagoons and long horizons"],
     image: {
       src: `${imageRoot}/gallery/the-mirror/01-uyuni-01.jpg`,
-      alt: "A shallow high-altitude lagoon reflects the mountains near Uyuni.",
+      alt: "Shallow high-altitude lagoon reflecting the mountains near Uyuni.",
       caption: "Uyuni region · Sawayatra route photograph",
       focalPoint: { x: 53, y: 52 },
     },
@@ -202,7 +202,7 @@ export const andeanDestinationDetails = {
     orientation: ["Historic civic centre and markets", "Neighbourhood streets and Andean viewpoints"],
     image: {
       src: `${imageRoot}/gallery/atacama/01-astro-01.jpg`,
-      alt: "A star-filled Atacama landscape on the northern Chile section of the route.",
+      alt: "Star-filled Atacama landscape on the northern Chile section of the route.",
       caption: "Northern Chile to Santiago · Sawayatra route photograph",
       focalPoint: { x: 50, y: 45 },
     },
@@ -222,7 +222,7 @@ export const andeanDestinationDetails = {
     orientation: ["Arrival gateway for central Aysén", "Road transfer towards Coyhaique"],
     image: {
       src: `${imageRoot}/gallery/the-end-of-the-road/02-patagonia-13.jpg`,
-      alt: "A narrow road crosses tawny grasslands beneath a Patagonian escarpment.",
+      alt: "Narrow road crossing tawny grasslands beneath a Patagonian escarpment.",
       caption: "Aysén · Sawayatra route photograph",
       focalPoint: { x: 46, y: 60 },
     },
@@ -242,7 +242,7 @@ export const andeanDestinationDetails = {
     orientation: ["Regional market and low-rise centre", "River valleys and mountain viewpoints"],
     image: {
       src: `${imageRoot}/gallery/the-end-of-the-road/07-patagoina-01.jpg`,
-      alt: "A gravel road runs through open Patagonian ranchland.",
+      alt: "Gravel road running through open Patagonian ranchland.",
       caption: "Coyhaique region · Sawayatra route photograph",
       focalPoint: { x: 50, y: 58 },
     },
@@ -262,7 +262,7 @@ export const andeanDestinationDetails = {
     orientation: ["The end-of-road marker", "Lake O’Higgins, forest and mountain landscape"],
     image: {
       src: `${imageRoot}/gallery/the-end-of-the-road/09-patagonia-41.jpg`,
-      alt: "A still Patagonian lake rests beneath a line of snow-covered mountains.",
+      alt: "Still Patagonian lake resting beneath a line of snow-covered mountains.",
       caption: "Villa O’Higgins region · Sawayatra route photograph",
       focalPoint: { x: 52, y: 50 },
     },
@@ -282,7 +282,7 @@ export const andeanDestinationDetails = {
     orientation: ["Return gateway after the southern road", "Final transition from road to air"],
     image: {
       src: `${imageRoot}/gallery/the-end-of-the-road/13-chile-016.jpg`,
-      alt: "A mountain road disappears into mist and autumn forest.",
+      alt: "Mountain road disappearing into mist and autumn forest.",
       caption: "Return through Aysén · Sawayatra route photograph",
       focalPoint: { x: 50, y: 60 },
     },

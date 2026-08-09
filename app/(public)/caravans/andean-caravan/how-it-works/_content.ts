@@ -50,7 +50,7 @@ export const caravanGates: readonly Gate[] = [
 
 export const caravanSections: readonly CaravanSection[] = [
   {
-    id: "01", slug: "desert-coast", name: "Desert Coast", joinGateId: "lima", leaveGateId: "arequipa", days: 9, countries: ["Peru"], modes: "road · boat · light aircraft", maximumAltitude: "2,335 m", physicalNotice: "The Nazca to Arequipa run is a nine-hour driving day.", accommodation: "A protected Lima arrival night is included.", arrival: "Join at sea level in Lima; your Host meets you before the group gathers.", promise: "Pacific light, pre-Inca cities, islands, desert cemeteries and the Nazca Lines.", image: { src: "/assets/images/departures/andean/gallery/desert-coast/01-lima-01.jpg", alt: "A quiet street and coastal architecture in Lima" },
+    id: "01", slug: "desert-coast", name: "Desert Coast", joinGateId: "lima", leaveGateId: "arequipa", days: 9, countries: ["Peru"], modes: "road · boat · light aircraft", maximumAltitude: "2,335 m", physicalNotice: "The Nazca to Arequipa run is a nine-hour driving day.", accommodation: "A protected Lima arrival night is included.", arrival: "Join at sea level in Lima; your Host meets you before the group gathers.", promise: "Pacific light, pre-Inca cities, islands, desert cemeteries and the Nazca Lines.", image: { src: "/assets/images/departures/andean/gallery/desert-coast/01-lima-01.jpg", alt: "Quiet street and coastal architecture in Lima" },
     legs: [
       { route: "Lima city days", mode: "coach and walking", surface: "paved", note: "Museo Larco, Pachacámac, Surquillo and Barranco" },
       { route: "Lima → Tambo Colorado → Paracas", mode: "road coach", surface: "paved Panamericana Sur" },
@@ -61,7 +61,7 @@ export const caravanSections: readonly CaravanSection[] = [
     ],
   },
   {
-    id: "02", slug: "white-city-deep-canyon", name: "White City, Deep Canyon", joinGateId: "arequipa", leaveGateId: "cusco", days: 7, countries: ["Peru"], modes: "road · scheduled flight", maximumAltitude: "4,910 m", physicalNotice: "The route crosses the high Patapampa pass before descending into Colca.", accommodation: "A protected handover night in Cusco is included.", arrival: "A rest day in Arequipa gives the section its altitude ladder.", promise: "Volcanic architecture, mountain ritual, Colca Canyon and the handover to Cusco.", image: { src: "/assets/images/departures/andean/gallery/white-city-deep-canyon/05-london-0ps.jpg", alt: "A highland road beneath dark cloud and mountain ridges", focalPoint: { x: 48, y: 58 } },
+    id: "02", slug: "white-city-deep-canyon", name: "White City, Deep Canyon", joinGateId: "arequipa", leaveGateId: "cusco", days: 7, countries: ["Peru"], modes: "road · scheduled flight", maximumAltitude: "4,910 m", physicalNotice: "The route crosses the high Patapampa pass before descending into Colca.", accommodation: "A protected handover night in Cusco is included.", arrival: "A rest day in Arequipa gives the section its altitude ladder.", promise: "Volcanic architecture, mountain ritual, Colca Canyon and the handover to Cusco.", image: { src: "/assets/images/departures/andean/gallery/white-city-deep-canyon/05-london-0ps.jpg", alt: "Highland road beneath dark cloud and mountain ridges", focalPoint: { x: 48, y: 58 } },
     legs: [
       { route: "Arequipa → Colca", mode: "road coach", surface: "paved high-altitude road", note: "Over Patapampa pass" },
       { route: "Colca → Arequipa", mode: "road coach", surface: "paved mountain road" },
@@ -78,7 +78,7 @@ export const caravanSections: readonly CaravanSection[] = [
     ],
   },
   {
-    id: "04", slug: "both-shores", name: "Both Shores", joinGateId: "puno", leaveGateId: "la-paz", days: 7, countries: ["Peru", "Bolivia"], modes: "coach · passenger boat · vehicle barge", maximumAltitude: "4,050 m", physicalNotice: "The Kasani land border is crossed on foot.", accommodation: "Amantaní has one shared family-stay standard; it is the section, not a downgrade.", arrival: "Arrive in Puno the previous day; the hotel night and arrival support are included.", promise: "Titicaca in two countries, Amantaní, Isla del Sol and a border crossed on foot.", image: { src: "/assets/images/departures/andean/gallery/both-shores/03-drive-la-paz-puno-10.jpg", alt: "A traveller beside a vehicle on the road between Puno and La Paz" },
+    id: "04", slug: "both-shores", name: "Both Shores", joinGateId: "puno", leaveGateId: "la-paz", days: 7, countries: ["Peru", "Bolivia"], modes: "coach · passenger boat · vehicle barge", maximumAltitude: "4,050 m", physicalNotice: "The Kasani land border is crossed on foot.", accommodation: "Amantaní has one shared family-stay standard; it is the section, not a downgrade.", arrival: "Arrive in Puno the previous day; the hotel night and arrival support are included.", promise: "Titicaca in two countries, Amantaní, Isla del Sol and a border crossed on foot.", image: { src: "/assets/images/departures/andean/gallery/both-shores/03-drive-la-paz-puno-10.jpg", alt: "Traveller beside a vehicle on the road between Puno and La Paz" },
     legs: [
       { route: "Puno → Uros → Taquile → Puno", mode: "passenger boat", surface: "Lake Titicaca" },
       { route: "Puno → Amantaní → Puno", mode: "passenger boat", surface: "Lake Titicaca" },
@@ -88,7 +88,7 @@ export const caravanSections: readonly CaravanSection[] = [
     ],
   },
   {
-    id: "05", slug: "thin-air-cloud-forest", name: "Thin Air & Cloud Forest", joinGateId: "la-paz", leaveGateId: "sucre", days: 9, countries: ["Bolivia"], modes: "road · cable car · scheduled flight", maximumAltitude: "4,200 m", physicalNotice: "The section deliberately descends into the Yungas before returning to altitude.", accommodation: "Sajama choices depend on confirmed local supply; three levels are not promised there.", arrival: "Arrive in La Paz the previous day; the hotel night and arrival support are included.", promise: "Cable cars, Tiwanaku, the Yungas and the high emptiness of Sajama.", image: { src: "/assets/images/departures/andean/gallery/thin-air-cloud-forest/02-la-paz-09-copy-2.jpg", alt: "A passenger boarding a painted bus in the Bolivian highlands" },
+    id: "05", slug: "thin-air-cloud-forest", name: "Thin Air & Cloud Forest", joinGateId: "la-paz", leaveGateId: "sucre", days: 9, countries: ["Bolivia"], modes: "road · cable car · scheduled flight", maximumAltitude: "4,200 m", physicalNotice: "The section deliberately descends into the Yungas before returning to altitude.", accommodation: "Sajama choices depend on confirmed local supply; three levels are not promised there.", arrival: "Arrive in La Paz the previous day; the hotel night and arrival support are included.", promise: "Cable cars, Tiwanaku, the Yungas and the high emptiness of Sajama.", image: { src: "/assets/images/departures/andean/gallery/thin-air-cloud-forest/02-la-paz-09-copy-2.jpg", alt: "Passenger boarding a painted bus in the Bolivian highlands" },
     legs: [
       { route: "La Paz ↔ Coroico", mode: "road vehicle", surface: "paved mountain road" },
       { route: "La Paz ↔ Tiwanaku", mode: "road vehicle", surface: "paved road" },
@@ -97,7 +97,7 @@ export const caravanSections: readonly CaravanSection[] = [
     ],
   },
   {
-    id: "06", slug: "silver-and-bone", name: "Silver & Bone", joinGateId: "sucre", leaveGateId: "uyuni", days: 7, countries: ["Bolivia"], modes: "road", maximumAltitude: "4,090 m", physicalNotice: "The route rises through Potosí before descending to Uyuni.", accommodation: "Urban stays use the chosen comfort level where supply allows.", arrival: "Sucre is the gentlest Bolivian altitude gate; your Host receives you before the group.", promise: "Dinosaur tracks, textiles, colonial wealth and the mountain that financed an empire.", image: { src: "/assets/images/departures/andean/gallery/silver-and-bone/03-bolivia-02a.jpg", alt: "A traveller standing beside a highland road in Bolivia" },
+    id: "06", slug: "silver-and-bone", name: "Silver & Bone", joinGateId: "sucre", leaveGateId: "uyuni", days: 7, countries: ["Bolivia"], modes: "road", maximumAltitude: "4,090 m", physicalNotice: "The route rises through Potosí before descending to Uyuni.", accommodation: "Urban stays use the chosen comfort level where supply allows.", arrival: "Sucre is the gentlest Bolivian altitude gate; your Host receives you before the group.", promise: "Dinosaur tracks, textiles, colonial wealth and the mountain that financed an empire.", image: { src: "/assets/images/departures/andean/gallery/silver-and-bone/03-bolivia-02a.jpg", alt: "Traveller standing beside a highland road in Bolivia" },
     legs: [
       { route: "Sucre → Potosí", mode: "road coach", surface: "paved mountain road" },
       { route: "Potosí → Uyuni", mode: "road coach", surface: "paved highland road" },
@@ -113,7 +113,7 @@ export const caravanSections: readonly CaravanSection[] = [
     ],
   },
   {
-    id: "08", slug: "atacama", name: "Atacama", joinGateId: "san-pedro", leaveGateId: "santiago", days: 4, countries: ["Chile"], modes: "road · scheduled flight", maximumAltitude: "4,320 m", physicalNotice: "High-lagoon and geyser excursions climb far above the 2,400 m base.", accommodation: "One base in San Pedro; no packing and repacking during the section.", arrival: "Arrive through Calama the previous day; the hotel night and transfer support are included.", promise: "Salt flats, high lagoons, geysers and the southern night sky.", image: { src: "/assets/images/departures/andean/gallery/atacama/01-astro-01.jpg", alt: "A clear night sky above the Atacama Desert" },
+    id: "08", slug: "atacama", name: "Atacama", joinGateId: "san-pedro", leaveGateId: "santiago", days: 4, countries: ["Chile"], modes: "road · scheduled flight", maximumAltitude: "4,320 m", physicalNotice: "High-lagoon and geyser excursions climb far above the 2,400 m base.", accommodation: "One base in San Pedro; no packing and repacking during the section.", arrival: "Arrive through Calama the previous day; the hotel night and transfer support are included.", promise: "Salt flats, high lagoons, geysers and the southern night sky.", image: { src: "/assets/images/departures/andean/gallery/atacama/01-astro-01.jpg", alt: "Clear night sky above the Atacama Desert" },
     legs: [
       { route: "San Pedro ↔ Valle de la Luna", mode: "road vehicle", surface: "paved and desert road" },
       { route: "Toconao, Salar de Atacama and high lagoons", mode: "road vehicle", surface: "paved and high-altitude road" },
@@ -122,7 +122,7 @@ export const caravanSections: readonly CaravanSection[] = [
     ],
   },
   {
-    id: "09", slug: "the-end-of-the-road", name: "The End of the Road", joinGateId: "santiago", leaveGateId: "balmaceda", days: 13, countries: ["Chile"], modes: "scheduled flight · road · vehicle ferries · lake vessel", maximumAltitude: "1,120 m", physicalNotice: "Tortel has stairs and boardwalks; guests carry their own bags from the road.", accommodation: "Villa O’Higgins has a comfortable local standard; no high-end tier is implied.", arrival: "Join at sea level in Santiago. Balmaceda is the final leaving gate only.", promise: "The Carretera Austral, Tortel, Villa O’Higgins and a different ferry return.", image: { src: "/assets/images/departures/andean/gallery/the-end-of-the-road/13-chile-016.jpg", alt: "A wet road disappearing into the mist of Chilean Patagonia", focalPoint: { x: 50, y: 58 } },
+    id: "09", slug: "the-end-of-the-road", name: "The End of the Road", joinGateId: "santiago", leaveGateId: "balmaceda", days: 13, countries: ["Chile"], modes: "scheduled flight · road · vehicle ferries · lake vessel", maximumAltitude: "1,120 m", physicalNotice: "Tortel has stairs and boardwalks; guests carry their own bags from the road.", accommodation: "Villa O’Higgins has a comfortable local standard; no high-end tier is implied.", arrival: "Join at sea level in Santiago. Balmaceda is the final leaving gate only.", promise: "The Carretera Austral, Tortel, Villa O’Higgins and a different ferry return.", image: { src: "/assets/images/departures/andean/gallery/the-end-of-the-road/13-chile-016.jpg", alt: "Wet road disappearing into the mist of Chilean Patagonia", focalPoint: { x: 50, y: 58 } },
     legs: [
       { route: "Santiago → Balmaceda → Coyhaique", mode: "scheduled flight and road vehicle", surface: "air and paved road", note: "Flight 4 of 4" },
       { route: "Coyhaique → Cerro Castillo → Río Tranquilo", mode: "road vehicle", surface: "paved and ripio" },

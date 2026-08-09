@@ -17,7 +17,7 @@
 .heading :is(h2, h3) {
   grid-column: 1;
   max-width: 10ch;
-  font-size: clamp(3.5rem, 8vw, 8rem);
+  font-size: var(--fs-heading);
   line-height: 0.82;
   scroll-margin-top: calc(var(--nav-height) + var(--space-4));
 }
@@ -26,13 +26,13 @@
   grid-column: 2;
   grid-row: 2;
   max-width: 35ch;
-  font-size: 1rem;
+  font-size: var(--fs-body);
 }
 
 .kicker {
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-eyebrow);
   line-height: 1.3;
   text-transform: uppercase;
 }
@@ -42,7 +42,7 @@
 .progressLabel,
 .orientation > p,
 .quickFacts dt {
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   line-height: 1.3;
@@ -101,7 +101,7 @@
   min-width: var(--touch-min);
   min-height: var(--touch-min);
   color: var(--ink);
-  font-size: 1.35rem;
+  font-size: var(--fs-title);
   background: var(--sun);
   border: 0;
 }
@@ -126,7 +126,7 @@
 .zoomControls > span {
   min-width: 6rem;
   padding: var(--space-3);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-align: center;
@@ -138,7 +138,7 @@
   grid-column: 1 / -1;
   min-height: var(--touch-min);
   color: var(--ink);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   letter-spacing: normal;
   text-transform: none;
   background: var(--pink);
@@ -167,7 +167,7 @@
 .countryLabels text {
   fill: var(--ink);
   font-family: var(--font-read);
-  font-size: 24px;
+  font-size: var(--fs-map-label);
   font-weight: 500;
   letter-spacing: 0.01em;
   text-transform: none;
@@ -248,8 +248,8 @@
 
 .mapCaptions text {
   fill: var(--ink);
-  font-family: var(--font-display);
-  font-size: 19px;
+  font-family: var(--font-read);
+  font-size: var(--fs-map-caption);
   font-style: italic;
 }
 
@@ -292,12 +292,12 @@
   position: relative;
   z-index: 2;
   display: grid;
-  width: 2.75rem;
-  height: 2.75rem;
-  flex: 0 0 2.75rem;
+  width: var(--touch-min);
+  height: var(--touch-min);
+  flex: 0 0 var(--touch-min);
   place-items: center;
   color: var(--paper);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   background: var(--ink);
   border: var(--border-strong) solid var(--paper);
@@ -345,7 +345,7 @@
   max-width: 10rem;
   padding: var(--space-1) var(--space-2);
   color: var(--ink);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   line-height: 1.15;
   background: var(--paper);
@@ -435,8 +435,8 @@
 
 .destinationPhoto img {
   object-fit: cover;
-  animation: reveal-photo calc(var(--motion-route) * 1.15)
-    cubic-bezier(0.16, 1, 0.3, 1) both;
+  /* §8: the choreographed photo zoom was a second, expressive motion
+     vocabulary; the stop change keeps the single restrained card slide. */
 }
 
 .destinationPhoto figcaption {
@@ -445,7 +445,7 @@
   bottom: 0;
   padding: var(--space-3) var(--space-4);
   color: var(--paper);
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
   letter-spacing: 0.08em;
   background: var(--ink);
@@ -456,8 +456,6 @@
   align-content: start;
   gap: var(--space-4);
   padding: clamp(1.5rem, 3vw, 2.5rem);
-  animation: reveal-copy calc(var(--motion-route) * 0.85)
-    cubic-bezier(0.16, 1, 0.3, 1) 80ms both;
 }
 
 .stopCount,
@@ -467,13 +465,13 @@
 
 .activeName {
   font-family: var(--font-display);
-  font-size: clamp(3rem, 5vw, 5.6rem);
+  font-size: var(--fs-card);
   line-height: 0.82;
   letter-spacing: -0.055em;
 }
 
 .introduction {
-  font-size: 1rem;
+  font-size: var(--fs-body);
 }
 
 .quickFacts {
@@ -502,13 +500,13 @@
 }
 
 .quickFactValue {
-  font-family: var(--font-display);
+  font-family: var(--font-read);
   font-size: var(--fs-title);
   line-height: 1;
 }
 
 .quickFacts small {
-  font-size: 1rem;
+  font-size: var(--fs-small);
   line-height: 1.3;
 }
 
@@ -523,7 +521,7 @@
   gap: var(--space-2) var(--space-4);
   margin: 0;
   padding-inline-start: 1.2rem;
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
 }
 
 .nextStop {
@@ -540,21 +538,21 @@
 }
 
 .nextStop span:first-child {
-  font-size: 1rem;
+  font-size: var(--fs-small);
   letter-spacing: normal;
   text-transform: none;
 }
 
 .nextStop strong {
   grid-column: 1;
-  font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-family: var(--font-read);
+  font-size: var(--fs-title);
 }
 
 .nextStop span:last-child {
   grid-column: 2;
   grid-row: 1 / 3;
-  font-size: 2rem;
+  font-size: var(--fs-display-3);
 }
 
 .progressGroup {
@@ -595,14 +593,14 @@
 }
 
 .controls button {
-  font-size: 1.2rem;
+  font-size: var(--fs-title);
 }
 
 .controls .playButton,
 .motionNote {
   display: grid;
   place-items: center;
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
@@ -615,8 +613,8 @@
 }
 
 .mapNote {
-  font-size: 1.125rem;
-  line-height: 1.4;
+  font-size: var(--fs-body);
+  line-height: var(--leading-body);
 }
 
 .mapNote a {
@@ -625,33 +623,9 @@
 
 @keyframes reveal-card {
   from {
-    opacity: 0.72;
     transform: translateX(1.25rem);
   }
   to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes reveal-photo {
-  from {
-    opacity: 0.78;
-    transform: scale(1.035);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes reveal-copy {
-  from {
-    opacity: 0;
-    transform: translateX(0.8rem);
-  }
-  to {
-    opacity: 1;
     transform: translateX(0);
   }
 }
@@ -774,7 +748,7 @@
 
 @media (max-width: 440px) {
   .heading :is(h2, h3) {
-    font-size: clamp(3.35rem, 16vw, 4.8rem);
+    font-size: var(--fs-display-1-compact);
   }
 
   .mapStage {

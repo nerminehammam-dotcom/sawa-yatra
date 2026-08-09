@@ -25,8 +25,22 @@ const nextConfig: NextConfig = {
         statusCode: 301,
       },
       {
+        // Spec v3.1 §2.3 — "Create your own" ceases to be a destination and
+        // becomes the Start one button on /journeys.
         source: "/do-it-yourself",
-        destination: "/create-your-own-journey",
+        destination: "/journeys",
+        statusCode: 301,
+      },
+      {
+        source: "/create-your-own-journey",
+        destination: "/journeys",
+        statusCode: 301,
+      },
+      {
+        // Departure dates are absorbed into /journeys (Leaving on a date /
+        // Still forming) per spec v3.1 §2.3.
+        source: "/departure-dates",
+        destination: "/journeys",
         statusCode: 301,
       },
       {

@@ -67,7 +67,7 @@ export function JoiningPointSelector({
             aria-controls={detailId}
             onClick={() => selectPoint(activeIndex - 1)}
           >
-            <span aria-hidden="true">←</span> Previous
+            <Arrow direction="left" /> Previous
           </button>
           <button
             type="button"

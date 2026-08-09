@@ -25,7 +25,7 @@ const galleryImage = (
 
 export const andeanCaravanHeroImage = image(
   "gallery/the-end-of-the-road/01-patagonia-62.jpg",
-  "A motorcyclist follows a gravel road towards snow-covered Patagonian peaks.",
+  "Motorcyclist following a gravel road towards snow-covered Patagonian peaks.",
   { x: 52, y: 61 },
 );
 
@@ -34,7 +34,7 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "desert-coast",
       "01-lima-01.jpg",
-      "A man in white friar's robes stands in a green doorway in Lima, holding a phone, an ornate iron street lamp on the wall beside him.",
+      "Man in white friar's robes standing in a green doorway in Lima, holding a phone, an ornate iron street lamp on the wall beside him.",
       { x: 41, y: 63 },
     ),
     galleryImage(
@@ -46,25 +46,25 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "desert-coast",
       "03-lima-05.jpg",
-      "A street vendor sits beside small stools against a weathered green wall in Lima.",
+      "Street vendor sitting beside small stools against a weathered green wall in Lima.",
       { x: 27, y: 55 },
     ),
     galleryImage(
       "desert-coast",
       "04-lima-08.jpg",
-      "A costumed performer pauses beside a tall wooden doorway in Lima.",
+      "Costumed performer pausing beside a tall wooden doorway in Lima.",
       { x: 72, y: 58 },
     ),
     galleryImage(
       "desert-coast",
       "05-lima-017a.jpg",
-      "A man fills bottles at a bicycle cart against a concrete wall in Lima.",
+      "Man filling bottles at a bicycle cart against a concrete wall in Lima.",
       { x: 51, y: 49 },
     ),
     galleryImage(
       "desert-coast",
       "06-lima-017ae.jpg",
-      "A police officer stands with a riot helmet beside a POLICIA sign in Lima.",
+      "Police officer standing with a riot helmet beside a POLICIA sign in Lima.",
       { x: 60, y: 54 },
     ),
   ],
@@ -72,7 +72,7 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "white-city-deep-canyon",
       "01-z8n0729-enhanced-nr-copy.jpg",
-      "A woman stands in a red doorway in a Peruvian highland town.",
+      "Woman standing in a red doorway in a Peruvian highland town.",
       { x: 76, y: 53 },
     ),
     galleryImage(
@@ -90,19 +90,19 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "white-city-deep-canyon",
       "04-london-0j.jpg",
-      "A field of yellow wildflowers below green terraced mountains under a heavy grey sky in the southern Peruvian Andes.",
+      "Field of yellow wildflowers below green terraced mountains under a heavy grey sky in the southern Peruvian Andes.",
       { x: 52, y: 48 },
     ),
     galleryImage(
       "white-city-deep-canyon",
       "05-london-0ps.jpg",
-      "A dirt road runs between highland fields and a wall of dark mountains.",
+      "Dirt road running between highland fields and a wall of dark mountains.",
       { x: 50, y: 62 },
     ),
     galleryImage(
       "white-city-deep-canyon",
       "06-london-02.jpg",
-      "An Andean woman in a hat walks a roadside path past green highland fields under a heavy grey sky.",
+      "Andean woman in a hat walking a roadside path past green highland fields under a heavy grey sky.",
       { x: 48, y: 62 },
     ),
   ],
@@ -110,19 +110,19 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "the-stone-road",
       "01-cuscco-01.jpg",
-      "A woman walks along a white-walled street in Cusco.",
+      "Woman walking along a white-walled street in Cusco.",
       { x: 72, y: 55 },
     ),
     galleryImage(
       "the-stone-road",
       "02-cusco-13.jpg",
-      "A child watches from the doorway of a carpenter's workshop in Cusco.",
+      "Child watching from the doorway of a carpenter's workshop in Cusco.",
       { x: 73, y: 53 },
     ),
     galleryImage(
       "the-stone-road",
       "03-cusco-15.jpg",
-      "A market vendor sits beneath a devotional image in Cusco.",
+      "Market vendor sitting beneath a devotional image in Cusco.",
       { x: 51, y: 53 },
     ),
     galleryImage(
@@ -142,37 +142,37 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "both-shores",
       "01-drive-la-paz-puno-05.jpg",
-      "A tractor works fields on the high plateau between Puno and La Paz.",
+      "Tractor working fields on the high plateau between Puno and La Paz.",
       { x: 53, y: 57 },
     ),
     galleryImage(
       "both-shores",
       "02-drive-la-paz-puno-09.jpg",
-      "A small handwritten word marks a white roadside wall near Lake Titicaca.",
+      "Small handwritten word marking a white roadside wall near Lake Titicaca.",
       { x: 50, y: 51 },
     ),
     galleryImage(
       "both-shores",
       "03-drive-la-paz-puno-10.jpg",
-      "A yellow truck passes a pedestrian on the high road towards La Paz.",
+      "Yellow truck passing a pedestrian on the high road towards La Paz.",
       { x: 47, y: 54 },
     ),
     galleryImage(
       "both-shores",
       "04-drive-la-paz-puno-01.jpg",
-      "A woman walks across wet ground past stacked ladders on the edge of a highland town.",
+      "Woman walking across wet ground past stacked ladders on the edge of a highland town.",
       { x: 72, y: 59 },
     ),
     galleryImage(
       "both-shores",
       "05-drive-la-paz-puno-04.jpg",
-      "A dark farm building stands on the open altiplano near grazing animals.",
+      "Dark farm building standing on the open altiplano near grazing animals.",
       { x: 33, y: 56 },
     ),
     galleryImage(
       "both-shores",
       "06-drive-la-paz-puno-05.jpg",
-      "A tractor crosses striped fields on the road between La Paz and Puno.",
+      "Tractor crossing striped fields on the road between La Paz and Puno.",
       { x: 56, y: 55 },
     ),
   ],
@@ -180,19 +180,19 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "thin-air-cloud-forest",
       "01-la-paz-05.jpg",
-      "A flower seller works among bundles of pale blooms in La Paz.",
+      "Flower seller working among bundles of pale blooms in La Paz.",
       { x: 64, y: 53 },
     ),
     galleryImage(
       "thin-air-cloud-forest",
       "02-la-paz-09-copy-2.jpg",
-      "A passenger boards a painted bus on a steep street in La Paz.",
+      "Passenger boarding a painted bus on a steep street in La Paz.",
       { x: 73, y: 54 },
     ),
     galleryImage(
       "thin-air-cloud-forest",
       "03-drive-uyuni-lapaz-03.jpg",
-      "A cyclist passes a lathe workshop on the outskirts of La Paz.",
+      "Cyclist passing a lathe workshop on the outskirts of La Paz.",
       { x: 35, y: 55 },
     ),
     galleryImage(
@@ -204,19 +204,19 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "thin-air-cloud-forest",
       "05-drive-uyuni-lapaz-010.jpg",
-      "A woman stands outside an adobe home under a wide turquoise sky.",
+      "Woman standing outside an adobe home under a wide turquoise sky.",
       { x: 69, y: 56 },
     ),
     galleryImage(
       "thin-air-cloud-forest",
       "06-drive-uyuni-lapaz-011.jpg",
-      "A cyclist rides past corrugated buildings on a Bolivian roadside.",
+      "Cyclist riding past corrugated buildings on a Bolivian roadside.",
       { x: 75, y: 53 },
     ),
     galleryImage(
       "thin-air-cloud-forest",
       "07-drive-uyuni-lapaz-300.jpg",
-      "A woman carries market goods through a narrow street in La Paz.",
+      "Woman carrying market goods through a narrow street in La Paz.",
       { x: 52, y: 52 },
     ),
   ],
@@ -230,7 +230,7 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "silver-and-bone",
       "02-bolivia-01a.jpg",
-      "A shepherd tends sheep beside a small highland settlement.",
+      "Shepherd tending sheep beside a small highland settlement.",
       { x: 45, y: 57 },
     ),
     galleryImage(
@@ -242,19 +242,19 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "silver-and-bone",
       "04-bolivia-03a.jpg",
-      "A flock of sheep spreads across a pale high-altitude valley.",
+      "Flock of sheep spreading across a pale high-altitude valley.",
       { x: 51, y: 57 },
     ),
     galleryImage(
       "silver-and-bone",
       "05-bolivia-04a.jpg",
-      "A small truck stands at the foot of a hill on the altiplano beneath towering clouds.",
+      "Small truck standing at the foot of a hill on the altiplano beneath towering clouds.",
       { x: 77, y: 59 },
     ),
     galleryImage(
       "silver-and-bone",
       "06-bolivia-07a.jpg",
-      "A cow grazes among dry grasses on the Bolivian plateau, two more resting behind.",
+      "Cow grazing among dry grasses on the Bolivian plateau, two more resting behind.",
       { x: 47, y: 58 },
     ),
     galleryImage(
@@ -266,19 +266,19 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "silver-and-bone",
       "08-drive-uyuni-lapaz-012.jpg",
-      "A flock of sheep rounds a bend in a highland road.",
+      "Flock of sheep rounding a bend in a highland road.",
       { x: 44, y: 55 },
     ),
     galleryImage(
       "silver-and-bone",
       "09-drive-uyuni-lapaz-013-2.jpg",
-      "A road descends towards a hazy Bolivian city beneath the mountains.",
+      "Road descending towards a hazy Bolivian city beneath the mountains.",
       { x: 50, y: 58 },
     ),
     galleryImage(
       "silver-and-bone",
       "10-drive-uyuni-lapaz-29.jpg",
-      "A flower seller sits in blue overalls among baskets of white and pink blooms.",
+      "Flower seller sitting in blue overalls among baskets of white and pink blooms.",
       { x: 67, y: 52 },
     ),
   ],
@@ -286,7 +286,7 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "the-mirror",
       "01-uyuni-01.jpg",
-      "A shallow high-altitude lagoon reflects the mountains near Uyuni.",
+      "Shallow high-altitude lagoon reflecting the mountains near Uyuni.",
       { x: 53, y: 52 },
     ),
     galleryImage(
@@ -298,7 +298,7 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "the-mirror",
       "03-uyuni-05.jpg",
-      "A turquoise lagoon cuts through the white mineral plain near Uyuni.",
+      "Turquoise lagoon cutting through the white mineral plain near Uyuni.",
       { x: 51, y: 52 },
     ),
     galleryImage(
@@ -310,7 +310,7 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "the-mirror",
       "05-drive-uyuni-lapaz-07-2.jpg",
-      "A herd of llamas wades through shallow water on the altiplano beneath a grey sky.",
+      "Herd of llamas wading through shallow water on the altiplano beneath a grey sky.",
       { x: 57, y: 54 },
     ),
   ],
@@ -330,7 +330,7 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "atacama",
       "03-z8n5462.jpg",
-      "A star-filled sky hangs above a red canyon in the Atacama Desert.",
+      "Star-filled sky hanging above a red canyon in the Atacama Desert.",
       { x: 52, y: 37 },
     ),
     galleryImage(
@@ -344,79 +344,79 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "the-end-of-the-road",
       "01-patagonia-62.jpg",
-      "A motorcyclist follows a gravel road towards snow-covered Patagonian peaks.",
+      "Motorcyclist following a gravel road towards snow-covered Patagonian peaks.",
       { x: 52, y: 61 },
     ),
     galleryImage(
       "the-end-of-the-road",
       "02-patagonia-13.jpg",
-      "A narrow road crosses tawny grasslands beneath a Patagonian escarpment.",
+      "Narrow road crossing tawny grasslands beneath a Patagonian escarpment.",
       { x: 46, y: 60 },
     ),
     galleryImage(
       "the-end-of-the-road",
       "03-patagonia-10.jpg",
-      "A low moon lays a gold path across a Patagonian lake.",
+      "Low moon laying a gold path across a Patagonian lake.",
       { x: 49, y: 49 },
     ),
     galleryImage(
       "the-end-of-the-road",
       "04-patagonia-8.jpg",
-      "A traveller walks along a black Patagonian beach beneath forested hills.",
+      "Traveller walking along a black Patagonian beach beneath forested hills.",
       { x: 56, y: 59 },
     ),
     galleryImage(
       "the-end-of-the-road",
       "05-patagonia-04.jpg",
-      "An orange excavator stands on a broad gravel riverbank below red Patagonian hills.",
+      "Orange excavator standing on a broad gravel riverbank below red Patagonian hills.",
       { x: 31, y: 57 },
     ),
     galleryImage(
       "the-end-of-the-road",
       "06-paragonia-02.jpg",
-      "A pale blue Patagonian lake stretches towards distant mountains.",
+      "Pale blue Patagonian lake stretching towards distant mountains.",
       { x: 50, y: 51 },
     ),
     galleryImage(
       "the-end-of-the-road",
       "07-patagoina-01.jpg",
-      "A gravel road runs through open Patagonian ranchland.",
+      "Gravel road running through open Patagonian ranchland.",
       { x: 50, y: 58 },
     ),
     galleryImage(
       "the-end-of-the-road",
       "08-patagonia-03.jpg",
-      "A clear river winds between autumn forest and red Patagonian peaks.",
+      "Clear river winding between autumn forest and red Patagonian peaks.",
       { x: 55, y: 52 },
     ),
     galleryImage(
       "the-end-of-the-road",
       "09-patagonia-41.jpg",
-      "A still Patagonian lake rests beneath a line of snow-covered mountains.",
+      "Still Patagonian lake resting beneath a line of snow-covered mountains.",
       { x: 52, y: 50 },
     ),
     galleryImage(
       "the-end-of-the-road",
       "10-z8n7627-copy.jpg",
-      "A vehicle approaches along a stony road in Patagonia.",
+      "Vehicle approaching along a stony road in Patagonia.",
       { x: 53, y: 56 },
     ),
     galleryImage(
       "the-end-of-the-road",
       "11-patagonia-50.jpg",
-      "A rider leads a second horse along a track above a long Patagonian river.",
+      "Rider leading a second horse along a track above a long Patagonian river.",
       { x: 54, y: 58 },
     ),
     galleryImage(
       "the-end-of-the-road",
       "12-z8n7909-copy.jpg",
-      "A gravel road curves between a Patagonian lake and a rocky cliff.",
+      "Gravel road curving between a Patagonian lake and a rocky cliff.",
       { x: 61, y: 58 },
     ),
     galleryImage(
       "the-end-of-the-road",
       "13-chile-016.jpg",
-      "A mountain road disappears into mist and autumn forest.",
+      "Mountain road disappearing into mist and autumn forest.",
       { x: 50, y: 60 },
     ),
     galleryImage(
@@ -428,13 +428,13 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "the-end-of-the-road",
       "15-naila-06.jpg",
-      "A brown cow stands before snow-dusted mountains in Patagonia.",
+      "Brown cow standing before snow-dusted mountains in Patagonia.",
       { x: 52, y: 57 },
     ),
     galleryImage(
       "the-end-of-the-road",
       "16-patagonia-36.jpg",
-      "A pale road winds through rolling Patagonian foothills.",
+      "Pale road winding through rolling Patagonian foothills.",
       { x: 52, y: 57 },
     ),
     galleryImage(
@@ -446,7 +446,7 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "the-end-of-the-road",
       "18-patagonia-33.jpg",
-      "A small boat rests on a Patagonian shore below snow-covered mountains.",
+      "Small boat resting on a Patagonian shore below snow-covered mountains.",
       { x: 49, y: 57 },
     ),
     galleryImage(
@@ -458,13 +458,13 @@ export const andeanCaravanSectionGalleries = {
     galleryImage(
       "the-end-of-the-road",
       "20-patagonia-2.jpg",
-      "A small boat sits on a rocky shore beside a misty Patagonian lake.",
+      "Small boat sitting on a rocky shore beside a misty Patagonian lake.",
       { x: 54, y: 56 },
     ),
     galleryImage(
       "the-end-of-the-road",
       "21-naila-03.jpg",
-      "A copper-coloured river bends through an autumn Patagonian valley.",
+      "Copper-coloured river bending through an autumn Patagonian valley.",
       { x: 48, y: 53 },
     ),
   ],

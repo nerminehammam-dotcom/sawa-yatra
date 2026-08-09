@@ -22,7 +22,7 @@
 
 .pronunciation {
   color: var(--pink);
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 400;
   letter-spacing: 0.12em;
 }
@@ -36,7 +36,7 @@
 .navigationLabel {
   margin-bottom: var(--space-4);
   color: var(--pink);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 400;
 }
 
@@ -61,7 +61,7 @@
   min-height: var(--touch-min);
   align-items: center;
   color: var(--paper);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   /* Light-on-dark blooms: one step below body so it reads at the same colour. */
   font-weight: 400;
   letter-spacing: normal;

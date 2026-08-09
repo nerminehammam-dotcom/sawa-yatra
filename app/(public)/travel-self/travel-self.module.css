@@ -11,13 +11,13 @@
 .before h2,
 .otherFamilies h2 {
   margin-bottom: var(--space-8);
-  font-size: clamp(2.4rem, 5.5vw, 5.5rem);
+  font-size: var(--fs-display-2);
 }
 
 .panelEyebrow,
 .progress,
 .passport dt {
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
@@ -27,21 +27,21 @@
   max-width: 60ch;
   margin-top: var(--space-16);
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: var(--fs-body);
   font-style: italic;
   line-height: 1.5;
 }
 
 
 .travelSelfIntro {
-  --tsi-paper: var(--paper, #e7e1d6);
-  --tsi-ink: var(--ink, #27231f);
-  --tsi-signal: var(--signal, #f05a2a);
-  --tsi-signal-text: var(--signal-text, #b03a0c);
-  --tsi-sun: var(--sun, #e5bc4f);
-  --tsi-clay: var(--clay, #a96f47);
-  --tsi-olive: var(--olive, #98904f);
-  --tsi-pink: var(--pink, #eeb6c4);
+  --tsi-paper: var(--paper);
+  --tsi-ink: var(--ink);
+  --tsi-signal: var(--signal);
+  --tsi-signal-text: var(--signal-text);
+  --tsi-sun: var(--sun);
+  --tsi-clay: var(--clay);
+  --tsi-olive: var(--olive);
+  --tsi-pink: var(--pink);
   --tsi-display: var(--font-display, "Fraunces", Georgia, serif);
   --tsi-hair: 1px;
   display: grid;
@@ -54,7 +54,7 @@
   color: var(--tsi-ink);
   background: var(--tsi-paper);
   border-bottom: 4px solid var(--tsi-signal-text);
-  font-size: 1.1875rem;
+  font-size: var(--fs-body);
   line-height: 1.6;
 }
 
@@ -93,9 +93,9 @@
 
 .travelSelfIntro .introKicker {
   margin: 0;
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-eyebrow);
   line-height: 1.35;
   text-transform: uppercase;
 }
@@ -108,9 +108,9 @@
   max-width: 12ch;
   margin: 0;
   font-family: var(--tsi-display);
-  font-size: clamp(3.25rem, 5.5vw, 6.5rem);
+  font-size: var(--fs-hero);
   font-optical-sizing: auto;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -0.025em;
   line-height: 0.9;
 }
@@ -127,7 +127,7 @@
   font-style: italic;
   /* SOFT + WONK only; opsz tracks the rendered size via font-optical-sizing. */
   font-variation-settings: "SOFT" 40, "WONK" 1;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .travelSelfIntro .introStandfirst {
@@ -148,7 +148,7 @@
   font-family: var(--tsi-display);
   font-size: var(--fs-lead);
   font-style: italic;
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1.3;
 }
 
@@ -199,7 +199,7 @@
 .travelSelfIntro .introReassure {
   max-width: 46ch;
   margin: 0;
-  font-size: 1.0625rem;
+  font-size: var(--fs-body);
   line-height: 1.55;
 }
 
@@ -216,7 +216,7 @@
   border-radius: 0;
   cursor: pointer;
   font: inherit;
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
   letter-spacing: 0.02em;
   text-decoration: none;
@@ -252,7 +252,7 @@
 
 .before h2 {
   color: var(--signal-text);
-  font-size: clamp(2.2rem, 4.5vw, 4.2rem);
+  font-size: var(--fs-display-3);
 }
 
 .before > div + div {
@@ -276,7 +276,7 @@
 .question h2 {
   max-width: 18ch;
   margin-bottom: var(--space-6);
-  font-size: clamp(2.5rem, 5.6vw, 5.6rem);
+  font-size: var(--fs-display-2);
 }
 
 .questionHelper,
@@ -284,7 +284,7 @@
   max-width: 50ch;
   color: var(--ink);
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: var(--fs-body);
   font-style: italic;
 }
 
@@ -313,14 +313,14 @@
 }
 
 .poles strong {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
+  font-family: var(--font-read);
+  font-size: var(--fs-title);
   font-weight: 400;
 }
 
 .poles small {
   margin-top: var(--space-1);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   line-height: 1.35;
 }
 
@@ -351,7 +351,7 @@
   --focus-ring: var(--ink);
   position: relative;
   display: grid;
-  min-width: 44px;
+  min-width: var(--touch-min);
   min-height: 56px;
   place-items: center;
   padding: 0;
@@ -359,7 +359,7 @@
   border-radius: 50%;
   color: var(--ink);
   background: var(--paper);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
 }
 
@@ -382,7 +382,7 @@
   min-height: 4.5rem;
   margin-top: var(--space-8);
   font-family: var(--font-display);
-  font-size: clamp(1.45rem, 2.5vw, 2.1rem);
+  font-size: var(--fs-title);
   font-style: italic;
   line-height: 1.35;
 }
@@ -418,7 +418,7 @@
 
 .selectionCount {
   margin-bottom: var(--space-6);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
 }
 
@@ -434,13 +434,13 @@
 }
 
 .passion strong {
-  font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-family: var(--font-read);
+  font-size: var(--fs-title);
   font-weight: 400;
 }
 
 .passion span {
-  font-size: 1rem;
+  font-size: var(--fs-small);
   line-height: 1.45;
 }
 
@@ -448,7 +448,7 @@
   min-height: 2rem;
   margin-top: var(--space-5);
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: var(--fs-title);
   font-style: italic;
 }
 
@@ -495,12 +495,12 @@
 
 .narrowLine {
   font-family: var(--font-display);
-  font-size: 1.65rem;
+  font-size: var(--fs-title);
 }
 
 .narrowDetail {
   margin-top: var(--space-2);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   line-height: 1.45;
 }
 
@@ -534,18 +534,19 @@
 
 .qCount {
   margin: 0;
-  font-family: var(--font-display);
-  font-size: 3rem;
+  font-family: var(--font-read);
+  font-size: var(--fs-display-3);
   font-weight: 400;
+  font-variant-numeric: tabular-nums;
   letter-spacing: -0.02em;
   line-height: 1;
 }
 
 .qBandLabel {
   margin: 0;
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: var(--tracking-eyebrow);
   line-height: 1.5;
   text-transform: uppercase;
 }
@@ -588,8 +589,8 @@
 .qBefore h2 {
   margin: 0 0 1rem;
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.4vw, 2rem);
-  font-weight: 400;
+  font-size: var(--fs-title);
+  font-weight: 500;
   line-height: 1.15;
 }
 
@@ -611,7 +612,7 @@
 
 .qBeforeRows p {
   margin: 0;
-  font-size: 1rem;
+  font-size: var(--fs-small);
   line-height: 1.5;
 }
 
@@ -633,8 +634,8 @@
   max-width: 17ch;
   margin: 0 0 0.75rem;
   font-family: var(--font-display);
-  font-size: clamp(2.1rem, 3.6vw, 3.5rem);
-  font-weight: 400;
+  font-size: var(--fs-display-3);
+  font-weight: 500;
   letter-spacing: -0.02em;
   line-height: 1.04;
 }
@@ -647,7 +648,7 @@
   max-width: 52ch;
   margin: 0;
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: var(--fs-body);
   font-style: italic;
   line-height: 1.5;
 }
@@ -666,15 +667,15 @@
 }
 
 .qPoles strong {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-family: var(--font-read);
+  font-size: var(--fs-title);
   font-weight: 400;
   line-height: 1.5;
 }
 
 .qPoles small {
   max-width: 18ch;
-  font-size: 1rem;
+  font-size: var(--fs-small);
   line-height: 1.35;
 }
 
@@ -731,19 +732,19 @@
   max-width: 34ch;
   min-height: 2.6em;
   margin: 1.75rem 0 0;
-  line-height: 1.4;
 }
 
 .qEcho {
   font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.2vw, 2.05rem);
+  font-size: var(--fs-title);
   font-style: italic;
-  font-weight: 300;
+  font-weight: 500;
   line-height: 1.25;
 }
 
 .qPrompt {
-  font-size: 1.0625rem;
+  font-size: var(--fs-body);
+  line-height: 1.55;
 }
 
 .qChoices {
@@ -768,7 +769,7 @@
 .qChoices button {
   padding: 0.9rem 1.25rem;
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: var(--fs-body);
 }
 
 .qChoices button:hover,
@@ -804,20 +805,20 @@
 }
 
 .qPassions strong {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-family: var(--font-read);
+  font-size: var(--fs-title);
   font-weight: 400;
   line-height: 1.2;
 }
 
 .qPassions span {
-  font-size: 1rem;
+  font-size: var(--fs-small);
   line-height: 1.4;
 }
 
 .qCounter {
   margin: 1rem 0 0;
-  font-size: 1.0625rem;
+  font-size: var(--fs-body);
   line-height: 1.5;
 }
 
@@ -825,7 +826,7 @@
   min-height: 1.75rem;
   margin: 0.5rem 0 0;
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: var(--fs-body);
   font-style: italic;
 }
 
@@ -848,7 +849,7 @@
   color: var(--ink);
   background: transparent;
   font: inherit;
-  font-size: 1.0625rem;
+  font-size: var(--fs-body);
   font-weight: 500;
 }
 
@@ -931,13 +932,13 @@
 .qNarrowLine {
   margin: 0;
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: var(--fs-body);
   line-height: 1.4;
 }
 
 .qNarrowDetail {
   margin: 0.25rem 0 0;
-  font-size: 1rem;
+  font-size: var(--fs-small);
   line-height: 1.5;
 }
 
@@ -969,7 +970,7 @@
 
 .passportHead > p:first-child {
   margin: 0 0 0.75rem;
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
@@ -978,7 +979,7 @@
 .passportHead h1 {
   max-width: none;
   margin: 0;
-  font-size: clamp(2.8rem, 8vw, 5rem);
+  font-size: var(--fs-display-2);
   line-height: 0.95;
   letter-spacing: -0.03em;
 }
@@ -990,7 +991,7 @@
 .passportReadout {
   margin: 0.75rem 0 0;
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-size: var(--fs-body);
   line-height: 1.4;
 }
 
@@ -1014,7 +1015,7 @@
   margin: 0;
   padding: 1rem clamp(1.25rem, 3vw, 2rem);
   border-bottom: 1px solid var(--ink);
-  font-size: 1.0625rem;
+  font-size: var(--fs-body);
   line-height: 1.55;
 }
 
@@ -1044,15 +1045,15 @@
 .passportFriction dt {
   margin: 0;
   padding-top: 0.25rem;
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
 
 .passportBody dd {
   margin: 0;
-  font-size: 1.0625rem;
+  font-size: var(--fs-body);
   line-height: 1.6;
 }
 
@@ -1070,7 +1071,7 @@
   max-width: 36ch;
   margin: 0;
   font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+  font-size: var(--fs-lead);
   line-height: 1.35;
 }
 
@@ -1082,14 +1083,14 @@
   max-width: 56ch;
   margin: 0;
   font-family: var(--font-display), Georgia, serif;
-  font-size: 1.1rem;
+  font-size: var(--fs-body);
   font-style: italic;
   line-height: 1.55;
 }
 
 .passportChange {
   margin: 0.6rem 0 0;
-  font-size: 1.0625rem;
+  font-size: var(--fs-body);
 }
 
 .passportActions {
@@ -1102,7 +1103,7 @@
 .passportSaveNotice {
   min-height: 1.5em;
   margin: 0.75rem 0 0;
-  font-size: 1rem;
+  font-size: var(--fs-small);
 }
 
 .resultStage,
@@ -1125,7 +1126,7 @@
 
 .resultEyebrow {
   margin-bottom: var(--space-8);
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
@@ -1134,15 +1135,15 @@
 .resultStage h1,
 .returningHeader h1 {
   max-width: none;
-  font-size: clamp(4rem, 12vw, 12rem);
+  font-size: var(--fs-display-1);
   line-height: 0.9;
 }
 
 .resultReadout {
   margin: var(--space-8) auto 0;
   color: var(--ink);
-  font-size: clamp(0.8rem, 1.4vw, 1.05rem);
-  letter-spacing: 0.2em;
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
 }
 
 .passport {
@@ -1188,7 +1189,7 @@
 
 .passport dd {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: var(--fs-body);
 }
 
 .passport .sting {
@@ -1206,7 +1207,7 @@
 .sting dd {
   max-width: 32ch;
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4vw, 3.8rem);
+  font-size: var(--fs-display-3);
   font-style: italic;
   line-height: 1.18;
 }
@@ -1251,22 +1252,22 @@
 }
 
 .otherFamilies strong {
-  font-family: var(--font-display);
+  font-family: var(--font-read);
   font-size: var(--fs-title);
   font-weight: 400;
 }
 
 .otherFamilies li span {
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
-  letter-spacing: 0.1em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
 
 .otherFamilies li p {
   margin-top: var(--space-3);
-  font-size: 1.125rem;
-  letter-spacing: 0.12em;
+  font-size: var(--fs-body);
+  letter-spacing: var(--tracking-eyebrow);
 }
 
 @media (max-width: 899px) {
@@ -1313,7 +1314,7 @@
 
   .qCount {
     grid-area: count;
-    font-size: 2.4rem;
+    font-size: var(--fs-display-3);
   }
 
   .qBandLabel {
@@ -1360,7 +1361,7 @@
   }
 
   .qQuestion h2 {
-    font-size: clamp(2rem, 5.2vw, 2.9rem);
+    font-size: var(--fs-display-3);
   }
 
   .qBeforeRows {
@@ -1389,8 +1390,8 @@
   }
 
   .inkPosition {
-    min-width: 44px;
-    min-height: 48px;
+    min-width: var(--touch-min);
+    min-height: var(--touch-min);
   }
 
   .passport dl > div {

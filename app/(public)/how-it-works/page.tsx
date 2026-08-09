@@ -51,7 +51,7 @@ export default function HowItWorksPage() {
           <div className={styles.featuredImage}>
             <Image
               src="/assets/images/departures/andean/gallery/the-end-of-the-road/09-patagonia-41.jpg"
-              alt="A broad Patagonian lake lies beneath a distant ridge of snow-covered mountains."
+              alt="Broad Patagonian lake lying beneath a distant ridge of snow-covered mountains."
               fill
               preload
               sizes="(max-width: 767px) 100vw, (max-width: 1440px) 92vw, 1325px"
@@ -80,7 +80,7 @@ export default function HowItWorksPage() {
             <div className={styles.wayImage}>
               <Image
                 src="/assets/images/departures/andean/gallery/white-city-deep-canyon/05-london-0ps.jpg"
-                alt="A pale road crosses cultivated Andean fields beneath dark mountains and gathering clouds."
+                alt="Pale road crossing cultivated Andean fields beneath dark mountains and gathering clouds."
                 fill
                 loading="eager"
                 sizes="(max-width: 1023px) 100vw, (max-width: 1440px) 58vw, 835px"
@@ -174,6 +174,10 @@ export default function HowItWorksPage() {
           {consentSteps.map((step) => (
             <li key={step}>
               <span>{step}</span>
+              {/* §6.3: arrows are the <Arrow /> SVG, never a font glyph. */}
+              <span className={styles.stepArrow} aria-hidden="true">
+                <Arrow />
+              </span>
             </li>
           ))}
         </ol>

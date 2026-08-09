@@ -1,0 +1,78 @@
+{
+  "framing": "These are round figures for shape and review only. They are not prices, not quotes, and not commitments. No output of this agent may reach a member-facing surface.",
+  "status": "demo-fixture",
+  "generatedAt": "2026-08-08T15:17:33.263Z",
+  "inputs": {
+    "section": "demo-section-not-real",
+    "operatorFixedCost": 1000,
+    "perHeadCost": 100,
+    "durationDays": 1,
+    "inclusions": [
+      "demo fixture only - not operator data"
+    ],
+    "currency": "USD",
+    "operatorFloor": 100
+  },
+  "bands": [
+    {
+      "band": 1,
+      "groupSize": "1 traveller",
+      "representativeSize": 1,
+      "fixedShare": 1000,
+      "perHead": 100,
+      "rawPerPerson": 1100,
+      "indicativeRoundFigure": 1100,
+      "arithmetic": "1000 / 1 + 100 = 1100 → rounds to 1100 (unit 10, USD)"
+    },
+    {
+      "band": 2,
+      "groupSize": "2–3",
+      "representativeSize": 3,
+      "fixedShare": 333.3333333333333,
+      "perHead": 100,
+      "rawPerPerson": 433.3333333333333,
+      "indicativeRoundFigure": 430,
+      "arithmetic": "1000 / 3 + 100 = 433.3333333333333 → rounds to 430 (unit 10, USD)"
+    },
+    {
+      "band": 3,
+      "groupSize": "4–5",
+      "representativeSize": 5,
+      "fixedShare": 200,
+      "perHead": 100,
+      "rawPerPerson": 300,
+      "indicativeRoundFigure": 300,
+      "arithmetic": "1000 / 5 + 100 = 300 → rounds to 300 (unit 10, USD)"
+    },
+    {
+      "band": 4,
+      "groupSize": "6–7",
+      "representativeSize": 7,
+      "fixedShare": 142.85714285714286,
+      "perHead": 100,
+      "rawPerPerson": 242.85714285714286,
+      "indicativeRoundFigure": 240,
+      "arithmetic": "1000 / 7 + 100 = 242.85714285714286 → rounds to 240 (unit 10, USD)"
+    },
+    {
+      "band": 5,
+      "groupSize": "8–9",
+      "representativeSize": 9,
+      "fixedShare": 111.11111111111111,
+      "perHead": 100,
+      "rawPerPerson": 211.11111111111111,
+      "indicativeRoundFigure": 210,
+      "arithmetic": "1000 / 9 + 100 = 211.11111111111111 → rounds to 210 (unit 10, USD)"
+    },
+    {
+      "band": 6,
+      "groupSize": "10–12",
+      "representativeSize": 12,
+      "fixedShare": 83.33333333333333,
+      "perHead": 100,
+      "rawPerPerson": 183.33333333333331,
+      "indicativeRoundFigure": 180,
+      "arithmetic": "1000 / 12 + 100 = 183.33333333333331 → rounds to 180 (unit 10, USD)"
+    }
+  ]
+}

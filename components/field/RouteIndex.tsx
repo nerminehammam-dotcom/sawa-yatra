@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { ProvenanceBadge } from "@/components/journeys/ProvenanceBadge";
 import { andeanCaravanSections } from "@/content/andean-caravan";
 import { getAndeanCaravanImage } from "@/content/andean-caravan-images";
 
@@ -31,6 +32,8 @@ export function RouteIndex() {
             <div className={styles.routeMain}>
               <h3>{section.title}</h3>
               <p>{section.route}</p>
+              {/* Rule 1.4 / §2.2 — provenance on every journey card. */}
+              <ProvenanceBadge provenance="sawayatra" />
             </div>
             <dl className={styles.routeFacts}>
               <div>

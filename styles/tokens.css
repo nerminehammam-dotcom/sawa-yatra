@@ -97,10 +97,18 @@
   --soft-blue: var(--blue); /* fixed: was --olive (see --dusty-blue). Genuine-olive soft grounds use --soft-olive. */
   --hairline: var(--ink);
 
-  /* Single-family type system: Fraunces for display and text.
-     The opsz axis (9-144) carries the register change, not a second family. */
+  /* §6.2 face split (constitution v2.5): Fraunces is the voice of the club —
+     display, headings, pull quotes, editorial body. General Sans is the
+     operational face — nav, forms, questionnaire, buttons, tables, prices,
+     dates, itineraries, captions, legal. The former single-family system
+     (opsz doing the register work) was overruled by §6.2: optical size works
+     within Fraunces, it does not substitute for the face split.
+     General Sans is self-hosted at public/fonts/general-sans/ (see the README
+     there — files come from fontshare.com under the ITF FFL); until the files
+     are dropped in, the stack falls to the system sans, never to Fraunces. */
   --font-display: var(--font-fraunces, Georgia, serif);
-  --font-read: var(--font-fraunces, Georgia, serif);
+  --font-read: "General Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
 
   /* Type scale (added 2026-08-07). One ramp for the whole site; the opsz axis
      carries the display/text register, so these are just sizes. Values match the
@@ -116,9 +124,17 @@
   --fs-card: clamp(3.2rem, 5vw, 5rem); /* large display card title (featured / way cards) */
   --fs-title: clamp(1.65rem, 2.8vw, 2.65rem); /* h3 / smaller card title */
   --fs-lead: clamp(1.15rem, 1.6vw, 1.5rem); /* standfirst / lead */
-  --fs-body: clamp(1.05rem, 1.4vw, 1.3rem); /* long-form body in modules */
-  --fs-small: 1rem; /* smallest readable — decision facts, per audit-01 */
+  --fs-body: clamp(1.125rem, 1.4vw, 1.3rem); /* long-form body — floor raised to
+     18px per constitution §10 (was 1.05rem/16.8px; sustained body never <18px) */
+  --fs-small: 1rem; /* smallest readable — short, secondary information ONLY (§10) */
   --fs-eyebrow: 0.875rem; /* decorative label floor */
+
+  /* Proposed §6.3 amendments (constitution-amendment-proposals.md): three
+     genuinely new roles the ramp lacked. SVG-space map type is deliberately
+     px — it lives in a viewBox coordinate system, not the document rem flow. */
+  --fs-map-label: 24px; /* SVG route-map stop labels */
+  --fs-map-caption: 19px; /* SVG route-map captions */
+  --fs-display-1-compact: clamp(3.2rem, 16vw, 5.6rem); /* h1 under 640px */
 
   --leading-tight: 1.06; /* display */
   --leading-title: 1.12; /* h3 */

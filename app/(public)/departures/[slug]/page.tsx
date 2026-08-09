@@ -32,8 +32,18 @@ import {
   andeanCaravanCountries,
   andeanCaravanRouteStops,
 } from "@/content/andean-caravan-route";
+import { PairedPrice } from "@/components/journeys/PairedPrice";
+import { PricingLadder } from "@/components/journeys/PricingLadder";
+import { ProvenanceBadge } from "@/components/journeys/ProvenanceBadge";
+import { UpgradePanel } from "@/components/journeys/UpgradePanel";
 import { siteConfig } from "@/content/site";
+import {
+  PRICING_SURFACE_TOKENS,
+  specTokensFilled,
+} from "@/content/spec-tokens";
+import { fixedJourneys } from "@/content/journeys-catalog";
 import { contactHref } from "@/lib/contact";
+import { emptyLadder } from "@/lib/journeys/pricing";
 import { absoluteUrl } from "@/lib/site-url";
 
 import styles from "./journey.module.css";
@@ -382,6 +392,9 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
   );
   const previous = andeanCaravanSections[sectionIndex - 1];
   const next = andeanCaravanSections[sectionIndex + 1];
+  const catalogJourney = fixedJourneys.find(
+    (journey) => journey.slug === section.slug,
+  );
   const why = textList(section.whyThisSectionExists);
   const shape = textList(section.journeyShape);
   const feature = textList(section.feature);
@@ -441,6 +454,41 @@ function SectionJourneyPage({ section }: { section: AndeanCaravanSection }) {
       />
 
       <JourneyGallery journeySlug={section.slug} images={gallery.slice(1)} />
+
+      {/* §7 pricing surfaces — laddered journeys only (§7.2), gated on the
+          journey's own pricing-model attribute, never assumed. Withheld from
+          production until the §13 pricing tokens are signed off ("nothing
+          ships with an unfilled token"); in development they render with
+          visible token markers for design review. */}
+      {catalogJourney?.pricingModel === "laddered" &&
+      (specTokensFilled(PRICING_SURFACE_TOKENS) ||
+        process.env.NODE_ENV !== "production") ? (
+        <Section
+          className={styles.movementsSection}
+          ground="cream"
+          aria-labelledby="pricing-heading"
+        >
+          <Container>
+            <div className={styles.sectionHeading}>
+              <Eyebrow kind="decision" tone="accent">
+                One price for the table
+              </Eyebrow>
+              <h2 id="pricing-heading">
+                The price is set by how many of us there are.
+              </h2>
+              <ProvenanceBadge
+                provenance={catalogJourney?.provenance ?? "sawayatra"}
+              />
+            </div>
+            <PairedPrice ladder={emptyLadder()} />
+            <PricingLadder
+              ladder={emptyLadder()}
+              pricingModel={catalogJourney?.pricingModel ?? "fixed-seat"}
+            />
+            <UpgradePanel availabilityNote="Where the route permits — which nights and gate cities, and which are not upgradeable, is stated per section once operator terms exist" />
+          </Container>
+        </Section>
+      ) : null}
 
       <CopySection
         eyebrow="Why this section exists"

@@ -33,9 +33,9 @@
 }
 
 .kicker {
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
 
@@ -43,7 +43,7 @@
 .gateChoice label > span,
 .truths span,
 .drawerHeader p {
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
@@ -95,7 +95,7 @@
 }
 
 .altitudeOptions span {
-  font-size: 1rem;
+  font-size: var(--fs-small);
 }
 
 .gateChoice {
@@ -126,7 +126,7 @@
   min-height: var(--touch-min);
   display: grid;
   place-items: center;
-  font-size: 1.5rem;
+  font-size: var(--fs-title);
 }
 
 .error {
@@ -172,9 +172,9 @@
 }
 
 .sectionNumber {
-  color: var(--signal);
-  font-family: var(--font-display);
-  font-size: 2.15rem;
+  color: var(--signal-text);
+  font-family: var(--font-read);
+  font-size: var(--fs-display-3);
 }
 
 .cardMain,
@@ -184,7 +184,7 @@
 }
 
 .cardMain strong {
-  font-family: var(--font-display);
+  font-family: var(--font-read);
   font-size: var(--fs-title);
   font-weight: 400;
   line-height: 1;
@@ -192,16 +192,17 @@
 
 .cardMain > span,
 .cardFacts {
-  font-size: 1rem;
+  font-size: var(--fs-small);
 }
 
 .cardFacts {
   grid-template-columns: 0.6fr 1.4fr 0.8fr;
+  font-variant-numeric: tabular-nums;
 }
 
 .cardState {
   justify-self: end;
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
@@ -210,7 +211,7 @@
 .physicalNotice {
   max-width: none;
   padding: 0 var(--space-8) var(--space-5) 8rem;
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
 }
 
 .panel {
@@ -238,8 +239,8 @@
 
 .gateDetails h4,
 .ledger h4 {
-  font-family: var(--font-display);
-  font-size: 1.8rem;
+  font-family: var(--font-read);
+  font-size: var(--fs-title);
   font-weight: 400;
   line-height: 1.1;
 }
@@ -259,7 +260,7 @@
 
 .gateDetails dt,
 .drawerFacts dt {
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
@@ -292,7 +293,7 @@
 }
 
 .truths p {
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
 }
 
 .ledger {
@@ -352,7 +353,7 @@
   display: flex;
   gap: var(--space-3);
   padding: var(--space-4);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   letter-spacing: normal;
   text-transform: none;
 }
@@ -367,8 +368,8 @@
 
 .imageRest p {
   max-width: 28ch;
-  font-family: var(--font-display);
-  font-size: 2rem;
+  font-family: var(--font-read);
+  font-size: var(--fs-display-3);
   line-height: 1.1;
 }
 
@@ -406,7 +407,7 @@
 .drawerHeader h2 {
   max-width: 9ch;
   color: var(--pink);
-  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-size: var(--fs-display-3);
 }
 
 .drawerHeader button {
@@ -463,8 +464,8 @@
 
 .drawerFacts dd {
   margin-top: var(--space-2);
-  font-family: var(--font-display);
-  font-size: 1.45rem;
+  font-family: var(--font-read);
+  font-size: var(--fs-title);
   line-height: 1.1;
 }
 

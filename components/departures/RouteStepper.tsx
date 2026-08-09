@@ -48,7 +48,7 @@ export function RouteStepper({ slug }: RouteStepperProps) {
         {previous ? (
           <Link className={styles.step} href={`/departures/${previous.slug}`} rel="prev">
             <span className={styles.direction}>
-              <span aria-hidden="true">←</span> Arrives from
+              <Arrow direction="left" /> Arrives from
             </span>
             <span className={styles.name}>{previous.title}</span>
             <span className={styles.detail}>

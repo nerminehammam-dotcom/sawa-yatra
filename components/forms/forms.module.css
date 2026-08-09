@@ -23,7 +23,7 @@
 
 .required {
   color: var(--deep-brown);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
@@ -31,7 +31,7 @@
 
 .control {
   width: 100%;
-  min-height: var(--touch-min, 44px);
+  min-height: var(--touch-min);
   padding: 0.9rem 1rem;
   color: var(--warm-ink);
   background: var(--cream);
@@ -70,13 +70,13 @@
 
 .hint {
   color: var(--deep-brown);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   line-height: 1.5;
 }
 
 .fieldError {
   color: var(--error-text);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   line-height: 1.45;
 }
@@ -92,7 +92,7 @@
 
 .consentLabel {
   display: grid;
-  grid-template-columns: var(--touch-min, 44px) minmax(0, 1fr);
+  grid-template-columns: var(--touch-min) minmax(0, 1fr);
   gap: var(--space-3, 0.75rem);
   align-items: start;
   line-height: 1.5;
@@ -161,7 +161,7 @@
   gap: var(--space-1, 0.25rem);
   border-style: dashed;
   background: var(--butter);
-  font-size: 1rem;
+  font-size: var(--fs-small);
 }
 
 .journeyContext {
@@ -171,15 +171,15 @@
 }
 
 .journeyContext span {
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
 }
 
 .journeyContext strong {
-  font-family: var(--font-display, Georgia, serif);
-  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  font-family: var(--font-read); /* §6.2: form context is operational */
+  font-size: var(--fs-title);
   font-weight: 400;
   line-height: 1.15;
 }
@@ -187,7 +187,7 @@
 .primaryAction {
   justify-self: start;
   min-width: min(100%, 15rem);
-  min-height: var(--touch-min, 44px);
+  min-height: var(--touch-min);
   padding: 0.75rem 1.35rem;
   color: var(--action-text);
   background: var(--action-bg);

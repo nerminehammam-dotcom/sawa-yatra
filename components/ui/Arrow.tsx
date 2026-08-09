@@ -1,6 +1,6 @@
 type ArrowProps = {
-  /** "right" for →, "up-right" for ↗ (external / new-context links). */
-  direction?: "right" | "up-right";
+  /** "right", "left", or "up-right" (external / new-context links). */
+  direction?: "right" | "left" | "up-right";
 };
 
 /**
@@ -30,6 +30,11 @@ export function Arrow({ direction = "right" }: ArrowProps) {
         <>
           <path d="M7 17 17 7" />
           <path d="M8 7h9v9" />
+        </>
+      ) : direction === "left" ? (
+        <>
+          <path d="M20 12H5" />
+          <path d="M11 6l-6 6 6 6" />
         </>
       ) : (
         <>

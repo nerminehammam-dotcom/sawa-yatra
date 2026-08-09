@@ -19,7 +19,7 @@
 .heading p {
   max-width: 38ch;
   color: var(--deep-brown);
-  font-size: clamp(1.0625rem, 1.25vw, 1.2rem);
+  font-size: var(--fs-body);
 }
 
 /* Not a grid.
@@ -72,8 +72,8 @@
   padding-top: var(--space-5);
   border-top: var(--border-hairline) solid var(--hairline);
   color: var(--deep-brown);
-  font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-family: var(--font-read);
+  font-size: var(--fs-body);
   font-style: italic;
   line-height: 1.4;
 }

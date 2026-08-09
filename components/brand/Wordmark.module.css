@@ -1,14 +1,15 @@
 /*
- * The wordmark was Fraunces text at opsz 72, SOFT 40, WONK 1. It is now the
- * drawn mark, in --signal — the same colour the text was set in, so nothing
- * about the brand colour changes. The supplied artwork was #E4481E, a shade
- * off the token; it has been brought onto --signal exactly.
+ * The wordmark is the commissioned full-colour mark — the Sawayatra letters in
+ * signal orange with a sun and mountain landscape above them — replacing the
+ * earlier single-colour traced mark on 8 August 2026. Its colours are baked
+ * into the SVG, so no filter or token recolours it; it renders the same on
+ * every ground.
  *
- * Sized by height, with width following the artwork's own 1938:526. The mark
- * carries a top bar and an ornament above the letters, so it stands taller
- * than a line of type at the same nominal size. The heights below are
- * therefore larger than the font sizes they replace, so the letters read at
- * roughly the size they did before.
+ * Sized by height, with width following the artwork's own 1326:471. The mark
+ * carries a landscape above the letters, so it stands taller than a line of
+ * type at the same nominal size. The heights below are therefore larger than
+ * the font sizes they replace, so the letters read at roughly the size they
+ * did before.
  */
 .root {
   display: inline-flex;
@@ -28,9 +29,10 @@
 }
 
 /*
- * Both tones resolved to --signal before this change and still do — the mark
- * is one colour everywhere it appears. The selectors are kept so that if a
- * dark ground ever needs a paper version there is an obvious place for it,
+ * The mark is full-colour artwork, identical on every ground: the orange
+ * letters, sun and mint hills carry well on --ink (the footer), while the
+ * dark-olive base sits quieter there. These selectors are kept as the obvious
+ * place to add a paper/knockout version if a dark ground ever needs one,
  * rather than a rule invented at the call site.
  */
 .cream .label,

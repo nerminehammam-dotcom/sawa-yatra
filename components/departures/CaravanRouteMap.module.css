@@ -16,7 +16,7 @@
 .heading h3 {
   grid-column: 1;
   max-width: 10ch;
-  font-size: clamp(3.5rem, 8vw, 8rem);
+  font-size: var(--fs-heading);
   line-height: 0.82;
 }
 
@@ -24,13 +24,13 @@
   grid-column: 2;
   grid-row: 2;
   max-width: 35ch;
-  font-size: 1rem;
+  font-size: var(--fs-body);
 }
 
 .kicker {
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-eyebrow);
   line-height: 1.3;
   text-transform: uppercase;
 }
@@ -40,7 +40,7 @@
 .progressLabel,
 .orientation > p,
 .quickFacts dt {
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   line-height: 1.3;
@@ -99,7 +99,7 @@
   min-width: var(--touch-min);
   min-height: var(--touch-min);
   color: var(--ink);
-  font-size: 1.35rem;
+  font-size: var(--fs-title);
   background: var(--sun);
   border: 0;
 }
@@ -115,7 +115,7 @@
 .zoomControls > span {
   min-width: 6rem;
   padding: var(--space-3);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-align: center;
@@ -127,7 +127,7 @@
   grid-column: 1 / -1;
   min-height: var(--touch-min);
   color: var(--ink);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   letter-spacing: normal;
   text-transform: none;
   background: var(--pink);
@@ -156,7 +156,7 @@
 .countryLabels text {
   fill: var(--ink);
   font-family: var(--font-read);
-  font-size: 24px;
+  font-size: var(--fs-map-label);
   font-weight: 500;
   letter-spacing: 0.01em;
   text-transform: none;
@@ -214,8 +214,8 @@
 
 .mapCaptions text {
   fill: var(--ink);
-  font-family: var(--font-display);
-  font-size: 19px;
+  font-family: var(--font-read);
+  font-size: var(--fs-map-caption);
   font-style: italic;
 }
 
@@ -246,7 +246,7 @@
   height: var(--touch-min);
   place-items: center;
   color: var(--paper);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   background: var(--ink);
   border: var(--border-strong) solid var(--paper);
@@ -264,7 +264,7 @@
   max-width: 10rem;
   padding: var(--space-1) var(--space-2);
   color: var(--ink);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   line-height: 1.15;
   background: var(--paper);
@@ -328,7 +328,7 @@
   bottom: 0;
   padding: var(--space-3) var(--space-4);
   color: var(--paper);
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
   letter-spacing: 0.08em;
   background: var(--ink);
@@ -348,13 +348,13 @@
 
 .activeName {
   font-family: var(--font-display);
-  font-size: clamp(3.3rem, 6vw, 6.6rem);
+  font-size: var(--fs-heading);
   line-height: 0.82;
   letter-spacing: -0.055em;
 }
 
 .introduction {
-  font-size: 1rem;
+  font-size: var(--fs-body);
 }
 
 .quickFacts {
@@ -383,13 +383,13 @@
 }
 
 .quickFactValue {
-  font-family: var(--font-display);
-  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-family: var(--font-read);
+  font-size: var(--fs-title);
   line-height: 1;
 }
 
 .quickFacts small {
-  font-size: 1rem;
+  font-size: var(--fs-small);
   line-height: 1.35;
 }
 
@@ -403,7 +403,7 @@
   gap: var(--space-2);
   margin: 0;
   padding-inline-start: 1.2rem;
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
 }
 
 .nextStop {
@@ -420,21 +420,21 @@
 }
 
 .nextStop span:first-child {
-  font-size: 1rem;
+  font-size: var(--fs-small);
   letter-spacing: normal;
   text-transform: none;
 }
 
 .nextStop strong {
   grid-column: 1;
-  font-family: var(--font-display);
-  font-size: 1.35rem;
+  font-family: var(--font-read);
+  font-size: var(--fs-title);
 }
 
 .nextStop span:last-child {
   grid-column: 2;
   grid-row: 1 / 3;
-  font-size: 2rem;
+  font-size: var(--fs-display-3);
 }
 
 .progressGroup {
@@ -475,14 +475,14 @@
 }
 
 .controls button {
-  font-size: 1.2rem;
+  font-size: var(--fs-title);
 }
 
 .controls .playButton,
 .motionNote {
   display: grid;
   place-items: center;
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
@@ -494,8 +494,8 @@
 }
 
 .mapNote {
-  font-size: 1.125rem;
-  line-height: 1.45;
+  font-size: var(--fs-body);
+  line-height: var(--leading-body);
 }
 
 .mapNote a {

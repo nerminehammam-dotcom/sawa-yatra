@@ -1,0 +1,118 @@
+/* §7.5 — six bands drawn horizontally, riso palette. Reached bands darker
+   ink; bands ahead lighter, as possibility. Mobile (≤380px): the condensed
+   vertical treatment is part of the spec, not an afterthought. */
+
+.ladder {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: var(--card-inset);
+  border: var(--border-hairline);
+  border-radius: var(--radius-card);
+  background: var(--paper);
+}
+
+.stateLine {
+  font-family: var(--font-read);
+  font-size: var(--fs-card);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+
+.bands {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-2);
+  counter-reset: band;
+}
+
+.band {
+  position: relative;
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  border-radius: var(--radius-card);
+  border: var(--border-hairline);
+  background: var(--soft-butter);
+  color: var(--clay);
+  min-height: var(--touch-min);
+}
+
+/* Bands reached: darker ink. */
+.band[data-reached] {
+  background: var(--sun);
+  color: var(--ink);
+}
+
+.band[data-current] {
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}
+
+.bandSize {
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.bandPrice {
+  font-family: var(--font-read);
+  font-size: var(--fs-card);
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.youAreHere {
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--signal-text);
+}
+
+.minGroupNotch {
+  font-size: var(--fs-small);
+  color: var(--ink);
+  max-width: var(--measure);
+}
+
+.liveLine {
+  font-family: var(--font-read);
+  font-size: var(--fs-lead);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--leading-title);
+  color: var(--ink);
+  max-width: var(--measure);
+}
+
+.smallType {
+  font-size: var(--fs-small);
+  color: var(--ink);
+  max-width: var(--measure);
+}
+
+/* Cancelled / closed states mute the bands rather than hiding history. */
+.ladder[data-state="cancelled"] .band,
+.ladder[data-state="closed"] .band {
+  opacity: 0.55;
+}
+
+/* The mobile treatment (§7.5): six horizontal bands do not fit at 380px —
+   the ladder turns vertical, price beside size, one band per row. */
+@media (max-width: 380px) {
+  .bands {
+    grid-template-columns: 1fr;
+  }
+
+  .band {
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .youAreHere {
+    grid-column: 1 / -1;
+  }
+}

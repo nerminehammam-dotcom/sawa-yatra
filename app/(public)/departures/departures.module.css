@@ -26,7 +26,7 @@
 .caravan > div > p:first-child,
 .sections header p,
 .ask > p {
-  font-size: 1.125rem;
+  font-size: var(--fs-body);
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -119,7 +119,7 @@
 
 .caravan dt,
 .sectionCopy dt {
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
@@ -128,6 +128,7 @@
 .caravan dd,
 .sectionCopy dd {
   margin: var(--space-2) 0 0;
+  font-variant-numeric: tabular-nums;
 }
 
 .caravan > a,
@@ -203,12 +204,12 @@
 
 .sectionCopy > span {
   color: var(--signal-text);
-  font-family: var(--font-display);
-  font-size: 2rem;
+  font-family: var(--font-read);
+  font-size: var(--fs-display-3);
 }
 
 .sectionCopy h3 {
-  font-size: clamp(2rem, 3.2vw, 3.4rem);
+  font-size: var(--fs-display-3);
 }
 
 .sectionCopy dl {
@@ -274,8 +275,9 @@
 }
 
 .price {
-  font-family: var(--font-display);
-  font-size: clamp(2.5rem, 5vw, 5rem);
+  font-family: var(--font-read);
+  font-size: var(--fs-display-2);
+  font-variant-numeric: tabular-nums;
   line-height: 1;
 }
 
@@ -311,7 +313,7 @@
   }
 
   .introductionCopy h1 {
-    font-size: clamp(3.5rem, 15vw, 5.8rem);
+    font-size: var(--fs-display-1-compact);
   }
 
   .introductionImage {

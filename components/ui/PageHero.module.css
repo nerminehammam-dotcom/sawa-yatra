@@ -116,6 +116,22 @@
     min-height: 0;
   }
 
+  /* §10: text over photography requires a scrim. Cream copy sits in the left
+     72% of a full-bleed photograph; this ink gradient (derived from --ink —
+     no ninth colour) plates it. Contrast should be re-measured against the
+     actual pixels at each breakpoint when the hero images are re-chosen. */
+  .withMedia .media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      color-mix(in srgb, var(--ink) 76%, transparent) 0%,
+      color-mix(in srgb, var(--ink) 46%, transparent) 55%,
+      color-mix(in srgb, var(--ink) 12%, transparent) 100%
+    );
+  }
+
   .withMedia .content {
     min-height: var(--hero-min-height, min(82svh, 900px));
     padding-block: var(--hero-block-padding, clamp(var(--space-16), 8vw, var(--space-24)));

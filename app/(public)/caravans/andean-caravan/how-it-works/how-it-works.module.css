@@ -19,7 +19,7 @@
 }
 
 .eyebrow {
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
@@ -28,7 +28,7 @@
 .hero h1 {
   color: var(--signal-text);
   max-width: 13ch;
-  font-size: clamp(3.4rem, 5.4vw, 6.25rem);
+  font-size: var(--fs-hero);
   line-height: 0.95;
 }
 
@@ -54,10 +54,10 @@
 .promise p {
   color: var(--pink);
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 2.5vw, 3.2rem);
-  /* 400, not 300: at the 1.75rem/28px floor the display 'e' crossbar thins
-     toward the documented sub-pixel collapse. */
-  font-weight: 400;
+  font-size: var(--fs-title);
+  /* 500: the constitution's documented floor for Fraunces display type —
+     below it the display 'e' crossbar thins toward sub-pixel collapse. */
+  font-weight: 500;
   line-height: 1.06;
 }
 
@@ -71,7 +71,7 @@
 }
 
 .proposition > p:first-child {
-  color: var(--signal);
+  color: var(--signal-text);
   font-family: var(--font-display);
   font-size: var(--fs-heading);
   line-height: 1;
@@ -93,7 +93,7 @@
 .numbers p {
   padding: var(--space-2) var(--space-5);
   border-inline-end: var(--border-hairline) solid var(--ink);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
@@ -104,7 +104,7 @@
   margin-top: var(--space-5);
   padding-top: var(--space-5);
   border-top: var(--border-hairline) solid var(--ink);
-  font-family: var(--font-display);
+  font-family: var(--font-read);
   font-size: var(--fs-title);
   font-weight: 400;
 }
@@ -148,7 +148,7 @@
 }
 
 .rules h3 {
-  font-size: clamp(1.4rem, 2vw, 2rem);
+  font-size: var(--fs-title);
 }
 
 .joining {
@@ -192,7 +192,7 @@
 .ritual li::before {
   color: var(--paper);
   font-family: var(--font-display);
-  font-size: 1.7rem;
+  font-size: var(--fs-title);
   content: counter(ritual, decimal-leading-zero);
 }
 
@@ -230,7 +230,7 @@
 
 .onceCopy strong {
   color: var(--sun);
-  font-family: var(--font-display);
+  font-family: var(--font-read);
   font-size: 1.35em;
   font-weight: 400;
 }
@@ -266,7 +266,7 @@
 }
 
 .combinationList h3 {
-  font-size: clamp(1.3rem, 2vw, 2rem);
+  font-size: var(--fs-title);
 }
 
 .standalone {
@@ -334,7 +334,7 @@
   padding-top: var(--space-5);
   color: var(--sun);
   border-top: var(--border-hairline) solid var(--paper);
-  font-size: 1rem;
+  font-size: var(--fs-small);
 }
 
 @media (max-width: 900px) {
@@ -363,7 +363,7 @@
   }
 
   .proposition > p:first-child {
-    font-size: 4rem;
+    font-size: var(--fs-display-2);
   }
 
   .onceImage,
@@ -388,7 +388,7 @@
   }
 
   .hero h1 {
-    font-size: clamp(3rem, 13vw, 4.5rem);
+    font-size: var(--fs-display-1-compact);
     line-height: 0.92;
   }
 

@@ -1,0 +1,27 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border: var(--border-hairline);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-read);
+  font-size: var(--fs-eyebrow);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--ink);
+  background: var(--paper);
+  white-space: nowrap;
+}
+
+.badge[data-provenance="sawayatra"] {
+  background: var(--soft-olive);
+}
+
+.badge[data-provenance="partner"] {
+  background: var(--soft-blue);
+}
+
+.badge[data-provenance="member"] {
+  background: var(--soft-butter);
+}

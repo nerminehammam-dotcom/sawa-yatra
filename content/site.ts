@@ -66,7 +66,7 @@ const approvedRouteDescriptions = {
   "departure-dates":
     "Browse Sawayatra journeys by departure date when confirmed dates become available.",
   journeys:
-    "Shorter Sawayatra journeys are in development and will be added when their information is ready.",
+    "Every Sawayatra journey in one place: those leaving on a date, and those still forming. Who stands behind each one is on the card.",
   "create-your-own-journey":
     "Create your own journey is in development and will open when the structure is ready.",
   members:
@@ -413,37 +413,9 @@ export const travelSelfPageContent = {
   contentStatus: "DRAFT",
 } as const;
 
-export const departuresPageContent = {
-  eyebrow: "Departures",
-  title: "One journey through the Andes. Nine ways to join it.",
-  browseRegionLabel: "Explore the complete Caravan and its nine sections",
-  filterLabel: "Choose where to join",
-  allFilterLabel: "All sections",
-  resultSummary: {
-    singularNoun: "journey",
-    pluralNoun: "journeys",
-    filteredJoiner: "for",
-  },
-  cardUnits: {
-    daySingular: "day",
-    dayPlural: "days",
-    travellerSingular: "traveller",
-    travellerPlural: "travellers",
-  },
-  draftDataNotice: `${ANDEAN_CARAVAN_PUBLIC_DATE}.`,
-  emptyState: {
-    title: "No journeys match those filters.",
-    body: "Clear the filters or meet your Travel Self to try another way in.",
-    clearActionLabel: "Clear filters",
-    travelSelfAction: {
-      label: "Meet your Travel Self",
-      href: "/travel-self",
-      style: "secondary",
-      contentStatus: "LOCKED",
-    },
-  },
-  contentStatus: "DRAFT",
-} as const;
+// departuresPageContent (filter labels, empty states) was removed with the
+// DepartureFilters cleanup: it was orphaned copy, and filter vocabulary is
+// exactly the category rule 4.4 of the membership spec wants kept thin.
 
 export const journeyDetailContent = {
   breadcrumbLabel: "Departures",

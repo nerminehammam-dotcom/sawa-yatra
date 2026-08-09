@@ -18,7 +18,7 @@
   gap: var(--space-2);
   align-items: center;
   color: inherit;
-  font-size: 1rem;
+  font-size: var(--fs-small);
   text-transform: none;
 }
 
@@ -34,7 +34,7 @@
 
 .completeHeroTitle {
   max-width: 14ch;
-  font-size: clamp(3.2rem, 4.5vw, 5.2rem);
+  font-size: var(--fs-card);
   line-height: 1.02;
 }
 
@@ -51,23 +51,23 @@
   max-width: 44ch;
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  font-size: var(--fs-body);
   font-style: italic;
-  line-height: 1.4;
+  line-height: var(--leading-body);
 }
 
 .publicDate {
   width: fit-content;
   padding-block-start: var(--space-4);
   border-top: 1px solid currentColor;
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
 }
 
 a.heroAction,
 a.heroAction:visited {
   color: var(--ink);
-  border-color: var(--brick);
+  border-color: var(--ink);
   background: transparent;
 }
 
@@ -89,7 +89,7 @@ a.heroAction:hover {
 .sectionHeading h2,
 .sectionHeadingInline h2 {
   max-width: 15ch;
-  font-size: clamp(2.35rem, 4vw, 4rem);
+  font-size: var(--fs-display-3);
 }
 
 .sectionHeading > p {
@@ -192,7 +192,7 @@ a.heroAction:hover {
 
 .facts dt {
   color: var(--deep-brown);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
@@ -200,7 +200,8 @@ a.heroAction:hover {
 
 .facts dd {
   margin: 0;
-  font-size: clamp(1.125rem, 1.8vw, 1.45rem);
+  font-size: var(--fs-lead);
+  font-variant-numeric: tabular-nums;
   line-height: 1.45;
 }
 
@@ -216,7 +217,7 @@ a.heroAction:hover {
   gap: var(--space-6);
   max-width: var(--measure);
   color: inherit;
-  font-size: clamp(1.125rem, 1.4vw, 1.28rem);
+  font-size: var(--fs-body);
   line-height: 1.65;
 }
 
@@ -232,7 +233,7 @@ a.heroAction:hover {
 
 .routeHeader h2 {
   max-width: 13ch;
-  font-size: clamp(2.65rem, 4.7vw, 4.8rem);
+  font-size: var(--fs-display-2);
 }
 
 .routeOverview {
@@ -245,7 +246,7 @@ a.heroAction:hover {
 
 .routeOverviewLabel {
   color: var(--ink);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
@@ -271,7 +272,7 @@ a.heroAction:hover {
   padding: 0.18rem 0.48rem;
   border-radius: var(--radius-pill);
   color: var(--warm-ink);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
 }
 
@@ -290,7 +291,7 @@ a.heroAction:hover {
 .countryRoutes dd {
   margin: 0;
   color: var(--deep-brown);
-  font-size: clamp(1.0625rem, 1.3vw, 1.16rem);
+  font-size: var(--fs-body);
   line-height: 1.55;
 }
 
@@ -303,7 +304,7 @@ a.heroAction:hover {
 .movementsHeader > p {
   max-width: 46ch;
   color: var(--deep-brown);
-  font-size: clamp(1.0625rem, 1.35vw, 1.2rem);
+  font-size: var(--fs-body);
 }
 
 .movementGrid {
@@ -341,20 +342,20 @@ a.heroAction:hover {
 }
 
 .adjacentLinks a:hover {
-  border-color: var(--brick);
+  border-color: var(--ink);
 }
 
 .adjacentLinks span {
   color: var(--ink);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
   text-transform: none;
 }
 
 .adjacentLinks strong {
-  font-family: var(--font-display);
-  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  font-family: var(--font-read);
+  font-size: var(--fs-lead);
   font-weight: 400;
 }
 

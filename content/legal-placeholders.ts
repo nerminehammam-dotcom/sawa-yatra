@@ -24,6 +24,9 @@ export const legalPages = [
     notice: legalNotice,
     body: [
       "Sawayatra's privacy policy will appear here: what is collected, why, how long it is kept, and your rights over it. We would rather show you nothing than publish a policy we have not properly prepared.",
+      // §14 downstream row — Privacy notice covers §12 in full. Plain-language
+      // scope statement, not legal copy; drafting is at legal review.
+      "When it is published it will cover, among other things: that identity documents are checked and immediately destroyed, never stored; that your date of birth is never shown to anyone and cannot be reconstructed from any export or report; how automated checks are used, that a person reviews them, and your route to a human review of any automated decision; and how long each kind of record, including moderation logs, is kept.",
     ],
     lastReviewed: "Not yet published",
     contentStatus: "LEGAL REVIEW",
@@ -36,6 +39,9 @@ export const legalPages = [
     notice: legalNotice,
     body: [
       "Sawayatra's terms will appear here before any booking or payment is possible. None is taken through this site today.",
+      // §14 downstream row — Terms cover 4.6, 5.3, 5.4, §6 budgets, §7.7,
+      // §11 disclosure. Plain-language scope statement, not legal copy.
+      "When they are published they will cover, among other things: the rule that contact details are not shared in open spaces; how invitations and sponsorship work, and what sponsors are accountable for; how removal works, always with a written reason and an appeal to a named person; the budgets that govern interest signals; how cancellation, replacement and the price lock work; and where automated tools are involved and what they may and may not do.",
     ],
     lastReviewed: "Not yet published",
     contentStatus: "LEGAL REVIEW",

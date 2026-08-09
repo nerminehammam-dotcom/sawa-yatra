@@ -418,7 +418,7 @@ export function CaravanRouteMap() {
 
               <div className={styles.controls}>
                 <button type="button" onClick={() => moveBy(-1)} aria-label="Previous stop">
-                  <span aria-hidden="true">←</span>
+                  <Arrow direction="left" />
                 </button>
                 {motionAllowed ? (
                   <button

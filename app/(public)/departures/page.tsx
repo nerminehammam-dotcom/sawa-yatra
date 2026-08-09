@@ -5,6 +5,7 @@ import Link from "next/link";
 import { createPageMetadata } from "@/app/_metadata";
 import { CaravanRouteMap } from "@/app/(public)/caravans/_components/CaravanRouteMap";
 import { RisoArtwork } from "@/components/brand/RisoArtwork";
+import { ProvenanceBadge } from "@/components/journeys/ProvenanceBadge";
 import {
   andeanCaravan,
   andeanCaravanGateById,
@@ -90,6 +91,8 @@ export default function DeparturesPage() {
                   />
                   <div className={styles.sectionCopy}>
                     <span>{String(section.sectionNumber).padStart(2, "0")}</span>
+                    {/* Rule 1.4 / §2.2 — provenance on every journey card. */}
+                    <ProvenanceBadge provenance="sawayatra" />
                     <h3>{section.title}</h3>
                     <p>{section.promise}</p>
                     <dl>

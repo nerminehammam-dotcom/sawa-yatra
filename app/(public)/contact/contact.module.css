@@ -30,7 +30,7 @@
 .emailLink {
   justify-self: start;
   color: var(--ink);
-  font-size: 1rem;
+  font-size: var(--fs-small);
   font-weight: 500;
   overflow-wrap: anywhere;
   text-underline-offset: 0.3em;
