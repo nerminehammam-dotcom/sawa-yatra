@@ -65,6 +65,7 @@ Phase 3 deliverable, not guessed in Phase 2.
 - Vitest: 194 tests passed
 - Next.js production build: passed
 
-The existing browser experience is unchanged. Phase 3 may now build the single
-Section 01 specimen for founder review, but must not roll the design across the
-remaining products before that review gate.
+The existing browser experience is unchanged. Phase 3 may now build the locked
+founder-review specimen: the overview, Section 03, the Stone Road choice,
+Journeys entry, maps, Shape of Journey and expanded-day treatment. It must not
+roll that design across Sections 01, 02 and 04 before the review gate.

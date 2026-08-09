@@ -2348,8 +2348,28 @@ const dayInputs = [
   },
 ] as const;
 
+const knownSleepAltitudes: Readonly<
+  Record<string, { metres: number; display: string; qualifier: "exact" | "approximate" }>
+> = {
+  Lima: { metres: 0, display: "Sea level", qualifier: "exact" },
+  Arequipa: { metres: 2335, display: "2,335 m", qualifier: "exact" },
+  Cusco: { metres: 3400, display: "3,400 m", qualifier: "exact" },
+  Puno: { metres: 3800, display: "Approx. 3,800 m", qualifier: "approximate" },
+  "La Paz": { metres: 3850, display: "Approx. 3,850 m", qualifier: "approximate" },
+  Coroico: { metres: 1700, display: "Approx. 1,700 m", qualifier: "approximate" },
+  Sucre: { metres: 2800, display: "Approx. 2,800 m", qualifier: "approximate" },
+  Potosí: { metres: 4090, display: "Approx. 4,090 m", qualifier: "approximate" },
+  Uyuni: { metres: 3650, display: "Approx. 3,650 m", qualifier: "approximate" },
+  "Refuge 1": { metres: 4100, display: "Approx. 4,100 m", qualifier: "approximate" },
+  "Refuge 2": { metres: 4550, display: "Approx. 4,500–4,600 m", qualifier: "approximate" },
+  "Refuge 3": { metres: 4300, display: "Approx. 4,300 m", qualifier: "approximate" },
+  "San Pedro de Atacama": { metres: 2400, display: "Approx. 2,400 m", qualifier: "approximate" },
+  Santiago: { metres: 520, display: "Approx. 520 m", qualifier: "approximate" },
+};
+
 export const rawDayRecords: readonly DayRecord[] = dayInputs.map((input) => {
   const recovery = normaliseRecoveryRole(input.source_recovery_role);
+  const knownAltitude = knownSleepAltitudes[input.sleep];
   return {
     ...input,
     recovery_role: recovery.roles,
@@ -2359,8 +2379,12 @@ export const rawDayRecords: readonly DayRecord[] = dayInputs.map((input) => {
     source_ids: [`${SOURCE_DOCUMENT}:day-${String(input.day).padStart(2, "0")}`],
     recheck_date: null,
     sleep_altitude: {
-      day: input.day, metres: null, display: null, qualifier: "pending_contract",
-      content_visibility: "pre_sale_disclosure", status: "draft",
+      day: input.day,
+      metres: knownAltitude?.metres ?? null,
+      display: knownAltitude?.display ?? null,
+      qualifier: knownAltitude?.qualifier ?? "pending_contract",
+      content_visibility: "pre_sale_disclosure",
+      status: knownAltitude ? "proposed" : "draft",
       source_ids: [`${SOURCE_DOCUMENT}:section-11:sleep-altitudes`], recheck_date: null,
     },
   };
