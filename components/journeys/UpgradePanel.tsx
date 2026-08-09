@@ -30,8 +30,8 @@ export function UpgradePanel({
           <dd>
             Single occupancy is {specToken("SINGLE_SUPPLEMENT")} — named here,
             on this page, not discovered at checkout. An upgrade of any kind
-            never changes anyone else's price: a member who upgrades still
-            counts as one traveller toward everyone's band.
+            never changes anyone else’s price: a member who upgrades still
+            counts as one traveller toward everyone’s band.
           </dd>
         </div>
       </dl>

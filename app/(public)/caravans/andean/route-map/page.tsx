@@ -37,7 +37,7 @@ export default function AndeanRouteMapPage() {
           </div>
         ))}
         <p className={styles.note}>
-          North to south, Lima to the end of the road. Each stop's detail —
+          North to south, Lima to the end of the road. Each stop’s detail —
           altitude, season, what the Caravan does there — lives on its section
           page.
         </p>

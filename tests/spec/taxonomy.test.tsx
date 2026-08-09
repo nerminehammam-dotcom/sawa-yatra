@@ -1,6 +1,8 @@
 // @vitest-environment jsdom
 /** Area C — §2: Fixed/Forming taxonomy, provenance badge, pricing model. */
 import "@testing-library/jest-dom/vitest";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it } from "vitest";
 
@@ -60,8 +62,6 @@ describe("§2.2 / rule 1.4 provenance badge", () => {
   it("is present at every journey-card render site, not only /journeys", () => {
     // Audit finding: the /journeys test alone cannot see the other card
     // surfaces. Source-level assertion keeps rule 1.4 honest everywhere.
-    const { readFileSync } = require("node:fs") as typeof import("node:fs");
-    const { join } = require("node:path") as typeof import("node:path");
     const root = join(__dirname, "..", "..");
     for (const site of [
       "app/(public)/journeys/page.tsx",

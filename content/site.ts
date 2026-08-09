@@ -1,4 +1,3 @@
-import { ANDEAN_CARAVAN_PUBLIC_DATE } from "@/content/andean-caravan";
 import {
   invitationRequestFormContent,
   journeyInterestFormContent,

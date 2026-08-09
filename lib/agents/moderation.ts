@@ -229,7 +229,6 @@ const NEVER_FLAG_TOPICS: ReadonlyArray<{
 
 /** Letters outside the Latin ranges → another script → not English. */
 const NON_LATIN_LETTER =
-  // eslint-disable-next-line no-control-regex -- deliberate full-range whitelist
   new RegExp("[^\\u0000-\\u024F\\u1E00-\\u1EFF\\u2000-\\u206F\\u20A0-\\u20CF]", "u");
 
 const COMMON_ENGLISH_WORDS: ReadonlySet<string> = new Set([
