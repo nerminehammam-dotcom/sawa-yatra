@@ -335,6 +335,8 @@
   color: var(--sun);
   border-top: var(--border-hairline) solid var(--paper);
   font-size: var(--fs-small);
+  font-family: var(--font-note);
+  line-height: 1.6;
 }
 
 @media (max-width: 900px) {

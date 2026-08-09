@@ -323,6 +323,7 @@
 .ledger small {
   grid-column: 1 / -1;
   color: var(--pink);
+  font-family: var(--font-note);
 }
 
 .cardAction {
@@ -356,6 +357,7 @@
   font-size: var(--fs-small);
   letter-spacing: normal;
   text-transform: none;
+  font-family: var(--font-note);
 }
 
 .imageRest {
@@ -478,6 +480,9 @@
   padding: var(--space-4);
   background: var(--sun);
   border: var(--border-hairline) solid var(--ink);
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  line-height: 1.6;
 }
 
 @media (max-width: 1000px) {

@@ -34,8 +34,29 @@ function withHighlights(text: string, phrases: readonly string[]) {
     );
 }
 
+/**
+ * Separates the locked name-origin paragraph at its two existing word markers.
+ * The copy stays unchanged in content/field-document.ts; only its presentation
+ * is rearranged here.
+ */
+function splitNameOrigin(text: string) {
+  const sawaMarker = " Sawa, ";
+  const yatraMarker = " Yatra, ";
+  const sawaStart = text.indexOf(sawaMarker);
+  const yatraStart = text.indexOf(yatraMarker);
+
+  if (sawaStart < 0 || yatraStart <= sawaStart) return null;
+
+  return {
+    introduction: text.slice(0, sawaStart),
+    sawa: text.slice(sawaStart + sawaMarker.length, yatraStart),
+    yatra: text.slice(yatraStart + yatraMarker.length),
+  };
+}
+
 export default function HomePage() {
   const content = fieldDocumentContent;
+  const nameOrigin = splitNameOrigin(content.nameStory.body[1]);
 
   return (
     <main className={styles.homePage} id="main-content" tabIndex={-1}>
@@ -90,11 +111,34 @@ export default function HomePage() {
           )}
         </p>
 
-        <div className={styles.nameStoryColumns}>
-          {content.nameStory.body.slice(1).map((paragraph) => (
-            <p key={paragraph.slice(0, 24)}>{paragraph}</p>
-          ))}
-        </div>
+        {nameOrigin ? (
+          <div className={styles.nameOrigin}>
+            <p className={styles.nameOriginIntroduction}>
+              {nameOrigin.introduction}
+            </p>
+            <div className={styles.nameOriginParts}>
+              <article className={styles.nameOriginPart}>
+                <p className={styles.nameOriginLanguage}>Arabic</p>
+                <h2 className={styles.nameOriginWord}>sawa</h2>
+                <p className={styles.nameOriginDefinition}>{nameOrigin.sawa}</p>
+              </article>
+              <article className={styles.nameOriginPart}>
+                <p className={styles.nameOriginLanguage}>Sanskrit</p>
+                <h2 className={styles.nameOriginWord}>yatra</h2>
+                <p className={styles.nameOriginDefinition}>{nameOrigin.yatra}</p>
+              </article>
+            </div>
+            <p className={styles.nameOriginConclusion}>
+              {content.nameStory.body[2]}
+            </p>
+          </div>
+        ) : (
+          <div className={styles.nameStoryColumns}>
+            {content.nameStory.body.slice(1).map((paragraph) => (
+              <p key={paragraph.slice(0, 24)}>{paragraph}</p>
+            ))}
+          </div>
+        )}
       </section>
     </main>
   );

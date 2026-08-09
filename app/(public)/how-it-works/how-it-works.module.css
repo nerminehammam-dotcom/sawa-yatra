@@ -20,11 +20,10 @@
   text-transform: none;
 }
 
-/* Opening — split hero, geometry matched exactly to the Andean / Departures /
-   Create-your-own-journey hero: 0.9 / 1.1 columns, 42rem tall, sun copy with a
-   rust headline, a 2px ink divider and a 4px rust bottom line. The poster is a
-   composed artwork carrying its own wordmark, so it is shown WHOLE (contain) on
-   paper rather than cropped. */
+/* Opening — the same split-hero grid as Andean / Departures and Travel Self:
+   0.9 / 1.1 columns, 42rem tall, identical copy rhythm, a 2px divider and a
+   4px closing line. Artwork fills its grid cell so none of the three openings
+   develops a letterboxed band above or below the image. */
 .hero {
   display: grid;
   min-height: min(42rem, calc(100dvh - 9.75rem));
@@ -66,7 +65,8 @@
 }
 
 .heroImage :global(img) {
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
   object-position: center;
 }
 
@@ -284,8 +284,9 @@
 }
 
 .note {
-  font-size: var(--fs-body);
-  line-height: 1.5;
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  line-height: 1.6;
 }
 
 .travelSelf {
@@ -499,7 +500,7 @@
   }
 
   .heroImage {
-    min-height: 22rem;
+    min-height: 24rem;
   }
 
   .featuredImage,

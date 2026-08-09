@@ -36,7 +36,8 @@
 
 .row dd {
   margin: 0;
-  font-size: var(--fs-body);
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
   font-variant-numeric: tabular-nums;
   line-height: var(--leading-body);
   color: var(--ink);

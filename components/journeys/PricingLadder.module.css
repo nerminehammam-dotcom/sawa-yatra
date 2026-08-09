@@ -73,6 +73,7 @@
 }
 
 .minGroupNotch {
+  font-family: var(--font-note);
   font-size: var(--fs-small);
   color: var(--ink);
   max-width: var(--measure);
@@ -88,6 +89,7 @@
 }
 
 .smallType {
+  font-family: var(--font-note);
   font-size: var(--fs-small);
   color: var(--ink);
   max-width: var(--measure);

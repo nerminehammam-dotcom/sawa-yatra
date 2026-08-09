@@ -142,6 +142,7 @@
 }
 
 .startOneNote {
+  font-family: var(--font-note);
   font-size: var(--fs-small);
   color: var(--ink);
   max-width: var(--measure-narrow);

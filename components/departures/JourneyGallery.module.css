@@ -72,8 +72,8 @@
   padding-top: var(--space-5);
   border-top: var(--border-hairline) solid var(--hairline);
   color: var(--deep-brown);
-  font-family: var(--font-read);
-  font-size: var(--fs-body);
-  font-style: italic;
-  line-height: 1.4;
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  font-style: normal;
+  line-height: 1.6;
 }

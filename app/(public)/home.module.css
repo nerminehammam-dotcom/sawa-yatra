@@ -472,6 +472,7 @@
   font-weight: 500;
   letter-spacing: var(--tracking-eyebrow);
   background: var(--ink);
+  font-family: var(--font-note);
 }
 
 .finalAction {
@@ -697,9 +698,9 @@
 /* ---- The name ------------------------------------------------------- */
 
 /* ---- The name --------------------------------------------------------
-   Set to the reference the founder supplied: a centred tracked line, a large
-   statement with washes behind the phrases that matter, then two columns of
-   smaller text beneath. No rules, no cards.                               */
+   A large proposition followed by a two-part name origin. The paired labels
+   meet at the centre to read as "sawayatra", with each definition directly
+   beneath the part it explains.                                           */
 
 .nameStory {
   display: grid;
@@ -771,6 +772,89 @@
   hanging-punctuation: first;
 }
 
+.nameOrigin {
+  display: grid;
+  width: min(46rem, 100%);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.nameOriginIntroduction,
+.nameOriginConclusion,
+.nameOriginDefinition {
+  margin: 0;
+  font-family: var(--font-read);
+  font-size: var(--fs-body);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  line-height: 1.6;
+  text-wrap: pretty;
+}
+
+.nameOriginIntroduction {
+  max-width: 34ch;
+  margin-inline: auto;
+  margin-bottom: var(--space-8);
+  text-align: center;
+}
+
+.nameOriginParts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.nameOriginPart {
+  display: grid;
+  align-content: start;
+  padding-inline: clamp(var(--space-5), 3vw, var(--space-10));
+}
+
+.nameOriginPart:first-child {
+  padding-inline-start: 0;
+  border-inline-end: var(--border-hairline) solid var(--ink);
+}
+
+.nameOriginPart:last-child {
+  padding-inline-end: 0;
+}
+
+.nameOriginLanguage {
+  margin: 0 0 var(--space-2);
+  font-family: var(--font-read);
+  font-size: var(--fs-eyebrow);
+  font-weight: 500;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.nameOriginWord {
+  margin: 0;
+  padding-bottom: var(--space-4);
+  color: var(--signal-text);
+  font-family: var(--font-display);
+  font-size: var(--fs-display-3);
+  font-optical-sizing: auto;
+  font-weight: 500;
+  line-height: 0.9;
+  border-bottom: var(--border-strong) solid var(--signal-text);
+}
+
+.nameOriginPart:first-child .nameOriginLanguage,
+.nameOriginPart:first-child .nameOriginWord {
+  text-align: right;
+}
+
+.nameOriginDefinition {
+  padding-top: var(--space-5);
+}
+
+.nameOriginConclusion {
+  max-width: 54ch;
+  margin: var(--space-10) auto 0;
+  padding: var(--space-6);
+  text-align: center;
+  background: color-mix(in srgb, var(--sun) 24%, var(--paper));
+}
+
 @media (max-width: 700px) {
   .nameStoryStatement {
     max-width: 100%;
@@ -778,6 +862,29 @@
 
   .nameStoryColumns {
     grid-template-columns: 1fr;
+  }
+
+  .nameOriginParts {
+    grid-template-columns: 1fr;
+  }
+
+  .nameOriginPart {
+    padding-inline: 0;
+  }
+
+  .nameOriginPart:first-child {
+    padding-bottom: var(--space-8);
+    border-inline-end: 0;
+  }
+
+  .nameOriginPart:last-child {
+    padding-top: var(--space-8);
+    border-top: var(--border-hairline) solid var(--ink);
+  }
+
+  .nameOriginPart:first-child .nameOriginLanguage,
+  .nameOriginPart:first-child .nameOriginWord {
+    text-align: left;
   }
 }
 

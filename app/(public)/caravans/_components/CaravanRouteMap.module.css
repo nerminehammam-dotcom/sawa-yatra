@@ -449,6 +449,7 @@
   font-weight: 500;
   letter-spacing: 0.08em;
   background: var(--ink);
+  font-family: var(--font-note);
 }
 
 .destinationBody {
@@ -613,7 +614,8 @@
 }
 
 .mapNote {
-  font-size: var(--fs-body);
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
   line-height: var(--leading-body);
 }
 

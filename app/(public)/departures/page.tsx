@@ -127,7 +127,7 @@ export default function DeparturesPage() {
         <div id="what-is-included">
           <h2>What is included</h2>
           <p>Where an earlier arrival is required, the protected hotel night and arrival support are included.</p>
-          <p>Complete operating inclusions will be confirmed before enquiries open.</p>
+          <p className={styles.conditionNote}>Complete operating inclusions will be confirmed before enquiries open.</p>
         </div>
       </section>
 
@@ -142,7 +142,7 @@ export default function DeparturesPage() {
         <div>
           <h2>Price status</h2>
           <p className={styles.price}>{andeanCaravan.price}</p>
-          <p>No payment or booking is taken through this site.</p>
+          <p className={styles.conditionNote}>No payment or booking is taken through this site.</p>
         </div>
       </section>
 

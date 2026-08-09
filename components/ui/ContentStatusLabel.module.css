@@ -35,4 +35,5 @@
   color: var(--ink);
   background: var(--cream);
   background: var(--paper);
+  font-family: var(--font-note);
 }

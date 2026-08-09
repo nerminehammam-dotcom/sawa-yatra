@@ -52,6 +52,12 @@
   max-width: 12ch;
 }
 
+.moneyNote :is(p, dd, li) {
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+}
+
 @media (max-width: 767px) {
   .hero {
     min-height: 36rem;

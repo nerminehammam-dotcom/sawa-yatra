@@ -71,6 +71,7 @@
   padding: var(--space-3) var(--space-4);
   color: var(--paper);
   background: var(--ink);
+  font-family: var(--font-note);
 }
 
 .flagship {
@@ -154,6 +155,9 @@
 .future > p:last-child {
   max-width: 45ch;
   color: var(--pink);
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  line-height: 1.6;
 }
 
 @media (max-width: 900px) {
@@ -234,4 +238,3 @@
 .sections > header h2 {
   max-width: 14ch;
 }
-

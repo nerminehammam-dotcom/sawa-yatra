@@ -46,6 +46,150 @@
   max-width: 42ch;
 }
 
+.founders {
+  border-bottom: var(--border-strong) solid var(--ink);
+  background: var(--paper);
+}
+
+.foundersLead,
+.founderProfile {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(min(24rem, 100%), 0.85fr);
+  min-height: 44rem;
+  border-bottom: var(--border-strong) solid var(--ink);
+}
+
+.foundersLeadImage,
+.profileImage,
+.founderFieldNotes figure {
+  position: relative;
+  min-height: 32rem;
+  margin: 0;
+  overflow: hidden;
+}
+
+.foundersLeadImage img,
+.profileImage img,
+.founderFieldNotes img {
+  object-fit: cover;
+}
+
+.foundersLeadImage img {
+  object-position: 50% 48%;
+}
+
+.foundersLeadImage figcaption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  padding: var(--space-3) var(--space-4);
+  color: var(--paper);
+  background: var(--ink);
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  line-height: 1.4;
+}
+
+.foundersIntroduction,
+.profileCopy {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: var(--space-6);
+  padding: clamp(3rem, 6vw, 6rem);
+}
+
+.foundersIntroduction {
+  background: var(--olive);
+  border-inline-start: var(--border-strong) solid var(--ink);
+}
+
+.foundersIntroduction > p:first-child,
+.profileCopy > p:first-child {
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.foundersIntroduction h2 {
+  max-width: 10ch;
+}
+
+.foundersIntroduction > p:last-child,
+.profileCopy > p:not(:first-child) {
+  max-width: 42ch;
+}
+
+.founderProfile {
+  grid-template-columns: minmax(min(24rem, 100%), 0.85fr) minmax(0, 1.15fr);
+}
+
+.founderProfile .profileImage {
+  border-inline-end: var(--border-strong) solid var(--ink);
+}
+
+.profileImage img {
+  object-position: center;
+}
+
+.profileCopy h3 {
+  max-width: 12ch;
+  color: var(--signal-text);
+  font-size: var(--fs-display-3);
+  line-height: 0.95;
+}
+
+.profileCopy a {
+  display: inline-flex;
+  min-height: var(--touch-min);
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  color: var(--paper);
+  background: var(--ink);
+  border: var(--border-strong) solid var(--ink);
+  font-family: var(--font-read);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.founderFieldNotes {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr) minmax(0, 0.75fr);
+  border-bottom: var(--border-hairline) solid var(--ink);
+}
+
+.founderFieldNotes figure {
+  min-height: clamp(24rem, 32vw, 36rem);
+}
+
+.founderFieldNotes figure + figure {
+  border-inline-start: var(--border-strong) solid var(--ink);
+}
+
+.founderFieldNotes figure:nth-child(1) img {
+  object-position: 54% center;
+}
+
+.founderFieldNotes figure:nth-child(3) img {
+  object-position: 50% 64%;
+}
+
+.founderCredit {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  color: var(--paper);
+  background: var(--ink);
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+}
+
 .observation {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(min(22rem, 100%), 0.85fr);
@@ -74,6 +218,7 @@
   font-weight: 500;
   letter-spacing: 0.08em;
   background: var(--ink);
+  font-family: var(--font-note);
 }
 
 .observation > div {
@@ -200,6 +345,8 @@
 
 @media (max-width: 900px) {
   .hero,
+  .foundersLead,
+  .founderProfile,
   .observation,
   .principles {
     grid-template-columns: 1fr;
@@ -225,6 +372,26 @@
     justify-self: start;
   }
 
+  .foundersIntroduction,
+  .founderProfile .profileImage {
+    border-inline: 0;
+  }
+
+  .foundersIntroduction,
+  .profileCopy {
+    border-top: var(--border-strong) solid var(--ink);
+  }
+
+  .founderFieldNotes {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .founderFieldNotes figure:nth-child(3) {
+    grid-column: 1 / -1;
+    border-top: var(--border-strong) solid var(--ink);
+    border-inline-start: 0;
+  }
+
   .observation > div,
   .principles header {
     min-height: 36rem;
@@ -236,6 +403,27 @@
 }
 
 @media (max-width: 620px) {
+  .foundersLeadImage,
+  .profileImage {
+    min-height: 28rem;
+  }
+
+  .founderFieldNotes {
+    grid-template-columns: 1fr;
+  }
+
+  .founderFieldNotes figure,
+  .founderFieldNotes figure:nth-child(3) {
+    grid-column: auto;
+    min-height: 28rem;
+    border-top: var(--border-strong) solid var(--ink);
+    border-inline-start: 0;
+  }
+
+  .founderFieldNotes figure:first-child {
+    border-top: 0;
+  }
+
   .principles li {
     grid-template-columns: 4.5rem 1fr;
   }

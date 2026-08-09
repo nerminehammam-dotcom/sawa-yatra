@@ -32,3 +32,28 @@ export const fraunces = localFont({
   fallback: ["Georgia", "serif"],
   preload: true,
 });
+
+/**
+ * IBM Plex Mono is the site's annotation voice: legal notes, limitations,
+ * pricing conditions and route footnotes. It is deliberately separate from
+ * both the editorial Fraunces voice and the operational sans face.
+ */
+export const ibmPlexMono = localFont({
+  src: [
+    {
+      path: "../public/assets/fonts/ibm-plex-mono/IBMPlexMono-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/assets/fonts/ibm-plex-mono/IBMPlexMono-Italic.woff2",
+      weight: "400",
+      style: "italic",
+    },
+  ],
+  display: "swap",
+  variable: "--font-ibm-plex-mono",
+  adjustFontFallback: false,
+  fallback: ["Courier New", "monospace"],
+  preload: true,
+});

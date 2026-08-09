@@ -281,6 +281,19 @@
   line-height: 1;
 }
 
+.conditionNote {
+  max-width: var(--measure);
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+}
+
+.createCopy > p:last-child {
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+}
+
 .ask {
   display: grid;
   justify-items: start;

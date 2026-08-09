@@ -23,14 +23,14 @@ export const assetManifest = {
   },
   "about-founder": {
     id: "about-founder",
-    src: "/assets/images/about-founder-placeholder.svg",
-    alt: "To be confirmed",
+    src: "/assets/images/about/founders/lakeside.jpg",
+    alt: "Nermine Hammam and Amal standing together beside a lake and green hillside beneath a wide blue sky.",
     treatment: "true",
     role: "portrait",
-    isPlaceholder: true,
-    contentStatus: "PLACEHOLDER",
+    isPlaceholder: false,
+    contentStatus: "DRAFT",
     contentNote:
-      "No founder portrait ships yet; /who-we-are currently uses a route field-note photograph instead. Supply a portrait and alt text if a human presence is wanted (design audit §4).",
+      "Founder photograph supplied by Nermine Hammam on 9 August 2026 and reproduced with permission; precise date and location metadata to be confirmed.",
   },
   "journey-patagonia-card": {
     id: "journey-patagonia-card",

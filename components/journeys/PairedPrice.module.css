@@ -11,7 +11,7 @@
 }
 
 .from {
-  font-family: var(--font-read);
+  font-family: var(--font-note);
   font-size: var(--fs-lead);
   font-variant-numeric: tabular-nums;
   line-height: var(--leading-title);
@@ -19,7 +19,7 @@
 }
 
 .today {
-  font-family: var(--font-read);
+  font-family: var(--font-note);
   font-size: var(--fs-lead);
   font-variant-numeric: tabular-nums;
   line-height: var(--leading-title);

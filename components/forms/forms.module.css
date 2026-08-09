@@ -97,6 +97,8 @@
   align-items: start;
   line-height: 1.5;
   cursor: pointer;
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
 }
 
 .checkbox {
@@ -162,6 +164,8 @@
   border-style: dashed;
   background: var(--butter);
   font-size: var(--fs-small);
+  font-family: var(--font-note);
+  line-height: 1.6;
 }
 
 .journeyContext {

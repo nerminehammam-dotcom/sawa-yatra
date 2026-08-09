@@ -26,10 +26,10 @@
 .boundary {
   max-width: 60ch;
   margin-top: var(--space-16);
-  font-family: var(--font-display);
-  font-size: var(--fs-body);
-  font-style: italic;
-  line-height: 1.5;
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  font-style: normal;
+  line-height: 1.6;
 }
 
 
@@ -62,33 +62,14 @@
   box-sizing: border-box;
 }
 
-/* The left column of the split hero: a block of colour carrying the whole
-   heading and the action, with the painting filling the column beside it. The
-   proportions are copied from the Caravans hero (caravans.module.css) so the
-   two pages read as one system — a coloured copy column with align-content:
-   space-between, and the picture cover-filling the column to its right.
-
-   Pink, not sun. How Sawayatra Works already owns the yellow opening, and the
-   painting is built on pink cloud, so the page walks into its own artwork.
-
-   The choice was also constrained. Per the pairing table in styles/tokens.css,
-   the block has to carry ink body copy AND an orange accent word, and only two
-   grounds do both: sun (3.37 for signal-text) and pink (3.51). Olive would
-   take the ink at 4.78 but kills the orange at 1.86. Ink on pink is 9.00, so
-   this is the better of the two on both counts. */
+/* The copy column uses the same grid rhythm and padding as the Departures hero. */
 .travelSelfIntro .introCopy {
   display: grid;
   align-content: center;
   gap: var(--space-6);
-  padding: clamp(2.5rem, 6vh, 4.5rem) var(--page-gutter);
+  padding: clamp(var(--space-12), 8vw, var(--space-24)) var(--page-gutter);
   background: var(--tsi-olive);
   border-inline-end: var(--border-strong) solid var(--tsi-ink);
-}
-
-.travelSelfIntro .introOpeningInner {
-  display: grid;
-  max-width: 100%;
-  gap: var(--space-6);
 }
 
 .travelSelfIntro .introKicker {
@@ -100,30 +81,25 @@
   text-transform: uppercase;
 }
 
-/* Sized for the narrower split column. Was clamp(4rem, 10vw, 9rem) across the
-   full width; at 9rem in a ~half-width column "Which one are you?" would
-   overflow, the same failure the Caravans hero had. Matched to that hero's
-   scale instead so it wraps to two or three lines and fits. */
+/* This question is a single, direct thought. Its token-bounded responsive size
+   keeps it on one line without competing with the painting. */
 .travelSelfIntro .introTitle {
-  max-width: 12ch;
   margin: 0;
   font-family: var(--tsi-display);
-  font-size: var(--fs-hero);
+  font-size: clamp(var(--fs-lead), 2.8vw, var(--fs-title));
   font-optical-sizing: auto;
   font-weight: 500;
   letter-spacing: -0.025em;
-  line-height: 0.9;
+  line-height: 1.05;
+  white-space: nowrap;
 }
 
 /* WONK 1 puts the swash italic on this one word. The axis was not in the font
    files until 5 August 2026, so this asked for nothing and got nothing before
-   then.
-
-   Ink, not orange, since 7 August 2026: the intro ground moved from pink to
-   olive, and signal-text on olive is 1.86:1 — illegal. Only ink reads on olive
-   (4.78:1), so the emphasis is now carried by the swash italic alone. */
+   then. The dark orange–ink blend keeps large-text contrast on the olive ground
+   while giving the word the requested colour distinction. */
 .travelSelfIntro .introYou {
-  color: var(--tsi-ink);
+  color: color-mix(in srgb, var(--tsi-signal-text) 50%, var(--tsi-ink));
   font-style: italic;
   /* SOFT + WONK only; opsz tracks the rendered size via font-optical-sizing. */
   font-variation-settings: "SOFT" 40, "WONK" 1;
@@ -133,31 +109,8 @@
 .travelSelfIntro .introStandfirst {
   max-width: 42ch;
   margin: 0;
-  font-size: var(--fs-lead);
+  font-size: var(--fs-body);
   line-height: 1.5;
-}
-
-/* The permission to ignore all of this belongs at the top, before anyone has
-   spent four minutes on it — not at the bottom as a footnote. The hairline
-   marks it as an aside rather than part of the pitch. */
-.travelSelfIntro .introBoundary {
-  max-width: 62ch;
-  margin: 0;
-  padding-block-start: var(--space-6);
-  border-top: var(--tsi-hair) solid var(--tsi-ink);
-  font-family: var(--tsi-display);
-  font-size: var(--fs-lead);
-  font-style: italic;
-  font-weight: 500;
-  line-height: 1.3;
-}
-
-.travelSelfIntro .introBoundary span {
-  display: block;
-}
-
-.travelSelfIntro .introBoundary span + span {
-  margin-top: 0.3em;
 }
 
 /* The right column of the split hero. The figure is stretched to the row
@@ -165,42 +118,19 @@
    same treatment as the Caravans hero image. */
 .travelSelfIntro .introPlate {
   position: relative;
-  min-height: 30rem;
+  min-height: 100%;
   margin: 0;
   overflow: hidden;
+  border-radius: 0;
   line-height: 0;
   background: var(--tsi-paper);
 }
 
-/* Contain, not cover (7 August 2026): the artwork is a composed poster — the
-   word SAWAYATRA and the whole scene — so cropping it to fill (which a photo
-   tolerates) cut the word and the edges and looked sloppy. Shown whole on the
-   paper ground it reads as a framed print, elegant, and nothing is lost at any
-   screen width. This is why it can't share the Departures image treatment: that
-   is a photograph, this is a painting. */
+/* Match the Departures image treatment: fill the complete right-hand grid cell. */
 .travelSelfIntro .introArtwork {
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
   object-position: center;
-}
-
-/* Sits at the bottom of the copy column (its padding comes from .introCopy).
-   Button then reassurance, stacked, since the column is too narrow to set them
-   side by side. */
-.travelSelfIntro .introAct {
-  display: grid;
-  gap: clamp(1.25rem, 2.5vh, 1.75rem);
-}
-
-.travelSelfIntro .introAssurances {
-  display: grid;
-  gap: var(--space-3);
-}
-
-.travelSelfIntro .introReassure {
-  max-width: 46ch;
-  margin: 0;
-  font-size: var(--fs-body);
-  line-height: 1.55;
 }
 
 .travelSelfIntro .introBegin {
@@ -1080,12 +1010,12 @@
 }
 
 .passportBoundary {
-  max-width: 56ch;
+  max-width: 68ch;
   margin: 0;
-  font-family: var(--font-display), Georgia, serif;
-  font-size: var(--fs-body);
-  font-style: italic;
-  line-height: 1.55;
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  font-style: normal;
+  line-height: 1.6;
 }
 
 .passportChange {
@@ -1270,28 +1200,29 @@
   letter-spacing: var(--tracking-eyebrow);
 }
 
-@media (max-width: 899px) {
-  /* Below this width the split stacks: copy on top, painting beneath it, the
-     way the Caravans hero collapses on narrow screens. The column divider
-     becomes the horizontal rule between the two. */
+@media (max-width: 767px) {
+  /* Use the same stacking point and mobile geometry as the Departures hero. */
   .travelSelfIntro {
     grid-template-columns: 1fr;
-    min-height: auto;
+    min-height: 0;
   }
 
   .travelSelfIntro .introCopy {
     border-inline-end: 0;
-    border-bottom: var(--border-strong) solid var(--tsi-ink);
+    border-bottom: var(--border-hairline) solid var(--tsi-ink);
   }
 
   .travelSelfIntro .introPlate {
-    min-height: clamp(22rem, 62vw, 32rem);
+    min-height: 24rem;
   }
 
   .travelSelfIntro .introBegin {
     width: 100%;
     justify-content: center;
   }
+}
+
+@media (max-width: 899px) {
 
   .questionGrid {
     grid-template-columns: 1fr;

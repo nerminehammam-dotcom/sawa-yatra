@@ -126,8 +126,9 @@
 
 .status > p:not(:first-child) {
   max-width: 60ch;
-  font-size: var(--fs-body);
-  line-height: 1.5;
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  line-height: 1.6;
 }
 
 .status a {

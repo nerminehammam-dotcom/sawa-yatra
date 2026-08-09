@@ -49,6 +49,114 @@ export default function AboutPage() {
         </p>
       </section>
 
+      <section className={styles.founders} aria-labelledby="founders-heading">
+        <div className={styles.foundersLead}>
+          <figure className={styles.foundersLeadImage}>
+            <Image
+              src="/assets/images/about/founders/lakeside.jpg"
+              alt="Nermine Hammam and Amal standing together beside a lake and green hillside beneath a wide blue sky."
+              fill
+              sizes="(max-width: 900px) 100vw, 58vw"
+            />
+            <figcaption>Nermine and Amal / on the road</figcaption>
+          </figure>
+          <div className={styles.foundersIntroduction}>
+            <p>Who we are / the people behind Sawayatra</p>
+            <h2 id="founders-heading">The idea began on the road.</h2>
+            <p>
+              Sawayatra was founded by Nermine Hammam and Amal El Masry. It
+              grew from travelling together and seeing how the right
+              companionship, attention to practical details and room for
+              spontaneity could transform a journey.
+            </p>
+          </div>
+        </div>
+
+        <article className={styles.founderProfile}>
+          <figure className={styles.profileImage}>
+            <Image
+              src="/assets/images/about/founders/nermine-photographing.jpeg"
+              alt="Nermine Hammam photographing a high-altitude wetland with mountains beyond."
+              fill
+              sizes="(max-width: 900px) 100vw, 45vw"
+            />
+          </figure>
+          <div className={styles.profileCopy}>
+            <p>Founder / artist / photographer</p>
+            <h3>Nermine Hammam</h3>
+            <p>
+              Nermine Hammam is an Egyptian photo artist working between Cairo
+              and London. Trained in filmmaking at New York University&apos;s
+              Tisch School of the Arts, she works across photography, digital
+              collage and mixed media. Her work has been exhibited
+              internationally and is held in collections including the
+              Victoria and Albert Museum and the Tropenmuseum.
+            </p>
+            <p>
+              She brings to Sawayatra an artist&apos;s attention to place,
+              memory and the stories images carry.
+            </p>
+            <a
+              href="https://www.nerminehammam.com/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Visit Nermine&apos;s artist website <Arrow direction="up-right" />
+            </a>
+          </div>
+        </article>
+
+        <article className={styles.founderProfile}>
+          <figure className={styles.profileImage}>
+            <Image
+              src="/assets/images/about/founders/walking.jpeg"
+              alt="Nermine Hammam and Amal walking together on a rocky path through low forest."
+              fill
+              sizes="(max-width: 900px) 100vw, 45vw"
+            />
+          </figure>
+          <div className={styles.profileCopy}>
+            <p>Founder</p>
+            <h3>Amal El Masry</h3>
+            <p>
+              Amal El Masry is a founder of Sawayatra. Her full biography will
+              be added here shortly, in her own words.
+            </p>
+          </div>
+        </article>
+
+        <div className={styles.founderFieldNotes}>
+          <figure>
+            <Image
+              src="/assets/images/about/founders/aircraft.jpg"
+              alt="Nermine Hammam and Amal posing against the weathered fuselage of an aircraft."
+              fill
+              sizes="(max-width: 700px) 100vw, 38vw"
+            />
+          </figure>
+          <figure>
+            <Image
+              src="/assets/images/about/founders/patagonia-lake.jpeg"
+              alt="Nermine Hammam and Amal standing above a vivid blue Patagonian lake."
+              fill
+              sizes="(max-width: 700px) 100vw, 34vw"
+            />
+          </figure>
+          <figure>
+            <Image
+              src="/assets/images/about/founders/salt-flat.jpg"
+              alt="Nermine Hammam and Amal standing on a white salt flat beneath a vast blue sky."
+              fill
+              sizes="(max-width: 700px) 100vw, 28vw"
+            />
+          </figure>
+        </div>
+        <p className={styles.founderCredit}>
+          Founder photographs from Nermine Hammam&apos;s personal archive.
+          Individual photographers are not yet credited.
+        </p>
+      </section>
+
       <section className={styles.observation} aria-labelledby="observation-heading">
         <figure>
           <Image

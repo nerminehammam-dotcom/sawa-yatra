@@ -93,7 +93,7 @@ export const fieldDocumentContent = {
        here. The hero is left exactly as it was — the photograph and the line. */
     highlights: ["not just your destination", "your Travel Self"],
     actions: [
-      { label: "See how Sawayatra works", href: "/how-it-works" },
+      { label: "Meet your Travel Self", href: "/travel-self" },
       { label: "Explore the Andean Caravan", href: "/caravans/andean" },
     ],
     body: [

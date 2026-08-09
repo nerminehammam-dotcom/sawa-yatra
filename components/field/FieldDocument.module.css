@@ -49,6 +49,11 @@
   text-transform: uppercase;
 }
 
+.heroCaption,
+.chapterImage figcaption {
+  font-family: var(--font-note);
+}
+
 .routeFacts dt {
   font-family: var(--font-read);
   font-size: var(--fs-small);

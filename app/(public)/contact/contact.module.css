@@ -25,6 +25,9 @@
 
 .supportSection p {
   max-width: 42ch;
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  line-height: 1.6;
 }
 
 .emailLink {

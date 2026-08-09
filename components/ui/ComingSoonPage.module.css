@@ -97,7 +97,9 @@
 
 .formNote {
   margin-top: 0.75rem;
+  font-family: var(--font-note);
   font-size: var(--fs-small);
+  line-height: 1.6;
 }
 
 .elsewhere > p {

@@ -23,10 +23,10 @@ export default function HowItWorksPage() {
       <section className={styles.hero} aria-labelledby="how-heading">
         <div className={styles.heroCopy}>
           <p className={styles.kicker}>A simple arrangement</p>
-          <h1 id="how-heading">How Sawayatra works</h1>
+          <h1 id="how-heading">How it works</h1>
           <p className={styles.openingLine}>
-            Browse the Andean Caravan openly. Connect privately. Nothing is
-            revealed until the interest is mutual.
+            Browse journeys openly. Connect privately. Nothing is revealed
+            until the interest is mutual.
           </p>
         </div>
         <figure className={styles.heroImage}>

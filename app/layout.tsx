@@ -4,7 +4,7 @@ import { routeMetadataByPath, siteConfig } from "@/content/site";
 import { absoluteUrl, siteUrl } from "@/lib/site-url";
 
 import { createPageMetadata } from "./_metadata";
-import { fraunces } from "./fonts";
+import { fraunces, ibmPlexMono } from "./fonts";
 import "./globals.css";
 
 const homeMetadata = routeMetadataByPath["/"];
@@ -59,7 +59,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={fraunces.variable}
+      className={`${fraunces.variable} ${ibmPlexMono.variable}`}
     >
       <body>
         <script

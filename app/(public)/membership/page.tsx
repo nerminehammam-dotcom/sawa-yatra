@@ -58,7 +58,7 @@ export default function MembershipPage() {
       </section>
 
       {showMoney ? (
-        <section className={styles.note} aria-labelledby="money-heading">
+        <section className={`${styles.note} ${styles.moneyNote}`} aria-labelledby="money-heading">
           <h2 id="money-heading">{membershipMoney.heading}</h2>
           <dl>
             {membershipMoney.lines.map((line) => (
@@ -84,7 +84,7 @@ export default function MembershipPage() {
           </p>
         </section>
       ) : (
-        <section className={styles.note} aria-labelledby="money-heading">
+        <section className={`${styles.note} ${styles.moneyNote}`} aria-labelledby="money-heading">
           <h2 id="money-heading">The details come after the idea is clear.</h2>
           <p>
             Prices and conditions are not published before they are ready. You

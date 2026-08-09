@@ -47,14 +47,14 @@ const approvedRouteDescriptions = {
    * search at all. Meet your Travel Self is the one thing no competitor has.
    *
    * Each sentence is condensed from what the page already says, not written
-   * fresh: /how-it-works opens "Browse the Andean Caravan openly. Connect
+   * fresh: /how-it-works opens "Browse journeys openly. Connect
    * privately. Nothing is revealed until the interest is mutual." and
    * /travel-self opens "One of sixteen travelling selves. Eight short
    * questions reveal which one is yours: how you travel, and what you travel
    * for." Both are marked DRAFT rather than LOCKED, pending approval.
    */
   "how-it-works":
-    "Browse the Andean Caravan openly and connect privately. Nothing is revealed until the interest is mutual.",
+    "Browse journeys openly and connect privately. Nothing is revealed until the interest is mutual.",
   "travel-self":
     "Sawayatra matches travellers by how they travel, not by where they are going. Eight short questions reveal which of sixteen travelling selves is yours.",
   "joining-points":
@@ -123,7 +123,7 @@ export const routeMetadata = ([
     "The Andean Caravan | Sawayatra",
   ],
   ["joining-points", "/joining-points", "Joining points | Sawayatra"],
-  ["how-it-works", "/how-it-works", "How Sawayatra works | Sawayatra"],
+  ["how-it-works", "/how-it-works", "How it works | Sawayatra"],
   ["travel-self", "/travel-self", "Meet your Travel Self | Sawayatra"],
   ["do-it-yourself", "/do-it-yourself", "Do It Yourself | Sawayatra"],
   ["departures", "/departures", "Departures | Sawayatra"],

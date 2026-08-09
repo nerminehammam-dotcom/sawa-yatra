@@ -57,10 +57,15 @@ None of these assets currently renders anywhere live.
 
 Left as `"To be confirmed"` — please supply the image and its alt when ready:
 
-- `about-founder` (`content/assets.ts:27`) — founder portrait; no portrait ships yet.
 - `journey-patagonia-hero` (`content/assets.ts:47`) — journey hero imagery.
 - `journey-carretera-hero` (`content/assets.ts:65`) — journey hero imagery.
 - `journey-atacama-hero` (`content/assets.ts:83`) — journey hero imagery.
+
+Resolved 9 August 2026:
+
+- `about-founder` — founder photograph supplied by Nermine Hammam, with a
+  placement-specific informative alt. Precise date and location remain to be
+  added to the rights ledger.
 
 Set to `alt: ""` in this pass (reversible if you disagree):
 
