@@ -133,6 +133,10 @@
   object-position: center;
 }
 
+.amalProfileImage img {
+  object-position: 34% center;
+}
+
 .profileCopy h3 {
   max-width: 12ch;
   color: var(--signal-text);
@@ -157,7 +161,7 @@
 
 .founderFieldNotes {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr) minmax(0, 0.75fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   border-bottom: var(--border-hairline) solid var(--ink);
 }
 
@@ -170,11 +174,15 @@
 }
 
 .founderFieldNotes figure:nth-child(1) img {
-  object-position: 54% center;
+  object-position: 84% center;
 }
 
 .founderFieldNotes figure:nth-child(3) img {
   object-position: 50% 64%;
+}
+
+.founderFieldNotes figure:nth-child(4) img {
+  object-position: 50% 45%;
 }
 
 .founderCredit {
@@ -386,9 +394,12 @@
     grid-template-columns: 1fr 1fr;
   }
 
-  .founderFieldNotes figure:nth-child(3) {
-    grid-column: 1 / -1;
+  .founderFieldNotes figure:nth-child(3),
+  .founderFieldNotes figure:nth-child(4) {
     border-top: var(--border-strong) solid var(--ink);
+  }
+
+  .founderFieldNotes figure:nth-child(3) {
     border-inline-start: 0;
   }
 

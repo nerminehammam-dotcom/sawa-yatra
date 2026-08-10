@@ -64,7 +64,7 @@ export default function AboutPage() {
             <p>Who we are / the people behind Sawayatra</p>
             <h2 id="founders-heading">The idea began on the road.</h2>
             <p>
-              Sawayatra was founded by Nermine Hammam and Amal El Masry. It
+              Sawayatra was founded by Nermine Hammam and Amal El Masri. It
               grew from travelling together and seeing how the right
               companionship, attention to practical details and room for
               spontaneity could transform a journey.
@@ -107,20 +107,29 @@ export default function AboutPage() {
         </article>
 
         <article className={styles.founderProfile}>
-          <figure className={styles.profileImage}>
+          <figure className={`${styles.profileImage} ${styles.amalProfileImage}`}>
             <Image
-              src="/assets/images/about/founders/walking.jpeg"
-              alt="Nermine Hammam and Amal walking together on a rocky path through low forest."
+              src="/assets/images/about/founders/amal-el-masri-atacama.jpg"
+              alt="Amal El Masri seated on a rock beside a high-altitude lagoon with volcanic mountains beyond."
               fill
               sizes="(max-width: 900px) 100vw, 45vw"
             />
           </figure>
           <div className={styles.profileCopy}>
-            <p>Founder</p>
-            <h3>Amal El Masry</h3>
+            <p>Founder &amp; Journey Curator, Sawayatra</p>
+            <h3>Amal El Masri</h3>
             <p>
-              Amal El Masry is a founder of Sawayatra. Her full biography will
-              be added here shortly, in her own words.
+              Amal el Masri is a travel entrepreneur and creative strategist
+              whose career spans advertising, branding and film, including
+              more than a decade at JWT, where she helped build one of the
+              region&apos;s most celebrated creative agencies and its award-winning
+              legacy. After years of frantic business travel had gradually
+              taken the joy out of travelling, she rediscovered the magic of
+              long-form journeys — and with it, a simple realisation: the people
+              you travel with fundamentally shape how you experience a place.
+              Sawayatra grew from this belief: that finding the right travel
+              companions can turn a good journey into something deeper, more
+              enriching and memorable.
             </p>
           </div>
         </article>
@@ -131,7 +140,7 @@ export default function AboutPage() {
               src="/assets/images/about/founders/aircraft.jpg"
               alt="Nermine Hammam and Amal posing against the weathered fuselage of an aircraft."
               fill
-              sizes="(max-width: 700px) 100vw, 38vw"
+              sizes="(max-width: 700px) 100vw, (max-width: 900px) 50vw, 25vw"
             />
           </figure>
           <figure>
@@ -139,7 +148,7 @@ export default function AboutPage() {
               src="/assets/images/about/founders/patagonia-lake.jpeg"
               alt="Nermine Hammam and Amal standing above a vivid blue Patagonian lake."
               fill
-              sizes="(max-width: 700px) 100vw, 34vw"
+              sizes="(max-width: 700px) 100vw, (max-width: 900px) 50vw, 25vw"
             />
           </figure>
           <figure>
@@ -147,7 +156,15 @@ export default function AboutPage() {
               src="/assets/images/about/founders/salt-flat.jpg"
               alt="Nermine Hammam and Amal standing on a white salt flat beneath a vast blue sky."
               fill
-              sizes="(max-width: 700px) 100vw, 28vw"
+              sizes="(max-width: 700px) 100vw, (max-width: 900px) 50vw, 25vw"
+            />
+          </figure>
+          <figure>
+            <Image
+              src="/assets/images/about/founders/walking.jpeg"
+              alt="Nermine Hammam and Amal walking together on a rocky path through low forest."
+              fill
+              sizes="(max-width: 700px) 100vw, (max-width: 900px) 50vw, 25vw"
             />
           </figure>
         </div>

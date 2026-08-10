@@ -20,6 +20,11 @@ const nextConfig: NextConfig = {
         statusCode: 301,
       },
       {
+        source: "/caravans",
+        destination: "/caravans/andean",
+        statusCode: 301,
+      },
+      {
         source: "/membership",
         destination: "/members",
         statusCode: 301,
@@ -54,17 +59,63 @@ const nextConfig: NextConfig = {
         statusCode: 301,
       },
       {
+        source: "/departures/desert-coast",
+        destination: "/caravans/andean/sea-to-stone",
+        statusCode: 301,
+      },
+      {
+        source: "/departures/white-city-deep-canyon",
+        destination: "/caravans/andean/sea-to-stone",
+        statusCode: 301,
+      },
+      {
+        source: "/departures/the-stone-road",
+        destination: "/caravans/andean/the-stone-road",
+        statusCode: 301,
+      },
+      {
+        source: "/departures/both-shores",
+        destination: "/caravans/andean/both-shores",
+        statusCode: 301,
+      },
+      {
+        source: "/departures/thin-air-cloud-forest",
+        destination: "/caravans/andean/both-shores",
+        statusCode: 301,
+      },
+      {
+        source: "/departures/silver-and-bone",
+        destination: "/caravans/andean/the-mirror",
+        statusCode: 301,
+      },
+      {
+        source: "/departures/the-mirror",
+        destination: "/caravans/andean/the-mirror",
+        statusCode: 301,
+      },
+      {
+        source: "/departures/atacama",
+        destination: "/caravans/andean/the-mirror",
+        statusCode: 301,
+      },
+      {
+        source: "/departures/the-end-of-the-road",
+        destination: "/caravans/andean/the-end-of-the-road",
+        statusCode: 301,
+      },
+      {
         source: "/caravans/the-andean-caravan",
         destination: "/caravans/andean",
         statusCode: 301,
       },
       {
-        // /start-here was a joining-point enquiry page that had been disabled
-        // with an unconditional notFound(); it rendered only a spinner and no
-        // heading. Its stated job — "choose a joining point" — is exactly what
-        // /joining-points does, so it redirects there. (7 August 2026)
+        source: "/joining-points",
+        destination: "/caravans/andean-caravan/how-it-works",
+        statusCode: 301,
+      },
+      {
         source: "/start-here",
-        destination: "/joining-points",
+        destination: "/caravans/andean-caravan/how-it-works",
         statusCode: 301,
       },
     ];

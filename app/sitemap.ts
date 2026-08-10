@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { andeanCaravanSections } from "@/content/andean-caravan";
+import { canonicalSectionSlugs } from "@/content/caravan/page-data";
 import { routeMetadata } from "@/content/site";
 import { absoluteUrl } from "@/lib/site-url";
 
@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       (entry) =>
         entry.path !== "/departures/[slug]" &&
         entry.path !== "/departures" &&
+        entry.path !== "/caravans" &&
         entry.path !== "/caravans/the-andean-caravan" &&
         entry.path !== "/joining-points" &&
         entry.path !== "/do-it-yourself" &&
@@ -21,8 +22,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     .map((entry) => ({ url: absoluteUrl(entry.path) }));
 
   const journeyEntries: MetadataRoute.Sitemap = [
-    ...andeanCaravanSections.map(
-      (section) => `/departures/${section.slug}` as const,
+    ...canonicalSectionSlugs.map(
+      (slug) => `/caravans/andean/${slug}` as const,
     ),
   ].map((path) => ({ url: absoluteUrl(path) }));
 

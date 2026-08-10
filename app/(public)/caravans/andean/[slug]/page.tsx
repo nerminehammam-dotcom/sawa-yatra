@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { CaravanRouteMap } from "@/app/(public)/caravans/_components/CaravanRouteMap";
 import { RisoArtwork } from "@/components/brand/RisoArtwork";
-import { CaravanRouteMap } from "@/components/departures/CaravanRouteMap";
 import { JourneyGallery } from "@/components/departures/JourneyGallery";
 import { Accordion } from "@/components/ui/Accordion";
+import { Arrow } from "@/components/ui/Arrow";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { FactStrip } from "@/components/ui/FactStrip";
@@ -13,9 +14,13 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import {
   getCanonicalCaravanGallery,
-  getCanonicalCaravanImage,
+  getCanonicalCaravanHeroImage,
   type CanonicalCaravanImageSlug,
 } from "@/content/andean-caravan-images";
+import {
+  andeanCaravanEditorial,
+  andeanCaravanEnquiry,
+} from "@/content/andean-caravan-editorial";
 import {
   canonicalProductSlugs,
   canonicalSectionSlugs,
@@ -70,9 +75,13 @@ function dayDetails(day: PublicDayView) {
 
 function sectionFacts(data: CanonicalSectionPageData) {
   const { section, gateFrom, gateTo } = data;
+  const route = section.section_id === "04"
+    ? `${gateFrom.name} → ${gateTo.name} → ${gateFrom.name}`
+    : `${gateFrom.name} → ${gateTo.name}`;
+
   return [
     { label: "Duration", value: `${section.day_end - section.day_start + 1} days` },
-    { label: "Route", value: `${gateFrom.name} → ${gateTo.name}` },
+    { label: "Route", value: route },
     { label: "Days", value: `${section.day_start}–${section.day_end}` },
     { label: "Group maximum", value: String(section.group_max) },
     { label: "Route maximum", value: section.route_max_altitude.display },
@@ -115,6 +124,11 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
   const gateTo = stoneRoad?.gateTo ?? data.gateTo;
   const duration = days.length;
   const gallerySlug = imageSlug(slug);
+  const editorial = andeanCaravanEditorial[gallerySlug];
+  const heroImage = getCanonicalCaravanHeroImage(gallerySlug);
+  const galleryImages = getCanonicalCaravanGallery(gallerySlug).filter(
+    (asset) => asset.src !== heroImage.src,
+  );
   const sectionIndex = canonicalSectionSlugs.indexOf(data.slug);
   const previousSlug = sectionIndex > 0 ? canonicalSectionSlugs[sectionIndex - 1] : undefined;
   const nextSlug = sectionIndex < canonicalSectionSlugs.length - 1
@@ -126,6 +140,7 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
       <PageHero
         className={styles.hero}
         mediaLayout="split"
+        mobileContentFirst
         ground="cream"
         eyebrow={
           <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
@@ -142,9 +157,7 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
           <div className={styles.heroIntro}>
             {data.section.subline && !isStoneRoad ? <p>{data.section.subline}</p> : null}
             <p>{duration} days · {gateFrom.name} to {gateTo.name} · Days {days[0]?.day}–{days.at(-1)?.day}</p>
-            {process.env.NODE_ENV !== "production" ? (
-              <p>[Founder copy needed: {title} proposition]</p>
-            ) : null}
+            <p>{editorial.proposition}</p>
           </div>
         }
         facts={
@@ -165,9 +178,9 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
         }
         media={
           <RisoArtwork
-            asset={getCanonicalCaravanImage(gallerySlug)}
+            asset={heroImage}
             aspectRatio="hero"
-            sizes="100vw"
+            sizes="(max-width: 639px) 100vw, 54vw"
             priority
           />
         }
@@ -185,9 +198,10 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
               <h2 id="declared-load-heading">{data.section.declared_load_exception.name}</h2>
             </div>
             <div className={styles.copyBody}>
-              {process.env.NODE_ENV !== "production" ? (
-                <p>[Founder copy needed: one framing sentence]</p>
-              ) : null}
+              <p>
+                Water, crust, cold and border conditions choose the exact line;
+                the itinerary keeps those limits visible before you decide.
+              </p>
               <p>{data.section.declared_load_exception.disclosure.text}</p>
               <p>{data.section.declared_load_exception.structural_reason.text}</p>
               <h3>Eleven-night acclimatisation progression</h3>
@@ -203,21 +217,24 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
         </Section>
       ) : null}
 
-      <CaravanRouteMap />
+      <CaravanRouteMap
+        key={data.section.section_id}
+        currentChapterId={data.section.section_id}
+        headingLevel={2}
+        initialChapterId={data.section.section_id}
+      />
 
-      {process.env.NODE_ENV !== "production" ? (
-        <Section className={styles.copySection} ground="olive" aria-labelledby="character-heading">
-          <Container className={styles.copyGrid}>
-            <div className={styles.sectionHeading}>
-              <Eyebrow tone="inherit" className={styles.oliveEyebrow}>Founder copy needed</Eyebrow>
-              <h2 id="character-heading">Section character</h2>
-            </div>
-            <div className={styles.copyBody}>
-              <p>[Founder copy needed: {title} editorial character]</p>
-            </div>
-          </Container>
-        </Section>
-      ) : null}
+      <Section className={styles.copySection} ground="olive" aria-labelledby="character-heading">
+        <Container className={styles.copyGrid}>
+          <div className={styles.sectionHeading}>
+            <Eyebrow tone="inherit" className={styles.oliveEyebrow}>Section character</Eyebrow>
+            <h2 id="character-heading">{editorial.characterTitle}</h2>
+          </div>
+          <div className={styles.copyBody}>
+            <p>{editorial.character}</p>
+          </div>
+        </Container>
+      </Section>
 
       {!isStoneRoad ? (
         <Section className={styles.copySection} ground="cream" aria-labelledby="demands-heading">
@@ -233,6 +250,11 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
         </Section>
       ) : null}
 
+      <JourneyGallery
+        journeySlug={slug}
+        images={galleryImages}
+      />
+
       <Section className={styles.movementsSection} ground="cream" aria-labelledby="itinerary-heading">
         <Container>
           <div className={styles.sectionHeadingInline}>
@@ -240,7 +262,6 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
             <h2 id="itinerary-heading">Open a stage, then a day.</h2>
           </div>
           <Accordion
-            allowMultiple
             initiallyOpen={stages[0] ? [stages[0].id] : []}
             items={stages.map((stage) => {
               const stageDays = days.filter((day) => day.stage_id === stage.id);
@@ -262,11 +283,6 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
           />
         </Container>
       </Section>
-
-      <JourneyGallery
-        journeySlug={slug}
-        images={getCanonicalCaravanGallery(gallerySlug)}
-      />
 
       <Section className={styles.copySection} ground="cream" aria-labelledby="practical-heading">
         <Container className={styles.copyGrid}>
@@ -305,10 +321,21 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
       <Section className={styles.interestSection} ground="brick" aria-labelledby="enquiry-heading">
         <Container className={styles.interestGrid}>
           <div className={styles.sectionHeading}>
-            <Eyebrow kind="decision" tone="inherit" className={styles.deepEyebrow}>Enquiry</Eyebrow>
-            <h2 id="enquiry-heading">Enquiry delivery is not connected yet.</h2>
+            <Eyebrow kind="decision" tone="inherit" className={styles.deepEyebrow}>
+              {andeanCaravanEnquiry.eyebrow}
+            </Eyebrow>
+            <h2 id="enquiry-heading">{andeanCaravanEnquiry.heading}</h2>
+            <p>{andeanCaravanEnquiry.invitation}</p>
             <p>{data.section.cta.text}</p>
-            <p>No payment or booking action is active.</p>
+          </div>
+          <div className={styles.interestActions}>
+            <Link className={styles.askLink} href="/register-interest">
+              Register your interest <Arrow />
+            </Link>
+            <Link className={styles.secondaryAskLink} href="/caravans/andean#all-sections">
+              Compare all four sections <Arrow />
+            </Link>
+            <p>{andeanCaravanEnquiry.status}</p>
           </div>
         </Container>
       </Section>

@@ -7,7 +7,7 @@ import { ProvenanceBadge } from "@/components/journeys/ProvenanceBadge";
 import { Arrow } from "@/components/ui/Arrow";
 import {
   andeanCaravanHeroImage,
-  getCanonicalCaravanImage,
+  getCanonicalCaravanCardImage,
 } from "@/content/andean-caravan-images";
 import { getCanonicalCaravanOverview } from "@/content/caravan/page-data";
 import { siteConfig } from "@/content/site";
@@ -30,7 +30,7 @@ export default function AndeanCaravanPage() {
         aria-labelledby="departures-heading"
       >
         <div className={styles.introductionCopy}>
-          <p>Departures</p>
+          <p>The Andean Caravan / Peru · Bolivia · Chile</p>
           <h1 id="departures-heading">Choose where the road becomes yours.</h1>
           <p>
             Each Caravan follows one route on one seasonal departure. Join for
@@ -70,7 +70,7 @@ export default function AndeanCaravanPage() {
       </section>
 
       <div className={styles.map} id="full-route-map">
-        <CaravanRouteMap />
+        <CaravanRouteMap headingLevel={2} />
       </div>
 
       <section
@@ -87,19 +87,23 @@ export default function AndeanCaravanPage() {
         <ol className={styles.sectionGrid}>
           {data.sections.map(({ slug, section, gateFrom, gateTo }) => {
             const duration = section.day_end - section.day_start + 1;
+            const routeLabel =
+              section.section_id === "04"
+                ? `${gateFrom.name} → ${gateTo.name} → ${gateFrom.name}`
+                : `${gateFrom.name} → ${gateTo.name}`;
 
             return (
               <li key={section.section_id}>
                 <Link
                   className={styles.sectionCard}
                   href={`/caravans/andean/${slug}`}
-                  aria-label={`Section ${section.section_id}, ${section.name} — ${duration} days, ${gateFrom.name} to ${gateTo.name}`}
+                  aria-label={`Section ${section.section_id}, ${section.name} — ${duration} days, ${routeLabel}`}
                 >
                   <RisoArtwork
                     className={styles.sectionImage}
-                    asset={getCanonicalCaravanImage(slug)}
+                    asset={getCanonicalCaravanCardImage(slug)}
                     aspectRatio="card"
-                    sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, (max-width: 1440px) 33vw, 475px"
+                    sizes="(max-width: 700px) 100vw, (max-width: 1440px) 50vw, 720px"
                   />
                   <div className={styles.sectionCopy}>
                     <span>{section.section_id}</span>
@@ -109,7 +113,7 @@ export default function AndeanCaravanPage() {
                     <dl>
                       <div>
                         <dt>Route</dt>
-                        <dd>{gateFrom.name} → {gateTo.name}</dd>
+                        <dd>{routeLabel}</dd>
                       </div>
                       <div><dt>Time</dt><dd>{duration} days</dd></div>
                       <div>
@@ -163,10 +167,16 @@ export default function AndeanCaravanPage() {
           </p>
         </div>
         <div>
-          <h2>Enquiry status</h2>
+          <h2>Interest registration</h2>
           <p className={styles.conditionNote}>
-            Enquiry delivery is not connected yet. No payment or booking action
-            is active.
+            Open for the first departure in February 2028. No payment is taken
+            online; Sawayatra will reply personally when dates, price and
+            availability are ready.
+          </p>
+          <p>
+            <Link href="/register-interest">
+              Register your interest <Arrow />
+            </Link>
           </p>
         </div>
       </section>
@@ -176,7 +186,7 @@ export default function AndeanCaravanPage() {
         <h2 id="ask-heading">
           Start with the part of the route you can already imagine.
         </h2>
-        <Link href="#all-sections">Choose a section <Arrow /></Link>
+        <Link href="/register-interest">Register your interest <Arrow /></Link>
       </section>
     </main>
   );

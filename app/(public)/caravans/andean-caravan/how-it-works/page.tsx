@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
+import { CaravanRouteMap } from "@/app/(public)/caravans/_components/CaravanRouteMap";
 import { RisoArtwork } from "@/components/brand/RisoArtwork";
-import { CaravanRouteMap } from "@/components/departures/CaravanRouteMap";
 import { Accordion } from "@/components/ui/Accordion";
+import { Arrow } from "@/components/ui/Arrow";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { FactStrip } from "@/components/ui/FactStrip";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { andeanCaravanHeroImage } from "@/content/andean-caravan-images";
+import { andeanCaravanEnquiry } from "@/content/andean-caravan-editorial";
 import { getCanonicalCaravanOverview } from "@/content/caravan/page-data";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/site-url";
@@ -37,6 +39,7 @@ export default function AndeanCaravanJoiningPage() {
       <PageHero
         className={styles.hero}
         mediaLayout="split"
+        mobileContentFirst
         ground="cream"
         eyebrow="The Andean Caravan"
         eyebrowKind="decision"
@@ -70,7 +73,7 @@ export default function AndeanCaravanJoiningPage() {
           <RisoArtwork
             asset={andeanCaravanHeroImage}
             aspectRatio="hero"
-            sizes="100vw"
+            sizes="(max-width: 639px) 100vw, 54vw"
             priority
           />
         }
@@ -145,17 +148,18 @@ export default function AndeanCaravanJoiningPage() {
       <Section
         className={styles.routeSection}
         ground="cream"
+        spacing="flush"
         aria-labelledby="route-heading"
       >
-        <Container>
+        <Container className={styles.atlasIntro}>
           <div className={styles.routeHeader}>
             <div className={styles.sectionHeading}>
               <Eyebrow kind="decision" tone="accent">The continuous route</Eyebrow>
               <h2 id="route-heading">Lima to Balmaceda.</h2>
             </div>
           </div>
-          <CaravanRouteMap />
         </Container>
+        <CaravanRouteMap headingLevel={3} initialChapterId="01" />
       </Section>
 
       <Section
@@ -166,13 +170,19 @@ export default function AndeanCaravanJoiningPage() {
         <Container className={styles.interestGrid}>
           <div className={styles.sectionHeading}>
             <Eyebrow kind="decision" tone="inherit" className={styles.deepEyebrow}>
-              Enquiry
+              {andeanCaravanEnquiry.eyebrow}
             </Eyebrow>
-            <h2 id="enquiry-heading">Enquiry delivery is not connected yet.</h2>
-            <p>
-              The route content is available to read. No payment or booking
-              action is active.
-            </p>
+            <h2 id="enquiry-heading">{andeanCaravanEnquiry.heading}</h2>
+            <p>{andeanCaravanEnquiry.invitation}</p>
+          </div>
+          <div className={styles.interestActions}>
+            <Link className={styles.askLink} href="/register-interest">
+              Register your interest <Arrow />
+            </Link>
+            <Link className={styles.secondaryAskLink} href="/caravans/andean#all-sections">
+              Compare all four sections <Arrow />
+            </Link>
+            <p>{andeanCaravanEnquiry.status}</p>
           </div>
         </Container>
       </Section>

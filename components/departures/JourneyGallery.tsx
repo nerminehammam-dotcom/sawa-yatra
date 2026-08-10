@@ -32,9 +32,9 @@ export function JourneyGallery({
         </div>
 
         <ul className={styles.gallery}>
-          {images.map((asset, index) => (
+          {images.map((asset) => (
             <li className={styles.item} key={asset.src}>
-              <JourneyPlate asset={asset} priority={index === 0} />
+              <JourneyPlate asset={asset} />
             </li>
           ))}
         </ul>

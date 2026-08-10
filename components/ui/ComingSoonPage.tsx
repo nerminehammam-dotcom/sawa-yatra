@@ -31,7 +31,7 @@ const defaultOnwardLinks: readonly OnwardLink[] = [
   {
     href: "/caravans/andean",
     label: "The Andean Caravan",
-    description: "71 days, Lima to Patagonia. Join one route section or all nine.",
+    description: "71 days, Lima to Patagonia. Join one of four sections or travel the complete route.",
   },
   {
     href: "/travel-self",

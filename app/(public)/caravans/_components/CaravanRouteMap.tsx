@@ -1,606 +1,1101 @@
 "use client";
-import { Arrow } from "@/components/ui/Arrow";
 
 import Image from "next/image";
+import Link from "next/link";
 import type { CSSProperties, KeyboardEvent } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useId, useRef, useState } from "react";
 
-import { andeanDestinationDetails } from "@/content/andean-caravan-destinations";
+import { Arrow } from "@/components/ui/Arrow";
 import {
   andeanMapCountries,
   andeanMapViewBox,
 } from "@/content/andean-map-geometry";
-import { andeanCaravanRouteStops } from "@/content/andean-caravan-route";
-import { joiningPoints } from "@/content/field-document";
+import {
+  andeanCaravanMapChapters,
+  type AndeanCaravanMapChapterId,
+} from "@/content/andean-caravan-map";
+import {
+  andeanCaravanAtlasStops as andeanCaravanRouteStops,
+  andeanCaravanRouteSegments,
+  type AndeanCaravanRouteSegment,
+  type AndeanCaravanTransportMode,
+} from "@/content/andean-caravan-route";
 
 import styles from "./CaravanRouteMap.module.css";
 
-interface StopPosition extends CSSProperties {
-  "--stop-x": string;
-  "--stop-y": string;
-  "--marker-shift-x": string;
-  "--marker-shift-y": string;
-  "--leader-length": string;
-  "--leader-angle": string;
+interface CaravanRouteMapProps {
+  currentChapterId?: AndeanCaravanMapChapterId;
+  headingLevel?: 2 | 3;
+  initialChapterId?: AndeanCaravanMapChapterId;
 }
 
-interface MapCanvasStyle extends CSSProperties {
-  "--map-zoom": number;
-  "--map-origin-x": string;
-  "--map-origin-y": string;
+type MapChapter = (typeof andeanCaravanMapChapters)[number];
+type RouteStop = (typeof andeanCaravanRouteStops)[number];
+type RouteSegment = AndeanCaravanRouteSegment;
+type RouteStopId = RouteStop["id"];
+
+interface MapPoint {
+  readonly x: number;
+  readonly y: number;
 }
 
-type RouteRole = "join" | "leave" | "join-leave" | "neutral";
-
-const zoomLevels = [1, 1.35, 1.7] as const;
-const zoomLabels = ["Overview", "Closer", "Closest"] as const;
-
-const projectRoute = (
-  stops: readonly (typeof andeanCaravanRouteStops)[number][],
-) => stops.map((stop) => `${stop.x * 7.8},${stop.y * 10}`).join(" ");
-
-const northernRoadStops = andeanCaravanRouteStops.slice(0, 9);
-const southernRoadStops = andeanCaravanRouteStops.slice(9);
-const northernRoadPoints = projectRoute(northernRoadStops);
-const southernRoadPoints = projectRoute(southernRoadStops);
-
-const exactJoiningNames = new Set(
-  joiningPoints.map((point) => point.place.trim().toLocaleLowerCase("en")),
-);
-const exactLeavingNames = new Set(
-  joiningPoints.map((point) => point.leaveAt.trim().toLocaleLowerCase("en")),
-);
-
-const markerShifts: Partial<
-  Record<(typeof andeanCaravanRouteStops)[number]["id"], { x: number; y: number }>
+const labelPlacement: Partial<
+  Record<
+    RouteStopId,
+    { readonly dx: number; readonly dy: number; readonly anchor: "start" | "end" }
+  >
 > = {
-  arequipa: { x: -8, y: 8 },
-  cusco: { x: -12, y: -13 },
-  titicaca: { x: 12, y: -11 },
-  "la-paz": { x: 16, y: 14 },
-  sucre: { x: 28, y: -10 },
-  uyuni: { x: -18, y: 22 },
-  "balmaceda-airport": { x: 60, y: -35 },
-  coyhaique: { x: -50, y: -5 },
-  "villa-ohiggins": { x: -45, y: 28 },
-  balmaceda: { x: 60, y: 36 },
+  lima: { dx: -15, dy: -15, anchor: "end" },
+  paracas: { dx: -13, dy: 21, anchor: "end" },
+  nazca: { dx: -14, dy: 23, anchor: "end" },
+  arequipa: { dx: -14, dy: 24, anchor: "end" },
+  colca: { dx: 16, dy: -15, anchor: "start" },
+  cusco: { dx: 17, dy: -18, anchor: "start" },
+  "sacred-valley": { dx: 16, dy: 22, anchor: "start" },
+  "machu-picchu": { dx: -16, dy: -15, anchor: "end" },
+  puno: { dx: -17, dy: 23, anchor: "end" },
+  copacabana: { dx: 16, dy: 22, anchor: "start" },
+  "isla-del-sol": { dx: -16, dy: -15, anchor: "end" },
+  "la-paz": { dx: 17, dy: 22, anchor: "start" },
+  coroico: { dx: 16, dy: -15, anchor: "start" },
+  sucre: { dx: 21, dy: -18, anchor: "start" },
+  potosi: { dx: -18, dy: -17, anchor: "end" },
+  uyuni: { dx: -16, dy: 23, anchor: "end" },
+  "san-pedro": { dx: 18, dy: 24, anchor: "start" },
+  calama: { dx: -16, dy: -14, anchor: "end" },
+  santiago: { dx: -17, dy: -15, anchor: "end" },
+  coyhaique: { dx: -27, dy: -28, anchor: "end" },
+  "rio-tranquilo": { dx: -25, dy: -4, anchor: "end" },
+  cochrane: { dx: 28, dy: 35, anchor: "start" },
+  tortel: { dx: -34, dy: 23, anchor: "end" },
+  "villa-ohiggins": { dx: -24, dy: 45, anchor: "end" },
+  "puerto-guadal": { dx: 17, dy: -15, anchor: "start" },
+  "chile-chico": { dx: 29, dy: -24, anchor: "start" },
+  "puerto-ibanez": { dx: 18, dy: 21, anchor: "start" },
+  balmaceda: { dx: 29, dy: 19, anchor: "start" },
 };
 
-function routeRoleFor(stopName: string): RouteRole {
-  const exactName = stopName.trim().toLocaleLowerCase("en");
-  const isJoin = exactJoiningNames.has(exactName);
-  const isLeave = exactLeavingNames.has(exactName);
+const patagoniaLabelPlacement: Partial<
+  Record<
+    RouteStopId,
+    { readonly dx: number; readonly dy: number; readonly anchor: "start" | "end" }
+  >
+> = {
+  coyhaique: { dx: -20, dy: -9, anchor: "end" },
+  "rio-tranquilo": { dx: -13, dy: -5, anchor: "end" },
+  tortel: { dx: -11, dy: -2, anchor: "end" },
+  "villa-ohiggins": { dx: -11, dy: 10, anchor: "end" },
+  balmaceda: { dx: 11, dy: -10, anchor: "start" },
+  "chile-chico": { dx: 12, dy: 4, anchor: "start" },
+  cochrane: { dx: 14, dy: 3, anchor: "start" },
+};
 
-  if (isJoin && isLeave) return "join-leave";
-  if (isJoin) return "join";
-  if (isLeave) return "leave";
-  return "neutral";
-}
+const continentalReferenceLabelIds = new Set<RouteStopId>([
+  "lima",
+  "la-paz",
+  "santiago",
+]);
 
-function stopStyleFor(
-  stop: (typeof andeanCaravanRouteStops)[number],
-): StopPosition {
-  const shift = markerShifts[stop.id] ?? { x: 0, y: 0 };
-  const length = Math.hypot(shift.x, shift.y);
-  const angle = Math.atan2(-shift.y, -shift.x) * (180 / Math.PI);
+const directionalSegmentIds = new Set<string>([
+  "paracas-nazca",
+  "cusco-puno",
+  "copacabana-la-paz",
+  "la-paz-sucre",
+  "potosi-uyuni",
+  "calama-santiago",
+  "santiago-balmaceda",
+  "rio-bravo-villa-ohiggins",
+  "villa-ohiggins-rio-bravo",
+  "puerto-ibanez-coyhaique",
+]);
 
-  return {
-    "--stop-x": `${stop.x}%`,
-    "--stop-y": `${stop.y}%`,
-    "--marker-shift-x": `${shift.x}px`,
-    "--marker-shift-y": `${shift.y}px`,
-    "--leader-length": `${length}px`,
-    "--leader-angle": `${angle.toFixed(6)}deg`,
-  };
-}
+const overlappingRetraceSegmentIds = new Set<string>([
+  "villa-ohiggins-rio-bravo",
+  "rio-bravo-puerto-yungay-return",
+]);
 
-/**
- * The map's own heading was a hard-coded h3. That is correct on /caravans and
- * /departures, where an h2 precedes it, but on /caravans/andean/route-map and
- * /caravans/andean-caravan/how-it-works it followed the h1 directly and skipped
- * a level. The level is now the caller's to state; the default preserves the
- * existing behaviour everywhere it was already right.
- */
-interface CaravanRouteMapProps {
-  headingLevel?: 2 | 3;
-}
+const transportLegendItems = [
+  { mode: "overland", label: "Road / 4×4" },
+  { mode: "rail", label: "Rail" },
+  { mode: "ferry", label: "Boat / ferry" },
+  { mode: "scheduled-flight", label: "Scheduled flight" },
+] as const satisfies readonly {
+  readonly mode: AndeanCaravanTransportMode;
+  readonly label: string;
+}[];
 
-export function CaravanRouteMap({ headingLevel = 3 }: CaravanRouteMapProps = {}) {
-  const MapHeading = `h${headingLevel}` as const;
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [motionAllowed, setMotionAllowed] = useState(false);
-  const [zoomIndex, setZoomIndex] = useState(0);
-  const detailPanelRef = useRef<HTMLElement>(null);
-  const stopButtonRefs = useRef<Array<HTMLButtonElement | null>>([]);
-  const activeStop = andeanCaravanRouteStops[activeIndex];
-  const activeDetail = activeStop
-    ? andeanDestinationDetails[activeStop.id]
-    : undefined;
-  const nextIndex = (activeIndex + 1) % andeanCaravanRouteStops.length;
-  const nextStop = andeanCaravanRouteStops[nextIndex];
-  const mapZoom = zoomLevels[zoomIndex] ?? zoomLevels[0];
-  const progress = Math.round(
-    (activeIndex / (andeanCaravanRouteStops.length - 1)) * 100,
-  );
-  const completedNorthernPoints = projectRoute(
-    northernRoadStops.slice(0, Math.min(activeIndex + 1, northernRoadStops.length)),
-  );
-  const completedSouthernPoints =
-    activeIndex < 9
-      ? ""
-      : projectRoute(southernRoadStops.slice(0, activeIndex - 8));
+const andesLabelPlacement: Record<
+  MapChapter["id"],
+  { readonly x: number; readonly y: number; readonly rotation: number }
+> = {
+  "01": { x: 425, y: 445, rotation: -75 },
+  "02": { x: 432, y: 452, rotation: -75 },
+  "03": { x: 414, y: 642, rotation: -76 },
+  "04": { x: 379, y: 735, rotation: -76 },
+};
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const updateMotionPreference = () => {
-      const allowed = !mediaQuery.matches;
-      setMotionAllowed(allowed);
-      if (!allowed) setIsPlaying(false);
+const patagoniaDetailViewBox = { x: 248, y: 776, width: 148, height: 112 } as const;
+const patagoniaAirBridgeViewBox = "240 540 240 355";
+
+const latitudeTicks = [
+  { label: "10°S", y: 193 },
+  { label: "20°S", y: 366 },
+  { label: "30°S", y: 540 },
+  { label: "40°S", y: 714 },
+  { label: "50°S", y: 887 },
+] as const;
+
+const andesSpine =
+  "M168 42 C195 80 224 116 251 153 C289 204 337 251 380 303 C414 344 437 385 441 425 C439 470 419 511 390 552 C383 605 361 655 335 703 C318 749 321 791 326 824 C315 858 296 887 304 918 C315 944 329 962 350 977";
+
+const reliefLines = [
+  "M143 44 C174 87 206 121 231 160 C270 216 316 255 357 307 C392 351 414 391 417 431 C414 476 396 519 369 558 C358 610 338 661 312 709 C296 753 299 794 305 829 C293 862 276 891 284 920 C294 944 311 963 332 980",
+  "M157 42 C186 84 218 118 244 156 C282 209 329 253 370 305 C406 348 427 388 430 428 C428 473 409 515 381 555 C373 608 351 658 325 706 C308 751 311 792 316 826 C305 860 287 889 295 919 C305 944 321 962 342 979",
+  andesSpine,
+  "M180 43 C207 78 236 113 264 151 C302 199 350 248 393 301 C427 340 450 382 454 423 C452 468 431 508 402 548 C396 601 373 652 348 700 C331 746 334 789 339 821 C328 855 309 884 317 916 C328 941 342 960 362 975",
+  "M194 48 C220 82 249 118 276 155 C315 204 363 251 405 303 C439 343 463 383 467 420 C465 465 444 506 414 546 C407 598 385 649 360 697 C343 743 346 785 351 818 C340 851 322 881 329 913 C340 938 354 957 374 973",
+] as const;
+
+const lakeTiticacaPath =
+  "M391 282 C399 274 411 276 420 281 C428 280 441 288 444 299 C439 307 429 311 419 306 C413 301 406 296 398 295 C392 293 388 287 391 282 Z";
+const salarPath =
+  "M449 365 L463 357 L482 360 L490 370 L481 381 L458 385 L447 376 Z";
+const atacamaPath =
+  "M398 327 C417 346 429 371 441 398 C450 421 446 451 430 480 C416 505 404 525 393 538 C382 503 379 469 383 432 C387 397 387 362 398 327 Z";
+
+const projectPoint = (stop: RouteStop): MapPoint => ({
+  x: stop.x * 7.8,
+  y: stop.y * 10,
+});
+
+const formatPoint = (point: MapPoint) =>
+  `${point.x.toFixed(1)} ${point.y.toFixed(1)}`;
+
+const smoothPath = (points: readonly MapPoint[]) => {
+  const firstPoint = points[0];
+  if (!firstPoint) return "";
+  if (points.length === 1) return `M${formatPoint(firstPoint)}`;
+
+  let path = `M${formatPoint(firstPoint)}`;
+
+  for (let index = 0; index < points.length - 1; index += 1) {
+    const current = points[index];
+    const next = points[index + 1];
+    if (!current || !next) continue;
+
+    const before = points[index - 1] ?? current;
+    const after = points[index + 2] ?? next;
+    const controlOne = {
+      x: current.x + (next.x - before.x) / 6,
+      y: current.y + (next.y - before.y) / 6,
+    };
+    const controlTwo = {
+      x: next.x - (after.x - current.x) / 6,
+      y: next.y - (after.y - current.y) / 6,
     };
 
-    updateMotionPreference();
-    mediaQuery.addEventListener("change", updateMotionPreference);
-    return () => mediaQuery.removeEventListener("change", updateMotionPreference);
-  }, []);
+    path += ` C${formatPoint(controlOne)} ${formatPoint(controlTwo)} ${formatPoint(next)}`;
+  }
 
-  useEffect(() => {
-    if (!motionAllowed || !isPlaying) return undefined;
+  return path;
+};
 
-    const timer = window.setInterval(() => {
-      setActiveIndex(
-        (current) => (current + 1) % andeanCaravanRouteStops.length,
-      );
-    }, 7000);
+const routeStopsById = new Map<string, RouteStop>(
+  andeanCaravanRouteStops.map((stop) => [stop.id, stop] as const),
+);
+const routeSegments: readonly RouteSegment[] = andeanCaravanRouteSegments;
 
-    return () => window.clearInterval(timer);
-  }, [isPlaying, motionAllowed]);
+const routePoints = (ids: readonly string[]) =>
+  ids
+    .map((id) => routeStopsById.get(id))
+    .filter((stop): stop is RouteStop => Boolean(stop))
+    .map(projectPoint);
 
-  if (!activeStop || !activeDetail || !nextStop) return null;
+const segmentPath = (segment: RouteSegment) => {
+  const fromStop = routeStopsById.get(segment.from);
+  const toStop = routeStopsById.get(segment.to);
+  if (!fromStop || !toStop) return "";
 
-  const chooseStop = (index: number) => {
-    setActiveIndex(index);
-    setIsPlaying(false);
+  const from = projectPoint(fromStop);
+  const to = projectPoint(toStop);
+  if (segment.mode !== "scheduled-flight") {
+    return `M${formatPoint(from)} L${formatPoint(to)}`;
+  }
 
-    if (window.matchMedia("(max-width: 767px)").matches) {
-      window.requestAnimationFrame(() => {
-        detailPanelRef.current?.scrollIntoView({
-          behavior: motionAllowed ? "smooth" : "auto",
-          block: "start",
-        });
-      });
-    }
+  const deltaX = to.x - from.x;
+  const deltaY = to.y - from.y;
+  const length = Math.hypot(deltaX, deltaY) || 1;
+  const bend = segment.curve ?? -0.25;
+  const control = {
+    x: (from.x + to.x) / 2 + (-deltaY / length) * length * bend,
+    y: (from.y + to.y) / 2 + (deltaX / length) * length * bend,
   };
 
-  const moveBy = (direction: -1 | 1) => {
-    setActiveIndex((current) => {
-      const next = current + direction;
-      if (next < 0) return andeanCaravanRouteStops.length - 1;
-      return next % andeanCaravanRouteStops.length;
-    });
-    setIsPlaying(false);
+  return `M${formatPoint(from)} Q${formatPoint(control)} ${formatPoint(to)}`;
+};
+
+const modeClassName = (mode: AndeanCaravanTransportMode) => {
+  if (mode === "scheduled-flight") return styles.segmentFlight;
+  if (mode === "rail") return styles.segmentRail;
+  if (mode === "ferry") return styles.segmentFerry;
+  return styles.segmentOverland;
+};
+
+const formatMeters = (value: number) =>
+  value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+function RouteLocator({ chapter }: { chapter: MapChapter }) {
+  const activeSegments = routeSegments.filter(
+    (segment) => segment.chapterId === chapter.id,
+  );
+  const view = chapter.atlasViewBox;
+
+  if (chapter.id === "04") {
+    const flightSegment = activeSegments.find(
+      (segment) => segment.id === "santiago-balmaceda",
+    );
+    const localSegments = activeSegments.filter(
+      (segment) => segment.id !== "santiago-balmaceda",
+    );
+    const contextStopIds = new Set<RouteStopId>(["santiago", "balmaceda"]);
+    const chapterStopIds = new Set<string>(chapter.stopIds);
+    const mobileDetailLabelIds = new Set<RouteStopId>([
+      "balmaceda",
+      "rio-tranquilo",
+      "tortel",
+      "villa-ohiggins",
+    ]);
+
+    return (
+      <div className={`${styles.locator} ${styles.locatorAirBridge}`} aria-hidden="true">
+        <p className={styles.locatorHeading}>
+          <span>Air bridge</span>
+          <small>Santiago → Balmaceda</small>
+        </p>
+        <svg
+          className={styles.airBridgeMap}
+          viewBox={patagoniaAirBridgeViewBox}
+          preserveAspectRatio="xMidYMid meet"
+        >
+          <g className={styles.locatorCountries}>
+            {andeanMapCountries
+              .filter((country) => country.id === "chile")
+              .map((country) => (
+                <path key={country.id} d={country.path} fillRule="evenodd" />
+              ))}
+          </g>
+          {localSegments.map((segment) => (
+            <path
+              key={segment.id}
+              className={`${styles.locatorRoute} ${modeClassName(segment.mode)}`}
+              d={segmentPath(segment)}
+            />
+          ))}
+          {flightSegment ? (
+            <path
+              className={`${styles.locatorRouteActive} ${styles.segmentFlight}`}
+              d={segmentPath(flightSegment)}
+            />
+          ) : null}
+          {andeanCaravanRouteStops.map((stop) => {
+            if (!contextStopIds.has(stop.id)) return null;
+            const point = projectPoint(stop);
+
+            return (
+              <g key={stop.id}>
+                <circle cx={point.x} cy={point.y} r="5" />
+                <text
+                  className={styles.locatorCityLabel}
+                  x={point.x + (stop.id === "santiago" ? -12 : 12)}
+                  y={point.y + (stop.id === "santiago" ? -8 : 14)}
+                  textAnchor={stop.id === "santiago" ? "end" : "start"}
+                >
+                  {stop.name}
+                </text>
+              </g>
+            );
+          })}
+          <rect
+            className={styles.locatorWindow}
+            x={patagoniaDetailViewBox.x}
+            y={patagoniaDetailViewBox.y}
+            width={patagoniaDetailViewBox.width}
+            height={patagoniaDetailViewBox.height}
+          />
+        </svg>
+        <p className={styles.locatorSubline}>
+          Return flight included after the road journey
+        </p>
+
+        <div className={styles.locatorDetailRoute}>
+          <p className={styles.locatorHeading}>
+            <span>Road detail</span>
+            <small>Carretera Austral</small>
+          </p>
+          <svg
+            viewBox={`${patagoniaDetailViewBox.x} ${patagoniaDetailViewBox.y} ${patagoniaDetailViewBox.width} ${patagoniaDetailViewBox.height}`}
+            preserveAspectRatio="xMidYMid meet"
+          >
+            <g className={styles.locatorCountries}>
+              {andeanMapCountries
+                .filter((country) => country.id === "chile")
+                .map((country) => (
+                  <path key={country.id} d={country.path} fillRule="evenodd" />
+                ))}
+            </g>
+            {localSegments.map((segment) => (
+              <path
+                key={segment.id}
+                className={`${styles.locatorRouteActive} ${modeClassName(segment.mode)}`}
+                d={segmentPath(segment)}
+              />
+            ))}
+            {andeanCaravanRouteStops.map((stop) => {
+              if (!chapterStopIds.has(stop.id)) return null;
+              const point = projectPoint(stop);
+              const placement = patagoniaLabelPlacement[stop.id];
+
+              return (
+                <g key={stop.id}>
+                  <circle cx={point.x} cy={point.y} r="1.5" />
+                  {mobileDetailLabelIds.has(stop.id) && placement ? (
+                    <text
+                      className={styles.locatorDetailLabel}
+                      x={point.x + placement.dx}
+                      y={point.y + placement.dy}
+                      textAnchor={placement.anchor}
+                    >
+                      {"mapLabel" in stop ? stop.mapLabel : stop.name}
+                    </text>
+                  ) : null}
+                </g>
+              );
+            })}
+          </svg>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className={styles.locator} aria-hidden="true">
+      <p className={styles.locatorHeading}>
+        <span>Entire journey</span>
+        <small>{chapter.title}</small>
+      </p>
+      <svg viewBox={andeanMapViewBox} preserveAspectRatio="xMidYMid meet">
+        <g className={styles.locatorCountries}>
+          {andeanMapCountries.map((country) => (
+            <path key={country.id} d={country.path} fillRule="evenodd" />
+          ))}
+        </g>
+        {routeSegments.map((segment) => (
+          <path
+            key={segment.id}
+            className={`${styles.locatorRoute} ${modeClassName(segment.mode)}`}
+            d={segmentPath(segment)}
+          />
+        ))}
+        {activeSegments.map((segment) => (
+          <path
+            key={segment.id}
+            className={`${styles.locatorRouteActive} ${modeClassName(segment.mode)} ${segment.role === "excursion" ? styles.segmentExcursion : ""}`}
+            d={segmentPath(segment)}
+          />
+        ))}
+        {andeanCaravanRouteStops.map((stop) => {
+          const point = projectPoint(stop);
+          return stop.kind === "gate" ? (
+            <circle key={stop.id} cx={point.x} cy={point.y} r="8" />
+          ) : null;
+        })}
+        <rect
+          className={styles.locatorWindow}
+          x={view.x}
+          y={view.y}
+          width={view.width}
+          height={view.height}
+        />
+      </svg>
+    </div>
+  );
+}
+
+function ElevationProfile({ chapter }: { chapter: MapChapter }) {
+  const baseline = 62;
+  const chartWidth = 300;
+  const points = chapter.elevation.points.map((value, index, values) => ({
+    x: 20 + (index * (chartWidth - 40)) / Math.max(values.length - 1, 1),
+    y: baseline - (value / 5000) * 50,
+  }));
+  const linePath = smoothPath(points);
+  const firstPoint = points[0] ?? { x: 20, y: baseline };
+  const lastPoint = points[points.length - 1] ?? firstPoint;
+  const areaPath = `${linePath} L${formatPoint({ x: lastPoint.x, y: baseline })} L${formatPoint({ x: firstPoint.x, y: baseline })} Z`;
+  const peakIndex = Array.from(chapter.elevation.points).findIndex(
+    (value) => value === chapter.elevation.highMeters,
+  );
+  const peakPoint = points[peakIndex] ?? firstPoint;
+
+  return (
+    <figure
+      className={styles.elevationProfile}
+      aria-label={`Elevation profile for ${chapter.route}. The shared scale is zero to 5,000 metres and this chapter reaches ${formatMeters(chapter.elevation.highMeters)} metres.`}
+    >
+      <div className={styles.elevationHeading}>
+        <span>Elevation rhythm</span>
+        <strong>{formatMeters(chapter.elevation.highMeters)} m high</strong>
+      </div>
+      <svg viewBox={`0 0 ${chartWidth} 76`} aria-hidden="true">
+        <line className={styles.elevationGuide} x1="20" y1="12" x2="280" y2="12" />
+        <line
+          className={styles.elevationBaseline}
+          x1="20"
+          y1={baseline}
+          x2="280"
+          y2={baseline}
+        />
+        <path className={styles.elevationArea} d={areaPath} />
+        <path className={styles.elevationLine} d={linePath} />
+        <circle className={styles.elevationPeak} cx={peakPoint.x} cy={peakPoint.y} r="3.5" />
+        <text x="20" y="73">0</text>
+        <text x="280" y="9" textAnchor="end">5,000 m</text>
+      </svg>
+      <figcaption>{chapter.terrain} · one shared 0–5,000 m scale</figcaption>
+    </figure>
+  );
+}
+
+function ChapterStory({
+  chapter,
+  chapterIndex,
+  currentChapterId,
+  headingId,
+  onChooseChapter,
+}: {
+  chapter: MapChapter;
+  chapterIndex: number;
+  currentChapterId?: AndeanCaravanMapChapterId;
+  headingId: string;
+  onChooseChapter: (index: number) => void;
+}) {
+  const previousChapter = andeanCaravanMapChapters[chapterIndex - 1];
+  const nextChapter = andeanCaravanMapChapters[chapterIndex + 1];
+  const isCurrentChapter = chapter.id === currentChapterId;
+  const isPatagoniaDetail = chapter.id === "04";
+
+  return (
+    <div className={styles.storyContent}>
+      <figure className={styles.storyPhoto}>
+        <Image
+          src={chapter.image.src}
+          alt={chapter.image.alt}
+          fill
+          sizes="(min-width: 1051px) 31vw, (min-width: 768px) 46vw, 100vw"
+          style={{
+            objectPosition: `${chapter.image.focalPoint.x}% ${chapter.image.focalPoint.y}%`,
+          }}
+        />
+        <figcaption>{chapter.image.caption}</figcaption>
+      </figure>
+
+      <div className={styles.storyCopy}>
+        <p className={styles.chapterMeta}>
+          Plate {chapter.id} / {chapter.days} days
+        </p>
+        <h3 id={headingId}>{chapter.title}</h3>
+        <p className={styles.routeName}>{chapter.route}</p>
+        <p className={styles.movementLine}>
+          <span>Movement</span>
+          {chapter.movement}
+        </p>
+        <p className={styles.summary}>{chapter.summary}</p>
+
+        {"routeGroups" in chapter && chapter.routeGroups ? (
+          <div className={`${styles.placeSequence} ${styles.routeGroups}`}>
+            <span>Route places</span>
+            {chapter.routeGroups.map((group) => (
+              <p key={group.label}>
+                <strong>{group.label}</strong>
+                <span>{group.places.join(" → ")}</span>
+              </p>
+            ))}
+          </div>
+        ) : (
+          <div className={styles.placeSequence}>
+            <span>Route places</span>
+            <p>{chapter.places.join(" → ")}</p>
+          </div>
+        )}
+
+        <p className={styles.geographicFact}>
+          <span>Field note</span>
+          {chapter.geographicFact}
+        </p>
+
+        <ElevationProfile chapter={chapter} />
+
+        <dl className={styles.gates}>
+          <div>
+            <dt>Join</dt>
+            <dd>{chapter.join}</dd>
+          </div>
+          <div>
+            <dt>Leave</dt>
+            <dd>{chapter.leave}</dd>
+          </div>
+        </dl>
+
+        <Link
+          className={styles.sectionLink}
+          href={isCurrentChapter ? "#itinerary-heading" : chapter.href}
+        >
+          {isCurrentChapter ? "Continue to the itinerary" : "Explore this chapter"} <Arrow />
+        </Link>
+
+        <p className={styles.mapNote}>
+          {isPatagoniaDetail
+            ? "Mapped Caravan route ends at Balmaceda. The included Balmaceda → Santiago scheduled flight follows after the journey and is intentionally not drawn."
+            : "Transport lines follow the published itinerary. Terrain linework is illustrative; not for navigation."}
+        </p>
+
+        <nav className={styles.chapterNav} aria-label="Move between atlas plates">
+          {previousChapter ? (
+            <button type="button" onClick={() => onChooseChapter(chapterIndex - 1)}>
+              <span>Previous plate</span>
+              <strong>{previousChapter.title}</strong>
+            </button>
+          ) : <span aria-hidden="true" />}
+          {nextChapter ? (
+            <button type="button" onClick={() => onChooseChapter(chapterIndex + 1)}>
+              <span>Next plate</span>
+              <strong>{nextChapter.title}</strong>
+            </button>
+          ) : <span aria-hidden="true" />}
+        </nav>
+      </div>
+    </div>
+  );
+}
+
+export function CaravanRouteMap({
+  currentChapterId,
+  headingLevel = 2,
+  initialChapterId = "01",
+}: CaravanRouteMapProps = {}) {
+  const MapHeading = `h${headingLevel}` as const;
+  const instanceId = useId();
+  const safeInstanceId = instanceId.replace(/[^a-zA-Z0-9_-]/g, "");
+  const headingId = `${instanceId}-route-heading`;
+  const panelId = `${instanceId}-route-panel`;
+  const mapTitleId = `${instanceId}-map-title`;
+  const mapDescriptionId = `${instanceId}-map-description`;
+  const mobilePanelId = `${instanceId}-mobile-route-panel`;
+  const mobileStoryHeadingId = `${instanceId}-mobile-story-heading`;
+  const landClipId = `${safeInstanceId}-land-clip`;
+  const saltPatternId = `${safeInstanceId}-salt-pattern`;
+  const desertPatternId = `${safeInstanceId}-desert-pattern`;
+  const focusGradientId = `${safeInstanceId}-focus-gradient`;
+  const directionMarkerId = `${safeInstanceId}-direction-marker`;
+  const [activeChapterIndex, setActiveChapterIndex] = useState(() => {
+    const index = andeanCaravanMapChapters.findIndex(
+      (chapter) => chapter.id === initialChapterId,
+    );
+    return index >= 0 ? index : 0;
+  });
+  const chapterButtonRefs = useRef<Array<HTMLButtonElement | null>>([]);
+  const activeChapter =
+    andeanCaravanMapChapters[activeChapterIndex] ?? andeanCaravanMapChapters[0];
+  const activeTabId = `${instanceId}-chapter-${activeChapterIndex}`;
+
+  const chooseChapter = (index: number) => {
+    setActiveChapterIndex(index);
   };
 
-  const handleStopKeyDown = (
+  const handleChapterKeyDown = (
     event: KeyboardEvent<HTMLButtonElement>,
     index: number,
   ) => {
     let destinationIndex: number | undefined;
 
     if (event.key === "ArrowRight" || event.key === "ArrowDown") {
-      destinationIndex = (index + 1) % andeanCaravanRouteStops.length;
+      destinationIndex = (index + 1) % andeanCaravanMapChapters.length;
     } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
       destinationIndex =
-        (index - 1 + andeanCaravanRouteStops.length) %
-        andeanCaravanRouteStops.length;
+        (index - 1 + andeanCaravanMapChapters.length) %
+        andeanCaravanMapChapters.length;
     } else if (event.key === "Home") {
       destinationIndex = 0;
     } else if (event.key === "End") {
-      destinationIndex = andeanCaravanRouteStops.length - 1;
+      destinationIndex = andeanCaravanMapChapters.length - 1;
     }
 
     if (destinationIndex === undefined) return;
 
     event.preventDefault();
-    setActiveIndex(destinationIndex);
-    setIsPlaying(false);
-    stopButtonRefs.current[destinationIndex]?.focus();
+    chooseChapter(destinationIndex);
+    chapterButtonRefs.current[destinationIndex]?.focus();
   };
 
-  const zoomIn = () => {
-    setZoomIndex((current) => Math.min(current + 1, zoomLevels.length - 1));
-    setIsPlaying(false);
-  };
-
-  const zoomOut = () => {
-    setZoomIndex((current) => Math.max(current - 1, 0));
-    setIsPlaying(false);
-  };
-
-  const canvasStyle: MapCanvasStyle = {
-    "--map-zoom": mapZoom,
-    "--map-origin-x": `${activeStop.x}%`,
-    "--map-origin-y": `${activeStop.y}%`,
-  };
+  const activeStopIds = new Set<string>(activeChapter.stopIds);
+  const labelStopIds = new Set<string>(activeChapter.labelStopIds);
+  const activeCountryIds = new Set<string>(activeChapter.countryIds);
+  const activeSegments = routeSegments.filter(
+    (segment) => segment.chapterId === activeChapter.id,
+  );
+  const isPatagoniaDetail = activeChapter.id === "04";
+  const visibleActiveSegments = isPatagoniaDetail
+    ? activeSegments.filter((segment) => segment.id !== "santiago-balmaceda")
+    : activeSegments;
+  const activeTransportModes = new Set<AndeanCaravanTransportMode>(
+    activeSegments.map((segment) => segment.mode),
+  );
+  const focusPoints = routePoints(activeChapter.focusStopIds);
+  const focusPoint = focusPoints.reduce(
+    (total, point) => ({ x: total.x + point.x, y: total.y + point.y }),
+    { x: 0, y: 0 },
+  );
+  const focusX = focusPoint.x / Math.max(focusPoints.length, 1);
+  const focusY = focusPoint.y / Math.max(focusPoints.length, 1);
+  const view = activeChapter.atlasViewBox;
+  const mainViewBox = `${view.x} ${view.y} ${view.width} ${view.height}`;
+  const latitudeTickX = view.x + 22;
+  const andesLabel = andesLabelPlacement[activeChapter.id];
+  const plateTypeScale = isPatagoniaDetail ? 0.265 : view.width / 650;
+  const mapTypeStyle = {
+    "--map-gate-label-size": `${14 * plateTypeScale}px`,
+    "--map-stop-label-size": `${12 * plateTypeScale}px`,
+    "--map-geographic-label-size": `${13 * plateTypeScale}px`,
+    "--map-feature-label-size": `${15 * plateTypeScale}px`,
+    "--map-feature-sub-size": `${11 * plateTypeScale}px`,
+    "--map-country-label-size": `${20 * plateTypeScale}px`,
+    "--map-label-stroke": `${4 * plateTypeScale}px`,
+    "--map-geographic-stroke": `${3 * plateTypeScale}px`,
+  } as CSSProperties;
 
   return (
-    <section className={styles.root} aria-labelledby="caravan-route-map-heading">
+    <section className={styles.root} aria-labelledby={headingId}>
       <header className={styles.heading}>
-        <p className={styles.kicker}>The illustrated route</p>
-        <MapHeading id="caravan-route-map-heading">
-          Follow the Andes south.
-        </MapHeading>
-        <p>
-          Peru, Bolivia and Chile are shown in their real geographic shapes.
-          Zoom closer or choose any numbered stop to open its destination story.
+        <div>
+          <p className={styles.kicker}>The Andean Caravan / Field atlas</p>
+          <MapHeading id={headingId}>A continent, read in four plates.</MapHeading>
+        </div>
+        <p className={styles.introduction}>
+          Each plate moves closer to the terrain; a context inset keeps every
+          change of scale legible.
         </p>
       </header>
 
-      <div className={styles.mapShell}>
-        <div
-          className={styles.mapStage}
-          aria-label="Illustrated geographic map of the Andean Caravan route through Peru, Bolivia and Chile"
-        >
-          <div className={styles.zoomControls} aria-label="Map zoom controls">
-            <button
-              type="button"
-              onClick={zoomOut}
-              disabled={zoomIndex === 0}
-              aria-label="Show a wider map view"
-            >
-              <span aria-hidden="true">−</span>
-            </button>
-            <span aria-live="polite">{zoomLabels[zoomIndex]}</span>
-            <button
-              type="button"
-              onClick={zoomIn}
-              disabled={zoomIndex === zoomLevels.length - 1}
-              aria-label="Show a closer map view"
-            >
-              <span aria-hidden="true">+</span>
-            </button>
-            {zoomIndex > 0 ? (
+      <ol
+        className={styles.chapterRail}
+        aria-label="Choose a Caravan atlas plate"
+        role="tablist"
+      >
+        {andeanCaravanMapChapters.map((chapter, index) => {
+          const isActive = index === activeChapterIndex;
+
+          return (
+            <li key={chapter.id} role="presentation">
               <button
+                ref={(element) => {
+                  chapterButtonRefs.current[index] = element;
+                }}
+                id={`${instanceId}-chapter-${index}`}
                 type="button"
-                className={styles.resetZoom}
-                onClick={() => setZoomIndex(0)}
+                role="tab"
+                aria-selected={isActive}
+                aria-controls={panelId}
+                tabIndex={isActive ? 0 : -1}
+                onClick={() => chooseChapter(index)}
+                onKeyDown={(event) => handleChapterKeyDown(event, index)}
               >
-                Overview
+                <span>{chapter.id}</span>
+                <strong>{chapter.title}</strong>
+                <small>{chapter.days} days</small>
               </button>
-            ) : null}
-          </div>
+            </li>
+          );
+        })}
+      </ol>
 
-          <div className={styles.mapCanvas} style={canvasStyle}>
-            <svg
-              className={styles.landscape}
-              viewBox={andeanMapViewBox}
-              aria-hidden="true"
-              preserveAspectRatio="xMidYMid meet"
-            >
-              <defs>
-                <filter
-                  id="caravans-paper-wobble"
-                  x="-10%"
-                  y="-10%"
-                  width="120%"
-                  height="120%"
-                >
-                  <feTurbulence
-                    type="fractalNoise"
-                    baseFrequency="0.018"
-                    numOctaves="2"
-                    seed="7"
-                    result="noise"
-                  />
-                  <feDisplacementMap
-                    in="SourceGraphic"
-                    in2="noise"
-                    scale="1.35"
-                    xChannelSelector="R"
-                    yChannelSelector="G"
-                  />
-                </filter>
-              </defs>
+      <div className={styles.mapShell}>
+        <div className={styles.mapStage}>
+          <p className={styles.mapIndex} aria-hidden="true">
+            <span>{isPatagoniaDetail ? "04 / Aysén" : "The long spine"}</span>
+            <strong>{isPatagoniaDetail ? "Carretera Austral" : "12°S → 49°S"}</strong>
+            <small>{isPatagoniaDetail ? "road + ferry loop" : "71 days / four field plates"}</small>
+          </p>
 
-              <g className={styles.oceanMarks}>
-                <path d="M35 360 q24 -18 48 0 t48 0" />
-                <path d="M48 382 q24 -18 48 0 t48 0" />
-                <path d="M57 404 q24 -18 48 0 t48 0" />
-                <circle cx="90" cy="280" r="24" />
-                <path d="M90 239 v-25 M90 346 v25 M49 280 H24 M131 280 h25 M61 251 l-18 -18 M119 309 l18 18 M119 251 l18 -18 M61 309 l-18 18" />
-              </g>
+          <svg
+            className={styles.map}
+            viewBox={mainViewBox}
+            preserveAspectRatio="xMidYMid meet"
+            data-detail={isPatagoniaDetail ? "patagonia" : undefined}
+            style={mapTypeStyle}
+            role="img"
+            aria-labelledby={`${mapTitleId} ${mapDescriptionId}`}
+          >
+            <title id={mapTitleId}>
+              {`Atlas plate ${activeChapter.id}: ${activeChapter.route}`}
+            </title>
+            <desc id={mapDescriptionId}>
+              {`A focused geographic route map of ${activeChapter.route}. Principal route cities for this plate are labelled. Overland routes are solid, rail is dash-dot, ferries are dotted and scheduled flights are dashed.`}
+            </desc>
 
-              <g
-                className={styles.countryShapes}
-                filter="url(#caravans-paper-wobble)"
-              >
+            <defs>
+              <clipPath id={landClipId}>
                 {andeanMapCountries.map((country) => (
-                  <path
-                    key={country.id}
-                    className={styles[country.id]}
-                    d={country.path}
-                    fillRule="evenodd"
-                  />
+                  <path key={country.id} d={country.path} fillRule="evenodd" />
+                ))}
+              </clipPath>
+              <pattern
+                id={saltPatternId}
+                width="12"
+                height="12"
+                patternUnits="userSpaceOnUse"
+              >
+                <path className={styles.saltHatch} d="M0 6 L6 0 M6 12 L12 6 M0 6 L6 12 M6 0 L12 6" />
+              </pattern>
+              <pattern
+                id={desertPatternId}
+                width="17"
+                height="17"
+                patternUnits="userSpaceOnUse"
+              >
+                <circle className={styles.desertDot} cx="3" cy="4" r="1" />
+                <circle className={styles.desertDot} cx="13" cy="11" r="0.8" />
+              </pattern>
+              <radialGradient
+                id={focusGradientId}
+                gradientUnits="userSpaceOnUse"
+                cx={focusX}
+                cy={focusY}
+                r={isPatagoniaDetail ? 58 : 230}
+              >
+                <stop offset="0" stopColor="var(--sun)" stopOpacity="0.12" />
+                <stop offset="0.72" stopColor="var(--sun)" stopOpacity="0.03" />
+                <stop offset="1" stopColor="var(--sun)" stopOpacity="0" />
+              </radialGradient>
+              <marker
+                id={directionMarkerId}
+                viewBox="0 0 10 10"
+                refX="8"
+                refY="5"
+                markerWidth="1.55"
+                markerHeight="1.55"
+                orient="auto-start-reverse"
+              >
+                <path className={styles.directionArrow} d="M0 0 L10 5 L0 10 Z" />
+              </marker>
+            </defs>
+
+            <g className={styles.countryFills}>
+              {andeanMapCountries.map((country) => (
+                <path
+                  key={country.id}
+                  className={
+                    activeCountryIds.has(country.id)
+                      ? styles.countryActive
+                      : undefined
+                  }
+                  d={country.path}
+                  fillRule="evenodd"
+                />
+              ))}
+            </g>
+
+            <g clipPath={`url(#${landClipId})`} aria-hidden="true">
+              <rect
+                className={styles.focusField}
+                x="0"
+                y="0"
+                width="780"
+                height="1000"
+                fill={`url(#${focusGradientId})`}
+              />
+              <path className={styles.reliefBand} d={andesSpine} />
+              <g className={styles.reliefLines}>
+                {reliefLines.slice(1, 4).map((line) => (
+                  <path key={line} d={line} />
                 ))}
               </g>
+              <g
+                className={`${styles.featureShapeGroup} ${activeChapter.id === "02" ? styles.featureLayerActive : ""}`}
+              >
+                <path className={styles.lakeShape} d={lakeTiticacaPath} />
+              </g>
+              <g
+                className={`${styles.featureShapeGroup} ${activeChapter.id === "03" ? styles.featureLayerActive : ""}`}
+              >
+                <path className={styles.salarShape} d={salarPath} fill={`url(#${saltPatternId})`} />
+                <path className={styles.atacamaShape} d={atacamaPath} fill={`url(#${desertPatternId})`} />
+              </g>
+            </g>
 
-              <g className={styles.countryLabels}>
-                {andeanMapCountries.map((country) => (
+            <g className={styles.countryBorders} aria-hidden="true">
+              {andeanMapCountries.map((country) => (
+                <path key={country.id} d={country.path} fillRule="evenodd" />
+              ))}
+            </g>
+
+            {!isPatagoniaDetail ? (
+              <g className={styles.latitudeTicks} aria-hidden="true">
+                {latitudeTicks.map((tick) => (
+                  <g key={tick.label}>
+                    <line x1={latitudeTickX} y1={tick.y} x2={latitudeTickX + 18} y2={tick.y} />
+                    <text x={latitudeTickX + 26} y={tick.y + 4}>{tick.label}</text>
+                  </g>
+                ))}
+              </g>
+            ) : null}
+
+            <g className={styles.geographicLabels} aria-hidden="true">
+              <text className={`${styles.oceanLabel} ${styles.waterLabel}`} x="88" y="525" textAnchor="middle" transform="rotate(-77 88 525)">
+                Pacific Ocean
+              </text>
+              <path className={styles.oceanWave} d="M46 454 q22 -12 44 0 t44 0" />
+              <path className={styles.oceanWave} d="M55 476 q22 -12 44 0 t44 0" />
+              {!isPatagoniaDetail ? (
+                <text
+                  className={styles.andesLabel}
+                  x={andesLabel.x}
+                  y={andesLabel.y}
+                  textAnchor="middle"
+                  transform={`rotate(${andesLabel.rotation} ${andesLabel.x} ${andesLabel.y})`}
+                >
+                  The Andes
+                </text>
+              ) : null}
+
+              <g
+                className={`${styles.featureAnnotation} ${activeChapter.id === "02" ? styles.featureLayerActive : ""}`}
+              >
+                <text className={styles.waterLabel} x="457" y="275">Lake Titicaca</text>
+              </g>
+              <g
+                className={`${styles.featureAnnotation} ${activeChapter.id === "03" ? styles.featureLayerActive : ""}`}
+              >
+                <path d="M507 376 L489 372" />
+                <text x="516" y="381">Salar de Uyuni</text>
+                <path d="M488 478 L432 455" />
+                <text x="500" y="486">Atacama Desert</text>
+              </g>
+              {isPatagoniaDetail ? (
+                <g className={`${styles.featureAnnotation} ${styles.featureLayerActive} ${styles.ferryAnnotation}`}>
+                  <path d="M340 868 C327 866 309 860 292 854" />
+                  <text x="343" y="869">Mitchell Fjord ferry</text>
+                </g>
+              ) : null}
+            </g>
+
+            <g className={styles.countryLabels} aria-hidden="true">
+              {andeanMapCountries.map((country) => {
+                const labelX = country.id === "chile" ? 326 : country.label.x;
+                const labelY = country.id === "chile" ? 650 : country.label.y;
+
+                return (
                   <text
                     key={country.id}
-                    x={country.label.x}
-                    y={country.label.y}
+                    x={labelX}
+                    y={labelY}
+                    textAnchor="middle"
                     transform={
                       country.id === "chile"
-                        ? `rotate(-77 ${country.label.x} ${country.label.y})`
+                        ? `rotate(-78 ${labelX} ${labelY})`
                         : undefined
                     }
                   >
                     {country.name}
                   </text>
-                ))}
-              </g>
-
-              <g className={styles.mountainChain}>
-                <path d="M326 96 l28 -38 27 38 20 -27 31 42" />
-                <path d="M410 350 l24 -31 20 31 16 -20 22 28" />
-                <path d="M302 825 l32 -43 30 43 25 -31 33 44" />
-              </g>
-
-              <g className={styles.lakeIllustration}>
-                <path d="M397 292 c18 -13 44 -12 56 2 c-8 17 -41 23 -56 -2 Z" />
-                <path d="M419 291 l9 -15 10 15 Z M428 276 v25" />
-              </g>
-
-              <g className={styles.saltIllustration}>
-                <path d="M568 354 l42 -20 43 20 -43 21 Z M568 354 l42 23 43 -23 M610 334 v43" />
-                <circle cx="610" cy="329" r="6" />
-              </g>
-
-              <g className={styles.desertIllustration}>
-                <path d="M474 438 q38 -24 77 0 q31 -18 62 1" />
-                <path d="M520 424 v-18 M511 415 h18 M571 443 v-16 M563 435 h16" />
-              </g>
-
-              <g className={styles.patagoniaIllustration}>
-                <path d="M165 845 l18 -32 18 32 Z M205 875 l18 -38 19 38 Z M496 864 l20 -36 19 36 Z" />
-                <path d="M120 914 q28 -18 56 0 t56 0 M520 930 q25 -17 50 0 t50 0" />
-              </g>
-
-              <g className={styles.condorIllustration}>
-                <path d="M109 67 q31 -31 64 -3 q32 -28 67 4 q-40 -12 -65 16 q-25 -28 -66 -17 Z" />
-                <circle cx="175" cy="82" r="5" />
-              </g>
-
-              <g className={styles.llamaIllustration}>
-                <path d="M687 422 v-43 l10 -13 l10 14 v42 h17 l6 39 h-12 l-3 -25 h-23 l-3 25 h-12 l5 -39 Z" />
-                <path d="M693 374 l-9 -13 M701 374 l11 -12" />
-                <circle cx="700" cy="383" r="2.5" />
-              </g>
-
-              <g className={styles.vanIllustration}>
-                <path d="M468 752 h54 l18 20 v29 h-78 v-39 Z" />
-                <path d="M478 760 h32 v17 h-36 Z M516 760 l16 17 h-16 Z" />
-                <circle cx="480" cy="803" r="9" />
-                <circle cx="523" cy="803" r="9" />
-              </g>
-
-              <path
-                className={styles.flightShadow}
-                d="M369.7 599 C490 660 468 765 339.3 816"
-              />
-              <path
-                className={`${styles.flightArc} ${activeIndex >= 9 ? styles.flightArcActive : ""}`}
-                d="M369.7 599 C490 660 468 765 339.3 816"
-              />
-              <g className={styles.plane}>
-                <path d="M0 -11 L5 -3 L19 0 L5 3 L0 11 L-3 11 L-1 3 L-9 5 L-12 2 L-3 0 L-12 -2 L-9 -5 L-1 -3 L-3 -11 Z" />
-              </g>
-
-              <polyline className={styles.routeShadow} points={northernRoadPoints} />
-              <polyline className={styles.routeShadow} points={southernRoadPoints} />
-              <polyline className={styles.routeUpcoming} points={northernRoadPoints} />
-              <polyline className={styles.routeUpcoming} points={southernRoadPoints} />
-              {completedNorthernPoints ? (
-                <polyline
-                  className={styles.routeProgress}
-                  points={completedNorthernPoints}
-                />
-              ) : null}
-              {completedSouthernPoints ? (
-                <polyline
-                  className={styles.routeProgress}
-                  points={completedSouthernPoints}
-                />
-              ) : null}
-
-              <g className={styles.mapCaptions}>
-                <text x="34" y="450">Pacific Ocean</text>
-                <text x="488" y="289">Lake Titicaca</text>
-                <text x="604" y="397">Salt flats</text>
-                <text x="540" y="476">Atacama</text>
-                <text x="515" y="900">Patagonia</text>
-              </g>
-            </svg>
-
-            <ol className={styles.stops}>
-              {andeanCaravanRouteStops.map((stop, index) => {
-                const isActive = activeIndex === index;
-                const routeRole = routeRoleFor(stop.name);
-
-                return (
-                  <li
-                    key={stop.id}
-                    className={`${styles.stop} ${styles[stop.labelSide]} ${isActive ? styles.activeStop : ""}`}
-                    style={stopStyleFor(stop)}
-                    data-country={stop.country.toLowerCase()}
-                    data-route-id={stop.id}
-                    data-route-role={routeRole}
-                  >
-                    <button
-                      ref={(element) => {
-                        stopButtonRefs.current[index] = element;
-                      }}
-                      type="button"
-                      className={styles.stopButton}
-                      aria-label={`Stop ${index + 1}: ${stop.name}, ${stop.country}`}
-                      aria-pressed={isActive}
-                      aria-controls="caravans-route-stop-details"
-                      data-route-stop={stop.id}
-                      onClick={() => chooseStop(index)}
-                      onKeyDown={(event) => handleStopKeyDown(event, index)}
-                    >
-                      {String(index + 1).padStart(2, "0")}
-                    </button>
-                    <span
-                      className={`${styles.stopLabel} ${isActive ? styles.stopLabelActive : ""}`}
-                      aria-hidden="true"
-                    >
-                      {"mapLabel" in stop ? stop.mapLabel : stop.name}
-                    </span>
-                  </li>
                 );
               })}
-            </ol>
+            </g>
 
-            <span
-              className={styles.traveller}
-              aria-hidden="true"
-              style={
-                {
-                  "--stop-x": `${activeStop.x}%`,
-                  "--stop-y": `${activeStop.y}%`,
-                  "--marker-shift-x": "0px",
-                  "--marker-shift-y": "0px",
-                  "--leader-length": "0px",
-                  "--leader-angle": "0deg",
-                } as StopPosition
-              }
-            >
-              <span key={activeStop.id} />
-            </span>
+            <g className={styles.routeSegments} aria-hidden="true">
+              {routeSegments.map((segment) => (
+                <path
+                  key={segment.id}
+                  className={`${styles.routeBase} ${modeClassName(segment.mode)} ${segment.role === "excursion" ? styles.segmentExcursion : ""}`}
+                  d={segmentPath(segment)}
+                />
+              ))}
+              {visibleActiveSegments.map((segment) => {
+                const path = segmentPath(segment);
+                const roleClass =
+                  segment.role === "excursion"
+                    ? styles.segmentExcursion
+                    : segment.role === "return"
+                      ? styles.segmentReturn
+                      : "";
+                const isOverlappingRetrace = overlappingRetraceSegmentIds.has(
+                  segment.id,
+                );
+
+                return (
+                  <g key={`${activeChapter.id}-${segment.id}`}>
+                    {!isOverlappingRetrace ? (
+                      <>
+                        <path className={styles.activeCorridor} d={path} />
+                        <path className={styles.routeCasing} d={path} />
+                      </>
+                    ) : null}
+                    <path
+                      className={`${styles.routeActive} ${modeClassName(segment.mode)} ${roleClass}`}
+                      d={path}
+                      markerEnd={
+                        directionalSegmentIds.has(segment.id)
+                          ? `url(#${directionMarkerId})`
+                          : undefined
+                      }
+                    />
+                  </g>
+                );
+              })}
+            </g>
+
+            <g className={styles.routeStops} aria-hidden="true">
+              {andeanCaravanRouteStops.map((stop) => {
+                const point = projectPoint(stop);
+                const isGate = stop.kind === "gate";
+                const isActive = activeStopIds.has(stop.id);
+                const showLabel =
+                  (isActive && (isGate || labelStopIds.has(stop.id))) ||
+                  (activeChapter.id === "01" &&
+                    continentalReferenceLabelIds.has(stop.id));
+                const placement =
+                  (isPatagoniaDetail
+                    ? patagoniaLabelPlacement[stop.id]
+                    : labelPlacement[stop.id]) ?? {
+                    dx: 15,
+                    dy: -15,
+                    anchor: "start" as const,
+                  };
+                const stopRadius = isPatagoniaDetail
+                  ? isGate
+                    ? 1.9
+                    : isActive
+                      ? 1.35
+                      : 0.8
+                  : isGate
+                    ? 6
+                    : isActive
+                      ? 4.25
+                      : 2.5;
+
+                return (
+                  <g
+                    key={stop.id}
+                    className={`${styles.routeStop} ${isActive ? styles.routeStopActive : ""} ${isGate ? styles.routeGate : ""}`}
+                    transform={`translate(${point.x} ${point.y})`}
+                  >
+                    {isActive && isGate ? (
+                      <circle className={styles.stopHalo} r={isPatagoniaDetail ? 3.2 : 10} />
+                    ) : null}
+                    <circle r={stopRadius} />
+                    {showLabel ? (
+                      <>
+                        <line
+                          className={styles.labelLeader}
+                          x1="0"
+                          y1="0"
+                          x2={placement.dx * 0.68}
+                          y2={placement.dy * 0.68}
+                        />
+                        <text
+                          className={isGate ? styles.gateLabel : styles.stopLabel}
+                          x={placement.dx}
+                          y={placement.dy}
+                          textAnchor={placement.anchor}
+                        >
+                          {"mapLabel" in stop ? stop.mapLabel : stop.name}
+                        </text>
+                      </>
+                    ) : null}
+                  </g>
+                );
+              })}
+            </g>
+          </svg>
+
+          <RouteLocator chapter={activeChapter} />
+
+          <div className={styles.mapKey} aria-label="Map key">
+            {transportLegendItems
+              .filter((item) => activeTransportModes.has(item.mode))
+              .map((item) => (
+                <span key={item.mode}>
+                  <svg className={styles.legendSample} viewBox="0 0 44 14" aria-hidden="true">
+                    <path
+                      className={`${styles.legendLine} ${modeClassName(item.mode)}`}
+                      d="M2 7 H42"
+                    />
+                  </svg>
+                  {item.label}
+                </span>
+              ))}
+            <small className={styles.mapKeyNote}>
+              Terracotta = selected plate · grey = whole journey
+            </small>
           </div>
         </div>
 
-        <aside
-          id="caravans-route-stop-details"
-          ref={detailPanelRef}
-          className={styles.routeLog}
-          aria-label="Selected route stop"
-          data-country={activeStop.country.toLowerCase()}
-          tabIndex={-1}
-        >
-          <p className="sr-only" aria-live="polite" aria-atomic="true">
-            Selected stop: {activeDetail.shortName}, {activeStop.country}.
-          </p>
-          <div key={activeStop.id} className={styles.destinationCard}>
-            <figure className={styles.destinationPhoto}>
-              <Image
-                src={activeDetail.image.src}
-                alt={activeDetail.image.alt}
-                fill
-                sizes="(min-width: 1051px) 38vw, (min-width: 768px) 45vw, 100vw"
-                style={{
-                  objectPosition: `${activeDetail.image.focalPoint.x}% ${activeDetail.image.focalPoint.y}%`,
-                }}
-              />
-              <figcaption>{activeDetail.image.caption}</figcaption>
-            </figure>
+        <div className={styles.mobileLocator}>
+          <RouteLocator chapter={activeChapter} />
+        </div>
 
-            <div className={styles.destinationBody}>
-              <p className={styles.stopCount}>
-                Stop {String(activeIndex + 1).padStart(2, "0")} of {andeanCaravanRouteStops.length}
-              </p>
-              <p className={styles.activeName}>{activeDetail.shortName}</p>
-              <p className={styles.country}>{activeStop.country}</p>
-              <p className={styles.introduction}>{activeDetail.introduction}</p>
+        <ol className={styles.mobileJourney} aria-label="The four route chapters">
+          {andeanCaravanMapChapters.map((chapter, index) => {
+            const isActive = index === activeChapterIndex;
 
-              <dl className={styles.quickFacts}>
-                <div>
-                  <dt>Altitude</dt>
-                  <dd>
-                    <span className={styles.quickFactValue}>
-                      {activeDetail.altitude}
-                    </span>
-                  </dd>
-                </div>
-                <div>
-                  <dt>Population</dt>
-                  <dd>
-                    <span className={styles.quickFactValue}>
-                      {activeDetail.population}
-                    </span>
-                    <small>{activeDetail.populationContext}</small>
-                  </dd>
-                </div>
-              </dl>
-
-              <div className={styles.orientation}>
-                <p>Around the stop</p>
-                <ul>
-                  {activeDetail.orientation.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
-              </div>
-
-              <button
-                type="button"
-                className={styles.nextStop}
-                onClick={() => moveBy(1)}
-              >
-                <span>Next stop</span>
-                <strong>
-                  {String(nextIndex + 1).padStart(2, "0")} · {"mapLabel" in nextStop ? nextStop.mapLabel : nextStop.name}
-                </strong>
-                <Arrow />
-              </button>
-
-              <div className={styles.progressGroup}>
-                <div className={styles.progressLabel}>
-                  <span>Route progress</span>
-                  <span>{progress}%</span>
-                </div>
-                <div
-                  className={styles.progressTrack}
-                  role="progressbar"
-                  aria-label="Progress along the illustrated route"
-                  aria-valuemin={0}
-                  aria-valuemax={100}
-                  aria-valuenow={progress}
+            return (
+              <li key={chapter.id} className={isActive ? styles.mobileActive : undefined}>
+                <button
+                  type="button"
+                  aria-expanded={isActive}
+                  aria-controls={isActive ? mobilePanelId : undefined}
+                  onClick={() => chooseChapter(index)}
                 >
-                  <span style={{ width: `${progress}%` }} />
-                </div>
-              </div>
-
-              <div className={styles.controls}>
-                <button type="button" onClick={() => moveBy(-1)} aria-label="Previous stop">
-                  <Arrow direction="left" />
+                  <span className={styles.mobileNumber}>{chapter.id}</span>
+                  <span className={styles.mobileCopy}>
+                    <strong>{chapter.title}</strong>
+                    <span>{chapter.route}</span>
+                    <small>{chapter.days} days</small>
+                  </span>
                 </button>
-                {motionAllowed ? (
-                  <button
-                    type="button"
-                    className={styles.playButton}
-                    onClick={() => setIsPlaying((current) => !current)}
-                    aria-pressed={isPlaying}
+                {isActive ? (
+                  <aside
+                    id={mobilePanelId}
+                    className={styles.mobileStoryPanel}
+                    role="region"
+                    aria-labelledby={mobileStoryHeadingId}
                   >
-                    {isPlaying ? "Pause route" : "Play route"}
-                  </button>
-                ) : (
-                  <span className={styles.motionNote}>Manual route</span>
-                )}
-                <button type="button" onClick={() => moveBy(1)} aria-label="Next stop">
-                  <Arrow />
-                </button>
-              </div>
+                    <ChapterStory
+                      chapter={activeChapter}
+                      chapterIndex={activeChapterIndex}
+                      currentChapterId={currentChapterId}
+                      headingId={mobileStoryHeadingId}
+                      onChooseChapter={chooseChapter}
+                    />
+                  </aside>
+                ) : null}
+              </li>
+            );
+          })}
+        </ol>
 
-              <p className={styles.mapNote}>
-                Geographic orientation only; these are not confirmed itinerary
-                inclusions. Altitude is approximate. Population definitions and
-                census years are shown with each figure. <a href={activeDetail.source.href} target="_blank" rel="noreferrer">{activeDetail.source.label} source</a>.
-              </p>
-            </div>
-          </div>
+        <aside
+          id={panelId}
+          className={styles.storyPanel}
+          role="tabpanel"
+          aria-labelledby={activeTabId}
+        >
+          <ChapterStory
+            chapter={activeChapter}
+            chapterIndex={activeChapterIndex}
+            currentChapterId={currentChapterId}
+            headingId={`${instanceId}-desktop-story-heading`}
+            onChooseChapter={chooseChapter}
+          />
         </aside>
       </div>
     </section>

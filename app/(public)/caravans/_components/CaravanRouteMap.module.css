@@ -1,6 +1,4 @@
 .root {
-  display: grid;
-  gap: var(--space-8);
   color: var(--ink);
   background: var(--paper);
   border-bottom: var(--border-strong) solid var(--ink);
@@ -8,607 +6,895 @@
 
 .heading {
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(20rem, 0.65fr);
-  gap: var(--space-8);
+  grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
+  gap: clamp(2rem, 5vw, 6rem);
   align-items: end;
-  padding: clamp(2rem, 5vw, 5rem) var(--page-gutter) 0;
+  padding: clamp(2.75rem, 5vw, 5rem) var(--page-gutter)
+    clamp(2rem, 4vw, 3.5rem);
+}
+
+.heading p,
+.heading :is(h2, h3),
+.storyPanel p,
+.storyPanel h3 {
+  margin: 0;
 }
 
 .heading :is(h2, h3) {
-  grid-column: 1;
-  max-width: 10ch;
-  font-size: var(--fs-heading);
-  line-height: 0.82;
+  max-width: 13ch;
+  margin-top: var(--space-3);
+  font-size: clamp(3.25rem, 5.5vw, 6rem);
+  line-height: 0.86;
+  letter-spacing: -0.055em;
   scroll-margin-top: calc(var(--nav-height) + var(--space-4));
 }
 
-.heading > p:last-child {
-  grid-column: 2;
-  grid-row: 2;
-  max-width: 35ch;
-  font-size: var(--fs-body);
-}
-
-.kicker {
-  font-size: var(--fs-body);
+.kicker,
+.chapterMeta,
+.mapIndex,
+.mapKey,
+.gates dt,
+.mobileNumber,
+.elevationHeading,
+.geographicFact span,
+.locatorHeading {
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: var(--tracking-eyebrow);
   line-height: 1.3;
   text-transform: uppercase;
 }
 
-.stopCount,
-.country,
-.progressLabel,
-.orientation > p,
-.quickFacts dt {
+.introduction {
+  max-width: 31ch;
+  font-size: var(--fs-body);
+  line-height: var(--leading-body);
+}
+
+.chapterRail {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  border-block: var(--border-strong) solid var(--ink);
+  list-style: none;
+}
+
+.chapterRail li + li {
+  border-inline-start: var(--border-hairline) solid var(--ink);
+}
+
+.chapterRail button {
+  display: grid;
+  width: 100%;
+  min-height: 7.5rem;
+  grid-template-columns: 1fr auto;
+  align-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-4) clamp(1rem, 2vw, 2rem);
+  color: var(--ink);
+  text-align: start;
+  background: var(--paper);
+  border: 0;
+}
+
+.chapterRail button > span,
+.chapterRail button > small {
   font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: normal;
-  line-height: 1.3;
   text-transform: none;
+}
+
+.chapterRail button > small {
+  text-align: end;
+}
+
+.chapterRail strong {
+  grid-column: 1 / -1;
+  font-family: var(--font-read);
+  font-size: clamp(1.35rem, 1.9vw, 2rem);
+  font-weight: 500;
+  line-height: 1.05;
+}
+
+.chapterRail button:hover,
+.chapterRail button:focus-visible {
+  color: var(--ink);
+  background: var(--pink);
+}
+
+.chapterRail button[aria-selected="true"] {
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.chapterRail button[aria-selected="true"]:focus-visible {
+  color: var(--paper);
+  background: var(--ink);
+  outline: 0.22rem solid var(--signal);
+  outline-offset: -0.38rem;
 }
 
 .mapShell {
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(min(30rem, 100%), 0.75fr);
+  grid-template-columns: minmax(0, 1.65fr) minmax(22rem, 0.65fr);
   min-height: 56rem;
-  border-block: var(--border-strong) solid var(--ink);
 }
 
 .mapStage {
-  position: relative;
-  min-height: 56rem;
+  position: sticky;
+  min-width: 0;
+  height: max(28rem, calc(100svh - var(--nav-height)));
+  align-self: start;
+  top: var(--nav-height);
   overflow: hidden;
-  background: var(--olive);
+  isolation: isolate;
+  background:
+    linear-gradient(110deg, color-mix(in srgb, var(--paper) 96%, var(--olive)), var(--paper));
   border-inline-end: var(--border-strong) solid var(--ink);
 }
 
-.mapCanvas {
+.mapIndex {
   position: absolute;
-  inset: 0;
-  /* Wider than a phone on purpose, and safe: the parent .mapStage sets
-     overflow: hidden, and this canvas is panned and zoomed rather than
-     reflowed. It is the one place on the site where a fixed width below the
-     viewport is correct. Excluded from the small-screen check by name. */
-  min-width: 44rem;
-  transform: scale(var(--map-zoom));
-  transform-origin: var(--map-origin-x) var(--map-origin-y);
-  transition: transform var(--motion-route) ease;
-}
-
-.landscape {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.zoomControls {
-  position: absolute;
-  z-index: 8;
+  z-index: 3;
   top: var(--space-4);
   left: var(--space-4);
   display: grid;
-  grid-template-columns: var(--touch-min) auto var(--touch-min);
-  align-items: center;
-  color: var(--paper);
-  background: var(--ink);
-  border: var(--border-strong) solid var(--ink);
-}
-
-.zoomControls button {
-  min-width: var(--touch-min);
-  min-height: var(--touch-min);
-  color: var(--ink);
-  font-size: var(--fs-title);
-  background: var(--sun);
-  border: 0;
-}
-
-/* ink, not paper. paper on signal measures 2.60:1 and fails both WCAG
-   thresholds; ink on signal is 4.61 and is what --action-text/--action-bg
-   already say the action pairing is. Caught by tests/design/pairings.test.ts. */
-.zoomControls button:hover:not(:disabled),
-.zoomControls button:focus-visible {
-  color: var(--ink);
-  background: var(--signal);
-}
-
-/* paper on olive is 2.51:1. Disabled controls are exempt under WCAG 1.4.3,
-   but there is no reason to take the exemption when ink on olive is 4.78 and
-   looks the same. */
-.zoomControls button:disabled {
-  color: var(--ink);
-  background: var(--olive);
-}
-
-.zoomControls > span {
-  min-width: 6rem;
-  padding: var(--space-3);
-  font-size: var(--fs-small);
-  font-weight: 500;
-  letter-spacing: normal;
-  text-align: center;
-  text-transform: none;
-}
-
-/* Was min-height 2.25rem (36px), under the 44px minimum. */
-.zoomControls .resetZoom {
-  grid-column: 1 / -1;
-  min-height: var(--touch-min);
-  color: var(--ink);
-  font-size: var(--fs-small);
-  letter-spacing: normal;
-  text-transform: none;
-  background: var(--pink);
-  border-top: var(--border-hairline) solid var(--ink);
-}
-
-.countryShapes path {
-  stroke: var(--ink);
-  stroke-width: 1.5;
-}
-
-.countryShapes .peru {
-  fill: var(--sun);
-}
-
-.countryShapes .bolivia {
-  fill: var(--pink);
-}
-
-/* Olive since 7 August 2026, not clay: the brown the founder disliked. The
-   three countries now read sun / pink / olive. Ink labels on olive are 4.78:1. */
-.countryShapes .chile {
-  fill: var(--olive);
-}
-
-.countryLabels text {
-  fill: var(--ink);
-  font-family: var(--font-read);
-  font-size: var(--fs-map-label);
-  font-weight: 500;
-  letter-spacing: 0.01em;
-  text-transform: none;
-}
-
-.oceanMarks,
-.mountainChain,
-.lakeIllustration,
-.saltIllustration,
-.desertIllustration,
-.patagoniaIllustration,
-.condorIllustration,
-.llamaIllustration,
-.vanIllustration {
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 2;
-}
-
-.oceanMarks,
-.mountainChain,
-.patagoniaIllustration {
-  stroke-dasharray: 7 5;
-}
-
-.condorIllustration,
-.llamaIllustration,
-.vanIllustration {
-  fill: var(--ink);
-}
-
-.flightShadow {
-  fill: none;
-  stroke: var(--paper);
-  stroke-width: 10;
-}
-
-.flightArc {
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 4;
-  stroke-dasharray: 10 10;
-}
-
-.flightArcActive {
-  stroke: var(--signal);
-}
-
-.plane {
-  fill: var(--ink);
-  offset-path: path("M369.7 599 C490 660 468 765 339.3 816");
-  offset-distance: 46%;
-}
-
-.routeShadow,
-.routeUpcoming,
-.routeProgress {
-  fill: none;
-  stroke-linecap: square;
-  stroke-linejoin: bevel;
-}
-
-.routeShadow {
-  stroke: var(--paper);
-  stroke-width: 14;
-}
-
-.routeUpcoming {
-  stroke: var(--ink);
-  stroke-width: 5;
-  stroke-dasharray: 3 11;
-}
-
-.routeProgress {
-  stroke: var(--signal);
-  stroke-width: 7;
-}
-
-.mapCaptions text {
-  fill: var(--ink);
-  font-family: var(--font-read);
-  font-size: var(--fs-map-caption);
-  font-style: italic;
-}
-
-.stops {
-  position: absolute;
-  inset: 0;
+  gap: 0.2rem;
   margin: 0;
-  padding: 0;
-  list-style: none;
+  padding: var(--space-3);
+  color: var(--ink);
+  letter-spacing: 0.08em;
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  border-top: 0.2rem solid var(--signal);
+  backdrop-filter: blur(0.25rem);
 }
 
-.stop {
-  position: absolute;
-  left: var(--stop-x);
-  top: var(--stop-y);
-  z-index: 4;
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  transform: translate(
-    calc(-50% + var(--marker-shift-x)),
-    calc(-50% + var(--marker-shift-y))
-  );
-}
-
-.stop::before {
-  position: absolute;
-  z-index: -1;
-  top: 50%;
-  left: 50%;
-  width: var(--leader-length);
-  height: var(--border-strong);
-  background: var(--ink);
-  content: "";
-  transform: rotate(var(--leader-angle));
-  transform-origin: left center;
-}
-
-.stopButton {
-  position: relative;
-  z-index: 2;
-  display: grid;
-  width: var(--touch-min);
-  height: var(--touch-min);
-  flex: 0 0 var(--touch-min);
-  place-items: center;
-  color: var(--paper);
-  font-size: var(--fs-small);
+.mapIndex strong {
+  font-family: var(--font-read);
+  font-size: var(--fs-title);
   font-weight: 500;
-  background: var(--ink);
-  border: var(--border-strong) solid var(--paper);
-  transition: transform var(--motion-fast) ease;
+  letter-spacing: -0.025em;
+  line-height: 1;
+  text-transform: none;
 }
 
-.stop[data-route-role="join"] .stopButton {
-  border-radius: 50%;
-}
-
-.stop[data-route-role="leave"] .stopButton {
-  outline: var(--border-strong) solid var(--ink);
-  outline-offset: 0.18rem;
-}
-
-.stop[data-route-role="join-leave"] .stopButton {
-  border-radius: 50%;
-  outline: var(--border-strong) solid var(--ink);
-  outline-offset: 0.18rem;
-}
-
-.stopButton:hover,
-.stopButton[aria-pressed="true"] {
-  color: var(--ink);
-  background: var(--signal);
-  border-color: var(--ink);
-  transform: translateY(-3px);
-}
-
-.stopButton[aria-pressed="true"] {
-  animation: marker-arrival var(--motion-route) cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.stopButton:focus-visible {
-  color: var(--ink);
-  background: var(--sun);
-  border-color: var(--ink);
-  outline: 0.22rem solid var(--paper);
-  outline-offset: 0.2rem;
-}
-
-.stopLabel {
-  position: relative;
-  z-index: 2;
-  max-width: 10rem;
-  padding: var(--space-1) var(--space-2);
-  color: var(--ink);
-  font-size: var(--fs-small);
+.mapIndex small {
+  font-size: 0.68rem;
   font-weight: 500;
-  line-height: 1.15;
-  background: var(--paper);
-  border: var(--border-hairline) solid var(--ink);
+  letter-spacing: normal;
+  text-transform: none;
 }
 
-.left .stopLabel {
-  order: -1;
-}
-
-.stopLabelActive {
-  background: var(--pink);
-  border-width: var(--border-strong);
-}
-
-.stop[data-route-id="arequipa"] .stopLabel {
-  transform: translate(-0.25rem, 1.35rem);
-}
-
-.stop[data-route-id="cusco"] .stopLabel {
-  transform: translate(0.25rem, -1.35rem);
-}
-
-.stop[data-route-id="titicaca"] .stopLabel {
-  transform: translate(0.25rem, -1.6rem);
-}
-
-.stop[data-route-id="la-paz"] .stopLabel {
-  transform: translate(-0.25rem, 1.5rem);
-}
-
-.stop[data-route-id="sucre"] .stopLabel {
-  transform: translate(0.25rem, -1.35rem);
-}
-
-.stop[data-route-id="uyuni"] .stopLabel {
-  transform: translate(-0.25rem, 1.4rem);
-}
-
-.stop[data-route-id="balmaceda-airport"] .stopLabel,
-.stop[data-route-id="coyhaique"] .stopLabel,
-.stop[data-route-id="villa-ohiggins"] .stopLabel,
-.stop[data-route-id="balmaceda"] .stopLabel {
-  max-width: 8.5rem;
-}
-
-.traveller {
-  position: absolute;
-  z-index: 3;
-  left: var(--stop-x);
-  top: var(--stop-y);
-  width: 4rem;
-  height: 4rem;
-  border: var(--border-strong) solid var(--ink);
-  transform: translate(-50%, -50%) rotate(45deg);
-  transition: left var(--motion-route) ease, top var(--motion-route) ease;
-}
-
-.traveller span {
+.map {
   display: block;
   width: 100%;
   height: 100%;
-  border: 0.55rem solid var(--signal);
-  animation: traveller-arrival var(--motion-route) cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 0;
+  padding: clamp(1rem, 2.25vw, 2rem);
+  animation: reveal-atlas var(--motion-route) cubic-bezier(0.16, 1, 0.3, 1)
+    both;
 }
 
-.routeLog {
+.countryFills path {
+  fill: var(--paper);
+  transition: fill var(--motion-route) ease;
+}
+
+.countryFills .countryActive {
+  fill: color-mix(in srgb, var(--paper) 94%, var(--sun));
+}
+
+.countryBorders path {
+  fill: none;
+  stroke: color-mix(in srgb, var(--ink) 58%, transparent);
+  stroke-width: 0.85;
+  vector-effect: non-scaling-stroke;
+}
+
+.focusField {
+  pointer-events: none;
+}
+
+.reliefBand,
+.reliefLines path,
+.oceanWave,
+.featureAnnotation path {
+  fill: none;
+  pointer-events: none;
+}
+
+.reliefBand {
+  stroke: color-mix(in srgb, var(--olive) 8%, transparent);
+  stroke-width: 44;
+  stroke-linecap: round;
+}
+
+.reliefLines path {
+  stroke: color-mix(in srgb, var(--ink) 10%, transparent);
+  stroke-width: 0.65;
+  vector-effect: non-scaling-stroke;
+}
+
+.featureShapeGroup {
+  opacity: 0.24;
+  transition: opacity var(--motion-route) ease;
+}
+
+.featureShapeGroup.featureLayerActive {
+  opacity: 1;
+}
+
+.lakeShape {
+  fill: color-mix(in srgb, #7ca7a4 22%, transparent);
+  stroke: color-mix(in srgb, var(--ink) 46%, transparent);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.salarShape,
+.atacamaShape {
+  stroke: color-mix(in srgb, var(--ink) 42%, transparent);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.saltHatch {
+  fill: none;
+  stroke: color-mix(in srgb, var(--ink) 28%, transparent);
+  stroke-width: 0.65;
+}
+
+.desertDot {
+  fill: color-mix(in srgb, var(--signal) 42%, transparent);
+}
+
+.latitudeTicks line,
+.featureAnnotation path,
+.oceanWave {
+  stroke: color-mix(in srgb, var(--ink) 48%, transparent);
+  stroke-width: 0.8;
+  vector-effect: non-scaling-stroke;
+}
+
+.latitudeTicks text,
+.geographicLabels text {
+  fill: color-mix(in srgb, var(--ink) 68%, transparent);
+  font-family: var(--font-note);
+  font-size: var(--map-geographic-label-size, 13px);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  paint-order: stroke fill;
+  stroke: color-mix(in srgb, var(--paper) 88%, transparent);
+  stroke-linejoin: round;
+  stroke-width: var(--map-geographic-stroke, 3px);
+  text-transform: uppercase;
+}
+
+.featureAnnotation {
+  opacity: 0;
+  transition: opacity var(--motion-route) ease;
+}
+
+.featureAnnotation.featureLayerActive {
+  opacity: 1;
+}
+
+.featureAnnotation text {
+  font-size: var(--map-feature-label-size, 15px);
+}
+
+.featureAnnotation .featureSubLabel {
+  font-size: var(--map-feature-sub-size, 11px);
+  letter-spacing: 0.12em;
+}
+
+.oceanLabel,
+.andesLabel {
+  opacity: 0.72;
+}
+
+.waterLabel {
+  font-family: var(--font-read);
+  font-style: italic;
+  letter-spacing: 0.035em;
+  text-transform: none;
+}
+
+.ferryAnnotation text {
+  font-family: var(--font-note);
+  font-size: var(--map-feature-sub-size, 11px);
+  letter-spacing: 0.08em;
+}
+
+.countryLabels text {
+  fill: color-mix(in srgb, var(--ink) 42%, transparent);
+  font-family: var(--font-read);
+  font-size: var(--map-country-label-size, 20px);
+  font-weight: 500;
+  letter-spacing: 0.11em;
+  paint-order: stroke fill;
+  stroke: color-mix(in srgb, var(--paper) 80%, transparent);
+  stroke-width: var(--map-geographic-stroke, 3px);
+  text-transform: uppercase;
+}
+
+.routeBase,
+.routeActive,
+.routeCasing,
+.activeCorridor {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.routeBase {
+  stroke: color-mix(in srgb, var(--ink) 20%, transparent);
+  stroke-width: 1.35;
+}
+
+.activeCorridor {
+  stroke: color-mix(in srgb, var(--sun) 8%, transparent);
+  stroke-width: 20;
+}
+
+.routeCasing {
+  stroke: color-mix(in srgb, var(--paper) 92%, transparent);
+  stroke-width: 6.5;
+}
+
+.routeActive {
+  stroke: var(--signal);
+  stroke-width: 3.75;
+  animation: reveal-route var(--motion-route) cubic-bezier(0.16, 1, 0.3, 1)
+    both;
+}
+
+.segmentFlight {
+  stroke-dasharray: 9 7;
+}
+
+.segmentOverland {
+  stroke-dasharray: none;
+}
+
+.segmentRail {
+  stroke-dasharray: 9 3 1.5 3;
+}
+
+.segmentFerry {
+  stroke-dasharray: 0.1 5.5;
+}
+
+.segmentExcursion {
+  opacity: 0.62;
+}
+
+.segmentReturn {
+  opacity: 0.84;
+}
+
+.directionArrow {
+  fill: var(--signal);
+}
+
+.routeStop circle {
+  fill: var(--paper);
+  stroke: var(--ink);
+  stroke-width: 1.2;
+  vector-effect: non-scaling-stroke;
+  transition: fill var(--motion-fast) ease, r var(--motion-fast) ease;
+}
+
+.routeStopActive circle {
+  fill: var(--signal);
+}
+
+.routeGate circle {
+  fill: var(--ink);
+  stroke: var(--paper);
+  stroke-width: 1.5;
+}
+
+.routeGate.routeStopActive > circle:not(.stopHalo) {
+  fill: var(--signal);
+  stroke: var(--ink);
+}
+
+.routeStop .stopHalo {
+  fill: color-mix(in srgb, var(--signal) 10%, transparent);
+  stroke: var(--signal);
+  stroke-width: 1.25;
+}
+
+.labelLeader {
+  stroke: color-mix(in srgb, var(--ink) 56%, transparent);
+  stroke-width: 0.65;
+  vector-effect: non-scaling-stroke;
+}
+
+.gateLabel,
+.stopLabel {
+  fill: var(--ink);
+  font-family: var(--font-read);
+  font-size: var(--map-gate-label-size, 14px);
+  font-weight: 500;
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-linejoin: round;
+  stroke-width: var(--map-label-stroke, 4px);
+}
+
+.stopLabel {
+  font-family: var(--font-note);
+  font-size: var(--map-stop-label-size, 12px);
+}
+
+.routeStop:not(.routeStopActive) .gateLabel {
+  opacity: 0.56;
+}
+
+.locator {
+  position: absolute;
+  z-index: 3;
+  bottom: var(--space-4);
+  left: var(--space-4);
+  width: 10rem;
+  padding: var(--space-2);
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  border: var(--border-hairline) solid color-mix(in srgb, var(--ink) 68%, transparent);
+  backdrop-filter: blur(0.25rem);
+}
+
+.locatorAirBridge {
+  top: var(--space-4);
+  right: var(--space-4);
+  bottom: auto;
+  left: auto;
+  width: 12.5rem;
+  border-top: 0.2rem solid var(--signal);
+}
+
+.locatorHeading {
+  display: grid;
+  gap: 0.1rem;
+  margin: 0 0 var(--space-2);
+  letter-spacing: 0.08em;
+}
+
+.locatorHeading small {
+  overflow: hidden;
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: normal;
+  text-overflow: ellipsis;
+  text-transform: none;
+  white-space: nowrap;
+}
+
+.locatorAirBridge .locatorHeading small {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+}
+
+.locator svg {
+  display: block;
+  width: 100%;
+  height: 10rem;
+}
+
+.locator .airBridgeMap {
+  height: 15.25rem;
+}
+
+.locatorCountries path {
+  fill: color-mix(in srgb, var(--paper) 82%, var(--olive));
+  stroke: color-mix(in srgb, var(--ink) 52%, transparent);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+}
+
+.locatorRoute,
+.locatorRouteActive,
+.locatorWindow {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.locatorRoute {
+  stroke: color-mix(in srgb, var(--ink) 34%, transparent);
+  stroke-width: 1.5;
+}
+
+.locatorRouteActive {
+  stroke: var(--signal);
+  stroke-width: 3;
+}
+
+.locator circle {
+  fill: var(--ink);
+  stroke: var(--paper);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.locatorCityLabel,
+.locatorDetailLabel {
+  fill: var(--ink);
+  font-family: var(--font-read);
+  font-size: 14px;
+  font-weight: 500;
+  paint-order: stroke;
+  stroke: var(--paper);
+  stroke-width: 4px;
+}
+
+.locatorSubline {
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-note);
+  font-size: 0.62rem;
+  line-height: 1.35;
+}
+
+.locatorDetailRoute {
+  display: none;
+}
+
+.locatorDetailLabel {
+  font-family: var(--font-note);
+  font-size: 3.2px;
+  stroke-width: 1px;
+}
+
+.locatorWindow {
+  stroke: var(--signal);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+
+.mapKey {
+  position: absolute;
+  z-index: 2;
+  right: var(--space-4);
+  bottom: var(--space-4);
+  left: auto;
+  width: min(34rem, calc(100% - 2 * var(--space-4)));
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-4);
+  padding: var(--space-3);
+  color: var(--ink);
+  letter-spacing: normal;
+  text-transform: none;
+  background: var(--paper);
+  border: var(--border-hairline) solid var(--ink);
+  backdrop-filter: blur(0.25rem);
+}
+
+.mapKey span {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.legendSample {
+  display: block;
+  width: 2rem;
+  height: 0.875rem;
+  overflow: visible;
+}
+
+.legendLine {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 3;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.mapKeyNote {
+  flex-basis: 100%;
+  color: color-mix(in srgb, var(--ink) 65%, transparent);
+  font-family: var(--font-note);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: normal;
+  line-height: 1.25;
+  text-transform: none;
+}
+
+.mobileJourney {
+  display: none;
+}
+
+.mobileLocator {
+  display: none;
+}
+
+.mobileStoryPanel {
+  display: none;
+}
+
+.storyPanel {
   min-width: 0;
-  overflow-x: clip;
   background: var(--paper);
 }
 
-.destinationCard {
+.storyContent {
   display: grid;
-  grid-template-rows: minmax(18rem, 0.72fr) auto;
   min-height: 100%;
-  animation: reveal-card var(--motion-route) cubic-bezier(0.16, 1, 0.3, 1) both;
+  grid-template-rows: minmax(17rem, 0.58fr) auto;
+  animation: reveal-story var(--motion-route) cubic-bezier(0.16, 1, 0.3, 1)
+    both;
 }
 
-.destinationPhoto {
+.storyPhoto {
   position: relative;
-  min-height: 18rem;
+  min-height: 17rem;
   margin: 0;
   overflow: hidden;
+  background: var(--olive);
   border-bottom: var(--border-strong) solid var(--ink);
 }
 
-.destinationPhoto img {
+.storyPhoto img {
   object-fit: cover;
-  /* §8: the choreographed photo zoom was a second, expressive motion
-     vocabulary; the stop change keeps the single restrained card slide. */
+  animation: settle-photo var(--motion-route) cubic-bezier(0.16, 1, 0.3, 1)
+    both;
 }
 
-.destinationPhoto figcaption {
+.storyPhoto figcaption {
   position: absolute;
-  left: 0;
   bottom: 0;
-  padding: var(--space-3) var(--space-4);
+  left: 0;
+  max-width: calc(100% - var(--space-4));
+  padding: var(--space-2) var(--space-3);
   color: var(--paper);
-  font-size: var(--fs-body);
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  background: var(--ink);
   font-family: var(--font-note);
+  font-size: var(--fs-small);
+  background: var(--ink);
 }
 
-.destinationBody {
+.storyCopy {
   display: grid;
   align-content: start;
-  gap: var(--space-4);
-  padding: clamp(1.5rem, 3vw, 2.5rem);
+  gap: clamp(0.9rem, 1.6vw, 1.5rem);
+  padding: clamp(1.35rem, 2.4vw, 2.5rem);
 }
 
-.stopCount,
-.country {
-  color: var(--ink);
+.chapterMeta {
+  letter-spacing: 0.08em;
 }
 
-.activeName {
-  font-family: var(--font-display);
-  font-size: var(--fs-card);
-  line-height: 0.82;
+.storyCopy h3 {
+  max-width: 10ch;
+  color: var(--signal);
+  font-size: clamp(3rem, 4.5vw, 5rem);
+  font-weight: 400;
+  line-height: 0.86;
   letter-spacing: -0.055em;
 }
 
-.introduction {
-  font-size: var(--fs-body);
-}
-
-.quickFacts {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0;
-  margin: 0;
-  border: var(--border-strong) solid var(--ink);
-}
-
-.quickFacts > div {
-  min-width: 0;
-  padding: var(--space-3);
-}
-
-.quickFacts > div + div {
-  border-inline-start: var(--border-hairline) solid var(--ink);
-}
-
-.quickFacts dd {
-  display: grid;
-  gap: var(--space-2);
-  min-width: 0;
-  margin: var(--space-2) 0 0;
-  overflow-wrap: anywhere;
-}
-
-.quickFactValue {
+.routeName {
+  max-width: 22ch;
   font-family: var(--font-read);
-  font-size: var(--fs-title);
-  line-height: 1;
+  font-size: clamp(1.4rem, 2vw, 2rem);
+  line-height: 1.15;
 }
 
-.quickFacts small {
-  font-size: var(--fs-small);
-  line-height: 1.3;
-}
-
-.orientation {
-  display: grid;
-  gap: var(--space-2);
-}
-
-.orientation ul {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-2) var(--space-4);
-  margin: 0;
-  padding-inline-start: 1.2rem;
+.summary {
+  max-width: 34ch;
   font-size: var(--fs-body);
+  line-height: var(--leading-body);
 }
 
-.nextStop {
+.movementLine,
+.placeSequence {
   display: grid;
-  grid-template-columns: 1fr auto;
-  min-height: 4.75rem;
-  align-items: center;
   gap: var(--space-2);
-  padding: var(--space-3) var(--space-4);
-  color: var(--ink);
-  text-align: left;
-  background: var(--pink);
-  border: var(--border-strong) solid var(--ink);
 }
 
-.nextStop span:first-child {
-  font-size: var(--fs-small);
+.movementLine {
+  color: var(--signal);
+  font-family: var(--font-read);
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
+  line-height: 1.2;
+}
+
+.movementLine span,
+.placeSequence > span {
+  color: color-mix(in srgb, var(--ink) 68%, transparent);
+  font-family: var(--font-read);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.placeSequence {
+  padding: var(--space-3);
+  background: color-mix(in srgb, var(--paper) 91%, var(--olive));
+  border: var(--border-hairline) solid color-mix(in srgb, var(--ink) 48%, transparent);
+}
+
+.placeSequence p {
+  font-family: var(--font-note);
+  font-size: 0.72rem;
+  line-height: 1.55;
+}
+
+.routeGroups {
+  gap: 0;
+  padding-block: var(--space-2);
+}
+
+.routeGroups > span {
+  padding: 0 var(--space-1) var(--space-2);
+}
+
+.routeGroups p {
+  display: grid;
+  grid-template-columns: 5.2rem 1fr;
+  gap: var(--space-2);
+  margin: 0;
+  padding: var(--space-2) var(--space-1);
+  border-top: var(--border-hairline) solid
+    color-mix(in srgb, var(--ink) 28%, transparent);
+}
+
+.routeGroups strong {
+  font-family: var(--font-read);
+  font-size: 0.64rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.geographicFact {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 36ch;
+  padding-inline-start: var(--space-3);
+  font-family: var(--font-read);
+  font-size: clamp(1rem, 1.25vw, 1.22rem);
+  line-height: 1.28;
+  border-inline-start: 0.2rem solid var(--signal);
+}
+
+.geographicFact span {
+  color: color-mix(in srgb, var(--ink) 68%, transparent);
+  font-family: var(--font-read);
+  font-size: 0.66rem;
+  letter-spacing: 0.09em;
+}
+
+.elevationProfile {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding-block: var(--space-3);
+  border-block: var(--border-hairline) solid var(--ink);
+}
+
+.elevationHeading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
   letter-spacing: normal;
   text-transform: none;
 }
 
-.nextStop strong {
-  grid-column: 1;
-  font-family: var(--font-read);
-  font-size: var(--fs-title);
+.elevationHeading strong {
+  color: var(--signal);
+  font-size: var(--fs-small);
+  font-weight: 500;
 }
 
-.nextStop span:last-child {
-  grid-column: 2;
-  grid-row: 1 / 3;
-  font-size: var(--fs-display-3);
-}
-
-.progressGroup {
-  display: grid;
-  gap: var(--space-2);
-}
-
-.progressLabel {
-  display: flex;
-  justify-content: space-between;
-}
-
-.progressTrack {
-  height: 0.7rem;
-  background: var(--paper);
-  border: var(--border-hairline) solid var(--ink);
-}
-
-.progressTrack > span {
+.elevationProfile svg {
   display: block;
-  height: 100%;
-  background: var(--signal);
-  transition: width var(--motion-route) ease;
+  width: 100%;
+  overflow: visible;
 }
 
-.controls {
+.elevationProfile text {
+  fill: color-mix(in srgb, var(--ink) 60%, transparent);
+  font-family: var(--font-note);
+  font-size: 8px;
+}
+
+.elevationGuide,
+.elevationBaseline {
+  stroke: color-mix(in srgb, var(--ink) 28%, transparent);
+  stroke-width: 0.8;
+  stroke-dasharray: 3 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.elevationBaseline {
+  stroke-dasharray: none;
+}
+
+.elevationArea {
+  fill: color-mix(in srgb, var(--sun) 16%, transparent);
+}
+
+.elevationLine {
+  fill: none;
+  stroke: var(--signal);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.elevationPeak {
+  fill: var(--signal);
+  stroke: var(--paper);
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+}
+
+.elevationProfile figcaption {
+  font-family: var(--font-note);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.gates {
   display: grid;
-  grid-template-columns: var(--touch-min) 1fr var(--touch-min);
-  gap: var(--space-2);
+  grid-template-columns: 1fr 1fr;
+  margin: 0;
+  border-block: var(--border-hairline) solid var(--ink);
 }
 
-.controls button,
-.motionNote {
+.gates > div {
+  min-width: 0;
+  padding: var(--space-3) 0;
+}
+
+.gates > div + div {
+  padding-inline-start: var(--space-4);
+  border-inline-start: var(--border-hairline) solid var(--ink);
+}
+
+.gates dt {
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.gates dd {
+  margin: var(--space-2) 0 0;
+  font-family: var(--font-read);
+  font-size: clamp(1.5rem, 1.9vw, 2rem);
+  line-height: 1;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+
+.sectionLink {
+  display: flex;
   min-height: var(--touch-min);
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
   color: var(--paper);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  text-decoration: none;
   background: var(--ink);
   border: var(--border-strong) solid var(--ink);
 }
 
-.controls button {
-  font-size: var(--fs-title);
-}
-
-.controls .playButton,
-.motionNote {
-  display: grid;
-  place-items: center;
-  font-size: var(--fs-small);
-  font-weight: 500;
-  letter-spacing: normal;
-  text-transform: none;
-}
-
-.controls button:hover,
-.controls button:focus-visible {
+.sectionLink:hover,
+.sectionLink:focus-visible {
   color: var(--ink);
   background: var(--sun);
 }
@@ -619,43 +905,73 @@
   line-height: var(--leading-body);
 }
 
-.mapNote a {
+.chapterNav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--border-hairline);
+  background: var(--ink);
+  border: var(--border-hairline) solid var(--ink);
+}
+
+.chapterNav button,
+.chapterNav > span {
+  min-height: 4.5rem;
+  padding: var(--space-3);
   color: var(--ink);
+  text-align: start;
+  background: var(--paper);
+  border: 0;
 }
 
-@keyframes reveal-card {
+.chapterNav button {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.chapterNav button:last-child {
+  text-align: end;
+}
+
+.chapterNav button:hover,
+.chapterNav button:focus-visible {
+  background: var(--pink);
+}
+
+.chapterNav span {
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.chapterNav strong {
+  font-family: var(--font-read);
+  font-size: var(--fs-body);
+  font-weight: 500;
+}
+
+@keyframes reveal-route {
   from {
-    transform: translateX(1.25rem);
-  }
-  to {
-    transform: translateX(0);
+    opacity: 0.18;
   }
 }
 
-@keyframes marker-arrival {
-  0% {
-    transform: translateY(-3px) scale(0.82);
-  }
-  55% {
-    transform: translateY(-3px) scale(1.14);
-  }
-  100% {
-    transform: translateY(-3px) scale(1);
+@keyframes reveal-atlas {
+  from {
+    opacity: 0.7;
+    transform: scale(0.995);
   }
 }
 
-@keyframes traveller-arrival {
-  0% {
-    opacity: 0.35;
-    transform: scale(0.62);
+@keyframes reveal-story {
+  from {
+    opacity: 0;
+    transform: translateX(1rem);
   }
-  62% {
-    opacity: 1;
-    transform: scale(1.08);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
+}
+
+@keyframes settle-photo {
+  from {
+    transform: scale(1.025);
   }
 }
 
@@ -665,130 +981,252 @@
   }
 
   .mapStage {
-    min-height: 52rem;
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: 45rem;
     border-inline-end: 0;
     border-bottom: var(--border-strong) solid var(--ink);
   }
 
-  .routeLog {
+  .map {
+    min-height: 45rem;
+  }
+
+  .storyContent {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    grid-template-rows: auto;
     min-height: 0;
   }
 
-  .destinationCard {
-    grid-template-columns: minmax(0, 0.9fr) minmax(min(22rem, 100%), 1.1fr);
-    grid-template-rows: auto;
-  }
-
-  .destinationPhoto {
-    min-height: 38rem;
+  .storyPhoto {
+    min-height: 34rem;
     border-bottom: 0;
     border-inline-end: var(--border-strong) solid var(--ink);
+  }
+}
+
+@media (min-width: 1051px) and (max-height: 800px) {
+  .mapStage {
+    position: relative;
+    top: auto;
+    height: 42rem;
+    min-height: 42rem;
   }
 }
 
 @media (max-width: 767px) {
   .heading {
     grid-template-columns: 1fr;
-    padding-inline: var(--page-gutter);
+    gap: var(--space-5);
   }
 
-  .heading > p:last-child {
-    grid-column: 1;
-    grid-row: auto;
+  .heading :is(h2, h3) {
+    font-size: clamp(3rem, 13.5vw, 5rem);
   }
 
+  .chapterRail,
   .mapStage {
-    min-height: 42rem;
-    overflow: auto;
-  }
-
-  .mapCanvas {
-    min-width: 0;
-  }
-
-  .zoomControls {
-    position: sticky;
-    width: max-content;
-  }
-
-  .stopLabel {
     display: none;
   }
 
-  .activeStop .stopLabel {
-    position: absolute;
+  .storyPanel {
+    display: none;
+  }
+
+  .mapShell {
     display: block;
+    min-height: 0;
+    border-top: var(--border-strong) solid var(--ink);
+  }
+
+  .mobileLocator {
+    display: block;
+    background: linear-gradient(110deg, color-mix(in srgb, var(--paper) 94%, var(--olive)), var(--paper));
+    border-bottom: var(--border-strong) solid var(--ink);
+  }
+
+  .mobileLocator .locator {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    padding: var(--space-4) var(--page-gutter);
+    background: transparent;
+    border: 0;
+    backdrop-filter: none;
+  }
+
+  .mobileLocator .locatorHeading {
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    margin-bottom: var(--space-3);
+  }
+
+  .mobileLocator .locator svg {
+    height: 15rem;
+  }
+
+  .mobileLocator .locatorAirBridge {
+    border-top: 0;
+  }
+
+  .mobileLocator .locatorSubline {
+    max-width: 29rem;
+    margin-top: var(--space-3);
+    font-size: 0.72rem;
+  }
+
+  .mobileLocator .locatorDetailRoute {
+    display: block;
+    margin-top: var(--space-4);
+    padding-top: var(--space-4);
+    border-top: var(--border-hairline) solid var(--ink);
+  }
+
+  .mobileLocator .locatorDetailRoute .locatorHeading {
+    margin-bottom: var(--space-2);
+  }
+
+  .mobileLocator .locatorDetailRoute svg {
+    height: 13rem;
+  }
+
+  .mobileJourney {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    background: color-mix(in srgb, var(--paper) 90%, var(--olive));
+    border-bottom: var(--border-strong) solid var(--ink);
+    list-style: none;
+  }
+
+  .mobileJourney li {
+    position: relative;
+    padding-inline-start: 2.25rem;
+  }
+
+  .mobileJourney li + li {
+    border-top: var(--border-hairline) solid var(--ink);
+  }
+
+  .mobileJourney li::before {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    bottom: 0;
+    left: 1.25rem;
+    width: var(--border-hairline);
+    background: var(--ink);
+    content: "";
+  }
+
+  .mobileJourney li::after {
+    position: absolute;
+    z-index: 2;
     top: 50%;
-    min-width: max-content;
-    order: initial;
-    transform: translateY(-50%);
+    left: 1.25rem;
+    width: 0.72rem;
+    height: 0.72rem;
+    background: var(--paper);
+    border: var(--border-strong) solid var(--ink);
+    border-radius: 50%;
+    content: "";
+    transform: translate(-50%, -50%);
   }
 
-  .activeStop.right .stopLabel {
-    left: calc(100% + var(--space-2));
+  .mobileJourney .mobileActive::after {
+    background: var(--signal);
   }
 
-  .activeStop.left .stopLabel {
-    right: calc(100% + var(--space-2));
-    left: auto;
+  .mobileJourney > li > button {
+    display: grid;
+    width: 100%;
+    min-height: 7rem;
+    grid-template-columns: 2.5rem minmax(0, 1fr);
+    gap: var(--space-3);
+    align-items: start;
+    padding: var(--space-4) var(--page-gutter) var(--space-4) var(--space-3);
+    color: var(--ink);
+    text-align: start;
+    background: transparent;
+    border: 0;
   }
 
-  .destinationCard {
+  .mobileJourney > li > button:hover,
+  .mobileJourney > li > button:focus-visible,
+  .mobileJourney > li > button[aria-expanded="true"] {
+    background: var(--pink);
+  }
+
+  .mobileStoryPanel {
+    display: block;
+    width: calc(100% + 2.25rem);
+    margin-inline-start: -2.25rem;
+    background: var(--paper);
+    border-top: var(--border-strong) solid var(--ink);
+  }
+
+  .mobileCopy {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  .mobileCopy strong {
+    font-family: var(--font-read);
+    font-size: var(--fs-title);
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .mobileCopy > span,
+  .mobileCopy small {
+    font-size: var(--fs-small);
+  }
+
+  .storyContent {
     grid-template-columns: 1fr;
   }
 
-  .destinationPhoto {
-    min-height: 24rem;
+  .storyPhoto {
+    min-height: 22rem;
     border-inline-end: 0;
     border-bottom: var(--border-strong) solid var(--ink);
   }
 
-  .orientation ul {
-    grid-template-columns: 1fr;
+  .storyCopy h3 {
+    font-size: clamp(3rem, 14vw, 4.8rem);
   }
 }
 
-@media (max-width: 440px) {
-  .heading :is(h2, h3) {
-    font-size: var(--fs-display-1-compact);
+@media (max-width: 420px) {
+  .routeGroups p {
+    grid-template-columns: 1fr;
+    gap: 0.15rem;
   }
 
-  .mapStage {
-    min-height: 39rem;
-  }
-
-  .zoomControls {
-    top: var(--space-3);
-    left: var(--space-3);
-  }
-
-  .zoomControls > span {
-    min-width: 5.25rem;
-  }
-
-  .quickFacts {
+  .gates {
     grid-template-columns: 1fr;
   }
 
-  .quickFacts > div + div {
-    border-inline-start: 0;
+  .gates > div + div {
+    padding-inline-start: 0;
     border-top: var(--border-hairline) solid var(--ink);
+    border-inline-start: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mapCanvas,
-  .stopButton,
-  .traveller,
-  .progressTrack > span {
+  .countryFills path,
+  .featureShapeGroup,
+  .featureAnnotation,
+  .routeStop circle {
     transition: none;
   }
 
-  .destinationCard,
-  .destinationPhoto img,
-  .destinationBody,
-  .stopButton[aria-pressed="true"],
-  .traveller span {
+  .map,
+  .routeActive,
+  .storyContent,
+  .storyPhoto img {
     animation: none;
   }
 }
