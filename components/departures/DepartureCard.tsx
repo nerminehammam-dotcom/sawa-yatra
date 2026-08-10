@@ -16,9 +16,9 @@ export interface DepartureCardProps {
   title: string;
   route: string;
   duration: string;
-  dateWindow: string;
-  groupSize: string;
-  price: string;
+  dateWindow?: string;
+  groupSize?: string;
+  price?: string;
   asset: RisoAsset;
   /**
    * §2.2 / rule 1.4 — provenance renders as a badge on every journey card:
@@ -91,17 +91,21 @@ export function DepartureCard({
             <dt>Duration</dt>
             <dd>{duration}</dd>
           </div>
-          <div>
-            <dt>Group</dt>
-            <dd>{groupSize}</dd>
-          </div>
-          <div className={styles.windowFact}>
-            <dt>Window</dt>
-            <dd>{dateWindow}</dd>
-          </div>
+          {groupSize ? (
+            <div>
+              <dt>Group</dt>
+              <dd>{groupSize}</dd>
+            </div>
+          ) : null}
+          {dateWindow ? (
+            <div className={styles.windowFact}>
+              <dt>Window</dt>
+              <dd>{dateWindow}</dd>
+            </div>
+          ) : null}
         </dl>
         <div className={styles.footer}>
-          <span className={styles.price}>{price}</span>
+          {price ? <span className={styles.price}>{price}</span> : null}
           <span className={styles.viewLink} aria-hidden="true">
             View journey <Arrow />
           </span>

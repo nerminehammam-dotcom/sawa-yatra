@@ -4,7 +4,9 @@ import "@testing-library/jest-dom/vitest";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { cleanup, render, screen } from "@testing-library/react";
-import { afterEach, describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
+
+vi.mock("server-only", () => ({}));
 
 afterEach(cleanup);
 
@@ -21,13 +23,13 @@ describe("§2.1 date-state taxonomy", () => {
     }
   });
 
-  it("the nine Caravan sections are Fixed · Sawayatra · laddered", () => {
-    expect(fixedJourneys).toHaveLength(9);
+  it("the Journeys index carries one canonical Andean Caravan entry", () => {
+    expect(fixedJourneys).toHaveLength(1);
     for (const journey of fixedJourneys) {
       expect(journey.dateState).toBe("fixed");
       expect(journey.provenance).toBe("sawayatra");
-      expect(journey.pricingModel).toBe("laddered");
-      expect(journey.dateLine).toBeTruthy();
+      expect(journey.href).toBe("/caravans/andean");
+      expect(journey.durationDays).toBe(71);
     }
   });
 
@@ -77,9 +79,8 @@ describe("§2.2 / rule 1.4 provenance badge", () => {
     }
   });
 
-  it("shows one honestly disabled Start one button (§2.3)", () => {
+  it("does not expose the former member-created journey action", () => {
     render(<JourneysPage />);
-    const button = screen.getByRole("button", { name: "Start one" });
-    expect(button).toBeDisabled();
+    expect(screen.queryByRole("button", { name: "Start one" })).not.toBeInTheDocument();
   });
 });

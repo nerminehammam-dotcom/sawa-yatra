@@ -1,8 +1,12 @@
 # Phase 3 · Content architecture and copy manifest
 
-Status: **prepared · awaiting founder approval**
+Status: **founder-approved · Phase 4 authorised**
 
 Date: 10 August 2026
+
+Founder approval recorded: 10 August 2026. The founder approved placing this
+content onto browser pages with the existing design, followed by separate
+founder-led redesign one section at a time.
 
 ## Governing instruction
 
@@ -125,8 +129,8 @@ copy store.
 - prices, dates, availability and other commercial fields remain omitted until
   approved and secured.
 
-## Human stop
+## Human stop — approved
 
-Approve or amend this content architecture and copy manifest before Phase 4.
-Phase 4 must use existing components and styles unchanged. Visual design is a
-separate founder-led process, section by section.
+The founder approved this content architecture and copy manifest on 10 August
+2026. Phase 4 may use existing components and styles unchanged. Visual design
+remains a separate founder-led process, section by section.

@@ -502,3 +502,44 @@ export function getAndeanCaravanGallery(slug: string): readonly RisoAsset[] {
     ] ?? []
   );
 }
+
+export type CanonicalCaravanImageSlug =
+  | "sea-to-stone"
+  | "the-stone-road"
+  | "both-shores"
+  | "the-mirror"
+  | "the-end-of-the-road";
+
+const canonicalCaravanGalleries: Readonly<
+  Record<CanonicalCaravanImageSlug, readonly RisoAsset[]>
+> = {
+  "sea-to-stone": [
+    ...andeanCaravanSectionGalleries["desert-coast"],
+    ...andeanCaravanSectionGalleries["white-city-deep-canyon"],
+    ...andeanCaravanSectionGalleries["the-stone-road"],
+  ],
+  "the-stone-road": andeanCaravanSectionGalleries["the-stone-road"],
+  "both-shores": [
+    ...andeanCaravanSectionGalleries["both-shores"],
+    ...andeanCaravanSectionGalleries["thin-air-cloud-forest"],
+  ],
+  "the-mirror": [
+    ...andeanCaravanSectionGalleries["silver-and-bone"],
+    ...andeanCaravanSectionGalleries["the-mirror"],
+    ...andeanCaravanSectionGalleries.atacama,
+  ],
+  "the-end-of-the-road":
+    andeanCaravanSectionGalleries["the-end-of-the-road"],
+};
+
+export function getCanonicalCaravanGallery(
+  slug: CanonicalCaravanImageSlug,
+): readonly RisoAsset[] {
+  return canonicalCaravanGalleries[slug];
+}
+
+export function getCanonicalCaravanImage(
+  slug: CanonicalCaravanImageSlug,
+): RisoAsset {
+  return canonicalCaravanGalleries[slug][0] ?? andeanCaravanHeroImage;
+}

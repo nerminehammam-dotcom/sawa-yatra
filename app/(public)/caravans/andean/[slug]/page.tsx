@@ -1,0 +1,317 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+
+import { RisoArtwork } from "@/components/brand/RisoArtwork";
+import { CaravanRouteMap } from "@/components/departures/CaravanRouteMap";
+import { JourneyGallery } from "@/components/departures/JourneyGallery";
+import { Accordion } from "@/components/ui/Accordion";
+import { Container } from "@/components/ui/Container";
+import { Eyebrow } from "@/components/ui/Eyebrow";
+import { FactStrip } from "@/components/ui/FactStrip";
+import { PageHero } from "@/components/ui/PageHero";
+import { Section } from "@/components/ui/Section";
+import {
+  getCanonicalCaravanGallery,
+  getCanonicalCaravanImage,
+  type CanonicalCaravanImageSlug,
+} from "@/content/andean-caravan-images";
+import {
+  canonicalProductSlugs,
+  canonicalSectionSlugs,
+  getCanonicalSectionPageData,
+  getCanonicalStoneRoadPageData,
+  isCanonicalProductSlug,
+  type CanonicalSectionPageData,
+  type CanonicalSectionSlug,
+  type PublicDayView,
+} from "@/content/caravan/page-data";
+import { siteConfig } from "@/content/site";
+import { absoluteUrl } from "@/lib/site-url";
+
+import styles from "../../../departures/[slug]/journey.module.css";
+
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+function canonicalPath(slug: string): string {
+  return slug === "the-stone-road"
+    ? "/caravans/andean/sea-to-stone"
+    : `/caravans/andean/${slug}`;
+}
+
+function imageSlug(slug: string): CanonicalCaravanImageSlug {
+  return slug as CanonicalCaravanImageSlug;
+}
+
+function dayDetails(day: PublicDayView) {
+  return (
+    <div>
+      <p><strong>{day.route}</strong></p>
+      <p>{day.description.text}</p>
+      {day.free_time ? <p>{day.free_time.text}</p> : null}
+      <dl>
+        <div><dt>Movement</dt><dd>{day.movement}</dd></div>
+        <div><dt>Sleep</dt><dd>{day.sleep}</dd></div>
+        <div><dt>Effort</dt><dd>{day.effort_level}</dd></div>
+        <div><dt>Environment</dt><dd>{day.operating_environment}</dd></div>
+        <div>
+          <dt>Sleeping altitude</dt>
+          <dd>{day.sleep_altitude.display ?? "Altitude pending contract"}</dd>
+        </div>
+      </dl>
+      {day.conditional_items.map((item) => (
+        <p key={item.label}><strong>{item.label}:</strong> {item.text}</p>
+      ))}
+    </div>
+  );
+}
+
+function sectionFacts(data: CanonicalSectionPageData) {
+  const { section, gateFrom, gateTo } = data;
+  return [
+    { label: "Duration", value: `${section.day_end - section.day_start + 1} days` },
+    { label: "Route", value: `${gateFrom.name} → ${gateTo.name}` },
+    { label: "Days", value: `${section.day_start}–${section.day_end}` },
+    { label: "Group maximum", value: String(section.group_max) },
+    { label: "Route maximum", value: section.route_max_altitude.display },
+    { label: "Season", value: section.season_public.text },
+  ];
+}
+
+export function generateStaticParams() {
+  return canonicalProductSlugs.map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  if (!isCanonicalProductSlug(slug)) notFound();
+
+  const title =
+    slug === "the-stone-road"
+      ? `The Stone Road | Andean Caravan | ${siteConfig.name}`
+      : `${getCanonicalSectionPageData(slug as CanonicalSectionSlug).section.name} | Andean Caravan | ${siteConfig.name}`;
+
+  return {
+    title: { absolute: title },
+    alternates: { canonical: absoluteUrl(canonicalPath(slug)) },
+  };
+}
+
+export default async function CanonicalCaravanProductPage({ params }: PageProps) {
+  const { slug } = await params;
+  if (!isCanonicalProductSlug(slug)) notFound();
+
+  const isStoneRoad = slug === "the-stone-road";
+  const stoneRoad = isStoneRoad ? getCanonicalStoneRoadPageData() : null;
+  const data = isStoneRoad
+    ? getCanonicalSectionPageData("sea-to-stone")
+    : getCanonicalSectionPageData(slug as CanonicalSectionSlug);
+  const title = stoneRoad?.product.name ?? data.section.name;
+  const days = stoneRoad?.days ?? data.days;
+  const stages = stoneRoad ? [stoneRoad.stage] : data.stages;
+  const gateFrom = stoneRoad?.gateFrom ?? data.gateFrom;
+  const gateTo = stoneRoad?.gateTo ?? data.gateTo;
+  const duration = days.length;
+  const gallerySlug = imageSlug(slug);
+  const sectionIndex = canonicalSectionSlugs.indexOf(data.slug);
+  const previousSlug = sectionIndex > 0 ? canonicalSectionSlugs[sectionIndex - 1] : undefined;
+  const nextSlug = sectionIndex < canonicalSectionSlugs.length - 1
+    ? canonicalSectionSlugs[sectionIndex + 1]
+    : undefined;
+
+  return (
+    <main id="main-content" tabIndex={-1}>
+      <PageHero
+        className={styles.hero}
+        mediaLayout="split"
+        ground="cream"
+        eyebrow={
+          <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
+            <Link href="/">Home</Link>
+            <span aria-hidden="true">›</span>
+            <Link href="/caravans/andean">The Andean Caravan</Link>
+            <span aria-hidden="true">›</span>
+            <span aria-current="page">{title}</span>
+          </nav>
+        }
+        title={title}
+        titleClassName={styles.heroTitle}
+        intro={
+          <div className={styles.heroIntro}>
+            {data.section.subline && !isStoneRoad ? <p>{data.section.subline}</p> : null}
+            <p>{duration} days · {gateFrom.name} to {gateTo.name} · Days {days[0]?.day}–{days.at(-1)?.day}</p>
+            {process.env.NODE_ENV !== "production" ? (
+              <p>[Founder copy needed: {title} proposition]</p>
+            ) : null}
+          </div>
+        }
+        facts={
+          <FactStrip
+            label={`${title} at a glance`}
+            facts={
+              isStoneRoad
+                ? [
+                    { label: "Duration", value: `${duration} days` },
+                    { label: "Route", value: `${gateFrom.name} → ${gateTo.name}` },
+                    { label: "Days", value: "16–23" },
+                    { label: "Group maximum", value: String(data.section.group_max) },
+                    { label: "Season", value: data.section.season_public.text },
+                  ]
+                : sectionFacts(data)
+            }
+          />
+        }
+        media={
+          <RisoArtwork
+            asset={getCanonicalCaravanImage(gallerySlug)}
+            aspectRatio="hero"
+            sizes="100vw"
+            priority
+          />
+        }
+      />
+
+      {!isStoneRoad && data.section.declared_load_exception ? (
+        <Section
+          className={`${styles.copySection} ${styles.roseCopySection}`}
+          ground="cream"
+          aria-labelledby="declared-load-heading"
+        >
+          <Container className={styles.copyGrid}>
+            <div className={styles.sectionHeading}>
+              <Eyebrow kind="decision" tone="accent">Read before continuing</Eyebrow>
+              <h2 id="declared-load-heading">{data.section.declared_load_exception.name}</h2>
+            </div>
+            <div className={styles.copyBody}>
+              {process.env.NODE_ENV !== "production" ? (
+                <p>[Founder copy needed: one framing sentence]</p>
+              ) : null}
+              <p>{data.section.declared_load_exception.disclosure.text}</p>
+              <p>{data.section.declared_load_exception.structural_reason.text}</p>
+              <h3>Eleven-night acclimatisation progression</h3>
+              <ol>
+                {data.section.acclimatisation_ladder.map((night, index) => (
+                  <li key={`${night.day}-${index}`}>
+                    Night {index + 1}: {night.display ?? "Altitude pending contract"}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </Container>
+        </Section>
+      ) : null}
+
+      <CaravanRouteMap />
+
+      {process.env.NODE_ENV !== "production" ? (
+        <Section className={styles.copySection} ground="olive" aria-labelledby="character-heading">
+          <Container className={styles.copyGrid}>
+            <div className={styles.sectionHeading}>
+              <Eyebrow tone="inherit" className={styles.oliveEyebrow}>Founder copy needed</Eyebrow>
+              <h2 id="character-heading">Section character</h2>
+            </div>
+            <div className={styles.copyBody}>
+              <p>[Founder copy needed: {title} editorial character]</p>
+            </div>
+          </Container>
+        </Section>
+      ) : null}
+
+      {!isStoneRoad ? (
+        <Section className={styles.copySection} ground="cream" aria-labelledby="demands-heading">
+          <Container className={styles.copyGrid}>
+            <div className={styles.sectionHeading}>
+              <Eyebrow kind="decision" tone="accent">Before you choose</Eyebrow>
+              <h2 id="demands-heading">What this section asks of travellers.</h2>
+            </div>
+            <div className={styles.copyBody}>
+              {data.section.demands.map((demand) => <p key={demand.text}>{demand.text}</p>)}
+            </div>
+          </Container>
+        </Section>
+      ) : null}
+
+      <Section className={styles.movementsSection} ground="cream" aria-labelledby="itinerary-heading">
+        <Container>
+          <div className={styles.sectionHeadingInline}>
+            <Eyebrow kind="decision" tone="accent">Stage-first itinerary</Eyebrow>
+            <h2 id="itinerary-heading">Open a stage, then a day.</h2>
+          </div>
+          <Accordion
+            allowMultiple
+            initiallyOpen={stages[0] ? [stages[0].id] : []}
+            items={stages.map((stage) => {
+              const stageDays = days.filter((day) => day.stage_id === stage.id);
+              return {
+                id: stage.id,
+                question: `${stage.name} · Days ${stage.day_start}–${stage.day_end}`,
+                answer: (
+                  <Accordion
+                    allowMultiple
+                    items={stageDays.map((day) => ({
+                      id: day.id,
+                      question: `Day ${day.day} · ${day.title}`,
+                      answer: dayDetails(day),
+                    }))}
+                  />
+                ),
+              };
+            })}
+          />
+        </Container>
+      </Section>
+
+      <JourneyGallery
+        journeySlug={slug}
+        images={getCanonicalCaravanGallery(gallerySlug)}
+      />
+
+      <Section className={styles.copySection} ground="cream" aria-labelledby="practical-heading">
+        <Container className={styles.copyGrid}>
+          <div className={styles.sectionHeading}>
+            <Eyebrow kind="decision" tone="accent">Travel, sleep and joining</Eyebrow>
+            <h2 id="practical-heading">The practical conditions.</h2>
+          </div>
+          <div className={styles.copyBody}>
+            <p><strong>Joining:</strong> {data.section.join_rule.text}</p>
+            <p><strong>Sleep:</strong> {data.section.sleep_standard.text}</p>
+            <p><strong>Gate arrival:</strong> {gateFrom.arrival_rule.text}</p>
+            {data.section.conditional_items.map((item) => (
+              <p key={item.id}>
+                <strong>{item.controller}:</strong> {item.fallback}. {item.remedy}.
+              </p>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      <Section className={styles.adjacentSection} ground="cream" aria-label="Adjacent Caravan sections">
+        <Container className={styles.adjacentLinks}>
+          <Link href="/caravans/andean"><span>All sections</span><strong>The Andean Caravan</strong></Link>
+          {isStoneRoad ? (
+            <Link href="/caravans/andean/sea-to-stone"><span>Parent section</span><strong>01 · Sea to Stone</strong></Link>
+          ) : null}
+          {!isStoneRoad && previousSlug ? (
+            <Link href={`/caravans/andean/${previousSlug}`}><span>Previous section</span><strong>{getCanonicalSectionPageData(previousSlug).section.name}</strong></Link>
+          ) : null}
+          {!isStoneRoad && nextSlug ? (
+            <Link href={`/caravans/andean/${nextSlug}`}><span>Next section</span><strong>{getCanonicalSectionPageData(nextSlug).section.name}</strong></Link>
+          ) : null}
+        </Container>
+      </Section>
+
+      <Section className={styles.interestSection} ground="brick" aria-labelledby="enquiry-heading">
+        <Container className={styles.interestGrid}>
+          <div className={styles.sectionHeading}>
+            <Eyebrow kind="decision" tone="inherit" className={styles.deepEyebrow}>Enquiry</Eyebrow>
+            <h2 id="enquiry-heading">Enquiry delivery is not connected yet.</h2>
+            <p>{data.section.cta.text}</p>
+            <p>No payment or booking action is active.</p>
+          </div>
+        </Container>
+      </Section>
+    </main>
+  );
+}
