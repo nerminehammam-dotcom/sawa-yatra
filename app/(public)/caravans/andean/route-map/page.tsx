@@ -1,8 +1,5 @@
 import { createPageMetadata } from "@/app/_metadata";
-import {
-  andeanCaravanCountries,
-  andeanCaravanRouteStops,
-} from "@/content/andean-caravan-route";
+import { andeanCaravanMapChapters } from "@/content/andean-caravan-map";
 
 import { CaravanRouteMap } from "../../_components/CaravanRouteMap";
 
@@ -24,22 +21,36 @@ export default function AndeanRouteMapPage() {
           carrying the same information. The route, in reading order. */}
       <section className={styles.staticRoute} aria-labelledby="static-route-heading">
         <h2 id="static-route-heading">The route, in order</h2>
-        {andeanCaravanCountries.map((country) => (
-          <div key={country} className={styles.country}>
-            <h3>{country}</h3>
-            <ol className={styles.stops}>
-              {andeanCaravanRouteStops
-                .filter((stop) => stop.country === country)
-                .map((stop) => (
-                  <li key={stop.id}>{stop.name}</li>
-                ))}
-            </ol>
-          </div>
-        ))}
+        <ol className={styles.chapters}>
+          {andeanCaravanMapChapters.map((chapter) => (
+            <li key={chapter.id}>
+              <article className={styles.chapter}>
+                <p className={styles.chapterNumber}>{chapter.id}</p>
+                <h3>{chapter.title}</h3>
+                <p className={styles.route}>{chapter.route} · {chapter.days} days</p>
+                <p>{chapter.movement}</p>
+                {"routeGroups" in chapter && chapter.routeGroups ? (
+                  <div className={styles.routeGroups}>
+                    {chapter.routeGroups.map((group) => (
+                      <p key={group.label}>
+                        <strong>{group.label}:</strong> {group.places.join(" → ")}
+                      </p>
+                    ))}
+                  </div>
+                ) : (
+                  <p>{chapter.places.join(" → ")}</p>
+                )}
+                <dl>
+                  <div><dt>Join</dt><dd>{chapter.join}</dd></div>
+                  <div><dt>Leave</dt><dd>{chapter.leave}</dd></div>
+                </dl>
+              </article>
+            </li>
+          ))}
+        </ol>
         <p className={styles.note}>
-          North to south, Lima to the end of the road. Each stop’s detail —
-          altitude, season, what the Caravan does there — lives on its section
-          page.
+          Transport modes and route places match the four atlas plates. Detailed
+          timing, altitude and operating conditions live on each chapter page.
         </p>
       </section>
     </main>

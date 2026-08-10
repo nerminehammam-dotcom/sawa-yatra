@@ -99,6 +99,21 @@
   align-items: center;
 }
 
+@media (max-width: 639px) {
+  .mobileContentFirst {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobileContentFirst .content {
+    order: 1;
+  }
+
+  .mobileContentFirst .media {
+    order: 2;
+  }
+}
+
 @media (min-width: 640px) {
   .root:not(.withMedia) .content {
     min-height: min(64svh, 690px);

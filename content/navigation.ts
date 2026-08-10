@@ -91,13 +91,13 @@ export const caravansNavigation = {
       id: "hop-on-hop-off",
       label: "Hop on, hop off",
       href: "/caravans/andean-caravan/how-it-works",
-      meta: "Nine route sections. Join for one, or ride the whole route.",
+      meta: "Four route sections. Join for one, combine several, or travel the whole route.",
     },
     {
       id: "route-map",
-      label: "Full route map, dates and availability",
+      label: "Full route map and travel details",
       href: "/caravans/andean/route-map",
-      meta: "Every route section, every date, and current availability.",
+      meta: "Four atlas plates, every transport mode and each joining gate.",
     },
     {
       id: "who-else-is-travelling",

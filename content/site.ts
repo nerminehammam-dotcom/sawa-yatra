@@ -28,7 +28,7 @@ const approvedRouteDescriptions = {
   caravans:
     "Explore Sawayatra caravans, beginning with the annual Andean Caravan through Peru, Bolivia and Chile.",
   "caravans-andean":
-    "Explore the Andean Caravan and its nine connected route sections through Peru, Bolivia and Chile.",
+    "Explore the Andean Caravan and its four connected route sections through Peru, Bolivia and Chile.",
   "caravans-route-map":
     "Follow the illustrated Andean Caravan route through Peru, Bolivia and Chile.",
   // Moved verbatim from the inline `metadata` object that previously shipped on
@@ -61,7 +61,7 @@ const approvedRouteDescriptions = {
   "do-it-yourself":
     "Create your own Sawayatra journey. The Do It Yourself experience is coming later.",
   departures:
-    "The Andean Caravan moves through Peru, Bolivia and Chile. Join one of nine consecutive sections, connect several, or travel the complete 71-day route.",
+    "The Andean Caravan moves through Peru, Bolivia and Chile. Join one of four consecutive sections, connect several, or travel the complete 71-day route.",
   "departure-dates":
     "Browse Sawayatra journeys by departure date when confirmed dates become available.",
   journeys:
@@ -79,7 +79,7 @@ const approvedRouteDescriptions = {
   contact:
     "Ask Sawayatra about membership, the Andean Caravan, a journey section or how the club works.",
   journey:
-    "Explore the complete Andean Caravan and its nine bookable sections through Peru, Bolivia and Chile.",
+    "Explore the complete Andean Caravan and its four connected sections through Peru, Bolivia and Chile.",
   // Added 7 August 2026 — these three routes were falling through to an
   // auto-generated "PLACEHOLDER: Founder-approved … meta description" string,
   // which shipped that scaffolding to search engines and social cards.
@@ -287,7 +287,7 @@ export const homeContent = {
   },
   departuresPreview: {
     eyebrow: "Departures",
-    title: "One journey through the Andes. Nine ways to join it.",
+    title: "One journey through the Andes. Four chapters to join.",
     action: {
       label: "Explore the Andean Caravan",
       href: "/caravans/andean",
@@ -358,7 +358,7 @@ export const howItWorksContent = {
       {
         id: "caravan-join",
         title: "Caravan / Join",
-        body: "Join one of nine consecutive sections, combine several, or travel the complete 71-day Andean Caravan.",
+        body: "Join one of four consecutive sections, combine several, or travel the complete 71-day Andean Caravan.",
         highlighted: true,
         contentStatus: "LOCKED",
       },

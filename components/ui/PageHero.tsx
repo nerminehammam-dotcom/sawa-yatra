@@ -21,6 +21,7 @@ export interface PageHeroProps {
   mediaLayout?: "overlay" | "split";
   ground?: "cream" | "butter" | "brick" | "olive" | "ink";
   contentPosition?: "left" | "right";
+  mobileContentFirst?: boolean;
   className?: string;
   titleClassName?: string;
 }
@@ -36,6 +37,7 @@ export function PageHero({
   mediaLayout = "overlay",
   ground = "cream",
   contentPosition = "left",
+  mobileContentFirst = false,
   className,
   titleClassName,
 }: PageHeroProps) {
@@ -46,6 +48,7 @@ export function PageHero({
         styles[ground],
         Boolean(media) && styles.withMedia,
         Boolean(media) && mediaLayout === "split" && styles.splitMedia,
+        Boolean(media) && mobileContentFirst && styles.mobileContentFirst,
         styles[contentPosition],
         className,
       )}

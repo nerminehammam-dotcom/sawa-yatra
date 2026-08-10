@@ -146,6 +146,10 @@ a.heroAction:hover {
   background: var(--paper);
 }
 
+.atlasIntro {
+  padding-block: clamp(4rem, 7vw, 6.75rem);
+}
+
 .movementsSection {
   --section-space: clamp(4rem, 7vw, 6.75rem);
 
@@ -361,7 +365,7 @@ a.heroAction:hover {
 
 .interestSection {
   border-top: var(--border-hairline) solid var(--hairline);
-  background: var(--paper);
+  background: var(--sun);
 }
 
 .interestSection .sectionHeading > p,
@@ -388,6 +392,37 @@ a.heroAction:hover {
   border: var(--border-hairline) solid var(--ink);
 }
 
+.interestActions {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+}
+
+.interestActions > p {
+  max-width: 42ch;
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+}
+
+.secondaryAskLink {
+  display: inline-flex;
+  width: fit-content;
+  min-height: var(--touch-min);
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  color: var(--ink);
+  font-weight: 500;
+  text-decoration: none;
+  background: transparent;
+  border: var(--border-hairline) solid var(--ink);
+}
+
+.secondaryAskLink:hover,
+.secondaryAskLink:focus-visible {
+  background: var(--pink);
+}
+
 @media (min-width: 640px) {
   .facts {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -407,6 +442,11 @@ a.heroAction:hover {
 }
 
 @media (min-width: 768px) {
+  .interestGrid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+    align-items: end;
+  }
+
   .routeHeader {
     grid-template-columns: minmax(0, 1fr) minmax(min(22rem, 100%), 0.9fr);
     align-items: stretch;

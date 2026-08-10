@@ -1,33 +1,35 @@
+import "server-only";
+
 /**
- * The journey catalog — one purchasable thing, two groups (§2.3):
- * "Leaving on a date" (Fixed) and "Still forming" (Forming).
- *
- * Release 1 reality: the nine Andean Caravan sections are the Fixed group
- * (Sawayatra provenance, laddered pricing). No partner inventory is live and
- * member-created journeys open with membership, so the Forming group is
- * honestly empty — an empty state, never invented entries.
+ * The public Journeys index carries one unlabelled Andean Caravan entry.
+ * Section choice happens inside the Caravan rather than as nine independent
+ * products in the index.
  */
-import { andeanCaravanSections } from "@/content/andean-caravan";
+import { getCanonicalCaravanOverview } from "@/content/caravan/page-data";
 import type { FixedJourney, FormingJourney, Journey } from "@/lib/journeys/model";
 
-export const fixedJourneys: readonly FixedJourney[] = andeanCaravanSections.map(
-  (section) => ({
-    id: section.id,
-    slug: section.slug,
-    title: section.title,
-    route: section.route,
-    durationDays: section.durationDays,
-    href: `/departures/${section.slug}` as const,
-    pricingModel: "laddered",
+const caravan = getCanonicalCaravanOverview();
+
+export const fixedJourneys: readonly FixedJourney[] = [
+  {
+    id: "andean-caravan",
+    slug: "andean-caravan",
+    title: caravan.name,
+    route: "Lima → Balmaceda",
+    durationDays: caravan.durationDays,
+    href: "/caravans/andean",
+    pricingModel: "fixed-seat",
     dateState: "fixed",
     provenance: "sawayatra",
-    dateLine: section.publicDateWindow,
-  }),
-);
+    // Required by the legacy taxonomy type; deliberately not rendered until
+    // the schedule is approved for public use.
+    dateLine: "Schedule not yet published",
+  },
+];
 
 /**
- * Member-created journeys, open to joining while forming (§2.2). Empty until
- * membership opens; the page renders an honest empty state.
+ * Member-created journeys remain out of the public index until membership is
+ * open. The empty array is retained for taxonomy compatibility only.
  */
 export const formingJourneys: readonly FormingJourney[] = [];
 
