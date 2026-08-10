@@ -10,6 +10,11 @@ The founder-approved Phase 3 content structure is now visible on public browser
 pages using the website's existing components, spacing, typography, image
 registry and colour system. No new visual design system was introduced.
 
+Founder correction: the `/caravans/andean` opening must retain the established
+Departures design exactly — yellow copy panel, rust headline and Patagonia road
+image in the original split grid. Canonical four-section content begins within
+that existing page system; the opening is not replaced by a generic page hero.
+
 ## Canonical browser pages
 
 - `/caravans/andean` — Caravan overview and four-section index
