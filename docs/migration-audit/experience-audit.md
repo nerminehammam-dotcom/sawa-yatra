@@ -148,12 +148,12 @@ Provisional regrouping available to the locked four-section architecture:
 | 01 Sea to Stone | Desert Coast + White City + Stone Road | 17 | Strong place coverage; first six images are mostly square, so the layout must not assume landscape-only supply. |
 | 02 Both Shores | Both Shores + Thin Air & Cloud Forest | 13 | Adequate landscape supply; image/place accuracy must be rechecked against the new Puno→Sucre day allocation. |
 | 03 The Mirror | Silver & Bone + Mirror + Atacama | 19 | Adequate overall, but the critical five-day Lagunas crossing has only the small current Mirror subset and needs careful caption verification. |
-| 04 The End of the Road | current End of Road | 21 | Richest section by a wide margin; it must not become the only design specimen. |
+| 04 The End of the Road | current End of Road | 21 | Richest section by a wide margin; later founder-led design must still work with the thinner real image pools. |
 
 The thinnest current pool is Atacama with four images; after honest four-section
-regrouping, Section 02 is the thinnest pool with 13. Phase 3 should use Section
-03 as required and stress the common architecture using Section 02’s real image
-supply. No stock/generated replacement is permitted.
+regrouping, Section 02 is the thinnest pool with 13. Phase 3 records this as
+content and asset context only; it performs no layout or visual stress test.
+No stock/generated replacement is permitted.
 
 ## 5. Journeys launch-state audit
 

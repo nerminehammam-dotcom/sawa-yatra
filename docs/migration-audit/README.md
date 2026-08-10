@@ -1,6 +1,6 @@
 # Andean Caravan migration audit
 
-Status: **Phase 1 approved; Phase 2 structured model complete**
+Status: **Phase 1 approved; Phase 2 complete; Phase 3 content prepared for approval**
 
 Branch: `migration/andean-caravan-v1-3`
 
@@ -20,8 +20,8 @@ The current implementation is a coherent nine-section site, but it is not a
 safe base for changing individual labels. Route truth is repeated across a
 central content file, a separate gate-selector dataset, map data, JSX copy,
 navigation, metadata and Journeys. The four-section migration therefore needs
-the canonical structured model required by the execution lock before the visual
-redesign begins.
+the canonical structured model required by the execution lock before the
+content migration begins. Visual redesign is outside the v2.0 build.
 
 No application, route, component, style, map, configuration, production content
 or redirect was changed during this phase. Only this audit, screenshots and raw
@@ -35,6 +35,9 @@ performance reports were added.
 - [Proposed URL architecture](./url-architecture.md)
 - [Existing copy inventory](./copy-inventory.md)
 - [Phase 0 safety record](./phase-0-safety.md)
+- [Phase 2 structured model](./phase-2-structured-model.md)
+- [Phase 3 content architecture](./phase-3-content-architecture.md)
+- [Launch blockers](./launch-blockers.md)
 - `baselines/` — full-page and first-viewport captures at 1440, 1024 and 390
 - `performance/` — three compressed raw Lighthouse JSON runs per audited scenario
 
@@ -59,4 +62,6 @@ blocker. See [Launch blockers](./launch-blockers.md).
 The canonical 71-day model, schema, validation rules, recovery-role
 normalisation and server-only public projection are recorded in
 [Phase 2 structured model](./phase-2-structured-model.md). Visible pages remain
-on the pre-migration content until the Phase 3 specimen is approved.
+on the pre-migration content while the Phase 3 content architecture and copy
+manifest await approval. The superseding v2.0 brief permits no Phase 3 visual
+specimen.

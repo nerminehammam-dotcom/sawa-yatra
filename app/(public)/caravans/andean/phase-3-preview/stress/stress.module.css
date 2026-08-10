@@ -1,7 +1,0 @@
-.page { max-width: var(--content-max); margin: 0 auto; padding: var(--section-space) var(--page-gutter); }
-.header { display: grid; gap: var(--space-4); margin-bottom: var(--space-12); }
-.header > p { font-family: var(--font-note); font-size: var(--fs-small); }
-.list { display: grid; gap: var(--space-4); margin: 0; padding: 0; list-style: none; }
-.fixture { display: grid; gap: var(--space-3); padding: var(--card-inset); border: var(--border-hairline) solid var(--ink); }
-.fixture code { font-family: var(--font-note); font-size: var(--fs-small); }
-.fixture p { padding: var(--space-3); background: var(--pink); border: var(--border-hairline) solid var(--ink); overflow-wrap: anywhere; }

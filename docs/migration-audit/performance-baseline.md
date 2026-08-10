@@ -31,11 +31,13 @@ Compressed raw reports are in `performance/*.json.gz`.
   there is no separately identifiable optional map chunk to report. The map is
   not interaction-level split from the initial route payload.
 - Initial image transfer is within future eager-image budgets, but the locked
-  full-page image budget still needs a scripted scroll test on the Phase 3
-  specimen. Lighthouse initial-navigation numbers are not a substitute for it.
+  full-page image budget still needs a scripted scroll test after Phase 4 has
+  built the content surfaces. Lighthouse initial-navigation numbers are not a
+  substitute for it.
 - SEO scores are limited by the intentionally empty production site URL/noindex
   setup and current metadata state; this is not treated as a performance defect.
 
-The Phase 3 specimen must reduce mobile LCP and initial JavaScript without
-removing required disclosures, lowering type size, weakening photography or
-disabling tablet map behaviour.
+Phase 3 creates no runnable surface under v2.0. Phase 4 and the final acceptance
+pass must reduce mobile LCP and initial JavaScript without removing required
+disclosures, lowering type size, weakening photography or disabling tablet map
+behaviour.

@@ -55,8 +55,9 @@ rather than being invented:
 - 2028 transport timetables and date-sensitive evidence rechecks; and
 - legal conduct, removal, disruption and remedy terms.
 
-The copy manifest ceilings depend on the Phase 3 specimen and are therefore a
-Phase 3 deliverable, not guessed in Phase 2.
+The copy manifest ceilings are a Phase 3 deliverable. Under v2.0 they are
+measured against existing site components only; no specimen or new component
+may be created to establish them.
 
 ## Verification
 
@@ -65,7 +66,7 @@ Phase 3 deliverable, not guessed in Phase 2.
 - Vitest: 194 tests passed
 - Next.js production build: passed
 
-The existing browser experience is unchanged. Phase 3 may now build the locked
-founder-review specimen: the overview, Section 03, the Stone Road choice,
-Journeys entry, maps, Shape of Journey and expanded-day treatment. It must not
-roll that design across Sections 01, 02 and 04 before the review gate.
+The existing browser experience is unchanged. Under the superseding v2.0
+prompt, Phase 3 documents content architecture and the complete copy manifest
+only, then stops for founder approval. It produces no browser surface, specimen,
+map treatment or visual proposal.

@@ -1,6 +1,26 @@
 {
-  "schema_version": "1.0",
-  "phase": "Phase 3 founder-review specimen",
+  "schema_version": "2.0",
+  "phase": "Phase 3 content architecture and copy manifest",
+  "authority": {
+    "route_master": {
+      "filename": "Sawayatra-01-Andean-Caravan-Route-Master-v4_2_1-LOCKED.docx",
+      "sha256": "15d8b91c11778c18a090dcca4285121cc18d42068516e5b25a2c2277a2cca88e"
+    },
+    "migration_prompt": {
+      "filename": "Sawayatra-03-Website-Content-Migration-Prompt-v2_0.md",
+      "sha256": "a19d2d5362f0bb73c15b4fd25509246e7785cd5a361419c7e22a93afeecdaff0"
+    }
+  },
+  "design_status": "not_started_by_instruction",
+  "measurement_basis": {
+    "hero_proposition": "Existing PageHero intro pattern",
+    "choice_character": "Existing Journeys and DepartureCard text pattern",
+    "editorial_character": "Existing Section body-copy pattern",
+    "stage_character": "Existing Accordion content pattern",
+    "image_caption": "Existing JourneyGallery caption pattern",
+    "enquiry_invitation": "Existing form-introduction pattern",
+    "seo_description": "Search-description ceiling"
+  },
   "production_placeholders_allowed": false,
   "slots": [
     { "slot_id": "caravan.hero.proposition", "surface": "Overview", "position": "Hero proposition", "copy_class": "founder_copy", "purpose": "Set the Caravan's character beside the factual route proposition", "max_length": 150, "breakpoint_note": "At 390px this must complete before the section chooser", "source_ref": "founder-supplied", "route_facts_available": true, "route_fact_refs": [], "fact_check_status": "pending", "adjacent_content": "After the 71-day factual proposition; before the four-section choice", "status": "needed", "approved_by": null, "approved_at": null, "placeholder_rendered": true },
@@ -67,8 +87,8 @@
     { "slot_id": "journeys.caravan.character", "surface": "Journeys entry", "position": "Single Andean Caravan card", "copy_class": "founder_copy", "purpose": "Introduce the Caravan without listing its sections as separate journeys", "max_length": 150, "breakpoint_note": "Three lines maximum at 390px", "source_ref": "founder-supplied", "route_facts_available": true, "route_fact_refs": [], "fact_check_status": "pending", "adjacent_content": "Below derived Caravan facts", "status": "needed", "approved_by": null, "approved_at": null, "placeholder_rendered": true },
     { "slot_id": "journeys.caravan.invitation", "surface": "Journeys entry", "position": "Card link label context", "copy_class": "founder_copy", "purpose": "Invite exploration of the one Caravan entry", "max_length": 72, "breakpoint_note": "One compact line", "source_ref": "founder-supplied", "route_facts_available": true, "route_fact_refs": [], "fact_check_status": "pending", "adjacent_content": "Before the overview link", "status": "needed", "approved_by": null, "approved_at": null, "placeholder_rendered": true },
 
-    { "slot_id": "caravan.overview.fixed.choice", "surface": "Overview", "position": "Choice introduction", "copy_class": "fixed_phrase", "purpose": "State how the full route can be joined", "max_length": 83, "breakpoint_note": "Render verbatim", "source_ref": "experience-brief-fixed-phrase", "route_facts_available": true, "route_fact_refs": ["caravan.duration_days", "section.*", "short_form_exception"], "fact_check_status": "passed", "adjacent_content": "Immediately before the four choices", "status": "placed", "approved_by": "locked brief", "approved_at": "v1.1", "placeholder_rendered": false },
-    { "slot_id": "caravan.joining.fixed", "surface": "Overview", "position": "How joining works", "copy_class": "fixed_phrase", "purpose": "Explain the gate mechanism plainly", "max_length": 98, "breakpoint_note": "Two fixed phrases may wrap", "source_ref": "experience-brief-fixed-phrase", "route_facts_available": true, "route_fact_refs": ["gates", "short_form_exception"], "fact_check_status": "passed", "adjacent_content": "After Level 1 map", "status": "placed", "approved_by": "locked brief", "approved_at": "v1.1", "placeholder_rendered": false },
+    { "slot_id": "caravan.overview.choice_intro", "surface": "Overview", "position": "Choice introduction", "copy_class": "founder_copy", "purpose": "Explain that the Caravan may be travelled as four sections, with The Stone Road as a subordinate short form", "max_length": 100, "breakpoint_note": "Existing PageHero/section-introduction pattern at 390px", "source_ref": "founder-supplied", "route_facts_available": true, "route_fact_refs": ["caravan.duration_days", "sections", "short_form_exception"], "fact_check_status": "pending", "adjacent_content": "Immediately before the four choices", "status": "needed", "approved_by": null, "approved_at": null, "placeholder_rendered": true },
+    { "slot_id": "caravan.joining.explanation", "surface": "Overview", "position": "How joining works", "copy_class": "founder_copy", "purpose": "Explain the five Caravan gates and Cusco short-form joining exception plainly", "max_length": 120, "breakpoint_note": "Existing Section body-copy pattern at 390px", "source_ref": "founder-supplied", "route_facts_available": true, "route_fact_refs": ["gates", "short_form_exception"], "fact_check_status": "pending", "adjacent_content": "After the Level 1 map content", "status": "needed", "approved_by": null, "approved_at": null, "placeholder_rendered": true },
     { "slot_id": "s03.disclosure.exception", "surface": "Section 03", "position": "Mandatory disclosure", "copy_class": "locked_source", "purpose": "Disclose the declared load exception verbatim", "max_length": 430, "breakpoint_note": "Never truncate or collapse", "source_ref": "route-master-v4.2.1:section-03-declared-load-exception", "route_facts_available": true, "route_fact_refs": ["sections.03.declared_load_exception"], "fact_check_status": "passed", "adjacent_content": "After fact strip and founder framing", "status": "placed", "approved_by": "locked route master", "approved_at": "v4.2.1", "placeholder_rendered": false },
     { "slot_id": "s03.disclosure.ladder", "surface": "Section 03", "position": "Mandatory acclimatisation ladder", "copy_class": "locked_source", "purpose": "Publish the eleven-night progression from the route model", "max_length": 11, "breakpoint_note": "Eleven records; unknown altitudes remain visibly pending", "source_ref": "route-master-v4.2.1:section-03-acclimatisation-ladder", "route_facts_available": true, "route_fact_refs": ["sections.03.acclimatisation_ladder"], "fact_check_status": "passed", "adjacent_content": "Inside the mandatory disclosure block", "status": "placed", "approved_by": "locked route master", "approved_at": "v4.2.1", "placeholder_rendered": false }
   ]

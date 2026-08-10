@@ -27,7 +27,7 @@ Closure evidence:
 
 ## LB-02 · Contract-pending sleeping altitudes
 
-Status: **open · visible in Phase 3 specimen**
+Status: **open · recorded in the content model**
 
 The route model now carries every sleeping altitude stated explicitly in the
 locked Route Master. It does not infer values for properties that are not yet
@@ -36,11 +36,13 @@ contracted. The Section 03 eleven-night ladder therefore labels three nights as
 
 No production enquiry action may appear on Section 03 until the complete
 sleeping-altitude progression has been checked against contracted properties.
+Phase 3 creates no visual ladder; Phase 4 must later place this content using an
+existing pattern only after the Phase 3 content stop is approved.
 
 Closure evidence:
 
 - all Section 03 nights have a value and qualifier;
 - the values match contracted sleeping properties rather than general town
   elevations;
-- the publication projection and visual ladder have been rechecked; and
+- the public projection and eventual Phase 4 presentation have been rechecked; and
 - the founder has approved the completed disclosure.
