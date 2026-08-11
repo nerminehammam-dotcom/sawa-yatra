@@ -30,13 +30,13 @@ const approvedRouteDescriptions = {
   "caravans-andean":
     "Explore the Andean Caravan and its four connected route sections through Peru, Bolivia and Chile.",
   "caravans-route-map":
-    "Follow the illustrated Andean Caravan route through Peru, Bolivia and Chile.",
+    "Read the complete Andean Caravan route in order, with its sections, transport modes, joining gates and short-form exception.",
   // Moved verbatim from the inline `metadata` object that previously shipped on
   // app/(public)/caravans/andean-caravan/how-it-works/page.tsx. Not new copy.
   "hop-on-hop-off":
     "Choose where to join and leave the Andean Caravan, one continuous section at a time.",
   "who-else-is-travelling":
-    "This section will show how each Caravan group is taking shape without naming individual members.",
+    "Privacy-safe group signals will appear only when registrations are numerous enough to be useful, without naming individual members.",
   "andean-caravan":
     "Follow the complete Andean Caravan route through Peru, Bolivia, the Atacama and the Carretera Austral.",
   /*
@@ -104,17 +104,17 @@ export const routeMetadata = ([
   [
     "caravans-route-map",
     "/caravans/andean/route-map",
-    "Andean Caravan route map | Sawayatra",
+    "Andean Caravan route, in order | Sawayatra",
   ],
   [
     "hop-on-hop-off",
     "/caravans/andean-caravan/how-it-works",
-    "Hop on, hop off | Sawayatra",
+    "Joining and leaving the Andean Caravan | Sawayatra",
   ],
   [
     "who-else-is-travelling",
     "/caravans/who-else-is-travelling",
-    "Who else is travelling | Sawayatra",
+    "Meet the travelling group | Sawayatra",
   ],
   [
     "andean-caravan",
@@ -287,7 +287,7 @@ export const homeContent = {
   },
   departuresPreview: {
     eyebrow: "Departures",
-    title: "One journey through the Andes. Four chapters to join.",
+    title: "One journey through the Andes. Four sections to join.",
     action: {
       label: "Explore the Andean Caravan",
       href: "/caravans/andean",

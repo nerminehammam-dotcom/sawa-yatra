@@ -104,7 +104,7 @@ export const andeanCaravanMapChapters = [
     join: "Puno",
     leave: "Sucre",
     summary:
-      "Lake roads, boats and the Tiquina vehicle barge reach La Paz; the chapter finishes with a scheduled flight down to Sucre.",
+      "Lake roads, boats and the Tiquina vehicle barge reach La Paz; the section finishes with a scheduled flight down to Sucre.",
     href: "/caravans/andean/both-shores",
     stopIds: [
       "puno",
@@ -128,7 +128,7 @@ export const andeanCaravanMapChapters = [
     atlasViewBox: { x: 250, y: 130, width: 530, height: 430 },
     terrain: "Lake / altiplano / cloud forest",
     geographicFact:
-      "Lake Titicaca lies at 3,812 metres, with this chapter tracing both its Peruvian and Bolivian shores.",
+      "Lake Titicaca lies at 3,812 metres, with this section tracing both its Peruvian and Bolivian shores.",
     elevation: {
       points: [3812, 3631, 1700, 4200, 2810],
       highMeters: 4200,
@@ -253,6 +253,10 @@ export const andeanCaravanMapChapters = [
           "Coyhaique",
           "Balmaceda",
         ],
+      },
+      {
+        label: "Included exit",
+        places: ["Balmaceda", "scheduled flight to Santiago"],
       },
     ],
     countryIds: ["chile"],

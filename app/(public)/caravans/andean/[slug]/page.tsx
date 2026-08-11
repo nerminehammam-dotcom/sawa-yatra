@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { CaravanRouteMap } from "@/app/(public)/caravans/_components/CaravanRouteMap";
 import { RisoArtwork } from "@/components/brand/RisoArtwork";
 import { JourneyGallery } from "@/components/departures/JourneyGallery";
 import { Accordion } from "@/components/ui/Accordion";
@@ -146,6 +145,8 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
           <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
             <Link href="/">Home</Link>
             <span aria-hidden="true">›</span>
+            <Link href="/caravans">Caravans</Link>
+            <span aria-hidden="true">›</span>
             <Link href="/caravans/andean">The Andean Caravan</Link>
             <span aria-hidden="true">›</span>
             <span aria-current="page">{title}</span>
@@ -217,12 +218,32 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
         </Section>
       ) : null}
 
-      <CaravanRouteMap
-        key={data.section.section_id}
-        currentChapterId={data.section.section_id}
-        headingLevel={2}
-        initialChapterId={data.section.section_id}
-      />
+      <Section
+        className={styles.orientationSection}
+        ground="cream"
+        aria-labelledby="orientation-heading"
+      >
+        <Container className={styles.orientationGrid}>
+          <div className={styles.sectionHeading}>
+            <Eyebrow kind="decision" tone="accent">Route orientation</Eyebrow>
+            <h2 id="orientation-heading">{gateFrom.name} to {gateTo.name}.</h2>
+            <p>
+              {isStoneRoad
+                ? "The Stone Road sits inside Sea to Stone as a short-form exception."
+                : `Section ${data.section.section_id} is one consecutive part of the four-section Caravan.`}
+            </p>
+          </div>
+          <div className={styles.orientationAction}>
+            <p>
+              See how this section connects with every joining gate, flight,
+              rail journey, road and ferry across the complete route.
+            </p>
+            <Link href="/caravans/andean#full-route-map">
+              Open the full route atlas <Arrow />
+            </Link>
+          </div>
+        </Container>
+      </Section>
 
       <Section className={styles.copySection} ground="olive" aria-labelledby="character-heading">
         <Container className={styles.copyGrid}>

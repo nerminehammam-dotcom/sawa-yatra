@@ -13,6 +13,7 @@ import {
 
 import {
   announcementNavigation,
+  andeanCaravanNavigation,
   caravansNavigation,
   primaryNavigation,
   utilityNavigation,
@@ -39,6 +40,49 @@ function isCaravansPath(pathname: string): boolean {
   );
 }
 
+function isAndeanCaravanPath(pathname: string): boolean {
+  return (
+    pathname === "/caravans/andean" ||
+    pathname.startsWith("/caravans/andean/") ||
+    pathname === "/caravans/andean-caravan/how-it-works"
+  );
+}
+
+function isCurrentAndeanEntry(
+  pathname: string,
+  hash: string,
+  id: string,
+): boolean {
+  if (id === "whole-caravan") {
+    return pathname === "/caravans/andean" && hash === "";
+  }
+  if (id === "joining-leaving") {
+    return pathname === "/caravans/andean-caravan/how-it-works";
+  }
+  if (id === "route-atlas") {
+    return pathname === "/caravans/andean" && hash === "#full-route-map";
+  }
+  if (id === "stop-by-stop") {
+    return pathname === "/caravans/andean/route-map";
+  }
+  if (id === "trip-documents") {
+    return pathname === "/caravans/andean" && hash === "#trip-documents";
+  }
+  return false;
+}
+
+function isCurrentCaravanEntry(
+  pathname: string,
+  id: string,
+  href: string,
+): boolean {
+  if (pathname === href) return true;
+  if (id === "andean-caravan") {
+    return isAndeanCaravanPath(pathname);
+  }
+  return id === "egyptian-caravan" && pathname.startsWith("/caravans/egypt/");
+}
+
 export function SiteNavigation() {
   const pathname = usePathname();
   const sheetId = useId();
@@ -49,6 +93,7 @@ export function SiteNavigation() {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isCaravansOpen, setIsCaravansOpen] = useState(false);
   const [isMobileCaravansOpen, setIsMobileCaravansOpen] = useState(false);
+  const [currentHash, setCurrentHash] = useState("");
   const rootRef = useRef<HTMLElement>(null);
   const previousPathnameRef = useRef(pathname);
   const caravansItemRef = useRef<HTMLLIElement>(null);
@@ -101,6 +146,13 @@ export function SiteNavigation() {
     });
 
     return () => window.cancelAnimationFrame(frame);
+  }, [pathname]);
+
+  useEffect(() => {
+    const updateHash = () => setCurrentHash(window.location.hash);
+    updateHash();
+    window.addEventListener("hashchange", updateHash);
+    return () => window.removeEventListener("hashchange", updateHash);
   }, [pathname]);
 
   useEffect(() => {
@@ -307,13 +359,22 @@ export function SiteNavigation() {
                       aria-labelledby={caravansTriggerId}
                     >
                       <div className={styles.panelColumn}>
-                        <p className={styles.panelLabel}>Choose a caravan</p>
-                        {caravansNavigation.choose.map((entry, index) => (
+                        <Link
+                          ref={firstCaravanLinkRef}
+                          className={`${styles.panelLabel} ${styles.panelLabelLink}`}
+                          href="/caravans"
+                          aria-current={pathname === "/caravans" ? "page" : undefined}
+                          onClick={() => setIsCaravansOpen(false)}
+                        >
+                          All Caravans
+                        </Link>
+                        {caravansNavigation.choose.map((entry) => (
                           <Link
-                            ref={index === 0 ? firstCaravanLinkRef : undefined}
                             className={styles.panelEntry}
                             href={entry.href}
                             key={entry.id}
+                            aria-current={isCurrentCaravanEntry(pathname, entry.id, entry.href) ? "page" : undefined}
+                            onClick={() => setIsCaravansOpen(false)}
                           >
                             <span className={styles.entryTitle}>{entry.label}</span>
                             <span className={styles.entryMeta}>{entry.meta}</span>
@@ -321,21 +382,28 @@ export function SiteNavigation() {
                         ))}
                       </div>
                       <div className={styles.panelColumn}>
-                        <p className={styles.panelLabel}>Join a caravan</p>
-                        {caravansNavigation.join.map((entry) => (
+                        <p className={styles.panelLabel}>
+                          Explore The Andean Caravan
+                        </p>
+                        {andeanCaravanNavigation.map((entry) => (
                           <Link
                             className={styles.panelEntry}
                             href={entry.href}
                             key={entry.id}
+                            aria-current={
+                              isCurrentAndeanEntry(
+                                pathname,
+                                currentHash,
+                                entry.id,
+                              )
+                                ? "page"
+                                : undefined
+                            }
+                            onClick={() => setIsCaravansOpen(false)}
                           >
-                            <span className={styles.entryTitle}>{entry.label}</span>
-                            {entry.id === "hop-on-hop-off" ? (
-                              <span className={styles.routeStrip} aria-hidden="true">
-                                {Array.from({ length: 9 }, (_, index) => (
-                                  <span key={index} />
-                                ))}
-                              </span>
-                            ) : null}
+                            <span className={styles.entryTitle}>
+                              {entry.label}
+                            </span>
                             <span className={styles.entryMeta}>{entry.meta}</span>
                           </Link>
                         ))}
@@ -397,36 +465,76 @@ export function SiteNavigation() {
                   </button>
                   {isMobileCaravansOpen ? (
                     <div className={styles.sheetDrawer} id={mobileCaravansId}>
-                      <p className={styles.panelLabel}>Choose a caravan</p>
-                      {caravansNavigation.choose.map((entry) => (
+                      <div className={styles.panelGroup}>
                         <Link
-                          className={styles.panelEntry}
-                          href={entry.href}
-                          key={entry.id}
+                          className={`${styles.panelLabel} ${styles.panelLabelLink}`}
+                          href="/caravans"
+                          aria-current={pathname === "/caravans" ? "page" : undefined}
                           onClick={closeSheet}
                         >
-                          <span className={styles.entryTitle}>{entry.label}</span>
-                          <span className={styles.entryMeta}>{entry.meta}</span>
+                          All Caravans
                         </Link>
-                      ))}
-                      <p className={styles.panelLabel}>Join a caravan</p>
-                      {caravansNavigation.join.map((entry) => (
-                        <Link
-                          className={styles.panelEntry}
-                          href={entry.href}
-                          key={entry.id}
-                          onClick={closeSheet}
-                        >
-                          <span className={styles.entryTitle}>{entry.label}</span>
-                          <span className={styles.entryMeta}>{entry.meta}</span>
-                        </Link>
-                      ))}
+                        {caravansNavigation.choose.map((entry) => (
+                          <Link
+                            className={styles.panelEntry}
+                            href={entry.href}
+                            key={entry.id}
+                            aria-current={
+                              isCurrentCaravanEntry(
+                                pathname,
+                                entry.id,
+                                entry.href,
+                              )
+                                ? "page"
+                                : undefined
+                            }
+                            onClick={closeSheet}
+                          >
+                            <span className={styles.entryTitle}>
+                              {entry.label}
+                            </span>
+                            <span className={styles.entryMeta}>{entry.meta}</span>
+                          </Link>
+                        ))}
+                      </div>
+                      <div className={styles.panelGroup}>
+                        <p className={styles.panelLabel}>
+                          Explore The Andean Caravan
+                        </p>
+                        {andeanCaravanNavigation.map((entry) => (
+                          <Link
+                            className={styles.panelEntry}
+                            href={entry.href}
+                            key={entry.id}
+                            aria-current={
+                              isCurrentAndeanEntry(
+                                pathname,
+                                currentHash,
+                                entry.id,
+                              )
+                                ? "page"
+                                : undefined
+                            }
+                            onClick={closeSheet}
+                          >
+                            <span className={styles.entryTitle}>
+                              {entry.label}
+                            </span>
+                            <span className={styles.entryMeta}>{entry.meta}</span>
+                          </Link>
+                        ))}
+                      </div>
                     </div>
                   ) : null}
                 </li>
               ) : (
                 <li key={item.id}>
-                  <Link className={styles.sheetLink} href={item.href} onClick={closeSheet}>
+                  <Link
+                    className={styles.sheetLink}
+                    href={item.href}
+                    aria-current={isCurrentPath(pathname, item.href) ? "page" : undefined}
+                    onClick={closeSheet}
+                  >
                     {item.label}
                   </Link>
                 </li>

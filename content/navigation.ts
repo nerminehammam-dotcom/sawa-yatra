@@ -2,7 +2,8 @@ import type { NavigationItem } from "@/lib/types";
 import { ANDEAN_CARAVAN_FIRST_DEPARTURE } from "@/content/andean-caravan";
 
 // Primary navigation per Membership/Identity spec v3.1 §2.3 — exactly four
-// items, in this order. The Caravan is named the way a maker names one model.
+// items, in this order. Caravans is the expandable collection; individual
+// routes such as The Andean Caravan sit beneath it as named products.
 // "Create your own" is no longer a destination: it is the Start one button on
 // /journeys, honestly disabled in Release 1 (build command §3.B). "Departure
 // dates" is likewise absorbed into Journeys (Leaving on a date / Still
@@ -11,8 +12,8 @@ import { ANDEAN_CARAVAN_FIRST_DEPARTURE } from "@/content/andean-caravan";
 export const primaryNavigation = [
   {
     id: "caravans",
-    label: "The Andean Caravan",
-    href: "/caravans/andean",
+    label: "Caravans",
+    href: "/caravans",
     contentStatus: "LOCKED",
   },
   {
@@ -85,28 +86,47 @@ export const caravansNavigation = {
       href: "/caravans/andean",
       meta: "71 days, Lima to Patagonia",
     },
-  ],
-  join: [
     {
-      id: "hop-on-hop-off",
-      label: "Hop on, hop off",
-      href: "/caravans/andean-caravan/how-it-works",
-      meta: "Four route sections. Join for one, combine several, or travel the whole route.",
-    },
-    {
-      id: "route-map",
-      label: "Full route map and travel details",
-      href: "/caravans/andean/route-map",
-      meta: "Four atlas plates, every transport mode and each joining gate.",
-    },
-    {
-      id: "who-else-is-travelling",
-      label: "See who else is travelling",
-      href: "/caravans/who-else-is-travelling",
-      meta: "How the group is shaping up on each route section.",
+      id: "egyptian-caravan",
+      label: "The Egyptian Caravan",
+      href: "/caravans/egypt",
+      meta: "Egypt · In progress",
     },
   ],
 } as const;
+
+export const andeanCaravanNavigation = [
+  {
+    id: "whole-caravan",
+    label: "The whole Caravan",
+    href: "/caravans/andean",
+    meta: "Overview, sections and route.",
+  },
+  {
+    id: "joining-leaving",
+    label: "Joining & leaving points",
+    href: "/caravans/andean-caravan/how-it-works",
+    meta: "Choose your start and finish.",
+  },
+  {
+    id: "route-atlas",
+    label: "Maps",
+    href: "/caravans/andean#full-route-map",
+    meta: "The route, transport and terrain.",
+  },
+  {
+    id: "stop-by-stop",
+    label: "Each stop",
+    href: "/caravans/andean/route-map",
+    meta: "Every route day in travelling order.",
+  },
+  {
+    id: "trip-documents",
+    label: "Trip PDFs — coming soon",
+    href: "/caravans/andean#trip-documents",
+    meta: "No files published yet.",
+  },
+] as const;
 
 export const footerNavigation = [
   ...primaryNavigation,

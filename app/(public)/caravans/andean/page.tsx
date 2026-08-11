@@ -9,6 +9,7 @@ import {
   andeanCaravanHeroImage,
   getCanonicalCaravanCardImage,
 } from "@/content/andean-caravan-images";
+import { andeanCaravanMapChapters } from "@/content/andean-caravan-map";
 import { getCanonicalCaravanOverview } from "@/content/caravan/page-data";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/site-url";
@@ -30,11 +31,13 @@ export default function AndeanCaravanPage() {
         aria-labelledby="departures-heading"
       >
         <div className={styles.introductionCopy}>
-          <p>The Andean Caravan / Peru · Bolivia · Chile</p>
-          <h1 id="departures-heading">Choose where the road becomes yours.</h1>
           <p>
-            Each Caravan follows one route on one seasonal departure. Join for
-            one section, combine several, or travel until the road ends.
+            <Link href="/caravans">Caravans</Link> / The Andean Caravan / Peru · Bolivia · Chile
+          </p>
+          <h1 id="departures-heading">The whole Andean Caravan.</h1>
+          <p>
+            Seventy-one days from Lima to Patagonia. Join one section, combine
+            several, or follow the road until the Caravan ends.
           </p>
         </div>
         <RisoArtwork
@@ -52,7 +55,7 @@ export default function AndeanCaravanPage() {
       >
         <div>
           <p>Peru / Bolivia / Chile</p>
-          <h2 id="andean-caravan-heading">{data.name}</h2>
+          <h2 id="andean-caravan-heading">Lima to Balmaceda, in four sections.</h2>
           <p>
             One continuous route from Lima to Balmaceda, arranged as four
             consecutive sections with one optional eight-day short form.
@@ -64,13 +67,37 @@ export default function AndeanCaravanPage() {
           <div><dt>Group</dt><dd>Maximum {data.groupMax}</dd></div>
           <div><dt>Scheduled flights</dt><dd>{data.scheduledFlights} movements</dd></div>
         </dl>
-        <Link href="/caravans/andean-caravan/how-it-works">
-          Explore joining and leaving <Arrow />
+        <Link href="#full-route-map">
+          View the Maps section <Arrow />
         </Link>
       </section>
 
       <div className={styles.map} id="full-route-map">
         <CaravanRouteMap headingLevel={2} />
+        <details className={styles.mapTextEquivalent}>
+          <summary>Read the Maps section as text</summary>
+          <ol>
+            {andeanCaravanMapChapters.map((section) => (
+              <li key={section.id}>
+                <p>{section.id}</p>
+                <h3>{section.title}</h3>
+                <p>{section.route} · {section.days} days</p>
+                <p><strong>Movement:</strong> {section.movement}</p>
+                <p><strong>Places:</strong> {section.places.join(" → ")}</p>
+                <dl>
+                  <div><dt>Join</dt><dd>{section.join}</dd></div>
+                  <div><dt>Leave</dt><dd>{section.leave}</dd></div>
+                </dl>
+              </li>
+            ))}
+          </ol>
+        </details>
+        <div className={styles.mapTextLink}>
+          <p>Prefer every route day in one reading order?</p>
+          <Link href="/caravans/andean/route-map">
+            Open Each stop <Arrow />
+          </Link>
+        </div>
       </div>
 
       <section
@@ -151,7 +178,34 @@ export default function AndeanCaravanPage() {
           </p>
           <p>
             <Link href="/caravans/andean-caravan/how-it-works">
-              Compare joining points <Arrow />
+              Plan your joining and leaving gates <Arrow />
+            </Link>
+          </p>
+        </div>
+      </section>
+
+      <section
+        className={styles.information}
+        id="trip-documents"
+        aria-labelledby="trip-documents-heading"
+      >
+        <div>
+          <p>Trip PDFs</p>
+          <h2 id="trip-documents-heading">Trip PDFs for the Andean Caravan.</h2>
+          <p>
+            This will be the single library for approved Andean Caravan PDFs
+            and traveller documents.
+          </p>
+        </div>
+        <div>
+          <h2>Coming soon</h2>
+          <p>
+            No trip documents are available for download yet. They will appear
+            here when the route, dates and practical information are approved.
+          </p>
+          <p>
+            <Link href="/caravans/andean/route-map">
+              Read every route day online <Arrow />
             </Link>
           </p>
         </div>

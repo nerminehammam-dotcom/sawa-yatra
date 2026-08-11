@@ -1,41 +1,172 @@
+.page {
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.intro,
 .staticRoute {
-  max-width: var(--content-max);
+  width: min(100%, var(--content-max));
   margin: 0 auto;
-  padding: var(--section-space) var(--page-gutter);
+  padding-inline: var(--page-gutter);
+}
+
+.intro {
   display: grid;
   gap: var(--space-6);
+  padding-block: clamp(4.5rem, 9vw, 8rem);
+  border-bottom: var(--border-hairline) solid var(--ink);
 }
 
-.staticRoute h2 {
+.eyebrow,
+.routeHeader > p:first-child {
+  color: var(--signal-text);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.eyebrow a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+
+.intro h1 {
+  max-width: 11ch;
   font-family: var(--font-display);
-  font-size: var(--fs-display-3);
-  color: var(--ink);
+  font-size: var(--fs-hero);
+  line-height: 1;
 }
 
-.chapters {
+.lede {
+  max-width: 56ch;
+  font-family: var(--font-read);
+  font-size: var(--fs-lead);
+  line-height: 1.55;
+}
+
+.introActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.introActions a,
+.sectionLink {
+  display: inline-flex;
+  width: fit-content;
+  min-height: var(--touch-min);
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+  border: var(--border-hairline) solid var(--ink);
+}
+
+.shortForm {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  gap: clamp(var(--space-5), 5vw, var(--space-10));
+  padding: clamp(var(--space-5), 4vw, var(--space-8));
+  background: color-mix(in srgb, var(--sun) 32%, var(--paper));
+  border: var(--border-hairline) solid var(--ink);
+}
+
+.shortForm > div {
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+}
+
+.shortForm > div:first-child > p:first-child {
+  color: var(--signal-text);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.shortForm h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-title);
+}
+
+.shortForm p {
+  line-height: 1.55;
+}
+
+.shortForm a {
+  display: inline-flex;
+  min-height: var(--touch-min);
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--ink);
+  font-weight: 600;
+  text-underline-offset: 0.2em;
+}
+
+.introActions .primaryAction {
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.introActions a:hover,
+.introActions a:focus-visible,
+.sectionLink:hover,
+.sectionLink:focus-visible {
+  color: var(--ink);
+  background: var(--sun);
+}
+
+.staticRoute {
+  display: grid;
+  gap: clamp(var(--space-8), 5vw, var(--space-14, 3.5rem));
+  padding-block: var(--section-space);
+}
+
+.routeHeader {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.routeHeader h2 {
+  max-width: 13ch;
+  font-family: var(--font-display);
+  font-size: var(--fs-display-2);
+}
+
+.routeHeader > p:last-child {
+  max-width: 48ch;
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+.sections {
+  display: grid;
+  grid-template-columns: 1fr;
   gap: var(--space-5);
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.chapter {
+.sectionCard {
   display: grid;
   height: 100%;
-  gap: var(--space-3);
-  padding: var(--space-6);
+  align-content: start;
+  gap: var(--space-4);
+  padding: clamp(var(--space-5), 4vw, var(--space-8));
   border: var(--border-hairline) solid var(--ink);
 }
 
-.chapter h3 {
+.sectionCard h3 {
   font-family: var(--font-display);
   font-size: var(--fs-title);
-  color: var(--ink);
 }
 
-.chapterNumber {
+.sectionNumber {
   color: var(--signal-text);
   font-family: var(--font-read);
   font-size: var(--fs-display-3);
@@ -46,35 +177,210 @@
   font-size: var(--fs-lead);
 }
 
+.movement {
+  width: fit-content;
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--fs-small);
+  background: var(--pink);
+}
+
+.routeGroups,
+.places {
+  display: grid;
+  gap: var(--space-2);
+  line-height: 1.55;
+}
+
 .routeGroups {
+  gap: var(--space-5);
+}
+
+.routeGroups > div {
   display: grid;
   gap: var(--space-2);
 }
 
-.chapter dl {
+.routeGroups h4 {
+  font-size: var(--fs-small);
+  font-weight: 600;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.stopList {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: route-stop;
+}
+
+.stopList li {
+  position: relative;
+  min-height: 2.5rem;
+  padding: var(--space-2) 0 var(--space-2) 2.75rem;
+  line-height: 1.45;
+  border-top: var(--border-hairline) solid var(--hairline);
+  counter-increment: route-stop;
+}
+
+.stopList li::before {
+  position: absolute;
+  top: var(--space-2);
+  left: 0;
+  color: var(--signal-text);
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  content: counter(route-stop, decimal-leading-zero);
+}
+
+.gates {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   margin: 0;
   border-top: var(--border-hairline) solid var(--ink);
 }
 
-.chapter dl div {
+.gates div {
   padding-top: var(--space-3);
 }
 
-.chapter dd {
+.gates dd {
   margin: var(--space-1) 0 0;
 }
 
-.note {
+.dayIndex {
+  border-block: var(--border-hairline) solid var(--ink);
+}
+
+.dayIndex summary {
+  min-height: var(--touch-min);
+  align-content: center;
+  padding-block: var(--space-3);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.dayIndex > ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.dayIndex > ol > li {
+  display: grid;
+  gap: var(--space-2);
+  padding-block: var(--space-4);
+  border-top: var(--border-hairline) solid var(--hairline);
+}
+
+.dayIndex > ol > li > div:first-child {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: baseline;
+}
+
+.dayIndex span,
+.dayIndex dt {
   font-family: var(--font-note);
   font-size: var(--fs-small);
-  color: var(--ink);
+}
+
+.dayIndex p {
+  line-height: 1.5;
+}
+
+.dayIndex dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.dayIndex dd {
+  margin: var(--space-1) 0 0;
+  line-height: 1.45;
+}
+
+.sectionLink {
+  align-self: end;
+  margin-top: auto;
+}
+
+.note {
   max-width: var(--measure);
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+}
+
+.nextSteps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: var(--border-hairline) solid var(--ink);
+}
+
+.nextSteps a {
+  display: grid;
+  gap: var(--space-2);
+  min-height: 10rem;
+  align-content: center;
+  padding: clamp(var(--space-6), 5vw, var(--space-12));
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nextSteps a + a {
+  border-inline-start: var(--border-hairline) solid var(--ink);
+}
+
+.nextSteps a:last-child {
+  background: var(--sun);
+}
+
+.nextSteps a:hover,
+.nextSteps a:focus-visible {
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.nextSteps span {
+  font-size: var(--fs-small);
+}
+
+.nextSteps strong {
+  font-family: var(--font-read);
+  font-size: var(--fs-lead);
+  font-weight: 400;
 }
 
 @media (max-width: 767px) {
-  .chapters {
+  .sections,
+  .nextSteps,
+  .shortForm {
     grid-template-columns: 1fr;
+  }
+
+  .introActions a,
+  .sectionLink {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .nextSteps a + a {
+    border-inline-start: 0;
+    border-top: var(--border-hairline) solid var(--ink);
+  }
+
+  .dayIndex dl {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (forced-colors: active) {
+  .movement,
+  .nextSteps a {
+    border: 1px solid CanvasText;
   }
 }

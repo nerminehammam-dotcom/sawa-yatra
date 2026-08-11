@@ -440,7 +440,7 @@ function ElevationProfile({ chapter }: { chapter: MapChapter }) {
   return (
     <figure
       className={styles.elevationProfile}
-      aria-label={`Elevation profile for ${chapter.route}. The shared scale is zero to 5,000 metres and this chapter reaches ${formatMeters(chapter.elevation.highMeters)} metres.`}
+      aria-label={`Elevation profile for ${chapter.route}. The shared scale is zero to 5,000 metres and this section reaches ${formatMeters(chapter.elevation.highMeters)} metres.`}
     >
       <div className={styles.elevationHeading}>
         <span>Elevation rhythm</span>
@@ -550,7 +550,7 @@ function ChapterStory({
           className={styles.sectionLink}
           href={isCurrentChapter ? "#itinerary-heading" : chapter.href}
         >
-          {isCurrentChapter ? "Continue to the itinerary" : "Explore this chapter"} <Arrow />
+          {isCurrentChapter ? "Continue to the itinerary" : "Explore this section"} <Arrow />
         </Link>
 
         <p className={styles.mapNote}>
@@ -677,12 +677,12 @@ export function CaravanRouteMap({
     <section className={styles.root} aria-labelledby={headingId}>
       <header className={styles.heading}>
         <div>
-          <p className={styles.kicker}>The Andean Caravan / Field atlas</p>
-          <MapHeading id={headingId}>A continent, read in four plates.</MapHeading>
+          <p className={styles.kicker}>Maps / The Andean Caravan</p>
+          <MapHeading id={headingId}>The full route atlas.</MapHeading>
         </div>
         <p className={styles.introduction}>
-          Each plate moves closer to the terrain; a context inset keeps every
-          change of scale legible.
+          Each atlas plate represents one joinable section; a context inset
+          keeps every change of scale legible.
         </p>
       </header>
 
@@ -1043,7 +1043,7 @@ export function CaravanRouteMap({
           <RouteLocator chapter={activeChapter} />
         </div>
 
-        <ol className={styles.mobileJourney} aria-label="The four route chapters">
+        <ol className={styles.mobileJourney} aria-label="The four route sections">
           {andeanCaravanMapChapters.map((chapter, index) => {
             const isActive = index === activeChapterIndex;
 

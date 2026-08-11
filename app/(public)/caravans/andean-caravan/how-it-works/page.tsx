@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 
-import { CaravanRouteMap } from "@/app/(public)/caravans/_components/CaravanRouteMap";
 import { RisoArtwork } from "@/components/brand/RisoArtwork";
-import { Accordion } from "@/components/ui/Accordion";
 import { Arrow } from "@/components/ui/Arrow";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
@@ -12,27 +10,84 @@ import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
 import { andeanCaravanHeroImage } from "@/content/andean-caravan-images";
 import { andeanCaravanEnquiry } from "@/content/andean-caravan-editorial";
-import { getCanonicalCaravanOverview } from "@/content/caravan/page-data";
+import {
+  getCanonicalCaravanOverview,
+  getCanonicalStoneRoadPageData,
+} from "@/content/caravan/page-data";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/site-url";
 
 import styles from "../../../departures/[slug]/journey.module.css";
+import { JoinLeavePlanner } from "./_components/JoinLeavePlanner";
 
 export const metadata: Metadata = {
-  title: { absolute: `Joining and leaving the Andean Caravan | ${siteConfig.name}` },
+  title: { absolute: `Joining & leaving points | ${siteConfig.name}` },
   alternates: {
     canonical: absoluteUrl("/caravans/andean-caravan/how-it-works"),
   },
 };
 
+function airportLabel(airport: string): string {
+  const labels: Readonly<Record<string, string>> = {
+    LIM: "Lima airport (LIM)",
+    CUZ: "Cusco airport (CUZ)",
+    "JUL + road": "Juliaca airport (JUL) + road transfer",
+    SRE: "Sucre airport (SRE)",
+    SCL: "Santiago airport (SCL)",
+    BBA: "Balmaceda airport (BBA)",
+  };
+  return labels[airport] ?? airport;
+}
+
+function gateRoleLabel(gateId: string): string {
+  const labels: Readonly<Record<string, string>> = {
+    lima: "Join Sea to Stone.",
+    puno: "Leave Sea to Stone or join Both Shores.",
+    sucre: "Leave Both Shores or join The Mirror.",
+    santiago: "Leave The Mirror or join The End of the Road.",
+    balmaceda:
+      "Leave The End of the Road; the included exit flight continues to Santiago.",
+    cusco: "Join The Stone Road short form only.",
+  };
+  return labels[gateId] ?? "Designated Caravan point.";
+}
+
 export default function AndeanCaravanJoiningPage() {
   const data = getCanonicalCaravanOverview();
+  const stoneRoad = getCanonicalStoneRoadPageData();
   const caravanGates = data.gates.filter(
     (gate) => gate.gate_class === "caravan_gate",
   );
   const shortFormGate = data.gates.find(
     (gate) => gate.gate_class === "short_form_joining_gate",
   );
+  const plannerSections = data.sections.map(
+    ({ slug, section, gateFrom, gateTo }) => ({
+      id: section.section_id,
+      name: section.name,
+      slug,
+      days: section.day_end - section.day_start + 1,
+      dayStart: section.day_start,
+      dayEnd: section.day_end,
+      join: gateFrom.name,
+      leave: gateTo.name,
+      joinAirport: gateFrom.airport,
+      leaveAirport: gateTo.airport,
+      joinNote: gateFrom.arrival_rule.text,
+    }),
+  );
+  const plannerShortForm = {
+    name: stoneRoad.product.name,
+    slug: stoneRoad.slug,
+    days: stoneRoad.product.day_end - stoneRoad.product.day_start + 1,
+    dayStart: stoneRoad.product.day_start,
+    dayEnd: stoneRoad.product.day_end,
+    join: stoneRoad.gateFrom.name,
+    leave: stoneRoad.gateTo.name,
+    joinAirport: stoneRoad.gateFrom.airport,
+    leaveAirport: stoneRoad.gateTo.airport,
+    joinNote: stoneRoad.gateFrom.arrival_rule.text,
+  };
 
   return (
     <main id="main-content" tabIndex={-1}>
@@ -41,22 +96,30 @@ export default function AndeanCaravanJoiningPage() {
         mediaLayout="split"
         mobileContentFirst
         ground="cream"
-        eyebrow="The Andean Caravan"
+        eyebrow={
+          <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
+            <Link href="/caravans">Caravans</Link>
+            <span aria-hidden="true">›</span>
+            <Link href="/caravans/andean">The Andean Caravan</Link>
+            <span aria-hidden="true">›</span>
+            <span aria-current="page">Joining &amp; leaving points</span>
+          </nav>
+        }
         eyebrowKind="decision"
-        title="Joining and leaving"
+        title="Joining & leaving points"
         titleClassName={styles.heroTitle}
         intro={
           <div className={styles.heroIntro}>
             <p>
-              The Caravan travels from Lima to Balmaceda in four sections.
-              Travellers join and leave at the designated gates attached to
-              those sections.
+              The Caravan travels from Lima to Balmaceda in four consecutive
+              sections, with a separate Cusco–Puno short form. Choose the
+              points where your part begins and ends.
             </p>
           </div>
         }
         facts={
           <FactStrip
-            label="Joining and leaving at a glance"
+            label="Joining & leaving at a glance"
             facts={[
               { label: "Full route", value: `${data.durationDays} days` },
               { label: "Sections", value: String(data.sections.length) },
@@ -87,32 +150,14 @@ export default function AndeanCaravanJoiningPage() {
         <Container>
           <div className={styles.sectionHeadingInline}>
             <Eyebrow kind="decision" tone="accent">Four sections</Eyebrow>
-            <h2 id="sections-heading">Choose where your journey begins and ends.</h2>
+            <h2 id="sections-heading">Choose your joining and leaving points.</h2>
           </div>
-          <Accordion
-            allowMultiple
-            items={data.sections.map(({ slug, section, gateFrom, gateTo }) => ({
-              id: section.section_id,
-              question: `${section.name} · ${section.day_end - section.day_start + 1} days · ${gateFrom.name} to ${gateTo.name}`,
-              answer: (
-                <div>
-                  {section.subline ? <p>{section.subline}</p> : null}
-                  <p>{section.join_rule.text}</p>
-                  <p>
-                    <Link href={`/caravans/andean/${slug}`}>
-                      Read {section.name}
-                    </Link>
-                  </p>
-                </div>
-              ),
-            }))}
+
+          <JoinLeavePlanner
+            sections={plannerSections}
+            shortForm={plannerShortForm}
           />
-          <div className={styles.adjacentLinks}>
-            <Link href="/caravans/andean/the-stone-road">
-              <span>Short-form exception · Days 16–23</span>
-              <strong>The Stone Road · Cusco → Puno · 8 days</strong>
-            </Link>
-          </div>
+
         </Container>
       </Section>
 
@@ -123,21 +168,33 @@ export default function AndeanCaravanJoiningPage() {
       >
         <Container className={styles.copyGrid}>
           <div className={styles.sectionHeading}>
-            <Eyebrow kind="decision" tone="accent">The gates</Eyebrow>
-            <h2 id="gates-heading">Five gates on the Caravan route.</h2>
+            <Eyebrow kind="decision" tone="accent">The points</Eyebrow>
+            <h2 id="gates-heading">
+              Five Caravan gates, plus Cusco for the short form.
+            </h2>
           </div>
           <div className={styles.copyBody}>
+            <div>
+              <h3>Before arranging travel</h3>
+              <p>
+                Exact dates and scheduled-flight times are not confirmed yet.
+                Wait for Sawayatra to confirm your joining point and arrival
+                plan before arranging tickets.
+              </p>
+            </div>
             {caravanGates.map((gate) => (
               <div key={gate.id}>
-                <h3>{gate.name} · {gate.airport}</h3>
-                <p>{gate.role}</p>
+                <h3>{gate.name} · {airportLabel(gate.airport)}</h3>
+                <p>{gateRoleLabel(gate.id)}</p>
                 <p>{gate.arrival_rule.text}</p>
               </div>
             ))}
             {shortFormGate ? (
               <div>
-                <h3>{shortFormGate.name} · short-form joining gate</h3>
-                <p>{shortFormGate.role}</p>
+                <h3>
+                  {shortFormGate.name} · {airportLabel(shortFormGate.airport)}
+                </h3>
+                <p>{gateRoleLabel(shortFormGate.id)}</p>
                 <p>{shortFormGate.arrival_rule.text}</p>
               </div>
             ) : null}
@@ -146,20 +203,26 @@ export default function AndeanCaravanJoiningPage() {
       </Section>
 
       <Section
-        className={styles.routeSection}
+        className={styles.adjacentSection}
         ground="cream"
-        spacing="flush"
-        aria-labelledby="route-heading"
+        aria-labelledby="next-step-heading"
       >
-        <Container className={styles.atlasIntro}>
-          <div className={styles.routeHeader}>
-            <div className={styles.sectionHeading}>
-              <Eyebrow kind="decision" tone="accent">The continuous route</Eyebrow>
-              <h2 id="route-heading">Lima to Balmaceda.</h2>
-            </div>
+        <Container>
+          <div className={styles.sectionHeadingInline}>
+            <Eyebrow kind="decision" tone="accent">Next step</Eyebrow>
+            <h2 id="next-step-heading">Put your chosen run back on the map.</h2>
+          </div>
+          <div className={styles.adjacentLinks}>
+            <Link href="/caravans/andean#full-route-map">
+              <span>Places, transport and terrain</span>
+              <strong>Open Maps</strong>
+            </Link>
+            <Link href="/caravans/andean/route-map">
+              <span>Every route day</span>
+              <strong>Open Each stop</strong>
+            </Link>
           </div>
         </Container>
-        <CaravanRouteMap headingLevel={3} initialChapterId="01" />
       </Section>
 
       <Section

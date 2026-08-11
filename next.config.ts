@@ -20,11 +20,6 @@ const nextConfig: NextConfig = {
         statusCode: 301,
       },
       {
-        source: "/caravans",
-        destination: "/caravans/andean",
-        statusCode: 301,
-      },
-      {
         source: "/membership",
         destination: "/members",
         statusCode: 301,
