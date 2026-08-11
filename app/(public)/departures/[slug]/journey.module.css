@@ -104,6 +104,33 @@ a.heroAction:hover {
   margin-bottom: clamp(var(--space-8), 4vw, var(--space-12));
 }
 
+.plannerDirectory {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: clamp(var(--space-12), 7vw, var(--space-20, 5rem));
+  margin-bottom: var(--space-8);
+  padding-top: var(--space-8);
+  border-top: var(--border-hairline) solid var(--hairline);
+}
+
+.plannerDirectory > div {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.plannerDirectory h3 {
+  max-width: 18ch;
+  font-family: var(--font-display);
+  font-size: var(--fs-title);
+  line-height: 1.12;
+}
+
+.plannerDirectory > p {
+  max-width: 48ch;
+  color: var(--deep-brown);
+  line-height: 1.6;
+}
+
 .factsSection,
 .copySection,
 .adjacentSection,
@@ -144,6 +171,49 @@ a.heroAction:hover {
   --section-space: clamp(4rem, 7vw, 6.75rem);
 
   background: var(--paper);
+}
+
+.orientationSection {
+  --section-space: clamp(3.75rem, 6vw, 6rem);
+
+  border-block: var(--border-hairline) solid var(--hairline);
+}
+
+.orientationGrid {
+  display: grid;
+  gap: clamp(var(--space-8), 8vw, var(--space-20, 5rem));
+}
+
+.orientationAction {
+  display: grid;
+  align-content: start;
+  gap: var(--space-5);
+  max-width: 42rem;
+}
+
+.orientationAction > p {
+  max-width: 46ch;
+  line-height: 1.65;
+}
+
+.orientationAction a {
+  display: inline-flex;
+  width: fit-content;
+  min-height: var(--touch-min);
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  color: var(--paper);
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--ink);
+  border: var(--border-hairline) solid var(--ink);
+}
+
+.orientationAction a:hover,
+.orientationAction a:focus-visible {
+  color: var(--ink);
+  background: var(--sun);
 }
 
 .atlasIntro {
@@ -455,6 +525,23 @@ a.heroAction:hover {
   .movementsHeader {
     grid-template-columns: minmax(0, 1.25fr) minmax(18rem, 0.75fr);
     align-items: end;
+  }
+
+  .plannerDirectory {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.8fr);
+    align-items: end;
+  }
+
+  .orientationGrid {
+    grid-template-columns: minmax(18rem, 0.8fr) minmax(0, 1.2fr);
+    align-items: end;
+  }
+}
+
+@media (max-width: 767px) {
+  .orientationAction a {
+    width: 100%;
+    justify-content: space-between;
   }
 }
 

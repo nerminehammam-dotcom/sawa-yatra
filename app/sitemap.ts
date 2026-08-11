@@ -10,7 +10,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       (entry) =>
         entry.path !== "/departures/[slug]" &&
         entry.path !== "/departures" &&
-        entry.path !== "/caravans" &&
         entry.path !== "/caravans/the-andean-caravan" &&
         entry.path !== "/joining-points" &&
         entry.path !== "/do-it-yourself" &&

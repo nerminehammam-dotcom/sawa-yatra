@@ -45,6 +45,32 @@
   margin: 0 0 3rem;
 }
 
+.actionIntro {
+  max-width: 48ch;
+  margin-bottom: var(--space-4);
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+.directAction {
+  display: inline-flex;
+  min-height: 56px;
+  align-items: center;
+  padding: 0.875rem 1.875rem;
+  color: var(--paper);
+  font-size: var(--fs-body);
+  font-weight: 600;
+  text-decoration: none;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+}
+
+.directAction:hover,
+.directAction:focus-visible {
+  color: var(--ink);
+  background: var(--signal);
+}
+
 .notify label {
   display: block;
   margin-bottom: 0.625rem;
@@ -148,5 +174,10 @@
 
   .notify button {
     width: 100%;
+  }
+
+  .directAction {
+    width: 100%;
+    justify-content: center;
   }
 }

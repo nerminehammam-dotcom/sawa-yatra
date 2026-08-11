@@ -2,29 +2,31 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { createPageMetadata } from "@/app/_metadata";
-import { RouteIndex } from "@/components/field/RouteIndex";
-import { andeanCaravan, andeanCaravanSections } from "@/content/andean-caravan";
-import { andeanCaravanHeroImage } from "@/content/andean-caravan-images";
-
-import { CaravanRouteMap } from "./_components/CaravanRouteMap";
-import styles from "./caravans.module.css";
 import { Arrow } from "@/components/ui/Arrow";
+import { ANDEAN_CARAVAN_FIRST_DEPARTURE } from "@/content/andean-caravan";
+import { andeanCaravanHeroImage } from "@/content/andean-caravan-images";
+import { getCanonicalCaravanOverview } from "@/content/caravan/page-data";
+
+import styles from "./caravans.module.css";
 
 export const metadata = createPageMetadata("/caravans");
 
 export default function CaravansPage() {
+  const andeanCaravan = getCanonicalCaravanOverview();
+
   return (
     <main id="main-content" tabIndex={-1}>
       <section className={styles.hero} aria-labelledby="caravans-heading">
         <div className={styles.heroCopy}>
           <p>Caravans / annual routes</p>
           <h1 id="caravans-heading">
-            <span>One caravan.</span>
-            <span>One long route.</span>
+            <span>Caravans.</span>
+            <span>Long routes, shared well.</span>
           </h1>
           <p>
-            A caravan is a continuous expedition with designated places to
-            join and leave. The Andean Caravan is the flagship route.
+            Each Caravan is one continuous, long-form journey with designated
+            places to join and leave. Choose the route first, then decide how
+            far to follow it.
           </p>
         </div>
         <figure className={styles.heroImage}>
@@ -44,9 +46,9 @@ export default function CaravansPage() {
 
       <section className={styles.flagship} aria-labelledby="andean-heading">
         <div className={styles.flagshipTitle}>
-          <p>Peru / Bolivia / Chile</p>
-          <h2 id="andean-heading">{andeanCaravan.productName}</h2>
-          <p>{andeanCaravan.route}</p>
+          <p>Caravan 01 / open for interest</p>
+          <h2 id="andean-heading">{andeanCaravan.name}</h2>
+          <p>Lima → Balmaceda · Peru / Bolivia / Chile</p>
         </div>
         <dl className={styles.facts}>
           <div>
@@ -54,16 +56,16 @@ export default function CaravansPage() {
             <dd>{andeanCaravan.durationDays} days</dd>
           </div>
           <div>
-            <dt>Public window</dt>
-            <dd>{andeanCaravan.publicDateWindow}</dd>
+            <dt>First departure</dt>
+            <dd>{ANDEAN_CARAVAN_FIRST_DEPARTURE}</dd>
           </div>
           <div>
             <dt>Sections</dt>
-            <dd>{andeanCaravanSections.length} connected ways to enter</dd>
+            <dd>{andeanCaravan.sections.length} consecutive sections</dd>
           </div>
           <div>
-            <dt>Price</dt>
-            <dd>{andeanCaravan.price}</dd>
+            <dt>Group</dt>
+            <dd>Maximum {andeanCaravan.groupMax}</dd>
           </div>
         </dl>
         <div className={styles.actions}>
@@ -72,27 +74,12 @@ export default function CaravansPage() {
         </div>
       </section>
 
-      <section
-        className={styles.sections}
-        aria-labelledby="andean-sections-heading"
-      >
-        <header>
-          <p>The Andean Caravan / sections</p>
-          <h2 id="andean-sections-heading">
-            {andeanCaravanSections.length} connected ways to enter
-          </h2>
-        </header>
-        <RouteIndex />
-      </section>
-
-      <CaravanRouteMap />
-
       <section className={styles.future} aria-labelledby="future-heading">
-        <p>Collection architecture / future routes</p>
-        <h2 id="future-heading">The field can grow. The facts have not been supplied yet.</h2>
+        <p>The collection / future routes</p>
+        <h2 id="future-heading">The collection will grow route by route.</h2>
         <p>
-          Clearly labelled placeholder, future caravan regions, dates and
-          operating details require approved source material before publication.
+          Future caravans will appear here only when their route, dates and
+          operating details are ready to be published clearly.
         </p>
       </section>
     </main>

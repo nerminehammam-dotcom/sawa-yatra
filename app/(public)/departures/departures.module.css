@@ -32,6 +32,11 @@
   text-transform: uppercase;
 }
 
+.introductionCopy > p:first-child a {
+  color: inherit;
+  text-underline-offset: 0.2em;
+}
+
 /* Fixed 7 August 2026. Was clamp(4rem, 8vw, 8.5rem) in a max-width: 10ch
    column, so on a wide screen "Choose where the road becomes yours." rendered
    at ~136px and wrapped to five or six lines, overflowing the fixed-height
@@ -152,13 +157,97 @@
 }
 
 .map {
-  scroll-margin-top: calc(var(--nav-height) + var(--space-6));
+  scroll-margin-top: var(--space-6);
   border-bottom: var(--border-hairline) solid var(--ink);
+}
+
+.mapTextEquivalent {
+  background: color-mix(in srgb, var(--olive) 18%, var(--paper));
+  border-top: var(--border-hairline) solid var(--ink);
+}
+
+.mapTextEquivalent summary {
+  min-height: var(--touch-min);
+  align-content: center;
+  padding: var(--space-4) var(--page-gutter);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.mapTextEquivalent ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+  width: min(100%, var(--content-max));
+  margin: 0 auto;
+  padding: var(--space-4) var(--page-gutter) var(--space-8);
+  list-style: none;
+}
+
+.mapTextEquivalent li {
+  display: grid;
+  align-content: start;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--paper);
+  border: var(--border-hairline) solid var(--ink);
+}
+
+.mapTextEquivalent h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-title);
+}
+
+.mapTextEquivalent li > p {
+  line-height: 1.55;
+}
+
+.mapTextEquivalent dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding-top: var(--space-3);
+  border-top: var(--border-hairline) solid var(--ink);
+}
+
+.mapTextEquivalent dd {
+  margin: var(--space-1) 0 0;
+}
+
+.mapTextLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--page-gutter);
+  background: var(--paper);
+  border-top: var(--border-hairline) solid var(--ink);
+}
+
+.mapTextLink p {
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+}
+
+.mapTextLink a {
+  display: inline-flex;
+  min-height: var(--touch-min);
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.mapTextLink a:hover,
+.mapTextLink a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .sections {
   padding: var(--section-space) var(--page-gutter);
-  scroll-margin-top: calc(var(--nav-height) + var(--space-6));
+  scroll-margin-top: var(--space-6);
 }
 
 .sections header {
@@ -255,7 +344,7 @@
 }
 
 .information {
-  scroll-margin-top: calc(var(--nav-height) + var(--space-6));
+  scroll-margin-top: var(--space-6);
 }
 
 .information > div + div,
@@ -302,6 +391,15 @@
 }
 
 @media (max-width: 767px) {
+  .mapTextEquivalent ol {
+    grid-template-columns: 1fr;
+  }
+
+  .mapTextLink {
+    align-items: start;
+    flex-direction: column;
+  }
+
   .introduction,
   .caravan,
   .joining,

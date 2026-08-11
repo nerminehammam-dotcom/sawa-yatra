@@ -59,7 +59,7 @@ export default function HowItWorksPage() {
           </div>
           <div className={styles.featuredCopy}>
             <p className={styles.cardLabel}>Open for interest</p>
-            <h3>Caravan — hop on, hop off</h3>
+            <h3>Caravan — join and leave by section</h3>
             <p className={styles.panelSummary}>
               One long overland route, travelled together. Join for a single
               section, combine several, or ride the whole 71-day road. One

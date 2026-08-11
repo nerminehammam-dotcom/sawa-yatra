@@ -1,58 +1,169 @@
-import { createPageMetadata } from "@/app/_metadata";
-import { andeanCaravanMapChapters } from "@/content/andean-caravan-map";
+import Link from "next/link";
 
-import { CaravanRouteMap } from "../../_components/CaravanRouteMap";
+import { createPageMetadata } from "@/app/_metadata";
+import { Arrow } from "@/components/ui/Arrow";
+import { andeanCaravanMapChapters } from "@/content/andean-caravan-map";
+import {
+  getCanonicalCaravanOverview,
+  getCanonicalStoneRoadPageData,
+} from "@/content/caravan/page-data";
 
 import styles from "./route-map.module.css";
 
 export const metadata = createPageMetadata("/caravans/andean/route-map");
 
 export default function AndeanRouteMapPage() {
-  return (
-    <main id="main-content" tabIndex={-1}>
-      {/* This route rendered the map and nothing else, so its only heading was
-          the map's own h3 and the page had no h1 at all. The wording is the
-          approved route title from content/site.ts, not new copy; it is
-          visually hidden so the page design is unchanged. */}
-      <h1 className="sr-only">Andean Caravan route map</h1>
-      <CaravanRouteMap headingLevel={2} />
+  const overview = getCanonicalCaravanOverview();
+  const stoneRoad = getCanonicalStoneRoadPageData();
 
-      {/* Constitution §5/§10: every map has a static, labelled equivalent
-          carrying the same information. The route, in reading order. */}
+  return (
+    <main className={styles.page} id="main-content" tabIndex={-1}>
+      <header className={styles.intro}>
+        <p className={styles.eyebrow}>
+          <Link href="/caravans">Caravans</Link> /{" "}
+          <Link href="/caravans/andean">The Andean Caravan</Link> / Each stop
+        </p>
+        <h1>Each stop, in travelling order.</h1>
+        <p className={styles.lede}>
+          A text-first companion to Maps: the principal route stops, every
+          travel day, transport modes, joining gates, the Cusco short-form
+          exception and the included exit flight.
+        </p>
+        <div className={styles.introActions}>
+          <Link className={styles.primaryAction} href="/caravans/andean#full-route-map">
+            Open Maps <Arrow />
+          </Link>
+          <Link href="/caravans/andean-caravan/how-it-works">
+            Choose where to join and leave <Arrow />
+          </Link>
+        </div>
+      </header>
+
       <section className={styles.staticRoute} aria-labelledby="static-route-heading">
-        <h2 id="static-route-heading">The route, in order</h2>
-        <ol className={styles.chapters}>
-          {andeanCaravanMapChapters.map((chapter) => (
-            <li key={chapter.id}>
-              <article className={styles.chapter}>
-                <p className={styles.chapterNumber}>{chapter.id}</p>
-                <h3>{chapter.title}</h3>
-                <p className={styles.route}>{chapter.route} · {chapter.days} days</p>
-                <p>{chapter.movement}</p>
-                {"routeGroups" in chapter && chapter.routeGroups ? (
-                  <div className={styles.routeGroups}>
-                    {chapter.routeGroups.map((group) => (
-                      <p key={group.label}>
-                        <strong>{group.label}:</strong> {group.places.join(" → ")}
-                      </p>
-                    ))}
-                  </div>
-                ) : (
-                  <p>{chapter.places.join(" → ")}</p>
-                )}
-                <dl>
-                  <div><dt>Join</dt><dd>{chapter.join}</dd></div>
-                  <div><dt>Leave</dt><dd>{chapter.leave}</dd></div>
-                </dl>
-              </article>
-            </li>
-          ))}
+        <header className={styles.routeHeader}>
+          <p>Four joinable sections</p>
+          <h2 id="static-route-heading">
+            Lima to Patagonia, with the included flight back to Santiago.
+          </h2>
+          <p>
+            Each numbered section corresponds to one atlas plate and one
+            consecutive part of the Caravan.
+          </p>
+        </header>
+
+        <ol className={styles.sections}>
+          {andeanCaravanMapChapters.map((section) => {
+            const sectionData = overview.sections.find(
+              ({ section: candidate }) => candidate.section_id === section.id,
+            );
+
+            return (
+              <li key={section.id}>
+                <article className={styles.sectionCard}>
+                  <p className={styles.sectionNumber}>{section.id}</p>
+                  <h3>{section.title}</h3>
+                  <p className={styles.route}>{section.route} · {section.days} days</p>
+                  <p className={styles.movement}>{section.movement}</p>
+                  {"routeGroups" in section && section.routeGroups ? (
+                    <div className={styles.routeGroups}>
+                      {section.routeGroups.map((group) => (
+                        <div key={group.label}>
+                          <h4>{group.label}</h4>
+                          <ol className={styles.stopList}>
+                            {group.places.map((place) => (
+                              <li key={`${group.label}-${place}`}>{place}</li>
+                            ))}
+                          </ol>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <ol className={styles.stopList}>
+                      {section.places.map((place) => (
+                        <li key={place}>{place}</li>
+                      ))}
+                    </ol>
+                  )}
+                  <dl className={styles.gates}>
+                    <div><dt>Join</dt><dd>{section.join}</dd></div>
+                    <div><dt>Leave</dt><dd>{section.leave}</dd></div>
+                  </dl>
+
+                  {sectionData ? (
+                    <details className={styles.dayIndex}>
+                      <summary>View all {sectionData.days.length} route days</summary>
+                      <ol>
+                        {sectionData.days.map((day) => (
+                          <li key={day.id}>
+                            <div>
+                              <span>Day {day.day}</span>
+                              <strong>{day.title}</strong>
+                            </div>
+                            <p>{day.route}</p>
+                            <dl>
+                              <div>
+                                <dt>Movement</dt>
+                                <dd>{day.movement}</dd>
+                              </div>
+                              <div>
+                                <dt>Sleep</dt>
+                                <dd>{day.sleep}</dd>
+                              </div>
+                            </dl>
+                          </li>
+                        ))}
+                      </ol>
+                    </details>
+                  ) : null}
+
+                  <Link className={styles.sectionLink} href={section.href}>
+                    Explore this section <Arrow />
+                  </Link>
+                </article>
+              </li>
+            );
+          })}
         </ol>
+
+        <aside className={styles.shortForm} aria-labelledby="short-form-heading">
+          <div>
+            <p>Short-form joining exception · Caravan days {stoneRoad.product.day_start}–{stoneRoad.product.day_end}</p>
+            <h3 id="short-form-heading">{stoneRoad.product.name}</h3>
+            <p>
+              {stoneRoad.gateFrom.name} → {stoneRoad.gateTo.name} · {stoneRoad.product.day_end - stoneRoad.product.day_start + 1} days
+            </p>
+          </div>
+          <div>
+            <p><strong>Join:</strong> {stoneRoad.gateFrom.name} · {stoneRoad.gateFrom.airport}</p>
+            <p><strong>Leave:</strong> {stoneRoad.gateTo.name} · {stoneRoad.gateTo.airport}</p>
+            <p>{stoneRoad.gateFrom.arrival_rule.text}</p>
+            <Link href="/caravans/andean/the-stone-road">
+              Explore the short form <Arrow />
+            </Link>
+          </div>
+        </aside>
+
         <p className={styles.note}>
-          Transport modes and route places match the four atlas plates. Detailed
-          timing, altitude and operating conditions live on each chapter page.
+          This index shows every published route day. Detailed narrative,
+          altitude, accommodation, demands and operating conditions live on
+          each section page.
         </p>
       </section>
+
+      <nav className={styles.nextSteps} aria-label="Continue planning the Andean Caravan">
+        <Link href="/caravans/andean#trip-documents">
+          <span>Documents</span>
+          <strong>Check the Trip PDFs status</strong>
+        </Link>
+        <Link href="/caravans/andean-caravan/how-it-works">
+          <span>Choose your run</span>
+          <strong>Plan where to join and leave</strong>
+        </Link>
+        <Link href="/register-interest">
+          <span>When you are ready</span>
+          <strong>Register your interest</strong>
+        </Link>
+      </nav>
     </main>
   );
 }

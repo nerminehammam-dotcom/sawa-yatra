@@ -21,10 +21,14 @@ interface ComingSoonPageProps {
   /** The full mailto subject line, when the default "notify me when … opens"
    *  framing is wrong (again, register-interest). */
   mailSubject?: string;
+  mailBody?: string;
   /** Copy for the email capture, so a page that is open for interest does not
    *  say "we will write once, when this section opens." */
   notifyIntro?: string;
   submitLabel?: string;
+  /** Use a normal site action instead of the email-app notification form. */
+  actionHref?: string;
+  actionNote?: string;
 }
 
 const defaultOnwardLinks: readonly OnwardLink[] = [
@@ -52,12 +56,18 @@ export function ComingSoonPage({
   onwardLinks = defaultOnwardLinks,
   label = "Coming soon",
   mailSubject,
+  mailBody,
   notifyIntro = "Leave your email and we will write once, when this section opens.",
   submitLabel = "Tell me when it opens",
+  actionHref,
+  actionNote,
 }: ComingSoonPageProps) {
-  const mailAction = `mailto:${contactEmail}?subject=${encodeURIComponent(
-    mailSubject ?? `Please notify me when ${notificationSubject} opens`,
-  )}`;
+  const mailAction = [
+    `mailto:${contactEmail}?subject=${encodeURIComponent(
+      mailSubject ?? `Please notify me when ${notificationSubject} opens`,
+    )}`,
+    mailBody ? `&body=${encodeURIComponent(mailBody)}` : "",
+  ].join("");
 
   return (
     <main className={styles.page} id="main-content" tabIndex={-1}>
@@ -68,28 +78,38 @@ export function ComingSoonPage({
 
         <hr className={styles.rule} />
 
-        <form
-          className={styles.notify}
-          action={mailAction}
-          method="post"
-          encType="text/plain"
-        >
-          <label htmlFor="coming-soon-email">{notifyIntro}</label>
-          <div className={styles.notifyRow}>
-            <input
-              id="coming-soon-email"
-              type="email"
-              name="email"
-              placeholder="you@example.com"
-              autoComplete="email"
-              required
-            />
-            <button type="submit">{submitLabel}</button>
+        {actionHref ? (
+          <div className={styles.notify}>
+            <p className={styles.actionIntro}>{notifyIntro}</p>
+            <Link className={styles.directAction} href={actionHref}>
+              {submitLabel}
+            </Link>
+            {actionNote ? <p className={styles.formNote}>{actionNote}</p> : null}
           </div>
-          <p className={styles.formNote}>
-            This opens your email app. Nothing is stored on this website.
-          </p>
-        </form>
+        ) : (
+          <form
+            className={styles.notify}
+            action={mailAction}
+            method="post"
+            encType="text/plain"
+          >
+            <label htmlFor="coming-soon-email">{notifyIntro}</label>
+            <div className={styles.notifyRow}>
+              <input
+                id="coming-soon-email"
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                autoComplete="email"
+                required
+              />
+              <button type="submit">{submitLabel}</button>
+            </div>
+            <p className={styles.formNote}>
+              This opens your email app. Nothing is stored on this website.
+            </p>
+          </form>
+        )}
 
         <nav className={styles.elsewhere} aria-label="Available Sawayatra sections">
           <p>In the meantime</p>

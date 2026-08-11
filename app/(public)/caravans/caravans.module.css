@@ -47,6 +47,14 @@
   display: block;
 }
 
+.heroCopy h1 span:last-child {
+  max-width: 13ch;
+  margin-top: var(--space-4);
+  color: var(--ink);
+  font-size: 0.56em;
+  line-height: 1;
+}
+
 .heroCopy > p:last-child {
   max-width: 34ch;
 }
@@ -89,7 +97,7 @@
 }
 
 .flagshipTitle h2 {
-  max-width: 8ch;
+  max-width: 10ch;
 }
 
 .facts {
@@ -214,27 +222,4 @@
     border-inline-start: 0;
     border-top: var(--border-strong) solid var(--ink);
   }
-}
-
-/* ---- The nine sections of the Andean Caravan ------------------------- */
-
-.sections {
-  border-bottom: var(--border-strong) solid var(--ink);
-}
-
-.sections > header {
-  display: grid;
-  gap: var(--space-3);
-  padding: clamp(3rem, 6vw, 6rem) var(--page-gutter) clamp(2rem, 4vw, 3rem);
-}
-
-.sections > header > p {
-  font-size: var(--fs-body);
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.sections > header h2 {
-  max-width: 14ch;
 }

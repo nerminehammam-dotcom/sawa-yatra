@@ -11,7 +11,7 @@ export const andeanCaravanEditorial: Readonly<
 > = {
   "sea-to-stone": {
     proposition:
-      "The Pacific is where this chapter begins; Puno’s altiplano is where it leaves us, by way of Colca, Cusco and Machu Picchu.",
+      "The Pacific is where this section begins; Puno’s altiplano is where it leaves us, by way of Colca, Cusco and Machu Picchu.",
     characterTitle: "Altitude is allowed to arrive slowly.",
     character:
       "Desert archaeology and long coastal roads lead to two quieter days in Arequipa, Colca’s 4,910 m pass, a flight to Cusco, two Machu Picchu entries and the day train to Puno.",
@@ -25,7 +25,7 @@ export const andeanCaravanEditorial: Readonly<
   },
   "both-shores": {
     proposition:
-      "Lake Titicaca holds both sides of this chapter: Puno and Amantaní, Copacabana and Isla del Sol, then La Paz and Sucre.",
+      "Lake Titicaca holds both sides of this section: Puno and Amantaní, Copacabana and Isla del Sol, then La Paz and Sucre.",
     characterTitle: "A border crossed at the pace of the lake.",
     character:
       "Both Shores moves by boat, steep island paths and the Kasani border on foot. After La Paz and Tiwanaku, the modern road drops into Coroico’s cloud forest. A protected Puno day keeps weather from becoming haste.",
