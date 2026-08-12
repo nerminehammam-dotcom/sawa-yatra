@@ -94,7 +94,7 @@ export const fieldDocumentContent = {
     highlights: ["not just your destination", "your Travel Self"],
     actions: [
       { label: "Meet your Travel Self", href: "/travel-self" },
-      { label: "Explore the Andean Caravan", href: "/caravans/andean" },
+      { label: "Explore the Andean Caravan", href: "/journeys/andean-caravan" },
     ],
     body: [
       "Sawayatra is a new way to travel. A way to find people who share not just your destination, but your pace, your curiosity, your passions and your sense of discovery. We call it your Travel Self.",

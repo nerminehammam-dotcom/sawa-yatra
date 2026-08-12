@@ -712,6 +712,87 @@
   background: var(--paper);
 }
 
+.howSteps {
+  display: grid;
+  gap: clamp(var(--space-8), 5vw, var(--space-16));
+  padding: var(--section-space) var(--page-gutter);
+  color: var(--paper);
+  background: var(--ink);
+  border-bottom: var(--border-strong) solid var(--signal-text);
+}
+
+.howStepsHeader {
+  display: grid;
+  max-width: var(--content-max);
+  gap: var(--space-4);
+  margin: 0 auto;
+}
+
+.howStepsHeader > p,
+.howStepsList > li > span {
+  color: var(--sun);
+  font-size: var(--fs-small);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.howStepsHeader h2 {
+  max-width: 12ch;
+  color: var(--pink);
+}
+
+.howStepsList {
+  display: grid;
+  max-width: var(--content-max);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin: 0 auto;
+  padding: 0;
+  border-top: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
+  list-style: none;
+}
+
+.howStepsList li {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  min-height: 18rem;
+  padding: var(--space-6);
+  border-right: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
+}
+
+.howStepsList li:nth-child(3n + 1) {
+  border-left: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
+}
+
+.howStepsList h3 {
+  color: var(--paper);
+  font-size: var(--fs-lead);
+}
+
+.howStepsList p {
+  font-size: var(--fs-small);
+  line-height: 1.55;
+}
+
+.howSteps > a {
+  justify-self: center;
+}
+
+@media (max-width: 900px) {
+  .howStepsList {
+    grid-template-columns: 1fr;
+  }
+
+  .howStepsList li,
+  .howStepsList li:nth-child(3n + 1) {
+    min-height: auto;
+    border-right: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
+    border-left: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
+  }
+}
+
 /* Replaced the tracked label that used to sit here. Centred to match what it
    replaced, and wrapping rather than shrinking on narrow screens so neither
    label is ever truncated. */

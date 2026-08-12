@@ -1,0 +1,10 @@
+.page { display: grid; gap: var(--space-10); min-height: 60vh; padding: var(--section-space) var(--page-gutter); background: var(--paper); }
+.page header { display: grid; gap: var(--space-4); }
+.page header > p { color: var(--signal-text); font-family: var(--font-mono); text-transform: uppercase; }
+.page h1 { max-width: 12ch; color: var(--signal-text); }
+.page h2 { color: var(--signal-text); }
+.page > section { display: grid; max-width: 58rem; gap: var(--space-5); padding: var(--space-8); border: var(--border-strong) solid var(--ink); }
+.page p,.page li { max-width: 58ch; line-height: 1.55; }
+.page nav { display: flex; flex-wrap: wrap; gap: var(--space-5); }
+.page a { color: var(--ink); font-weight: 600; text-underline-offset: 4px; }
+

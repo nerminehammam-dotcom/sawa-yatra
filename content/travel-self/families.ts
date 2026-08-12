@@ -33,3 +33,11 @@ export const FAMILIES: Readonly<Record<FamilyKey, TravelFamily>> = {
 
 export const FAMILY_KEYS = Object.keys(FAMILIES) as FamilyKey[];
 export const FAMILY_LIST = FAMILY_KEYS.map((key) => FAMILIES[key]);
+
+export function familySlug(family: Pick<TravelFamily, "name">): string {
+  return family.name.toLowerCase().replace(/^the\s+/, "").replace(/\s+/g, "-");
+}
+
+export const FAMILY_BY_SLUG = Object.fromEntries(
+  FAMILY_LIST.map((family) => [familySlug(family), family]),
+) as Readonly<Record<string, TravelFamily>>;

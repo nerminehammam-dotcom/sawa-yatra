@@ -1,30 +1,27 @@
 import type { MetadataRoute } from "next";
 
-import { canonicalSectionSlugs } from "@/content/caravan/page-data";
-import { routeMetadata } from "@/content/site";
+import {
+  FAMILY_LIST,
+  familySlug,
+} from "@/content/travel-self/families";
 import { absoluteUrl } from "@/lib/site-url";
+import { journeys } from "@/lib/sawayatra/server";
+
+const PUBLIC_ROUTES = [
+  "/",
+  "/how-it-works",
+  "/journeys",
+  "/travel-self",
+  "/travel-self/take",
+  "/club",
+  "/club/apply",
+  "/who-we-are",
+] as const;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticEntries: MetadataRoute.Sitemap = routeMetadata
-    .filter(
-      (entry) =>
-        entry.path !== "/departures/[slug]" &&
-        entry.path !== "/departures" &&
-        entry.path !== "/caravans/the-andean-caravan" &&
-        entry.path !== "/joining-points" &&
-        entry.path !== "/do-it-yourself" &&
-        entry.path !== "/membership" &&
-        entry.path !== "/about" &&
-        entry.noIndex !== true &&
-        entry.descriptionStatus !== "PLACEHOLDER",
-    )
-    .map((entry) => ({ url: absoluteUrl(entry.path) }));
-
-  const journeyEntries: MetadataRoute.Sitemap = [
-    ...canonicalSectionSlugs.map(
-      (slug) => `/caravans/andean/${slug}` as const,
-    ),
+  return [
+    ...PUBLIC_ROUTES,
+    ...journeys.map((journey) => `/journeys/${journey.slug}` as const),
+    ...FAMILY_LIST.map((family) => `/travel-self/${familySlug(family)}` as const),
   ].map((path) => ({ url: absoluteUrl(path) }));
-
-  return [...staticEntries, ...journeyEntries];
 }

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { createPageMetadata } from "@/app/_metadata";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import { fieldDocumentContent } from "@/content/field-document";
+import { HOW_IT_WORKS_STEPS } from "@/content/how-it-works-v24";
 
 import styles from "./home.module.css";
 
@@ -86,6 +87,25 @@ export default function HomePage() {
             <span className={styles.homeHeroRoman}>together.</span>
           </h1>
         </div>
+      </section>
+
+      <section className={styles.howSteps} aria-labelledby="home-how-heading">
+        <header className={styles.howStepsHeader}>
+          <p>How Sawayatra works</p>
+          <h2 id="home-how-heading">The people are the journey.</h2>
+        </header>
+        <ol className={styles.howStepsList}>
+          {HOW_IT_WORKS_STEPS.map((step) => (
+            <li key={step.number}>
+              <span>{step.number}</span>
+              <h3>{step.title}</h3>
+              <p>{step.paragraphs[0]}</p>
+            </li>
+          ))}
+        </ol>
+        <ButtonLink href="/how-it-works" variant="secondary">
+          Read how it works
+        </ButtonLink>
       </section>
 
       <section className={styles.nameStory} aria-label="Sawayatra">

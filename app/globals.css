@@ -24,40 +24,14 @@ html {
   text-size-adjust: 100%;
 }
 
-/* §6.2 — General Sans, the operational face. Self-hosted; plain @font-face
-   rather than next/font so a missing file degrades to the system sans at
-   runtime instead of failing the build. Drop the three woff2 files from
-   fontshare.com into public/fonts/general-sans/ (see README there). */
-@font-face {
-  font-family: "General Sans";
-  src: url("/fonts/general-sans/general-sans-400.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "General Sans";
-  src: url("/fonts/general-sans/general-sans-500.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "General Sans";
-  src: url("/fonts/general-sans/general-sans-600.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
 body {
   min-width: 320px;
   min-height: 100%;
   margin: 0;
   color: var(--ink);
   background: var(--paper);
-  /* §6.2: the default register is editorial body — Fraunces. Operational
-     components opt in to var(--font-read) (General Sans) explicitly. */
+  /* The default register is editorial body — Fraunces. Operational
+     components opt in to var(--font-read) explicitly. */
   font-family: var(--font-display);
   font-optical-sizing: auto;
   /* §10: sustained body ≥18px — floor raised from 16px. */

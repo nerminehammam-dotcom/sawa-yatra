@@ -97,18 +97,10 @@
   --soft-blue: var(--blue); /* fixed: was --olive (see --dusty-blue). Genuine-olive soft grounds use --soft-olive. */
   --hairline: var(--ink);
 
-  /* §6.2 face split (constitution v2.5): Fraunces is the voice of the club —
-     display, headings, pull quotes, editorial body. General Sans is the
-     operational face — nav, forms, questionnaire, buttons, tables, prices,
-     dates, itineraries, captions, legal. The former single-family system
-     (opsz doing the register work) was overruled by §6.2: optical size works
-     within Fraunces, it does not substitute for the face split.
-     General Sans is self-hosted at public/fonts/general-sans/ (see the README
-     there — files come from fontshare.com under the ITF FFL); until the files
-     are dropped in, the stack falls to the system sans, never to Fraunces. */
+  /* Fraunces carries the editorial voice. The native UI stack handles nav,
+     forms, questionnaires, buttons, tables, dates, captions and legal copy. */
   --font-display: var(--font-fraunces, Georgia, serif);
-  --font-read: "General Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, sans-serif;
+  --font-read: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   /* A narrow annotation role chosen 9 Aug 2026: legal notes, limitations,
      pricing conditions and route footnotes only. It never replaces the
      editorial or operational faces for primary content. */

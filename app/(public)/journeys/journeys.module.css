@@ -6,6 +6,50 @@
   gap: var(--space-16);
 }
 
+.header > p:first-child {
+  color: var(--signal-text);
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.v24CardImage {
+  position: relative;
+  min-height: 30rem;
+  margin: 0;
+  overflow: hidden;
+}
+
+.v24CardImage img {
+  object-fit: cover;
+}
+
+.v24CardCopy {
+  display: grid;
+  align-content: center;
+  gap: var(--space-5);
+  padding: clamp(var(--space-6), 5vw, var(--space-16));
+  background: var(--sun);
+}
+
+.v24CardCopy > p:last-child {
+  max-width: 48ch;
+  line-height: 1.55;
+}
+
+.cardList > .card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  padding: 0;
+}
+
+@media (max-width: 800px) {
+  .cardList > .card {
+    grid-template-columns: 1fr;
+  }
+}
+
+
 .header {
   display: grid;
   gap: var(--space-4);

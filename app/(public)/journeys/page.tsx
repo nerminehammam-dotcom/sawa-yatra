@@ -1,8 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { createPageMetadata } from "@/app/_metadata";
-import { ProvenanceBadge } from "@/components/journeys/ProvenanceBadge";
-import { fixedJourneys } from "@/content/journeys-catalog";
+import { journeys } from "@/lib/sawayatra/server";
 
 import styles from "./journeys.module.css";
 
@@ -10,30 +10,40 @@ export const metadata = createPageMetadata("/journeys");
 
 export default function JourneysPage() {
   return (
-    <main className={styles.page}>
+    <main className={styles.page} id="main-content" tabIndex={-1}>
       <header className={styles.header}>
-        <h1>Journeys</h1>
+        <p>Journeys / every road is public to read</p>
+        <h1>Find a journey.</h1>
         <p className={styles.lede}>
-          The Andean Caravan is one continuous route. Open it to choose one of
-          four sections, combine consecutive sections, or travel the complete
-          road from Lima to Balmaceda.
+          Where it goes, how long it takes, what it costs and what it asks of
+          you. Membership changes what you can do, not what a Caravan lets you
+          read.
         </p>
       </header>
 
-      <section className={styles.group} aria-label="Available journeys">
+      <section className={styles.group} aria-label="All journeys">
         <ul className={styles.cardList}>
-          {fixedJourneys.map((journey) => (
+          {journeys.map((journey) => (
             <li key={journey.id} className={styles.card}>
-              <div className={styles.cardTop}>
-                <ProvenanceBadge provenance={journey.provenance} />
-                <span className={styles.duration}>
-                  {journey.durationDays} days
-                </span>
+              <figure className={styles.v24CardImage}>
+                <Image
+                  src={journey.heroImage}
+                  alt={journey.heroAlt}
+                  fill
+                  sizes="(max-width: 760px) 100vw, 50vw"
+                />
+              </figure>
+              <div className={styles.v24CardCopy}>
+                <div className={styles.cardTop}>
+                  <span>{journey.type === "caravan" ? "Caravan" : "Open journey"}</span>
+                  <span className={styles.duration}>{journey.duration}</span>
+                </div>
+                <h2 className={styles.cardTitle}>
+                  <Link href={`/journeys/${journey.slug}`}>{journey.title}</Link>
+                </h2>
+                <p className={styles.cardRoute}>{journey.route}</p>
+                <p>{journey.groupPortrait.intended}</p>
               </div>
-              <h3 className={styles.cardTitle}>
-                <Link href={journey.href}>{journey.title}</Link>
-              </h3>
-              <p className={styles.cardRoute}>{journey.route}</p>
             </li>
           ))}
         </ul>

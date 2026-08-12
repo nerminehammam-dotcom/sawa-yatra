@@ -551,10 +551,10 @@ export function TravelSelfQuiz({ children }: { children?: ReactNode }) {
           <h2 id="onward-title">{COPY.onward.heading}</h2>
           <p>{COPY.onward.body}</p>
           <div className={styles.onwardActions}>
-            <ButtonLink href="/register-interest" variant="primary">
+            <ButtonLink href="/club/apply" variant="primary">
               {COPY.onward.register}
             </ButtonLink>
-            <ButtonLink href="/caravans/andean" variant="secondary">
+            <ButtonLink href="/journeys/andean-caravan" variant="secondary">
               {COPY.onward.explore}
             </ButtonLink>
           </div>

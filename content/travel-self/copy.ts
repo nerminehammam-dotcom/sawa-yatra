@@ -91,8 +91,8 @@ export const TRAVEL_SELF_COPY = {
   },
   onward: {
     heading: "Now you know how you travel.",
-    body: "Membership is not open yet. Register your interest and we will write to you first — when dates, joining points and membership open. No account, no payment.",
-    register: "Register your interest",
+    body: "The result is yours without an account or payment. Join the free club when you want to save it to your membership profile and use it on a journey.",
+    register: "Join the club",
     explore: "See the Andean Caravan",
   },
   sharePronunciation: "sa · wa · ya · tra",

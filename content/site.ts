@@ -124,6 +124,9 @@ export const routeMetadata = ([
   ["joining-points", "/joining-points", "Joining points | Sawayatra"],
   ["how-it-works", "/how-it-works", "How it works | Sawayatra"],
   ["travel-self", "/travel-self", "Meet your Travel Self | Sawayatra"],
+  ["travel-self-take", "/travel-self/take", "Take the Travel Self | Sawayatra"],
+  ["club", "/club", "The Club | Sawayatra"],
+  ["club-apply", "/club/apply", "Apply to the club | Sawayatra"],
   ["do-it-yourself", "/do-it-yourself", "Do It Yourself | Sawayatra"],
   ["departures", "/departures", "Departures | Sawayatra"],
   ["departure-dates", "/departure-dates", "Browse by departure date | Sawayatra"],
@@ -170,7 +173,6 @@ export const routeMetadata = ([
     id === "not-found" ||
     id === "who-else-is-travelling" ||
     id === "departure-dates" ||
-    id === "journeys" ||
     id === "create-your-own-journey" ||
     id === "partners" ||
     id === "register-interest" ||

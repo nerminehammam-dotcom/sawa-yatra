@@ -32,6 +32,15 @@ export type StaticRoute =
   | "/caravans/the-andean-caravan"
   | "/joining-points"
   | "/travel-self"
+  | "/travel-self/take"
+  | "/club"
+  | "/club/apply"
+  | "/my"
+  | "/my/travel-self"
+  | "/my/journeys"
+  | "/my/connections"
+  | "/my/account"
+  | "/my/application"
   | "/departures"
   | "/departure-dates"
   | "/do-it-yourself"
@@ -51,9 +60,17 @@ export type StaticRoute =
   | "/accessibility"
   | "/404";
 
-export type JourneyRoute = `/departures/${string}` | `/caravans/${string}`;
+export type JourneyRoute =
+  | `/departures/${string}`
+  | `/caravans/${string}`
+  | `/journeys/${string}`
+  | `/travel-self/${string}`;
 export type SiteRoute = StaticRoute | JourneyRoute;
-export type RouteTemplate = StaticRoute | "/departures/[slug]";
+export type RouteTemplate =
+  | StaticRoute
+  | "/departures/[slug]"
+  | "/journeys/[journey]"
+  | "/travel-self/[type]";
 
 export interface CallToAction extends ContentStatusRecord {
   readonly label: string;
