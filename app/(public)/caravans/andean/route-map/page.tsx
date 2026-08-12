@@ -20,8 +20,8 @@ export default function AndeanRouteMapPage() {
     <main className={styles.page} id="main-content" tabIndex={-1}>
       <header className={styles.intro}>
         <p className={styles.eyebrow}>
-          <Link href="/caravans">Caravans</Link> /{" "}
-          <Link href="/caravans/andean">The Andean Caravan</Link> / Each stop
+          <Link href="/journeys/caravans">Caravans</Link> /{" "}
+          <Link href="/journeys/caravans/andean-caravan">The Andean Caravan</Link> / Each stop
         </p>
         <h1>Each stop, in travelling order.</h1>
         <p className={styles.lede}>
@@ -30,10 +30,10 @@ export default function AndeanRouteMapPage() {
           exception and the included exit flight.
         </p>
         <div className={styles.introActions}>
-          <Link className={styles.primaryAction} href="/caravans/andean#full-route-map">
+          <Link className={styles.primaryAction} href="/journeys/caravans/andean-caravan#full-route-map">
             Open Maps <Arrow />
           </Link>
-          <Link href="/caravans/andean-caravan/how-it-works">
+          <Link href="/journeys/caravans/andean-caravan/joining-points">
             Choose where to join and leave <Arrow />
           </Link>
         </div>
@@ -137,7 +137,7 @@ export default function AndeanRouteMapPage() {
             <p><strong>Join:</strong> {stoneRoad.gateFrom.name} · {stoneRoad.gateFrom.airport}</p>
             <p><strong>Leave:</strong> {stoneRoad.gateTo.name} · {stoneRoad.gateTo.airport}</p>
             <p>{stoneRoad.gateFrom.arrival_rule.text}</p>
-            <Link href="/caravans/andean/the-stone-road">
+            <Link href="/journeys/caravans/andean-caravan/the-stone-road">
               Explore the short form <Arrow />
             </Link>
           </div>
@@ -151,11 +151,11 @@ export default function AndeanRouteMapPage() {
       </section>
 
       <nav className={styles.nextSteps} aria-label="Continue planning the Andean Caravan">
-        <Link href="/caravans/andean#trip-documents">
+        <Link href="/journeys/caravans/andean-caravan#trip-documents">
           <span>Documents</span>
           <strong>Check the Trip PDFs status</strong>
         </Link>
-        <Link href="/caravans/andean-caravan/how-it-works">
+        <Link href="/journeys/caravans/andean-caravan/joining-points">
           <span>Choose your run</span>
           <strong>Plan where to join and leave</strong>
         </Link>

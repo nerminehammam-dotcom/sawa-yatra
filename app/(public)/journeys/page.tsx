@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { createPageMetadata } from "@/app/_metadata";
+import { journeyProductNavigation } from "@/content/navigation";
+import { journeyPublicHrefForSlug } from "@/lib/sawayatra/journey-registry";
 import { journeys } from "@/lib/sawayatra/server";
 
 import styles from "./journeys.module.css";
@@ -21,6 +23,16 @@ export default function JourneysPage() {
         </p>
       </header>
 
+      <nav aria-label="Journey products">
+        <ul className={styles.productList}>
+          {journeyProductNavigation.map((product) => (
+            <li key={product.id}>
+              <Link href={product.href}>{product.label}</Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
       <section className={styles.group} aria-label="All journeys">
         <ul className={styles.cardList}>
           {journeys.map((journey) => (
@@ -39,7 +51,11 @@ export default function JourneysPage() {
                   <span className={styles.duration}>{journey.duration}</span>
                 </div>
                 <h2 className={styles.cardTitle}>
-                  <Link href={`/journeys/${journey.slug}`}>{journey.title}</Link>
+                  <Link
+                    href={journeyPublicHrefForSlug(journey.slug) ?? "/journeys"}
+                  >
+                    {journey.title}
+                  </Link>
                 </h2>
                 <p className={styles.cardRoute}>{journey.route}</p>
                 <p>{journey.groupPortrait.intended}</p>

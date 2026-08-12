@@ -697,17 +697,9 @@
 
 /* ---- The name ------------------------------------------------------- */
 
-/* ---- The name --------------------------------------------------------
-   A large proposition followed by a two-part name origin. The paired labels
-   meet at the centre to read as "sawayatra", with each definition directly
-   beneath the part it explains.                                           */
-
 .nameStory {
-  display: grid;
-  justify-items: center;
-  width: min(58rem, 100%);
-  margin-inline: auto;
-  padding: clamp(6rem, 14vh, 11rem) var(--page-gutter);
+  width: 100%;
+  padding: clamp(var(--space-24), 12vw, var(--space-32)) var(--page-gutter);
   color: var(--ink);
   background: var(--paper);
 }
@@ -737,8 +729,10 @@
 }
 
 .howStepsHeader h2 {
-  max-width: 12ch;
+  max-width: none;
   color: var(--pink);
+  font-size: clamp(1.2rem, 6vw, 6.25rem);
+  white-space: nowrap;
 }
 
 .howStepsList {
@@ -793,179 +787,106 @@
   }
 }
 
-/* Replaced the tracked label that used to sit here. Centred to match what it
-   replaced, and wrapping rather than shrinking on narrow screens so neither
-   label is ever truncated. */
-.nameStoryActions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-3);
-  justify-content: center;
-  margin-bottom: clamp(2.5rem, 5vw, 4rem);
-}
-
-@media (max-width: 520px) {
-  .nameStoryActions {
-    display: grid;
-    justify-items: stretch;
-    width: 100%;
-  }
-}
-
-.nameStoryStatement {
-  max-width: 30ch;
-  font-family: var(--font-display);
-  font-size: var(--fs-title);
-  font-optical-sizing: auto;
-  font-weight: 500;
-  line-height: 1.24;
-  letter-spacing: -0.015em;
-  text-wrap: pretty;
-}
-
-/* The wash. The palette is closed, so this is sun let down into paper rather
-   than a new colour — a warm tint a few percent off the ground, the way the
-   reference sits a few percent off its own. Ink over it stays far above any
-   contrast threshold, and mark's default yellow is overridden outright. */
-.nameStoryStatement mark {
-  padding: 0.06em 0.12em;
-  color: var(--ink);
-  background: color-mix(in srgb, var(--sun) 38%, var(--paper));
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
-
-.nameStoryColumns {
+.nameStoryInner {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(1.5rem, 3.5vw, 3.5rem);
-  max-width: 46rem;
-  margin-top: clamp(2.5rem, 5vw, 4rem);
-}
-
-.nameStoryColumns p {
-  font-family: var(--font-read);
-  font-size: var(--fs-body);
-  font-optical-sizing: auto;
-  font-weight: 400;
-  line-height: 1.6;
-  text-wrap: pretty;
-  hanging-punctuation: first;
-}
-
-.nameOrigin {
-  display: grid;
-  width: min(46rem, 100%);
-  margin-top: clamp(2.5rem, 5vw, 4rem);
-}
-
-.nameOriginIntroduction,
-.nameOriginConclusion,
-.nameOriginDefinition {
-  margin: 0;
-  font-family: var(--font-read);
-  font-size: var(--fs-body);
-  font-optical-sizing: auto;
-  font-weight: 400;
-  line-height: 1.6;
-  text-wrap: pretty;
-}
-
-.nameOriginIntroduction {
-  max-width: 34ch;
+  max-width: var(--content-max);
   margin-inline: auto;
-  margin-bottom: var(--space-8);
-  text-align: center;
 }
 
-.nameOriginParts {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.nameOriginPart {
-  display: grid;
-  align-content: start;
-  padding-inline: clamp(var(--space-5), 3vw, var(--space-10));
-}
-
-.nameOriginPart:first-child {
-  padding-inline-start: 0;
-  border-inline-end: var(--border-hairline) solid var(--ink);
-}
-
-.nameOriginPart:last-child {
-  padding-inline-end: 0;
-}
-
-.nameOriginLanguage {
-  margin: 0 0 var(--space-2);
+.nameStoryHeading {
+  margin: 0 0 clamp(var(--space-16), 8vw, var(--space-24));
+  color: color-mix(in srgb, var(--ink) 68%, var(--paper));
   font-family: var(--font-read);
-  font-size: var(--fs-eyebrow);
+  font-size: var(--fs-small);
   font-weight: 500;
-  letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
+  letter-spacing: 0.28em;
+  text-align: center;
   text-transform: uppercase;
 }
 
-.nameOriginWord {
-  margin: 0;
-  padding-bottom: var(--space-4);
-  color: var(--signal-text);
+.nameStoryOrigins {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(var(--space-16), 10vw, var(--space-32));
+}
+
+.nameStoryOrigin {
+  display: grid;
+  align-content: start;
+}
+
+.nameStoryLanguage {
+  margin: 0 0 var(--space-8);
+  color: color-mix(in srgb, var(--ink) 68%, var(--paper));
+  font-family: var(--font-read);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.nameStoryWord {
+  margin: 0 0 var(--space-6);
+  color: var(--ink);
   font-family: var(--font-display);
   font-size: var(--fs-display-3);
   font-optical-sizing: auto;
   font-weight: 500;
-  line-height: 0.9;
-  border-bottom: var(--border-strong) solid var(--signal-text);
+  line-height: 0.95;
+  letter-spacing: -0.025em;
 }
 
-.nameOriginPart:first-child .nameOriginLanguage,
-.nameOriginPart:first-child .nameOriginWord {
-  text-align: right;
+.nameStoryDefinition {
+  max-width: 44ch;
+  margin: 0;
+  color: color-mix(in srgb, var(--ink) 72%, var(--paper));
+  font-family: var(--font-read);
+  font-size: var(--fs-lead);
+  font-optical-sizing: auto;
+  font-weight: 400;
+  line-height: var(--leading-body);
+  text-wrap: pretty;
 }
 
-.nameOriginDefinition {
-  padding-top: var(--space-5);
+.nameStoryQuote {
+  width: min(72rem, 100%);
+  margin: clamp(var(--space-16), 9vw, var(--space-24)) auto 0;
+  padding: 0;
+  border: 0;
 }
 
-.nameOriginConclusion {
-  max-width: 54ch;
-  margin: var(--space-10) auto 0;
-  padding: var(--space-6);
+.nameStoryQuote p {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--fs-title);
+  font-optical-sizing: auto;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: -0.012em;
   text-align: center;
-  background: color-mix(in srgb, var(--sun) 24%, var(--paper));
+  text-wrap: balance;
 }
 
 @media (max-width: 700px) {
-  .nameStoryStatement {
+  .nameStory {
+    padding-block: var(--space-20);
+  }
+
+  .nameStoryHeading {
+    margin-bottom: var(--space-16);
+  }
+
+  .nameStoryOrigins {
+    grid-template-columns: 1fr;
+    gap: var(--space-16);
+  }
+
+  .nameStoryQuote {
     max-width: 100%;
-  }
-
-  .nameStoryColumns {
-    grid-template-columns: 1fr;
-  }
-
-  .nameOriginParts {
-    grid-template-columns: 1fr;
-  }
-
-  .nameOriginPart {
-    padding-inline: 0;
-  }
-
-  .nameOriginPart:first-child {
-    padding-bottom: var(--space-8);
-    border-inline-end: 0;
-  }
-
-  .nameOriginPart:last-child {
-    padding-top: var(--space-8);
-    border-top: var(--border-hairline) solid var(--ink);
-  }
-
-  .nameOriginPart:first-child .nameOriginLanguage,
-  .nameOriginPart:first-child .nameOriginWord {
-    text-align: left;
+    margin-top: var(--space-20);
   }
 }
 

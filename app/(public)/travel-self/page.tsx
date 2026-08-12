@@ -4,7 +4,6 @@ import { createPageMetadata } from "@/app/_metadata";
 import { FAMILIES, type FamilyKey } from "@/content/travel-self/families";
 import { absoluteUrl } from "@/lib/site-url";
 
-import { TravelSelfQuiz } from "./TravelSelfQuiz";
 import { TravelSelfIntro } from "./TravelSelfIntro";
 
 function isFamilyKey(value: string | undefined): value is FamilyKey {
@@ -39,9 +38,7 @@ export async function generateMetadata({
 export default function TravelSelfPage() {
   return (
     <main id="main-content" tabIndex={-1}>
-      <TravelSelfQuiz>
-        <TravelSelfIntro />
-      </TravelSelfQuiz>
+      <TravelSelfIntro />
     </main>
   );
 }

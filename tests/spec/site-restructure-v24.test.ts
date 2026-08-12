@@ -7,6 +7,9 @@ import { ClaimRegistry, issueClaimToken } from "@/lib/sawayatra/claims";
 import {
   createJourney,
   editPassport,
+  formOpenJourneyGroup,
+  JOURNEY_TYPES,
+  mayWriteGroupPortrait,
   SIGNED_OUT_VIEWER,
   type Passport,
   type ViewerContext,
@@ -49,6 +52,7 @@ function journey(overrides: Partial<Parameters<typeof createJourney>[0]> = {}) {
     groupFormedAt: null,
     originatorType: "club",
     originatorId: null,
+    operatorId: null,
     groupPortrait: { intended: "For the road.", actual: "Five read the geology." },
     route: "A → B",
     duration: "10 days",
@@ -86,10 +90,15 @@ function passport(memberId: string): Passport {
 }
 
 describe("v2.4 journey records and publication gates", () => {
+  it("models exactly two journey types", () => {
+    expect(JOURNEY_TYPES).toEqual(["caravan", "open"]);
+  });
+
   it("forces every caravan public and editorially approved", () => {
     const record = journey({ visibility: "members", publicationState: "draft" });
     expect(record.visibility).toBe("public");
     expect(record.publicationState).toBe("approved");
+    expect(record.operatorType).toBe("club");
   });
 
   it("defaults open journeys to members-only drafts", () => {
@@ -101,6 +110,62 @@ describe("v2.4 journey records and publication gates", () => {
     });
     expect(record.visibility).toBe("members");
     expect(record.publicationState).toBe("draft");
+    expect(record.operatorType).toBe("partner");
+    expect(record.operatorId).toBeNull();
+  });
+
+  it("enforces who authors and operates each journey type", () => {
+    expect(() => journey({
+      originatorType: "member",
+      originatorId: "member-1",
+    })).toThrow(/Caravan must be authored by the club/);
+    expect(() => journey({
+      type: "open",
+      status: "draft",
+      originatorType: "club",
+      originatorId: null,
+    })).toThrow(/open journey must be authored by a member or partner/);
+    expect(() => journey({ operatorType: "partner" })).toThrow(/operated by the club/);
+    expect(() => journey({
+      type: "open",
+      status: "draft",
+      originatorType: "partner",
+      originatorId: "author-partner",
+      operatorType: "club",
+    })).toThrow(/operated by a partner/);
+  });
+
+  it("forms an open journey only by its author and records its partner operator", () => {
+    const record = journey({
+      type: "open",
+      status: "open",
+      publicationState: "approved",
+      originatorType: "member",
+      originatorId: "author-1",
+    });
+    expect(() => formOpenJourneyGroup(
+      record,
+      { type: "member", id: "someone-else" },
+      "partner-1",
+      NOW,
+    )).toThrow(/Only the journey's author/);
+    const formed = formOpenJourneyGroup(
+      record,
+      { type: "member", id: "author-1" },
+      "partner-1",
+      NOW,
+    );
+    expect(formed.groupFormedAt).toEqual(NOW);
+    expect(formed.operatorType).toBe("partner");
+    expect(formed.operatorId).toBe("partner-1");
+  });
+
+  it("reserves group portrait writing for club staff, never the itinerary author", () => {
+    expect(mayWriteGroupPortrait(viewer({
+      authoredJourneyIds: ["j1"],
+      isClubStaff: false,
+    }))).toBe(false);
+    expect(mayWriteGroupPortrait(viewer({ isClubStaff: true }))).toBe(true);
   });
 
   it("will not open a journey before approval", () => {
@@ -123,6 +188,20 @@ describe("v2.4 journey records and publication gates", () => {
     expect(mayRouteJourney(draft, SIGNED_OUT_VIEWER)).toBe(false);
     expect(mayRouteJourney(draft, viewer({ authoredJourneyIds: [draft.id] }))).toBe(true);
     expect(mayRouteJourney(draft, viewer({ isClubStaff: true }))).toBe(true);
+
+    const rejected = journey({
+      type: "open",
+      status: "draft",
+      publicationState: "rejected",
+      originatorType: "partner",
+      originatorId: "partner-author",
+    });
+    expect(mayRouteJourney(rejected, SIGNED_OUT_VIEWER)).toBe(false);
+    expect(mayRouteJourney(rejected, viewer())).toBe(false);
+    expect(mayRouteJourney(rejected, viewer({
+      authoredJourneyIds: [rejected.id],
+    }))).toBe(true);
+    expect(mayRouteJourney(rejected, viewer({ isClubStaff: true }))).toBe(true);
   });
 
   it("keeps members-only open journeys unreachable to non-members", () => {

@@ -258,7 +258,7 @@ export interface ShortFormExceptionRecord extends ContentRecord {
   readonly shared_inventory: true;
   readonly inventory_additive: false;
   readonly closed_to_other_stages: true;
-  readonly canonical_for: "/caravans/andean/sea-to-stone";
+  readonly canonical_for: "/journeys/caravans/andean-caravan/sea-to-stone";
   readonly canonical_document_has_fragment: false;
   readonly legacy_url: readonly ["/departures/the-stone-road"];
 }

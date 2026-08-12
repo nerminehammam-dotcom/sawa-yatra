@@ -5,12 +5,19 @@ import {
   familySlug,
 } from "@/content/travel-self/families";
 import { absoluteUrl } from "@/lib/site-url";
-import { journeys } from "@/lib/sawayatra/server";
 
 const PUBLIC_ROUTES = [
   "/",
   "/how-it-works",
   "/journeys",
+  "/journeys/caravans",
+  "/journeys/caravans/andean-caravan",
+  "/journeys/caravans/andean-caravan/route-map",
+  "/journeys/caravans/andean-caravan/joining-points",
+  "/journeys/caravans/andean-caravan/sea-to-stone",
+  "/journeys/caravans/andean-caravan/both-shores",
+  "/journeys/caravans/andean-caravan/the-mirror",
+  "/journeys/caravans/andean-caravan/the-end-of-the-road",
   "/travel-self",
   "/travel-self/take",
   "/club",
@@ -21,7 +28,6 @@ const PUBLIC_ROUTES = [
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...PUBLIC_ROUTES,
-    ...journeys.map((journey) => `/journeys/${journey.slug}` as const),
     ...FAMILY_LIST.map((family) => `/travel-self/${familySlug(family)}` as const),
   ].map((path) => ({ url: absoluteUrl(path) }));
 }

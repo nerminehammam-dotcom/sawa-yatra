@@ -8,7 +8,7 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { FactStrip } from "@/components/ui/FactStrip";
 import { PageHero } from "@/components/ui/PageHero";
 import { Section } from "@/components/ui/Section";
-import { andeanCaravanHeroImage } from "@/content/andean-caravan-images";
+import { joiningPointsHeroImage } from "@/content/andean-caravan-images";
 import { andeanCaravanEnquiry } from "@/content/andean-caravan-editorial";
 import {
   getCanonicalCaravanOverview,
@@ -23,7 +23,9 @@ import { JoinLeavePlanner } from "./_components/JoinLeavePlanner";
 export const metadata: Metadata = {
   title: { absolute: `Joining & leaving points | ${siteConfig.name}` },
   alternates: {
-    canonical: absoluteUrl("/caravans/andean-caravan/how-it-works"),
+    canonical: absoluteUrl(
+      "/journeys/caravans/andean-caravan/joining-points",
+    ),
   },
 };
 
@@ -98,9 +100,9 @@ export default function AndeanCaravanJoiningPage() {
         ground="cream"
         eyebrow={
           <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
-            <Link href="/caravans">Caravans</Link>
+            <Link href="/journeys/caravans">Caravans</Link>
             <span aria-hidden="true">›</span>
-            <Link href="/caravans/andean">The Andean Caravan</Link>
+            <Link href="/journeys/caravans/andean-caravan">The Andean Caravan</Link>
             <span aria-hidden="true">›</span>
             <span aria-current="page">Joining &amp; leaving points</span>
           </nav>
@@ -134,7 +136,7 @@ export default function AndeanCaravanJoiningPage() {
         }
         media={
           <RisoArtwork
-            asset={andeanCaravanHeroImage}
+            asset={joiningPointsHeroImage}
             aspectRatio="hero"
             sizes="(max-width: 639px) 100vw, 54vw"
             priority
@@ -213,11 +215,11 @@ export default function AndeanCaravanJoiningPage() {
             <h2 id="next-step-heading">Put your chosen run back on the map.</h2>
           </div>
           <div className={styles.adjacentLinks}>
-            <Link href="/caravans/andean#full-route-map">
+            <Link href="/journeys/caravans/andean-caravan#full-route-map">
               <span>Places, transport and terrain</span>
               <strong>Open Maps</strong>
             </Link>
-            <Link href="/caravans/andean/route-map">
+            <Link href="/journeys/caravans/andean-caravan/route-map">
               <span>Every route day</span>
               <strong>Open Each stop</strong>
             </Link>
@@ -242,7 +244,7 @@ export default function AndeanCaravanJoiningPage() {
             <Link className={styles.askLink} href="/register-interest">
               Register your interest <Arrow />
             </Link>
-            <Link className={styles.secondaryAskLink} href="/caravans/andean#all-sections">
+            <Link className={styles.secondaryAskLink} href="/journeys/caravans/andean-caravan#all-sections">
               Compare all four sections <Arrow />
             </Link>
             <p>{andeanCaravanEnquiry.status}</p>

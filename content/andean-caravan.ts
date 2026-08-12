@@ -45,6 +45,26 @@ export type AndeanCaravanSectionSlug =
   | "atacama"
   | "the-end-of-the-road";
 
+const canonicalSectionSlugByLegacySlug: Readonly<
+  Record<AndeanCaravanSectionSlug, string>
+> = {
+  "desert-coast": "sea-to-stone",
+  "white-city-deep-canyon": "sea-to-stone",
+  "the-stone-road": "the-stone-road",
+  "both-shores": "both-shores",
+  "thin-air-cloud-forest": "both-shores",
+  "silver-and-bone": "the-mirror",
+  "the-mirror": "the-mirror",
+  "atacama": "the-mirror",
+  "the-end-of-the-road": "the-end-of-the-road",
+};
+
+export function andeanCaravanSectionHref(
+  slug: AndeanCaravanSectionSlug,
+): `/journeys/caravans/andean-caravan/${string}` {
+  return `/journeys/caravans/andean-caravan/${canonicalSectionSlugByLegacySlug[slug]}`;
+}
+
 export type AndeanCaravanPublicEnquiryId =
   | "andean-caravan-complete"
   | "andean-caravan-section-01"

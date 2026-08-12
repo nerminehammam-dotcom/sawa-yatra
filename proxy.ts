@@ -5,10 +5,7 @@ import {
   verifyInterestToken,
   verifySessionToken,
 } from "@/lib/sawayatra/session";
-
-const JOURNEY_IDS_BY_SLUG: Readonly<Record<string, string>> = {
-  "andean-caravan": "journey-andean-caravan",
-};
+import { journeyIdForSlug } from "@/lib/sawayatra/journey-registry";
 
 /**
  * Optimistic, pre-render pool gate. The page repeats the full authorization
@@ -22,8 +19,17 @@ export function proxy(request: NextRequest) {
     secret,
     new Date(),
   );
+  const pathname = request.nextUrl.pathname;
+
+  if (pathname === "/my" || pathname.startsWith("/my/")) {
+    if (!viewer.isSignedIn) {
+      return NextResponse.redirect(new URL("/sign-in", request.url));
+    }
+    return NextResponse.next();
+  }
+
   const slug = request.nextUrl.pathname.split("/")[2] ?? "";
-  const journeyId = JOURNEY_IDS_BY_SLUG[slug];
+  const journeyId = journeyIdForSlug(slug);
   const cookieDeclaration =
     viewer.memberId && journeyId
       ? request.cookies
@@ -40,7 +46,7 @@ export function proxy(request: NextRequest) {
           )
       : false;
   const authorized =
-    journeyId !== undefined &&
+    journeyId !== null &&
     viewer.membershipStatus === "member" &&
     (viewer.declaredJourneyIds.includes(journeyId) || cookieDeclaration);
 
@@ -57,6 +63,5 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  matcher: "/journeys/:journey/people",
+  matcher: ["/my", "/my/:path*", "/journeys/:journey/people"],
 };
-

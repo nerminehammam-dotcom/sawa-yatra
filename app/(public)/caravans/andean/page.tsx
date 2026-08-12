@@ -18,7 +18,7 @@ import styles from "../../departures/departures.module.css";
 
 export const metadata: Metadata = {
   title: { absolute: `The Andean Caravan | ${siteConfig.name}` },
-  alternates: { canonical: absoluteUrl("/caravans/andean") },
+  alternates: { canonical: absoluteUrl("/journeys/caravans/andean-caravan") },
 };
 
 export default function AndeanCaravanPage() {
@@ -32,7 +32,7 @@ export default function AndeanCaravanPage() {
       >
         <div className={styles.introductionCopy}>
           <p>
-            <Link href="/caravans">Caravans</Link> / The Andean Caravan / Peru · Bolivia · Chile
+            <Link href="/journeys/caravans">Caravans</Link> / The Andean Caravan / Peru · Bolivia · Chile
           </p>
           <h1 id="departures-heading">The whole Andean Caravan.</h1>
           <p>
@@ -94,7 +94,7 @@ export default function AndeanCaravanPage() {
         </details>
         <div className={styles.mapTextLink}>
           <p>Prefer every route day in one reading order?</p>
-          <Link href="/caravans/andean/route-map">
+          <Link href="/journeys/caravans/andean-caravan/route-map">
             Open Each stop <Arrow />
           </Link>
         </div>
@@ -123,7 +123,7 @@ export default function AndeanCaravanPage() {
               <li key={section.section_id}>
                 <Link
                   className={styles.sectionCard}
-                  href={`/caravans/andean/${slug}`}
+                  href={`/journeys/caravans/andean-caravan/${slug}`}
                   aria-label={`Section ${section.section_id}, ${section.name} — ${duration} days, ${routeLabel}`}
                 >
                   <RisoArtwork
@@ -165,7 +165,7 @@ export default function AndeanCaravanPage() {
             16–23 of Sea to Stone.
           </p>
           <p>
-            <Link href="/caravans/andean/the-stone-road">
+            <Link href="/journeys/caravans/andean-caravan/the-stone-road">
               Read The Stone Road <Arrow />
             </Link>
           </p>
@@ -177,7 +177,7 @@ export default function AndeanCaravanPage() {
             exception.
           </p>
           <p>
-            <Link href="/caravans/andean-caravan/how-it-works">
+            <Link href="/journeys/caravans/andean-caravan/joining-points">
               Plan your joining and leaving gates <Arrow />
             </Link>
           </p>
@@ -204,7 +204,7 @@ export default function AndeanCaravanPage() {
             here when the route, dates and practical information are approved.
           </p>
           <p>
-            <Link href="/caravans/andean/route-map">
+            <Link href="/journeys/caravans/andean-caravan/route-map">
               Read every route day online <Arrow />
             </Link>
           </p>

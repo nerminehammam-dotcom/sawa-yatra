@@ -35,118 +35,128 @@ const nextConfig: NextConfig = {
         statusCode: 301,
       },
       {
+        source: "/journeys/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan",
+        statusCode: 301,
+      },
+      {
         source: "/caravans",
-        destination: "/journeys",
+        destination: "/journeys/caravans",
         statusCode: 301,
       },
       {
         source: "/caravans/andean",
-        destination: "/journeys/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan",
         statusCode: 301,
       },
       {
         source: "/caravans/andean/:path*",
-        destination: "/journeys/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan/:path*",
         statusCode: 301,
       },
       {
-        source: "/caravans/andean-caravan/:path*",
-        destination: "/journeys/andean-caravan",
+        source: "/caravans/andean-caravan/how-it-works",
+        destination: "/journeys/caravans/andean-caravan/joining-points",
+        statusCode: 301,
+      },
+      {
+        source: "/caravans/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan",
         statusCode: 301,
       },
       {
         source: "/caravans/who-else-is-travelling",
-        destination: "/journeys/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan",
         statusCode: 301,
       },
       {
         source: "/caravans/egypt/:path*",
-        destination: "/journeys",
+        destination: "/journeys/caravans/egyptian-caravan",
         statusCode: 301,
       },
       {
         source: "/do-it-yourself",
-        destination: "/journeys",
+        destination: "/journeys/create",
         statusCode: 301,
       },
       {
         source: "/create-your-own-journey",
-        destination: "/journeys",
+        destination: "/journeys/create",
         statusCode: 301,
       },
       {
         source: "/departure-dates",
-        destination: "/journeys",
+        destination: "/journeys/caravans",
         statusCode: 301,
       },
       {
         source: "/departures",
-        destination: "/journeys",
+        destination: "/journeys/caravans",
         statusCode: 301,
       },
       {
         source: "/departures/the-andean-caravan",
-        destination: "/journeys/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan",
         statusCode: 301,
       },
       {
         source: "/departures/desert-coast",
-        destination: "/journeys/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan/sea-to-stone",
         statusCode: 301,
       },
       {
         source: "/departures/white-city-deep-canyon",
-        destination: "/journeys/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan/sea-to-stone",
         statusCode: 301,
       },
       {
         source: "/departures/the-stone-road",
-        destination: "/journeys/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan/the-stone-road",
         statusCode: 301,
       },
       {
         source: "/departures/both-shores",
-        destination: "/journeys/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan/both-shores",
         statusCode: 301,
       },
       {
         source: "/departures/thin-air-cloud-forest",
-        destination: "/journeys/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan/both-shores",
         statusCode: 301,
       },
       {
         source: "/departures/silver-and-bone",
-        destination: "/journeys/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan/the-mirror",
         statusCode: 301,
       },
       {
         source: "/departures/the-mirror",
-        destination: "/journeys/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan/the-mirror",
         statusCode: 301,
       },
       {
         source: "/departures/atacama",
-        destination: "/journeys/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan/the-mirror",
         statusCode: 301,
       },
       {
         source: "/departures/the-end-of-the-road",
-        destination: "/journeys/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan/the-end-of-the-road",
         statusCode: 301,
       },
       {
         source: "/caravans/the-andean-caravan",
-        destination: "/journeys/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan",
         statusCode: 301,
       },
       {
         source: "/joining-points",
-        destination: "/journeys/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan/joining-points",
         statusCode: 301,
       },
       {
         source: "/start-here",
-        destination: "/journeys/andean-caravan",
+        destination: "/journeys/caravans/andean-caravan",
         statusCode: 301,
       },
     ];
@@ -154,7 +164,7 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: "/journeys/:journey",
+        source: "/journeys/:journey((?!caravans$|create$|join$)[^/]+)",
         headers: [
           { key: "Cache-Control", value: "private, no-store" },
           { key: "Vary", value: "Cookie" },

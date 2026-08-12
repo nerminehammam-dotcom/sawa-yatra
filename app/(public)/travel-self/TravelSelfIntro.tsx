@@ -1,17 +1,17 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import styles from "./travel-self.module.css";
 import { Arrow } from "@/components/ui/Arrow";
 
 function BeginButton() {
   return (
-    <button
+    <Link
       className={styles.introBegin}
-      data-travel-self-begin
-      type="button"
+      href="/travel-self/take"
     >
       Find out <Arrow />
-    </button>
+    </Link>
   );
 }
 

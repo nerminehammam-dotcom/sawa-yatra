@@ -2,7 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { ProvenanceBadge } from "@/components/journeys/ProvenanceBadge";
-import { andeanCaravanSections } from "@/content/andean-caravan";
+import {
+  andeanCaravanSectionHref,
+  andeanCaravanSections,
+} from "@/content/andean-caravan";
 import { getAndeanCaravanImage } from "@/content/andean-caravan-images";
 
 import styles from "./FieldDocument.module.css";
@@ -47,7 +50,7 @@ export function RouteIndex() {
             </dl>
             <Link
               className={styles.routeLink}
-              href={`/departures/${section.slug}`}
+              href={andeanCaravanSectionHref(section.slug)}
               aria-label={`View ${section.title}`}
             >
               View section <Arrow direction="up-right" />

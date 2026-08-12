@@ -554,7 +554,7 @@ export function TravelSelfQuiz({ children }: { children?: ReactNode }) {
             <ButtonLink href="/club/apply" variant="primary">
               {COPY.onward.register}
             </ButtonLink>
-            <ButtonLink href="/journeys/andean-caravan" variant="secondary">
+            <ButtonLink href="/journeys/caravans/andean-caravan" variant="secondary">
               {COPY.onward.explore}
             </ButtonLink>
           </div>

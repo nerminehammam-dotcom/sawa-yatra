@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 
 import { getCurrentViewer, getJourneyBySlug } from "@/lib/sawayatra/server";
+import { journeyPublicHrefForSlug } from "@/lib/sawayatra/journey-registry";
 import { issueInterestToken } from "@/lib/sawayatra/session";
 
 function cookieName(journeyId: string): string {
@@ -43,17 +44,20 @@ export async function declareInterestAction(formData: FormData) {
       expires,
     },
   );
-  revalidatePath(`/journeys/${journey.slug}`);
+  revalidatePath(
+    journeyPublicHrefForSlug(journey.slug) ?? `/journeys/${journey.slug}`,
+  );
 }
 
 export async function withdrawInterestAction(formData: FormData) {
   const slug = String(formData.get("journey") ?? "");
   const { journey } = await requireDeclarationContext(slug);
   (await cookies()).delete(cookieName(journey.id));
-  revalidatePath(`/journeys/${journey.slug}`);
+  revalidatePath(
+    journeyPublicHrefForSlug(journey.slug) ?? `/journeys/${journey.slug}`,
+  );
 }
 
 export async function reconfirmInterestAction(formData: FormData) {
   return declareInterestAction(formData);
 }
-

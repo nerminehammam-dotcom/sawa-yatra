@@ -42,7 +42,7 @@ describe("Phase 2 canonical Caravan model", () => {
       sectionOne.days.find((day) => day.day === 16),
     );
     expect(stoneRoad.product?.canonical_for).toBe(
-      "/caravans/andean/sea-to-stone",
+      "/journeys/caravans/andean-caravan/sea-to-stone",
     );
     expect(stoneRoad.product?.canonical_document_has_fragment).toBe(false);
   });

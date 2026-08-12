@@ -23,10 +23,65 @@ const galleryImage = (
 ): RisoAsset =>
   image(`gallery/${sectionSlug}/${filename}`, alt, focalPoint);
 
-export const andeanCaravanHeroImage = image(
-  "gallery/the-end-of-the-road/01-patagonia-62.jpg",
-  "Motorcyclist following a gravel road towards snow-covered Patagonian peaks.",
+const carreteraAustralImage = (
+  filename: string,
+  alt: string,
+  focalPoint?: { x: number; y: number },
+): RisoAsset =>
+  image(`gallery/carretera-austral/${filename}`, alt, focalPoint);
+
+export const homeCarreteraHeroImage = carreteraAustralImage(
+  "home-road.webp",
+  "Long gravel road crossing the Patagonian steppe towards a line of mountains.",
+  { x: 50, y: 68 },
+);
+
+export const journeysCarreteraCardImage = carreteraAustralImage(
+  "journeys-storm-steppe.webp",
+  "A dark storm front gathering above the central Aysén steppe.",
+  { x: 50, y: 58 },
+);
+
+export const caravansCollectionHeroImage = carreteraAustralImage(
+  "caravans-cattle-drive.webp",
+  "Rider moving cattle along Ruta 7 through the forest in central Aysén.",
+  { x: 74, y: 57 },
+);
+
+export const andeanCaravanHeroImage = carreteraAustralImage(
+  "andean-steppe-road.webp",
+  "Gravel road curving through tawny steppe below Cerro Castillo.",
   { x: 52, y: 61 },
+);
+
+export const joiningPointsHeroImage = carreteraAustralImage(
+  "joining-gravel-ruta-7.webp",
+  "Gravel stretch of Ruta 7 leading into rain beneath dark Patagonian mountains.",
+  { x: 50, y: 58 },
+);
+
+export const departuresCarreteraHeroImage = carreteraAustralImage(
+  "departures-ibanez-valley.webp",
+  "The Ibáñez River valley opening beneath cloud-covered mountains near Villa Cerro Castillo.",
+  { x: 50, y: 54 },
+);
+
+export const endOfRoadCardImage = carreteraAustralImage(
+  "end-road-card.webp",
+  "The Ibáñez River winding through the Cerro Castillo valley beneath snow-covered peaks.",
+  { x: 50, y: 59 },
+);
+
+export const endOfRoadAtlasImage = carreteraAustralImage(
+  "atlas-baker-canyon.webp",
+  "A vehicle raising dust on the road above the Baker River canyon near Puerto Bertrand.",
+  { x: 44, y: 59 },
+);
+
+export const endOfRoadHeroImage = carreteraAustralImage(
+  "end-road-hero.webp",
+  "Two riders descending a trail towards Lago O’Higgins in southern Aysén.",
+  { x: 43, y: 64 },
 );
 
 export const andeanCaravanSectionGalleries = {
@@ -341,131 +396,49 @@ export const andeanCaravanSectionGalleries = {
     ),
   ],
   "the-end-of-the-road": [
-    galleryImage(
-      "the-end-of-the-road",
-      "01-patagonia-62.jpg",
-      "Motorcyclist following a gravel road towards snow-covered Patagonian peaks.",
-      { x: 52, y: 61 },
+    carreteraAustralImage(
+      "01-rural-ruta-7-night.webp",
+      "Cow standing on a dark rural stretch of Ruta 7 in Aysén.",
     ),
-    galleryImage(
-      "the-end-of-the-road",
-      "02-patagonia-13.jpg",
-      "Narrow road crossing tawny grasslands beneath a Patagonian escarpment.",
-      { x: 46, y: 60 },
+    carreteraAustralImage(
+      "02-villa-ohiggins-minimarket.webp",
+      "Colourful minimarket frontage in Villa O’Higgins.",
     ),
-    galleryImage(
-      "the-end-of-the-road",
-      "03-patagonia-10.jpg",
-      "Low moon laying a gold path across a Patagonian lake.",
-      { x: 49, y: 49 },
+    carreteraAustralImage(
+      "03-cerro-castillo-valley.webp",
+      "Yellow-flowering shrubs and fenced pasture beneath Cerro Castillo.",
     ),
-    galleryImage(
-      "the-end-of-the-road",
-      "04-patagonia-8.jpg",
-      "Traveller walking along a black Patagonian beach beneath forested hills.",
-      { x: 56, y: 59 },
+    carreteraAustralImage(
+      "04-coyhaique-ranch.webp",
+      "Cattle grazing on open ranchland near Coyhaique.",
     ),
-    galleryImage(
-      "the-end-of-the-road",
-      "05-patagonia-04.jpg",
-      "Orange excavator standing on a broad gravel riverbank below red Patagonian hills.",
-      { x: 31, y: 57 },
+    carreteraAustralImage(
+      "05-lago-general-carrera-water.webp",
+      "Turquoise water of Lago General Carrera stretching towards distant mountains.",
     ),
-    galleryImage(
-      "the-end-of-the-road",
-      "06-paragonia-02.jpg",
-      "Pale blue Patagonian lake stretching towards distant mountains.",
-      { x: 50, y: 51 },
+    carreteraAustralImage(
+      "06-baker-river-valley.webp",
+      "The Baker River winding through a rocky valley near Puerto Bertrand.",
     ),
-    galleryImage(
-      "the-end-of-the-road",
-      "07-patagoina-01.jpg",
-      "Gravel road running through open Patagonian ranchland.",
-      { x: 50, y: 58 },
+    carreteraAustralImage(
+      "07-lago-general-carrera-shore.webp",
+      "Boats pulled up along the shore of Lago General Carrera at Puerto Río Tranquilo.",
     ),
-    galleryImage(
-      "the-end-of-the-road",
-      "08-patagonia-03.jpg",
-      "Clear river winding between autumn forest and red Patagonian peaks.",
-      { x: 55, y: 52 },
+    carreteraAustralImage(
+      "08-cattle-on-ruta-7.webp",
+      "Cattle crossing Ruta 7 in central Aysén.",
     ),
-    galleryImage(
-      "the-end-of-the-road",
-      "09-patagonia-41.jpg",
-      "Still Patagonian lake resting beneath a line of snow-covered mountains.",
-      { x: 52, y: 50 },
+    carreteraAustralImage(
+      "09-caleta-tortel-residents.webp",
+      "Two Caleta Tortel residents sitting beside a dark waterfront building.",
     ),
-    galleryImage(
-      "the-end-of-the-road",
-      "10-z8n7627-copy.jpg",
-      "Vehicle approaching along a stony road in Patagonia.",
-      { x: 53, y: 56 },
+    carreteraAustralImage(
+      "10-villa-ohiggins-steppe.webp",
+      "A lone tree standing on the southern Aysén steppe near Villa O’Higgins.",
     ),
-    galleryImage(
-      "the-end-of-the-road",
-      "11-patagonia-50.jpg",
-      "Rider leading a second horse along a track above a long Patagonian river.",
-      { x: 54, y: 58 },
-    ),
-    galleryImage(
-      "the-end-of-the-road",
-      "12-z8n7909-copy.jpg",
-      "Gravel road curving between a Patagonian lake and a rocky cliff.",
-      { x: 61, y: 58 },
-    ),
-    galleryImage(
-      "the-end-of-the-road",
-      "13-chile-016.jpg",
-      "Mountain road disappearing into mist and autumn forest.",
-      { x: 50, y: 60 },
-    ),
-    galleryImage(
-      "the-end-of-the-road",
-      "14-patagonia-5.jpg",
-      "Long evening light softens a lake between dark Patagonian ridges.",
-      { x: 54, y: 51 },
-    ),
-    galleryImage(
-      "the-end-of-the-road",
-      "15-naila-06.jpg",
-      "Brown cow standing before snow-dusted mountains in Patagonia.",
-      { x: 52, y: 57 },
-    ),
-    galleryImage(
-      "the-end-of-the-road",
-      "16-patagonia-36.jpg",
-      "Pale road winding through rolling Patagonian foothills.",
-      { x: 52, y: 57 },
-    ),
-    galleryImage(
-      "the-end-of-the-road",
-      "17-patagonia-37.jpg",
-      "Dark mountains frame a steel-grey lake beneath storm clouds.",
-      { x: 53, y: 50 },
-    ),
-    galleryImage(
-      "the-end-of-the-road",
-      "18-patagonia-33.jpg",
-      "Small boat resting on a Patagonian shore below snow-covered mountains.",
-      { x: 49, y: 57 },
-    ),
-    galleryImage(
-      "the-end-of-the-road",
-      "19-chile-011.jpg",
-      "Red autumn leaves and pale boulders cover a Patagonian hillside.",
-      { x: 51, y: 53 },
-    ),
-    galleryImage(
-      "the-end-of-the-road",
-      "20-patagonia-2.jpg",
-      "Small boat sitting on a rocky shore beside a misty Patagonian lake.",
-      { x: 54, y: 56 },
-    ),
-    galleryImage(
-      "the-end-of-the-road",
-      "21-naila-03.jpg",
-      "Copper-coloured river bending through an autumn Patagonian valley.",
-      { x: 48, y: 53 },
+    carreteraAustralImage(
+      "11-lago-ohiggins.webp",
+      "Lago O’Higgins beneath a layered sky and dark mountain shore.",
     ),
   ],
 } as const satisfies Readonly<
@@ -483,8 +456,7 @@ export const andeanCaravanSectionImages = {
   "silver-and-bone": andeanCaravanSectionGalleries["silver-and-bone"][0],
   "the-mirror": andeanCaravanSectionGalleries["the-mirror"][0],
   atacama: andeanCaravanSectionGalleries.atacama[0],
-  "the-end-of-the-road":
-    andeanCaravanSectionGalleries["the-end-of-the-road"][0],
+  "the-end-of-the-road": endOfRoadCardImage,
 } as const satisfies Readonly<Record<AndeanCaravanSectionSlug, RisoAsset>>;
 
 export function getAndeanCaravanImage(slug: string): RisoAsset {
@@ -549,17 +521,8 @@ const canonicalCaravanGalleries: Readonly<
     andeanCaravanSectionGalleries.atacama[0],
     andeanCaravanSectionGalleries.atacama[2],
   ],
-  "the-end-of-the-road": [
-    andeanCaravanSectionGalleries["the-end-of-the-road"][0],
-    andeanCaravanSectionGalleries["the-end-of-the-road"][1],
-    andeanCaravanSectionGalleries["the-end-of-the-road"][2],
-    andeanCaravanSectionGalleries["the-end-of-the-road"][3],
-    andeanCaravanSectionGalleries["the-end-of-the-road"][7],
-    andeanCaravanSectionGalleries["the-end-of-the-road"][10],
-    andeanCaravanSectionGalleries["the-end-of-the-road"][12],
-    andeanCaravanSectionGalleries["the-end-of-the-road"][17],
-    andeanCaravanSectionGalleries["the-end-of-the-road"][20],
-  ],
+  "the-end-of-the-road":
+    andeanCaravanSectionGalleries["the-end-of-the-road"],
 };
 
 const canonicalCaravanHeroImages: Readonly<
@@ -569,7 +532,7 @@ const canonicalCaravanHeroImages: Readonly<
   "the-stone-road": andeanCaravanSectionGalleries["the-stone-road"][2],
   "both-shores": andeanCaravanSectionGalleries["both-shores"][2],
   "the-mirror": andeanCaravanSectionGalleries["the-mirror"][1],
-  "the-end-of-the-road": andeanCaravanSectionGalleries["the-end-of-the-road"][12],
+  "the-end-of-the-road": endOfRoadHeroImage,
 };
 
 const canonicalCaravanCardImages: Readonly<
@@ -579,7 +542,7 @@ const canonicalCaravanCardImages: Readonly<
   "the-stone-road": andeanCaravanSectionGalleries["the-stone-road"][4],
   "both-shores": andeanCaravanSectionGalleries["both-shores"][4],
   "the-mirror": andeanCaravanSectionGalleries["the-mirror"][0],
-  "the-end-of-the-road": andeanCaravanSectionGalleries["the-end-of-the-road"][1],
+  "the-end-of-the-road": endOfRoadCardImage,
 };
 
 export function getCanonicalCaravanGallery(

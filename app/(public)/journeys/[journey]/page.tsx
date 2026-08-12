@@ -28,7 +28,7 @@ export async function generateMetadata({
   if (!journey) return {};
   const canonical = absoluteUrl(`/journeys/${journey.slug}`);
   return {
-    title: `${journey.title} | Sawayatra`,
+    title: journey.title,
     description: journey.story[0],
     alternates: { canonical },
     openGraph: {

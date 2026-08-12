@@ -4,8 +4,9 @@ import Link from "next/link";
 import { createPageMetadata } from "@/app/_metadata";
 import { Arrow } from "@/components/ui/Arrow";
 import { ANDEAN_CARAVAN_FIRST_DEPARTURE } from "@/content/andean-caravan";
-import { andeanCaravanHeroImage } from "@/content/andean-caravan-images";
+import { caravansCollectionHeroImage } from "@/content/andean-caravan-images";
 import { getCanonicalCaravanOverview } from "@/content/caravan/page-data";
+import { caravanNavigation } from "@/content/navigation";
 
 import styles from "./caravans.module.css";
 
@@ -31,18 +32,28 @@ export default function CaravansPage() {
         </div>
         <figure className={styles.heroImage}>
           <Image
-            src={andeanCaravanHeroImage.src}
-            alt={andeanCaravanHeroImage.alt}
+            src={caravansCollectionHeroImage.src}
+            alt={caravansCollectionHeroImage.alt}
             fill
             preload
             sizes="(max-width: 800px) 100vw, (max-width: 1440px) 55vw, 792px"
             style={{
-              objectPosition: `${andeanCaravanHeroImage.focalPoint?.x ?? 50}% 76%`,
+              objectPosition: `${caravansCollectionHeroImage.focalPoint?.x ?? 50}% ${caravansCollectionHeroImage.focalPoint?.y ?? 50}%`,
             }}
           />
           <figcaption>FLAGSHIP / SOUTH AMERICA</figcaption>
         </figure>
       </section>
+
+      <nav className={styles.collectionNavigation} aria-label="Caravans">
+        <ul>
+          {caravanNavigation.map((caravan) => (
+            <li key={caravan.id}>
+              <Link href={caravan.href}>{caravan.label}</Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
 
       <section className={styles.flagship} aria-labelledby="andean-heading">
         <div className={styles.flagshipTitle}>
@@ -69,8 +80,8 @@ export default function CaravansPage() {
           </div>
         </dl>
         <div className={styles.actions}>
-          <Link href="/caravans/andean">Follow the complete route <Arrow /></Link>
-          <Link href="/caravans/andean-caravan/how-it-works">Compare joining points <Arrow direction="up-right" /></Link>
+          <Link href="/journeys/caravans/andean-caravan">Follow the complete route <Arrow /></Link>
+          <Link href="/journeys/caravans/andean-caravan/joining-points">Compare joining points <Arrow direction="up-right" /></Link>
         </div>
       </section>
 

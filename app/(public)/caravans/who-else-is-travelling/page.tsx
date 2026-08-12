@@ -15,12 +15,12 @@ export default function WhoElseIsTravellingPage() {
       actionNote="No names or private details will be published. No account or payment is required."
       onwardLinks={[
         {
-          href: "/caravans/andean#full-route-map",
+          href: "/journeys/caravans/andean-caravan#full-route-map",
           label: "Explore the full route",
           description: "Four atlas plates showing the places, transport and terrain.",
         },
         {
-          href: "/caravans/andean-caravan/how-it-works",
+          href: "/journeys/caravans/andean-caravan/joining-points",
           label: "Joining & leaving",
           description: "Build a consecutive run and compare every joining gate.",
         },

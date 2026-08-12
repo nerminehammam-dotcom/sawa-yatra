@@ -93,7 +93,8 @@ export function validateCaravanModel(
   const sectionOne = model.sections.find((section) => section.section_id === "01");
   const shortForm = sectionOne?.short_form_exception;
   if (
-    shortForm?.canonical_for !== "/caravans/andean/sea-to-stone" ||
+    shortForm?.canonical_for !==
+      "/journeys/caravans/andean-caravan/sea-to-stone" ||
     shortForm.canonical_document_has_fragment
   ) {
     fail("T10/T11: Section 01 must own Days 16–23 with a fragment-free canonical document URL");

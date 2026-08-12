@@ -117,7 +117,7 @@ export const systemPageContent = {
       returnHomeAction,
       {
         label: "Browse departures",
-        href: "/caravans/andean",
+        href: "/journeys/caravans/andean-caravan",
         style: "secondary",
         contentStatus: "LOCKED",
       },

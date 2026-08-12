@@ -33,6 +33,76 @@ export const primaryNavigation = [
     contentStatus: "LOCKED",
   },
 ] as const satisfies readonly NavigationItem[];
+
+/** The two Caravan destinations nested beneath the Caravans product. */
+export const caravanNavigation = [
+  {
+    id: "andean-caravan",
+    label: "The Andean Caravan",
+    href: "/journeys/caravans/andean-caravan",
+    meta: "71 days, Lima to Patagonia",
+  },
+  {
+    id: "egyptian-caravan",
+    label: "The Egyptian Caravan",
+    href: "/journeys/caravans/egyptian-caravan",
+    meta: "Egypt · In progress",
+  },
+] as const;
+
+/** The Andean Caravan's existing detail navigation, kept beneath that Caravan. */
+export const andeanCaravanNavigation = [
+  {
+    id: "whole-caravan",
+    label: "The whole Caravan",
+    href: "/journeys/caravans/andean-caravan",
+    meta: "Overview, sections and route.",
+  },
+  {
+    id: "joining-leaving",
+    label: "Joining & leaving points",
+    href: "/journeys/caravans/andean-caravan/joining-points",
+    meta: "Choose your start and finish.",
+  },
+  {
+    id: "route-atlas",
+    label: "Maps",
+    href: "/journeys/caravans/andean-caravan#full-route-map",
+    meta: "The route, transport and terrain.",
+  },
+  {
+    id: "stop-by-stop",
+    label: "Each stop",
+    href: "/journeys/caravans/andean-caravan/route-map",
+    meta: "Every route day in travelling order.",
+  },
+  {
+    id: "trip-documents",
+    label: "Trip PDFs — coming soon",
+    href: "/journeys/caravans/andean-caravan#trip-documents",
+    meta: "No files published yet.",
+  },
+] as const;
+
+/** The three equal public products inside the Journeys section. */
+export const journeyProductNavigation = [
+  {
+    id: "caravans",
+    label: "Caravans",
+    href: "/journeys/caravans",
+  },
+  {
+    id: "create-your-own-journey",
+    label: "Create your own journey",
+    href: "/journeys/create",
+  },
+  {
+    id: "join-an-existing-journey",
+    label: "Join an existing journey",
+    href: "/journeys/join",
+  },
+] as const;
+
 export const footerNavigation = [
   ...primaryNavigation,
   {

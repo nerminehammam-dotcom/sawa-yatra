@@ -9,10 +9,11 @@ import { ProvenanceBadge } from "@/components/journeys/ProvenanceBadge";
 import {
   andeanCaravan,
   andeanCaravanGateById,
+  andeanCaravanSectionHref,
   andeanCaravanSections,
 } from "@/content/andean-caravan";
 import {
-  andeanCaravanHeroImage,
+  departuresCarreteraHeroImage,
   getAndeanCaravanImage,
 } from "@/content/andean-caravan-images";
 import { contactHref } from "@/lib/contact";
@@ -32,7 +33,7 @@ export default function DeparturesPage() {
         </div>
         <RisoArtwork
           className={styles.introductionImage}
-          asset={andeanCaravanHeroImage}
+          asset={departuresCarreteraHeroImage}
           aspectRatio="wide"
           sizes="(max-width: 900px) 100vw, (max-width: 1440px) 52vw, 749px"
           priority
@@ -51,7 +52,7 @@ export default function DeparturesPage() {
           <div><dt>Group</dt><dd>{andeanCaravan.group}</dd></div>
           <div><dt>Price</dt><dd>{andeanCaravan.price}</dd></div>
         </dl>
-        <Link href="/caravans/andean">Explore the complete Caravan <Arrow /></Link>
+        <Link href="/journeys/caravans/andean-caravan">Explore the complete Caravan <Arrow /></Link>
       </section>
 
       <div className={styles.map} id="full-route-map">
@@ -80,7 +81,7 @@ export default function DeparturesPage() {
                     h3, so the section titles still appear in the heading outline. */}
                 <Link
                   className={styles.sectionCard}
-                  href={`/departures/${section.slug}`}
+                  href={andeanCaravanSectionHref(section.slug)}
                   aria-label={`Section ${section.sectionNumber}, ${section.title} — ${section.durationDays} days, ${section.route}`}
                 >
                   <RisoArtwork
@@ -115,7 +116,7 @@ export default function DeparturesPage() {
           <h2 id="joining-heading">Joining & Leaving Points</h2>
           <p>Compare every gateway, airport, time commitment and next natural leaving point in one place.</p>
         </div>
-        <Link href="/caravans/andean-caravan/how-it-works">Compare joining points <Arrow /></Link>
+        <Link href="/journeys/caravans/andean-caravan/joining-points">Compare joining points <Arrow /></Link>
       </section>
 
       <section className={styles.information} id="dates-availability" aria-labelledby="dates-heading">

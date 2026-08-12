@@ -172,7 +172,7 @@ export function JoinLeavePlanner({ sections, shortForm }: JoinLeavePlannerProps)
           <ol>
             {selectedSections.map((section) => (
               <li key={section.id}>
-                <Link href={`/caravans/andean/${section.slug}`}>
+                <Link href={`/journeys/caravans/andean-caravan/${section.slug}`}>
                   <span>{section.id}</span>
                   {section.name}
                 </Link>
@@ -197,7 +197,7 @@ export function JoinLeavePlanner({ sections, shortForm }: JoinLeavePlannerProps)
           <p>{shortForm.joinNote}</p>
         </div>
         <div className={styles.shortFormLinks}>
-          <Link href={`/caravans/andean/${shortForm.slug}`}>
+          <Link href={`/journeys/caravans/andean-caravan/${shortForm.slug}`}>
             Explore {shortForm.name}
           </Link>
           <Link href={shortFormRegistrationHref}>

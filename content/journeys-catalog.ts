@@ -17,7 +17,7 @@ export const fixedJourneys: readonly FixedJourney[] = [
     title: caravan.name,
     route: "Lima → Balmaceda",
     durationDays: caravan.durationDays,
-    href: "/caravans/andean",
+    href: "/journeys/caravans/andean-caravan",
     pricingModel: "fixed-seat",
     dateState: "fixed",
     provenance: "sawayatra",

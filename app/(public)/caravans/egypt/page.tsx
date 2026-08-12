@@ -11,13 +11,13 @@ export const metadata: Metadata = {
 
 const onwardLinks = [
   {
-    href: "/caravans/andean",
+    href: "/journeys/caravans/andean-caravan",
     label: "The Andean Caravan",
     description:
       "Explore the complete 71-day route through Peru, Bolivia and Chile.",
   },
   {
-    href: "/caravans",
+    href: "/journeys/caravans",
     label: "All Caravans",
     description: "Return to the Caravan collection.",
   },
@@ -31,7 +31,7 @@ export default function EgyptianCaravanPage() {
       lede="Its place in the collection is now visible, but the route, dates, sections and joining points are not ready to publish. Nothing on this page should be read as a confirmed itinerary."
       notifyIntro="Only the Andean Caravan is currently open for interest."
       submitLabel="View all Caravans"
-      actionHref="/caravans"
+      actionHref="/journeys/caravans"
       actionNote="The Egyptian Caravan will remain marked in development until its route is ready."
       onwardLinks={onwardLinks}
     />

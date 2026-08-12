@@ -1,71 +1,23 @@
 import Image from "next/image";
 
 import { createPageMetadata } from "@/app/_metadata";
+import { Arrow } from "@/components/ui/Arrow";
 import { ButtonLink } from "@/components/ui/ButtonLink";
-import { fieldDocumentContent } from "@/content/field-document";
-import { HOW_IT_WORKS_STEPS } from "@/content/how-it-works-v24";
+import { homeCarreteraHeroImage } from "@/content/andean-caravan-images";
 
 import styles from "./home.module.css";
+import howItWorksStyles from "./how-it-works/how-it-works.module.css";
 
 export const metadata = createPageMetadata("/");
 
-/**
- * Wraps the given phrases in <mark> without altering a character of the copy.
- * Each phrase must occur exactly once in the text; anything not found is
- * skipped rather than approximated.
- */
-function withHighlights(text: string, phrases: readonly string[]) {
-  const pattern = phrases
-    .filter((phrase) => text.includes(phrase))
-    .map((phrase) => phrase.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"))
-    .join("|");
-
-  if (!pattern) {
-    return text;
-  }
-
-  return text
-    .split(new RegExp(`(${pattern})`))
-    .map((part, index) =>
-      phrases.includes(part) ? (
-        <mark key={`${part}-${index}`}>{part}</mark>
-      ) : (
-        part
-      ),
-    );
-}
-
-/**
- * Separates the locked name-origin paragraph at its two existing word markers.
- * The copy stays unchanged in content/field-document.ts; only its presentation
- * is rearranged here.
- */
-function splitNameOrigin(text: string) {
-  const sawaMarker = " Sawa, ";
-  const yatraMarker = " Yatra, ";
-  const sawaStart = text.indexOf(sawaMarker);
-  const yatraStart = text.indexOf(yatraMarker);
-
-  if (sawaStart < 0 || yatraStart <= sawaStart) return null;
-
-  return {
-    introduction: text.slice(0, sawaStart),
-    sawa: text.slice(sawaStart + sawaMarker.length, yatraStart),
-    yatra: text.slice(yatraStart + yatraMarker.length),
-  };
-}
-
 export default function HomePage() {
-  const content = fieldDocumentContent;
-  const nameOrigin = splitNameOrigin(content.nameStory.body[1]);
-
   return (
     <main className={styles.homePage} id="main-content" tabIndex={-1}>
       <section className={styles.homeHero} aria-labelledby="home-heading">
         <Image
           className={styles.homeHeroImage}
-          src="/assets/images/departures/andean/gallery/the-end-of-the-road/07-patagoina-01.jpg"
-          alt="Quiet road running through open Patagonian grassland beneath a pale blue sky."
+          src={homeCarreteraHeroImage.src}
+          alt={homeCarreteraHeroImage.alt}
           fill
           preload
           sizes="100vw"
@@ -91,74 +43,141 @@ export default function HomePage() {
 
       <section className={styles.howSteps} aria-labelledby="home-how-heading">
         <header className={styles.howStepsHeader}>
-          <p>How Sawayatra works</p>
           <h2 id="home-how-heading">The people are the journey.</h2>
         </header>
-        <ol className={styles.howStepsList}>
-          {HOW_IT_WORKS_STEPS.map((step) => (
-            <li key={step.number}>
-              <span>{step.number}</span>
-              <h3>{step.title}</h3>
-              <p>{step.paragraphs[0]}</p>
-            </li>
-          ))}
-        </ol>
         <ButtonLink href="/how-it-works" variant="secondary">
           Read how it works
         </ButtonLink>
       </section>
 
-      <section className={styles.nameStory} aria-label="Sawayatra">
-        {/* The tracked label that sat here is gone; the two ways onward take
-            its place. They are the only navigation on the homepage outside
-            the header and footer. */}
-        <div className={styles.nameStoryActions}>
-          {content.nameStory.actions.map((action, index) => (
+      <section
+        className={howItWorksStyles.ways}
+        aria-labelledby="ways-heading"
+      >
+        <header className={howItWorksStyles.sectionHeader}>
+          <p className={howItWorksStyles.kicker}>Choose your way in</p>
+          <h2 id="ways-heading">Three ways to travel</h2>
+        </header>
+
+        <article className={howItWorksStyles.featuredJourney}>
+          <div className={howItWorksStyles.featuredImage}>
+            <Image
+              src="/assets/images/departures/andean/gallery/the-end-of-the-road/09-patagonia-41.jpg"
+              alt="Broad Patagonian lake lying beneath a distant ridge of snow-covered mountains."
+              fill
+              preload
+              sizes="(max-width: 767px) 100vw, (max-width: 1440px) 92vw, 1325px"
+            />
+          </div>
+          <div className={howItWorksStyles.featuredCopy}>
+            <p className={howItWorksStyles.cardLabel}>Open for interest</p>
+            <h3>Caravan — join and leave by section</h3>
+            <p className={howItWorksStyles.panelSummary}>
+              One long overland route, travelled together. Join for a single
+              section, combine several, or ride the whole 71-day road. One
+              departure a year.
+            </p>
             <ButtonLink
-              key={action.href}
-              href={action.href}
-              variant={index === 0 ? "primary" : "secondary"}
+              className={howItWorksStyles.featuredAction}
+              href="/journeys/caravans/andean-caravan"
+              surface="deep"
             >
-              {action.label}
+              Explore the Andean Caravan <Arrow />
             </ButtonLink>
-          ))}
-        </div>
+          </div>
+        </article>
 
-        <p className={styles.nameStoryStatement}>
-          {withHighlights(
-            content.nameStory.body[0],
-            content.nameStory.highlights,
-          )}
-        </p>
-
-        {nameOrigin ? (
-          <div className={styles.nameOrigin}>
-            <p className={styles.nameOriginIntroduction}>
-              {nameOrigin.introduction}
-            </p>
-            <div className={styles.nameOriginParts}>
-              <article className={styles.nameOriginPart}>
-                <p className={styles.nameOriginLanguage}>Arabic</p>
-                <h2 className={styles.nameOriginWord}>sawa</h2>
-                <p className={styles.nameOriginDefinition}>{nameOrigin.sawa}</p>
-              </article>
-              <article className={styles.nameOriginPart}>
-                <p className={styles.nameOriginLanguage}>Sanskrit</p>
-                <h2 className={styles.nameOriginWord}>yatra</h2>
-                <p className={styles.nameOriginDefinition}>{nameOrigin.yatra}</p>
-              </article>
+        <div className={howItWorksStyles.secondaryWays}>
+          <article
+            className={`${howItWorksStyles.wayCard} ${howItWorksStyles.joinCard}`}
+          >
+            <div className={howItWorksStyles.wayImage}>
+              <Image
+                src="/assets/images/departures/andean/gallery/white-city-deep-canyon/05-london-0ps.jpg"
+                alt="Pale road crossing cultivated Andean fields beneath dark mountains and gathering clouds."
+                fill
+                loading="eager"
+                sizes="(max-width: 1023px) 100vw, (max-width: 1440px) 58vw, 835px"
+              />
             </div>
-            <p className={styles.nameOriginConclusion}>
-              {content.nameStory.body[2]}
+            <div className={howItWorksStyles.wayCopy}>
+              <p className={howItWorksStyles.cardLabel}>Coming later</p>
+              <h3>Join a journey with others</h3>
+              <p className={howItWorksStyles.panelSummary}>
+                Shorter journeys, one country at a time, discovered and joined
+                with other members. In development now, opening after the
+                Caravan.
+              </p>
+              <ButtonLink href="/journeys/join" surface="deep">
+                See what&apos;s coming <Arrow />
+              </ButtonLink>
+            </div>
+          </article>
+
+          <article className={howItWorksStyles.wayCard}>
+            <div
+              className={`${howItWorksStyles.wayImage} ${howItWorksStyles.atacamaImage}`}
+            >
+              <Image
+                src="/assets/images/departures/andean/gallery/atacama/01-astro-01.jpg"
+                alt="Stars fill the night sky above rock formations in the Atacama Desert."
+                fill
+                sizes="(max-width: 1023px) 100vw, (max-width: 1440px) 58vw, 835px"
+              />
+            </div>
+            <div className={howItWorksStyles.wayCopy}>
+              <p className={howItWorksStyles.cardLabel}>Coming later</p>
+              <h3>Create your own</h3>
+              <p className={howItWorksStyles.panelSummary}>
+                A later way for members to propose a destination, dates and
+                travel style, then invite compatible members to join.
+              </p>
+              <div className={howItWorksStyles.cardActionGroup}>
+                <ButtonLink href="/journeys/create" surface="deep">
+                  Register your interest <Arrow />
+                </ButtonLink>
+                <p className={howItWorksStyles.requirement}>
+                  Not yet available.
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section className={styles.nameStory} aria-labelledby="name-heading">
+        <div className={styles.nameStoryInner}>
+          <h2 className={styles.nameStoryHeading} id="name-heading">
+            The name
+          </h2>
+
+          <div className={styles.nameStoryOrigins}>
+            <article className={styles.nameStoryOrigin}>
+              <p className={styles.nameStoryLanguage}>Arabic</p>
+              <h3 className={styles.nameStoryWord}>sawa</h3>
+              <p className={styles.nameStoryDefinition}>
+                Together — rooted in an old word for harmony, alignment, and
+                making things level.
+              </p>
+            </article>
+
+            <article className={styles.nameStoryOrigin}>
+              <p className={styles.nameStoryLanguage}>Sanskrit</p>
+              <h3 className={styles.nameStoryWord}>yatra</h3>
+              <p className={styles.nameStoryDefinition}>
+                Journey — once a pilgrimage of purpose, now any voyage of
+                discovery.
+              </p>
+            </article>
+          </div>
+
+          <blockquote className={styles.nameStoryQuote}>
+            <p>
+              The most meaningful journeys aren’t simply shared — they’re
+              shared with people who move through the world much the way we do.
             </p>
-          </div>
-        ) : (
-          <div className={styles.nameStoryColumns}>
-            {content.nameStory.body.slice(1).map((paragraph) => (
-              <p key={paragraph.slice(0, 24)}>{paragraph}</p>
-            ))}
-          </div>
-        )}
+          </blockquote>
+        </div>
       </section>
     </main>
   );

@@ -41,8 +41,8 @@ interface PageProps {
 
 function canonicalPath(slug: string): string {
   return slug === "the-stone-road"
-    ? "/caravans/andean/sea-to-stone"
-    : `/caravans/andean/${slug}`;
+    ? "/journeys/caravans/andean-caravan/sea-to-stone"
+    : `/journeys/caravans/andean-caravan/${slug}`;
 }
 
 function imageSlug(slug: string): CanonicalCaravanImageSlug {
@@ -145,9 +145,9 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
           <nav className={styles.breadcrumbs} aria-label="Breadcrumb">
             <Link href="/">Home</Link>
             <span aria-hidden="true">›</span>
-            <Link href="/caravans">Caravans</Link>
+            <Link href="/journeys/caravans">Caravans</Link>
             <span aria-hidden="true">›</span>
-            <Link href="/caravans/andean">The Andean Caravan</Link>
+            <Link href="/journeys/caravans/andean-caravan">The Andean Caravan</Link>
             <span aria-hidden="true">›</span>
             <span aria-current="page">{title}</span>
           </nav>
@@ -238,7 +238,7 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
               See how this section connects with every joining gate, flight,
               rail journey, road and ferry across the complete route.
             </p>
-            <Link href="/caravans/andean#full-route-map">
+            <Link href="/journeys/caravans/andean-caravan#full-route-map">
               Open the full route atlas <Arrow />
             </Link>
           </div>
@@ -326,15 +326,15 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
 
       <Section className={styles.adjacentSection} ground="cream" aria-label="Adjacent Caravan sections">
         <Container className={styles.adjacentLinks}>
-          <Link href="/caravans/andean"><span>All sections</span><strong>The Andean Caravan</strong></Link>
+          <Link href="/journeys/caravans/andean-caravan"><span>All sections</span><strong>The Andean Caravan</strong></Link>
           {isStoneRoad ? (
-            <Link href="/caravans/andean/sea-to-stone"><span>Parent section</span><strong>01 · Sea to Stone</strong></Link>
+            <Link href="/journeys/caravans/andean-caravan/sea-to-stone"><span>Parent section</span><strong>01 · Sea to Stone</strong></Link>
           ) : null}
           {!isStoneRoad && previousSlug ? (
-            <Link href={`/caravans/andean/${previousSlug}`}><span>Previous section</span><strong>{getCanonicalSectionPageData(previousSlug).section.name}</strong></Link>
+            <Link href={`/journeys/caravans/andean-caravan/${previousSlug}`}><span>Previous section</span><strong>{getCanonicalSectionPageData(previousSlug).section.name}</strong></Link>
           ) : null}
           {!isStoneRoad && nextSlug ? (
-            <Link href={`/caravans/andean/${nextSlug}`}><span>Next section</span><strong>{getCanonicalSectionPageData(nextSlug).section.name}</strong></Link>
+            <Link href={`/journeys/caravans/andean-caravan/${nextSlug}`}><span>Next section</span><strong>{getCanonicalSectionPageData(nextSlug).section.name}</strong></Link>
           ) : null}
         </Container>
       </Section>
@@ -353,7 +353,7 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
             <Link className={styles.askLink} href="/register-interest">
               Register your interest <Arrow />
             </Link>
-            <Link className={styles.secondaryAskLink} href="/caravans/andean#all-sections">
+            <Link className={styles.secondaryAskLink} href="/journeys/caravans/andean-caravan#all-sections">
               Compare all four sections <Arrow />
             </Link>
             <p>{andeanCaravanEnquiry.status}</p>

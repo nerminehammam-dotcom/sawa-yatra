@@ -1,6 +1,9 @@
 import Link from "next/link";
 
-import { andeanCaravanSections } from "@/content/andean-caravan";
+import {
+  andeanCaravanSectionHref,
+  andeanCaravanSections,
+} from "@/content/andean-caravan";
 
 import styles from "./RouteStepper.module.css";
 import { Arrow } from "@/components/ui/Arrow";
@@ -46,7 +49,7 @@ export function RouteStepper({ slug }: RouteStepperProps) {
 
       <div className={styles.steps}>
         {previous ? (
-          <Link className={styles.step} href={`/departures/${previous.slug}`} rel="prev">
+          <Link className={styles.step} href={andeanCaravanSectionHref(previous.slug)} rel="prev">
             <span className={styles.direction}>
               <Arrow direction="left" /> Arrives from
             </span>
@@ -66,7 +69,7 @@ export function RouteStepper({ slug }: RouteStepperProps) {
         )}
 
         {next ? (
-          <Link className={styles.step} href={`/departures/${next.slug}`} rel="next">
+          <Link className={styles.step} href={andeanCaravanSectionHref(next.slug)} rel="next">
             <span className={styles.direction}>
               Continues to <Arrow />
             </span>
@@ -90,7 +93,7 @@ export function RouteStepper({ slug }: RouteStepperProps) {
 
       <p className={styles.whole}>
         Sections can be travelled on their own or joined end to end.{" "}
-        <Link href="/departures/the-andean-caravan">
+        <Link href="/journeys/caravans/andean-caravan">
           See all {total} as one continuous route
         </Link>
       </p>

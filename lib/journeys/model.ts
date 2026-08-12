@@ -40,7 +40,10 @@ interface JourneyBase {
   readonly title: string;
   readonly route: string;
   readonly durationDays: number;
-  readonly href: `/departures/${string}` | `/caravans/${string}`;
+  readonly href:
+    | `/departures/${string}`
+    | `/caravans/${string}`
+    | `/journeys/${string}`;
   /**
    * §7.2 — the page renders a ladder or a flat rate, never the wrong one.
    * Showing a ladder on fixed-seat inventory would be a straightforward lie.

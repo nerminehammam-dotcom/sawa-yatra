@@ -33,7 +33,7 @@ interface ComingSoonPageProps {
 
 const defaultOnwardLinks: readonly OnwardLink[] = [
   {
-    href: "/caravans/andean",
+    href: "/journeys/caravans/andean-caravan",
     label: "The Andean Caravan",
     description: "71 days, Lima to Patagonia. Join one of four sections or travel the complete route.",
   },

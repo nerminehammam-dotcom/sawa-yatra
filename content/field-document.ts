@@ -67,9 +67,9 @@ export const fieldDocumentContent = {
   hero: {
     eyebrow: "The Andean Caravan · annual expedition",
     actionLabel: "Enter the route",
-    actionHref: "/caravans/andean",
+    actionHref: "/journeys/caravans/andean-caravan",
     secondaryLabel: "See joining points",
-    secondaryHref: "/caravans/andean-caravan/how-it-works",
+    secondaryHref: "/journeys/caravans/andean-caravan/joining-points",
     image: andeanCaravanHeroImage,
   },
   interruption: "The caravan is already moving.",
@@ -94,7 +94,10 @@ export const fieldDocumentContent = {
     highlights: ["not just your destination", "your Travel Self"],
     actions: [
       { label: "Meet your Travel Self", href: "/travel-self" },
-      { label: "Explore the Andean Caravan", href: "/journeys/andean-caravan" },
+      {
+        label: "Explore the Andean Caravan",
+        href: "/journeys/caravans/andean-caravan",
+      },
     ],
     body: [
       "Sawayatra is a new way to travel. A way to find people who share not just your destination, but your pace, your curiosity, your passions and your sense of discovery. We call it your Travel Self.",

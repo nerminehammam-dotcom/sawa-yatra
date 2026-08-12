@@ -66,6 +66,16 @@ const approvedRouteDescriptions = {
     "Browse Sawayatra journeys by departure date when confirmed dates become available.",
   journeys:
     "Every Sawayatra journey in one place: those leaving on a date, and those still forming. Who stands behind each one is on the card.",
+  "journeys-caravans":
+    "Explore Sawayatra caravans, beginning with the annual Andean Caravan through Peru, Bolivia and Chile.",
+  "journeys-andean-caravan":
+    "Explore the Andean Caravan and its four connected route sections through Peru, Bolivia and Chile.",
+  "journeys-caravans-route-map":
+    "Read the complete Andean Caravan route in order, with its sections, transport modes, joining gates and short-form exception.",
+  "journeys-caravans-joining-points":
+    "Choose where to join and leave the Andean Caravan, one continuous section at a time.",
+  "journeys-egyptian-caravan":
+    "The Egyptian Caravan is in development. Its route, dates and sections are not published yet.",
   "create-your-own-journey":
     "Create your own journey is in development and will open when the structure is ready.",
   members:
@@ -131,6 +141,27 @@ export const routeMetadata = ([
   ["departures", "/departures", "Departures | Sawayatra"],
   ["departure-dates", "/departure-dates", "Browse by departure date | Sawayatra"],
   ["journeys", "/journeys", "Journeys | Sawayatra"],
+  ["journeys-caravans", "/journeys/caravans", "Caravans | Sawayatra"],
+  [
+    "journeys-andean-caravan",
+    "/journeys/caravans/andean-caravan",
+    "The Andean Caravan | Sawayatra",
+  ],
+  [
+    "journeys-caravans-route-map",
+    "/journeys/caravans/andean-caravan/route-map",
+    "Andean Caravan route, in order | Sawayatra",
+  ],
+  [
+    "journeys-caravans-joining-points",
+    "/journeys/caravans/andean-caravan/joining-points",
+    "Joining and leaving the Andean Caravan | Sawayatra",
+  ],
+  [
+    "journeys-egyptian-caravan",
+    "/journeys/caravans/egyptian-caravan",
+    "The Egyptian Caravan | Sawayatra",
+  ],
   [
     "create-your-own-journey",
     "/create-your-own-journey",
@@ -174,6 +205,7 @@ export const routeMetadata = ([
     id === "who-else-is-travelling" ||
     id === "departure-dates" ||
     id === "create-your-own-journey" ||
+    id === "journeys-egyptian-caravan" ||
     id === "partners" ||
     id === "register-interest" ||
     // Added 7 August 2026: these carry honest holding copy now, not final
@@ -292,7 +324,7 @@ export const homeContent = {
     title: "One journey through the Andes. Four sections to join.",
     action: {
       label: "Explore the Andean Caravan",
-      href: "/caravans/andean",
+      href: "/journeys/caravans/andean-caravan",
       style: "secondary",
       contentStatus: "LOCKED",
     },

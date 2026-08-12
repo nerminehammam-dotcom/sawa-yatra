@@ -1,3 +1,5 @@
+import { endOfRoadAtlasImage } from "@/content/andean-caravan-images";
+
 export type AndeanCaravanMapChapterId = "01" | "02" | "03" | "04";
 
 export interface AndeanCaravanMapChapter {
@@ -54,7 +56,7 @@ export const andeanCaravanMapChapters = [
     leave: "Puno",
     summary:
       "Road south to Arequipa, scheduled flight to Cusco, then the Titicaca day train to Puno.",
-    href: "/caravans/andean/sea-to-stone",
+    href: "/journeys/caravans/andean-caravan/sea-to-stone",
     stopIds: [
       "lima",
       "paracas",
@@ -105,7 +107,7 @@ export const andeanCaravanMapChapters = [
     leave: "Sucre",
     summary:
       "Lake roads, boats and the Tiquina vehicle barge reach La Paz; the section finishes with a scheduled flight down to Sucre.",
-    href: "/caravans/andean/both-shores",
+    href: "/journeys/caravans/andean-caravan/both-shores",
     stopIds: [
       "puno",
       "copacabana",
@@ -149,7 +151,7 @@ export const andeanCaravanMapChapters = [
     leave: "Santiago",
     summary:
       "Road and 4×4 through Potosí, Uyuni and San Pedro; Calama to Santiago is by air.",
-    href: "/caravans/andean/the-mirror",
+    href: "/journeys/caravans/andean-caravan/the-mirror",
     stopIds: ["sucre", "potosi", "uyuni", "san-pedro", "calama", "santiago"],
     labelStopIds: ["potosi", "uyuni", "san-pedro", "calama"],
     focusStopIds: ["sucre", "uyuni", "san-pedro", "santiago"],
@@ -189,7 +191,7 @@ export const andeanCaravanMapChapters = [
     leave: "Balmaceda",
     summary:
       "Fly south, follow the Carretera Austral and ferry loop, then return by road to Balmaceda for the included onward flight.",
-    href: "/caravans/andean/the-end-of-the-road",
+    href: "/journeys/caravans/andean-caravan/the-end-of-the-road",
     stopIds: [
       "santiago",
       "balmaceda",
@@ -269,10 +271,10 @@ export const andeanCaravanMapChapters = [
       highMeters: 1120,
     },
     image: {
-      src: "/assets/images/departures/andean/gallery/the-end-of-the-road/02-patagonia-13.jpg",
-      alt: "Narrow road crossing tawny grasslands beneath a Patagonian escarpment.",
+      src: endOfRoadAtlasImage.src,
+      alt: endOfRoadAtlasImage.alt,
       caption: "Aysén · Sawayatra route photograph",
-      focalPoint: { x: 46, y: 60 },
+      focalPoint: endOfRoadAtlasImage.focalPoint ?? { x: 50, y: 50 },
     },
   },
 ] as const satisfies readonly AndeanCaravanMapChapter[];

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 import type { JoiningPointRecord } from "@/content/field-document";
+import { andeanCaravanSectionHref } from "@/content/andean-caravan";
 import { contactHref } from "@/lib/contact";
 
 import styles from "./JoiningPointSelector.module.css";
@@ -157,7 +158,7 @@ export function JoiningPointSelector({
             </div>
           </dl>
           <div className={styles.actions}>
-            <Link href={`/departures/${active.sectionSlug}`}>View this section <Arrow /></Link>
+            <Link href={andeanCaravanSectionHref(active.sectionSlug)}>View this section <Arrow /></Link>
             <Link href={contactHref(`Joining point: ${active.place}`)}>
               Ask about joining here <Arrow direction="up-right" />
             </Link>

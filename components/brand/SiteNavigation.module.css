@@ -222,30 +222,97 @@
 }
 
 .caravansPanel {
-  position: fixed;
+  position: absolute;
   z-index: 120;
-  top: var(--site-header-height, 13rem);
-  left: 50vw;
+  top: 100%;
+  left: 50%;
   display: grid;
-  width: min(50rem, calc(100vw - 32px));
+  width: min(23rem, calc(100vw - 32px));
   max-height: calc(100svh - var(--site-header-height, 13rem) - 1rem);
-  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+  grid-template-columns: minmax(0, 1fr);
   overflow-y: auto;
-  padding: 1.875rem 2.125rem 1.625rem;
-  background: var(--nav-paper-deep);
+  padding: 0;
+  background: var(--nav-paper);
   border: 1px solid var(--nav-rule);
   border-top: 0;
-  box-shadow: 0 22px 44px color-mix(in srgb, var(--ink) 14%, transparent); /* §7: derived from --ink, no ninth colour */
+  box-shadow: 0 16px 32px color-mix(in srgb, var(--ink) 12%, transparent);
   translate: -50% 0;
+}
+
+.caravansPanel[data-caravans-open="true"] {
+  position: fixed;
+  top: var(--site-header-height, 13rem);
+  left: 50vw;
+  width: min(50rem, calc(100vw - 32px));
+  grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
 }
 
 .panelColumn {
   min-width: 0;
 }
 
-.panelColumn + .panelColumn {
-  padding-inline-start: 2.125rem;
+.journeyMenu {
+  padding: 0.5rem;
+}
+
+.caravanDetails {
+  min-width: 0;
+  padding: 1.375rem 1.5rem;
+  background: var(--nav-paper-deep);
   border-inline-start: 1px solid var(--nav-rule-soft);
+}
+
+.caravanDetails .panelEntry {
+  margin-inline: 0;
+}
+
+.journeysOverview {
+  margin: 0;
+  padding: 0.75rem 0.875rem 0.625rem;
+}
+
+.productWithChildren {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 48px;
+  border-bottom: 1px solid var(--nav-rule-soft);
+}
+
+.productWithChildren .journeyRootEntry {
+  border-bottom: 0;
+}
+
+.productToggle {
+  display: grid;
+  width: 48px;
+  min-height: 48px;
+  place-items: center;
+  padding: 0;
+  color: var(--nav-ink);
+  background: transparent;
+  border: 0;
+  border-inline-start: 1px solid var(--nav-rule-soft);
+  border-radius: 0;
+}
+
+.productToggle:hover,
+.productToggle:focus-visible {
+  background: var(--nav-paper-deep);
+}
+
+.caravansPanel .journeyRootEntry {
+  min-height: 52px;
+  margin: 0;
+  padding: 0.8125rem 0.875rem;
+  border-bottom: 1px solid var(--nav-rule-soft);
+}
+
+.caravansPanel .journeyMenu > .journeyRootEntry:last-child {
+  border-bottom: 0;
+}
+
+.caravansPanel .journeyRootEntry .entryTitle {
+  margin: 0;
+  font-weight: 500;
 }
 
 .panelLabel {
@@ -281,10 +348,12 @@
 
 .panelEntry:hover,
 .panelEntry:focus-visible,
+.panelEntry[data-active="true"],
 .panelEntry[aria-current="page"] {
   background: var(--nav-paper);
 }
 
+.panelEntry[data-active="true"],
 .panelEntry[aria-current="page"] {
   box-shadow: inset 3px 0 0 var(--nav-rust);
 }
@@ -292,6 +361,25 @@
 .panelEntry[aria-current="page"] .entryTitle {
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+.nestedEntries {
+  grid-column: 1 / -1;
+  margin: 0 0 0.25rem;
+  padding: 0.25rem 0.25rem 0.25rem 0.875rem;
+  background: var(--nav-paper-deep);
+  border-inline-start: 2px solid var(--nav-rust);
+}
+
+.caravansPanel .caravanEntry {
+  min-height: 0;
+  margin: 0;
+  padding: 0.6875rem 0.75rem 0.75rem;
+  border-bottom: 1px solid var(--nav-rule-soft);
+}
+
+.caravansPanel .caravanEntry:last-child {
+  border-bottom: 0;
 }
 
 .entryTitle {
@@ -440,6 +528,16 @@
 .sheetDrawer .panelEntry {
   margin: 0;
   padding-block: 0.8125rem;
+}
+
+.mobileCaravanDetails {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--nav-rule-soft);
+}
+
+.mobileCaravanDetails .panelLabel {
+  margin-top: 0;
 }
 
 @media (prefers-reduced-motion: no-preference) {
