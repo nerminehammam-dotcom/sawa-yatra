@@ -77,12 +77,12 @@ export const fieldDocumentContent = {
    * Founder-supplied 5 August 2026, verbatim.
    *
    * body[0] is set as the statement; body[1] and body[2] run as two columns
-   * beneath it. `highlights` are phrases washed in the statement — each occurs
+   * beneath it. `highlights` are phrases washed in the statement - each occurs
    * exactly once in body[0], and they are the two meanings the name is made
    * from. No word of the copy is altered by any of this.
    */
   nameStory: {
-    /* Reordered 7 August 2026 — not rewritten. Every sentence is Nermine's,
+    /* Reordered 7 August 2026 - not rewritten. Every sentence is Nermine's,
        unchanged; only their order moved. The block used to open with the
        Sawa/Yatra etymology and reach the proposition ("a new way to travel…")
        only in the third paragraph, so a first-time visitor read the name's
@@ -90,7 +90,7 @@ export const fieldDocumentContent = {
        and is the highlighted statement; the etymology follows as supporting
        depth. The site-wide announcement banner already carries the status
        ("open for interest · first departure February 2028"), so none is added
-       here. The hero is left exactly as it was — the photograph and the line. */
+       here. The hero is left exactly as it was - the photograph and the line. */
     highlights: ["not just your destination", "your Travel Self"],
     actions: [
       { label: "Meet your Travel Self", href: "/travel-self" },
@@ -181,7 +181,7 @@ export const fieldDocumentContent = {
 /**
  * Homepage sections that are designed but have no founder-approved copy yet.
  * They render in development so the gap stays visible, and are filtered out of
- * the production page by `approvedHomeSections`. Do not invent copy for these —
+ * the production page by `approvedHomeSections`. Do not invent copy for these -
  * supply it here with contentStatus "LOCKED" and it will appear automatically.
  */
 export const reservedHomeSections = [

@@ -1,5 +1,5 @@
 /**
- * GENERATED FILE — do not edit by hand.
+ * GENERATED FILE - do not edit by hand.
  *
  * Written by tools/photography/write-plates.py from
  * tools/photography/photographs.json. Edit the manifest, then re-run the script.
@@ -35,7 +35,6 @@ export const photographPlates: Readonly<Record<string, PhotographPlate>> = {
   "departures/andean/gallery/both-shores/03-drive-la-paz-puno-10.jpg": { width: 2000, height: 1604, caption: "The La Paz to Puno road \u00b7 2025" },
   "departures/andean/gallery/both-shores/04-drive-la-paz-puno-01.jpg": { width: 2000, height: 1334, caption: "The La Paz to Puno road \u00b7 2025" },
   "departures/andean/gallery/both-shores/05-drive-la-paz-puno-04.jpg": { width: 2000, height: 1292, caption: "The La Paz to Puno road \u00b7 2025" },
-  "departures/andean/gallery/both-shores/06-drive-la-paz-puno-05.jpg": { width: 2000, height: 1305, caption: "The La Paz to Puno road \u00b7 2025" },
   "departures/andean/gallery/desert-coast/01-lima-01.jpg": { width: 1882, height: 2000, caption: "Lima, Peru \u00b7 2025" },
   "departures/andean/gallery/desert-coast/02-lima-02.jpg": { width: 2000, height: 2000, caption: "Lima, Peru \u00b7 2025" },
   "departures/andean/gallery/desert-coast/03-lima-05.jpg": { width: 2000, height: 2000, caption: "Lima, Peru \u00b7 2025" },

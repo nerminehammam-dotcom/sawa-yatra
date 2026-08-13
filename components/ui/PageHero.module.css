@@ -16,7 +16,7 @@
   background: var(--cream);
 }
 
-/* A "butter" ground uses the butter (sun) token, not --soft-blue — see Section.module.css. */
+/* A "butter" ground uses the butter (sun) token, not --soft-blue - see Section.module.css. */
 .butter {
   --hero-ground: var(--butter);
   --hero-ink: var(--warm-ink);
@@ -132,7 +132,7 @@
   }
 
   /* §10: text over photography requires a scrim. Cream copy sits in the left
-     72% of a full-bleed photograph; this ink gradient (derived from --ink —
+     72% of a full-bleed photograph; this ink gradient (derived from --ink -
      no ninth colour) plates it. Contrast should be re-measured against the
      actual pixels at each breakpoint when the hero images are re-chosen. */
   .withMedia .media::after {

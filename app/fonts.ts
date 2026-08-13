@@ -6,7 +6,7 @@ import localFont from "next/font/local";
  *
  * Loaded through next/font/local rather than a hand-written @font-face so that
  * Next generates a metric-matched fallback (Times New Roman, adjusted) and the
- * font swap no longer reflows the page — the FOUT reflow the manual setup left
+ * font swap no longer reflows the page - the FOUT reflow the manual setup left
  * behind. next/font also self-hosts and preloads automatically.
  *
  * Exposed as the CSS variable --font-fraunces, consumed by --font-display and

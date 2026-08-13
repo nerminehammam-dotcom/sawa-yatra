@@ -6,7 +6,7 @@ export const metadata = createPageMetadata("/caravans/who-else-is-travelling");
 export default function WhoElseIsTravellingPage() {
   return (
     <ComingSoonPage
-      label="Coming soon — by design"
+      label="Coming soon - by design"
       title="Meet the travelling group"
       lede="Group signals will appear only when they can be useful without exposing anyone's identity: enough registrations, clear consent and no individual member profiles."
       notifyIntro="Interested in helping the first group take shape? Start with the same expression-of-interest path used across the Caravan."

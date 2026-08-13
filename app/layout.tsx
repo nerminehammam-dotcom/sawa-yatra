@@ -54,7 +54,7 @@ export default function RootLayout({
 }>) {
   return (
     // next/font (app/fonts.ts) self-hosts Fraunces, preloads both faces, and
-    // supplies a metric-matched fallback via --font-fraunces — so the manual
+    // supplies a metric-matched fallback via --font-fraunces - so the manual
     // <head> preloads and @font-face are no longer needed.
     <html
       lang="en"

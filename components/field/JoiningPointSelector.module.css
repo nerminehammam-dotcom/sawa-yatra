@@ -144,9 +144,9 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-2) var(--space-3);
   color: var(--paper);
-  font-size: var(--fs-body);
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: 0.08em;
   background: var(--ink);

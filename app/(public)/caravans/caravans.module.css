@@ -18,8 +18,7 @@
 
 .heroCopy > p:first-child,
 .flagshipTitle > p:first-child,
-.future > p:first-child,
-.heroImage figcaption {
+.future > p:first-child {
   font-size: var(--fs-body);
   font-weight: 500;
   letter-spacing: 0.12em;
@@ -76,10 +75,14 @@
   position: absolute;
   right: 0;
   bottom: 0;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-2) var(--space-3);
   color: var(--paper);
   background: var(--ink);
   font-family: var(--font-note);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .collectionNavigation ul {

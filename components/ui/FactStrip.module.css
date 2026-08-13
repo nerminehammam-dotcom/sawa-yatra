@@ -1,7 +1,7 @@
 /* Facts under the heading.
 
-   A wrapping row rather than a grid: the values are wildly different lengths —
-   "7 days" next to "2,335 m → 3,600 m → 3,800 m, over a 4,910 m pass" — and a
+   A wrapping row rather than a grid: the values are wildly different lengths -
+   "7 days" next to "2,335 m → 3,600 m → 3,800 m, over a 4,910 m pass" - and a
    fixed grid would either truncate the long one or leave four cells of air
    beside the short one. Each fact takes the width it needs.
 

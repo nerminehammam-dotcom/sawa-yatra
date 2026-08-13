@@ -114,7 +114,7 @@
 }
 
 /* The right column of the split hero. The figure is stretched to the row
-   height by the grid, and the painting fills it with object-fit: cover — the
+   height by the grid, and the painting fills it with object-fit: cover - the
    same treatment as the Caravans hero image. */
 .travelSelfIntro .introPlate {
   position: relative;
@@ -1420,7 +1420,7 @@
   }
 }
 
-/* Onward actions on the result — the flagship experience no longer dead-ends.
+/* Onward actions on the result - the flagship experience no longer dead-ends.
    Routes to the working register-interest capture and to the actual product. */
 .onward {
   display: grid;

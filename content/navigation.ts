@@ -1,6 +1,6 @@
 import type { NavigationItem } from "@/lib/types";
 
-/** v2.4 §9 — the public concept leads, in this exact order. */
+/** v2.4 §9 - the public concept leads, in this exact order. */
 export const primaryNavigation = [
   {
     id: "how-it-works",
@@ -78,7 +78,7 @@ export const andeanCaravanNavigation = [
   },
   {
     id: "trip-documents",
-    label: "Trip PDFs — coming soon",
+    label: "Trip PDFs - coming soon",
     href: "/journeys/caravans/andean-caravan#trip-documents",
     meta: "No files published yet.",
   },

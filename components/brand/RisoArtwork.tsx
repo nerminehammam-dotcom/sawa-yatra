@@ -79,7 +79,6 @@ export function RisoArtwork({
           sizes={sizes}
           preload={priority}
           loading={priority ? undefined : "lazy"}
-          fetchPriority={priority ? "high" : undefined}
         />
       )}
     </figure>

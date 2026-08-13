@@ -65,13 +65,16 @@ export default function HomePage() {
               src="/assets/images/departures/andean/gallery/the-end-of-the-road/09-patagonia-41.jpg"
               alt="Broad Patagonian lake lying beneath a distant ridge of snow-covered mountains."
               fill
-              preload
               sizes="(max-width: 767px) 100vw, (max-width: 1440px) 92vw, 1325px"
             />
           </div>
           <div className={howItWorksStyles.featuredCopy}>
-            <p className={howItWorksStyles.cardLabel}>Open for interest</p>
-            <h3>Caravan — join and leave by section</h3>
+            <h3>
+              Caravans
+              <span className={howItWorksStyles.featuredTitleDetail}>
+                join and leave by section
+              </span>
+            </h3>
             <p className={howItWorksStyles.panelSummary}>
               One long overland route, travelled together. Join for a single
               section, combine several, or ride the whole 71-day road. One
@@ -96,7 +99,6 @@ export default function HomePage() {
                 src="/assets/images/departures/andean/gallery/white-city-deep-canyon/05-london-0ps.jpg"
                 alt="Pale road crossing cultivated Andean fields beneath dark mountains and gathering clouds."
                 fill
-                loading="eager"
                 sizes="(max-width: 1023px) 100vw, (max-width: 1440px) 58vw, 835px"
               />
             </div>
@@ -156,7 +158,7 @@ export default function HomePage() {
               <p className={styles.nameStoryLanguage}>Arabic</p>
               <h3 className={styles.nameStoryWord}>sawa</h3>
               <p className={styles.nameStoryDefinition}>
-                Together — rooted in an old word for harmony, alignment, and
+                Together - rooted in an old word for harmony, alignment, and
                 making things level.
               </p>
             </article>
@@ -165,7 +167,7 @@ export default function HomePage() {
               <p className={styles.nameStoryLanguage}>Sanskrit</p>
               <h3 className={styles.nameStoryWord}>yatra</h3>
               <p className={styles.nameStoryDefinition}>
-                Journey — once a pilgrimage of purpose, now any voyage of
+                Journey - once a pilgrimage of purpose, now any voyage of
                 discovery.
               </p>
             </article>
@@ -173,7 +175,7 @@ export default function HomePage() {
 
           <blockquote className={styles.nameStoryQuote}>
             <p>
-              The most meaningful journeys aren’t simply shared — they’re
+              The most meaningful journeys aren’t simply shared - they’re
               shared with people who move through the world much the way we do.
             </p>
           </blockquote>

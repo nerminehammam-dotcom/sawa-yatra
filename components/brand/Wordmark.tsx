@@ -29,7 +29,7 @@ export function Wordmark({
    * The commissioned full-colour wordmark, replacing the traced single-colour
    * mark on 8 August 2026. Served as a file rather than inlined: it appears
    * twice per page, in the navigation and the footer, and ~40KB inlined twice
-   * on every route is worse than one cached request. Decorative here — every
+   * on every route is worse than one cached request. Decorative here - every
    * caller either sets aria-label on the link or role="img" on the wrapper.
    */
   const wordmark = (

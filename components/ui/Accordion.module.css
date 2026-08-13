@@ -23,7 +23,7 @@
   border: 0;
   color: var(--warm-ink);
   background: transparent;
-  font-family: var(--font-read); /* §6.2: an accordion trigger is a button — operational */
+  font-family: var(--font-read); /* §6.2: an accordion trigger is a button - operational */
   font-size: var(--fs-title);
   font-weight: 400;
   line-height: 1.2;

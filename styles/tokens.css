@@ -1,6 +1,6 @@
 :root {
   /* Master brief v2, extended: a closed eight-colour system. Dusty blue is the
-   * cool note added 7 August 2026 — a greyed blue that reads as words on ink
+   * cool note added 7 August 2026 - a greyed blue that reads as words on ink
    * and carries ink as a ground, and colour-blocks against the warm spots.
    *
    * CONTRAST PAIRINGS (WCAG 2.1 ratios).
@@ -14,7 +14,7 @@
    *   signal, sun, olive, pink, blue   on ink only
    *   clay         on nothing at all
    *
-   * Two pairings look plausible and are not. ink on signal-text is 2.57 — two
+   * Two pairings look plausible and are not. ink on signal-text is 2.57 - two
    * dark colours are not a pairing. ink on clay is 3.75, which is large text
    * only, and a chip or a label is not large text.
    *
@@ -39,10 +39,10 @@
    */
   --paper: #e7e1d6;
   --ink: #27231f;
-  /* --signal is a FILL behind ink, or a large graphic mark — never a foreground.
+  /* --signal is a FILL behind ink, or a large graphic mark - never a foreground.
    * It fails 3:1 on paper (2.60), so it must not be text, icon, hairline or a
    * focus ring on the cream canvas. (CI checks declared pairs, not colour
-   * inherited from an ancestor — so this one is on you.) */
+   * inherited from an ancestor - so this one is on you.) */
   --signal: #f05a2a;
   --signal-text: #b03a0c;
   --clay: #a96f47;
@@ -82,7 +82,7 @@
    * Only ink (11.99), signal-text (4.67) and clay (3.19) do; signal, olive,
    * sun and pink all fail. That leaves three colours for four states, so
    * `warning` shares ink with `info` and is separated by border style
-   * instead — see .formStatus[data-tone="duplicate"] in forms.module.css.
+   * instead - see .formStatus[data-tone="duplicate"] in forms.module.css.
    * Every status is also stated in text, never by colour alone.
    */
   --success: var(--clay);
@@ -109,7 +109,7 @@
   /* Type scale (added 2026-08-07). One ramp for the whole site; the opsz axis
      carries the display/text register, so these are just sizes. Values match the
      established h1/h2/h3 ramp and the dominant module sizes, so adopting a token
-     is visually a no-op — the point is to collapse ~95 bespoke `font-size:
+     is visually a no-op - the point is to collapse ~95 bespoke `font-size:
      clamp()` values onto a shared set. Modules should migrate onto these; the
      long tail is staged for a rendered pass (see docs/sawayatra-design-audit.md §2). */
   --fs-display-1: clamp(3.6rem, 9.5vw, 9.5rem); /* hero / h1 */
@@ -120,21 +120,21 @@
   --fs-card: clamp(3.2rem, 5vw, 5rem); /* large display card title (featured / way cards) */
   --fs-title: clamp(1.65rem, 2.8vw, 2.65rem); /* h3 / smaller card title */
   --fs-lead: clamp(1.15rem, 1.6vw, 1.5rem); /* standfirst / lead */
-  --fs-body: clamp(1.125rem, 1.4vw, 1.3rem); /* long-form body — floor raised to
+  --fs-body: clamp(1.125rem, 1.4vw, 1.3rem); /* long-form body - floor raised to
      18px per constitution §10 (was 1.05rem/16.8px; sustained body never <18px) */
-  --fs-small: 1rem; /* smallest readable — short, secondary information ONLY (§10) */
+  --fs-small: 1rem; /* smallest readable - short, secondary information ONLY (§10) */
   --fs-eyebrow: 0.875rem; /* decorative label floor */
 
   /* Proposed §6.3 amendments (constitution-amendment-proposals.md): three
      genuinely new roles the ramp lacked. SVG-space map type is deliberately
-     px — it lives in a viewBox coordinate system, not the document rem flow. */
+     px - it lives in a viewBox coordinate system, not the document rem flow. */
   --fs-map-label: 24px; /* SVG route-map stop labels */
   --fs-map-caption: 19px; /* SVG route-map captions */
   --fs-display-1-compact: clamp(3.2rem, 16vw, 5.6rem); /* h1 under 640px */
 
   --leading-tight: 1.06; /* display */
   --leading-title: 1.12; /* h3 */
-  --leading-body: 1.62; /* body copy — one value (was 1.5 / 1.55 / 1.6 / 1.62) */
+  --leading-body: 1.62; /* body copy - one value (was 1.5 / 1.55 / 1.6 / 1.62) */
   --tracking-eyebrow: 0.12em; /* cap for uppercase labels */
 
   --space-1: 0.25rem;

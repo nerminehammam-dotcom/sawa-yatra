@@ -86,7 +86,7 @@ function selectedRun(
 // to say "Registration is coming soon," which flatly contradicted the banner
 // that led the visitor here. It now presents the email capture as the open
 // action. Delivery is still a mailto until the Resend adapter is switched on;
-// that is honest — it opens the visitor's own email and stores nothing.
+// that is honest - it opens the visitor's own email and stores nothing.
 export default async function RegisterInterestPage({ searchParams }: PageProps) {
   const run = selectedRun(await searchParams);
   const runSummary = run
@@ -103,7 +103,7 @@ export default async function RegisterInterestPage({ searchParams }: PageProps) 
       title="Register your interest"
       lede={runSummary
         ? `Your selected run is ${runSummary}. Leave your email and we will reply when dates, joining points and membership open. No account, no payment, nothing to commit.`
-        : "The Andean Caravan is open for interest. Leave your email and we will write to you first — when dates, joining points and membership open. No account, no payment, nothing to commit."}
+        : "The Andean Caravan is open for interest. Leave your email and we will write to you first - when dates, joining points and membership open. No account, no payment, nothing to commit."}
       notifyIntro={runSummary
         ? "Your route choice will be included in the email. Add your address and send it from your email app."
         : "Leave your email and we will write to you first."}

@@ -56,6 +56,7 @@ export default function AboutPage() {
               src="/assets/images/about/founders/lakeside.jpg"
               alt="Nermine Hammam and Amal standing together beside a lake and green hillside beneath a wide blue sky."
               fill
+              loading="eager"
               sizes="(max-width: 900px) 100vw, 58vw"
             />
             <figcaption>Nermine and Amal / on the road</figcaption>
@@ -125,7 +126,7 @@ export default function AboutPage() {
               region&apos;s most celebrated creative agencies and its award-winning
               legacy. After years of frantic business travel had gradually
               taken the joy out of travelling, she rediscovered the magic of
-              long-form journeys — and with it, a simple realisation: the people
+              long-form journeys - and with it, a simple realisation: the people
               you travel with fundamentally shape how you experience a place.
               Sawayatra grew from this belief: that finding the right travel
               companions can turn a good journey into something deeper, more

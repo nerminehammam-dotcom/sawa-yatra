@@ -55,7 +55,7 @@
   color: var(--pink);
   font-family: var(--font-display);
   font-size: var(--fs-title);
-  /* 500: the constitution's documented floor for Fraunces display type —
+  /* 500: the constitution's documented floor for Fraunces display type -
      below it the display 'e' crossbar thins toward sub-pixel collapse. */
   font-weight: 500;
   line-height: 1.06;

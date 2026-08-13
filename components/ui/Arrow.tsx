@@ -6,7 +6,7 @@ type ArrowProps = {
 /**
  * Inline CTA arrow, drawn as SVG in currentColor and sized to the text (1em),
  * so it matches Fraunces instead of falling back to a serif glyph the subset
- * does not carry. Decorative only — aria-hidden.
+ * does not carry. Decorative only - aria-hidden.
  *
  * This is for CTA affordances ("Explore the Andean Caravan →"). Route-notation
  * arrows in data ("Lima → Paracas") are real text and stay as text.

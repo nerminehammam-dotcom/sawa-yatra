@@ -16,7 +16,7 @@
   position: relative;
   display: grid;
   width: 100vw;
-  /* One screen exactly. The hero opens complete — headline included — with
+  /* One screen exactly. The hero opens complete - headline included - with
      nothing of it below the fold.
 
      The photograph is 2560x1706, a 3:2 landscape, and this band is nearer
@@ -31,7 +31,7 @@
 .homeHeroImage {
   z-index: 0;
   object-fit: cover;
-  /* Was center, which took the crop evenly off the top and the bottom — half
+  /* Was center, which took the crop evenly off the top and the bottom - half
      the sky and half the road. Weighting it low takes almost all of it off
      the top, so what goes is sky and what stays is the horizon, the valley
      and the road running out of the frame.
@@ -79,7 +79,7 @@
 /* The gradient above is now only a fallback. Where the outline renders, the
    photograph is left completely alone.
 
-   No darkening at all, and that is not laziness — it is what the measurements
+   No darkening at all, and that is not laziness - it is what the measurements
    demanded. A dark outline needs a LIGHT backdrop to separate from, so any
    wash over the photograph moves the picture towards the outline rather than
    away from it. A soft 20% corner vignette was tried first and dropped the
@@ -137,7 +137,7 @@
 
    Measured before the colour was chosen. With the scrim removed, the
    photograph behind the words runs from #7a6b6a to #afa087, and pink on that
-   is 1.48 to 2.93 — a clear fail against 3.0. Outlining moves the question to
+   is 1.48 to 2.93 - a clear fail against 3.0. Outlining moves the question to
    two new boundaries and both have to hold:
 
      pink fill against an ink outline      9.00
@@ -152,9 +152,6 @@
    of the stroke is covered and the letterforms keep their shape. Without it a
    centred stroke eats the hairlines of a high-contrast serif. */
 .homeHeroCopy h1 {
-  --hero-stroke: 0.034em;
-  --hero-stroke-color: var(--ink);
-
   /* 9.58vw is the size at which the line exactly fills 88vw, and 9vw was
      shipped first. Too big. This sits between that and the 88px it topped
      out at when it was three lines stacked: about 82px at 1280 and 92px at
@@ -163,15 +160,13 @@
      Capped at 7.5rem so it stops growing on very wide screens. Without the
      cap a 2560px monitor got 230px, which is a poster, not a headline.
 
-     nowrap is the safety net — the line must never break. */
+     nowrap is the safety net - the line must never break. */
   margin: 0;
-  color: var(--hero-rose);
+  color: var(--ink);
   white-space: nowrap;
   font-family: var(--font-display);
   font-optical-sizing: auto;
   line-height: 0.92;
-  paint-order: stroke fill;
-  -webkit-text-stroke: var(--hero-stroke) var(--hero-stroke-color);
 }
 
 .homeHeroRoman {
@@ -187,7 +182,7 @@
 .homeHeroTurn {
   font-size: var(--fs-display-2);
   font-style: italic;
-  /* WONK 1 swaps in the swash forms — the curling italic that gives this kind
+  /* WONK 1 swaps in the swash forms - the curling italic that gives this kind
      of setting its flourish. SOFT 40 rounds the terminals a little so the word
      sits softer against the two roman lines it cuts across. */
   /* SOFT + WONK only; opsz tracks the rendered size via font-optical-sizing. */
@@ -466,9 +461,9 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-2) var(--space-3);
   color: var(--paper);
-  font-size: var(--fs-body);
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: var(--tracking-eyebrow);
   background: var(--ink);
@@ -485,7 +480,7 @@
 }
 
 .finalAction h2 {
-  /* Deep-orange on the pink final-call ground (3.5:1, display) — the closing
+  /* Deep-orange on the pink final-call ground (3.5:1, display) - the closing
      headline carries colour like the page heroes, not flat ink. */
   color: var(--signal-text);
   max-width: 8ch;
@@ -699,7 +694,7 @@
 
 .nameStory {
   width: 100%;
-  padding: clamp(var(--space-24), 12vw, var(--space-32)) var(--page-gutter);
+  padding: clamp(var(--space-16), 8vw, var(--space-28)) var(--page-gutter);
   color: var(--ink);
   background: var(--paper);
 }
@@ -718,6 +713,7 @@
   max-width: var(--content-max);
   gap: var(--space-4);
   margin: 0 auto;
+  padding-top: var(--space-8);
 }
 
 .howStepsHeader > p,
@@ -791,34 +787,50 @@
   display: grid;
   max-width: var(--content-max);
   margin-inline: auto;
+  overflow: hidden;
+  border: var(--border-strong) solid var(--ink);
 }
 
 .nameStoryHeading {
-  margin: 0 0 clamp(var(--space-16), 8vw, var(--space-24));
-  color: color-mix(in srgb, var(--ink) 68%, var(--paper));
+  margin: 0;
+  padding: var(--space-5) clamp(var(--space-6), 4vw, var(--space-12));
+  color: var(--pink);
+  background: var(--ink);
   font-family: var(--font-read);
   font-size: var(--fs-small);
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0.28em;
-  text-align: center;
   text-transform: uppercase;
 }
 
 .nameStoryOrigins {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(var(--space-16), 10vw, var(--space-32));
+  gap: 0;
+  border-bottom: var(--border-strong) solid var(--ink);
 }
 
 .nameStoryOrigin {
   display: grid;
   align-content: start;
+  gap: var(--space-5);
+  min-height: 25rem;
+  padding: clamp(var(--space-8), 6vw, var(--space-16));
+}
+
+.nameStoryOrigin:first-child {
+  background: var(--pink);
+}
+
+.nameStoryOrigin:last-child {
+  background: var(--blue);
+  border-inline-start: var(--border-strong) solid var(--ink);
 }
 
 .nameStoryLanguage {
-  margin: 0 0 var(--space-8);
-  color: color-mix(in srgb, var(--ink) 68%, var(--paper));
+  margin: 0;
+  color: var(--ink);
   font-family: var(--font-read);
   font-size: var(--fs-small);
   font-weight: 500;
@@ -828,10 +840,10 @@
 }
 
 .nameStoryWord {
-  margin: 0 0 var(--space-6);
+  margin: auto 0 0;
   color: var(--ink);
   font-family: var(--font-display);
-  font-size: var(--fs-display-3);
+  font-size: var(--fs-display-2);
   font-optical-sizing: auto;
   font-weight: 500;
   line-height: 0.95;
@@ -841,7 +853,7 @@
 .nameStoryDefinition {
   max-width: 44ch;
   margin: 0;
-  color: color-mix(in srgb, var(--ink) 72%, var(--paper));
+  color: var(--ink);
   font-family: var(--font-read);
   font-size: var(--fs-lead);
   font-optical-sizing: auto;
@@ -851,9 +863,10 @@
 }
 
 .nameStoryQuote {
-  width: min(72rem, 100%);
-  margin: clamp(var(--space-16), 9vw, var(--space-24)) auto 0;
-  padding: 0;
+  width: 100%;
+  margin: 0;
+  padding: clamp(var(--space-10), 6vw, var(--space-16));
+  background: var(--sun);
   border: 0;
 }
 
@@ -876,17 +889,26 @@
   }
 
   .nameStoryHeading {
-    margin-bottom: var(--space-16);
+    padding-inline: var(--space-6);
   }
 
   .nameStoryOrigins {
     grid-template-columns: 1fr;
-    gap: var(--space-16);
+  }
+
+  .nameStoryOrigin {
+    min-height: 20rem;
+    padding: var(--space-8);
+  }
+
+  .nameStoryOrigin:last-child {
+    border-inline-start: 0;
+    border-top: var(--border-strong) solid var(--ink);
   }
 
   .nameStoryQuote {
     max-width: 100%;
-    margin-top: var(--space-20);
+    padding: var(--space-8);
   }
 }
 
@@ -1107,9 +1129,9 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-2) var(--space-3);
   color: var(--paper);
-  font-size: var(--fs-body);
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: var(--tracking-eyebrow);
   background: var(--ink);
@@ -1125,7 +1147,7 @@
 }
 
 .finalAction h2 {
-  /* Deep-orange on the pink final-call ground (3.5:1, display) — the closing
+  /* Deep-orange on the pink final-call ground (3.5:1, display) - the closing
      headline carries colour like the page heroes, not flat ink. */
   color: var(--signal-text);
   max-width: 8ch;

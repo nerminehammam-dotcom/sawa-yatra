@@ -59,7 +59,7 @@
   border-color: var(--ink);
 }
 
-/* Secondary fills with ink, not signal — filling with signal made it
+/* Secondary fills with ink, not signal - filling with signal made it
    indistinguishable from the primary button. */
 .secondary:hover:not(:disabled):not([aria-disabled="true"]) {
   color: var(--paper);

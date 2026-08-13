@@ -17,7 +17,7 @@ const expectedAndeanLinks = [
   ["Maps", "/journeys/caravans/andean-caravan#full-route-map"],
   ["Each stop", "/journeys/caravans/andean-caravan/route-map"],
   [
-    "Trip PDFs — coming soon",
+    "Trip PDFs - coming soon",
     "/journeys/caravans/andean-caravan#trip-documents",
   ],
 ] as const;

@@ -50,7 +50,7 @@ export const andeanCaravanEnquiry = {
   eyebrow: "Enquiry",
   heading: "Which part of the road stayed with you?",
   invitation:
-    "Tell us which section—or run of sections—has stayed with you. This is an expression of interest, not a booking.",
+    "Tell us which section-or run of sections-has stayed with you. This is an expression of interest, not a booking.",
   status:
     "No payment is taken. We’ll write when confirmed dates, availability and next steps are ready.",
 } as const;

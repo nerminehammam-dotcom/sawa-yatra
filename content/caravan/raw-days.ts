@@ -198,7 +198,7 @@ const dayInputs = [
         label: "OPERATING TARGET", content_visibility: "internal_operations",
         status: "proposed", copy_class: "locked_source",
         source_ids: [`${SOURCE_DOCUMENT}:day-06:note`], recheck_date: null,
-        text: "Three stops and a hotel change. If the surveyed elapsed time pushes past the envelope, Tambo Colorado is the stop that comes out — not the comfort stops and not the Huacachina pause. Record that decision rather than leaving it to the driver on the day.",
+        text: "Three stops and a hotel change. If the surveyed elapsed time pushes past the envelope, Tambo Colorado is the stop that comes out - not the comfort stops and not the Huacachina pause. Record that decision rather than leaving it to the driver on the day.",
       },
     ],
   },
@@ -220,7 +220,7 @@ const dayInputs = [
     description: {
       content_visibility: "public", status: "proposed",
       source_ids: [`${SOURCE_DOCUMENT}:day-07`], recheck_date: null,
-      copy_class: "locked_source", text: "The morning reads the Nazca lines from the mirador and the interpretive record — how they were made, who made them, what the desert surface does and does not preserve. Chauchilla follows, with its exposed cemetery landscape. After lunch the road turns south through Sacaco and its fossil marine beds to Chala on the coast.",
+      copy_class: "locked_source", text: "The morning reads the Nazca lines from the mirador and the interpretive record - how they were made, who made them, what the desert surface does and does not preserve. Chauchilla follows, with its exposed cemetery landscape. After lunch the road turns south through Sacaco and its fossil marine beds to Chala on the coast.",
     },
     free_time: {
       content_visibility: "public", status: "proposed",
@@ -864,7 +864,7 @@ const dayInputs = [
     description: {
       content_visibility: "public", status: "proposed",
       source_ids: [`${SOURCE_DOCUMENT}:day-27`], recheck_date: null,
-      copy_class: "locked_source", text: "The whole day is held. If wind or swell shortened Taquile, displaced the Amantaní stay or forced an early return, this is where that time is recovered — with the community, at the community’s convenience, not squeezed into an already-full day. If the lake behaved, the day belongs to rest, laundry, a slower Puno and individual time before the border.",
+      copy_class: "locked_source", text: "The whole day is held. If wind or swell shortened Taquile, displaced the Amantaní stay or forced an early return, this is where that time is recovered - with the community, at the community’s convenience, not squeezed into an already-full day. If the lake behaved, the day belongs to rest, laundry, a slower Puno and individual time before the border.",
     },
     free_time: {
       content_visibility: "public", status: "proposed",
@@ -1480,7 +1480,7 @@ const dayInputs = [
         label: "DECLARED LOAD BRIEFING", content_visibility: "pre_sale_disclosure",
         status: "proposed", copy_class: "locked_source",
         source_ids: [`${SOURCE_DOCUMENT}:day-46:note`], recheck_date: null,
-        text: "The Days 49–53 load is restated here in full, in person: five consecutive Demanding days, three refuge nights between approximately 4,100 and 4,600 m, shared bathrooms, limited heating, and a pre-dawn border day. Nobody should first understand this from a briefing — it is disclosed before sale — but it is confirmed here, and a traveller may withdraw from the crossing at this point under the published terms.",
+        text: "The Days 49–53 load is restated here in full, in person: five consecutive Demanding days, three refuge nights between approximately 4,100 and 4,600 m, shared bathrooms, limited heating, and a pre-dawn border day. Nobody should first understand this from a briefing - it is disclosed before sale - but it is confirmed here, and a traveller may withdraw from the crossing at this point under the published terms.",
       },
       {
         label: "[SIGN-OFF]", content_visibility: "internal_operations",
@@ -2002,13 +2002,13 @@ const dayInputs = [
         label: "MAKERS THREAD", content_visibility: "internal_operations",
         status: "proposed", copy_class: "locked_source",
         source_ids: [`${SOURCE_DOCUMENT}:day-61:note`], recheck_date: null,
-        text: "The day carries the section’s contracted encounter with a working household, workshop or maker: a Baker valley household, a wool or leather workshop, a small producer, or an equivalent chosen with local advice. It is a route requirement with named local authority, agreed payment, credit and photography consent — the same terms as Maragua or Taquile, not a lesser version because it sits in Chile.",
+        text: "The day carries the section’s contracted encounter with a working household, workshop or maker: a Baker valley household, a wool or leather workshop, a small producer, or an equivalent chosen with local advice. It is a route requirement with named local authority, agreed payment, credit and photography consent - the same terms as Maragua or Taquile, not a lesser version because it sits in Chile.",
       },
       {
         label: "[SIGN-OFF]", content_visibility: "internal_operations",
         status: "proposed", copy_class: "locked_source",
         source_ids: [`${SOURCE_DOCUMENT}:day-61:note`], recheck_date: null,
-        text: "Identify and contract this encounter before Section 04 is published. If no suitable arrangement can be made at Day 61, it moves to Tortel on Day 62 with the timber and boatbuilding tradition — but it does not disappear.",
+        text: "Identify and contract this encounter before Section 04 is published. If no suitable arrangement can be made at Day 61, it moves to Tortel on Day 62 with the timber and boatbuilding tradition - but it does not disappear.",
       },
       {
         label: "LAUNDRY WINDOW", content_visibility: "internal_operations",
@@ -2036,7 +2036,7 @@ const dayInputs = [
     description: {
       content_visibility: "public", status: "proposed",
       source_ids: [`${SOURCE_DOCUMENT}:day-62`], recheck_date: null,
-      copy_class: "locked_source", text: "The road ends above Caleta Tortel. The village continues through timber boardwalks and stairs — a settlement built from and on cypress, which is the materials thread arriving at the end of the road. Main luggage remains with the vehicle only if secure storage is contracted. The overnight-bag transfer method, including any porterage, is published after the route has been measured and the service contracted.",
+      copy_class: "locked_source", text: "The road ends above Caleta Tortel. The village continues through timber boardwalks and stairs - a settlement built from and on cypress, which is the materials thread arriving at the end of the road. Main luggage remains with the vehicle only if secure storage is contracted. The overnight-bag transfer method, including any porterage, is published after the route has been measured and the service contracted.",
     },
     free_time: {
       content_visibility: "public", status: "proposed",
@@ -2339,7 +2339,7 @@ const dayInputs = [
     },
     conditional_items: [
       {
-        label: "DECIDED IN v4.2 — THE DEPARTURE FLIGHT IS INCLUDED", content_visibility: "pre_sale_disclosure",
+        label: "DECIDED IN v4.2 - THE DEPARTURE FLIGHT IS INCLUDED", content_visibility: "pre_sale_disclosure",
         status: "proposed", copy_class: "locked_source",
         source_ids: [`${SOURCE_DOCUMENT}:day-71:note`], recheck_date: null,
         text: "The Balmaceda to Santiago flight is part of every product that closes at Balmaceda. For a traveller finishing fourteen days of Patagonia or seventy-one days of the Caravan, Sawayatra returns them to the international gateway rather than dissolving at a regional check-in desk.",

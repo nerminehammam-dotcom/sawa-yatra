@@ -13,7 +13,7 @@ export const formSuccessResponseSchema = z
     kind: formKindSchema,
     /**
      * True only when delivery actually succeeded. The client must never treat
-     * a response as a success on ok alone — see lib/forms/client.ts.
+     * a response as a success on ok alone - see lib/forms/client.ts.
      */
     sent: z.boolean(),
     storedOnServer: z.literal(false),

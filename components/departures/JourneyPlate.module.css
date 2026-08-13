@@ -3,7 +3,7 @@
    The whole mechanism is two lines: a fixed height on the image and a width of
    auto. Everything else here is spacing.
 
-   This is how a print gallery hangs work — a common centre line, and each
+   This is how a print gallery hangs work - a common centre line, and each
    frame as wide as it happens to be. Fraenkel Gallery pin the height at 900px
    and let width run from 619 to 1170; Panos pin the width and let the height
    run from 221 to 707. Nobody serious pins both.
@@ -30,7 +30,7 @@
 }
 
 /* Below the two-column breakpoint the common height stops working: a 0.92:1
-   portrait at a shared height is wider than the screen. So the rule inverts —
+   portrait at a shared height is wider than the screen. So the rule inverts -
    width leads, height follows, and the aspect ratio carries the shape. */
 @media (max-width: 767px) {
   .image {

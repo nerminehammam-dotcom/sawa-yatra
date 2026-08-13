@@ -224,12 +224,6 @@ export const andeanCaravanSectionGalleries = {
       "Dark farm building standing on the open altiplano near grazing animals.",
       { x: 33, y: 56 },
     ),
-    galleryImage(
-      "both-shores",
-      "06-drive-la-paz-puno-05.jpg",
-      "Tractor crossing striped fields on the road between La Paz and Puno.",
-      { x: 56, y: 55 },
-    ),
   ],
   "thin-air-cloud-forest": [
     galleryImage(

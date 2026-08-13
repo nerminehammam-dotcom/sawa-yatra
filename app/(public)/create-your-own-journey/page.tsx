@@ -18,10 +18,10 @@ export default function CreateYourOwnJourneyPage() {
       <section className={styles.hero} aria-labelledby="cyoj-heading">
         <div className={styles.heroCopy}>
           <p>Create your own journey</p>
-          <h1 id="cyoj-heading">Yours to shape — anywhere.</h1>
+          <h1 id="cyoj-heading">Yours to shape - anywhere.</h1>
           <p>
             You set where, when and the pace. You build it; we help you, to the
-            standard a Caravan is held to. Yours by default — and if you choose,
+            standard a Caravan is held to. Yours by default - and if you choose,
             we open it to a few members whose Travel Self fits, so it can arrive
             together.
           </p>
@@ -44,7 +44,7 @@ export default function CreateYourOwnJourneyPage() {
             <span aria-hidden="true">01</span>
             <h2>You set the shape</h2>
             <p>
-              Where — anywhere — when, the pace, and whether it is yours alone or
+              Where - anywhere - when, the pace, and whether it is yours alone or
               open to company.
             </p>
           </li>
@@ -52,8 +52,8 @@ export default function CreateYourOwnJourneyPage() {
             <span aria-hidden="true">02</span>
             <h2>You build it, we help</h2>
             <p>
-              You are the author. We bring how a Sawayatra journey is made — the
-              joining points, the rhythm, the care — so yours holds to the
+              You are the author. We bring how a Sawayatra journey is made - the
+              joining points, the rhythm, the care - so yours holds to the
               Caravan standard.
             </p>
           </li>

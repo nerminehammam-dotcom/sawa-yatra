@@ -27,8 +27,8 @@
    The previous version used `grid-auto-rows` with `overflow: hidden`, which
    pins both dimensions and therefore crops every photograph to a slot chosen
    by a stylesheet. It also rounded the corners and painted a 0.45rem terracotta
-   or dusty-blue band inside the edge of every first and third image — on top of
-   the photograph — which is the decorative effect the site's own gallery rule
+   or dusty-blue band inside the edge of every first and third image - on top of
+   the photograph - which is the decorative effect the site's own gallery rule
    prohibits.
 
    A wrapping flex row is the right structure for plates of a common height and

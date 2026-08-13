@@ -1,4 +1,4 @@
-// AUTO-TRANSCRIBED FROM Sawayatra Travel Self v2.3. Do not edit strings here —
+// AUTO-TRANSCRIBED FROM Sawayatra Travel Self v2.3. Do not edit strings here -
 // change the specification first, then re-transcribe. The specification wins.
 
 export type Pole = 1 | 2 | 3 | 4 | 5 | 6;
@@ -311,7 +311,7 @@ export const GROUP_MIN_MEMBERS = 5;
 // The signature is the four readout words in axis order:
 //   pace | planning | social | rhythm
 // Positions 1-3 take the first word, 4-6 take the second.
-// Look the name up by signature. NEVER by array index — the
+// Look the name up by signature. NEVER by array index - the
 // ARCHETYPES array is in presentation order, not binary order.
 // ─────────────────────────────────────────────────────────────
 

@@ -2,7 +2,7 @@
    it as a dead band. Sized by content plus padding; the old 82svh floor left
    roughly half the section empty at desktop widths.
    Dark ground with a dusty-blue title (7 August 2026): the editorial page gets
-   the boldest risograph treatment — a bright blue headline on near-black
+   the boldest risograph treatment - a bright blue headline on near-black
    (6.13:1) over paper body copy (11.99:1). This is where the new blue sings,
    and it keeps pink off a third page opening without adding more yellow. */
 .hero {
@@ -82,11 +82,11 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-2) var(--space-3);
   color: var(--paper);
   background: var(--ink);
   font-family: var(--font-note);
-  font-size: var(--fs-small);
+  font-size: 0.875rem;
   line-height: 1.4;
 }
 
@@ -220,9 +220,9 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-2) var(--space-3);
   color: var(--paper);
-  font-size: var(--fs-body);
+  font-size: var(--fs-small);
   font-weight: 500;
   letter-spacing: 0.08em;
   background: var(--ink);

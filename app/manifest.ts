@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 
 import { siteConfig } from "@/content/site";
 
-// Web app manifest — gives the site a name, colours and icons when installed to
+// Web app manifest - gives the site a name, colours and icons when installed to
 // a home screen, and sets the mobile browser chrome colour. Icons point at the
 // generated app/icon (512) and app/apple-icon (180).
 export default function manifest(): MetadataRoute.Manifest {

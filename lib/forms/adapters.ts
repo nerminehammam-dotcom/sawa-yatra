@@ -31,7 +31,7 @@ export interface FormDeliveryAdapter {
  * inspect submitted values.
  *
  * Only ever reached when the email adapter is unconfigured AND NODE_ENV is not
- * production — see resolveFormAdapter. In production an unconfigured adapter is
+ * production - see resolveFormAdapter. In production an unconfigured adapter is
  * an error, never a silent success: a form that validates someone's details,
  * thanks them and discards them is worse than one that visibly fails.
  */
@@ -83,7 +83,7 @@ function renderSubmission(kind: FormKind, values: Record<string, unknown>) {
     values.consent === true ? "ticked" : "not present on this form";
 
   const text = [
-    `${subjectByKind[kind]} — sawayatra`,
+    `${subjectByKind[kind]} - sawayatra`,
     "",
     ...rows.map(([key, value]) => `${fieldLabel(key)}: ${String(value)}`),
     "",
@@ -113,7 +113,7 @@ function renderSubmission(kind: FormKind, values: Record<string, unknown>) {
 }
 
 /**
- * Email delivery via Resend, over plain fetch — no SDK, no new dependency.
+ * Email delivery via Resend, over plain fetch - no SDK, no new dependency.
  *
  * Requires all three of RESEND_API_KEY, SAWAYATRA_FORM_RECIPIENT and
  * SAWAYATRA_FORM_SENDER. Missing any one leaves it unconfigured, which is a
@@ -161,7 +161,7 @@ export const emailFormAdapter: FormDeliveryAdapter = {
         body: JSON.stringify({
           from: sender,
           to: [recipient],
-          subject: `Sawayatra — ${subjectByKind[submission.kind]}`,
+          subject: `Sawayatra - ${subjectByKind[submission.kind]}`,
           text,
           html,
           ...(replyTo ? { reply_to: replyTo } : {}),
@@ -170,7 +170,7 @@ export const emailFormAdapter: FormDeliveryAdapter = {
       });
 
       if (!response.ok) {
-        // Status only — the error body can echo the submitted payload back.
+        // Status only - the error body can echo the submitted payload back.
         return {
           acknowledged: false,
           sent: false,
@@ -199,7 +199,7 @@ export const emailFormAdapter: FormDeliveryAdapter = {
 };
 
 /**
- * Email if configured. Otherwise the mock — but only outside production. In
+ * Email if configured. Otherwise the mock - but only outside production. In
  * production an unconfigured adapter returns null so the route can fail
  * loudly, making a broken configuration visible at once instead of quietly
  * losing every enquiry.

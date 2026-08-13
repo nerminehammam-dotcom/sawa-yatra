@@ -2,7 +2,7 @@
   background: var(--paper);
 }
 
-/* Hero — split, geometry matched exactly to the Andean/Departures hero:
+/* Hero - split, geometry matched exactly to the Andean/Departures hero:
    0.9 / 1.1 columns, 42rem tall, sun copy with a rust headline, a 2px ink
    divider and a 4px rust bottom line. The painting is shown WHOLE (contain) on
    paper, since it is a composed artwork, not a croppable photograph. */
@@ -54,7 +54,7 @@
   object-position: center;
 }
 
-/* How it works — four steps */
+/* How it works - four steps */
 .how {
   padding: var(--section-space) var(--page-gutter);
   border-bottom: var(--border-hairline) solid var(--ink);
@@ -102,7 +102,7 @@
   line-height: 1.5;
 }
 
-/* Honest status + register interest — olive ground, ink text, orange action */
+/* Honest status + register interest - olive ground, ink text, orange action */
 .status {
   display: grid;
   justify-items: start;

@@ -21,7 +21,7 @@ export interface DepartureCardProps {
   price?: string;
   asset: RisoAsset;
   /**
-   * §2.2 / rule 1.4 — provenance renders as a badge on every journey card:
+   * §2.2 / rule 1.4 - provenance renders as a badge on every journey card:
    * who stands behind this journey. Defaults to Sawayatra for the Caravan
    * sections; partner inventory must pass its own.
    */

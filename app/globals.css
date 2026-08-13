@@ -30,11 +30,11 @@ body {
   margin: 0;
   color: var(--ink);
   background: var(--paper);
-  /* The default register is editorial body — Fraunces. Operational
+  /* The default register is editorial body - Fraunces. Operational
      components opt in to var(--font-read) explicitly. */
   font-family: var(--font-display);
   font-optical-sizing: auto;
-  /* §10: sustained body ≥18px — floor raised from 16px. */
+  /* §10: sustained body ≥18px - floor raised from 16px. */
   font-size: clamp(1.125rem, 1.05rem + 0.22vw, 1.25rem);
   font-weight: 400;
   line-height: var(--leading-body);
@@ -107,7 +107,7 @@ a:visited:not([class]) {
    `currentColor` is not a guess. tests/design/pairings.test.ts now fails the
    build on any rule that sets a text colour on a background below 3:1, so the
    text colour of a focusable element is guaranteed to clear 3:1 against what it
-   sits on — which is exactly what WCAG 2.4.11 asks of a focus indicator. The
+   sits on - which is exactly what WCAG 2.4.11 asks of a focus indicator. The
    ring inherits that guarantee for free. Components that need a different
    colour set --focus-ring rather than writing their own outline.
 

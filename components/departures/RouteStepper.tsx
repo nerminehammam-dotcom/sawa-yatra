@@ -18,7 +18,7 @@ interface RouteStepperProps {
  *
  * The Caravan is nine consecutive sections and, until this existed, there was
  * no way to move from one to the next. A reader finishing Desert Coast had to
- * go back to the index and find White City themselves — on a product whose
+ * go back to the index and find White City themselves - on a product whose
  * entire proposition is that the sections join up into one road.
  *
  * Every serious sequential body of work solves this the same way. Nermine's own
@@ -27,7 +27,7 @@ interface RouteStepperProps {
  * and Oasis publish every permutation of one circuit and connect them by naming
  * convention. It is the cheapest structural thing a route brand can do.
  *
- * The counter is deliberately plain — "Section 3 of 9" — because scarcity and
+ * The counter is deliberately plain - "Section 3 of 9" - because scarcity and
  * shape in this category are always a number and never an adjective.
  */
 export function RouteStepper({ slug }: RouteStepperProps) {

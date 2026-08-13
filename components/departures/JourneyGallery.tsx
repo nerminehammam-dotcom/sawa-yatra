@@ -43,7 +43,7 @@ export function JourneyGallery({
           Cookson Adventures were the only operator in twenty-seven surveyed who
           made any claim about owning their imagery. For a club founded by a
           photographic artist whose photographs are the product, this is not a
-          claim — it is a fact, and it costs one line.
+          claim - it is a fact, and it costs one line.
         */}
         <p className={styles.credit}>{PHOTOGRAPH_CREDIT}</p>
       </Container>

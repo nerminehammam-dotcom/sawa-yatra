@@ -76,13 +76,13 @@ export default function DeparturesPage() {
               <li key={section.id}>
                 {/* Concise accessible name for the whole-card link. Without it,
                     a screen-reader user listing links hears the entire card
-                    dumped as link text — number, promise, every fact — for all
+                    dumped as link text - number, promise, every fact - for all
                     nine. aria-label overrides the link's name without hiding the
                     h3, so the section titles still appear in the heading outline. */}
                 <Link
                   className={styles.sectionCard}
                   href={andeanCaravanSectionHref(section.slug)}
-                  aria-label={`Section ${section.sectionNumber}, ${section.title} — ${section.durationDays} days, ${section.route}`}
+                  aria-label={`Section ${section.sectionNumber}, ${section.title} - ${section.durationDays} days, ${section.route}`}
                 >
                   <RisoArtwork
                     className={styles.sectionImage}
@@ -92,7 +92,7 @@ export default function DeparturesPage() {
                   />
                   <div className={styles.sectionCopy}>
                     <span>{String(section.sectionNumber).padStart(2, "0")}</span>
-                    {/* Rule 1.4 / §2.2 — provenance on every journey card. */}
+                    {/* Rule 1.4 / §2.2 - provenance on every journey card. */}
                     <ProvenanceBadge provenance="sawayatra" />
                     <h3>{section.title}</h3>
                     <p>{section.promise}</p>

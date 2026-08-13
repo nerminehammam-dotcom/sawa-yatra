@@ -95,7 +95,7 @@ export const assetManifest = {
     isPlaceholder: false,
     contentStatus: "LOCKED",
     contentNote:
-      "Founder-approved AI-generated brand artwork for social / OG cards. Intentional — not a placeholder.",
+      "Founder-approved AI-generated brand artwork for social / OG cards. Intentional - not a placeholder.",
   },
   favicon: {
     id: "favicon",

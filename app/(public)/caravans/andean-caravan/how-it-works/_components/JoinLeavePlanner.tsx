@@ -103,7 +103,7 @@ export function JoinLeavePlanner({ sections, shortForm }: JoinLeavePlannerProps)
             >
               {sections.map((section) => (
                 <option key={section.id} value={section.id}>
-                  {section.join} — Section {section.id}
+                  {section.join} - Section {section.id}
                 </option>
               ))}
             </select>
@@ -117,7 +117,7 @@ export function JoinLeavePlanner({ sections, shortForm }: JoinLeavePlannerProps)
             >
               {sections.slice(startIndex).map((section) => (
                 <option key={section.id} value={section.id}>
-                  {section.leave} — after {section.name}
+                  {section.leave} - after {section.name}
                 </option>
               ))}
             </select>
@@ -214,7 +214,7 @@ export function JoinLeavePlanner({ sections, shortForm }: JoinLeavePlannerProps)
               <span>{section.id}</span>
               <small>
                 {section.name}
-                {isSelected ? <span className="sr-only"> — included</span> : null}
+                {isSelected ? <span className="sr-only"> - included</span> : null}
               </small>
             </li>
           );

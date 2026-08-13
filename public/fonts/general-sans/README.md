@@ -1,4 +1,4 @@
-# General Sans — self-hosted files (action needed)
+# General Sans - self-hosted files (action needed)
 
 Constitution §6.2 makes General Sans the operational face. The CSS is fully
 wired (`app/globals.css` @font-face → `--font-read` in `styles/tokens.css`);
@@ -15,5 +15,5 @@ To finish:
    - `general-sans-500.woff2`
    - `general-sans-600.woff2`
 
-Until then, operational text falls back to the system sans — never to
+Until then, operational text falls back to the system sans - never to
 Fraunces, so the §6.2 register split is already visible.

@@ -186,7 +186,7 @@
 }
 
 /* The list is centred in a full-bleed bar, so the outermost left and right
-   rules terminate in empty space instead of meeting anything — they read as
+   rules terminate in empty space instead of meeting anything - they read as
    orphaned ticks. Keep the dividers between items only. */
 .mainItem:first-child .mainLink {
   border-left: 0;

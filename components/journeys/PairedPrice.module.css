@@ -1,4 +1,4 @@
-/* Rule 4.9 — one block, two figures, comparable weight. The floor is not
+/* Rule 4.9 - one block, two figures, comparable weight. The floor is not
    allowed to shout and the live figure is not allowed to whisper. */
 .block {
   display: grid;

@@ -12,7 +12,7 @@ const memberPath = [
     steps: [
       {
         number: "01",
-        title: "Meet your Travel Self — if you want",
+        title: "Meet your Travel Self - if you want",
         body: "The questionnaire is free, anonymous and optional. Take it before joining, after joining, or not yet.",
         actions: [
           { label: "Meet your Travel Self", href: "/travel-self", protected: false },

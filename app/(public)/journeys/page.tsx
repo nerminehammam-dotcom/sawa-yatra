@@ -42,6 +42,7 @@ export default function JourneysPage() {
                   src={journey.heroImage}
                   alt={journey.heroAlt}
                   fill
+                  loading="eager"
                   sizes="(max-width: 760px) 100vw, 50vw"
                 />
               </figure>

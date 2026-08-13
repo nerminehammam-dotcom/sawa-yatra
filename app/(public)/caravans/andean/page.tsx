@@ -124,7 +124,7 @@ export default function AndeanCaravanPage() {
                 <Link
                   className={styles.sectionCard}
                   href={`/journeys/caravans/andean-caravan/${slug}`}
-                  aria-label={`Section ${section.section_id}, ${section.name} — ${duration} days, ${routeLabel}`}
+                  aria-label={`Section ${section.section_id}, ${section.name} - ${duration} days, ${routeLabel}`}
                 >
                   <RisoArtwork
                     className={styles.sectionImage}

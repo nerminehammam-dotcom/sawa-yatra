@@ -35,7 +35,7 @@ export function RouteIndex() {
             <div className={styles.routeMain}>
               <h3>{section.title}</h3>
               <p>{section.route}</p>
-              {/* Rule 1.4 / §2.2 — provenance on every journey card. */}
+              {/* Rule 1.4 / §2.2 - provenance on every journey card. */}
               <ProvenanceBadge provenance="sawayatra" />
             </div>
             <dl className={styles.routeFacts}>

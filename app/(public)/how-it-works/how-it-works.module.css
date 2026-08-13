@@ -112,7 +112,7 @@
   text-transform: none;
 }
 
-/* Opening — the same split-hero grid as Andean / Departures and Travel Self:
+/* Opening - the same split-hero grid as Andean / Departures and Travel Self:
    0.9 / 1.1 columns, 42rem tall, identical copy rhythm, a 2px divider and a
    4px closing line. Artwork fills its grid cell so none of the three openings
    develops a letterboxed band above or below the image. */
@@ -133,7 +133,7 @@
 }
 
 /* Deep-orange, not ink (7 August 2026): a display duet on sun (3.37:1, large
-   text only — this heading never drops below 3rem). The titles across the site
+   text only - this heading never drops below 3rem). The titles across the site
    carry colour now rather than all reading as black. */
 .heroCopy h1 {
   color: var(--signal-text);
@@ -217,6 +217,13 @@
   color: var(--pink);
   font-size: var(--fs-card);
   line-height: 0.93;
+}
+
+.featuredTitleDetail {
+  display: block;
+  margin-top: var(--space-3);
+  font-size: 0.58em;
+  line-height: 1.05;
 }
 
 .featuredBody {
@@ -492,7 +499,7 @@
 }
 
 /* §6.3: the connector arrow is the <Arrow /> SVG rendered in JSX
-   (.stepArrow), not a CSS content glyph — Fraunces carries no U+2192. */
+   (.stepArrow), not a CSS content glyph - Fraunces carries no U+2192. */
 .stepArrow {
   position: absolute;
   z-index: 1;

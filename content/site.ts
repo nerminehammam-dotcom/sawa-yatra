@@ -90,13 +90,13 @@ const approvedRouteDescriptions = {
     "Ask Sawayatra about membership, the Andean Caravan, a journey section or how the club works.",
   journey:
     "Explore the complete Andean Caravan and its four connected sections through Peru, Bolivia and Chile.",
-  // Added 7 August 2026 — these three routes were falling through to an
+  // Added 7 August 2026 - these three routes were falling through to an
   // auto-generated "PLACEHOLDER: Founder-approved … meta description" string,
   // which shipped that scaffolding to search engines and social cards.
   "sign-in":
     "Member access opens in stages and is not active yet. Register your interest and Sawayatra will write to you first.",
   "request-invitation":
-    "Invitations open when membership does. Register your interest and Sawayatra will write to you first — no account, no payment.",
+    "Invitations open when membership does. Register your interest and Sawayatra will write to you first - no account, no payment.",
   "not-found":
     "This page could not be found. Return to Sawayatra and pick the road back up from the Andean Caravan or your Travel Self.",
   privacy:
@@ -584,10 +584,10 @@ export const requestInvitationContent = {
   // and an invitation form whose consent checkbox declared itself "not final
   // legal consent" while collecting name, email and country. Collecting
   // personal data behind a self-described non-consent box, before a reviewed
-  // privacy policy exists, is a live compliance risk — so the form is removed
+  // privacy policy exists, is a live compliance risk - so the form is removed
   // until the policy is ready and this points to the email-only interest
   // capture instead. Restore the form once consent wording is approved.
-  lead: "Invitations open when membership does. In the meantime, register your interest and we will write to you first — no account, no payment, nothing to commit.",
+  lead: "Invitations open when membership does. In the meantime, register your interest and we will write to you first - no account, no payment, nothing to commit.",
   form: invitationRequestFormContent,
   contentStatus: "DRAFT",
   contentNote: "Consent and follow-up copy require approval before launch.",

@@ -15,7 +15,7 @@ interface FactStripProps {
  * The facts, immediately under the heading, before any prose.
  *
  * This is the one itinerary convention nearly every operator in the category
- * shares — Chimu, Steppes, Wild Frontiers, Intrepid, Wilderness Travel, Natural
+ * shares - Chimu, Steppes, Wild Frontiers, Intrepid, Wilderness Travel, Natural
  * World Safaris, Aracari, Jacada, Black Tomato and Much Better Adventures all
  * have it. The contents vary from three cells to seven; the position does not.
  * A visitor arrives with the convention already installed, and breaking it

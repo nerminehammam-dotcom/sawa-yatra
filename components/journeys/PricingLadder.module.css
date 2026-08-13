@@ -1,4 +1,4 @@
-/* §7.5 — six bands drawn horizontally, riso palette. Reached bands darker
+/* §7.5 - six bands drawn horizontally, riso palette. Reached bands darker
    ink; bands ahead lighter, as possibility. Mobile (≤380px): the condensed
    vertical treatment is part of the spec, not an afterthought. */
 
@@ -101,7 +101,7 @@
   opacity: 0.55;
 }
 
-/* The mobile treatment (§7.5): six horizontal bands do not fit at 380px —
+/* The mobile treatment (§7.5): six horizontal bands do not fit at 380px -
    the ladder turns vertical, price beside size, one band per row. */
 @media (max-width: 380px) {
   .bands {
