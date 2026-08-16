@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 
 import { assetManifest } from "@/content/assets";
 import { routeMetadataByPath, siteConfig } from "@/content/site";
-import { absoluteUrl, isProductionDomainConfigured } from "@/lib/site-url";
+import { absoluteUrl, isIndexingEnabled } from "@/lib/site-url";
 import type { StaticRoute } from "@/lib/types";
 
+// Absolute URLs below are always correct in a production build. Whether the
+// page invites indexing is a separate opt-in - see lib/site-url.ts.
 const isIndexableEnvironment =
-  process.env.NODE_ENV === "production" && isProductionDomainConfigured;
+  process.env.NODE_ENV === "production" && isIndexingEnabled;
 
 function routeTitle(path: StaticRoute, fullTitle: string): Metadata["title"] {
   if (path === "/") {

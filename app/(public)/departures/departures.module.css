@@ -390,6 +390,103 @@
   background: var(--sun);
 }
 
+/* Trip PDF library. A ruled list rather than cards: these are documents, and
+   the page already carries enough blocked colour. Ink on paper throughout -
+   no midtone is used as a foreground here.
+
+   This section drops the two-column split the other .information blocks use.
+   A document list needs the full measure: at half width the section titles
+   wrapped onto three lines and the metadata had nowhere to sit. */
+.documents {
+  grid-template-columns: 1fr;
+  gap: var(--space-10);
+}
+
+.documents > div + div {
+  padding-inline-start: 0;
+  border-inline-start: 0;
+}
+
+.documents h2 {
+  max-width: 20ch;
+}
+
+.documentList {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  border-top: var(--border-hairline) solid var(--ink);
+  list-style: none;
+}
+
+.documentLink {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr) auto auto;
+  align-items: baseline;
+  gap: var(--space-4);
+  min-height: var(--touch-min);
+  padding: var(--space-5) var(--space-2) var(--space-5) 0;
+  border-bottom: var(--border-hairline) solid var(--ink);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.documentLink:hover .documentText strong,
+.documentLink:focus-visible .documentText strong {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+.documentNumber {
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.documentText {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.documentText strong {
+  font-size: var(--fs-lead);
+  font-weight: 500;
+  line-height: var(--leading-title);
+}
+
+.documentText span {
+  font-family: var(--font-read);
+  font-size: var(--fs-small);
+  line-height: 1.5;
+}
+
+.documentMeta {
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.documentNote {
+  max-width: var(--measure);
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  line-height: 1.6;
+}
+
+@media (max-width: 767px) {
+  .documentLink {
+    grid-template-columns: 2.5rem minmax(0, 1fr) auto;
+    row-gap: var(--space-2);
+  }
+
+  .documentMeta {
+    grid-column: 2 / -1;
+  }
+}
+
 @media (max-width: 767px) {
   .mapTextEquivalent ol {
     grid-template-columns: 1fr;

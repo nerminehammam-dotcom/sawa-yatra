@@ -1,0 +1,216 @@
+/* Join an existing journey.
+   The page was an empty <main> until 15 August 2026; this is its first layout.
+
+   Colour: ink on paper throughout, with one sun band for the hero eyebrow and
+   an ink footer band. No midtone carries text, and the only signal on the page
+   is the number column, which is a large graphic mark and not a foreground for
+   reading. Checked against the matrix in styles/tokens.css. */
+
+.page {
+  display: grid;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(18rem, 0.85fr);
+  align-content: start;
+  gap: var(--space-10) var(--space-16);
+  padding: clamp(3rem, 7vw, 7rem) var(--page-gutter) clamp(2.5rem, 5vw, 5rem);
+  border-bottom: var(--border-strong) solid var(--ink);
+}
+
+.hero h1 {
+  max-width: 14ch;
+  font-size: var(--fs-display-2);
+  line-height: var(--leading-tight);
+}
+
+.heroAside {
+  display: grid;
+  align-content: end;
+  gap: var(--space-4);
+  max-width: var(--measure-narrow);
+}
+
+.heroAside p {
+  font-size: var(--fs-lead);
+  line-height: var(--leading-body);
+}
+
+.regionBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--page-gutter);
+  border-bottom: var(--border-hairline) solid var(--ink);
+  background: var(--sun);
+}
+
+.regionBar p {
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+}
+
+.regionBar strong {
+  font-size: var(--fs-title);
+  font-weight: 500;
+}
+
+.list {
+  display: grid;
+  margin: 0;
+  padding: 0 var(--page-gutter) var(--section-space);
+  list-style: none;
+}
+
+.item {
+  border-bottom: var(--border-hairline) solid var(--ink);
+}
+
+.item:first-child {
+  border-top: var(--border-hairline) solid var(--ink);
+}
+
+.link {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr) 13rem auto;
+  align-items: start;
+  gap: var(--space-6);
+  min-height: var(--touch-min);
+  padding: var(--space-8) var(--space-2) var(--space-8) 0;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.link:hover .title,
+.link:focus-visible .title {
+  text-decoration: underline;
+  text-underline-offset: 0.16em;
+}
+
+/* A large graphic mark, not a foreground: signal is never read as text.
+   It repeats the number printed on the document cover. */
+.number {
+  font-size: var(--fs-title);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--signal);
+}
+
+.body {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.title {
+  font-size: var(--fs-title);
+  font-weight: 500;
+  line-height: var(--leading-title);
+}
+
+.standfirst {
+  max-width: 46ch;
+  font-size: var(--fs-body);
+  line-height: var(--leading-body);
+}
+
+.facts {
+  display: grid;
+  gap: var(--space-1);
+  margin: 0;
+  font-family: var(--font-read);
+  font-size: var(--fs-small);
+  line-height: 1.45;
+}
+
+.facts div {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: var(--space-2);
+}
+
+.facts dt {
+  color: var(--ink);
+  opacity: 0.72;
+}
+
+.facts dd {
+  margin: 0;
+}
+
+.download {
+  display: grid;
+  justify-items: end;
+  gap: var(--space-2);
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+  white-space: nowrap;
+}
+
+.closing {
+  display: grid;
+  gap: var(--space-5);
+  padding: var(--section-space) var(--page-gutter);
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.closing h2 {
+  max-width: 18ch;
+  font-size: var(--fs-display-3);
+  line-height: var(--leading-tight);
+}
+
+.closing p {
+  max-width: var(--measure);
+}
+
+.closingLinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin-top: var(--space-4);
+}
+
+.closingLinks a {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: baseline;
+  color: var(--paper);
+  text-underline-offset: 0.16em;
+}
+
+@media (max-width: 1024px) {
+  .link {
+    grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+    row-gap: var(--space-4);
+  }
+
+  .download {
+    grid-column: 2 / -1;
+    justify-items: start;
+    text-align: start;
+  }
+}
+
+@media (max-width: 767px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: var(--fs-display-3);
+  }
+
+  .link {
+    grid-template-columns: 2.75rem minmax(0, 1fr);
+  }
+
+  .download {
+    grid-column: 2;
+  }
+}

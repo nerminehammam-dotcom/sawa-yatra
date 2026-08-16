@@ -20,7 +20,9 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#e7e1d6",
+  // --paper. A literal because the browser reads this before any stylesheet;
+  // keep it in step with styles/tokens.css by hand.
+  themeColor: "#F5EFE2",
 };
 
 // Organization + WebSite structured data (JSON-LD). Uses siteUrl, so it is

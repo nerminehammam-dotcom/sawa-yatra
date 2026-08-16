@@ -31,8 +31,13 @@ export async function GET(
           alignItems: "center",
           justifyContent: "center",
           padding: "72px",
+          // Palette literals, not tokens: ImageResponse renders outside the
+          // document. --ink on --signal as of the 15 August 2026 colour pass.
+          // That pairing measures 3.86, which is large-text only - it holds
+          // here because the name below is set at 116px, and nowhere on this
+          // card is smaller than 18px. Do not reuse this pairing at body size.
           color: "#27231F",
-          background: "#F05A2A",
+          background: "#D9522F",
           textAlign: "center",
         }}
       >

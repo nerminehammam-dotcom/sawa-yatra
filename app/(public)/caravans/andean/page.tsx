@@ -9,6 +9,7 @@ import {
   andeanCaravanHeroImage,
   getCanonicalCaravanCardImage,
 } from "@/content/andean-caravan-images";
+import { andeanCaravanDocuments } from "@/content/andean-caravan-documents";
 import { andeanCaravanMapChapters } from "@/content/andean-caravan-map";
 import { getCanonicalCaravanOverview } from "@/content/caravan/page-data";
 import { siteConfig } from "@/content/site";
@@ -185,7 +186,7 @@ export default function AndeanCaravanPage() {
       </section>
 
       <section
-        className={styles.information}
+        className={`${styles.information} ${styles.documents}`}
         id="trip-documents"
         aria-labelledby="trip-documents-heading"
       >
@@ -193,17 +194,37 @@ export default function AndeanCaravanPage() {
           <p>Trip PDFs</p>
           <h2 id="trip-documents-heading">Trip PDFs for the Andean Caravan.</h2>
           <p>
-            This will be the single library for approved Andean Caravan PDFs
+            This is the single library for approved Andean Caravan PDFs
             and traveller documents.
           </p>
         </div>
         <div>
-          <h2>Coming soon</h2>
-          <p>
-            No trip documents are available for download yet. They will appear
-            here when the route, dates and practical information are approved.
-          </p>
-          <p>
+          <ul className={styles.documentList}>
+            {andeanCaravanDocuments.map((doc) => (
+              <li key={doc.id}>
+                <a
+                  className={styles.documentLink}
+                  href={doc.href}
+                  download
+                  aria-label={`Download ${doc.title}, PDF, ${doc.pages} pages, ${doc.sizeLabel}`}
+                >
+                  <span className={styles.documentNumber} aria-hidden="true">
+                    {doc.number ?? "All"}
+                  </span>
+                  <span className={styles.documentText}>
+                    <strong>{doc.title}</strong>
+                    <span>{doc.scope}</span>
+                  </span>
+                  <span className={styles.documentMeta}>
+                    PDF · {doc.pages} pages · {doc.sizeLabel}
+                  </span>
+                  <Arrow />
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className={styles.documentNote}>
+            Every section is also readable online, day by day.{" "}
             <Link href="/journeys/caravans/andean-caravan/route-map">
               Read every route day online <Arrow />
             </Link>

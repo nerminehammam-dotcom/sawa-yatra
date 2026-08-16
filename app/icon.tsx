@@ -19,13 +19,17 @@ export default function Icon() {
           height: "100%",
           alignItems: "center",
           justifyContent: "center",
-          background: "#E7E1D6",
+          // Palette literals, not tokens: ImageResponse renders outside the
+          // document, so CSS custom properties are not available here. Keep
+          // these in step with styles/tokens.css by hand.
+          // paper, signal, olive as of the 15 August 2026 colour pass.
+          background: "#F5EFE2",
         }}
       >
         <RouteGateMark
-          gateColor="#F05A2A"
+          gateColor="#D9522F"
           height={350}
-          routeColor="#98904F"
+          routeColor="#8E9130"
           width={395}
         />
       </div>

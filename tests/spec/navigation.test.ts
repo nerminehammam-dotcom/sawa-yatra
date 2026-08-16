@@ -90,9 +90,9 @@ describe("v2.4 navigation", () => {
       },
       {
         id: "trip-documents",
-        label: "Trip PDFs - coming soon",
+        label: "Trip PDFs",
         href: "/journeys/caravans/andean-caravan#trip-documents",
-        meta: "No files published yet.",
+        meta: "The complete guide and each section, to download.",
       },
     ]);
   });

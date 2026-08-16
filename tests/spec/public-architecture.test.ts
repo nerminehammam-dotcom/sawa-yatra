@@ -28,15 +28,29 @@ describe("public Journey product architecture", () => {
     }
   });
 
-  it("keeps Create and Join as empty structural pages", () => {
-    for (const route of [
+  // Create is still an empty structural page: the route exists so the three
+  // Journey products are structurally equal in navigation, but no copy for it
+  // has been approved, and none may be invented.
+  it("keeps Create as an empty structural page", () => {
+    const source = readFileSync(
       "app/(public)/journeys/create/page.tsx",
-      "app/(public)/journeys/join/page.tsx",
-    ]) {
-      const source = readFileSync(route, "utf8");
-      expect(source).toContain('<main id="main-content" tabIndex={-1} />');
-      expect(source).not.toMatch(/<(?:h1|h2|p|form|Image)\b/);
-    }
+      "utf8",
+    );
+    expect(source).toContain('<main id="main-content" tabIndex={-1} />');
+    expect(source).not.toMatch(/<(?:h1|h2|p|form|Image)\b/);
+  });
+
+  // Join stopped being an empty shell on 15 August 2026, when nine client
+  // guides for the Egyptian Western Desert journeys were supplied and approved
+  // for publication. Its content is still not invented: every field rendered
+  // is read from the cover of the corresponding PDF. This test replaces the
+  // empty-shell guard for Join with a positive one, so the page cannot quietly
+  // regress to a blank main or start carrying copy from outside the documents.
+  it("lists the existing journeys on Join, sourced from the content module", () => {
+    const source = readFileSync("app/(public)/journeys/join/page.tsx", "utf8");
+    expect(source).toContain('from "@/content/existing-journeys"');
+    expect(source).toContain("existingJourneys.map");
+    expect(source).not.toContain('<main id="main-content" tabIndex={-1} />');
   });
 
   it("keeps Andean detail destinations local and real", () => {

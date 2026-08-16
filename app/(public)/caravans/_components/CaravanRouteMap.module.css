@@ -226,8 +226,11 @@
   opacity: 1;
 }
 
+/* Water reads blue, and --blue is the palette's cool note, so the lake now
+   draws from the token rather than the off-palette #7ca7a4 it used to carry.
+   At 22% over paper it is a wash, not a ground - no text sits on it. */
 .lakeShape {
-  fill: color-mix(in srgb, #7ca7a4 22%, transparent);
+  fill: color-mix(in srgb, var(--blue) 22%, transparent);
   stroke: color-mix(in srgb, var(--ink) 46%, transparent);
   stroke-width: 1;
   vector-effect: non-scaling-stroke;

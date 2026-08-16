@@ -12,8 +12,10 @@ export default function manifest(): MetadataRoute.Manifest {
     description: siteConfig.descriptor,
     start_url: "/",
     display: "standalone",
-    background_color: "#e7e1d6",
-    theme_color: "#e7e1d6",
+    // --paper. A literal because the manifest is JSON, not CSS; keep it in step
+    // with styles/tokens.css by hand.
+    background_color: "#F5EFE2",
+    theme_color: "#F5EFE2",
     icons: [
       { src: "/icon", sizes: "512x512", type: "image/png" },
       { src: "/apple-icon", sizes: "180x180", type: "image/png" },

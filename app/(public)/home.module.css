@@ -135,18 +135,21 @@
 /* The headline is outlined rather than sat on a darkened photograph, so the
    picture can be seen.
 
-   Measured before the colour was chosen. With the scrim removed, the
-   photograph behind the words runs from #7a6b6a to #afa087, and pink on that
-   is 1.48 to 2.93 - a clear fail against 3.0. Outlining moves the question to
-   two new boundaries and both have to hold:
+   Measured before the colour was chosen, and remeasured for the 15 August 2026
+   palette. With the scrim removed, the photograph behind the words runs from
+   #7a6b6a to #afa087, and pink on that is 1.24 to 2.46 - a clear fail against
+   3.0, and slightly worse than the 1.48 to 2.93 the old pink gave. Outlining
+   moves the question to two new boundaries and both still have to hold:
 
-     pink fill against an ink outline      9.00
+     pink fill against an ink outline      7.58   (was 9.00)
      ink outline against the photograph    3.07 at worst, 6.09 at best
 
-   A paper outline was measured too and is the wrong answer: pink on paper is
-   1.33, so the letter would disappear into its own edge, and paper against the
-   photograph falls to 1.97 in places. Ink, on the numbers rather than by
-   taste. --hero-stroke-color is here if you want to try it anyway.
+   The ink outline is doing the work and it is unchanged, so the decision
+   stands. A paper outline was measured too and is still the wrong answer:
+   pink on paper is 1.80, so the letter would disappear into its own edge, and
+   paper against the photograph falls to 2.23 in places. Ink, on the numbers
+   rather than by taste. --hero-stroke-color is here if you want to try it
+   anyway.
 
    paint-order draws the stroke first and the fill over it, so the inner half
    of the stroke is covered and the letterforms keep their shape. Without it a

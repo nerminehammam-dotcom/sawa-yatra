@@ -1,55 +1,78 @@
 :root {
-  /* Master brief v2, extended: a closed eight-colour system. Dusty blue is the
-   * cool note added 7 August 2026 - a greyed blue that reads as words on ink
-   * and carries ink as a ground, and colour-blocks against the warm spots.
+  /* Master brief v2, extended: a closed eight-colour system. Blue is the cool
+   * note added 7 August 2026 - it reads as words on ink and carries ink as a
+   * ground, and colour-blocks against the warm spots.
+   *
+   * COLOUR PASS 15 August 2026. The palette moved to warm 1970s earth: higher
+   * chroma, more inviting, still matte and print-derived. Seven of the nine
+   * primitives changed value; ink and signal-text did not. Blue changed hue -
+   * a lagoon teal was tried and rejected, and it is now a denim blue (#6E93B8),
+   * keeping the same role as the cool counterweight. Every ratio below was
+   * recomputed for the new values; nothing here is inherited from v2.3.
    *
    * CONTRAST PAIRINGS (WCAG 2.1 ratios).
    *
    * WHAT MAY CARRY BODY TEXT ON WHAT (>= 4.5). This is the short version, and
    * it is the version to read at the moment of choosing:
    *
-   *   ink          on paper, signal, sun, olive, pink or blue
+   *   ink          on paper, sun, olive, pink or blue
    *   paper        on ink or signal-text
    *   signal-text  on paper only
-   *   signal, sun, olive, pink, blue   on ink only
+   *   sun, olive, pink, blue   on ink only
+   *   signal       on nothing at all
    *   clay         on nothing at all
    *
-   * Two pairings look plausible and are not. ink on signal-text is 2.57 - two
-   * dark colours are not a pairing. ink on clay is 3.75, which is large text
-   * only, and a chip or a label is not large text.
+   * Three pairings look plausible and are not. ink on signal-text is 2.57 -
+   * two dark colours are not a pairing. ink on clay is 4.01, which is large
+   * text only, and a chip or a label is not large text. ink on signal is 3.86:
+   * it PASSED AA at 4.61 before this pass and does not now, so any button or
+   * chip that sets ink on a signal fill is large-text-only from here. That was
+   * an accepted, recorded cost of the deeper signal, not an oversight.
    *
    * The full matrix follows. Every pairing that does not involve ink or paper
    * fails AA for body text, and most fail the 3:1 large-text threshold too.
    *
    *              paper    ink  signal  sig-txt   clay    sun  olive   pink   blue
-   *   paper        --   11.99   2.60x    4.67   3.19L  1.39x  2.51x  1.33x  1.96x
-   *   ink       11.99      --    4.61    2.57x  3.75L   8.64   4.78   9.00   6.13
-   *   signal     2.60x   4.61      --    1.79x  1.23x  1.88x  1.04x  1.96x  1.33x
-   *   sig-txt     4.67   2.57x   1.79x      --  1.46x  3.37L  1.86x  3.51L  2.39x
-   *   clay       3.19L   3.75L   1.23x    1.46x    --   2.30x  1.27x  2.40x  1.63x
-   *   sun        1.39x    8.64   1.88x    3.37L  2.30x     --  1.81x  1.04x  1.41x
-   *   olive      2.51x    4.78   1.04x    1.86x  1.27x  1.81x     --   1.88x  1.28x
-   *   pink       1.33x    9.00   1.96x    3.51L  2.40x  1.04x  1.88x     --   1.47x
-   *   blue       1.96x    6.13   1.33x    2.39x  1.63x  1.41x  1.28x  1.47x     --
+   *   paper        --   13.61   3.53L    5.30   3.39L  1.72x  2.94x  1.80x  2.81x
+   *   ink       13.61      --   3.86L    2.57x  4.01L   7.93   4.64   7.58   4.85
+   *   signal     3.53L   3.86L     --    1.50x  1.04x  2.05x  1.20x  1.96x  1.26x
+   *   sig-txt     5.30   2.57x   1.50x      --  1.56x  3.09L  1.81x  2.95x  1.89x
+   *   clay       3.39L   4.01L   1.04x    1.56x    --   1.98x  1.16x  1.89x  1.21x
+   *   sun        1.72x    7.93   2.05x    3.09L  1.98x     --  1.71x  1.05x  1.64x
+   *   olive      2.94x    4.64   1.20x    1.81x  1.16x  1.71x     --   1.63x  1.05x
+   *   pink       1.80x    7.58   1.96x    2.95x  1.89x  1.05x  1.63x     --   1.56x
+   *   blue       2.81x    4.85   1.26x    1.89x  1.21x  1.64x  1.05x  1.56x     --
    *
    *   no mark = passes AA (>=4.5)   L = large text only (>=3)   x = fails both
    *
-   * Before pairing two colours, check this table. pink-on-olive (1.88) shipped
+   * Before pairing two colours, check this table. pink-on-olive (1.63) shipped
    * to production once because nothing recorded that it was illegal.
+   *
+   * Two things this pass changed that are easy to miss. signal-text on pink was
+   * 3.51 and is now 2.95, so it has dropped out of large text as well - it is
+   * no longer legal at any size. And blue against olive is 1.05: they are now
+   * near-identical in luminance, so a blue edge against an olive edge will
+   * vanish in greyscale and for anyone with reduced colour vision. They are not
+   * adjacent anywhere today. Keep it that way, or separate them with a rule.
    */
-  --paper: #e7e1d6;
+  --paper: #F5EFE2;
+  --bone: #EDE4D1; /* second canvas step: cards, surfaces */
+  --sand: #E0D4BC; /* third canvas step: section tints, table stripes */
   --ink: #27231f;
   /* --signal is a FILL behind ink, or a large graphic mark - never a foreground.
-   * It fails 3:1 on paper (2.60), so it must not be text, icon, hairline or a
-   * focus ring on the cream canvas. (CI checks declared pairs, not colour
-   * inherited from an ancestor - so this one is on you.) */
-  --signal: #f05a2a;
+   * At 3.53 on paper it now clears the 3:1 a non-text indicator needs (it was
+   * 2.60 and failed), but it still fails text contrast in both directions -
+   * 3.53 with paper on it, 3.86 with ink on it - so it must not be text, icon,
+   * hairline or a focus ring on the cream canvas. The rule is unchanged; only
+   * the reason is narrower. (CI checks declared pairs, not colour inherited
+   * from an ancestor - so this one is on you.) */
+  --signal: #D9522F;
   --signal-text: #b03a0c;
-  --clay: #a96f47;
-  --sun: #e5bc4f;
-  --olive: #98904f;
-  --pink: #eeb6c4;
-  --blue: #7ea8c0;
+  --clay: #B5713F;
+  --sun: #E3B233;
+  --olive: #8E9130;
+  --pink: #F2A08F;
+  --blue: #6E93B8;
 
   /* Compatibility names point back to the approved system. */
   --cream: var(--paper);
@@ -76,13 +99,16 @@
   --focus: var(--focus-ring-light);
   --hover: var(--ink);
   --visited: var(--ink);
-  --disabled: #98904f; /* own token (was aliased to --olive) so a palette change to olive can't silently restyle disabled controls; retune to a muted grey if a clearer disabled look is wanted. */
+  --disabled: #98904f; /* own token (was aliased to --olive) so a palette change to olive can't silently restyle disabled controls; retune to a muted grey if a clearer disabled look is wanted. As of the 15 Aug 2026 colour pass this is the PREVIOUS olive - olive moved to #8E9130 and this deliberately did not follow, so disabled now reads as its own duller green rather than as brand olive. It measures 2.85 on the new paper, so it does not register as a 3:1 indicator; it did not before either (2.51). */
 
   /* Status colours must clear 3:1 against --paper to register as indicators.
-   * Only ink (11.99), signal-text (4.67) and clay (3.19) do; signal, olive,
-   * sun and pink all fail. That leaves three colours for four states, so
-   * `warning` shares ink with `info` and is separated by border style
-   * instead - see .formStatus[data-tone="duplicate"] in forms.module.css.
+   * Only ink (13.61), signal-text (5.30) and clay (3.39) do; olive (2.94),
+   * pink (1.80) and sun (1.72) all fail. signal now measures 3.53 and clears
+   * the threshold arithmetically, but it is excluded anyway - a status dot or
+   * icon is a foreground, and signal is never a foreground (see above).
+   * That leaves three colours for four states, so `warning` shares ink with
+   * `info` and is separated by border style instead - see
+   * .formStatus[data-tone="duplicate"] in forms.module.css.
    * Every status is also stated in text, never by colour alone.
    */
   --success: var(--clay);
@@ -96,6 +122,18 @@
   --soft-rose: var(--pink);
   --soft-blue: var(--blue); /* fixed: was --olive (see --dusty-blue). Genuine-olive soft grounds use --soft-olive. */
   --hairline: var(--ink);
+
+  /* Tint grounds: a midtone at 25% toward paper. Large grounds only.
+     Never shaded darker - shading a midtone creates a false anchor.
+     Added 15 August 2026 and NOT yet wired up: no component uses these,
+     and adopting them is a separate task. Each resolves light enough to
+     carry ink comfortably (10.06 to 11.91) and far too light for paper.
+     Those are float ratios, as the browser computes color-mix; quantising
+     the mix to 8-bit hex first gives 10.07 for tint-signal. */
+  --tint-sun: color-mix(in srgb, var(--sun) 25%, var(--paper));
+  --tint-olive: color-mix(in srgb, var(--olive) 25%, var(--paper));
+  --tint-pink: color-mix(in srgb, var(--pink) 25%, var(--paper));
+  --tint-signal: color-mix(in srgb, var(--signal) 25%, var(--paper));
 
   /* Fraunces carries the editorial voice. The native UI stack handles nav,
      forms, questionnaires, buttons, tables, dates, captions and legal copy. */

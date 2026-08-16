@@ -68,7 +68,38 @@ next-env.d.ts
 /docs/Sawayatra-prelaunch-plan.docx
 /Preview site.command
 /Push to GitHub.command
+/Push to main.command
 __pycache__/
 
 # One-off compression comparison crops. Regenerate with tools/photography if needed.
 /audit/quality-proof/
+
+# Local review artefacts, 15 August 2026 colour pass. Rendered from the running
+# site for the founder to judge; large, regenerable, and not part of the build.
+/colour-review.html
+/colour-review-blue.html
+/colour-applied.html
+/site-catalogue.html
+/trip-pdfs-review.html
+/Sawayatra-every-page.pdf
+/Sawayatra-colour-brand-manual.pdf
+/wordmark-options.png
+/sawayatra-claude-handoff-*.md
+
+# Full-quality PDF masters and their web derivatives. The web set that the site
+# actually serves lives in public/assets/guides and IS tracked; this is the
+# source material, ~114MB, and must never enter a website commit.
+/output/
+
+# Local preview and capture helpers, generated per session.
+/start-preview.command
+/capture-*.command
+/capture-*.mjs
+/verify.command
+/verify-output.txt
+/join-review/
+/docs-review/
+/colour-check/
+/colour-review/
+/colour-applied/
+/site-catalogue/
