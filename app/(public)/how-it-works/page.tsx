@@ -1,8 +1,11 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { createPageMetadata } from "@/app/_metadata";
+import { Arrow } from "@/components/ui/Arrow";
 import { ButtonLink } from "@/components/ui/ButtonLink";
 import {
+  HOW_IT_WORKS_GROUPS,
   HOW_IT_WORKS_REASONS,
   HOW_IT_WORKS_STEPS,
 } from "@/content/how-it-works-v24";
@@ -41,21 +44,49 @@ export default function HowItWorksPage() {
       </section>
 
       <section className={styles.v24Steps} aria-label="The six steps">
-        <ol>
-          {HOW_IT_WORKS_STEPS.map((step) => (
-            <li key={step.number}>
-              <header>
-                <span>{step.number}</span>
-                <h2>{step.title}</h2>
-              </header>
-              <div>
-                {step.paragraphs.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
+        {HOW_IT_WORKS_GROUPS.map((group) => {
+          const steps = HOW_IT_WORKS_STEPS.filter(
+            (step) => step.group === group.id,
+          );
+          const first = steps[0];
+
+          if (!first) {
+            return null;
+          }
+
+          return (
+            <div className={styles.stepGroup} key={group.id}>
+              <h2 className={styles.stepGroupLabel} id={`steps-${group.id}`}>
+                {group.label}
+              </h2>
+              <ol
+                aria-labelledby={`steps-${group.id}`}
+                start={Number(first.number)}
+              >
+                {steps.map((step) => (
+                  <li key={step.number}>
+                    <header>
+                      <span>{step.number}</span>
+                      <h3>{step.title}</h3>
+                    </header>
+                    <div>
+                      {step.paragraphs.map((paragraph) => (
+                        <p key={paragraph}>{paragraph}</p>
+                      ))}
+                      {step.action ? (
+                        <p className={styles.stepAction}>
+                          <Link href={step.action.href}>
+                            {step.action.label} <Arrow />
+                          </Link>
+                        </p>
+                      ) : null}
+                    </div>
+                  </li>
                 ))}
-              </div>
-            </li>
-          ))}
-        </ol>
+              </ol>
+            </div>
+          );
+        })}
       </section>
 
       <section className={styles.v24Reasons} aria-labelledby="reasons-heading">

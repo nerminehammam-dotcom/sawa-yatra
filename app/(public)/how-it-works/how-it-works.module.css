@@ -6,7 +6,32 @@
   padding: var(--section-space) var(--page-gutter);
 }
 
-.v24Steps > ol {
+/* The six steps are split into two groups - what a reader can act on today and
+   what the club does once it opens. The grouping is carried by the two labels
+   and the space between them, NOT by dimming the second group: at 72% opacity
+   the signal-text step numbers measure 3.27 on paper, which fails AA for text
+   that small. Every step here stays at full strength. */
+.stepGroup {
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.stepGroup + .stepGroup {
+  margin-top: clamp(var(--space-16), 10vw, var(--space-32));
+}
+
+.stepGroupLabel {
+  max-width: none;
+  margin-bottom: var(--space-6);
+  color: var(--ink);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.v24Steps ol {
   max-width: var(--content-max);
   margin: 0 auto;
   padding: 0;
@@ -33,7 +58,7 @@
   font-family: var(--font-mono);
 }
 
-.v24Steps h2 {
+.v24Steps h3 {
   max-width: 10ch;
   color: var(--signal-text);
 }
@@ -48,6 +73,23 @@
   max-width: 58ch;
   font-size: var(--fs-lead);
   line-height: 1.5;
+}
+
+/* Present only on steps that can actually be started today. signal-text on
+   paper is 5.30, the one accent that may be read. */
+.v24Steps .stepAction {
+  margin-top: var(--space-2);
+  font-size: var(--fs-body);
+}
+
+.v24Steps .stepAction a {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: baseline;
+  min-height: var(--touch-min);
+  align-content: center;
+  color: var(--signal-text);
+  text-underline-offset: 0.16em;
 }
 
 .v24Reasons {
