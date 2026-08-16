@@ -104,3 +104,15 @@ __pycache__/
 /colour-applied/
 /site-catalogue/
 /how-it-works-result.html
+/typography-specimen.html
+/type-review/
+/type-pass.log
+/capture-type.mjs
+/layout-audit/
+/audit-layout.mjs
+/run-audit.command
+/layout-audit.html
+/run-layout-check.command
+/audit-after.mjs
+/layout-after/
+/run-checks.command
