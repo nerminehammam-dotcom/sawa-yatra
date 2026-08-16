@@ -7,7 +7,7 @@
   gap: var(--space-4);
   margin: 0;
   padding: var(--card-inset);
-  border: var(--border-hairline);
+  border: var(--border-hairline) solid;
   border-radius: var(--radius-card);
   background: var(--paper);
 }
@@ -35,7 +35,7 @@
   gap: var(--space-1);
   padding: var(--space-3);
   border-radius: var(--radius-card);
-  border: var(--border-hairline);
+  border: var(--border-hairline) solid;
   background: var(--soft-butter);
   color: var(--clay);
   min-height: var(--touch-min);

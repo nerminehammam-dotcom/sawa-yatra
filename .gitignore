@@ -116,3 +116,7 @@ __pycache__/
 /audit-after.mjs
 /layout-after/
 /run-checks.command
+/layout-pass-review.html
+/home-before-after.html
+/_crops/
+/layout-after-prev/

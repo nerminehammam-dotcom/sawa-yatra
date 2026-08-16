@@ -136,8 +136,15 @@
   gap: var(--space-5);
 }
 
+/* `solid` was missing from all nine border shorthands in the journeys set.
+   border-style defaults to none, so a width alone draws nothing - these cards
+   have never had the outline the stylesheet describes.
+
+   No colour is named: border-color falls back to currentColor, so each border
+   takes the ink the element already carries. That keeps this a layout fix
+   rather than a palette decision. */
 .card {
-  border: var(--border-hairline);
+  border: var(--border-hairline) solid;
   border-radius: var(--radius-card);
   background: var(--paper);
   padding: var(--card-inset);
@@ -193,7 +200,7 @@
 }
 
 .formingEmpty {
-  border: var(--border-hairline);
+  border: var(--border-hairline) solid;
   border-radius: var(--radius-card);
   padding: var(--card-inset);
   background: var(--soft-butter);
@@ -217,7 +224,7 @@
   font-size: var(--fs-body);
   padding: var(--space-3) var(--space-6);
   border-radius: var(--radius-pill);
-  border: var(--border-strong);
+  border: var(--border-strong) solid;
   background: var(--paper);
   color: var(--disabled);
   cursor: not-allowed;

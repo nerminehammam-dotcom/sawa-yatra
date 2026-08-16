@@ -1,7 +1,7 @@
 .map {
   display: grid;
   gap: var(--space-4);
-  border: var(--border-hairline);
+  border: var(--border-hairline) solid;
   border-radius: var(--radius-card);
   padding: var(--card-inset);
   background: var(--soft-blue);

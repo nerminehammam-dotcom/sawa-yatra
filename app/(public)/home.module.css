@@ -249,6 +249,20 @@
 
 /* ---- Restored editorial sections ------------------------------------ */
 
+/* NOT REACHABLE. Everything from here to the end of the reserved-slots block,
+   plus .howStepsList further down, styles class names that appear in no markup:
+   .how .route .joining .regions .fieldNotes .imageStrip .finalAction
+   .travelSelf* .reserved* .editorialHeading .routeHeading .joiningHeading
+   .regionsHeading .howStepsList. Home renders 18 of this file's 38 classes.
+
+   334 of the 929 lines below and above are unreachable - 35% of the file, on
+   top of the 449 duplicated lines already removed. Measured 16 August 2026 by
+   matching every selector against the styles.* references in the TSX.
+
+   Left in place rather than deleted: it is not clear whether these sections are
+   waiting to come back or were abandoned, and that is a content decision, not a
+   layout one. Deleting them is a separate commit whenever you want it. */
+
 .how,
 .route,
 .joining,
@@ -472,15 +486,13 @@
   font-weight: 500;
   letter-spacing: var(--tracking-eyebrow);
   background: var(--ink);
-  /* font-family: var(--font-note);
-
-     Left commented so this deletion changes nothing on screen. Until now the
-     file carried a second, stale copy of itself (lines 917-1362) that redefined
-     this rule WITHOUT the mono family, and being last it won the cascade - so
-     the caption has never actually rendered in Plex Mono despite the stylesheet
-     appearing to say so. Removing the duplicate would have silently switched
-     the face, which is a typography change, and this is a layout pass.
-     Uncomment to honour the original intent. Raised for decision, 16 Aug 2026. */
+  /* Restored 16 August 2026, and it changes nothing, because .imageStrip is
+     not referenced by any markup - the before/after renders are byte-identical.
+     The stale duplicate of this file had dropped this declaration, which looked
+     like a live typography bug until the render proved otherwise. Kept so the
+     rule is correct if this block is ever wired up; see the note at the head of
+     the dead section below. */
+  font-family: var(--font-note);
 }
 
 .finalAction {
