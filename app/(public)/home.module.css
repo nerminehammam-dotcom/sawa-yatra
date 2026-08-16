@@ -268,7 +268,9 @@
 .joiningHeading,
 .regionsHeading,
 .fieldNotes > header {
-  padding: clamp(3rem, 7vw, 7rem) var(--page-gutter);
+  /* Was clamp(3rem, 7vw, 7rem) - a hand-rolled curve that landed at 100.8px on
+     a 1440 viewport where every other band sat at 144. Same role, same token. */
+  padding: var(--section-space) var(--page-gutter);
 }
 
 .editorialHeading {
@@ -485,7 +487,7 @@
   display: grid;
   align-content: start;
   gap: var(--space-8);
-  padding: clamp(3rem, 7vw, 7rem) var(--page-gutter);
+  padding: var(--section-space) var(--page-gutter);
   color: var(--ink);
   background: var(--pink);
 }
@@ -705,7 +707,12 @@
 
 .nameStory {
   width: 100%;
-  padding: clamp(var(--space-16), 8vw, var(--space-28)) var(--page-gutter);
+  /* Was clamp(var(--space-16), 8vw, var(--space-28)). --space-28 is not a token
+     and never has been - the scale runs ...16, 20, 24, 32. An undefined var()
+     with no fallback makes the whole declaration invalid at computed-value
+     time, so this band has been rendering with padding: 0 rather than the
+     intended inset. It was the only undefined custom property in the codebase. */
+  padding: var(--section-space) var(--page-gutter);
   color: var(--ink);
   background: var(--paper);
 }
