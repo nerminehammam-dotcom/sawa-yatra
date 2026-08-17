@@ -90,7 +90,7 @@ describe("v2.4 navigation", () => {
       },
       {
         id: "trip-documents",
-        label: "Trip PDFs",
+        label: "Field books",
         href: "/journeys/caravans/andean-caravan#trip-documents",
         meta: "The complete guide and each section, to download.",
       },

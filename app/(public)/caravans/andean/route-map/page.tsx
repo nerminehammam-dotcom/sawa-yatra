@@ -153,7 +153,7 @@ export default function AndeanRouteMapPage() {
       <nav className={styles.nextSteps} aria-label="Continue planning the Andean Caravan">
         <Link href="/journeys/caravans/andean-caravan#trip-documents">
           <span>Documents</span>
-          <strong>Check the Trip PDFs status</strong>
+          <strong>Check the field books status</strong>
         </Link>
         <Link href="/journeys/caravans/andean-caravan/joining-points">
           <span>Choose your run</span>

@@ -42,10 +42,9 @@ export default function AboutPage() {
         <p>About / Sawayatra field document</p>
         <h1 id="about-heading">A travel club with a point of view.</h1>
         <p>
-          Sawayatra brings compatible travellers together through shared
-          journeys. It begins with the annual Andean Caravan, built around
-          designated joining points, practical clarity and the life found
-          between destinations.
+          Sawayatra runs long overland journeys for a small membership. The
+          route is fixed, the company is not: it is assembled, one person at a
+          time, from people who keep a day the same way.
         </p>
       </section>
 
@@ -190,11 +189,12 @@ export default function AboutPage() {
         </figure>
         <div>
           <p>Working belief</p>
-          <h2>The in-between moments are part of the expedition.</h2>
+          <h2>We do not sell a view. We sell the hours on either side of it.</h2>
           <p>
             Roads, weather, roadside meals, border crossings and changes of
             vehicle make a continuous caravan tangible. They are not edited out
-            to create a polished travel fantasy.
+            to create a polished travel fantasy. A route is not a list of
+            sights; it is a distance covered slowly enough to be changed by it.
           </p>
         </div>
       </section>

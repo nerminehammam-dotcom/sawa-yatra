@@ -308,9 +308,9 @@ export const homeContent = {
     contentStatus: "DRAFT",
   },
   travelSelfHook: {
-    eyebrow: "Meet your Travel Self",
-    title: "You're not a demographic. You're a way of travelling.",
-    body: "Six honest questions. About two minutes.",
+    eyebrow: "Manner, not means",
+    title: "We ask how you keep a day, not what you do for a living.",
+    body: "Six honest questions. About two minutes. A group is a piece of equipment, and we pack it carefully.",
     action: {
       label: "Begin the taster",
       href: "/travel-self",

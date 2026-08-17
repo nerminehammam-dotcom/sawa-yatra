@@ -111,8 +111,8 @@ export const systemUiContent = {
 export const systemPageContent = {
   notFound: {
     eyebrow: "404",
-    title: "Page not found",
-    body: "The page you were looking for isn't here - it may have moved, or the link may be wrong. You can pick the road back up below.",
+    title: "Nothing here yet",
+    body: "This road doesn't go anywhere. The others do.",
     actions: [
       returnHomeAction,
       {

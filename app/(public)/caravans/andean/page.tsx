@@ -191,11 +191,15 @@ export default function AndeanCaravanPage() {
         aria-labelledby="trip-documents-heading"
       >
         <div>
-          <p>Trip PDFs</p>
-          <h2 id="trip-documents-heading">Trip PDFs for the Andean Caravan.</h2>
+          <p>Field books</p>
+          <h2 id="trip-documents-heading">
+            Field books for the Andean Caravan.
+          </h2>
           <p>
-            This is the single library for approved Andean Caravan PDFs
-            and traveller documents.
+            This is the single library for approved Andean Caravan documents.
+            Each journey ends in a volume: the route drawn to scale, the
+            practical notes, and what the road actually asked of the people on
+            it.
           </p>
         </div>
         <div>

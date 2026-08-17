@@ -16,7 +16,7 @@ const expectedAndeanLinks = [
   ],
   ["Maps", "/journeys/caravans/andean-caravan#full-route-map"],
   ["Each stop", "/journeys/caravans/andean-caravan/route-map"],
-  ["Trip PDFs", "/journeys/caravans/andean-caravan#trip-documents"],
+  ["Field books", "/journeys/caravans/andean-caravan#trip-documents"],
 ] as const;
 
 vi.mock("next/navigation", () => ({
