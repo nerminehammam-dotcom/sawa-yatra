@@ -98,6 +98,20 @@ a {
   text-underline-offset: 0.18em;
 }
 
+/* Hover is a wavy rule, not a colour change. The link text colour is left
+   alone deliberately: signal-text on ink measures 2.57, so recolouring the
+   word on a dark ground would fail. Decoration carries no text-contrast
+   requirement, so the same rule can hold on both grounds. */
+a:hover {
+  text-decoration-style: wavy;
+  text-decoration-color: var(--signal-text);
+}
+
+[data-ground="ink"] a:hover,
+.onInk a:hover {
+  text-decoration-color: var(--sun);
+}
+
 a:visited:not([class]) {
   color: var(--visited);
 }
@@ -143,21 +157,26 @@ canvas {
   max-width: 100%;
 }
 
+/* The Announcer. Headings left Fraunces for Bricolage Grotesque on 16 August
+   2026. The old weight-500 floor was a Fraunces problem - its display cut lost
+   the `e` crossbar below that on 1x displays - and does not apply to a
+   grotesque, so the weights here are set for colour on the page instead. */
 h1,
 h2,
 h3,
 h4 {
   font-family: var(--font-display);
   font-optical-sizing: auto;
-  /* 500, not 400: below this the display cut's `e` crossbar falls under one
-     device pixel on 1x displays and the letter reads as a `c`. */
-  font-weight: 500;
+  font-weight: 600;
+  font-stretch: 92%;
   line-height: var(--leading-tight);
   text-wrap: balance;
 }
 
 h1 {
   font-size: var(--fs-display-1);
+  font-weight: 620;
+  font-stretch: 90%;
   letter-spacing: -0.035em;
 }
 
@@ -172,10 +191,90 @@ h3 {
   letter-spacing: -0.015em;
 }
 
+/* The Turn. Exactly one accent word or phrase per headline, never inside body
+   copy. Fraunces italic with the wonky forms on, at the one weight that holds
+   against Bricolage's 620 without shouting.
+
+   Colour: signal-text on light grounds (5.30 on paper), sun on ink (7.93).
+   Both are existing palette entries and both clear AA at display size. */
+.turn {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 440;
+  font-variation-settings:
+    "SOFT" 0,
+    "WONK" var(--wonk);
+  letter-spacing: -0.01em;
+  color: var(--turn-color);
+}
+
+[data-ground="ink"] .turn,
+.onInk .turn {
+  color: var(--turn-color-on-ink);
+}
+
 p {
   max-width: var(--measure);
   text-wrap: pretty;
   hyphens: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Devices. Shared utilities for the three-voice system. New classes only -
+   nothing here changes an existing rule, a colour or a layout measure.
+   --------------------------------------------------------------------------- */
+
+/* Marker. A highlight of four words or fewer. Ink on sun is 7.93, ink on pink
+   7.58, so either ground carries text at any size. */
+.marker {
+  padding: 0 0.14em;
+  color: var(--ink);
+  background: var(--sun);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.marker.markerPink {
+  background: var(--pink);
+}
+
+/* Stamp. A small mono label set at a slight angle, as if pressed on. */
+.stamp {
+  display: inline-block;
+  padding: 6px 12px;
+  border: 1.5px solid var(--ink);
+  font-family: var(--font-note);
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transform: rotate(-2.5deg);
+}
+
+.stamp:nth-of-type(even) {
+  transform: rotate(2.5deg);
+}
+
+/* Counter. Outlined numerals for section numbers and steps. The solid ink
+   colour is declared first so a browser without text-stroke support gets a
+   filled numeral rather than an invisible one. */
+.counter {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  color: var(--ink);
+}
+
+@supports (-webkit-text-stroke: 1.5px black) {
+  .counter {
+    color: transparent;
+    -webkit-text-stroke: 1.5px var(--ink);
+  }
+
+  [data-ground="ink"] .counter,
+  .onInk .counter {
+    -webkit-text-stroke-color: var(--paper);
+  }
 }
 
 main {
@@ -210,10 +309,14 @@ main {
   }
 }
 
-/* Below 1025px the utility row and main nav bar are hidden, so the header is shorter. */
+/* Below 1025px the utility row and main nav bar are hidden, so the header is
+   shorter. 186px was the old estimate and was more than twice the truth:
+   measured 17 August 2026, the header is 93.5px at 1024 and 80px at 768 and
+   below. 96px covers the taller of the two; the ResizeObserver takes over on
+   the first frame either way. */
 @media (max-width: 1024px) {
   :root {
-    --nav-height-fallback: 186px;
+    --nav-height-fallback: 96px;
   }
 }
 

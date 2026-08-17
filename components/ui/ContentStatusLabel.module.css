@@ -5,12 +5,13 @@
   padding: 0.28rem 0.5rem;
   border: var(--border-hairline) solid currentColor;
   border-radius: var(--radius-card);
-  font-family: var(--font-read);
-  font-size: var(--fs-small);
+  /* Field Note: a status label is an annotation on the content, not part of it. */
+  font-family: var(--font-note);
+  font-size: var(--fs-eyebrow);
   font-weight: 500;
   line-height: 1.1;
-  letter-spacing: normal;
-  text-transform: none;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .locked {

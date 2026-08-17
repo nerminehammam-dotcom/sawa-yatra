@@ -135,14 +135,35 @@
   --tint-pink: color-mix(in srgb, var(--pink) 25%, var(--paper));
   --tint-signal: color-mix(in srgb, var(--signal) 25%, var(--paper));
 
-  /* Fraunces carries the editorial voice. The native UI stack handles nav,
-     forms, questionnaires, buttons, tables, dates, captions and legal copy. */
-  --font-display: var(--font-fraunces, Georgia, serif);
+  /* THREE VOICES (type proposal 01, 16 August 2026).
+   *
+   *   The Announcer   Bricolage Grotesque. Headings, nav, numbers, buttons.
+   *   The Turn        Fraunces italic, SOFT 0 / WONK 1. One accent word per
+   *                   headline, plus standfirsts and pull quotes.
+   *   The Field Note  IBM Plex Mono. Eyebrows, captions, facts, footnotes.
+   *
+   * Fraunces roman 400 remains the body voice and did not move. The change here
+   * is that headings left Fraunces for Bricolage; --font-display now points at
+   * the new face, and --font-editorial is the name for the body voice that
+   * --font-display used to carry. No colour and no spacing token changed. */
+  --font-bricolage-stack: var(--font-bricolage, "Arial Narrow", sans-serif);
+  --font-display: var(--font-bricolage-stack);
+  --font-editorial: var(--font-fraunces, Georgia, serif);
   --font-read: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   /* A narrow annotation role chosen 9 Aug 2026: legal notes, limitations,
      pricing conditions and route footnotes only. It never replaces the
      editorial or operational faces for primary content. */
   --font-note: var(--font-ibm-plex-mono, "Courier New", monospace);
+
+  /* Global playfulness switch. 0 turns off the wonky italic forms everywhere
+     without hunting for call sites. */
+  --wonk: 1;
+
+  /* The accent word takes a different colour on light and dark grounds. Both
+     are existing palette entries and both clear AA at display size:
+     signal-text on paper 5.30, sun on ink 7.93. No colour was added. */
+  --turn-color: var(--signal-text);
+  --turn-color-on-ink: var(--sun);
 
   /* Type scale (added 2026-08-07). One ramp for the whole site; the opsz axis
      carries the display/text register, so these are just sizes. Values match the
@@ -150,18 +171,22 @@
      is visually a no-op - the point is to collapse ~95 bespoke `font-size:
      clamp()` values onto a shared set. Modules should migrate onto these; the
      long tail is staged for a rendered pass (see docs/sawayatra-design-audit.md §2). */
-  --fs-display-1: clamp(3.6rem, 9.5vw, 9.5rem); /* hero / h1 */
-  --fs-display-2: clamp(2.6rem, 6vw, 6.25rem); /* section head / h2 */
+  /* Retuned for Bricolage on 16 August 2026. A grotesque sets larger on the body
+     for the same nominal size than Fraunces does, so the display steps came down
+     while the reading sizes held. The 18px body floor from constitution §10 is
+     untouched, and --fs-small stays 1rem. */
+  --fs-display-1: clamp(3.25rem, 9.5vw, 9.5rem); /* hero / h1 */
+  --fs-display-2: clamp(2.375rem, 5vw, 5.25rem); /* section head / h2 */
   --fs-display-3: clamp(2rem, 3.8vw, 4rem); /* sub-section */
   --fs-hero: clamp(3rem, 5.2vw, 6rem); /* split-hero headline (CYOJ / how-it-works / departures) */
   --fs-heading: clamp(3rem, 6vw, 6rem); /* in-page section heading */
   --fs-card: clamp(3.2rem, 5vw, 5rem); /* large display card title (featured / way cards) */
-  --fs-title: clamp(1.65rem, 2.8vw, 2.65rem); /* h3 / smaller card title */
-  --fs-lead: clamp(1.15rem, 1.6vw, 1.5rem); /* standfirst / lead */
-  --fs-body: clamp(1.125rem, 1.4vw, 1.3rem); /* long-form body - floor raised to
-     18px per constitution §10 (was 1.05rem/16.8px; sustained body never <18px) */
+  --fs-title: clamp(1.625rem, 2.8vw, 2.625rem); /* h3 / smaller card title */
+  --fs-lead: clamp(1.1875rem, 1.8vw, 1.5rem); /* standfirst / lead - Fraunces italic */
+  --fs-body: clamp(1.125rem, 1.4vw, 1.25rem); /* long-form body - floor held at
+     18px per constitution §10 (sustained body never <18px) */
   --fs-small: 1rem; /* smallest readable - short, secondary information ONLY (§10) */
-  --fs-eyebrow: 0.875rem; /* decorative label floor */
+  --fs-eyebrow: 0.78rem; /* mono 500, uppercase */
 
   /* Proposed §6.3 amendments (constitution-amendment-proposals.md): three
      genuinely new roles the ramp lacked. SVG-space map type is deliberately
@@ -170,10 +195,10 @@
   --fs-map-caption: 19px; /* SVG route-map captions */
   --fs-display-1-compact: clamp(3.2rem, 16vw, 5.6rem); /* h1 under 640px */
 
-  --leading-tight: 1.06; /* display */
-  --leading-title: 1.12; /* h3 */
-  --leading-body: 1.62; /* body copy - one value (was 1.5 / 1.55 / 1.6 / 1.62) */
-  --tracking-eyebrow: 0.12em; /* cap for uppercase labels */
+  --leading-tight: 0.98; /* display - a grotesque sets tighter than Fraunces did */
+  --leading-title: 1.08; /* h3 */
+  --leading-body: 1.62; /* body copy - unchanged, Fraunces still sets it */
+  --tracking-eyebrow: 0.16em; /* cap for uppercase mono labels */
 
   --space-1: 0.25rem;
   --space-2: 0.5rem;
@@ -199,11 +224,30 @@
   --touch-min: 48px;
   --content-max: 1440px;
   --section-space: clamp(5rem, 10vw, 10rem);
+  /* Declared here, but this clamp is never what any element sees: four media
+     queries at the foot of app/globals.css redefine --page-gutter on :root as
+     20 / 32 / 64 / 96 across the whole width range, and they win everywhere
+     except a hairline between 1023 and 1024px. Kept as the value that gap
+     resolves to, and as documentation of the intended curve; the stepped
+     overrides are the real definition. Measured 17 August 2026. */
   --page-gutter: clamp(1.25rem, 5vw, 6rem);
-  /* SiteNavigation measures the real header into --site-header-height (ResizeObserver).
-     The fallback applies only to first paint and to routes that render no navigation.
-     Measured: 220px desktop, ~186px below 1025px. */
-  --nav-height-fallback: 220px;
+
+  /* SiteNavigation measures the real header into --site-header-height
+     (ResizeObserver). The fallback applies only to first paint and to routes
+     that render no navigation.
+
+     Measured from the running site, 17 August 2026:
+
+       360 and 768    80px
+       1024           93.5px
+       1280 and 1440  173.6px
+
+     The previous fallback was 220px with a comment claiming "220px desktop,
+     ~186px below 1025px" - both stale, and 220 was 46px taller than the real
+     header, so anything sized against it was short for one frame and then
+     jumped. 176px is the desktop measurement rounded up to a whole pixel; the
+     ≤1024 override below carries the narrow case. */
+  --nav-height-fallback: 176px;
   --nav-height: var(--site-header-height, var(--nav-height-fallback));
   --grain-opacity: 0.07;
   --motion-fast: 180ms;

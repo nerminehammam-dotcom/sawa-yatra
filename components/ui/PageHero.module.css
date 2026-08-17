@@ -86,10 +86,15 @@
   line-height: 1.03;
 }
 
+/* The standfirst is the Turn's second home: Fraunces italic, so the sentence
+   under an Announcer headline changes voice rather than just size. */
 .intro {
   max-width: var(--measure-narrow);
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 450;
   font-size: var(--fs-lead);
-  line-height: 1.6;
+  line-height: 1.5;
 }
 
 .actions {

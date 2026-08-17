@@ -120,3 +120,5 @@ __pycache__/
 /home-before-after.html
 /_crops/
 /layout-after-prev/
+/run-eyebrow-check.command
+/audit-eyebrow.mjs

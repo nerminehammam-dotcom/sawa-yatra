@@ -1,10 +1,14 @@
+/* The Field Note. Eyebrows moved from the native UI stack to IBM Plex Mono on
+   16 August 2026, and down from body size to the eyebrow step - a label above a
+   headline should not compete with the sentence beneath it. Colour is still
+   inherited or set by the tone classes below; nothing here changes it. */
 .root {
   color: inherit;
-  font-family: var(--font-read);
-  font-size: var(--fs-body);
+  font-family: var(--font-note);
+  font-size: var(--fs-eyebrow);
   font-weight: 500;
   line-height: 1.35;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
 
@@ -18,8 +22,25 @@
   color: var(--deep-brown);
 }
 
+/* The brief's one colour change, and it was held back until it could be
+   measured rather than argued about.
+
+   The objection at the time was that accent eyebrows might sit on ink or olive
+   as well as paper, where signal-text falls to 2.57 and fails. That turned out
+   to be a guess. Every accent eyebrow on the site was found in the DOM and its
+   real ground read off the rendered page, 17 August 2026:
+
+     11 of 11 sit on --paper.  signal-text on paper = 5.30, passes AA.
+      0 sit on ink, olive, or any other ground.
+
+   So the risk named was not a real one, and the change is safe as asked.
+
+   The constraint is still live for anything added later: signal-text needs a
+   paper or bone ground. On ink use --sun (7.93); on olive, ink. Re-run the
+   probe rather than assuming if an accent eyebrow is ever placed on a dark
+   band. */
 .accent {
-  color: var(--ink);
+  color: var(--signal-text);
 }
 
 .honey {
