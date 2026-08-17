@@ -126,3 +126,5 @@ __pycache__/
 /read-lovable.mjs
 /lovable-read/
 /lovable-read.txt
+/Check main.command
+/Clean workspace.command
