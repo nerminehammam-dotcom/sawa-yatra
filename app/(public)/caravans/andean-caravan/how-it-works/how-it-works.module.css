@@ -5,7 +5,7 @@
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 1.55fr) minmax(20rem, 0.45fr);
-  min-height: min(44rem, calc(100dvh - var(--nav-height)));
+  min-height: min(44rem, var(--hero-reserve));
   border-bottom: var(--border-strong) solid var(--ink);
 }
 
@@ -361,7 +361,7 @@
   }
 
   .promise {
-    min-height: 22rem;
+    min-height: 0;
   }
 
   .proposition > p:first-child {

@@ -296,6 +296,10 @@ main {
 @media (max-width: 639px) {
   :root {
     --page-gutter: 20px;
+
+    /* Heroes stop reserving a screen and size to their content. See the note
+       on --hero-reserve in styles/tokens.css for the measurements. */
+    --hero-reserve: 0px;
   }
 
   h1 {

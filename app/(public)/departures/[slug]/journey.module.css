@@ -27,6 +27,25 @@
   color: inherit;
 }
 
+/* On a phone these are the main way back out of a section page, and they
+   measured 22-26px tall - under the 44px WCAG 2.5.5 minimum and well under the
+   site's own --touch-min. The padding is inline-start-free so the row still
+   starts on the page gutter, and the negative block margin keeps the visual
+   rhythm identical: only the tappable box grows. */
+@media (max-width: 767px) {
+  .breadcrumbs {
+    gap: var(--space-1) var(--space-3);
+    margin-block: calc(var(--space-3) * -1);
+  }
+
+  .breadcrumbs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--touch-min);
+    padding-block: var(--space-3);
+  }
+}
+
 .heroTitle {
   max-width: 10ch;
   font-size: var(--fs-heading);

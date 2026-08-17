@@ -8,7 +8,7 @@
 }
 
 .hero {
-  min-height: min(48rem, calc(100dvh - var(--nav-height)));
+  min-height: min(48rem, var(--hero-reserve));
   align-content: center;
   background: var(--olive);
 }
@@ -60,7 +60,7 @@
 
 @media (max-width: 767px) {
   .hero {
-    min-height: 36rem;
+    min-height: 0;
   }
 
   .hero a {

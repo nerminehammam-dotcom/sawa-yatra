@@ -172,7 +172,7 @@
    a number that was true once. */
 .hero {
   display: grid;
-  min-height: min(42rem, calc(100dvh - var(--nav-height)));
+  min-height: min(42rem, var(--hero-reserve));
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   border-bottom: 4px solid var(--signal-text);
 }
@@ -681,7 +681,7 @@
   }
 
   .wayCopy {
-    min-height: 27rem;
+    min-height: 0;
   }
 
   .travelSelfHeading {
@@ -689,7 +689,7 @@
   }
 
   .travelSelfHeading {
-    min-height: 30rem;
+    min-height: 0;
     border-inline-end: 0;
     border-bottom: var(--border-strong) solid var(--ink);
   }

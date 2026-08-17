@@ -50,7 +50,7 @@
      and the same copy rhythm. The closing line is rust-red; the title stays ink
      on olive because olive carries nothing else legibly. */
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  min-height: min(42rem, calc(100dvh - var(--nav-height)));
+  min-height: min(42rem, var(--hero-reserve));
   color: var(--tsi-ink);
   background: var(--tsi-paper);
   border-bottom: 4px solid var(--tsi-signal-text);

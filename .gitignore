@@ -128,3 +128,9 @@ __pycache__/
 /lovable-read.txt
 /Check main.command
 /Clean workspace.command
+/run-mobile-audit.command
+/audit-mobile.mjs
+/mobile-audit/
+/mobile-audit.txt
+/mobile-audit.html
+/_m/

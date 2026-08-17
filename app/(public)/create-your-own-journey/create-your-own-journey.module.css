@@ -8,7 +8,7 @@
    paper, since it is a composed artwork, not a croppable photograph. */
 .hero {
   display: grid;
-  min-height: min(42rem, calc(100dvh - var(--nav-height)));
+  min-height: min(42rem, var(--hero-reserve));
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   border-bottom: 4px solid var(--signal-text);
 }

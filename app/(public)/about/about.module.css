@@ -405,7 +405,7 @@
 
   .observation > div,
   .principles header {
-    min-height: 36rem;
+    min-height: 0;
     border-inline-start: 0;
     border-inline-end: 0;
     border-top: var(--border-strong) solid var(--ink);

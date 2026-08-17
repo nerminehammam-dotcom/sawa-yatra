@@ -249,6 +249,21 @@
      ≤1024 override below carries the narrow case. */
   --nav-height-fallback: 176px;
   --nav-height: var(--site-header-height, var(--nav-height-fallback));
+
+  /* How much height a page hero is allowed to reserve before its content has
+     asked for any. Seven heroes are written as
+       min-height: min(42rem, var(--hero-reserve))
+     so on a desktop they open at about one screen, and below 640px this drops
+     to 0 and they size to whatever is inside them instead.
+
+     Measured on an iPhone 14 viewport (390x844) on 17 August 2026: the formula
+     resolved to 672px while the content inside was nearer 350px, so every hero
+     opened with roughly 300px of empty ground. Across sixteen pages, nine
+     opened with more than half the first screen flat colour; on /club a single
+     unbroken empty band ran to 26% of the screen. A phone has no room to spend
+     on emptiness the way a wide display does. */
+  --hero-reserve: calc(100dvh - var(--nav-height));
+
   --grain-opacity: 0.07;
   --motion-fast: 180ms;
   --motion-route: 680ms;
