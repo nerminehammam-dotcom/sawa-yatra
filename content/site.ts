@@ -560,7 +560,10 @@ export const aboutContent = {
 export const signInContent = {
   eyebrow: "Member access",
   title: "Member access is opening in stages.",
-  body: "Authentication is not active in Release 1.",
+  // Was "Authentication is not active in Release 1." - true, but it described
+  // our release plan rather than the thing behind the door. This says what the
+  // member layer is for and keeps the same fact.
+  body: "The member layer will hold your Travel Self, your journeys, and any company we propose. It is not open yet.",
   interestForm: signInInterestFormContent,
   requestAction: {
     label: "Register your interest",
@@ -587,7 +590,7 @@ export const requestInvitationContent = {
   // privacy policy exists, is a live compliance risk - so the form is removed
   // until the policy is ready and this points to the email-only interest
   // capture instead. Restore the form once consent wording is approved.
-  lead: "Invitations open when membership does. In the meantime, register your interest and we will write to you first - no account, no payment, nothing to commit.",
+  lead: "Invitations open when membership does. In the meantime, register your interest and we will write to you first - no account, no payment, nothing to commit. Write it the way you'd say it.",
   form: invitationRequestFormContent,
   contentStatus: "DRAFT",
   contentNote: "Consent and follow-up copy require approval before launch.",

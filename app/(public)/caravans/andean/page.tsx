@@ -196,10 +196,9 @@ export default function AndeanCaravanPage() {
             Field books for the Andean Caravan.
           </h2>
           <p>
-            This is the single library for approved Andean Caravan documents.
-            Each journey ends in a volume: the route drawn to scale, the
-            practical notes, and what the road actually asked of the people on
-            it.
+            This is the single library for approved Andean Caravan documents:
+            the route drawn to scale, the practical notes, and what each
+            section asks of you.
           </p>
         </div>
         <div>
