@@ -196,9 +196,12 @@ export default function AndeanCaravanPage() {
             Field books for the Andean Caravan.
           </h2>
           <p>
-            This is the single library for approved Andean Caravan documents:
-            the route drawn to scale, the practical notes, and what each
-            section asks of you.
+            Five volumes, 117 pages: one for each of the four sections and a
+            complete edition of the whole passage. Each opens with what the
+            section is for, then a key for reading a day - effort and operating
+            environment kept apart, because a short day that sleeps high is not
+            an easy one - and then every day in order, with its route, its
+            sleep, its movement and its rhythm.
           </p>
         </div>
         <div>

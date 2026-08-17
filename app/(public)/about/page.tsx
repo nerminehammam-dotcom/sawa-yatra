@@ -191,10 +191,12 @@ export default function AboutPage() {
           <p>Working belief</p>
           <h2>We do not sell a view. We sell the hours on either side of it.</h2>
           <p>
-            Roads, weather, roadside meals, border crossings and changes of
-            vehicle make a continuous caravan tangible. They are not edited out
-            to create a polished travel fantasy. A route is not a list of
-            sights; it is a distance covered slowly enough to be changed by it.
+            A caravan is not a race down a route. It is a moving circle -
+            travellers, hosts, vehicles and local knowledge - progressing
+            slowly enough for each place to change the terms. Roads, weather,
+            roadside meals, border crossings and changes of vehicle make that
+            circle tangible. They are not edited out to create a polished
+            travel fantasy.
           </p>
         </div>
       </section>
