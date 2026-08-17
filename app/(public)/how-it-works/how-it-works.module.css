@@ -158,9 +158,21 @@
    0.9 / 1.1 columns, 42rem tall, identical copy rhythm, a 2px divider and a
    4px closing line. Artwork fills its grid cell so none of the three openings
    develops a letterboxed band above or below the image. */
+/* --nav-height, not a literal. The seven hero rules across the site all
+   subtracted a hard-coded 9.75rem (156px), which is not the height of the
+   header at any viewport width. Measured from the running site:
+
+     360 and 768   80px
+     1024          93.5px
+     1280 and 1440 173.6px
+
+   So the literal was 76px too generous on phones and 17.6px too mean on
+   desktop. --nav-height reads --site-header-height, which SiteNavigation keeps
+   current with a ResizeObserver, so this now tracks the real header instead of
+   a number that was true once. */
 .hero {
   display: grid;
-  min-height: min(42rem, calc(100dvh - 9.75rem));
+  min-height: min(42rem, calc(100dvh - var(--nav-height)));
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   border-bottom: 4px solid var(--signal-text);
 }

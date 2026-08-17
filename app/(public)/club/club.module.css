@@ -4,7 +4,7 @@
 
 .hero {
   display: grid;
-  min-height: min(42rem, calc(100dvh - 9.75rem));
+  min-height: min(42rem, calc(100dvh - var(--nav-height)));
   grid-template-columns: minmax(0, 1.08fr) minmax(24rem, 0.92fr);
   border-bottom: 4px solid var(--signal-text);
 }
