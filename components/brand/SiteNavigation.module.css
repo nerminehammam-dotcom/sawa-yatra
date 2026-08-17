@@ -12,6 +12,29 @@
   --nav-rule-soft: color-mix(in srgb, var(--ink) 18%, var(--paper));
   --nav-clay: var(--clay);
   --signal: var(--nav-rust);
+
+  /* The page gutter, but reproduced as padding so the bars keep their
+     full-bleed backgrounds and rules.
+
+     The header used a flat 2.5rem inset, so the wordmark sat at x=40 while
+     every page's content started at x=96 - a 56px disagreement visible on
+     every route. Measured, --page-gutter is 20 / 32 / 64 / 96 by breakpoint;
+     note those come from the four media queries in app/globals.css, not from
+     the clamp() in tokens.css, which those overrides leave unreachable.
+
+     A plain padding-inline: var(--page-gutter) would fix the alignment up to
+     1440 and break again above it: page content is capped at --content-max and
+     centred, so past 1440 its left edge walks inward while a padded bar's does
+     not. The max() adds back half the leftover width above the cap, which is
+     exactly what Container's margin-inline: auto produces.
+
+     Padding rather than a wrapper: capping the bars themselves would pull the
+     banner's ink ground and the main bar's rules in off the viewport edge. */
+  --nav-inset: max(
+    var(--page-gutter),
+    calc((100% - var(--content-max)) / 2 + var(--page-gutter))
+  );
+
   position: sticky;
   z-index: 100;
   top: 0;
@@ -24,7 +47,7 @@
   align-items: center;
   gap: 1.25rem;
   min-height: 3.5rem;
-  padding: 0.5rem 2.5rem;
+  padding: 0.5rem var(--nav-inset);
   color: var(--nav-paper);
   background: var(--nav-ink);
 }
@@ -97,7 +120,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 1.5rem;
-  padding: 1.125rem 2.5rem 1rem;
+  /* Vertical values untouched - min-height and the 1.125/1rem block padding are
+     the header's height logic, which this pass is not allowed to move. */
+  padding: 1.125rem var(--nav-inset) 1rem;
 }
 
 .wordmark {
@@ -567,12 +592,12 @@
 @media (max-width: 1024px) {
   .banner {
     gap: 0.75rem;
-    padding: 0.5rem 1.25rem;
+    padding: 0.5rem var(--nav-inset);
   }
 
   .brandRow {
     min-height: 5rem;
-    padding: 0.875rem 1.375rem;
+    padding: 0.875rem var(--nav-inset);
   }
 
   .utility,
