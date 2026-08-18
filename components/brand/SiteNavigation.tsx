@@ -231,7 +231,7 @@ export function SiteNavigation() {
           {rightItems.map((item, index) => (
             <span className={styles.utilityItem} key={item.href}>
               {index > 0 ? <span className={styles.utilityRule} aria-hidden="true" /> : null}
-              {item.label === "Join" || item.label === "Renew" ? (
+              {item.href === "/club/apply" ? (
                 <ButtonLink href={item.href} variant="primary">
                   {item.label}
                 </ButtonLink>
@@ -440,7 +440,9 @@ export function SiteNavigation() {
                   href={item.href}
                   aria-current={isCurrentPath(pathname, item.href) ? "page" : undefined}
                 >
-                  {item.label}
+                  {item.id === "how-it-works"
+                    ? "How Sawayatra works"
+                    : item.label}
                 </Link>
               </li>
             );
@@ -620,7 +622,9 @@ export function SiteNavigation() {
                     aria-current={isCurrentPath(pathname, item.href) ? "page" : undefined}
                     onClick={closeSheet}
                   >
-                    {item.label}
+                    {item.id === "how-it-works"
+                      ? "How Sawayatra works"
+                      : item.label}
                   </Link>
                 </li>
               ),

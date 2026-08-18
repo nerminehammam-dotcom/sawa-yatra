@@ -27,6 +27,12 @@ export const primaryNavigation = [
     contentStatus: "LOCKED",
   },
   {
+    id: "about",
+    label: "About",
+    href: "/about",
+    contentStatus: "LOCKED",
+  },
+  {
     id: "who-we-are",
     label: "Who we are",
     href: "/who-we-are",

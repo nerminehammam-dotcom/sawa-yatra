@@ -1,8 +1,9 @@
 .root {
   padding: clamp(3rem, 7vw, 7rem) 0 var(--space-6);
-  color: var(--paper);
-  background: var(--ink);
-  border-top: var(--border-strong) solid var(--signal);
+  color: var(--ink);
+  background: var(--bone);
+  border-top: 1px solid var(--sand);
+  font-family: var(--font-display);
 }
 
 /* Three tracks: brand, Explore, Legal. Legal used to sit under Explore inside
@@ -21,7 +22,7 @@
 }
 
 .pronunciation {
-  color: var(--pink);
+  color: var(--signal-text);
   font-size: var(--fs-body);
   font-weight: 400;
   letter-spacing: 0.12em;
@@ -35,7 +36,7 @@
 
 .navigationLabel {
   margin-bottom: var(--space-4);
-  color: var(--pink);
+  color: var(--signal-text);
   font-size: var(--fs-small);
   font-weight: 400;
 }
@@ -60,7 +61,7 @@
   display: inline-flex;
   min-height: var(--touch-min);
   align-items: center;
-  color: var(--paper);
+  color: var(--ink);
   font-size: var(--fs-small);
   /* Light-on-dark blooms: one step below body so it reads at the same colour. */
   font-weight: 400;
@@ -70,7 +71,7 @@
 }
 
 .link:visited {
-  color: var(--paper);
+  color: var(--ink);
 }
 
 @media (max-width: 960px) {

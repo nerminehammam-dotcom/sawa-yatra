@@ -1,0 +1,233 @@
+.aboutPage {
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--page-gutter);
+}
+
+.hero {
+  padding-block: clamp(var(--space-16), 9vw, var(--space-32));
+}
+
+.hero .wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 0.65fr) minmax(20rem, 1fr);
+  align-items: end;
+  gap: clamp(var(--space-10), 7vw, var(--space-24));
+}
+
+.hero h1 {
+  max-width: 11ch;
+}
+
+.introduction {
+  display: grid;
+  gap: var(--space-5);
+  padding-inline-start: var(--space-8);
+  border-inline-start: 1px solid var(--sand);
+}
+
+.introduction p {
+  max-width: 43ch;
+}
+
+.belief {
+  width: calc(100% - (2 * var(--page-gutter)));
+  max-width: calc(var(--content-max) - (2 * var(--page-gutter)));
+  margin-inline: auto;
+  padding-block: clamp(var(--space-12), 7vw, var(--space-24));
+  color: var(--paper);
+  background: var(--ink);
+  border-radius: var(--radius-card);
+}
+
+.belief blockquote {
+  margin: 0;
+}
+
+.belief p {
+  max-width: 28ch;
+  font-size: clamp(2rem, 4.2vw, 4.25rem);
+  font-style: italic;
+  font-weight: 440;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.splitSection {
+  padding-block: var(--section-space);
+}
+
+.splitSection + .splitSection {
+  padding-top: 0;
+}
+
+.splitSection > .wrap {
+  display: grid;
+  grid-template-columns: minmax(16rem, 0.42fr) minmax(0, 1fr);
+  gap: clamp(var(--space-10), 8vw, var(--space-24));
+}
+
+.splitSection header {
+  align-self: start;
+  padding-top: var(--space-2);
+}
+
+.splitSection h2 {
+  max-width: 10ch;
+}
+
+.sectionCopy {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: var(--space-5);
+}
+
+.sectionCopy > p {
+  max-width: 49ch;
+}
+
+.textLink {
+  display: inline-flex;
+  min-height: var(--touch-min);
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.75rem 1.2rem;
+  color: var(--paper);
+  background: var(--ink);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.reveal {
+  margin-top: var(--space-5);
+  padding: clamp(var(--space-6), 4vw, var(--space-10));
+  background: var(--bone);
+  border-radius: var(--radius-card);
+  font-size: var(--fs-lead);
+  font-style: italic;
+}
+
+.membership {
+  width: calc(100% - (2 * var(--page-gutter)));
+  max-width: calc(var(--content-max) - (2 * var(--page-gutter)));
+  margin-inline: auto;
+  padding: clamp(var(--space-10), 6vw, var(--space-16));
+  background: var(--tint-olive);
+  border-radius: var(--radius-card);
+}
+
+.membership > .wrap {
+  padding-inline: 0;
+}
+
+.ways {
+  padding-block: var(--section-space);
+}
+
+.ways h2 {
+  max-width: 12ch;
+}
+
+.wayGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
+  margin-top: clamp(var(--space-10), 6vw, var(--space-20));
+}
+
+.wayGrid article {
+  display: grid;
+  align-content: start;
+  gap: var(--space-5);
+  min-height: 20rem;
+  padding: clamp(var(--space-6), 4vw, var(--space-10));
+  background: var(--bone);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-card);
+}
+
+.wayGrid h3 {
+  max-width: 11ch;
+  color: var(--signal-text);
+}
+
+.wayGrid h3 a {
+  color: inherit;
+}
+
+.wayGrid p {
+  max-width: 32ch;
+}
+
+.note {
+  margin-top: auto;
+  color: color-mix(in srgb, var(--ink) 62%, transparent);
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+}
+
+.afterRoad {
+  padding-block: 0 var(--section-space);
+}
+
+.afterRoad .wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.8fr);
+  align-items: end;
+  gap: clamp(var(--space-10), 7vw, var(--space-24));
+  padding-block: clamp(var(--space-10), 7vw, var(--space-20));
+  background: var(--tint-sun);
+  border-radius: var(--radius-card);
+}
+
+.afterRoad h2 {
+  max-width: 9ch;
+}
+
+.afterRoad p {
+  max-width: 42ch;
+}
+
+@media (max-width: 900px) {
+  .hero .wrap,
+  .splitSection > .wrap,
+  .afterRoad .wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .introduction {
+    padding-block-start: var(--space-6);
+    padding-inline-start: 0;
+    border-block-start: 1px solid var(--sand);
+    border-inline-start: 0;
+  }
+
+  .wayGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .wayGrid article {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 620px) {
+  .belief,
+  .membership {
+    width: calc(100% - (2 * var(--page-gutter)));
+  }
+
+  .membership {
+    padding: var(--space-8);
+  }
+}

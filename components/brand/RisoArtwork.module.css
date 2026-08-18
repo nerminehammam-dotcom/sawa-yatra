@@ -60,7 +60,7 @@
   width: min(58%, 22rem);
   aspect-ratio: 1;
   inset: -18% auto auto -9%;
-  border-radius: 50%;
+  border-radius: 0;
   background: var(--terracotta);
   mix-blend-mode: multiply;
   opacity: 0.88;

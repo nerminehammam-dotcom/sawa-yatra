@@ -6,6 +6,8 @@ import { SkipLink } from "@/components/brand/SkipLink";
 import { footerNavigation, primaryNavigation } from "@/content/navigation";
 import { siteConfig } from "@/content/site";
 
+import { EditorialReveal } from "./EditorialReveal";
+
 const legalLinks = footerNavigation
   .filter((item) =>
     ["/privacy", "/terms", "/accessibility"].includes(item.href),
@@ -26,6 +28,7 @@ export function PublicShell({ children }: { children: ReactNode }) {
       <SkipLink />
       <SiteNavigation />
       {children}
+      <EditorialReveal />
       <Footer
         navigationLinks={footerLinks}
         legalLinks={legalLinks}

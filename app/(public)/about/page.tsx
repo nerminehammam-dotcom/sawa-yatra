@@ -1,229 +1,179 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { createPageMetadata } from "@/app/_metadata";
-import { getAndeanCaravanGallery } from "@/content/andean-caravan-images";
-import { contactHref } from "@/lib/contact";
-
-import styles from "./about.module.css";
 import { Arrow } from "@/components/ui/Arrow";
+
+import styles from "./club-about.module.css";
 
 export const metadata = createPageMetadata("/about");
 
-const fieldImage = getAndeanCaravanGallery("both-shores")[3]!;
-
-const principles = [
-  {
-    number: "01",
-    title: "The route is real work",
-    body: "Distances, altitude, borders, ferries and transfer days belong in the story, not in hidden small print.",
-  },
-  {
-    number: "02",
-    title: "The caravan stays connected",
-    body: "Each section is part of one annual movement through the Andes, even as travellers join and leave.",
-  },
-  {
-    number: "03",
-    title: "Places are not decoration",
-    body: "The site uses approved factual content and observed photography without reducing a region or culture to a motif.",
-  },
-  {
-    number: "04",
-    title: "Clarity is a form of care",
-    body: "A complex route should still feel possible to understand, compare and enter.",
-  },
-] as const;
-
 export default function AboutPage() {
   return (
-    <main id="main-content" tabIndex={-1}>
+    <main className={styles.aboutPage} id="main-content" tabIndex={-1}>
       <section className={styles.hero} aria-labelledby="about-heading">
-        <p>About / Sawayatra field document</p>
-        <h1 id="about-heading">A travel club with a point of view.</h1>
-        <p>
-          Sawayatra runs long overland journeys for a small membership. The
-          route is fixed, the company is not: it is assembled, one person at a
-          time, from people who keep a day the same way.
-        </p>
-      </section>
-
-      <section className={styles.founders} aria-labelledby="founders-heading">
-        <div className={styles.foundersLead}>
-          <figure className={styles.foundersLeadImage}>
-            <Image
-              src="/assets/images/about/founders/lakeside.jpg"
-              alt="Nermine Hammam and Amal standing together beside a lake and green hillside beneath a wide blue sky."
-              fill
-              loading="eager"
-              sizes="(max-width: 900px) 100vw, 58vw"
-            />
-            <figcaption>Nermine and Amal / on the road</figcaption>
-          </figure>
-          <div className={styles.foundersIntroduction}>
-            <p>Who we are / the people behind Sawayatra</p>
-            <h2 id="founders-heading">The idea began on the road.</h2>
+        <div className={styles.wrap}>
+          <h1 id="about-heading">
+            A club for people who travel alone on purpose.
+          </h1>
+          <div className={styles.introduction}>
             <p>
-              Sawayatra was founded by Nermine Hammam and Amal El Masri. It
-              grew from travelling together and seeing how the right
-              companionship, attention to practical details and room for
-              spontaneity could transform a journey.
+              Sawayatra is an invitation-only members&apos; club for slow
+              overland journeys beyond the usual tourist circuit. It brings
+              together independent-minded travellers who want depth rather
+              than destination collecting, and compatible company without the
+              arbitrariness of conventional group travel.
+            </p>
+            <p>
+              The club exists so that a journey which might otherwise feel too
+              unfamiliar, too complex or too remote to attempt alone becomes
+              possible.
             </p>
           </div>
         </div>
-
-        <article className={styles.founderProfile}>
-          <figure className={styles.profileImage}>
-            <Image
-              src="/assets/images/about/founders/nermine-photographing.jpeg"
-              alt="Nermine Hammam photographing a high-altitude wetland with mountains beyond."
-              fill
-              sizes="(max-width: 900px) 100vw, 45vw"
-            />
-          </figure>
-          <div className={styles.profileCopy}>
-            <p>Founder / artist / photographer</p>
-            <h3>Nermine Hammam</h3>
-            <p>
-              Nermine Hammam is an Egyptian photo artist working between Cairo
-              and London. Trained in filmmaking at New York University&apos;s
-              Tisch School of the Arts, she works across photography, digital
-              collage and mixed media. Her work has been exhibited
-              internationally and is held in collections including the
-              Victoria and Albert Museum and the Tropenmuseum.
-            </p>
-            <p>
-              She brings to Sawayatra an artist&apos;s attention to place,
-              memory and the stories images carry.
-            </p>
-            <a
-              href="https://www.nerminehammam.com/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Visit Nermine&apos;s artist website <Arrow direction="up-right" />
-            </a>
-          </div>
-        </article>
-
-        <article className={styles.founderProfile}>
-          <figure className={`${styles.profileImage} ${styles.amalProfileImage}`}>
-            <Image
-              src="/assets/images/about/founders/amal-el-masri-atacama.jpg"
-              alt="Amal El Masri seated on a rock beside a high-altitude lagoon with volcanic mountains beyond."
-              fill
-              sizes="(max-width: 900px) 100vw, 45vw"
-            />
-          </figure>
-          <div className={styles.profileCopy}>
-            <p>Founder &amp; Journey Curator, Sawayatra</p>
-            <h3>Amal El Masri</h3>
-            <p>
-              Amal el Masri is a travel entrepreneur and creative strategist
-              whose career spans advertising, branding and film, including
-              more than a decade at JWT, where she helped build one of the
-              region&apos;s most celebrated creative agencies and its award-winning
-              legacy. After years of frantic business travel had gradually
-              taken the joy out of travelling, she rediscovered the magic of
-              long-form journeys - and with it, a simple realisation: the people
-              you travel with fundamentally shape how you experience a place.
-              Sawayatra grew from this belief: that finding the right travel
-              companions can turn a good journey into something deeper, more
-              enriching and memorable.
-            </p>
-          </div>
-        </article>
-
-        <div className={styles.founderFieldNotes}>
-          <figure>
-            <Image
-              src="/assets/images/about/founders/aircraft.jpg"
-              alt="Nermine Hammam and Amal posing against the weathered fuselage of an aircraft."
-              fill
-              sizes="(max-width: 700px) 100vw, (max-width: 900px) 50vw, 25vw"
-            />
-          </figure>
-          <figure>
-            <Image
-              src="/assets/images/about/founders/patagonia-lake.jpeg"
-              alt="Nermine Hammam and Amal standing above a vivid blue Patagonian lake."
-              fill
-              sizes="(max-width: 700px) 100vw, (max-width: 900px) 50vw, 25vw"
-            />
-          </figure>
-          <figure>
-            <Image
-              src="/assets/images/about/founders/salt-flat.jpg"
-              alt="Nermine Hammam and Amal standing on a white salt flat beneath a vast blue sky."
-              fill
-              sizes="(max-width: 700px) 100vw, (max-width: 900px) 50vw, 25vw"
-            />
-          </figure>
-          <figure>
-            <Image
-              src="/assets/images/about/founders/walking.jpeg"
-              alt="Nermine Hammam and Amal walking together on a rocky path through low forest."
-              fill
-              sizes="(max-width: 700px) 100vw, (max-width: 900px) 50vw, 25vw"
-            />
-          </figure>
-        </div>
-        <p className={styles.founderCredit}>
-          Founder photographs from Nermine Hammam&apos;s personal archive.
-          Individual photographers are not yet credited.
-        </p>
       </section>
 
-      <section className={styles.observation} aria-labelledby="observation-heading">
-        <figure>
-          <Image
-            src={fieldImage.src}
-            alt={fieldImage.alt}
-            fill
-            sizes="(max-width: 800px) 100vw, (max-width: 1440px) 58vw, 835px"
-            style={{
-              objectPosition: `${fieldImage.focalPoint?.x ?? 50}% ${fieldImage.focalPoint?.y ?? 50}%`,
-            }}
-          />
-          <figcaption>FIELD NOTE / ALTIPLANO ROAD</figcaption>
-        </figure>
-        <div>
-          <p>Working belief</p>
-          <h2>We do not sell a view. We sell the hours on either side of it.</h2>
+      <section className={styles.belief} aria-label="Sawayatra belief">
+        <div className={styles.wrap}>
+          <blockquote>
+            <p>
+              Adventure should belong to the road, not to uncertainty about
+              who you are travelling with.
+            </p>
+          </blockquote>
+        </div>
+      </section>
+
+      <section
+        className={styles.splitSection}
+        aria-labelledby="company-heading"
+      >
+        <div className={styles.wrap}>
+          <header>
+            <h2 id="company-heading">How the company is formed</h2>
+          </header>
+          <div className={styles.sectionCopy}>
+            <p>
+              Most clubs sort people by what they earn or what they do.
+              Sawayatra sorts by how they travel: pace, company, planning,
+              attention.
+            </p>
+            <p>
+              Every member completes a Travel Self: fourteen situations on the
+              road, where both answers cost something. It is not a personality
+              test. It is how the company for each journey is assembled, one
+              person at a time.
+            </p>
+            <p>
+              A reading describes how you keep pace, how you take company, how
+              you hold a plan, where your attention goes, and how you fray when
+              a journey is long. Anyone may take it. Only members receive a
+              colourway, an archetype and a Passport.
+            </p>
+            <Link className={styles.textLink} href="/travel-self">
+              Take the Travel Self <Arrow />
+            </Link>
+            <p className={styles.reveal}>
+              When two members are considered for the same road, neither sees
+              the other until both have agreed to be seen. This is the mutual
+              reveal. It is the moment a stranger becomes company.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className={`${styles.splitSection} ${styles.membership}`}
+        aria-labelledby="membership-heading"
+      >
+        <div className={styles.wrap}>
+          <header>
+            <h2 id="membership-heading">Membership</h2>
+          </header>
+          <div className={styles.sectionCopy}>
+            <p>
+              Membership begins with an invitation from the founders or a
+              nomination from an existing member. Prospective members complete
+              their Travel Self and apply for admission.
+            </p>
+            <p>
+              Once admitted, a member belongs to the club, not merely to a
+              single journey.
+            </p>
+            <p>
+              Age, gender and rooming are asked once, at application, and held
+              for rooming and paperwork. They form no part of a reading and are
+              not used to match anyone unless a member asks.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.ways} aria-labelledby="ways-heading">
+        <div className={styles.wrap}>
+          <h2 id="ways-heading">Three ways to travel</h2>
+          <div className={styles.wayGrid}>
+            <article>
+              <h3>
+                <Link href="/journeys/caravans">A Caravan</Link>
+              </h3>
+              <p>
+                Join the annual overland route, entering or leaving it at
+                designated gates.
+              </p>
+              <p className={styles.note}>71 days and 26 days</p>
+            </article>
+            <article>
+              <h3>
+                <Link href="/journeys/join">An Open Journey</Link>
+              </h3>
+              <p>
+                Join a shorter journey between Caravans, designed by Sawayatra
+                or proposed by another member.
+              </p>
+            </article>
+            <article>
+              <h3>A journey of your own</h3>
+              <p>
+                Propose a route and find members who may be compatible company.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className={styles.splitSection}
+        aria-labelledby="club-carries-heading"
+      >
+        <div className={styles.wrap}>
+          <header>
+            <h2 id="club-carries-heading">What the club carries</h2>
+          </header>
+          <div className={styles.sectionCopy}>
+            <p>
+              When a proposed journey fits Sawayatra principles, the club helps
+              make it workable. It assesses the route, forms the travelling
+              company, and finds local people who know the ground.
+            </p>
+            <p>
+              Every journey states plainly who conceived it, who hosts it, who
+              operates it, and what Sawayatra is responsible for.
+            </p>
+            <Link className={styles.textLink} href="/how-it-works">
+              How journeys work <Arrow />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.afterRoad} aria-labelledby="after-road-heading">
+        <div className={styles.wrap}>
+          <h2 id="after-road-heading">After the road</h2>
           <p>
-            A caravan is not a race down a route. It is a moving circle -
-            travellers, hosts, vehicles and local knowledge - progressing
-            slowly enough for each place to change the terms. Roads, weather,
-            roadside meals, border crossings and changes of vehicle make that
-            circle tangible. They are not edited out to create a polished
-            travel fantasy.
+            Members add field notes, photographs and practical knowledge to
+            the journey archive, so each road travelled leaves something useful
+            for those who follow.
           </p>
-        </div>
-      </section>
-
-      <section className={styles.principles} aria-labelledby="principles-heading">
-        <header>
-          <p>Operating principles / what remains visible</p>
-          <h2 id="principles-heading">Practical, authored, alive.</h2>
-        </header>
-        <ol>
-          {principles.map((principle) => (
-            <li key={principle.number}>
-              <span>{principle.number}</span>
-              <h3>{principle.title}</h3>
-              <p>{principle.body}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      <section className={styles.action} aria-labelledby="about-action-heading">
-        <h2 id="about-action-heading">Begin with the first route.</h2>
-        <div>
-          <Link href="/journeys/caravans/andean-caravan">Explore the Andean Caravan <Arrow /></Link>
-          <Link href={contactHref()}>
-            Ask a question <Arrow direction="up-right" />
-          </Link>
         </div>
       </section>
     </main>

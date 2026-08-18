@@ -1,963 +1,376 @@
-:global(body):has(.homePage)::before {
-  opacity: 0.085;
-}
-
 .homePage {
-  /* Was three off-system hexes; the creams and inks differed from the tokens
-     by a few percent and produced seams against the shared chrome. */
-  --hero-cream: var(--paper);
-  --hero-ink: var(--ink);
-  --hero-rose: var(--pink);
+  --home-hair-soft: rgb(39 35 31 / 11%);
+  --home-hair: rgb(39 35 31 / 20%);
+  --home-hair-strong: rgb(39 35 31 / 34%);
+  --home-body-ink: color-mix(in srgb, var(--ink) 84%, transparent);
+  --home-muted-ink: color-mix(in srgb, var(--ink) 60%, transparent);
+  --home-band: clamp(4.5rem, 10vw, 9.5rem);
+  --home-gutter: clamp(1.25rem, 5vw, 6rem);
+  --home-max: 1440px;
 
   overflow: clip;
-}
-
-.homeHero {
-  position: relative;
-  display: grid;
-  width: 100vw;
-  /* One screen exactly. The hero opens complete - headline included - with
-     nothing of it below the fold.
-
-     The photograph is 2560x1706, a 3:2 landscape, and this band is nearer
-     2.4:1, so cover has to discard about a third of its height. Which third
-     is the whole question, and it is set by --hero-focus-y below. */
-  min-height: calc(100svh - var(--site-header-height, 0px));
-  overflow: hidden;
-  color: var(--hero-cream);
-  background: var(--hero-ink);
-}
-
-.homeHeroImage {
-  z-index: 0;
-  object-fit: cover;
-  /* Was center, which took the crop evenly off the top and the bottom - half
-     the sky and half the road. Weighting it low takes almost all of it off
-     the top, so what goes is sky and what stays is the horizon, the valley
-     and the road running out of the frame.
-
-     One number to move. Higher cuts more sky; 100% would cut it all and sit
-     the horizon at the top edge. Lower gives the sky back. */
-  --hero-focus-y: 82%;
-  object-position: center var(--hero-focus-y);
-}
-
-.homeHeroScrim {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  /* Right-hand column only, so the road and sky on the left stay bright.
-
-     MEASURED 5 August 2026 by tools/audit/measure-hero-contrast.py, which
-     composites this gradient over the real crop of the real photograph and
-     samples the lightest 5% behind each line's actual glyph box.
-
-     Worst case 7.17:1 at 1280x800, against a 3.0 threshold for large text.
-     Every line at every width from 1280 to 2560 clears 7:1, which is the AAA
-     threshold for normal text, let alone large.
-
-     It used to fail badly and the reason is worth keeping. The old hero had a
-     tagline, a definition, two buttons and a link stacked below the headline,
-     which pushed the headline high into the frame where the sky is bright:
-     1.58-1.66:1 modelled, and an earlier audit measured 1.99:1. Removing all
-     of that dropped the headline to the foot of the frame, over dark land.
-     The fix was not this gradient. It was what sat underneath it.
-
-     So: if anything is ever added below the headline again, re-run the script
-     before assuming this still holds. */
-  background: linear-gradient(
-    to left,
-    color-mix(in srgb, var(--ink) 88%, transparent) 0%,
-    color-mix(in srgb, var(--ink) 74%, transparent) 28%,
-    color-mix(in srgb, var(--ink) 42%, transparent) 52%,
-    color-mix(in srgb, var(--ink) 10%, transparent) 72%,
-    color-mix(in srgb, var(--ink) 0%, transparent) 88%
-  );
-  pointer-events: none;
-}
-
-/* The gradient above is now only a fallback. Where the outline renders, the
-   photograph is left completely alone.
-
-   No darkening at all, and that is not laziness - it is what the measurements
-   demanded. A dark outline needs a LIGHT backdrop to separate from, so any
-   wash over the photograph moves the picture towards the outline rather than
-   away from it. A soft 20% corner vignette was tried first and dropped the
-   worst line from 3.07 to 2.36, below the threshold. Removing every trace of
-   it puts the range back to 3.07 at worst and 6.09 at best.
-
-   Gated on @supports rather than applied outright: a browser without
-   text-stroke would otherwise get pink on a bare photograph at 1.48:1. The
-   picture opens up exactly where the outline is there to carry it, and stays
-   protected where it is not. */
-@supports (paint-order: stroke) and (-webkit-text-stroke: 1px currentColor) {
-  .homeHeroScrim {
-    background: none;
-  }
-}
-
-
-/* The headline sits high in the sky, on one line, across the frame.
-
-   It was bottom-right in three lines until 6 August 2026. Moving it up was
-   measured, not guessed, and the outline is what made it possible: a dark edge
-   wants a bright backdrop, so the sky went from the worst place on this
-   photograph to the best.
-
-     high in the frame, 6-32%    9.1 to 9.3
-     the horizon, around 50%     7.7 to 8.5
-     where it used to sit, 88%   3.1 to 5.3
-
-   Roughly three times the separation, and the sky is the emptiest part of the
-   picture, so nothing is covered up. */
-.homeHeroCopy {
-  position: absolute;
-  z-index: 3;
-  inset-block-start: 0;
-  inset-inline: 0;
-  display: grid;
-  align-content: start;
-  box-sizing: border-box;
-  width: 100%;
-  padding: clamp(1.75rem, 8svh, 5.5rem) 6vw 0;
-  text-align: center;
-}
-
-/* One line across the frame. The three-line setting with the italic cutting
-   across it is gone: it only worked stacked, and the scale gained by going to
-   a single line is worth more.
-
-   All one colour. The contrast is roman against italic and heavy against
-   light, not pink against something else.
-
-   The font files carry all four Fraunces axes: opsz, wght, SOFT and WONK.
-   WONK is the one that swaps in the swash forms. */
-/* The headline is outlined rather than sat on a darkened photograph, so the
-   picture can be seen.
-
-   Measured before the colour was chosen, and remeasured for the 15 August 2026
-   palette. With the scrim removed, the photograph behind the words runs from
-   #7a6b6a to #afa087, and pink on that is 1.24 to 2.46 - a clear fail against
-   3.0, and slightly worse than the 1.48 to 2.93 the old pink gave. Outlining
-   moves the question to two new boundaries and both still have to hold:
-
-     pink fill against an ink outline      7.58   (was 9.00)
-     ink outline against the photograph    3.07 at worst, 6.09 at best
-
-   The ink outline is doing the work and it is unchanged, so the decision
-   stands. A paper outline was measured too and is still the wrong answer:
-   pink on paper is 1.80, so the letter would disappear into its own edge, and
-   paper against the photograph falls to 2.23 in places. Ink, on the numbers
-   rather than by taste. --hero-stroke-color is here if you want to try it
-   anyway.
-
-   paint-order draws the stroke first and the fill over it, so the inner half
-   of the stroke is covered and the letterforms keep their shape. Without it a
-   centred stroke eats the hairlines of a high-contrast serif. */
-.homeHeroCopy h1 {
-  /* 9.58vw is the size at which the line exactly fills 88vw, and 9vw was
-     shipped first. Too big. This sits between that and the 88px it topped
-     out at when it was three lines stacked: about 82px at 1280 and 92px at
-     1440, spanning roughly 59vw rather than the full frame.
-
-     Capped at 7.5rem so it stops growing on very wide screens. Without the
-     cap a 2560px monitor got 230px, which is a poster, not a headline.
-
-     nowrap is the safety net - the line must never break. */
-  margin: 0;
-  color: var(--ink);
-  white-space: nowrap;
-  font-family: var(--font-display);
-  font-optical-sizing: auto;
-  line-height: 0.92;
-}
-
-.homeHeroRoman {
-  font-size: var(--fs-display-2);
-  font-style: normal;
-  /* opsz is left to font-optical-sizing: auto (the initial value) so the
-     optical size tracks the rendered size. Pinning "opsz" 144 drew hairline
-     144pt display strokes even at ~38px on phones. */
-  font-weight: 600;
-  letter-spacing: -0.022em;
-}
-
-.homeHeroTurn {
-  font-size: var(--fs-display-2);
-  font-style: italic;
-  /* WONK 1 swaps in the swash forms - the curling italic that gives this kind
-     of setting its flourish. SOFT 40 rounds the terminals a little so the word
-     sits softer against the two roman lines it cuts across. */
-  /* SOFT + WONK only; opsz tracks the rendered size via font-optical-sizing. */
-  font-variation-settings: "SOFT" 40, "WONK" 1;
-  font-weight: 500;
-  line-height: 0.85;
-  letter-spacing: -0.03em;
-}
-
-@media (max-width: 639px) {
-  /* The band stops being a full screen on phones, and the reason is the crop
-     rather than the height.
-
-     The photograph is 2560x1706 - 1.5:1 landscape. A full-height band on a
-     390x844 phone is 390x764, which is 0.51:1. To cover that, the image has to
-     be scaled until its HEIGHT fits, which leaves its width at 1.5 x 764 =
-     1146px against a 390px box: 66% of the picture is cropped away
-     horizontally, and the full height is kept - including all of the sky.
-
-     That is why --hero-focus-y does nothing here. It chooses which third of the
-     height to discard, and on a portrait box no height is discarded at all.
-     Measured on the render: the top 60% of the mobile hero was empty sky.
-
-     At 72svh the band is 390x608, or 0.64:1, and 57% of the width survives
-     instead of 34%. The picture reads as a landscape again. Below that it
-     stops feeling like an opening; above it the sky takes over. */
-  .homeHero {
-    min-height: min(72svh, calc(100svh - var(--site-header-height, 0px)));
-  }
-
-  /* One line does not survive a phone: 9vw of 390px is 35px, too small to be
-     a headline. Below 640px it wraps to three lines at a usable size, and the
-     copy moves back to the foot of the frame where there is room for them. */
-  .homeHeroCopy h1 {
-    white-space: normal;
-    text-wrap: balance;
-  }
-
-  .homeHeroRoman,
-  .homeHeroTurn {
-    font-size: var(--fs-display-2);
-  }
-
-  /* On mobile the copy is full-width and starts mid-frame, so the scrim has to
-     be vertical-dominant; a right-anchored gradient misses the headline entirely. */
-  .homeHeroScrim {
-    background: linear-gradient(
-      to top,
-      color-mix(in srgb, var(--ink) 90%, transparent) 0%,
-      color-mix(in srgb, var(--ink) 86%, transparent) 32%,
-      color-mix(in srgb, var(--ink) 76%, transparent) 54%,
-      color-mix(in srgb, var(--ink) 38%, transparent) 70%,
-      color-mix(in srgb, var(--ink) 6%, transparent) 86%,
-      color-mix(in srgb, var(--ink) 0%, transparent) 100%
-    );
-  }
-
-  .homeHeroCopy {
-    width: 100vw;
-    height: 100%;
-    align-content: end;
-    padding: clamp(2rem, 5svh, 3rem) var(--page-gutter);
-    text-align: left;
-  }
-
-  .homeHeroCopy h1 {
-    /* Pink cannot reach 3:1 over a bright sky without darkening the whole
-       frame, which is what we are avoiding. Paper does it at 3.3:1. */
-    color: var(--paper);
-  }
-
-  .homeHeroRoman {
-    font-size: var(--fs-display-2);
-  }
-
-  .homeHeroTurn {
-    margin-inline-end: 0;
-    font-size: var(--fs-display-1-compact);
-  }
-}
-
-/* ---- Restored editorial sections ------------------------------------ */
-
-/* NOT REACHABLE. Everything from here to the end of the reserved-slots block,
-   plus .howStepsList further down, styles class names that appear in no markup:
-   .how .route .joining .regions .fieldNotes .imageStrip .finalAction
-   .travelSelf* .reserved* .editorialHeading .routeHeading .joiningHeading
-   .regionsHeading .howStepsList. Home renders 18 of this file's 38 classes.
-
-   334 of the 929 lines below and above are unreachable - 35% of the file, on
-   top of the 449 duplicated lines already removed. Measured 16 August 2026 by
-   matching every selector against the styles.* references in the TSX.
-
-   Left in place rather than deleted: it is not clear whether these sections are
-   waiting to come back or were abandoned, and that is a content decision, not a
-   layout one. Deleting them is a separate commit whenever you want it. */
-
-.how,
-.route,
-.joining,
-.regions,
-.fieldNotes {
+  color: var(--home-body-ink);
   background: var(--paper);
+  font-family: var(--font-editorial);
+  font-size: 1.1875rem;
+  font-variation-settings: "SOFT" 0, "WONK" 0;
+  line-height: 1.62;
 }
 
-.how {
-  display: grid;
-  grid-template-columns: minmax(18rem, 0.72fr) minmax(0, 1.28fr);
-  border-bottom: var(--border-strong) solid var(--ink);
-}
-
-.editorialHeading,
-.routeHeading,
-.joiningHeading,
-.regionsHeading,
-.fieldNotes > header {
-  /* Was clamp(3rem, 7vw, 7rem) - a hand-rolled curve that landed at 100.8px on
-     a 1440 viewport where every other band sat at 144. Same role, same token. */
-  padding: var(--section-space) var(--page-gutter);
-}
-
-.editorialHeading {
-  display: grid;
-  align-content: space-between;
-  gap: var(--space-12);
-  min-height: 34rem;
-  border-inline-end: var(--border-strong) solid var(--ink);
-}
-
-.editorialHeading > p,
-.routeHeading > div > p,
-.joiningHeading > p:first-child,
-.regionsHeading > p,
-.fieldNotes > header > p,
-.finalAction > p {
-  font-size: var(--fs-body);
-  font-weight: 500;
-  letter-spacing: var(--tracking-eyebrow);
-  text-transform: uppercase;
-}
-
-.editorialHeading h2 {
-  max-width: 11ch;
-}
-
-.editorialHeading a {
+.homePage :where(h1, h2, h3) {
   color: var(--ink);
-  font-size: var(--fs-small);
-  font-weight: 500;
-  letter-spacing: normal;
-  text-transform: none;
-}
-
-.howSteps {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.howSteps li {
-  display: grid;
-  grid-template-columns: minmax(6rem, 0.4fr) minmax(12rem, 0.8fr) minmax(15rem, 1fr);
-  align-items: center;
-  min-height: 16rem;
-  border-bottom: var(--border-hairline) solid var(--ink);
-}
-
-.howSteps li:last-child {
-  border-bottom: 0;
-}
-
-.howSteps span,
-.howSteps h3,
-.howSteps p {
-  padding: var(--space-8);
-}
-
-.howSteps span {
-  align-self: stretch;
-  color: var(--ink);
-  font-family: var(--font-display);
-  font-size: var(--fs-heading);
-  line-height: 1;
-  border-inline-end: var(--border-hairline) solid var(--ink);
-}
-
-.howSteps h3 {
-  font-size: var(--fs-display-3);
-}
-
-.howSteps p {
-  font-size: var(--fs-small);
-}
-
-.routeHeading {
-  display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(min(22rem, 100%), 0.65fr);
-  gap: var(--space-16);
-  align-items: end;
-}
-
-.routeHeading h2,
-.joiningHeading h2,
-.regionsHeading h2,
-.fieldNotes h2,
-.finalAction h2 {
-  max-width: 11ch;
-  margin-top: var(--space-5);
-  letter-spacing: -0.055em;
-}
-
-.routeHeading aside {
-  display: grid;
-  gap: var(--space-4);
-  padding: var(--space-6);
-  color: var(--paper);
-  background: var(--ink);
-}
-
-.routeHeading aside strong {
-  color: var(--paper);
-  font-size: var(--fs-small);
-  letter-spacing: normal;
-}
-
-.routeHeading aside p {
-  font-size: var(--fs-small);
-}
-
-.joining {
-  padding-top: var(--section-space);
-}
-
-.joiningHeading {
-  display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(18rem, 0.5fr);
-  gap: var(--space-8);
-  align-items: end;
-}
-
-.joiningHeading > p:first-child,
-.joiningHeading > h2 {
-  grid-column: 1;
-}
-
-.joiningHeading > p:last-child {
-  grid-column: 2;
-  grid-row: 2;
-  max-width: 32ch;
-}
-
-.regions {
-  padding-top: var(--section-space);
-}
-
-.regionsHeading {
-  display: grid;
-  justify-items: start;
-  gap: var(--space-4);
-  border-top: var(--border-strong) solid var(--ink);
-}
-
-.regionsHeading a {
-  color: var(--ink);
-  font-size: var(--fs-small);
-  font-weight: 500;
-  letter-spacing: normal;
-  text-transform: none;
-}
-
-.fieldNotes {
-  display: grid;
-  gap: var(--space-12);
-  padding-bottom: var(--section-space);
-}
-
-.fieldNotes > header {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: var(--space-8);
-  align-items: start;
-}
-
-.fieldNotes h2 {
-  margin-top: 0;
-}
-
-.imageStrip {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr 1fr 1.2fr;
-  gap: var(--border-strong);
-  min-height: 38rem;
-  overflow-x: auto;
-  background: var(--ink);
-  border-block: var(--border-strong) solid var(--ink);
-}
-
-.imageStrip figure {
-  position: relative;
-  min-width: 17rem;
-  min-height: 38rem;
-  margin: 0;
-  overflow: hidden;
-  background: var(--paper);
-}
-
-.imageStrip img {
-  object-fit: cover;
-}
-
-.imageStrip figcaption {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  padding: var(--space-2) var(--space-3);
-  color: var(--paper);
-  font-size: var(--fs-small);
-  font-weight: 500;
-  letter-spacing: var(--tracking-eyebrow);
-  background: var(--ink);
-  /* Restored 16 August 2026, and it changes nothing, because .imageStrip is
-     not referenced by any markup - the before/after renders are byte-identical.
-     The stale duplicate of this file had dropped this declaration, which looked
-     like a live typography bug until the render proved otherwise. Kept so the
-     rule is correct if this block is ever wired up; see the note at the head of
-     the dead section below. */
-  font-family: var(--font-note);
-}
-
-.finalAction {
-  display: grid;
-  align-content: start;
-  gap: var(--space-8);
-  padding: var(--section-space) var(--page-gutter);
-  color: var(--ink);
-  background: var(--pink);
-}
-
-.finalAction h2 {
-  /* Deep-orange on the pink final-call ground (3.5:1, display) - the closing
-     headline carries colour like the page heroes, not flat ink. */
-  color: var(--signal-text);
-  max-width: 8ch;
-  /* was line-height 0.78, which collided descenders with the next line's ascenders */
-  font-size: var(--fs-display-1);
-  line-height: 0.92;
-}
-
-.finalAction > div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-4);
-}
-
-.finalAction a {
-  display: inline-flex;
-  min-height: var(--touch-min);
-  align-items: center;
-  padding: var(--space-4) var(--space-5);
-  color: var(--paper);
-  font-size: var(--fs-small);
-  font-weight: 500;
-  letter-spacing: normal;
-  text-decoration: none;
-  text-transform: none;
-  background: var(--ink);
-  border: var(--border-strong) solid var(--ink);
-}
-
-.finalAction a:first-of-type {
-  color: var(--ink);
-  background: var(--signal);
-  border-color: var(--ink);
-}
-
-.finalAction a:not(:first-of-type) {
-  color: var(--ink);
-  background: transparent;
-}
-
-/* ---- Meet your Travel Self ------------------------------------------- */
-
-.travelSelf {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr);
-  align-items: stretch;
-  background: var(--paper);
-  border-block: var(--border-strong) solid var(--ink);
-}
-
-.travelSelfCopy {
-  display: grid;
-  align-content: center;
-  justify-items: start;
-  gap: var(--space-5);
-  padding: clamp(3rem, 7vw, 7rem) var(--page-gutter);
-  border-inline-end: var(--border-strong) solid var(--ink);
-}
-
-.travelSelfCopy > p:first-child {
-  font-size: var(--fs-body);
-  font-weight: 500;
-  letter-spacing: var(--tracking-eyebrow);
-  text-transform: uppercase;
-}
-
-.travelSelfCopy h2 {
-  max-width: 12ch;
-  margin-top: var(--space-2);
-}
-
-.travelSelfBody {
-  max-width: 44ch;
-  font-size: var(--fs-body);
-}
-
-.travelSelfNote {
-  max-width: 44ch;
-  font-size: var(--fs-small);
-}
-
-.travelSelfFigure {
-  position: relative;
-  min-height: 34rem;
-  overflow: hidden;
-}
-
-.travelSelfFigure img {
-  object-fit: cover;
-}
-
-/* ---- Reserved slots (development only) ------------------------------- */
-
-.reserved {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
-  gap: var(--border-strong);
-  padding: 0;
-  background: var(--ink);
-  border-block: var(--border-strong) solid var(--ink);
-}
-
-.reserved article {
-  display: grid;
-  align-content: start;
-  gap: var(--space-3);
-  padding: clamp(2rem, 4vw, 3.5rem) var(--page-gutter);
-  background: repeating-linear-gradient(
-    -45deg,
-    var(--paper),
-    var(--paper) 14px,
-    color-mix(in srgb, var(--paper) 92%, var(--ink)) 14px,
-    color-mix(in srgb, var(--paper) 92%, var(--ink)) 28px
-  );
-}
-
-.reserved article > p:first-child {
-  font-size: var(--fs-body);
-  font-weight: 500;
-  letter-spacing: var(--tracking-eyebrow);
-  text-transform: uppercase;
-}
-
-.reserved h2 {
-  font-size: var(--fs-title);
-}
-
-.reservedNeeds {
-  max-width: 46ch;
-  padding-top: var(--space-3);
-  font-size: var(--fs-small);
-  border-top: var(--border-hairline) solid var(--ink);
-}
-
-
-@media (max-width: 1023px) {
-  .how {
-      grid-template-columns: 1fr;
-    }
-
-  .editorialHeading {
-      min-height: 38rem;
-      border-inline-end: 0;
-      border-bottom: var(--border-strong) solid var(--ink);
-    }
-
-  .howSteps li {
-      grid-template-columns: 6rem minmax(0, 1fr);
-    }
-
-  .howSteps p {
-      grid-column: 2;
-      border-top: var(--border-hairline) solid var(--ink);
-    }
-
-  .routeHeading,
-    .joiningHeading,
-    .fieldNotes > header {
-      grid-template-columns: 1fr;
-    }
-
-  .joiningHeading > p:last-child {
-      grid-column: 1;
-      grid-row: auto;
-    }
-
-  .travelSelf {
-    grid-template-columns: 1fr;
-  }
-
-  .travelSelfCopy {
-    border-inline-end: 0;
-    border-bottom: var(--border-strong) solid var(--ink);
-  }
-
-  .travelSelfFigure {
-    min-height: 24rem;
-  }
-}
-
-@media (max-width: 639px) {
-  .howSteps li {
-      grid-template-columns: 4.5rem minmax(0, 1fr);
-    }
-
-  .howSteps span,
-    .howSteps h3,
-    .howSteps p {
-      padding: var(--space-5);
-    }
-
-  .howSteps span {
-      font-size: var(--fs-display-2);
-    }
-
-  .imageStrip {
-      display: flex;
-      min-height: 31rem;
-      scroll-snap-type: x mandatory;
-    }
-
-  .imageStrip figure {
-      width: 78vw;
-      min-width: 78vw;
-      min-height: 31rem;
-      scroll-snap-align: start;
-    }
-}
-
-/* ---- The name ------------------------------------------------------- */
-
-.nameStory {
-  width: 100%;
-  /* Was clamp(var(--space-16), 8vw, var(--space-28)). --space-28 is not a token
-     and never has been - the scale runs ...16, 20, 24, 32. An undefined var()
-     with no fallback makes the whole declaration invalid at computed-value
-     time, so this band has been rendering with padding: 0 rather than the
-     intended inset. It was the only undefined custom property in the codebase. */
-  padding: var(--section-space) var(--page-gutter);
-  color: var(--ink);
-  background: var(--paper);
-}
-
-.howSteps {
-  display: grid;
-  gap: clamp(var(--space-8), 5vw, var(--space-16));
-  padding: var(--section-space) var(--page-gutter);
-  color: var(--paper);
-  background: var(--ink);
-  border-bottom: var(--border-strong) solid var(--signal-text);
-}
-
-.howStepsHeader {
-  display: grid;
-  max-width: var(--content-max);
-  gap: var(--space-4);
-  margin: 0 auto;
-  padding-top: var(--space-8);
-}
-
-.howStepsHeader > p,
-.howStepsList > li > span {
-  color: var(--sun);
-  font-size: var(--fs-small);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.howStepsHeader h2 {
-  max-width: none;
-  color: var(--pink);
-  font-size: clamp(1.2rem, 6vw, 6.25rem);
-  white-space: nowrap;
-}
-
-.howStepsList {
-  display: grid;
-  max-width: var(--content-max);
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 0;
-  margin: 0 auto;
-  padding: 0;
-  border-top: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
-  list-style: none;
-}
-
-.howStepsList li {
-  display: grid;
-  align-content: start;
-  gap: var(--space-4);
-  min-height: 18rem;
-  padding: var(--space-6);
-  border-right: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
-  border-bottom: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
-}
-
-.howStepsList li:nth-child(3n + 1) {
-  border-left: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
-}
-
-.howStepsList h3 {
-  color: var(--paper);
-  font-size: var(--fs-lead);
-}
-
-.howStepsList p {
-  font-size: var(--fs-small);
-  line-height: 1.55;
-}
-
-.howSteps > a {
-  justify-self: center;
-}
-
-@media (max-width: 900px) {
-  .howStepsList {
-    grid-template-columns: 1fr;
-  }
-
-  .howStepsList li,
-  .howStepsList li:nth-child(3n + 1) {
-    min-height: auto;
-    border-right: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
-    border-left: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
-  }
-}
-
-.nameStoryInner {
-  display: grid;
-  max-width: var(--content-max);
-  margin-inline: auto;
-  overflow: hidden;
-  border: var(--border-strong) solid var(--ink);
-}
-
-.nameStoryHeading {
-  margin: 0;
-  padding: var(--space-5) clamp(var(--space-6), 4vw, var(--space-12));
-  color: var(--pink);
-  background: var(--ink);
-  font-family: var(--font-read);
-  font-size: var(--fs-small);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-}
-
-.nameStoryOrigins {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0;
-  border-bottom: var(--border-strong) solid var(--ink);
-}
-
-.nameStoryOrigin {
-  display: grid;
-  align-content: start;
-  gap: var(--space-5);
-  min-height: 25rem;
-  padding: clamp(var(--space-8), 6vw, var(--space-16));
-}
-
-.nameStoryOrigin:first-child {
-  background: var(--pink);
-}
-
-.nameStoryOrigin:last-child {
-  background: var(--blue);
-  border-inline-start: var(--border-strong) solid var(--ink);
-}
-
-.nameStoryLanguage {
-  margin: 0;
-  color: var(--ink);
-  font-family: var(--font-read);
-  font-size: var(--fs-small);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-}
-
-.nameStoryWord {
-  margin: auto 0 0;
-  color: var(--ink);
-  font-family: var(--font-display);
-  font-size: var(--fs-display-2);
+  font-family: var(--font-editorial);
   font-optical-sizing: auto;
+  font-stretch: normal;
+  font-variation-settings: "SOFT" 0, "WONK" 0, "opsz" 144;
   font-weight: 500;
-  line-height: 0.95;
-  letter-spacing: -0.025em;
-}
-
-.nameStoryDefinition {
-  max-width: 44ch;
-  margin: 0;
-  color: var(--ink);
-  font-family: var(--font-read);
-  font-size: var(--fs-lead);
-  font-optical-sizing: auto;
-  font-weight: 400;
-  line-height: var(--leading-body);
-  text-wrap: pretty;
-}
-
-.nameStoryQuote {
-  width: 100%;
-  margin: 0;
-  padding: clamp(var(--space-10), 6vw, var(--space-16));
-  background: var(--sun);
-  border: 0;
-}
-
-.nameStoryQuote p {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: var(--fs-title);
-  font-optical-sizing: auto;
-  font-style: italic;
-  font-weight: 500;
-  line-height: 1.45;
-  letter-spacing: -0.012em;
-  text-align: center;
+  letter-spacing: -0.006em;
+  line-height: 1.06;
   text-wrap: balance;
 }
 
-@media (max-width: 700px) {
-  .nameStory {
-    padding-block: var(--space-20);
+.homePage h1 {
+  font-size: clamp(2.9rem, 6.2vw, 5.6rem);
+}
+
+.homePage h2 {
+  font-size: clamp(2.2rem, 4.4vw, 3.8rem);
+}
+
+.homePage h3 {
+  font-size: clamp(1.45rem, 2.3vw, 2.05rem);
+  line-height: 1.14;
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--home-max);
+  margin-inline: auto;
+  padding-inline: var(--home-gutter);
+}
+
+.eyebrow,
+.language,
+.cardLabel,
+.note,
+.featuredCopy h3 span {
+  font-family: var(--font-note);
+  font-variation-settings: normal;
+}
+
+.eyebrow {
+  margin: 0 0 1.25rem;
+  color: var(--signal-text);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.eyebrowOnDark {
+  color: var(--paper);
+  opacity: 0.86;
+}
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  min-height: calc(100svh - var(--site-header-height, var(--nav-height-fallback)));
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.heroImage {
+  z-index: -2;
+  object-fit: cover;
+  object-position: 50% 68%;
+}
+
+.heroScrim {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgb(20 17 14 / 76%) 0%,
+    rgb(20 17 14 / 47%) 28%,
+    rgb(20 17 14 / 11%) 58%,
+    rgb(20 17 14 / 0%) 80%
+  );
+}
+
+.heroInner {
+  padding-block: var(--home-band) clamp(2.5rem, 6vw, 4.75rem);
+}
+
+.hero h1 {
+  max-width: 15ch;
+  color: var(--paper);
+}
+
+.hero h1 em {
+  color: var(--sun);
+  font-style: italic;
+  font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 144;
+  font-weight: 400;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.875rem 1.625rem;
+  margin-top: 1.875rem;
+}
+
+.button,
+.textLink {
+  font-family: var(--font-editorial);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.button {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.875rem 1.375rem;
+  color: var(--paper);
+  line-height: 1;
+  text-decoration: none;
+  background: var(--ink);
+  border: 1px solid transparent;
+  border-radius: 0;
+  transition:
+    background var(--motion-fast),
+    color var(--motion-fast),
+    border-color var(--motion-fast);
+}
+
+.button:hover {
+  background: #000;
+  text-decoration: none;
+}
+
+.buttonPale {
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.buttonPale:hover {
+  background: #fff;
+}
+
+.buttonLine {
+  color: var(--ink);
+  background: transparent;
+  border-color: var(--home-hair);
+}
+
+.buttonLine:hover {
+  background: transparent;
+  border-color: var(--home-hair-strong);
+}
+
+.textLink {
+  padding-block: 0.75rem 0.2rem;
+  color: var(--ink);
+  line-height: 1.2;
+  text-decoration: none;
+  border-bottom: 1px solid var(--home-hair);
+}
+
+.textLink:hover {
+  text-decoration: none;
+  border-bottom-color: var(--home-hair-strong);
+}
+
+.textLinkOnDark {
+  color: var(--paper);
+  border-bottom-color: rgb(245 239 226 / 50%);
+}
+
+.band {
+  padding-block: var(--home-band);
+}
+
+.peopleBand {
+  border-bottom: 1px solid var(--home-hair-soft);
+}
+
+.peopleGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.78fr);
+  align-items: end;
+  gap: clamp(1.75rem, 6vw, 6rem);
+}
+
+.peopleGrid h2,
+.sectionHeader h2 {
+  max-width: 15ch;
+}
+
+.sectionHeader {
+  margin-bottom: clamp(2.125rem, 4.5vw, 3.75rem);
+}
+
+.featured {
+  display: grid;
+  gap: clamp(1.625rem, 3.4vw, 3.25rem);
+  margin-bottom: clamp(3.25rem, 7vw, 6.25rem);
+}
+
+.featuredImage,
+.cardImage {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--sand);
+}
+
+.featuredImage {
+  aspect-ratio: 21 / 9;
+}
+
+.featuredImage img,
+.cardImage img {
+  object-fit: cover;
+}
+
+.featuredCopy {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1.375rem, 4vw, 4rem);
+}
+
+.featuredCopy h3 {
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+}
+
+.featuredCopy h3 span {
+  display: block;
+  margin-top: 0.875rem;
+  color: var(--home-muted-ink);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.75rem, 3.4vw, 3.5rem);
+}
+
+.cardImage {
+  aspect-ratio: 4 / 3;
+}
+
+.cardLabel {
+  margin: 1.5rem 0 0.75rem;
+  color: var(--home-muted-ink);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.card h3 {
+  margin-bottom: 0.75rem;
+}
+
+.card > p:not(.cardLabel, .note) {
+  max-width: 44ch;
+}
+
+.note {
+  margin-top: 0.75rem;
+  color: var(--home-muted-ink);
+  font-size: 0.78125rem;
+  line-height: 1.6;
+}
+
+.nameBand {
+  background: var(--bone);
+}
+
+.nameBand > .wrap > .eyebrow {
+  margin-bottom: 0;
+}
+
+.origins {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.875rem, 6vw, 6rem);
+  margin-top: clamp(1.875rem, 4vw, 3.375rem);
+}
+
+.language {
+  color: var(--home-muted-ink);
+  font-size: 0.6875rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.word {
+  margin-top: 0.625rem;
+  font-size: clamp(2.4rem, 4.6vw, 4rem) !important;
+  font-weight: 500 !important;
+  line-height: 1.05 !important;
+}
+
+.origin > p:last-child {
+  max-width: 34ch;
+  margin-top: 1rem;
+}
+
+.quote {
+  margin-top: clamp(3rem, 7vw, 6.25rem);
+  padding-top: clamp(1.75rem, 4vw, 3.25rem);
+  border-top: 1px solid var(--home-hair);
+}
+
+.quote p {
+  max-width: 28ch;
+  color: var(--ink);
+  font-size: clamp(1.35rem, 2.5vw, 2.05rem);
+  font-style: italic;
+  line-height: 1.36;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    min-height: min(72svh, calc(100svh - var(--site-header-height, 80px)));
   }
 
-  .nameStoryHeading {
-    padding-inline: var(--space-6);
-  }
-
-  .nameStoryOrigins {
+  .peopleGrid,
+  .featuredCopy,
+  .origins,
+  .cards {
     grid-template-columns: 1fr;
   }
+}
 
-  .nameStoryOrigin {
-    min-height: 0;
-    padding: var(--space-8);
+@media (max-width: 639px) {
+  .heroInner {
+    padding-block-end: clamp(2rem, 6vw, 3rem);
   }
 
-  .nameStoryOrigin:last-child {
-    border-inline-start: 0;
-    border-top: var(--border-strong) solid var(--ink);
+  .hero h1 {
+    max-width: 11ch;
   }
 
-  .nameStoryQuote {
-    max-width: 100%;
-    padding: var(--space-8);
+  .actions {
+    gap: 0.75rem 1rem;
+  }
+
+  .featuredImage {
+    aspect-ratio: 4 / 3;
   }
 }

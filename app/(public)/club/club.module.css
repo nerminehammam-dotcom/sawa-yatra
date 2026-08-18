@@ -362,3 +362,140 @@
     justify-content: center;
   }
 }
+
+/* Hybrid cleanup: a lighter membership document, with colour reserved for
+   invitations and the final decision point. */
+.hero {
+  width: calc(100% - (2 * var(--page-gutter)));
+  max-width: calc(var(--content-max) - (2 * var(--page-gutter)));
+  min-height: 0;
+  margin: clamp(var(--space-6), 4vw, var(--space-12)) auto var(--section-space);
+  grid-template-columns: minmax(0, 0.65fr) minmax(24rem, 1fr);
+  gap: clamp(var(--space-6), 4vw, var(--space-12));
+  border: 0;
+}
+
+.heroStatement,
+.heroInvitation {
+  min-height: 31rem;
+  padding: clamp(var(--space-8), 5vw, var(--space-16));
+  border-radius: var(--radius-card);
+}
+
+.heroStatement {
+  background: var(--paper);
+  border: 1px solid var(--sand);
+}
+
+.heroStatement h1 {
+  color: var(--ink);
+  line-height: 0.98;
+}
+
+.heroInvitation {
+  color: var(--ink);
+  background: var(--bone);
+}
+
+.heroInvitation a,
+.application a {
+  color: var(--paper);
+  background: var(--signal-text);
+  border-color: var(--signal-text);
+  border-radius: var(--radius-pill);
+}
+
+.memberPath {
+  color: var(--ink);
+  background: var(--paper);
+  padding-top: 0;
+}
+
+.sheetHeader {
+  grid-template-columns: minmax(0, 0.42fr) minmax(18rem, 1fr);
+  border-color: var(--sand);
+}
+
+.sheetHeader > div > p,
+.columnLabel,
+.pathColumn:nth-child(2) .columnLabel {
+  color: var(--signal-text);
+}
+
+.sheetHeader h2,
+.sheetHeader > p {
+  color: var(--ink);
+}
+
+.pathColumn ol {
+  gap: var(--space-4);
+  padding: 0;
+  background: transparent;
+}
+
+.pathColumn li,
+.pathColumn:first-child li:nth-child(1),
+.pathColumn:first-child li:nth-child(2),
+.pathColumn:first-child li:nth-child(4),
+.pathColumn:nth-child(2) li:nth-child(1),
+.pathColumn:nth-child(2) li:nth-child(2),
+.pathColumn:nth-child(2) li:nth-child(3),
+.pathColumn:nth-child(2) li:nth-child(4) {
+  min-height: 22rem;
+  background: var(--bone);
+  border-radius: var(--radius-card);
+}
+
+.stepAction {
+  border-radius: var(--radius-pill);
+}
+
+.sheetFooter {
+  color: var(--ink);
+  border-color: var(--sand);
+}
+
+.promise {
+  width: calc(100% - (2 * var(--page-gutter)));
+  max-width: calc(var(--content-max) - (2 * var(--page-gutter)));
+  min-height: 0;
+  margin: 0 auto var(--section-space);
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+  gap: var(--space-5);
+  border: 0;
+}
+
+.promise h2,
+.promise p {
+  min-height: 24rem;
+  border: 0;
+  border-radius: var(--radius-card);
+}
+
+.promise h2 {
+  background: var(--bone);
+}
+
+.promise p {
+  background: var(--tint-sun);
+}
+
+.application {
+  width: calc(100% - (2 * var(--page-gutter)));
+  max-width: calc(var(--content-max) - (2 * var(--page-gutter)));
+  margin: 0 auto var(--section-space);
+  border-radius: var(--radius-card);
+}
+
+@media (max-width: 780px) {
+  .heroStatement,
+  .heroInvitation,
+  .promise h2,
+  .promise p {
+    min-height: 0;
+  }
+
+  .heroStatement {
+    border-bottom: 1px solid var(--sand);
+  }
+}

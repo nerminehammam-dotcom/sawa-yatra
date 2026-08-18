@@ -25,14 +25,18 @@ html {
 }
 
 body {
+  /* One accent across the public experience: fills and readable accent text
+     resolve to the same restrained rust. */
+  --signal: var(--signal-text);
+
   min-width: 320px;
   min-height: 100%;
   margin: 0;
   color: var(--ink);
   background: var(--paper);
-  /* The default register is editorial body - Fraunces. Operational
-     components opt in to var(--font-read) explicitly. */
-  font-family: var(--font-display);
+  /* Editorial copy carries the warmth; navigation and controls opt into the
+     cleaner grotesque register explicitly. */
+  font-family: var(--font-editorial);
   font-optical-sizing: auto;
   /* §10: sustained body ≥18px - floor raised from 16px. */
   font-size: clamp(1.125rem, 1.05rem + 0.22vw, 1.25rem);
@@ -165,30 +169,29 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-display);
+  font-family: var(--font-editorial);
   font-optical-sizing: auto;
-  font-weight: 600;
-  font-stretch: 92%;
+  font-weight: 500;
+  font-stretch: normal;
   line-height: var(--leading-tight);
   text-wrap: balance;
 }
 
 h1 {
   font-size: var(--fs-display-1);
-  font-weight: 620;
-  font-stretch: 90%;
-  letter-spacing: -0.035em;
+  font-weight: 500;
+  letter-spacing: -0.025em;
 }
 
 h2 {
   font-size: var(--fs-display-2);
-  letter-spacing: -0.025em;
+  letter-spacing: -0.018em;
 }
 
 h3 {
   font-size: var(--fs-title);
   line-height: var(--leading-title);
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
 }
 
 /* The Turn. Exactly one accent word or phrase per headline, never inside body
@@ -281,6 +284,18 @@ main {
   isolation: isolate;
 }
 
+html[data-editorial-reveal-ready] [data-editorial-reveal] {
+  transition:
+    opacity 0.6s ease-out var(--reveal-delay, 0ms),
+    transform 0.6s ease-out var(--reveal-delay, 0ms);
+}
+
+html[data-editorial-reveal-ready]
+  [data-editorial-reveal]:not([data-reveal-visible]) {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
 .sr-only {
   position: absolute !important;
   width: 1px !important;
@@ -295,7 +310,7 @@ main {
 
 @media (max-width: 639px) {
   :root {
-    --page-gutter: 20px;
+    --page-gutter: 16px;
 
     /* Heroes stop reserving a screen and size to their content. See the note
        on --hero-reserve in styles/tokens.css for the measurements. */
@@ -320,19 +335,19 @@ main {
    the first frame either way. */
 @media (max-width: 1024px) {
   :root {
-    --nav-height-fallback: 96px;
+    --nav-height-fallback: 80px;
   }
 }
 
 @media (min-width: 1024px) and (max-width: 1439px) {
   :root {
-    --page-gutter: 64px;
+    --page-gutter: 48px;
   }
 }
 
 @media (min-width: 1440px) {
   :root {
-    --page-gutter: 96px;
+    --page-gutter: 64px;
   }
 }
 
@@ -348,6 +363,12 @@ main {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+
+  html[data-editorial-reveal-ready] [data-editorial-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
 

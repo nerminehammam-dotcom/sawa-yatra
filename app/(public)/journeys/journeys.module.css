@@ -247,3 +247,45 @@
     border-inline-start: 0;
   }
 }
+
+/* Hybrid cleanup: keep the journey catalogue intact, but let the photographs
+   and titles do the work instead of a boxed grid. */
+.page {
+  gap: clamp(var(--space-12), 7vw, var(--space-24));
+}
+
+.productList {
+  gap: var(--space-4);
+  border: 0;
+}
+
+.productList li,
+.productList li + li {
+  border: 0;
+}
+
+.productList a {
+  min-height: 10rem;
+  background: var(--bone);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-card);
+}
+
+.productList a:hover,
+.productList a:focus-visible {
+  background: var(--tint-sun);
+}
+
+.cardList > .card {
+  overflow: hidden;
+  padding: 0;
+  border-color: var(--sand);
+}
+
+.v24CardImage {
+  min-height: 26rem;
+}
+
+.v24CardCopy {
+  background: var(--bone);
+}

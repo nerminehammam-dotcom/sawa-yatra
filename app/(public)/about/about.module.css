@@ -1,20 +1,23 @@
-/* Two columns so the standfirst occupies the right half rather than leaving
-   it as a dead band. Sized by content plus padding; the old 82svh floor left
-   roughly half the section empty at desktop widths.
-   Dark ground with a dusty-blue title (7 August 2026): the editorial page gets
-   the boldest risograph treatment - a bright blue headline on near-black
-   (6.13:1) over paper body copy (11.99:1). This is where the new blue sings,
-   and it keeps pink off a third page opening without adding more yellow. */
+.hero,
+.founders,
+.observation,
+.principles,
+.action {
+  width: calc(100% - (2 * var(--page-gutter)));
+  max-width: calc(var(--content-max) - (2 * var(--page-gutter)));
+  margin-inline: auto;
+}
+
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(20rem, 0.9fr);
-  min-height: calc(58svh - var(--nav-height));
-  align-content: start;
-  gap: var(--space-12) var(--space-16);
-  padding: clamp(3.5rem, 8vw, 8rem) var(--page-gutter);
-  color: var(--paper);
-  background: var(--ink);
-  border-bottom: var(--border-strong) solid var(--ink);
+  grid-template-columns: minmax(0, 0.65fr) minmax(18rem, 1fr);
+  align-items: end;
+  gap: var(--space-10) clamp(var(--space-10), 7vw, var(--space-24));
+  margin-block: clamp(var(--space-6), 4vw, var(--space-12));
+  padding: clamp(var(--space-10), 7vw, var(--space-24));
+  background: var(--bone);
+  border: 1px solid var(--sand);
+  border-radius: var(--radius-card);
 }
 
 .hero > p:first-child {
@@ -23,49 +26,57 @@
 
 .hero > p:last-child {
   grid-column: 2;
-  align-self: end;
 }
 
 .hero > p:first-child,
 .observation > div > p:first-child,
 .principles header > p,
 .founder > p:first-child {
-  font-size: var(--fs-body);
+  color: var(--signal-text);
+  font-family: var(--font-note);
+  font-size: var(--fs-eyebrow);
   font-weight: 500;
-  letter-spacing: 0.12em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
 
 .hero h1 {
-  color: var(--blue);
-  max-width: 13ch;
-  line-height: 0.82;
+  max-width: 11ch;
+  font-size: var(--fs-display-1);
+  line-height: 0.95;
 }
 
 .hero > p:last-child {
   max-width: 42ch;
+  color: color-mix(in srgb, var(--ink) 78%, transparent);
+  font-size: var(--fs-lead);
 }
 
 .founders {
-  border-bottom: var(--border-strong) solid var(--ink);
-  background: var(--paper);
+  padding-block: var(--section-space);
 }
 
 .foundersLead,
 .founderProfile {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(min(24rem, 100%), 0.85fr);
-  min-height: 44rem;
-  border-bottom: var(--border-strong) solid var(--ink);
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.65fr);
+  align-items: center;
+  gap: clamp(var(--space-8), 6vw, var(--space-20));
 }
 
 .foundersLeadImage,
 .profileImage,
 .founderFieldNotes figure {
   position: relative;
-  min-height: 32rem;
+  min-height: 0;
   margin: 0;
   overflow: hidden;
+  background: var(--sand);
+  border-radius: var(--radius-card);
+}
+
+.foundersLeadImage {
+  aspect-ratio: 4 / 3;
 }
 
 .foundersLeadImage img,
@@ -78,16 +89,18 @@
   object-position: 50% 48%;
 }
 
-.foundersLeadImage figcaption {
+.foundersLeadImage figcaption,
+.observation figcaption {
   position: absolute;
-  left: 0;
-  bottom: 0;
-  padding: var(--space-2) var(--space-3);
+  right: var(--space-3);
+  bottom: var(--space-3);
+  padding: 0.55rem 0.8rem;
   color: var(--paper);
-  background: var(--ink);
+  background: color-mix(in srgb, var(--ink) 88%, transparent);
+  border-radius: var(--radius-pill);
   font-family: var(--font-note);
-  font-size: 0.875rem;
-  line-height: 1.4;
+  font-size: 0.75rem;
+  line-height: 1.3;
 }
 
 .foundersIntroduction,
@@ -95,38 +108,39 @@
   display: grid;
   align-content: center;
   justify-items: start;
-  gap: var(--space-6);
-  padding: clamp(3rem, 6vw, 6rem);
+  gap: var(--space-5);
 }
 
 .foundersIntroduction {
-  background: var(--olive);
-  border-inline-start: var(--border-strong) solid var(--ink);
+  padding-block: var(--space-8);
 }
 
 .foundersIntroduction > p:first-child,
 .profileCopy > p:first-child {
-  font-size: var(--fs-small);
+  color: var(--signal-text);
+  font-family: var(--font-note);
+  font-size: var(--fs-eyebrow);
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .foundersIntroduction h2 {
-  max-width: 10ch;
+  max-width: 11ch;
 }
 
 .foundersIntroduction > p:last-child,
 .profileCopy > p:not(:first-child) {
-  max-width: 42ch;
+  max-width: 44ch;
 }
 
 .founderProfile {
-  grid-template-columns: minmax(min(24rem, 100%), 0.85fr) minmax(0, 1.15fr);
+  grid-template-columns: minmax(19rem, 0.65fr) minmax(0, 1fr);
+  margin-top: clamp(var(--space-16), 9vw, var(--space-32));
 }
 
-.founderProfile .profileImage {
-  border-inline-end: var(--border-strong) solid var(--ink);
+.profileImage {
+  aspect-ratio: 4 / 5;
 }
 
 .profileImage img {
@@ -137,40 +151,43 @@
   object-position: 34% center;
 }
 
+.profileCopy {
+  padding: clamp(var(--space-8), 5vw, var(--space-16));
+  background: var(--bone);
+  border-radius: var(--radius-card);
+}
+
 .profileCopy h3 {
   max-width: 12ch;
   color: var(--signal-text);
   font-size: var(--fs-display-3);
-  line-height: 0.95;
 }
 
-.profileCopy a {
+.profileCopy a,
+.action a {
   display: inline-flex;
   min-height: var(--touch-min);
   align-items: center;
   gap: var(--space-3);
-  padding: var(--space-4) var(--space-5);
+  padding: 0.75rem 1.2rem;
   color: var(--paper);
   background: var(--ink);
-  border: var(--border-strong) solid var(--ink);
-  font-family: var(--font-read);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
   font-size: var(--fs-small);
-  font-weight: 500;
+  font-weight: 600;
   text-decoration: none;
 }
 
 .founderFieldNotes {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-bottom: var(--border-hairline) solid var(--ink);
+  gap: clamp(var(--space-3), 2vw, var(--space-6));
+  margin-top: clamp(var(--space-16), 9vw, var(--space-32));
 }
 
 .founderFieldNotes figure {
-  min-height: clamp(24rem, 32vw, 36rem);
-}
-
-.founderFieldNotes figure + figure {
-  border-inline-start: var(--border-strong) solid var(--ink);
+  aspect-ratio: 3 / 4;
 }
 
 .founderFieldNotes figure:nth-child(1) img {
@@ -186,81 +203,72 @@
 }
 
 .founderCredit {
-  width: 100%;
   max-width: none;
-  box-sizing: border-box;
-  margin: 0;
-  padding: var(--space-3) var(--space-4);
-  color: var(--paper);
-  background: var(--ink);
+  margin-top: var(--space-4);
+  color: color-mix(in srgb, var(--ink) 62%, transparent);
   font-family: var(--font-note);
-  font-size: var(--fs-small);
+  font-size: 0.8125rem;
   line-height: 1.6;
 }
 
 .observation {
   display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(min(22rem, 100%), 0.85fr);
-  min-height: 54rem;
-  border-bottom: var(--border-strong) solid var(--ink);
+  grid-template-columns: minmax(0, 1fr) minmax(20rem, 0.65fr);
+  align-items: stretch;
+  gap: clamp(var(--space-6), 4vw, var(--space-12));
+  padding-bottom: var(--section-space);
 }
 
 .observation figure {
   position: relative;
-  min-height: 42rem;
+  min-height: 34rem;
   margin: 0;
   overflow: hidden;
+  background: var(--sand);
+  border-radius: var(--radius-card);
 }
 
 .observation img {
   object-fit: cover;
 }
 
-.observation figcaption {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  padding: var(--space-2) var(--space-3);
-  color: var(--paper);
-  font-size: var(--fs-small);
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  background: var(--ink);
-  font-family: var(--font-note);
-}
-
 .observation > div {
   display: grid;
-  align-content: space-between;
-  gap: var(--space-12);
-  padding: clamp(3rem, 6vw, 6rem);
-  background: var(--sun);
-  border-inline-start: var(--border-strong) solid var(--ink);
+  align-content: center;
+  gap: var(--space-6);
+  padding: clamp(var(--space-8), 5vw, var(--space-16));
+  background: var(--tint-sun);
+  border-radius: var(--radius-card);
 }
 
 .observation h2,
 .principles h2,
 .founder h2,
 .action h2 {
-  max-width: 10ch;
+  max-width: 11ch;
 }
 
 .principles {
-  display: grid;
-  grid-template-columns: minmax(20rem, 0.72fr) minmax(0, 1.28fr);
-  border-bottom: var(--border-strong) solid var(--ink);
+  padding-block: var(--section-space);
+  border-top: 1px solid var(--sand);
 }
 
 .principles header {
   display: grid;
-  min-height: 48rem;
-  align-content: space-between;
-  gap: var(--space-12);
-  padding: clamp(3rem, 6vw, 6rem) var(--page-gutter);
-  border-inline-end: var(--border-strong) solid var(--ink);
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+  align-items: end;
+  gap: var(--space-6) var(--space-16);
+  margin-bottom: clamp(var(--space-10), 6vw, var(--space-20));
+}
+
+.principles header > p {
+  grid-column: 1 / -1;
 }
 
 .principles ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
   margin: 0;
   padding: 0;
   list-style: none;
@@ -268,87 +276,53 @@
 
 .principles li {
   display: grid;
-  grid-template-columns: 6rem minmax(12rem, 0.8fr) minmax(16rem, 1.2fr);
-  min-height: 12rem;
-  align-items: center;
-  border-bottom: var(--border-hairline) solid var(--ink);
-}
-
-.principles li:last-child {
-  border-bottom: 0;
-}
-
-.principles li > * {
-  padding: var(--space-5);
+  grid-template-columns: auto 1fr;
+  align-content: start;
+  gap: var(--space-4) var(--space-5);
+  padding: clamp(var(--space-6), 4vw, var(--space-10));
+  background: var(--bone);
+  border-radius: var(--radius-card);
 }
 
 .principles li span {
-  color: var(--ink);
-  font-family: var(--font-display);
-  font-size: var(--fs-display-3);
-  line-height: 0.8;
-  border-inline-end: var(--border-hairline) solid var(--ink);
+  grid-row: 1 / 3;
+  color: var(--signal-text);
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
 }
 
 .principles li p {
   font-size: var(--fs-small);
 }
 
-.founder {
-  display: grid;
-  min-height: 56vh;
-  align-content: space-between;
-  gap: var(--space-12);
-  padding: clamp(3rem, 7vw, 7rem) var(--page-gutter);
-  color: var(--paper);
-  background: var(--ink);
-}
-
-.founder h2 {
-  color: var(--pink);
-}
-
-.founder > p:last-child {
-  max-width: 42ch;
-}
-
-/* Actions sit to the right of the heading on its last baseline. Stacked
-   underneath they left the right half of the olive band empty, and the 44vh
-   floor stretched the band further than its content needed. */
 .action {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: end;
-  gap: var(--space-12) var(--space-16);
-  padding: clamp(3rem, 7vw, 7rem) var(--page-gutter);
-  background: var(--olive);
+  gap: var(--space-10);
+  margin-block: 0 var(--section-space);
+  padding: clamp(var(--space-10), 7vw, var(--space-20));
+  color: var(--paper);
+  background: var(--ink);
+  border-radius: var(--radius-card);
 }
 
 .action > div {
   display: flex;
   flex-wrap: wrap;
   justify-self: end;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
 .action a {
-  display: inline-flex;
-  min-height: var(--touch-min);
-  align-items: center;
-  padding: var(--space-4) var(--space-5);
-  color: var(--paper);
-  font-size: var(--fs-small);
-  font-weight: 500;
-  letter-spacing: normal;
-  text-decoration: none;
-  text-transform: none;
-  background: var(--ink);
+  color: var(--ink);
+  background: var(--paper);
 }
 
 .action a:last-child {
-  color: var(--ink);
-  background: var(--pink);
-  border: var(--border-strong) solid var(--ink);
+  color: var(--paper);
+  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--paper) 48%, transparent);
 }
 
 @media (max-width: 900px) {
@@ -356,91 +330,36 @@
   .foundersLead,
   .founderProfile,
   .observation,
-  .principles {
+  .principles header,
+  .action {
     grid-template-columns: 1fr;
-  }
-
-  /* Back to a single reading column: eyebrow, heading, standfirst. */
-  .hero {
-    min-height: 0;
   }
 
   .hero > p:first-child,
   .hero > p:last-child {
     grid-column: 1;
-    align-self: auto;
-  }
-
-  /* Not enough width to seat the actions beside the heading. */
-  .action {
-    grid-template-columns: 1fr;
   }
 
   .action > div {
     justify-self: start;
   }
 
-  .foundersIntroduction,
-  .founderProfile .profileImage {
-    border-inline: 0;
-  }
-
-  .foundersIntroduction,
-  .profileCopy {
-    border-top: var(--border-strong) solid var(--ink);
-  }
-
   .founderFieldNotes {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .founderFieldNotes figure:nth-child(3),
-  .founderFieldNotes figure:nth-child(4) {
-    border-top: var(--border-strong) solid var(--ink);
-  }
-
-  .founderFieldNotes figure:nth-child(3) {
-    border-inline-start: 0;
-  }
-
-  .observation > div,
-  .principles header {
-    min-height: 0;
-    border-inline-start: 0;
-    border-inline-end: 0;
-    border-top: var(--border-strong) solid var(--ink);
-    border-bottom: var(--border-strong) solid var(--ink);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 620px) {
-  .foundersLeadImage,
-  .profileImage {
-    min-height: 28rem;
+  .hero {
+    padding: var(--space-8);
   }
 
-  .founderFieldNotes {
+  .founderFieldNotes,
+  .principles ol {
     grid-template-columns: 1fr;
   }
 
-  .founderFieldNotes figure,
-  .founderFieldNotes figure:nth-child(3) {
-    grid-column: auto;
-    min-height: 28rem;
-    border-top: var(--border-strong) solid var(--ink);
-    border-inline-start: 0;
-  }
-
-  .founderFieldNotes figure:first-child {
-    border-top: 0;
-  }
-
-  .principles li {
-    grid-template-columns: 4.5rem 1fr;
-  }
-
-  .principles li p {
-    grid-column: 2;
-    border-top: var(--border-hairline) solid var(--ink);
+  .observation figure {
+    min-height: 27rem;
   }
 }

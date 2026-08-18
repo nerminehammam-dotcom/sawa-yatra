@@ -487,6 +487,148 @@
   }
 }
 
+/* Quiet editorial pass. The complete document and every destination remain
+   intact; only its outer register changes. */
+.introduction {
+  width: calc(100% - (2 * var(--page-gutter)));
+  max-width: calc(var(--content-max) - (2 * var(--page-gutter)));
+  min-height: 0;
+  margin: clamp(var(--space-6), 4vw, var(--space-12)) auto var(--section-space);
+  grid-template-columns: minmax(0, 0.65fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(var(--space-8), 5vw, var(--space-16));
+  border-bottom: 1px solid var(--sand);
+}
+
+.introductionCopy {
+  padding: clamp(var(--space-8), 5vw, var(--space-16)) 0;
+  background: transparent;
+  border: 0;
+}
+
+.introductionCopy > p:first-child {
+  color: var(--signal-text);
+  font-family: var(--font-note);
+  font-size: var(--fs-eyebrow);
+}
+
+.introductionCopy h1 {
+  color: var(--ink);
+  line-height: 0.98;
+}
+
+.introductionImage {
+  min-height: 0;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.caravan,
+.sections,
+.joining,
+.information,
+.conditions,
+.ask {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  border-color: var(--sand);
+}
+
+.caravan {
+  grid-template-columns: minmax(0, 0.42fr) minmax(20rem, 1fr);
+}
+
+.caravan dl {
+  border-color: var(--sand);
+}
+
+.caravan dl div,
+.map,
+.mapTextEquivalent,
+.mapTextLink,
+.sectionCard,
+.sectionCopy dl div,
+.information > div + div,
+.conditions > div + div,
+.documentList,
+.documentLink {
+  border-color: var(--sand);
+}
+
+.caravan > a,
+.joining a {
+  color: var(--paper);
+  background: var(--signal-text);
+  border-color: var(--signal-text);
+}
+
+.mapTextEquivalent,
+.joining,
+.conditions {
+  background: var(--bone);
+}
+
+.mapTextEquivalent li {
+  border-color: var(--sand);
+}
+
+.sectionGrid {
+  gap: var(--space-8) var(--space-10);
+}
+
+.sectionCard {
+  background: var(--paper);
+}
+
+.sectionCard:hover,
+.sectionCard:focus-visible {
+  color: var(--ink);
+  background: var(--bone);
+}
+
+.sectionCopy > span {
+  color: var(--signal-text);
+}
+
+.information,
+.conditions {
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+}
+
+.documents {
+  grid-template-columns: 1fr;
+}
+
+.ask {
+  color: var(--paper);
+  background: var(--ink);
+}
+
+.ask h2,
+.ask > p {
+  color: var(--paper);
+}
+
+.ask a {
+  color: var(--ink);
+  background: var(--paper);
+  border-color: var(--paper);
+}
+
+@media (max-width: 767px) {
+  .introduction,
+  .caravan,
+  .information,
+  .conditions {
+    grid-template-columns: 1fr;
+  }
+
+  .introductionCopy {
+    padding-bottom: 0;
+  }
+}
+
 @media (max-width: 767px) {
   .mapTextEquivalent ol {
     grid-template-columns: 1fr;

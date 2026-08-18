@@ -91,7 +91,7 @@
   place-items: center;
   padding: var(--space-1);
   border: 1px solid var(--card-accent);
-  border-radius: 50%;
+  border-radius: 0;
   color: var(--warm-ink);
   background: var(--paper);
   letter-spacing: 0;

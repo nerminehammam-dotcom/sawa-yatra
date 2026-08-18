@@ -20,8 +20,9 @@
   cursor: pointer;
   box-shadow: none;
   transition:
-    transform 180ms ease,
-    box-shadow 180ms ease;
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
 }
 
 .root:focus-visible {
@@ -30,26 +31,25 @@
 }
 
 .root:not(:disabled):not([aria-disabled="true"]):active {
-  transform: translate(3px, 3px);
+  transform: none;
   box-shadow: none;
 }
 
 .primary,
 .primary:visited {
-
-  color: var(--action-text);
-  background: var(--action-bg);
-  border-color: var(--ink);
+  color: var(--paper);
+  background: var(--signal-text);
+  border-color: var(--signal-text);
 }
 
 /* Primary keeps its colour on hover; the border and lift do the work.
    Filling with ink used to make it read as a different button entirely. */
 .primary:hover:not(:disabled):not([aria-disabled="true"]) {
-  color: var(--action-text);
-  background: var(--action-bg);
+  color: var(--paper);
+  background: var(--ink);
   border-color: var(--ink);
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0 var(--ink);
+  transform: none;
+  box-shadow: none;
 }
 
 .secondary,
@@ -65,7 +65,7 @@
 .secondary:hover:not(:disabled):not([aria-disabled="true"]) {
   color: var(--paper);
   background: var(--ink);
-  transform: translate(-1px, -1px);
+  transform: none;
   box-shadow: none;
 }
 
@@ -81,7 +81,7 @@
   color: var(--warm-ink);
   background: var(--cream);
   border-color: var(--cream);
-  transform: translate(-1px, -1px);
+  transform: none;
   box-shadow: none;
 }
 
@@ -97,7 +97,7 @@
 .secondaryDeep:hover:not(:disabled):not([aria-disabled="true"]) {
   color: var(--ink);
   background: var(--cream);
-  transform: translate(-1px, -1px);
+  transform: none;
   box-shadow: none;
 }
 

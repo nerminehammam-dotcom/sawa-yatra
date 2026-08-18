@@ -18,27 +18,27 @@
 
 /* A "butter" ground uses the butter (sun) token, not --soft-blue - see Section.module.css. */
 .butter {
-  --hero-ground: var(--butter);
+  --hero-ground: var(--tint-sun);
   --hero-ink: var(--warm-ink);
 
   color: var(--hero-ink);
-  background: var(--butter);
+  background: var(--hero-ground);
 }
 
 .brick {
-  --hero-ground: var(--brick);
+  --hero-ground: var(--tint-signal);
   --hero-ink: var(--ink);
 
   color: var(--hero-ink);
-  background: var(--brick);
+  background: var(--hero-ground);
 }
 
 .olive {
-  --hero-ground: var(--olive);
+  --hero-ground: var(--tint-olive);
   --hero-ink: var(--ink);
 
   color: var(--hero-ink);
-  background: var(--olive);
+  background: var(--hero-ground);
 }
 
 .ink {
@@ -57,7 +57,7 @@
   position: relative;
   z-index: 1;
   display: flex;
-  min-height: 54svh;
+  min-height: 48svh;
   flex-direction: column;
   justify-content: center;
   gap: var(--space-6);
@@ -121,7 +121,7 @@
 
 @media (min-width: 640px) {
   .root:not(.withMedia) .content {
-    min-height: min(64svh, 690px);
+    min-height: min(56svh, 620px);
   }
 
   .withMedia {

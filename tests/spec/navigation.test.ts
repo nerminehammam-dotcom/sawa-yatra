@@ -16,6 +16,7 @@ describe("v2.4 navigation", () => {
       "Journeys",
       "Travel Self",
       "The Club",
+      "About",
       "Who we are",
     ]);
   });
@@ -112,8 +113,8 @@ describe("v2.4 navigation", () => {
   });
 
   it("renders the exact right-hand state for every membership status", () => {
-    expect(rightHandNavigation({ isSignedIn: false, membershipStatus: "none" }).map((item) => item.label)).toEqual(["Join", "Sign in"]);
-    expect(rightHandNavigation({ isSignedIn: true, membershipStatus: "none" }).map((item) => item.label)).toEqual(["Join", "My account"]);
+    expect(rightHandNavigation({ isSignedIn: false, membershipStatus: "none" }).map((item) => item.label)).toEqual(["Request an invitation", "Sign in"]);
+    expect(rightHandNavigation({ isSignedIn: true, membershipStatus: "none" }).map((item) => item.label)).toEqual(["Request an invitation", "My account"]);
     expect(rightHandNavigation({ isSignedIn: true, membershipStatus: "applied" }).map((item) => item.label)).toEqual(["My application"]);
     expect(rightHandNavigation({ isSignedIn: true, membershipStatus: "member" }).map((item) => item.label)).toEqual(["My Sawayatra"]);
     expect(rightHandNavigation({ isSignedIn: true, membershipStatus: "declined" }).map((item) => item.label)).toEqual(["My account"]);

@@ -19,17 +19,17 @@
    below. (--soft-blue is real blue now.) ink-on-sun is 8.64, well clear of AA. */
 .butter {
   color: var(--warm-ink);
-  background: var(--butter);
+  background: var(--tint-sun);
 }
 
 .brick {
   color: var(--ink);
-  background: var(--brick);
+  background: var(--tint-signal);
 }
 
 .olive {
   color: var(--ink);
-  background: var(--olive);
+  background: var(--tint-olive);
 }
 
 .ink {

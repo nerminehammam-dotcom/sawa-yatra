@@ -173,7 +173,7 @@
 .hero {
   display: grid;
   min-height: min(42rem, var(--hero-reserve));
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  grid-template-columns: minmax(0, 0.65fr) minmax(0, 1fr);
   border-bottom: 4px solid var(--signal-text);
 }
 
@@ -738,5 +738,92 @@
   .featuredJourney,
   .privacy {
     border: 1px solid CanvasText;
+  }
+}
+
+/* Hybrid cleanup: retain the complete page structure while replacing the
+   poster-like wall of colour with a calmer editorial rhythm. */
+.hero {
+  width: calc(100% - (2 * var(--page-gutter)));
+  max-width: calc(var(--content-max) - (2 * var(--page-gutter)));
+  min-height: 0;
+  margin: clamp(var(--space-6), 4vw, var(--space-12)) auto var(--section-space);
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(var(--space-8), 5vw, var(--space-16));
+  align-items: center;
+  border: 0;
+}
+
+.heroCopy {
+  padding: clamp(var(--space-8), 5vw, var(--space-16)) 0;
+  background: transparent;
+  border: 0;
+}
+
+.heroCopy h1 {
+  max-width: 12ch;
+  color: var(--ink);
+  line-height: 0.98;
+}
+
+.heroImage {
+  min-height: 0;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-card);
+}
+
+.kicker {
+  color: var(--signal-text);
+  font-family: var(--font-note);
+  font-size: var(--fs-eyebrow);
+}
+
+.v24Steps {
+  padding-top: 0;
+}
+
+.v24Steps ol {
+  border-top-color: var(--sand);
+}
+
+.v24Steps li {
+  border-bottom-color: var(--sand);
+}
+
+.v24Steps h3 {
+  color: var(--ink);
+}
+
+.v24Reasons,
+.v24Closing {
+  width: calc(100% - (2 * var(--page-gutter)));
+  max-width: calc(var(--content-max) - (2 * var(--page-gutter)));
+  margin-inline: auto;
+  border-radius: var(--radius-card);
+}
+
+.v24Reasons {
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+  color: var(--ink);
+  background: var(--bone);
+}
+
+.v24Reasons h2 {
+  color: var(--ink);
+}
+
+.v24Closing {
+  margin-block: var(--space-6) var(--section-space);
+  color: var(--paper);
+  background: var(--ink);
+}
+
+@media (max-width: 780px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .heroCopy {
+    padding-bottom: 0;
   }
 }

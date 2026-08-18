@@ -22,6 +22,7 @@ const PUBLIC_ROUTES = [
   "/travel-self/take",
   "/club",
   "/club/apply",
+  "/about",
   "/who-we-are",
 ] as const;
 

@@ -121,7 +121,7 @@
   --soft-honey: var(--sun);
   --soft-rose: var(--pink);
   --soft-blue: var(--blue); /* fixed: was --olive (see --dusty-blue). Genuine-olive soft grounds use --soft-olive. */
-  --hairline: var(--ink);
+  --hairline: var(--sand);
 
   /* Tint grounds: a midtone at 25% toward paper. Large grounds only.
      Never shaded darker - shading a midtone creates a false anchor.
@@ -130,10 +130,10 @@
      carry ink comfortably (10.06 to 11.91) and far too light for paper.
      Those are float ratios, as the browser computes color-mix; quantising
      the mix to 8-bit hex first gives 10.07 for tint-signal. */
-  --tint-sun: color-mix(in srgb, var(--sun) 25%, var(--paper));
-  --tint-olive: color-mix(in srgb, var(--olive) 25%, var(--paper));
-  --tint-pink: color-mix(in srgb, var(--pink) 25%, var(--paper));
-  --tint-signal: color-mix(in srgb, var(--signal) 25%, var(--paper));
+  --tint-sun: var(--bone);
+  --tint-olive: var(--bone);
+  --tint-pink: var(--bone);
+  --tint-signal: var(--bone);
 
   /* THREE VOICES (type proposal 01, 16 August 2026).
    *
@@ -175,13 +175,13 @@
      for the same nominal size than Fraunces does, so the display steps came down
      while the reading sizes held. The 18px body floor from constitution §10 is
      untouched, and --fs-small stays 1rem. */
-  --fs-display-1: clamp(3.25rem, 9.5vw, 9.5rem); /* hero / h1 */
-  --fs-display-2: clamp(2.375rem, 5vw, 5.25rem); /* section head / h2 */
-  --fs-display-3: clamp(2rem, 3.8vw, 4rem); /* sub-section */
-  --fs-hero: clamp(3rem, 5.2vw, 6rem); /* split-hero headline (CYOJ / how-it-works / departures) */
-  --fs-heading: clamp(3rem, 6vw, 6rem); /* in-page section heading */
-  --fs-card: clamp(3.2rem, 5vw, 5rem); /* large display card title (featured / way cards) */
-  --fs-title: clamp(1.625rem, 2.8vw, 2.625rem); /* h3 / smaller card title */
+  --fs-display-1: clamp(3rem, 7.2vw, 7.25rem); /* hero / h1 */
+  --fs-display-2: clamp(2.25rem, 4.5vw, 4.5rem); /* section head / h2 */
+  --fs-display-3: clamp(1.875rem, 3.2vw, 3.25rem); /* sub-section */
+  --fs-hero: clamp(2.75rem, 4.6vw, 5.25rem); /* split-hero headline */
+  --fs-heading: clamp(2.75rem, 5vw, 5.25rem); /* in-page section heading */
+  --fs-card: clamp(2.5rem, 4vw, 4rem); /* large display card title */
+  --fs-title: clamp(1.5rem, 2.4vw, 2.25rem); /* h3 / smaller card title */
   --fs-lead: clamp(1.1875rem, 1.8vw, 1.5rem); /* standfirst / lead - Fraunces italic */
   --fs-body: clamp(1.125rem, 1.4vw, 1.25rem); /* long-form body - floor held at
      18px per constitution §10 (sustained body never <18px) */
@@ -193,40 +193,42 @@
      px - it lives in a viewBox coordinate system, not the document rem flow. */
   --fs-map-label: 24px; /* SVG route-map stop labels */
   --fs-map-caption: 19px; /* SVG route-map captions */
-  --fs-display-1-compact: clamp(3.2rem, 16vw, 5.6rem); /* h1 under 640px */
+  --fs-display-1-compact: clamp(2.75rem, 13vw, 4.75rem); /* h1 under 640px */
 
-  --leading-tight: 0.98; /* display - a grotesque sets tighter than Fraunces did */
-  --leading-title: 1.08; /* h3 */
+  --leading-tight: 1.02;
+  --leading-title: 1.12;
   --leading-body: 1.62; /* body copy - unchanged, Fraunces still sets it */
   --tracking-eyebrow: 0.16em; /* cap for uppercase mono labels */
 
-  --space-1: 0.25rem;
+  /* The public layout follows one 8px beat. Existing semantic names collapse
+     onto the approved steps instead of introducing in-between values. */
+  --space-1: 0.5rem;
   --space-2: 0.5rem;
-  --space-3: 0.75rem;
+  --space-3: 1rem;
   --space-4: 1rem;
-  --space-5: 1.25rem;
+  --space-5: 1.5rem;
   --space-6: 1.5rem;
   --space-8: 2rem;
-  --space-10: 2.5rem;
+  --space-10: 3rem;
   --space-12: 3rem;
   --space-16: 4rem;
-  --space-20: 5rem;
-  --space-24: 6rem;
-  --space-32: 8rem;
+  --space-20: 6rem;
+  --space-24: 8rem;
+  --space-32: 12rem;
 
-  --radius-card: 2px;
-  --radius-pill: 2px;
+  --radius-card: 0;
+  --radius-pill: 0;
   --border-hairline: 1px;
-  --border-strong: 2px;
+  --border-strong: 1px;
   --measure: 62ch;
   --measure-narrow: 48ch;
-  --card-inset: clamp(1.5rem, 3.2vw, 2.75rem);
+  --card-inset: clamp(1.5rem, 3.2vw, 3rem);
   --touch-min: 48px;
-  --content-max: 1440px;
-  --section-space: clamp(5rem, 10vw, 10rem);
+  --content-max: 1180px;
+  --section-space: clamp(6rem, 9vw, 8rem);
   /* Declared here, but this clamp is never what any element sees: four media
      queries at the foot of app/globals.css redefine --page-gutter on :root as
-     20 / 32 / 64 / 96 across the whole width range, and they win everywhere
+     16 / 32 / 48 / 64 across the whole width range, and they win everywhere
      except a hairline between 1023 and 1024px. Kept as the value that gap
      resolves to, and as documentation of the intended curve; the stepped
      overrides are the real definition. Measured 17 August 2026. */
@@ -247,7 +249,7 @@
      header, so anything sized against it was short for one frame and then
      jumped. 176px is the desktop measurement rounded up to a whole pixel; the
      ≤1024 override below carries the narrow case. */
-  --nav-height-fallback: 176px;
+  --nav-height-fallback: 142px;
   --nav-height: var(--site-header-height, var(--nav-height-fallback));
 
   /* How much height a page hero is allowed to reserve before its content has
@@ -264,7 +266,7 @@
      on emptiness the way a wide display does. */
   --hero-reserve: calc(100dvh - var(--nav-height));
 
-  --grain-opacity: 0.07;
+  --grain-opacity: 0.035;
   --motion-fast: 180ms;
   --motion-route: 680ms;
 }

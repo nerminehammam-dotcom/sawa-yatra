@@ -101,7 +101,7 @@
 .chapterRail button:hover,
 .chapterRail button:focus-visible {
   color: var(--ink);
-  background: var(--pink);
+  background: var(--bone);
 }
 
 .chapterRail button[aria-selected="true"] {
@@ -130,8 +130,7 @@
   top: var(--nav-height);
   overflow: hidden;
   isolation: isolate;
-  background:
-    linear-gradient(110deg, color-mix(in srgb, var(--paper) 96%, var(--olive)), var(--paper));
+  background: var(--paper);
   border-inline-end: var(--border-strong) solid var(--ink);
 }
 
@@ -183,7 +182,7 @@
 }
 
 .countryFills .countryActive {
-  fill: color-mix(in srgb, var(--paper) 94%, var(--sun));
+  fill: var(--bone);
 }
 
 .countryBorders path {
@@ -206,7 +205,7 @@
 }
 
 .reliefBand {
-  stroke: color-mix(in srgb, var(--olive) 8%, transparent);
+  stroke: color-mix(in srgb, var(--ink) 7%, transparent);
   stroke-width: 44;
   stroke-linecap: round;
 }
@@ -230,7 +229,7 @@
    draws from the token rather than the off-palette #7ca7a4 it used to carry.
    At 22% over paper it is a wash, not a ground - no text sits on it. */
 .lakeShape {
-  fill: color-mix(in srgb, var(--blue) 22%, transparent);
+  fill: var(--bone);
   stroke: color-mix(in srgb, var(--ink) 46%, transparent);
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
@@ -339,7 +338,7 @@
 }
 
 .activeCorridor {
-  stroke: color-mix(in srgb, var(--sun) 8%, transparent);
+  stroke: color-mix(in srgb, var(--ink) 8%, transparent);
   stroke-width: 20;
 }
 
@@ -494,7 +493,7 @@
 }
 
 .locatorCountries path {
-  fill: color-mix(in srgb, var(--paper) 82%, var(--olive));
+  fill: var(--bone);
   stroke: color-mix(in srgb, var(--ink) 52%, transparent);
   stroke-width: 2;
   vector-effect: non-scaling-stroke;
@@ -641,7 +640,7 @@
   min-height: 17rem;
   margin: 0;
   overflow: hidden;
-  background: var(--olive);
+  background: var(--bone);
   border-bottom: var(--border-strong) solid var(--ink);
 }
 
@@ -722,7 +721,7 @@
 
 .placeSequence {
   padding: var(--space-3);
-  background: color-mix(in srgb, var(--paper) 91%, var(--olive));
+  background: var(--bone);
   border: var(--border-hairline) solid color-mix(in srgb, var(--ink) 48%, transparent);
 }
 
@@ -825,7 +824,7 @@
 }
 
 .elevationArea {
-  fill: color-mix(in srgb, var(--sun) 16%, transparent);
+  fill: var(--bone);
 }
 
 .elevationLine {
@@ -899,7 +898,7 @@
 .sectionLink:hover,
 .sectionLink:focus-visible {
   color: var(--ink);
-  background: var(--sun);
+  background: var(--bone);
 }
 
 .mapNote {
@@ -937,7 +936,7 @@
 
 .chapterNav button:hover,
 .chapterNav button:focus-visible {
-  background: var(--pink);
+  background: var(--bone);
 }
 
 .chapterNav span {
@@ -1045,7 +1044,7 @@
 
   .mobileLocator {
     display: block;
-    background: linear-gradient(110deg, color-mix(in srgb, var(--paper) 94%, var(--olive)), var(--paper));
+    background: var(--paper);
     border-bottom: var(--border-strong) solid var(--ink);
   }
 
@@ -1098,7 +1097,7 @@
     display: grid;
     margin: 0;
     padding: 0;
-    background: color-mix(in srgb, var(--paper) 90%, var(--olive));
+    background: var(--bone);
     border-bottom: var(--border-strong) solid var(--ink);
     list-style: none;
   }
@@ -1132,7 +1131,7 @@
     height: 0.72rem;
     background: var(--paper);
     border: var(--border-strong) solid var(--ink);
-    border-radius: 50%;
+    border-radius: 0;
     content: "";
     transform: translate(-50%, -50%);
   }
@@ -1158,7 +1157,7 @@
   .mobileJourney > li > button:hover,
   .mobileJourney > li > button:focus-visible,
   .mobileJourney > li > button[aria-expanded="true"] {
-    background: var(--pink);
+    background: var(--bone);
   }
 
   .mobileStoryPanel {
@@ -1232,4 +1231,51 @@
   .storyPhoto img {
     animation: none;
   }
+}
+
+/* Shared editorial frame for the interactive map. Geography stays functional;
+   decoration is reduced to paper, ink, sand and the route accent. */
+.heading {
+  grid-template-columns: minmax(0, 0.42fr) minmax(18rem, 1fr);
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-block: var(--section-space);
+}
+
+.chapterRail,
+.mapShell {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+}
+
+.root,
+.chapterRail,
+.chapterRail li + li,
+.mapStage,
+.locator,
+.mapKey,
+.storyPhoto,
+.placeSequence,
+.elevationProfile,
+.gates,
+.gates > div + div,
+.chapterNav,
+.mapShell,
+.mobileLocator,
+.mobileJourney,
+.mobileJourney li + li,
+.mobileStoryPanel {
+  border-color: var(--sand);
+}
+
+.chapterNav {
+  background: var(--sand);
+}
+
+.storyCopy h3,
+.movementLine,
+.elevationHeading strong {
+  color: var(--signal-text);
 }
