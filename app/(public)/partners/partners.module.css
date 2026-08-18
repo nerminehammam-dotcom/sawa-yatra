@@ -1,0 +1,103 @@
+.process {
+  padding: var(--section-space) var(--page-gutter);
+  color: var(--ink);
+  background: var(--bone);
+  border-top: var(--border-hairline) solid var(--sand);
+}
+
+.wrap {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+}
+
+.wrap > header {
+  display: grid;
+  grid-template-columns: minmax(0, 0.42fr) minmax(0, 1fr);
+  gap: var(--space-5) clamp(var(--space-8), 8vw, var(--space-24));
+  align-items: end;
+  margin-bottom: clamp(var(--space-10), 7vw, var(--space-20));
+}
+
+.wrap > header > p:first-child {
+  grid-column: 1 / -1;
+  color: var(--signal-text);
+  font-size: var(--fs-small);
+  font-weight: 500;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+}
+
+.wrap > header h2 {
+  max-width: 10ch;
+}
+
+.wrap > header > p:last-child {
+  max-width: 48ch;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
+}
+
+.wrap ol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: var(--border-strong) solid var(--ink);
+  border-inline-start: var(--border-hairline) solid var(--sand);
+}
+
+.wrap li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-4);
+  min-height: 9rem;
+  padding: var(--space-6);
+  border-inline-end: var(--border-hairline) solid var(--sand);
+  border-bottom: var(--border-hairline) solid var(--sand);
+}
+
+.wrap li span {
+  color: var(--signal-text);
+  font-family: var(--font-mono);
+  font-size: var(--fs-small);
+}
+
+.wrap li p {
+  max-width: 42ch;
+  line-height: 1.55;
+}
+
+.note {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6) clamp(var(--space-8), 8vw, var(--space-24));
+  margin-top: clamp(var(--space-10), 7vw, var(--space-20));
+  padding-top: var(--space-6);
+  border-top: var(--border-strong) solid var(--ink);
+}
+
+.note p {
+  max-width: 45ch;
+  line-height: 1.55;
+}
+
+.note a {
+  display: inline-flex;
+  min-height: var(--touch-min);
+  align-items: center;
+  gap: var(--space-2);
+  justify-self: start;
+  color: var(--signal-text);
+  font-weight: 600;
+  text-underline-offset: 0.16em;
+}
+
+@media (max-width: 720px) {
+  .wrap > header,
+  .wrap ol,
+  .note {
+    grid-template-columns: 1fr;
+  }
+}

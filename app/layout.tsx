@@ -4,10 +4,11 @@ import { routeMetadataByPath, siteConfig } from "@/content/site";
 import { absoluteUrl, siteUrl } from "@/lib/site-url";
 
 import { createPageMetadata } from "./_metadata";
-import { bricolage, fraunces, ibmPlexMono } from "./fonts";
 import "./globals.css";
 
 const homeMetadata = routeMetadataByPath["/"];
+const googleFontsHref =
+  "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,100..900,0..100,0..1;1,9..144,100..900,0..100,0..1&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Instrument+Sans:ital,wdth,wght@0,75..100,400..700;1,75..100,400..700&display=swap";
 
 export const metadata: Metadata = {
   ...createPageMetadata("/"),
@@ -55,14 +56,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // next/font (app/fonts.ts) self-hosts Fraunces, preloads both faces, and
-    // supplies a metric-matched fallback via --font-fraunces - so the manual
-    // <head> preloads and @font-face are no longer needed.
-    <html
-      lang="en"
-      data-scroll-behavior="smooth"
-      className={`${bricolage.variable} ${fraunces.variable} ${ibmPlexMono.variable}`}
-    >
+    <html lang="en" data-scroll-behavior="smooth">
+      <head>
+        <link href={googleFontsHref} rel="stylesheet" />
+      </head>
       <body>
         <script
           type="application/ld+json"

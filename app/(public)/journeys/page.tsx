@@ -21,6 +21,11 @@ export default function JourneysPage() {
           you. Membership changes what you can do, not what a Caravan lets you
           read.
         </p>
+        <p className={styles.lede}>
+          Read the route, duration, demands and current publication status.
+          Structure, setting, access and origin remain separate parts of every
+          journey record.
+        </p>
       </header>
 
       <nav aria-label="Journey products">

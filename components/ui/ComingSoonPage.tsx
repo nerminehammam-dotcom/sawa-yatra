@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 import { contactEmail } from "@/lib/contact";
 
@@ -13,6 +14,7 @@ interface OnwardLink {
 interface ComingSoonPageProps {
   title: string;
   lede: string;
+  children?: ReactNode;
   notificationSubject?: string;
   onwardLinks?: readonly OnwardLink[];
   /** Status label. Defaults to "Coming soon"; register-interest overrides it,
@@ -52,6 +54,7 @@ const defaultOnwardLinks: readonly OnwardLink[] = [
 export function ComingSoonPage({
   title,
   lede,
+  children,
   notificationSubject = title,
   onwardLinks = defaultOnwardLinks,
   label = "Coming soon",
@@ -125,6 +128,7 @@ export function ComingSoonPage({
           </ul>
         </nav>
       </div>
+      {children}
     </main>
   );
 }

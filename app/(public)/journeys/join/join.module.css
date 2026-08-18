@@ -151,6 +151,45 @@
   white-space: nowrap;
 }
 
+.review {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(18rem, 1.2fr);
+  gap: var(--space-10) var(--space-16);
+  padding: var(--space-10) var(--page-gutter);
+  border-top: var(--border-hairline) solid var(--ink);
+  border-bottom: var(--border-hairline) solid var(--ink);
+}
+
+.reviewEyebrow {
+  margin-bottom: var(--space-3);
+  color: var(--signal-text);
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.review h2 {
+  max-width: 16ch;
+  font-size: var(--fs-title);
+  line-height: var(--leading-title);
+}
+
+.reviewCopy {
+  display: grid;
+  gap: var(--space-4);
+  max-width: var(--measure);
+}
+
+.reviewCopy a {
+  display: inline-flex;
+  gap: var(--space-2);
+  align-items: baseline;
+  justify-self: start;
+  color: var(--ink);
+  text-underline-offset: 0.16em;
+}
+
 .closing {
   display: grid;
   gap: var(--space-5);
@@ -199,6 +238,10 @@
 
 @media (max-width: 767px) {
   .hero {
+    grid-template-columns: 1fr;
+  }
+
+  .review {
     grid-template-columns: 1fr;
   }
 

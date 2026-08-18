@@ -277,6 +277,7 @@ export const ARCHETYPES: { name: string; readout: string; essence: string; bring
 export const BOUNDARY_PERSONAL = "The Travel Self is not a psychological test. It compares what travellers have said about how and why they travel. It cannot predict how two people will get along.";
 export const CHANGE_LATER = "You can change any of this later.";
 export const PRIVACY_LINE = "Your answers are saved in this browser as you go. They are not sent to Sawayatra unless you choose to save your Travel Self to a member profile. Nationality, gender and age bracket are read only from an existing signed-in profile and are not written or changed by the questionnaire.";
+export const CURRENT_TRAVEL_SELF_STATUS = "Current website status: Saving a Travel Self to a member profile is not yet available. Your answers remain in this browser and are not sent to Sawayatra.";
 export const NO_STORAGE_WARNING = "Closing or refreshing this page will clear your answers.";
 export const GUEST_BAND = "Your member details will appear here when you save this Travel Self to a profile.";
 export const MISSING_FIELD = "Not added";

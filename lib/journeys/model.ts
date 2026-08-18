@@ -1,18 +1,37 @@
+import type {
+  JourneyAccess,
+  JourneyOrigin,
+  JourneySetting,
+  JourneyStructure,
+} from "@/lib/sawayatra/model";
+
+export {
+  JOURNEY_ACCESSES,
+  JOURNEY_ORIGINS,
+  JOURNEY_SETTINGS,
+  JOURNEY_STRUCTURES,
+} from "@/lib/sawayatra/model";
+export type {
+  JourneyAccess,
+  JourneyOrigin,
+  JourneySetting,
+  JourneyStructure,
+} from "@/lib/sawayatra/model";
+
 /**
- * Journey taxonomy - spec v3.1 §2, §7.2.
- *
- * The resolving distinction is not who made a journey but whether its date
- * exists yet. Provenance is a badge, not an axis (§2.2): it renders on every
- * card, unabbreviated, never soft-pedalled (build command §1.4).
- *
- * Everything in §6.3–6.6 (windows, demand density, quorum calls, conveners)
- * belongs to Forming only - the types below make Forming fields unexpressible
- * on a Fixed journey.
+ * Date state remains independent from structure, setting, access and origin.
+ * Forming-only fields are type-gated so they cannot appear on a Fixed journey.
  */
 
 export type DateState = "fixed" | "forming";
 export type Provenance = "sawayatra" | "partner" | "member";
 export type PricingModel = "laddered" | "fixed-seat";
+
+export const JOURNEY_ORIGIN_LABEL: Readonly<Record<JourneyOrigin, string>> = {
+  "sawayatra-conceived": "Sawayatra-conceived",
+  "member-proposed": "Member-proposed",
+  "partner-submitted": "Partner-submitted",
+};
 
 /**
  * §2.2 badge copy - the exact, unabbreviated forms. There is no short form.
@@ -38,6 +57,12 @@ interface JourneyBase {
   readonly id: string;
   readonly slug: string;
   readonly title: string;
+  readonly structure: JourneyStructure;
+  readonly setting: JourneySetting | null;
+  /** Null means the canonical access classification is not approved. */
+  readonly access: JourneyAccess | null;
+  /** Null means the canonical origin classification is not approved. */
+  readonly origin: JourneyOrigin | null;
   readonly route: string;
   readonly durationDays: number;
   readonly href:
@@ -51,13 +76,10 @@ interface JourneyBase {
   readonly pricingModel: PricingModel;
 }
 
-/**
- * Fixed - the date is real and immovable (§2.1). Sawayatra and Partner
- * journeys are always Fixed; a member journey becomes Fixed when a quorum
- * call lands a date (§6.5).
- */
+/** Fixed means that a public date line exists. Origin remains independent. */
 export interface FixedJourney extends JourneyBase {
   readonly dateState: "fixed";
+  /** @deprecated Read origin instead. Retained for existing card callers. */
   readonly provenance: Provenance;
   /** Public date line, e.g. "February–April 2028 · exact dates …". */
   readonly dateLine: string;
@@ -66,12 +88,12 @@ export interface FixedJourney extends JourneyBase {
 }
 
 /**
- * Forming - the date does not exist yet; it is decided by whoever gathers
- * (§2.1). Only member-created journeys form, and forming journeys are always
- * laddered (fixed-seat inventory has a seller-set rate and a seller-set date).
+ * Forming means that the date does not exist yet. It retains all four
+ * independent taxonomy dimensions and uses laddered pricing.
  */
 export interface FormingJourney extends JourneyBase {
   readonly dateState: "forming";
+  /** @deprecated Read origin instead. Retained for existing card callers. */
   readonly provenance: "member";
   readonly pricingModel: "laddered";
   readonly windows: readonly JourneyWindow[];

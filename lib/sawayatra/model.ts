@@ -7,7 +7,31 @@ export const MEMBERSHIP_STATUSES = [
 ] as const;
 
 export type MembershipStatus = (typeof MEMBERSHIP_STATUSES)[number];
+
+/**
+ * Journey taxonomy is split into independent dimensions. Structure describes
+ * the arrangement of a road; it does not imply its setting, access, origin or
+ * operator.
+ */
+export const JOURNEY_STRUCTURES = ["caravan", "standalone"] as const;
+export type JourneyStructure = (typeof JOURNEY_STRUCTURES)[number];
+
+export const JOURNEY_SETTINGS = ["farm"] as const;
+export type JourneySetting = (typeof JOURNEY_SETTINGS)[number];
+
+export const JOURNEY_ACCESSES = ["open-to-members", "private"] as const;
+export type JourneyAccess = (typeof JOURNEY_ACCESSES)[number];
+
+export const JOURNEY_ORIGINS = [
+  "sawayatra-conceived",
+  "member-proposed",
+  "partner-submitted",
+] as const;
+export type JourneyOrigin = (typeof JOURNEY_ORIGINS)[number];
+
+/** @deprecated Use JOURNEY_STRUCTURES and JourneyStructure for new data. */
 export const JOURNEY_TYPES = ["caravan", "open"] as const;
+/** @deprecated Use JourneyStructure for new data. */
 export type JourneyType = (typeof JOURNEY_TYPES)[number];
 export type JourneyVisibility = "public" | "members";
 export type JourneyStatus =
@@ -22,7 +46,17 @@ export type PublicationState =
   | "approved"
   | "rejected";
 export type OriginatorType = "club" | "member" | "partner";
-export type OperatorType = "club" | "partner";
+export type CanonicalOperatorType = "sawayatra" | "partner";
+/** `club` is retained for records created through the legacy API. */
+export type OperatorType = CanonicalOperatorType | "club";
+
+const ORIGINATOR_TYPE_BY_ORIGIN: Readonly<
+  Record<JourneyOrigin, OriginatorType>
+> = Object.freeze({
+  "sawayatra-conceived": "club",
+  "member-proposed": "member",
+  "partner-submitted": "partner",
+});
 
 export interface GroupPortrait {
   /** Club-authored copy about who the journey is designed for. */
@@ -35,15 +69,24 @@ export interface JourneyRecord {
   readonly id: string;
   readonly slug: string;
   readonly title: string;
+  readonly structure: JourneyStructure;
+  /** @deprecated Read structure instead. */
   readonly type: JourneyType;
+  readonly setting: JourneySetting | null;
+  /** Null means the canonical access classification is not approved. */
+  readonly access: JourneyAccess | null;
+  /** Null means the canonical origin classification is not approved. */
+  readonly origin: JourneyOrigin | null;
   readonly visibility: JourneyVisibility;
   readonly status: JourneyStatus;
   readonly publicationState: PublicationState;
   readonly groupFormedAt: Date | null;
+  /** @deprecated Read origin instead. */
   readonly originatorType: OriginatorType;
   readonly originatorId: string | null;
-  readonly operatorType: OperatorType;
-  /** Null only while an open journey has not yet formed its group. */
+  /** Null means no operator has been approved for publication. */
+  readonly operatorType: OperatorType | null;
+  /** Null when no operator is published. */
   readonly operatorId: string | null;
   readonly groupPortrait: GroupPortrait;
   readonly route: string;
@@ -137,46 +180,132 @@ export const SIGNED_OUT_VIEWER: ViewerContext = Object.freeze({
   isClubStaff: false,
 });
 
-export function createJourney(
-  input: Omit<JourneyRecord, "visibility" | "publicationState" | "operatorType"> & {
-    readonly visibility?: JourneyVisibility;
-    readonly publicationState?: PublicationState;
-    readonly operatorType?: OperatorType;
-  },
-): JourneyRecord {
-  const visibility = input.type === "caravan" ? "public" : (input.visibility ?? "members");
-  const publicationState =
-    input.type === "caravan" ? "approved" : (input.publicationState ?? "draft");
-  const operatorType = input.type === "caravan" ? "club" : "partner";
+export type CreateJourneyInput = Omit<
+  JourneyRecord,
+  | "type"
+  | "structure"
+  | "setting"
+  | "access"
+  | "origin"
+  | "originatorType"
+  | "visibility"
+  | "publicationState"
+  | "operatorType"
+  | "operatorId"
+> & {
+  /** Legacy input. New records should provide structure instead. */
+  readonly type?: JourneyType;
+  readonly structure?: JourneyStructure;
+  readonly setting?: JourneySetting | null;
+  readonly access?: JourneyAccess | null;
+  readonly origin?: JourneyOrigin | null;
+  /** Legacy input. New records derive this from origin. */
+  readonly originatorType?: OriginatorType;
+  readonly visibility?: JourneyVisibility;
+  readonly publicationState?: PublicationState;
+  readonly operatorType?: OperatorType | null;
+  readonly operatorId?: string | null;
+};
 
-  if (input.type === "caravan" && input.originatorType !== "club") {
-    throw new Error("A Caravan must be authored by the club.");
-  }
-  if (input.type === "open" && input.originatorType === "club") {
-    throw new Error("An open journey must be authored by a member or partner.");
-  }
-  if (input.operatorType && input.operatorType !== operatorType) {
+function legacyTypeForStructure(structure: JourneyStructure): JourneyType {
+  return structure === "caravan" ? "caravan" : "open";
+}
+
+function structureForLegacyType(type: JourneyType): JourneyStructure {
+  return type === "caravan" ? "caravan" : "standalone";
+}
+
+/**
+ * Creates either a legacy journey record or a record using the independent
+ * taxonomy axes. Supplying `type` opts into the old defaults and validation;
+ * omitting it requires explicit structure, access and origin fields. Access
+ * and origin may be null when those classifications are not approved. Neither
+ * a legacy type nor a provenance field is converted into an approved axis.
+ */
+export function createJourney(input: CreateJourneyInput): JourneyRecord {
+  const isLegacyInput = input.type !== undefined;
+  const hasExplicitAccess = Object.prototype.hasOwnProperty.call(
+    input,
+    "access",
+  );
+  const hasExplicitOrigin = Object.prototype.hasOwnProperty.call(
+    input,
+    "origin",
+  );
+
+  if (
+    !isLegacyInput &&
+    (!input.structure || !hasExplicitAccess || !hasExplicitOrigin)
+  ) {
     throw new Error(
-      input.type === "caravan"
-        ? "A Caravan must be operated by the club."
-        : "An open journey must be operated by a partner once its group forms.",
+      "New journey records require explicit structure, access and origin fields.",
     );
   }
 
-  if (input.originatorType === "club" && input.originatorId !== null) {
-    throw new Error("Club-originated journeys must have a null originatorId.");
+  const structure =
+    input.structure ?? structureForLegacyType(input.type as JourneyType);
+  const type = input.type ?? legacyTypeForStructure(structure);
+  if (structureForLegacyType(type) !== structure) {
+    throw new Error("Legacy type and journey structure must agree.");
   }
-  if (input.originatorType !== "club" && input.originatorId === null) {
-    throw new Error("Member and partner originators require a real originatorId.");
+
+  const setting = input.setting ?? null;
+  const access = hasExplicitAccess ? (input.access ?? null) : null;
+  const origin = hasExplicitOrigin ? (input.origin ?? null) : null;
+  const originatorType = origin
+    ? ORIGINATOR_TYPE_BY_ORIGIN[origin]
+    : input.originatorType;
+  if (!originatorType) {
+    throw new Error(
+      "An unapproved origin requires the legacy originatorType field.",
+    );
   }
-  if (input.type === "caravan" && input.groupFormedAt !== null) {
-    throw new Error("groupFormedAt belongs to open journeys only.");
+
+  if (
+    origin !== null &&
+    input.originatorType !== undefined &&
+    input.originatorType !== originatorType
+  ) {
+    throw new Error("Journey origin and originatorType must agree.");
   }
-  if (input.type === "caravan" && input.operatorId !== null) {
-    throw new Error("Club-operated Caravans must have a null operatorId.");
+
+  const operatorType = input.operatorType ?? null;
+  const operatorId = input.operatorId ?? null;
+
+  const visibility = isLegacyInput
+    ? type === "caravan"
+      ? "public"
+      : (input.visibility ?? "members")
+    : (input.visibility ?? "members");
+  const publicationState = isLegacyInput
+    ? type === "caravan"
+      ? "approved"
+      : (input.publicationState ?? "draft")
+    : (input.publicationState ?? "draft");
+
+  if (originatorType === "club" && input.originatorId !== null) {
+    throw new Error(
+      isLegacyInput
+        ? "Club-originated journeys must have a null originatorId."
+        : "Sawayatra-conceived journeys must have a null originatorId.",
+    );
   }
-  if (input.type === "open" && input.groupFormedAt !== null && input.operatorId === null) {
-    throw new Error("A formed open journey requires its partner operatorId.");
+  if (originatorType !== "club" && input.originatorId === null) {
+    throw new Error(
+      isLegacyInput
+        ? "Member and partner originators require a real originatorId."
+        : "Member-proposed and partner-submitted journeys require a real originatorId.",
+    );
+  }
+
+  if (input.groupFormedAt !== null && access !== "open-to-members") {
+    throw new Error("groupFormedAt belongs to journeys open to members only.");
+  }
+  if (operatorType === null && operatorId !== null) {
+    throw new Error("An operatorId requires an explicit operatorType.");
+  }
+  if (operatorType === "partner" && !operatorId?.trim()) {
+    throw new Error("A published partner operator requires a real operatorId.");
   }
   if (input.status === "open" && publicationState !== "approved") {
     throw new Error("A journey may only open after editorial approval.");
@@ -184,20 +313,32 @@ export function createJourney(
 
   return Object.freeze({
     ...input,
+    structure,
+    type,
+    setting,
+    access,
+    origin,
     visibility,
     publicationState,
+    originatorType,
     operatorType,
+    operatorId,
   });
+}
+
+export interface JourneyOperatorReference {
+  readonly type: OperatorType;
+  readonly id: string | null;
 }
 
 export function formOpenJourneyGroup(
   journey: JourneyRecord,
   author: { readonly type: Exclude<OriginatorType, "club">; readonly id: string },
-  partnerOperatorId: string,
+  operator: JourneyOperatorReference | string | null,
   formedAt: Date,
 ): JourneyRecord {
-  if (journey.type !== "open") {
-    throw new Error("Only an open journey can form a group.");
+  if (journey.access !== "open-to-members") {
+    throw new Error("Only a journey open to members can form an open group.");
   }
   if (
     author.type !== journey.originatorType ||
@@ -205,15 +346,21 @@ export function formOpenJourneyGroup(
   ) {
     throw new Error("Only the journey's author may decide that its group has formed.");
   }
-  if (!partnerOperatorId.trim()) {
-    throw new Error("A formed open journey requires a partner operatorId.");
+
+  const operatorReference: JourneyOperatorReference | null =
+    typeof operator === "string" ? { type: "partner", id: operator } : operator;
+  if (
+    operatorReference?.type === "partner" &&
+    !operatorReference.id?.trim()
+  ) {
+    throw new Error("A published partner operator requires a real operatorId.");
   }
 
   return Object.freeze({
     ...journey,
     groupFormedAt: new Date(formedAt),
-    operatorType: "partner",
-    operatorId: partnerOperatorId,
+    operatorType: operatorReference?.type ?? null,
+    operatorId: operatorReference?.id ?? null,
   });
 }
 

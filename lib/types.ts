@@ -54,6 +54,8 @@ export type StaticRoute =
   | "/journeys/join"
   | "/create-your-own-journey"
   | "/membership"
+  | "/journey-standards"
+  | "/archive"
   | "/members"
   | "/about"
   | "/who-we-are"

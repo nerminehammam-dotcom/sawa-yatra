@@ -15,7 +15,6 @@ const revealSelector = [
 ].join(",");
 
 function initialiseEditorialReveal() {
-  const root = document.documentElement;
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   ).matches;
@@ -23,29 +22,32 @@ function initialiseEditorialReveal() {
     document.querySelectorAll<HTMLElement>(revealSelector),
   );
 
-  const resetTargets = () => {
-    delete root.dataset.editorialRevealReady;
-    targets.forEach((target) => {
-      delete target.dataset.editorialReveal;
-      delete target.dataset.revealVisible;
-      target.style.removeProperty("--reveal-delay");
-    });
-  };
+  if (prefersReducedMotion) return () => {};
+
+  const animations = new Map<HTMLElement, Animation>();
 
   targets.forEach((target) => {
-    target.dataset.editorialReveal = "";
-
     const bounds = target.getBoundingClientRect();
     const isInitiallyVisible =
       bounds.top < window.innerHeight * 0.92 && bounds.bottom > 0;
 
-    if (prefersReducedMotion || isInitiallyVisible) {
-      target.dataset.revealVisible = "";
-    }
-  });
+    if (isInitiallyVisible) return;
 
-  root.dataset.editorialRevealReady = "";
-  if (prefersReducedMotion) return resetTargets;
+    const animation = target.animate(
+      [
+        { opacity: 0, transform: "translateY(6px)" },
+        { opacity: 1, transform: "translateY(0)" },
+      ],
+      {
+        duration: 600,
+        easing: "ease-out",
+        fill: "both",
+      },
+    );
+    animation.pause();
+    animation.currentTime = 0;
+    animations.set(target, animation);
+  });
 
   const pending = new Set<HTMLElement>();
   let animationFrame: number | null = null;
@@ -60,8 +62,9 @@ function initialiseEditorialReveal() {
     animationFrame = null;
 
     orderedTargets.forEach((target, index) => {
-      target.style.setProperty("--reveal-delay", `${index * 90}ms`);
-      target.dataset.revealVisible = "";
+      const animation = animations.get(target);
+      animation?.effect?.updateTiming({ delay: index * 90 });
+      animation?.play();
     });
   };
 
@@ -82,14 +85,12 @@ function initialiseEditorialReveal() {
     { rootMargin: "0px 0px -10%", threshold: 0.08 },
   );
 
-  targets.forEach((target) => {
-    if (!target.hasAttribute("data-reveal-visible")) observer.observe(target);
-  });
+  animations.forEach((_animation, target) => observer.observe(target));
 
   return () => {
     observer.disconnect();
     if (animationFrame !== null) window.cancelAnimationFrame(animationFrame);
-    resetTargets();
+    animations.forEach((animation) => animation.cancel());
   };
 }
 

@@ -488,6 +488,10 @@
 }
 
 @media (max-width: 780px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+
   .heroStatement,
   .heroInvitation,
   .promise h2,

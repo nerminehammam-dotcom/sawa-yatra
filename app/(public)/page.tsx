@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { createPageMetadata } from "@/app/_metadata";
 import { homeCarreteraHeroImage } from "@/content/andean-caravan-images";
+import { whatSawayatraIs } from "@/content/club-first";
 
 import styles from "./home.module.css";
 
@@ -46,11 +47,32 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className={`${styles.band} ${styles.clubIntroBand}`}>
+        <div className={`${styles.wrap} ${styles.clubIntroGrid}`}>
+          <header>
+            <p className={styles.eyebrow}>What Sawayatra is</p>
+            <h2>A members&apos; club before it is a journey.</h2>
+          </header>
+          <div className={styles.editorialCopy}>
+            <p>{whatSawayatraIs.definition}</p>
+            <p>{whatSawayatraIs.reason}</p>
+            <p className={styles.statusNote}>{whatSawayatraIs.currentStatus}</p>
+            <Link className={styles.textLink} href="/membership">
+              Read about membership
+            </Link>
+          </div>
+        </div>
+      </section>
+
       <section className={`${styles.band} ${styles.peopleBand}`}>
         <div className={`${styles.wrap} ${styles.peopleGrid}`}>
           <h2>The people are the journey.</h2>
-          <div>
+          <div className={styles.peopleCopy}>
             <p>Members are matched by how they travel, not by what they earn.</p>
+            <p>
+              Travel Self gives members a shared language for considering
+              company. It does not guarantee compatibility or safety.
+            </p>
             <div className={styles.actions}>
               <Link
                 className={`${styles.button} ${styles.buttonLine}`}
@@ -68,6 +90,12 @@ export default function HomePage() {
           <header className={styles.sectionHeader}>
             <p className={styles.eyebrow}>Choose your way in</p>
             <h2>Three ways to travel</h2>
+            <p>
+              Members may join a published departure open to the club, ask
+              Sawayatra to shape a private journey for an existing company, or
+              propose a road they wish to travel and invite interest from
+              compatible members.
+            </p>
           </header>
 
           <article className={styles.featured}>

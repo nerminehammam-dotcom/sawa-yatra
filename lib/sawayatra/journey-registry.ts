@@ -11,11 +11,17 @@ export const ANDEAN_CARAVAN_JOURNEY = createJourney({
   id: "journey-andean-caravan",
   slug: "andean-caravan",
   title: "The Andean Caravan",
-  type: "caravan",
+  structure: "caravan",
+  setting: null,
+  access: null,
+  origin: null,
+  visibility: "public",
   status: "open",
+  publicationState: "approved",
   groupFormedAt: null,
   originatorType: "club",
   originatorId: null,
+  operatorType: null,
   operatorId: null,
   groupPortrait: Object.freeze({
     intended:

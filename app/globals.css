@@ -1,10 +1,7 @@
 @import "../styles/tokens.css";
 
-/* Fraunces (variable, opsz 9-144, wght 100-900, roman + italic) is now loaded
-   via next/font/local in app/fonts.ts, which self-hosts it, preloads both faces
-   and generates a metric-matched fallback (Times New Roman, adjusted) so the
-   font swap no longer reflows the page. The family is exposed as --font-fraunces
-   and consumed by --font-display / --font-read in styles/tokens.css. */
+/* Fraunces, Instrument Sans and IBM Plex Mono are loaded once in the root
+   layout and exposed through the tokens in styles/tokens.css. */
 
 *,
 *::before,
@@ -34,9 +31,7 @@ body {
   margin: 0;
   color: var(--ink);
   background: var(--paper);
-  /* Editorial copy carries the warmth; navigation and controls opt into the
-     cleaner grotesque register explicitly. */
-  font-family: var(--font-editorial);
+  font-family: var(--font-read);
   font-optical-sizing: auto;
   /* §10: sustained body ≥18px - floor raised from 16px. */
   font-size: clamp(1.125rem, 1.05rem + 0.22vw, 1.25rem);
@@ -118,6 +113,10 @@ a:hover {
 
 a:visited:not([class]) {
   color: var(--visited);
+}
+
+nav[aria-label] :is(a, button) {
+  font-family: var(--font-mono);
 }
 
 /* One focus ring for the whole site.

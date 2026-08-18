@@ -161,6 +161,21 @@
   outline-offset: 4px;
 }
 
+.travelSelfIntro .introNotices {
+  display: grid;
+  max-width: 46ch;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: var(--border-hairline) solid var(--tsi-ink);
+  font-family: var(--font-note);
+  font-size: var(--fs-small);
+  line-height: 1.55;
+}
+
+.travelSelfIntro .introNotices p {
+  margin: 0;
+}
+
 .questionnaire {
   min-height: calc(100dvh - var(--nav-height));
   padding-block: clamp(var(--space-10), 6vw, var(--space-20));

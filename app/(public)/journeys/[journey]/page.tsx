@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { JourneyResponsibilityPanel } from "@/components/journeys/JourneyResponsibilityPanel";
+import { getJourneyResponsibility } from "@/content/journey-responsibilities";
 import { getCurrentViewer, getJourneyView, journeys } from "@/lib/sawayatra/server";
 import { absoluteUrl } from "@/lib/site-url";
 
@@ -71,6 +73,7 @@ export default async function JourneyPage({
   const viewer = await getCurrentViewer();
   const view = getJourneyView(slug, viewer);
   if (!view?.canViewJourney) notFound();
+  const responsibility = getJourneyResponsibility(view.journey.slug);
 
   return (
     <main className={styles.page} id="main-content" tabIndex={-1}>
@@ -99,6 +102,10 @@ export default async function JourneyPage({
           <div><dt>Status</dt><dd>{view.journey.status}</dd></div>
         </dl>
       </section>
+
+      {responsibility ? (
+        <JourneyResponsibilityPanel responsibility={responsibility} />
+      ) : null}
 
       <section className={styles.story} aria-labelledby="story-heading">
         <h2 id="story-heading">The road</h2>

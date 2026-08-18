@@ -96,6 +96,27 @@ export default function JoinJourneyPage() {
         ))}
       </ul>
 
+      <section className={styles.review} aria-labelledby="journey-review-heading">
+        <div>
+          <p className={styles.reviewEyebrow}>Journey status</p>
+          <h2 id="journey-review-heading">Draft guides under review.</h2>
+        </div>
+        <div className={styles.reviewCopy}>
+          <p>
+            These downloadable Western Desert guides remain draft source
+            material.
+          </p>
+          <p>
+            Named operator, contracting party, payment recipient, emergency
+            responsibility and review information is still required for each
+            journey.
+          </p>
+          <Link href="/journey-standards">
+            Read the Journey Standards <Arrow />
+          </Link>
+        </div>
+      </section>
+
       <section className={styles.closing} aria-labelledby="join-next-heading">
         <h2 id="join-next-heading">Not what you are after?</h2>
         <p>

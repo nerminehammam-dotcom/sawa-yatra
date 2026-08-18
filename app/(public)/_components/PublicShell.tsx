@@ -16,6 +16,8 @@ const legalLinks = footerNavigation
 
 const footerLinks = [
   ...primaryNavigation.map(({ href, label }) => ({ href, label })),
+  { href: "/journey-standards", label: "Journey Standards" },
+  { href: "/archive", label: "Archive" },
   { href: "/partners", label: "Partners" },
   { href: "/contact", label: "Ask a question" },
   { href: "/sign-in", label: "Sign in" },

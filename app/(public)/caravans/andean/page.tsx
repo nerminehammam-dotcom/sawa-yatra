@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { CaravanRouteMap } from "@/app/(public)/caravans/_components/CaravanRouteMap";
 import { RisoArtwork } from "@/components/brand/RisoArtwork";
+import { JourneyResponsibilityPanel } from "@/components/journeys/JourneyResponsibilityPanel";
 import { ProvenanceBadge } from "@/components/journeys/ProvenanceBadge";
 import { Arrow } from "@/components/ui/Arrow";
 import {
@@ -12,6 +13,7 @@ import {
 import { andeanCaravanDocuments } from "@/content/andean-caravan-documents";
 import { andeanCaravanMapChapters } from "@/content/andean-caravan-map";
 import { getCanonicalCaravanOverview } from "@/content/caravan/page-data";
+import { ANDEAN_CARAVAN_RESPONSIBILITY } from "@/content/journey-responsibilities";
 import { siteConfig } from "@/content/site";
 import { absoluteUrl } from "@/lib/site-url";
 
@@ -72,6 +74,10 @@ export default function AndeanCaravanPage() {
           View the Maps section <Arrow />
         </Link>
       </section>
+
+      <JourneyResponsibilityPanel
+        responsibility={ANDEAN_CARAVAN_RESPONSIBILITY}
+      />
 
       <div className={styles.map} id="full-route-map">
         <CaravanRouteMap headingLevel={2} />

@@ -15,6 +15,9 @@ import {
 const legalNotice =
   "This page is being prepared and professionally reviewed. It will be published before Sawayatra collects any personal information or takes any reservation. Until then, anything you send is emailed to Sawayatra and is not stored on this website.";
 
+const currentWebsiteStatus =
+  "Current website status: Contact and interest forms send what you provide to Sawayatra by email and do not store it on this website. No reservation or payment is taken here.";
+
 export const legalPages = [
   {
     id: "privacy",
@@ -27,6 +30,8 @@ export const legalPages = [
       // §14 downstream row - Privacy notice covers §12 in full. Plain-language
       // scope statement, not legal copy; drafting is at legal review.
       "When it is published it will cover, among other things: that identity documents are checked and immediately destroyed, never stored; that your date of birth is never shown to anyone and cannot be reconstructed from any export or report; how automated checks are used, that a person reviews them, and your route to a human review of any automated decision; and how long each kind of record, including moderation logs, is kept.",
+      currentWebsiteStatus,
+      "Current website status: Until the privacy policy is published, do not send identity documents, payment details, health information or emergency contacts through a website form.",
     ],
     lastReviewed: "Not yet published",
     contentStatus: "LEGAL REVIEW",
@@ -42,6 +47,8 @@ export const legalPages = [
       // §14 downstream row - Terms cover 4.6, 5.3, 5.4, §6 budgets, §7.7,
       // §11 disclosure. Plain-language scope statement, not legal copy.
       "When they are published they will cover, among other things: the rule that contact details are not shared in open spaces; how invitations and sponsorship work, and what sponsors are accountable for; how removal works, always with a written reason and an appeal to a named person; the budgets that govern interest signals; how cancellation, replacement and the price lock work; and where automated tools are involved and what they may and may not do.",
+      currentWebsiteStatus,
+      "Current website status: The final terms will describe only processes that are operating and have approved legal wording.",
     ],
     lastReviewed: "Not yet published",
     contentStatus: "LEGAL REVIEW",
@@ -54,6 +61,7 @@ export const legalPages = [
     notice: legalNotice,
     body: [
       "Sawayatra's accessibility statement will appear here. The site is built with WCAG 2.2 AA as the standard; the formal statement is being finalised.",
+      currentWebsiteStatus,
     ],
     lastReviewed: "Not yet published",
     contentStatus: "LEGAL REVIEW",

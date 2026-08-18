@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 
 import { RisoArtwork } from "@/components/brand/RisoArtwork";
 import { JourneyGallery } from "@/components/departures/JourneyGallery";
+import { JourneyResponsibilityPanel } from "@/components/journeys/JourneyResponsibilityPanel";
 import { Accordion } from "@/components/ui/Accordion";
 import { Arrow } from "@/components/ui/Arrow";
 import { Container } from "@/components/ui/Container";
@@ -31,6 +32,7 @@ import {
   type PublicDayView,
 } from "@/content/caravan/page-data";
 import { siteConfig } from "@/content/site";
+import { getJourneyResponsibility } from "@/content/journey-responsibilities";
 import { absoluteUrl } from "@/lib/site-url";
 
 import styles from "../../../departures/[slug]/journey.module.css";
@@ -133,6 +135,7 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
   const nextSlug = sectionIndex < canonicalSectionSlugs.length - 1
     ? canonicalSectionSlugs[sectionIndex + 1]
     : undefined;
+  const responsibility = getJourneyResponsibility(slug);
 
   return (
     <main id="main-content" tabIndex={-1}>
@@ -186,6 +189,10 @@ export default async function CanonicalCaravanProductPage({ params }: PageProps)
           />
         }
       />
+
+      {responsibility ? (
+        <JourneyResponsibilityPanel responsibility={responsibility} />
+      ) : null}
 
       {!isStoneRoad && data.section.declared_load_exception ? (
         <Section

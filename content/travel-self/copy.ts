@@ -1,6 +1,14 @@
 export const TRAVEL_SELF_COPY = {
   title: "Your Travel Self",
   standfirst: "Sawayatra is a members’ travel club that matches travellers by how they travel, not by age, not by destination. The Travel Self is how that works. Eight short questions about the way you move through a journey and what draws you to a place. Answer them once, and every journey on the site reads differently.",
+  currentStatus: {
+    heading: "Current website status",
+    paragraphs: [
+      "When member-profile saving and the journey comparison layer open, Travel Self may help a member consider how a journey’s pace and social rhythm sit against their preferences.",
+      "Those mechanisms are not active yet.",
+      "There will be no public member directory or public member profile.",
+    ],
+  },
   introduction: {
     heading: "You already know how you travel.",
     paragraphs: [
@@ -56,6 +64,7 @@ export const TRAVEL_SELF_COPY = {
   passions: {
     question: "What draws you to a place?",
     helper: "Choose three. These are shown to other members, never scored, never counted against you.",
+    currentStatus: "Member sharing is not active yet.",
     refusal: "Three only. Something has to go.",
   },
   followUp: {
@@ -92,6 +101,7 @@ export const TRAVEL_SELF_COPY = {
   onward: {
     heading: "Now you know how you travel.",
     body: "The result is yours without an account or payment. Join the free club when you want to save it to your membership profile and use it on a journey.",
+    currentStatus: "Saving it to a member profile is not yet available.",
     register: "Join the club",
     explore: "See the Andean Caravan",
   },

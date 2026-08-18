@@ -11,7 +11,7 @@
   overflow: clip;
   color: var(--home-body-ink);
   background: var(--paper);
-  font-family: var(--font-editorial);
+  font-family: var(--font-read);
   font-size: 1.1875rem;
   font-variation-settings: "SOFT" 0, "WONK" 0;
   line-height: 1.62;
@@ -197,6 +197,18 @@
   padding-block: var(--home-band);
 }
 
+.clubIntroBand {
+  background: var(--bone);
+  border-bottom: 1px solid var(--home-hair-soft);
+}
+
+.clubIntroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.78fr);
+  align-items: start;
+  gap: clamp(1.75rem, 6vw, 6rem);
+}
+
 .peopleBand {
   border-bottom: 1px solid var(--home-hair-soft);
 }
@@ -208,6 +220,16 @@
   gap: clamp(1.75rem, 6vw, 6rem);
 }
 
+.peopleCopy {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.peopleCopy .actions {
+  margin-top: var(--space-3);
+}
+
+.clubIntroGrid h2,
 .peopleGrid h2,
 .sectionHeader h2 {
   max-width: 15ch;
@@ -215,6 +237,26 @@
 
 .sectionHeader {
   margin-bottom: clamp(2.125rem, 4.5vw, 3.75rem);
+}
+
+.editorialCopy {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.editorialCopy > p {
+  max-width: 48ch;
+}
+
+.editorialCopy > .textLink {
+  justify-self: start;
+}
+
+.statusNote {
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--home-hair);
+  color: var(--home-muted-ink);
+  font-size: 1rem;
 }
 
 .featured {
@@ -349,6 +391,7 @@
     min-height: min(72svh, calc(100svh - var(--site-header-height, 80px)));
   }
 
+  .clubIntroGrid,
   .peopleGrid,
   .featuredCopy,
   .origins,

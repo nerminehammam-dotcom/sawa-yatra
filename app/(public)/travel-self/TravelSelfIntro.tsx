@@ -3,6 +3,10 @@ import Link from "next/link";
 
 import styles from "./travel-self.module.css";
 import { Arrow } from "@/components/ui/Arrow";
+import {
+  CURRENT_TRAVEL_SELF_STATUS,
+  PRIVACY_LINE,
+} from "@/content/travel-self/travel-self-model";
 
 function BeginButton() {
   return (
@@ -33,6 +37,10 @@ export function TravelSelfIntro() {
           naturally align with your own.
         </p>
         <BeginButton />
+        <div className={styles.introNotices} aria-label="Travel Self privacy and status">
+          <p>{PRIVACY_LINE}</p>
+          <p>{CURRENT_TRAVEL_SELF_STATUS}</p>
+        </div>
       </div>
 
       <figure className={styles.introPlate}>

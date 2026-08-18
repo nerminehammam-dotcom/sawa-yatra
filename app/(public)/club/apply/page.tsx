@@ -23,8 +23,17 @@ export default function ApplyPage() {
         This is the application surface. It intentionally does not ask for a
         payment, a booking, a journey choice or a Travel Self result.
       </p>
+      <section aria-label="Current application status">
+        <p>
+          <strong>Current status.</strong> Applications are not yet accepted
+          online while privacy and consent wording is completed.
+        </p>
+        <p>
+          An invitation or nomination will open an application when the joining
+          process is ready. It will not guarantee admission.
+        </p>
+      </section>
       <Link href="/contact">Ask the club about applying</Link>
     </main>
   );
 }
-

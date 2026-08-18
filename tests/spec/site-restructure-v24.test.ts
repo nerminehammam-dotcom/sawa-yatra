@@ -94,11 +94,11 @@ describe("v2.4 journey records and publication gates", () => {
     expect(JOURNEY_TYPES).toEqual(["caravan", "open"]);
   });
 
-  it("forces every caravan public and editorially approved", () => {
+  it("keeps legacy caravan visibility defaults without inventing an operator", () => {
     const record = journey({ visibility: "members", publicationState: "draft" });
     expect(record.visibility).toBe("public");
     expect(record.publicationState).toBe("approved");
-    expect(record.operatorType).toBe("club");
+    expect(record.operatorType).toBeNull();
   });
 
   it("defaults open journeys to members-only drafts", () => {
@@ -110,34 +110,44 @@ describe("v2.4 journey records and publication gates", () => {
     });
     expect(record.visibility).toBe("members");
     expect(record.publicationState).toBe("draft");
-    expect(record.operatorType).toBe("partner");
+    expect(record.operatorType).toBeNull();
     expect(record.operatorId).toBeNull();
   });
 
-  it("enforces who authors and operates each journey type", () => {
-    expect(() => journey({
+  it("does not derive authorship or operation from the legacy type", () => {
+    const memberCaravan = journey({
+      status: "draft",
       originatorType: "member",
       originatorId: "member-1",
-    })).toThrow(/Caravan must be authored by the club/);
-    expect(() => journey({
+    });
+    expect(memberCaravan.structure).toBe("caravan");
+    expect(memberCaravan.origin).toBeNull();
+    expect(memberCaravan.originatorType).toBe("member");
+    expect(memberCaravan.operatorType).toBeNull();
+
+    const clubStandalone = journey({
       type: "open",
       status: "draft",
       originatorType: "club",
       originatorId: null,
-    })).toThrow(/open journey must be authored by a member or partner/);
-    expect(() => journey({ operatorType: "partner" })).toThrow(/operated by the club/);
-    expect(() => journey({
-      type: "open",
-      status: "draft",
-      originatorType: "partner",
-      originatorId: "author-partner",
-      operatorType: "club",
-    })).toThrow(/operated by a partner/);
+    });
+    expect(clubStandalone.structure).toBe("standalone");
+    expect(clubStandalone.origin).toBeNull();
+    expect(clubStandalone.originatorType).toBe("club");
+    expect(clubStandalone.operatorType).toBeNull();
+
+    const explicitlyOperated = journey({
+      operatorType: "partner",
+      operatorId: "partner-1",
+    });
+    expect(explicitlyOperated.operatorType).toBe("partner");
+    expect(explicitlyOperated.operatorId).toBe("partner-1");
   });
 
   it("forms an open journey only by its author and records its partner operator", () => {
     const record = journey({
       type: "open",
+      access: "open-to-members",
       status: "open",
       publicationState: "approved",
       originatorType: "member",

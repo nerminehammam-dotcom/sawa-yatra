@@ -24,7 +24,7 @@ export const siteConfig = {
 
 const approvedRouteDescriptions = {
   home:
-    "One annual caravan through Peru, Bolivia and Chile. Join at a designated point and leave when your part of the route is complete.",
+    "An invitation-only members’ club for slow overland journeys, compatible travelling company, considered routes and clearly named responsibilities.",
   caravans:
     "Explore Sawayatra caravans, beginning with the annual Andean Caravan through Peru, Bolivia and Chile.",
   "caravans-andean":
@@ -53,7 +53,7 @@ const approvedRouteDescriptions = {
    * for." Both are marked DRAFT rather than LOCKED, pending approval.
    */
   "how-it-works":
-    "Browse journeys openly and connect privately. Nothing is revealed until the interest is mutual.",
+    "How members join, form travelling company, take part in Caravans, standalone journeys, private journeys and member-proposed roads.",
   "travel-self":
     "Sawayatra matches travellers by how they travel, not by where they are going. Eight short questions reveal which of sixteen travelling selves is yours.",
   "joining-points":
@@ -78,6 +78,12 @@ const approvedRouteDescriptions = {
     "The Egyptian Caravan is in development. Its route, dates and sections are not published yet.",
   "create-your-own-journey":
     "Create your own journey is in development and will open when the structure is ready.",
+  membership:
+    "Learn how invitation, nomination, Travel Self and admission work within the Sawayatra members’ club.",
+  "journey-standards":
+    "How Sawayatra considers journeys, assesses named operators and makes responsibilities visible to members.",
+  archive:
+    "Read how the planned member Archive will hold field notes, photographs and practical knowledge after a journey.",
   members:
     "Learn how Sawayatra membership keeps introductions considered and the travelling room small.",
   "who-we-are":
@@ -108,7 +114,7 @@ const approvedRouteDescriptions = {
 } as const;
 
 export const routeMetadata = ([
-  ["home", "/", "Sawayatra | One caravan. One long route."],
+  ["home", "/", "Sawayatra | A Members’ Club for Slow Overland Journeys"],
   ["caravans", "/caravans", "Caravans | Sawayatra"],
   ["caravans-andean", "/caravans/andean", "The Andean Caravan | Sawayatra"],
   [
@@ -132,7 +138,11 @@ export const routeMetadata = ([
     "The Andean Caravan | Sawayatra",
   ],
   ["joining-points", "/joining-points", "Joining points | Sawayatra"],
-  ["how-it-works", "/how-it-works", "How it works | Sawayatra"],
+  [
+    "how-it-works",
+    "/how-it-works",
+    "How Sawayatra Works | Membership, Journeys and Travel Self",
+  ],
   ["travel-self", "/travel-self", "Meet your Travel Self | Sawayatra"],
   ["travel-self-take", "/travel-self/take", "Take the Travel Self | Sawayatra"],
   ["club", "/club", "The Club | Sawayatra"],
@@ -169,6 +179,12 @@ export const routeMetadata = ([
   ],
   ["journey", "/departures/[slug]", "Journey | Sawayatra"],
   ["membership", "/membership", "Membership | Sawayatra"],
+  [
+    "journey-standards",
+    "/journey-standards",
+    "Journey Standards | Sawayatra",
+  ],
+  ["archive", "/archive", "Archive | Sawayatra"],
   ["members", "/members", "Members | Sawayatra"],
   ["about", "/about", "About | Sawayatra"],
   ["who-we-are", "/who-we-are", "Who we are | Sawayatra"],
