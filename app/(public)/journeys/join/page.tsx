@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 import { Arrow } from "@/components/ui/Arrow";
@@ -8,9 +9,16 @@ import {
   existingJourneyRegion,
   existingJourneys,
 } from "@/content/existing-journeys";
+import { omanJourneyGuides } from "@/content/oman-journeys";
 import { absoluteUrl } from "@/lib/site-url";
 
 import styles from "./join.module.css";
+
+const guideCoverSrc = (href: string, country: "egypt" | "oman") => {
+  const filename = href.split("/").at(-1)?.replace(/\.pdf$/i, ".jpg");
+
+  return `/assets/images/journeys/join/${country}/${filename}`;
+};
 
 export const metadata: Metadata = {
   title: { absolute: "Join an existing journey | Sawayatra" },
@@ -43,8 +51,22 @@ export default function JoinJourneyPage() {
         </div>
       </section>
 
+      <nav className={styles.countryNavigation} aria-label="Journey countries">
+        <a href="#egypt">Egypt</a>
+        <a href="#oman">Oman</a>
+      </nav>
+
+      <figure className={styles.countryImage} id="egypt">
+        <Image
+          src="/assets/images/journeys/join/egypt/region-western-desert.jpg"
+          alt="Sunrise over rippled sand beneath a broad sky in Egypt's Western Desert."
+          fill
+          preload
+          sizes="100vw"
+        />
+      </figure>
       <div className={styles.regionBar}>
-        <strong>{existingJourneyRegion.label}</strong>
+        <h2>{existingJourneyRegion.label}</h2>
         <p>
           {existingJourneys.length} journeys ·{" "}
           {existingJourneyDayRange.shortest} to {existingJourneyDayRange.longest}{" "}
@@ -61,35 +83,49 @@ export default function JoinJourneyPage() {
               download
               aria-label={`Download the client guide for ${journey.title}, ${journey.days} days, PDF, ${journey.pages} pages, ${journey.sizeLabel}`}
             >
-              <span className={styles.number} aria-hidden="true">
-                {journey.number}
-              </span>
-              <span className={styles.body}>
-                <span className={styles.title}>{journey.title}</span>
-                <span className={styles.standfirst}>{journey.standfirst}</span>
-              </span>
-              <dl className={styles.facts}>
-                <div>
-                  <dt>Length</dt>
-                  <dd>
-                    {journey.days} {journey.days === 1 ? "day" : "days"}
-                  </dd>
-                </div>
-                <div>
-                  <dt>Gate</dt>
-                  <dd>{journey.gate}</dd>
-                </div>
-                <div>
-                  <dt>Group</dt>
-                  <dd>{journey.group}</dd>
-                </div>
-              </dl>
-              <span className={styles.download}>
-                <span>Client guide</span>
-                <span>
-                  PDF · {journey.pages} pages · {journey.sizeLabel}
+              <figure className={styles.cardImage}>
+                <Image
+                  src={guideCoverSrc(journey.href, "egypt")}
+                  alt={`${journey.title} client guide photograph.`}
+                  fill
+                  sizes="(max-width: 767px) 100vw, 50vw"
+                />
+              </figure>
+              <span className={styles.cardContent}>
+                <span className={styles.cardHeading}>
+                  <span className={styles.number} aria-hidden="true">
+                    {journey.number}
+                  </span>
+                  <span className={styles.body}>
+                    <span className={styles.title}>{journey.title}</span>
+                    <span className={styles.standfirst}>
+                      {journey.standfirst}
+                    </span>
+                  </span>
                 </span>
-                <Arrow />
+                <dl className={styles.facts}>
+                  <div>
+                    <dt>Length</dt>
+                    <dd>
+                      {journey.days} {journey.days === 1 ? "day" : "days"}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>Gate</dt>
+                    <dd>{journey.gate}</dd>
+                  </div>
+                  <div>
+                    <dt>Group</dt>
+                    <dd>{journey.group}</dd>
+                  </div>
+                </dl>
+                <span className={styles.download}>
+                  <span>Client guide</span>
+                  <span>
+                    PDF · {journey.pages} pages · {journey.sizeLabel}
+                  </span>
+                  <Arrow />
+                </span>
               </span>
             </a>
           </li>
@@ -116,6 +152,77 @@ export default function JoinJourneyPage() {
           </Link>
         </div>
       </section>
+
+      <figure className={styles.countryImage} id="oman">
+        <Image
+          src="/assets/images/journeys/join/oman/region-oman.jpg"
+          alt="Camel standing below green mountain slopes in Oman."
+          fill
+          sizes="100vw"
+        />
+      </figure>
+      <div className={styles.regionBar}>
+        <h2>Oman</h2>
+        <p>{omanJourneyGuides.length} client guides</p>
+      </div>
+
+      <ul className={styles.list}>
+        {omanJourneyGuides.map((journey) => (
+          <li className={styles.item} key={journey.id}>
+            <a
+              className={styles.link}
+              href={journey.href}
+              download
+              aria-label={`Download the client guide for ${journey.title}, ${journey.days} days, PDF, ${journey.pages} pages, ${journey.sizeLabel}`}
+            >
+              <figure className={styles.cardImage}>
+                <Image
+                  src={guideCoverSrc(journey.href, "oman")}
+                  alt={`${journey.title} client guide photograph.`}
+                  fill
+                  sizes="(max-width: 767px) 100vw, 50vw"
+                />
+              </figure>
+              <span className={styles.cardContent}>
+                <span className={styles.cardHeading}>
+                  <span className={styles.number} aria-hidden="true">
+                    {journey.number}
+                  </span>
+                  <span className={styles.body}>
+                    <span className={styles.title}>{journey.title}</span>
+                    <span className={styles.standfirst}>
+                      {journey.standfirst}
+                    </span>
+                  </span>
+                </span>
+                <dl className={styles.facts}>
+                  <div>
+                    <dt>Length</dt>
+                    <dd>{journey.days} days</dd>
+                  </div>
+                  <div>
+                    <dt>Route</dt>
+                    <dd>{journey.route}</dd>
+                  </div>
+                  {journey.group ? (
+                    <div>
+                      <dt>Group</dt>
+                      <dd>{journey.group}</dd>
+                    </div>
+                  ) : null}
+                </dl>
+                <span className={styles.download}>
+                  <span>Client guide</span>
+                  <span>
+                    PDF · {journey.pages} pages · {journey.sizeLabel}
+                  </span>
+                  <Arrow />
+                </span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
 
       <section className={styles.closing} aria-labelledby="join-next-heading">
         <h2 id="join-next-heading">Not what you are after?</h2>
