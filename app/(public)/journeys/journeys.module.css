@@ -300,8 +300,8 @@
 
 .header {
   display: grid;
-  grid-template-columns: minmax(20rem, 0.42fr) minmax(0, 1fr);
-  min-height: 42rem;
+  grid-template-columns: 1fr;
+  min-height: 0;
   gap: 0;
   border-bottom: var(--border-hairline) solid var(--ink);
 }
@@ -340,21 +340,23 @@
 }
 
 .page > nav {
-  padding-block: var(--section-space);
+  padding-block: var(--space-16);
 }
 
 .productList {
-  gap: var(--space-8);
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
 }
 
 .productList li,
 .productList li + li {
-  border-top: var(--border-hairline) solid var(--ink);
+  border: var(--border-hairline) solid var(--ink);
 }
 
 .productList a {
   display: grid;
-  grid-template-rows: minmax(20rem, 32vw) auto;
+  grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.84fr);
+  align-items: stretch;
   min-height: 0;
   padding: 0;
   overflow: hidden;
@@ -365,18 +367,46 @@
 
 .productImage {
   position: relative;
-  min-height: 20rem;
+  min-height: 17rem;
   margin: 0;
   overflow: hidden;
-  border-bottom: var(--border-hairline) solid var(--ink);
+  border-right: var(--border-hairline) solid var(--ink);
 }
 
 .productImage img {
   transition: transform 600ms ease;
 }
 
-.productList a span {
-  padding: var(--space-5) 0 0;
+.productCopy {
+  display: grid;
+  align-content: center;
+  gap: var(--space-4);
+  padding: clamp(var(--space-6), 4vw, var(--space-10));
+}
+
+.productList li:nth-child(1) .productCopy {
+  background: var(--sun);
+}
+
+.productList li:nth-child(2) .productCopy {
+  background: var(--olive);
+}
+
+.productList li:nth-child(3) .productCopy {
+  background: var(--blue);
+}
+
+.productTitle {
+  font-family: var(--font-display);
+  font-size: var(--fs-title);
+  line-height: var(--leading-title);
+}
+
+.productDescription {
+  max-width: 42ch;
+  font-family: var(--font-read);
+  font-size: var(--fs-body);
+  line-height: var(--leading-body);
 }
 
 .productList a:hover,
@@ -412,11 +442,17 @@
   }
 
   .productList {
-    gap: var(--space-12);
+    gap: var(--space-8);
   }
 
   .productList a {
-    grid-template-rows: minmax(22rem, 75vw) auto;
+    grid-template-columns: 1fr;
+  }
+
+  .productImage {
+    min-height: min(62vw, 22rem);
+    border-right: 0;
+    border-bottom: var(--border-hairline) solid var(--ink);
   }
 }
 

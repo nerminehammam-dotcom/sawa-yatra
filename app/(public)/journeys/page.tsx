@@ -3,24 +3,31 @@ import Link from "next/link";
 
 import { createPageMetadata } from "@/app/_metadata";
 import { journeyProductNavigation } from "@/content/navigation";
-import { journeyPublicHrefForSlug } from "@/lib/sawayatra/journey-registry";
-import { journeys } from "@/lib/sawayatra/server";
 
 import styles from "./journeys.module.css";
 
 const productImages = {
   caravans: {
-    src: "/assets/images/departures/andean/gallery/carretera-austral/caravans-cattle-drive.webp",
-    alt: "Rider moving cattle along Ruta 7 through forest in central Aysén.",
+    src: "/assets/images/journeys/caravans.png",
+    alt: "Painted desert landscape with pink clouds, flowers, cacti and a white caravan beneath rocky peaks.",
   },
   "create-your-own-journey": {
     src: "/assets/images/create-your-own-journey/hero-anywhere.jpg",
     alt: "Illustrated landscape with pyramids, an aeroplane, camels and desert plants beneath pink clouds.",
   },
   "join-an-existing-journey": {
-    src: "/assets/images/journeys/join/egypt/region-western-desert.jpg",
-    alt: "Sunrise over rippled sand beneath a broad sky in Egypt's Western Desert.",
+    src: "/assets/images/journeys/join-existing-journey.png",
+    alt: "Painted pink horse standing beneath white clouds in a broad desert landscape.",
   },
+} as const;
+
+const productDescriptions = {
+  caravans:
+    "Each Caravan is one continuous, long-form journey with designated places to join and leave. Choose the route first, then decide how far to follow it.",
+  "create-your-own-journey":
+    "A later way for members to propose a destination, dates and travel style, then invite compatible members to join.",
+  "join-an-existing-journey":
+    "These run to a set route and a set length. You join one as it is, rather than building it from scratch or riding a Caravan section by section.",
 } as const;
 
 export const metadata = createPageMetadata("/journeys");
@@ -43,15 +50,6 @@ export default function JourneysPage() {
             journey record.
           </p>
         </div>
-        <figure className={styles.headerImage}>
-          <Image
-            src="/assets/images/departures/andean/gallery/carretera-austral/home-road.webp"
-            alt="Long gravel road crossing the Patagonian steppe towards mountains."
-            fill
-            preload
-            sizes="(max-width: 800px) 100vw, 58vw"
-          />
-        </figure>
       </header>
 
       <nav aria-label="Journey products">
@@ -64,48 +62,21 @@ export default function JourneysPage() {
                     src={productImages[product.id].src}
                     alt={productImages[product.id].alt}
                     fill
-                    sizes="(max-width: 800px) 100vw, 33vw"
+                    sizes="(max-width: 800px) 100vw, 50vw"
                   />
                 </figure>
-                <span>{product.label}</span>
+                <span className={styles.productCopy}>
+                  <span className={styles.productTitle}>{product.label}</span>
+                  <span className={styles.productDescription}>
+                    {productDescriptions[product.id]}
+                  </span>
+                </span>
               </Link>
             </li>
           ))}
         </ul>
       </nav>
 
-      <section className={styles.group} aria-label="All journeys">
-        <ul className={styles.cardList}>
-          {journeys.map((journey) => (
-            <li key={journey.id} className={styles.card}>
-              <figure className={styles.v24CardImage}>
-                <Image
-                  src={journey.heroImage}
-                  alt={journey.heroAlt}
-                  fill
-                  loading="eager"
-                  sizes="(max-width: 760px) 100vw, 50vw"
-                />
-              </figure>
-              <div className={styles.v24CardCopy}>
-                <div className={styles.cardTop}>
-                  <span>{journey.type === "caravan" ? "Caravan" : "Open journey"}</span>
-                  <span className={styles.duration}>{journey.duration}</span>
-                </div>
-                <h2 className={styles.cardTitle}>
-                  <Link
-                    href={journeyPublicHrefForSlug(journey.slug) ?? "/journeys"}
-                  >
-                    {journey.title}
-                  </Link>
-                </h2>
-                <p className={styles.cardRoute}>{journey.route}</p>
-                <p>{journey.groupPortrait.intended}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </section>
     </main>
   );
 }
