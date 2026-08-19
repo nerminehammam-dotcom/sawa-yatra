@@ -1,11 +1,36 @@
 import Link from "next/link";
 
 import { createPageMetadata } from "@/app/_metadata";
+import { RoutePhotoStrip } from "@/components/editorial/RoutePhotoStrip";
 import { Arrow } from "@/components/ui/Arrow";
 
 import styles from "./club-about.module.css";
 
 export const metadata = createPageMetadata("/about");
+
+const routePhotographs = [
+  {
+    src: "/assets/images/editorial/bolivia-highland-farmland.jpg",
+    alt: "Woman standing beside luggage near a tethered cow and cultivated highland fields in Bolivia.",
+    caption: "Bolivian highlands",
+    width: 1477,
+    height: 1024,
+  },
+  {
+    src: "/assets/images/editorial/altiplano-salt-lagoon.jpg",
+    alt: "Shallow salt lagoon reflecting a turquoise sky beneath red-brown altiplano mountains.",
+    caption: "The altiplano · Bolivia",
+    width: 1134,
+    height: 756,
+  },
+  {
+    src: "/assets/images/editorial/puyuhuapi-moon.jpg",
+    alt: "Moonlight reflecting across a fjord beneath snow-dusted mountains near Puyuhuapi.",
+    caption: "Puyuhuapi · Chile",
+    width: 8256,
+    height: 5504,
+  },
+] as const;
 
 export default function AboutPage() {
   return (
@@ -31,6 +56,13 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <RoutePhotoStrip
+        id="about-road-photographs"
+        eyebrow="Seen from the road"
+        title="Places are not decoration."
+        photos={routePhotographs}
+      />
 
       <section className={styles.belief} aria-label="Sawayatra belief">
         <div className={styles.wrap}>

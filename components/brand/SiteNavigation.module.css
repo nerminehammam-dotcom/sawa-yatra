@@ -124,7 +124,7 @@
   gap: 1.5rem;
   /* Vertical values untouched - min-height and the 1.125/1rem block padding are
      the header's height logic, which this pass is not allowed to move. */
-  padding: 0.875rem var(--nav-inset);
+  padding: 0.875rem 1.5rem;
 }
 
 .wordmark {

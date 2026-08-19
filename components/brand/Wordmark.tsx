@@ -26,11 +26,9 @@ export function Wordmark({
     className,
   );
   /*
-   * The commissioned full-colour wordmark, replacing the traced single-colour
-   * mark on 8 August 2026. Served as a file rather than inlined: it appears
-   * twice per page, in the navigation and the footer, and ~40KB inlined twice
-   * on every route is worse than one cached request. Decorative here - every
-   * caller either sets aria-label on the link or role="img" on the wrapper.
+   * The current horizontal Sawayatra wordmark. Served as a file rather than
+   * inlined so its repeated header, menu and footer instances share one cached
+   * request. The image keeps its descriptive alt text at every placement.
    */
   const wordmark = (
     /* next/image is deliberately not used. It does not optimise SVG without
@@ -39,21 +37,16 @@ export function Wordmark({
     // eslint-disable-next-line @next/next/no-img-element
     <img
       className={styles.label}
-      src="/assets/brand/sawayatra-wordmark-309c304e.svg"
-      alt=""
-      width={1326}
-      height={471}
-      aria-hidden="true"
+      src="/assets/brand/sawayatra-logo-web.svg"
+      alt={siteConfig.name}
+      width={1964}
+      height={394}
     />
   );
 
   if (!href) {
     return (
-      <span
-        className={wordmarkClassName}
-        role="img"
-        aria-label={siteConfig.name}
-      >
+      <span className={wordmarkClassName}>
         {wordmark}
       </span>
     );

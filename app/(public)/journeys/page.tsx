@@ -8,16 +8,16 @@ import styles from "./journeys.module.css";
 
 const productImages = {
   caravans: {
-    src: "/assets/images/journeys/caravans.png",
-    alt: "Painted desert landscape with pink clouds, flowers, cacti and a white caravan beneath rocky peaks.",
+    src: "/assets/images/editorial/chaiten-lago-yelcho.jpg",
+    alt: "Lago Yelcho reflecting blue evening light between forested mountains near Chaitén.",
   },
   "create-your-own-journey": {
-    src: "/assets/images/create-your-own-journey/hero-anywhere.jpg",
-    alt: "Illustrated landscape with pyramids, an aeroplane, camels and desert plants beneath pink clouds.",
+    src: "/assets/images/editorial/atacama-night-rock-tower.jpg",
+    alt: "Star-filled night sky above a tall rock formation in the Atacama Desert.",
   },
   "join-an-existing-journey": {
-    src: "/assets/images/journeys/join-existing-journey.png",
-    alt: "Painted pink horse standing beneath white clouds in a broad desert landscape.",
+    src: "/assets/images/editorial/altiplano-sheep.jpg",
+    alt: "Sheep standing in highland fields with a shepherd further up the slope.",
   },
 } as const;
 
@@ -54,7 +54,7 @@ export default function JourneysPage() {
 
       <nav aria-label="Journey products">
         <ul className={styles.productList}>
-          {journeyProductNavigation.map((product) => (
+          {journeyProductNavigation.map((product, index) => (
             <li key={product.id}>
               <Link href={product.href}>
                 <figure className={styles.productImage}>
@@ -62,6 +62,7 @@ export default function JourneysPage() {
                     src={productImages[product.id].src}
                     alt={productImages[product.id].alt}
                     fill
+                    preload={index === 0}
                     sizes="(max-width: 800px) 100vw, 50vw"
                   />
                 </figure>

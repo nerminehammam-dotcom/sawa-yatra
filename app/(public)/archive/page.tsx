@@ -1,12 +1,37 @@
 import Link from "next/link";
 
 import { createPageMetadata } from "@/app/_metadata";
+import { RoutePhotoStrip } from "@/components/editorial/RoutePhotoStrip";
 import { Arrow } from "@/components/ui/Arrow";
 import { archiveCopy } from "@/content/club-first";
 
 import styles from "../about/club-about.module.css";
 
 export const metadata = createPageMetadata("/archive");
+
+const founderRoutePhotographs = [
+  {
+    src: "/assets/images/editorial/atacama-night-desert-road.jpg",
+    alt: "Milky Way above a pale desert road and low mountains in the Atacama Desert.",
+    caption: "Atacama Desert · road at night",
+    width: 1321,
+    height: 1981,
+  },
+  {
+    src: "/assets/images/editorial/southern-aysen-mountain-lake.jpg",
+    alt: "A mountain lake lying beneath dark forested slopes in southern Aysén.",
+    caption: "Southern Aysén · Chile",
+    width: 8256,
+    height: 5504,
+  },
+  {
+    src: "/assets/images/editorial/chaiten-yelcho-valley.jpg",
+    alt: "The broad Yelcho valley opening between forested mountain slopes near Chaitén.",
+    caption: "Yelcho valley · Chile",
+    width: 8256,
+    height: 5504,
+  },
+] as const;
 
 export default function ArchivePage() {
   return (
@@ -23,6 +48,13 @@ export default function ArchivePage() {
           </div>
         </div>
       </section>
+
+      <RoutePhotoStrip
+        id="founder-route-photographs"
+        eyebrow="Founders' route photographs"
+        title="A road leaves evidence."
+        photos={founderRoutePhotographs}
+      />
 
       <section className={styles.belief} aria-label="Archive principle">
         <div className={styles.wrap}>

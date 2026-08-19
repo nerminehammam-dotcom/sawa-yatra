@@ -6,26 +6,12 @@
   font-family: var(--font-display);
 }
 
-/* Three tracks: brand, Explore, Legal. Legal used to sit under Explore inside
-   a single right-hand column, which left the right third empty and forced the
-   legal list to wrap. */
+/* Two tracks: Explore and Legal. */
 .layout {
   display: grid;
-  grid-template-columns: minmax(14rem, 0.8fr) minmax(min(24rem, 100%), 1.1fr) minmax(10rem, 0.6fr);
+  grid-template-columns: minmax(min(24rem, 100%), 1fr) minmax(10rem, 0.4fr);
   align-items: start;
   gap: var(--space-16);
-}
-
-.identity {
-  display: grid;
-  gap: var(--space-5);
-}
-
-.pronunciation {
-  color: var(--signal-text);
-  font-size: var(--fs-body);
-  font-weight: 400;
-  letter-spacing: 0.12em;
 }
 
 /* The wrapper carries no semantics, so dissolving its box lets the two navs

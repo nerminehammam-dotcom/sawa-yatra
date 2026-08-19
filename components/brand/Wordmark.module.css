@@ -1,15 +1,7 @@
 /*
- * The wordmark is the commissioned full-colour mark - the Sawayatra letters in
- * signal orange with a sun and mountain landscape above them - replacing the
- * earlier single-colour traced mark on 8 August 2026. Its colours are baked
- * into the SVG, so no filter or token recolours it; it renders the same on
- * every ground.
- *
- * Sized by height, with width following the artwork's own 1326:471. The mark
- * carries a landscape above the letters, so it stands taller than a line of
- * type at the same nominal size. The heights below are therefore larger than
- * the font sizes they replace, so the letters read at roughly the size they
- * did before.
+ * The wordmark is the current horizontal full-colour mark. Its colours are
+ * baked into the SVG, so no filter or token recolours it. The 1964:394 artwork
+ * is sized by width to preserve the existing header, menu and footer footprint.
  */
 .root {
   display: inline-flex;
@@ -20,19 +12,18 @@
 
 .label {
   display: block;
-  width: auto;
-  height: clamp(2.15rem, 3.1vw, 2.8rem);
+  width: clamp(7rem, 14vw, 8rem);
+  height: auto;
 }
 
 .large .label {
-  height: clamp(2.9rem, 6.4vw, 5.1rem);
+  width: clamp(13.08615rem, 26.1723vw, 17.249925rem);
 }
 
 /*
- * The mark is full-colour artwork, identical on every ground: the orange
- * letters, sun and mint hills carry well on --ink (the footer), while the
- * dark-olive base sits quieter there. These selectors are kept as the obvious
- * place to add a paper/knockout version if a dark ground ever needs one,
+ * The mark is full-colour artwork, identical on every ground. These selectors
+ * are kept as the obvious place to add a paper/knockout version if a dark
+ * ground ever needs one,
  * rather than a rule invented at the call site.
  */
 .cream .label,
