@@ -18,10 +18,10 @@ export default async function MyPage() {
         <section>
           <h2>No journey needs choosing yet.</h2>
           <p>
-            Membership is a supported steady state. Keep your Travel Self,
+            Membership is a supported steady state. Keep Your Travel Fingerprint,
             read the roads, and declare interest only when one holds you.
           </p>
-          <nav><Link href="/journeys">Read the journeys</Link><Link href="/my/travel-self">Your Travel Self</Link></nav>
+          <nav><Link href="/journeys">Read the journeys</Link><Link href="/my/travel-self">Your Travel Fingerprint</Link></nav>
         </section>
       ) : (
         <section><h2>Your journeys</h2><p>You are circling {viewer.declaredJourneyIds.length} journey.</p><Link href="/my/journeys">See your journeys</Link></section>
@@ -29,4 +29,3 @@ export default async function MyPage() {
     </main>
   );
 }
-

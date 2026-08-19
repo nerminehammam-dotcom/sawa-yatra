@@ -22,7 +22,7 @@ export default function CreateYourOwnJourneyPage() {
           <p>
             You set where, when and the pace. You build it; we help you, to the
             standard a Caravan is held to. Yours by default - and if you choose,
-            we open it to a few members whose Travel Self fits, so it can arrive
+            we open it to a few members whose Travel Fingerprint fits, so it can arrive
             together.
           </p>
         </div>
@@ -61,7 +61,7 @@ export default function CreateYourOwnJourneyPage() {
             <span aria-hidden="true">03</span>
             <h2>Open it, if you choose</h2>
             <p>
-              We match members whose Travel Self fits yours. A few may join, and
+              We match members whose Travel Fingerprint fits yours. A few may join, and
               you approve who.
             </p>
           </li>

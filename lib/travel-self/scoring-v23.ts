@@ -78,7 +78,7 @@ export function motivationLineV23(
 ): string {
   const families = passions.map((passion) => {
     const item = PASSION_BY_NAME.get(passion);
-    if (!item) throw new Error(`Unknown Travel Self passion: ${passion}`);
+    if (!item) throw new Error(`Unknown Travel Fingerprint passion: ${passion}`);
     return item.family;
   });
 
@@ -93,7 +93,7 @@ export function motivationLineV23(
   const spreadKey = [...new Set(families)].sort().join("+");
   const spreadLine = SPREAD_LINE[spreadKey];
   if (!spreadLine) {
-    throw new Error(`Missing Travel Self motivation line: ${spreadKey}`);
+    throw new Error(`Missing Travel Fingerprint motivation line: ${spreadKey}`);
   }
   return spreadLine;
 }
@@ -110,7 +110,7 @@ export function bendLineV23(positions: CompletePositions): string {
   }
   if (bends.length === 4) {
     const firmAxis = BEND_ORDER.find((axis) => !bends.includes(axis));
-    if (!firmAxis) throw new Error("Expected one firm Travel Self axis");
+    if (!firmAxis) throw new Error("Expected one firm Travel Fingerprint axis");
     return BEND_FOUR(AXIS_BY_KEY[firmAxis].label.toLowerCase());
   }
   return BEND_FIVE;
@@ -125,7 +125,7 @@ export function frictionLineV23(positions: CompletePositions): string {
       ? AXIS_BY_KEY[axis].left.name
       : AXIS_BY_KEY[axis].right.name;
     const line = FRICTION[`${axis}|${pole}`];
-    if (!line) throw new Error(`Missing Travel Self friction line: ${axis}|${pole}`);
+    if (!line) throw new Error(`Missing Travel Fingerprint friction line: ${axis}|${pole}`);
     return line;
   }
   return FRICTION_ALL_FLEXIBLE;
@@ -148,10 +148,10 @@ export function scoreTravelSelfV23(
 
   const signature = signatureFor(positions);
   const name = ARCHETYPE_BY_SIGNATURE[signature];
-  if (!name) throw new Error(`Missing Travel Self archetype: ${signature}`);
+  if (!name) throw new Error(`Missing Travel Fingerprint archetype: ${signature}`);
 
   const archetype = ARCHETYPE_DETAILS_BY_NAME.get(name);
-  if (!archetype) throw new Error(`Missing Travel Self portrait: ${name}`);
+  if (!archetype) throw new Error(`Missing Travel Fingerprint portrait: ${name}`);
 
   return {
     signature,

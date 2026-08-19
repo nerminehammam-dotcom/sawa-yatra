@@ -12,10 +12,10 @@ const memberPath = [
     steps: [
       {
         number: "01",
-        title: "Meet your Travel Self - if you want",
+        title: "Meet Your Travel Fingerprint - if you want",
         body: "The questionnaire is free, anonymous and optional. Take it before joining, after joining, or not yet.",
         actions: [
-          { label: "Meet your Travel Self", href: "/travel-self", protected: false },
+          { label: "Meet Your Travel Fingerprint", href: "/travel-self", protected: false },
           { label: "Take the questionnaire", href: "/travel-self/take", protected: false },
         ],
       },
@@ -38,7 +38,7 @@ const memberPath = [
       {
         number: "04",
         title: "Membership becomes active",
-        body: "If accepted, you are a member whether or not you have saved a Travel Self or chosen a journey.",
+        body: "If accepted, you are a member whether or not you have saved a Travel Fingerprint or chosen a journey.",
         actions: [
           { label: "My Sawayatra", href: "/my", protected: true },
         ],
@@ -50,10 +50,10 @@ const memberPath = [
     steps: [
       {
         number: "05",
-        title: "Save your Travel Self when you choose",
+        title: "Save Your Travel Fingerprint when you choose",
         body: "A saved result becomes your passport. You can retake it later and control each optional demographic separately.",
         actions: [
-          { label: "My Travel Self", href: "/my/travel-self", protected: true },
+          { label: "Your Travel Fingerprint", href: "/my/travel-self", protected: true },
         ],
       },
       {
@@ -67,7 +67,7 @@ const memberPath = [
       {
         number: "07",
         title: "Declare interest",
-        body: "Choose a journey first. Declare interest on that journey’s page; it is not a booking and does not require a saved Travel Self.",
+        body: "Choose a journey first. Declare interest on that journey’s page; it is not a booking and does not require a saved Travel Fingerprint.",
         actions: [],
       },
       {

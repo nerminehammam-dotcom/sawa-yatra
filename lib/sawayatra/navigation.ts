@@ -14,10 +14,7 @@ export function rightHandNavigation(
   session: NavigationSession,
 ): readonly NavigationLink[] {
   if (!session.isSignedIn) {
-    return [
-      { label: "Request an invitation", href: "/club/apply" },
-      { label: "Sign in", href: "/sign-in" },
-    ];
+    return [{ label: "Sign in", href: "/sign-in" }];
   }
   switch (session.membershipStatus) {
     case "member":

@@ -185,7 +185,7 @@ export async function POST(
     ) {
       referenceIssues.push({
         path: "travelSelfResult",
-        message: "Choose one of the available Travel Self results.",
+        message: "Choose one of the available Travel Fingerprint results.",
       });
     }
 

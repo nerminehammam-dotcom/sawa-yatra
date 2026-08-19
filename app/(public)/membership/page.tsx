@@ -9,7 +9,7 @@ export const metadata = createPageMetadata("/membership");
 
 const joiningSteps = [
   "Invitation opens the application",
-  "Complete Travel Self",
+  "Complete Your Travel Fingerprint",
   "Join the club",
   "Consider each journey",
 ] as const;
@@ -54,7 +54,7 @@ export default function MembershipPage() {
                   {index === 1 ? (
                     <div className={styles.stepActions}>
                       <Link className={styles.stepAction} href="/travel-self">
-                        Meet your Travel Self
+                        Meet Your Travel Fingerprint
                       </Link>
                     </div>
                   ) : null}
@@ -71,7 +71,7 @@ export default function MembershipPage() {
       </section>
 
       <section className={styles.promise}>
-        <h2>What Travel Self can and cannot do.</h2>
+        <h2>What Your Travel Fingerprint can and cannot do.</h2>
         <p>{joiningCopy.travelSelfLimit}</p>
       </section>
     </main>

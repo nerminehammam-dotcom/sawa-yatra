@@ -50,7 +50,7 @@ function PassportCard({
   const demographics = Object.values(passport.demographics);
   return (
     <article className={`${passportStyles.passport} ${styles.poolPassport}`}>
-      <p>Travel Self Passport</p>
+      <p>Your Travel Fingerprint Passport</p>
       <h3>{passport.archetype}</h3>
       <dl>
         {Object.entries(passport.axes).map(([axis, value]) => (
@@ -125,7 +125,7 @@ export default async function JourneyPage({
 
       {view.needsTravelSelfPrompt ? (
         <section className={styles.prompt} aria-labelledby="passport-prompt-heading">
-          <h2 id="passport-prompt-heading">Complete your Travel Self</h2>
+          <h2 id="passport-prompt-heading">Complete Your Travel Fingerprint</h2>
           <p>
             You can declare interest without it. Until you save one, you will
             neither see nor appear in this journey&apos;s matching layer.
@@ -137,9 +137,9 @@ export default async function JourneyPage({
       {view.showsFitLayer ? (
         <section className={styles.fit} aria-labelledby="fit-heading">
           <p>Your view / fit</p>
-          <h2 id="fit-heading">Your Travel Self on this road</h2>
+          <h2 id="fit-heading">Your Travel Fingerprint on this road</h2>
           <p>
-            Your saved Travel Self is read against this journey&apos;s pace,
+            Your saved Travel Fingerprint is read against this journey&apos;s pace,
             structure and social rhythm. It is never a club-wide compatibility
             score.
           </p>
@@ -175,7 +175,7 @@ export default async function JourneyPage({
               {view.passports.map((passport) => <PassportCard key={passport.memberId} passport={passport} />)}
             </div>
           ) : (
-            <p>Save your Travel Self to see and be seen in the matching layer.</p>
+            <p>Save Your Travel Fingerprint to see and be seen in the matching layer.</p>
           )}
         </section>
       ) : null}

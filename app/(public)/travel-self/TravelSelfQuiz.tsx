@@ -154,8 +154,8 @@ function NarrowingPanel({ positions, step }: { positions: PartialPositions; step
   const [line, detail] = COPY.narrowing[namingAnswered] ?? COPY.narrowing[4];
 
   return (
-    <aside className={styles.narrowing} aria-label="Travel Self narrowing">
-      <p className={styles.panelEyebrow}>Sixteen travel selves</p>
+    <aside className={styles.narrowing} aria-label="Travel Fingerprint narrowing">
+      <p className={styles.panelEyebrow}>Sixteen Travel Fingerprints</p>
       <div className={styles.tiles} aria-hidden="true">
         {Array.from({ length: 16 }, (_, index) => (
           <span key={index} data-active={index < remaining} />
@@ -439,7 +439,7 @@ export function TravelSelfQuiz({ children }: { children?: ReactNode }) {
       <div onClick={beginFromIntroduction}>
         {children ?? (
           <section>
-            <h1>Your Travel Self</h1>
+            <h1>Your Travel Fingerprint</h1>
             <button data-travel-self-begin type="button">Begin</button>
           </section>
         )}
@@ -515,7 +515,7 @@ export function TravelSelfQuiz({ children }: { children?: ReactNode }) {
         </Container>
       </section>
       <Container>
-        <section className={styles.passport} aria-label="Your Travel Self passport">
+        <section className={styles.passport} aria-label="Your Travel Fingerprint passport">
           {returning && stored && annualPromptDue(stored) ? (
             <div className={styles.annual}>
               <p>{COPY.annual}</p>

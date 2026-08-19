@@ -26,7 +26,7 @@ export default function WhoElseIsTravellingPage() {
         },
         {
           href: "/travel-self",
-          label: "Meet your Travel Self",
+          label: "Meet Your Travel Fingerprint",
           description: "Eight short questions about how you travel.",
         },
       ]}

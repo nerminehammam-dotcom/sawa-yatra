@@ -62,7 +62,7 @@ export const journeyInterestFormContent = {
   fields: {
     name: "Name",
     email: "Email",
-    travelSelf: "Travel Self result",
+    travelSelf: "Travel Fingerprint result",
     note: "Short note",
   },
   travelSelfPrompt: "Choose a result",

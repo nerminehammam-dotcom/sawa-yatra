@@ -33,11 +33,11 @@ export function TravelSelfIntro() {
         <p className={styles.introStandfirst}>
           Not at work. Not at home. The version of you that comes alive when
           the world opens up. Answer a few simple questions to uncover your
-          unique Travel Self and begin meeting travelers whose journeys
+          unique Travel Fingerprint and begin meeting travelers whose journeys
           naturally align with your own.
         </p>
         <BeginButton />
-        <div className={styles.introNotices} aria-label="Travel Self privacy and status">
+        <div className={styles.introNotices} aria-label="Your Travel Fingerprint privacy and status">
           <p>{PRIVACY_LINE}</p>
           <p>{CURRENT_TRAVEL_SELF_STATUS}</p>
         </div>

@@ -70,7 +70,7 @@ export default function HomePage() {
           <div className={styles.peopleCopy}>
             <p>Members are matched by how they travel, not by what they earn.</p>
             <p>
-              Travel Self gives members a shared language for considering
+              Your Travel Fingerprint gives members a shared language for considering
               company. It does not guarantee compatibility or safety.
             </p>
             <div className={styles.actions}>

@@ -30,7 +30,7 @@ export async function generateMetadata({
   if (!family) return {};
   const url = absoluteUrl(`/travel-self/${type}`);
   return {
-    title: `${family.name} Travel Self`,
+    title: `${family.name} Travel Fingerprint`,
     description: family.essence,
     alternates: { canonical: url },
     openGraph: { title: family.name, description: family.essence, url },

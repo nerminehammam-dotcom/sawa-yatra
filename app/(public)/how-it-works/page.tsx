@@ -239,7 +239,7 @@ export default function HowItWorksPage() {
 
       <section className={styles.v24Closing} aria-label="Where to begin">
         <p>Start with the questionnaire. It&apos;s free and asks nothing of you.</p>
-        <ButtonLink href="/travel-self/take">Meet your travel self</ButtonLink>
+        <ButtonLink href="/travel-self/take">Meet Your Travel Fingerprint</ButtonLink>
         <p>Or read the journeys first.</p>
         <ButtonLink href="/journeys" variant="secondary">The journeys</ButtonLink>
       </section>

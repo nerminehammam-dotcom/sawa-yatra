@@ -117,10 +117,10 @@
 }
 
 .brandRow {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   min-height: 5.25rem;
   align-items: center;
-  justify-content: space-between;
   gap: 1.5rem;
   /* Vertical values untouched - min-height and the 1.125/1rem block padding are
      the header's height logic, which this pass is not allowed to move. */
@@ -128,12 +128,18 @@
 }
 
 .wordmark {
+  grid-column: 2;
   flex: 0 0 auto;
+  justify-self: center;
+  padding: clamp(0.5rem, 0.8vw, 0.75rem);
+  transform: translateY(0.35rem);
 }
 
 .utility {
   display: flex;
+  grid-column: 3;
   align-items: center;
+  justify-self: end;
   gap: 1.375rem;
 }
 
@@ -437,8 +443,10 @@
 
 .menuButton {
   display: none;
+  grid-column: 3;
   min-height: 48px;
   align-items: center;
+  justify-self: end;
   gap: 0.625rem;
   padding: 0.625rem 1.125rem;
   color: var(--nav-ink);

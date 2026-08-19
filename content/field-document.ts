@@ -91,16 +91,16 @@ export const fieldDocumentContent = {
        depth. The site-wide announcement banner already carries the status
        ("open for interest · first departure February 2028"), so none is added
        here. The hero is left exactly as it was - the photograph and the line. */
-    highlights: ["not just your destination", "your Travel Self"],
+    highlights: ["not just your destination", "Your Travel Fingerprint"],
     actions: [
-      { label: "Meet your Travel Self", href: "/travel-self" },
+      { label: "Meet Your Travel Fingerprint", href: "/travel-self" },
       {
         label: "Explore the Andean Caravan",
         href: "/journeys/caravans/andean-caravan",
       },
     ],
     body: [
-      "Sawayatra is a new way to travel. A way to find people who share not just your destination, but your pace, your curiosity, your passions and your sense of discovery. We call it your Travel Self.",
+      "Sawayatra is a new way to travel. A way to find people who share not just your destination, but your pace, your curiosity, your passions and your sense of discovery. We call it Your Travel Fingerprint.",
       "Sawayatra is a name woven from two ancient words. Sawa, used across the Arabic-speaking world to mean together, is rooted in an ancient Arabic word that speaks of harmony, alignment and making things level. Yatra, the Sanskrit word for journey, began as a spiritual pilgrimage, a journey of purpose and transformation, and today has come to mean any journey or voyage of discovery.",
       "Together, they express the idea that inspired this community: that the most meaningful journeys are not simply shared, but shared with people who move through the world in much the same way we do.",
     ],
@@ -139,7 +139,7 @@ export const fieldDocumentContent = {
     body:
       "Sawayatra matches travellers by how they travel, not by where they are going. Sixteen travelling selves; eight short questions reveal which one is yours.",
     note: "Four minutes. Your answers are saved in this browser when you finish, and they are not sent to Sawayatra.",
-    actionLabel: "Meet your Travel Self",
+    actionLabel: "Meet Your Travel Fingerprint",
     actionHref: "/travel-self",
   },
   regionalChapters: [

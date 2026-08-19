@@ -41,7 +41,7 @@ const defaultOnwardLinks: readonly OnwardLink[] = [
   },
   {
     href: "/travel-self",
-    label: "Meet your Travel Self",
+    label: "Meet Your Travel Fingerprint",
     description: "Eight short questions about how you travel.",
   },
   {

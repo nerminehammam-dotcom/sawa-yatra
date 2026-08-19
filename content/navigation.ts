@@ -16,7 +16,7 @@ export const primaryNavigation = [
   },
   {
     id: "travel-self",
-    label: "Travel Self",
+    label: "Your Travel Fingerprint",
     href: "/travel-self",
     contentStatus: "LOCKED",
   },

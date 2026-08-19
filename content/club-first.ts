@@ -19,12 +19,12 @@ export const joiningCopy = {
     "The joining model is set out below. Applications are not yet accepted online while privacy and consent wording is completed.",
   paragraphs: [
     "Membership begins with an invitation from the founders or a nomination from an existing member. An invitation or nomination opens the application; it does not guarantee admission.",
-    "Prospective members complete their Travel Self and submit a request for admission. Once admitted, they belong to the club, not merely to one journey.",
+    "Prospective members complete their Travel Fingerprint and submit a request for admission. Once admitted, they belong to the club, not merely to one journey.",
     "Membership gives access to the club, but not automatic acceptance onto every departure. Each journey states any particular physical, practical, medical, experience or documentation requirements.",
-    "Where members do not already know one another, Travel Self helps form the travelling company. Identities are disclosed only after mutual interest.",
+    "Where members do not already know one another, Your Travel Fingerprint helps form the travelling company. Identities are disclosed only after mutual interest.",
   ],
   travelSelfLimit:
-    "Travel Self supports consideration of compatibility. It is not a medical, behavioural or safety assessment, and it cannot guarantee that people will travel well together.",
+    "Your Travel Fingerprint supports consideration of compatibility. It is not a medical, behavioural or safety assessment, and it cannot guarantee that people will travel well together.",
 } as const;
 
 export const journeyStructures = [
@@ -115,7 +115,7 @@ export const archiveCopy = {
   purpose:
     "Members may contribute photographs of places and routes, field notes and practical knowledge to the club’s Archive, so that every road travelled can leave something useful for those who follow.",
   privacy:
-    "The Archive is visible only to members. Contributions appear under the member’s Travel Self, never under their name or portrait.",
+    "The Archive is visible only to members. Contributions appear under the member’s Travel Fingerprint, never under their name or portrait.",
   status:
     "The Archive is not open yet. No member contributions are available on the public website.",
 } as const;

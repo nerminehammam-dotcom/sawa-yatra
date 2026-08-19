@@ -449,7 +449,7 @@
   line-height: 1.45;
 }
 
-/* Travel Self v2.3 questionnaire. Kept separate from the approved introduction. */
+/* Travel Fingerprint v2.3 questionnaire. Kept separate from the approved introduction. */
 .travelSelfQ {
   --q-hair: 1px;
   min-height: calc(100dvh - var(--nav-height));

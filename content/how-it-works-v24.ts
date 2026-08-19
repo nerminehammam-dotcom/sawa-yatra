@@ -46,7 +46,7 @@ export const HOW_IT_WORKS_GROUPS = [
 export const HOW_IT_WORKS_STEPS: readonly HowItWorksStep[] = [
   {
     number: "01",
-    title: "Meet your travel self",
+    title: "Meet Your Travel Fingerprint",
     paragraphs: [
       "Eight questions about how you travel, not who you are. Whether you plan or improvise. Whether you rise early or arrive late. Whether you want the table full or the road quiet.",
       "It takes a few minutes and costs nothing. No account, no payment. You can walk away with the result and never come back.",
@@ -60,7 +60,7 @@ export const HOW_IT_WORKS_STEPS: readonly HowItWorksStep[] = [
     title: "Join the club",
     paragraphs: [
       "Membership is separate from any journey. You apply, we read it, and if it's a fit, you're in - whether or not you yet know what you want to do.",
-      "Members keep their travel self, see how they sit against every journey, and can travel with us. Anyone can read the site and take the questionnaire. The people are the part that stays private.",
+      "Members keep their Travel Fingerprint, see how they sit against every journey, and can travel with us. Anyone can read the site and take the questionnaire. The people are the part that stays private.",
     ],
     group: "today",
     // The application wording is in legal review, so nothing is accepted on the

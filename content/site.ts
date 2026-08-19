@@ -42,8 +42,8 @@ const approvedRouteDescriptions = {
   /*
    * Added 6 August 2026. Both pages carried placeholder descriptions, and
    * createPageMetadata marks any such route noIndex while sitemap.ts drops it,
-   * so How Sawayatra works and Meet your Travel Self could not be found in
-   * search at all. Meet your Travel Self is the one thing no competitor has.
+   * so How Sawayatra works and Meet Your Travel Fingerprint could not be found in
+   * search at all. Your Travel Fingerprint is the one thing no competitor has.
    *
    * Each sentence is condensed from what the page already says, not written
    * fresh: /how-it-works opens "Browse journeys openly. Connect
@@ -79,7 +79,7 @@ const approvedRouteDescriptions = {
   "create-your-own-journey":
     "Create your own journey is in development and will open when the structure is ready.",
   membership:
-    "Learn how invitation, nomination, Travel Self and admission work within the Sawayatra members’ club.",
+    "Learn how invitation, nomination, Your Travel Fingerprint and admission work within the Sawayatra members’ club.",
   "journey-standards":
     "How Sawayatra considers journeys, assesses named operators and makes responsibilities visible to members.",
   archive:
@@ -104,7 +104,7 @@ const approvedRouteDescriptions = {
   "request-invitation":
     "Invitations open when membership does. Register your interest and Sawayatra will write to you first - no account, no payment.",
   "not-found":
-    "This page could not be found. Return to Sawayatra and pick the road back up from the Andean Caravan or your Travel Self.",
+    "This page could not be found. Return to Sawayatra and pick the road back up from the Andean Caravan or Your Travel Fingerprint.",
   privacy:
     "Sawayatra's privacy policy is being prepared and professionally reviewed, and will be published before any personal information is collected.",
   terms:
@@ -141,10 +141,10 @@ export const routeMetadata = ([
   [
     "how-it-works",
     "/how-it-works",
-    "How Sawayatra Works | Membership, Journeys and Travel Self",
+    "How Sawayatra Works | Membership, Journeys and Your Travel Fingerprint",
   ],
-  ["travel-self", "/travel-self", "Meet your Travel Self | Sawayatra"],
-  ["travel-self-take", "/travel-self/take", "Take the Travel Self | Sawayatra"],
+  ["travel-self", "/travel-self", "Your Travel Fingerprint | Sawayatra"],
+  ["travel-self-take", "/travel-self/take", "Take Your Travel Fingerprint | Sawayatra"],
   ["club", "/club", "The Club | Sawayatra"],
   ["club-apply", "/club/apply", "Apply to the club | Sawayatra"],
   ["do-it-yourself", "/do-it-yourself", "Do It Yourself | Sawayatra"],
@@ -250,7 +250,7 @@ export const homeContent = {
     accentWord: "arrive",
     lead: "Good travel isn't about going with anyone. It's about going with the right people, found for you, and introduced only when it's mutual.",
     primaryAction: {
-      label: "Meet your Travel Self",
+      label: "Meet Your Travel Fingerprint",
       href: "/travel-self",
       style: "primary",
       contentStatus: "LOCKED",
@@ -389,7 +389,7 @@ export const howItWorksContent = {
       id: "everyone-says-yes",
       number: "03",
       title: "Everyone says yes first",
-      body: "We share Travel Selves, not names. Only when everyone says yes do we make the introduction, Travel Self first, then names.",
+      body: "We share Travel Fingerprints, not names. Only when everyone says yes do we make the introduction, Travel Fingerprint first, then names.",
       contentStatus: "DRAFT",
       contentNote: "Publish only after this operating mechanism is verified.",
     },
@@ -436,7 +436,7 @@ export const howItWorksContent = {
     contentStatus: "DRAFT",
   },
   action: {
-    label: "Meet your Travel Self",
+    label: "Meet Your Travel Fingerprint",
     href: "/travel-self",
     style: "primary",
     contentStatus: "LOCKED",
@@ -444,7 +444,7 @@ export const howItWorksContent = {
 } as const;
 
 export const travelSelfPageContent = {
-  title: "Meet your Travel Self",
+  title: "Your Travel Fingerprint",
   saveNotice:
     "You can take the draft taster without an account. Saving or continuing requires an invitation request or member access.",
   requestAction: {
@@ -470,7 +470,7 @@ export const journeyDetailContent = {
   breadcrumbLabel: "Departures",
   summaryLabel: "Journey summary",
   factEyebrow: "Journey details",
-  tableEyebrow: "Travel Selves only",
+  tableEyebrow: "Travel Fingerprints only",
   statusLabelPrefix: "Status",
   demoDataPrefix: "Demo data",
   exactDatesPrefix: "Exact dates",
@@ -502,10 +502,10 @@ export const journeyDetailContent = {
     held: "What is held",
     included: "What is included",
   },
-  tablePrivacyLine: "Travel Selves only, never member names or photographs.",
+  tablePrivacyLine: "Travel Fingerprints only, never member names or photographs.",
   tablePlaceholder: "To be confirmed",
   tablePlaceholderNote:
-    "Travel Self details for this demo journey have not been supplied.",
+    "Travel Fingerprint details for this demo journey have not been supplied.",
   primaryActionLabel: journeyInterestFormContent.actionLabel,
   interestForm: {
     ...journeyInterestFormContent,
@@ -579,7 +579,7 @@ export const signInContent = {
   // Was "Authentication is not active in Release 1." - true, but it described
   // our release plan rather than the thing behind the door. This says what the
   // member layer is for and keeps the same fact.
-  body: "The member layer will hold your Travel Self, your journeys, and any company we propose. It is not open yet.",
+  body: "The member layer will hold Your Travel Fingerprint, your journeys, and any company we propose. It is not open yet.",
   interestForm: signInInterestFormContent,
   requestAction: {
     label: "Register your interest",

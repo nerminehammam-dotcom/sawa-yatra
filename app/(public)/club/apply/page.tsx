@@ -21,7 +21,7 @@ export default function ApplyPage() {
       </p>
       <p>
         This is the application surface. It intentionally does not ask for a
-        payment, a booking, a journey choice or a Travel Self result.
+        payment, a booking, a journey choice or a Travel Fingerprint result.
       </p>
       <section aria-label="Current application status">
         <p>

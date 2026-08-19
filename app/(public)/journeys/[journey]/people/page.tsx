@@ -30,7 +30,7 @@ export default async function JourneyPeoplePage({
         <div className={styles.passports}>
           {view.passports.map((passport) => (
             <article className={`${passportStyles.passport} ${styles.poolPassport}`} key={passport.memberId}>
-              <p>Travel Self Passport</p>
+              <p>Your Travel Fingerprint Passport</p>
               <h2>{passport.archetype}</h2>
               {Object.values(passport.demographics).length > 0 ? (
                 <p>{Object.values(passport.demographics).join(" · ")}</p>
@@ -39,7 +39,7 @@ export default async function JourneyPeoplePage({
           ))}
         </div>
       ) : (
-        <p>Save your Travel Self to see and be seen in this matching layer.</p>
+        <p>Save Your Travel Fingerprint to see and be seen in this matching layer.</p>
       )}
     </main>
   );

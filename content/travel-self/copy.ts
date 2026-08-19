@@ -1,10 +1,10 @@
 export const TRAVEL_SELF_COPY = {
-  title: "Your Travel Self",
-  standfirst: "Sawayatra is a members’ travel club that matches travellers by how they travel, not by age, not by destination. The Travel Self is how that works. Eight short questions about the way you move through a journey and what draws you to a place. Answer them once, and every journey on the site reads differently.",
+  title: "Your Travel Fingerprint",
+  standfirst: "Sawayatra is a members’ travel club that matches travellers by how they travel, not by age, not by destination. Your Travel Fingerprint is how that works. Eight short questions about the way you move through a journey and what draws you to a place. Answer them once, and every journey on the site reads differently.",
   currentStatus: {
     heading: "Current website status",
     paragraphs: [
-      "When member-profile saving and the journey comparison layer open, Travel Self may help a member consider how a journey’s pace and social rhythm sit against their preferences.",
+      "When member-profile saving and the journey comparison layer open, Your Travel Fingerprint may help a member consider how a journey’s pace and social rhythm sit against their preferences.",
       "Those mechanisms are not active yet.",
       "There will be no public member directory or public member profile.",
     ],
@@ -25,7 +25,7 @@ export const TRAVEL_SELF_COPY = {
   whatYouGet: {
     heading: "What you get",
     paragraphs: [
-      "A Travel Self: a name and a short portrait of how you move through a journey.",
+      "A Travel Fingerprint: a name and a short portrait of how you move through a journey.",
       "More usefully, it shows where you bend, where you do not, and the moment on a shared trip when you are most likely to feel the difference between you and everyone else.",
       "It is not a compatibility score.",
       "No number can tell you whether nine days with a stranger will work, and we would rather say so than pretend.",
@@ -42,7 +42,7 @@ export const TRAVEL_SELF_COPY = {
       "You see the comparison, not the person. Names stay private until interest runs both ways.",
     ],
   },
-  boundary: "The Travel Self is not a psychological test. It compares what travellers have said about how and why they travel. It cannot predict whether two people will get along.",
+  boundary: "Your Travel Fingerprint is not a psychological test. It compares what travellers have said about how and why they travel. It cannot predict whether two people will get along.",
   before: {
     heading: "Before you begin",
     groups: [
@@ -56,7 +56,7 @@ export const TRAVEL_SELF_COPY = {
   back: "Back",
   backToIntroduction: "Back to the introduction",
   next: "Next",
-  submit: "See your Travel Self",
+  submit: "See Your Travel Fingerprint",
   timeTogether: {
     question: "When you travel with others, how much of the day do you want to spend together?",
     helper: "This one shapes the group, not the comparison. Nobody is measured against it.",
@@ -69,7 +69,7 @@ export const TRAVEL_SELF_COPY = {
   },
   followUp: {
     question: "Which of these would most influence the journey you book?",
-    helper: "This orders what we show you first. It does not change your Travel Self.",
+    helper: "This orders what we show you first. It does not change Your Travel Fingerprint.",
   },
   narrowing: [
     ["All of them still yours.", "Each answer rules some out."],
@@ -79,7 +79,7 @@ export const TRAVEL_SELF_COPY = {
     ["One.", "You will meet it at the end."],
   ],
   narrowingSettled: "Your self is settled. The rest is what it is for.",
-  resultEyebrow: "Your Travel Self",
+  resultEyebrow: "Your Travel Fingerprint",
   passportFields: {
     essence: "Essence",
     bring: "What you bring",
@@ -90,13 +90,13 @@ export const TRAVEL_SELF_COPY = {
     sting: "You will feel it when",
   },
   changeLater: "You can change any of this later.",
-  update: "Update your Travel Self",
-  annual: "You made this a year ago. Travel selves change, with age, with money, and with who you are travelling with.",
+  update: "Update Your Travel Fingerprint",
+  annual: "You made this a year ago. Travel Fingerprints change, with age, with money, and with who you are travelling with.",
   dismiss: "Dismiss",
   others: {
     heading: "The other fifteen",
     introduction: "Sixteen ways of moving through a journey. You will recognise more than one of them.",
-    ownMarker: "Your Travel Self",
+    ownMarker: "Your Travel Fingerprint",
   },
   onward: {
     heading: "Now you know how you travel.",

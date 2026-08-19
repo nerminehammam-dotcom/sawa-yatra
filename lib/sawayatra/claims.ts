@@ -68,11 +68,10 @@ export class ClaimRegistry {
     if (payload.resultId !== expectedResultId) throw new Error("Claim token does not match result.");
     if (payload.expiresAt <= now.getTime()) throw new Error("Claim token has expired.");
     if (this.#usedNonces.has(payload.nonce) || this.#claimedResultIds.has(payload.resultId)) {
-      throw new Error("Travel Self result has already been claimed.");
+      throw new Error("Travel Fingerprint result has already been claimed.");
     }
     this.#usedNonces.add(payload.nonce);
     this.#claimedResultIds.add(payload.resultId);
     return payload.resultId;
   }
 }
-

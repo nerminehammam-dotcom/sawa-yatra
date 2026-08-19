@@ -90,7 +90,7 @@ export default function AboutPage() {
               attention.
             </p>
             <p>
-              Every member completes a Travel Self: fourteen situations on the
+              Every member completes a Travel Fingerprint: fourteen situations on the
               road, where both answers cost something. It is not a personality
               test. It is how the company for each journey is assembled, one
               person at a time.
@@ -102,7 +102,7 @@ export default function AboutPage() {
               colourway, an archetype and a Passport.
             </p>
             <Link className={styles.textLink} href="/travel-self">
-              Take the Travel Self <Arrow />
+              Take Your Travel Fingerprint <Arrow />
             </Link>
             <p className={styles.reveal}>
               When two members are considered for the same road, neither sees
@@ -125,7 +125,7 @@ export default function AboutPage() {
             <p>
               Membership begins with an invitation from the founders or a
               nomination from an existing member. Prospective members complete
-              their Travel Self and apply for admission.
+              their Travel Fingerprint and apply for admission.
             </p>
             <p>
               Once admitted, a member belongs to the club, not merely to a

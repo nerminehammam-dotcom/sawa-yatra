@@ -54,7 +54,7 @@ export const journeyInterestSchema = z
     journey: identifier("Journey"),
     travelSelfResult: z.union([
       z.literal(NOT_COMPLETED_TRAVEL_SELF),
-      identifier("Travel Self result"),
+      identifier("Travel Fingerprint result"),
     ]),
     shortNote: requiredText("Short note", 2_000),
     consent,
@@ -122,7 +122,7 @@ export function createJourneyInterestClientSchema(
       context.addIssue({
         code: "custom",
         path: ["travelSelfResult"],
-        message: "Choose one of the Travel Self results available here.",
+        message: "Choose one of the Travel Fingerprint results available here.",
       });
     }
   });
