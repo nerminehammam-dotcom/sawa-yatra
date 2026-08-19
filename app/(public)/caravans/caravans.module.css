@@ -19,9 +19,12 @@
 .heroCopy > p:first-child,
 .flagshipTitle > p:first-child,
 .future > p:first-child {
-  font-size: var(--fs-body);
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
+  letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -37,8 +40,8 @@
   width: 100%;
   max-width: 100%;
   align-self: center;
-  font-size: var(--fs-heading);
-  line-height: 0.9;
+  font-size: var(--fs-display-2);
+  line-height: var(--leading-tight);
   text-wrap: initial;
 }
 
@@ -50,7 +53,7 @@
   max-width: 13ch;
   margin-top: var(--space-4);
   color: var(--ink);
-  font-size: 0.56em;
+  font-size: var(--fs-title);
   line-height: 1;
 }
 

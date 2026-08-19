@@ -17,6 +17,8 @@
   align-items: baseline;
   justify-content: space-between;
   gap: var(--space-2, 0.5rem);
+  font-family: var(--font-read);
+  font-size: var(--fs-small);
   font-weight: 500;
   line-height: 1.35;
 }
@@ -38,6 +40,8 @@
   border: 1px solid var(--deep-brown);
   border-radius: var(--radius-card);
   box-shadow: none;
+  font-family: var(--font-read);
+  font-size: var(--fs-small);
 }
 
 .control:hover:not(:disabled) {
@@ -66,6 +70,7 @@
 .formStatus p,
 .handlingNotice p {
   margin: 0;
+  font-family: var(--font-read);
 }
 
 .hint {
@@ -97,7 +102,7 @@
   align-items: start;
   line-height: 1.5;
   cursor: pointer;
-  font-family: var(--font-note);
+  font-family: var(--font-read);
   font-size: var(--fs-small);
 }
 
@@ -164,7 +169,7 @@
   border-style: dashed;
   background: var(--butter);
   font-size: var(--fs-small);
-  font-family: var(--font-note);
+  font-family: var(--font-read);
   line-height: 1.6;
 }
 

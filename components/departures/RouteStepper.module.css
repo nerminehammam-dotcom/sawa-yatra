@@ -13,10 +13,12 @@
 
 .counter {
   margin: 0;
-  font-size: var(--fs-body);
-  font-weight: 500;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
-  line-height: 1.35;
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -68,17 +70,20 @@ a.step:hover .name {
 }
 
 .direction {
-  font-size: var(--fs-small);
-  font-weight: 500;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
   text-transform: uppercase;
 }
 
 .name {
   font-family: var(--font-read);
   font-size: var(--fs-title);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  line-height: var(--leading-title);
+  letter-spacing: var(--tracking-title);
 }
 
 .detail {

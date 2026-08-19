@@ -48,13 +48,13 @@
 
 .heroTitle {
   max-width: 10ch;
-  font-size: var(--fs-heading);
+  font-size: var(--fs-display-2);
 }
 
 .completeHeroTitle {
   max-width: 14ch;
-  font-size: var(--fs-card);
-  line-height: 1.02;
+  font-size: var(--fs-title);
+  line-height: var(--leading-title);
 }
 
 .heroIntro {

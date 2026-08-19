@@ -23,13 +23,13 @@ export default function Icon() {
           // document, so CSS custom properties are not available here. Keep
           // these in step with styles/tokens.css by hand.
           // paper, signal, olive as of the 15 August 2026 colour pass.
-          background: "#F5EFE2",
+          background: "#e7e1d6",
         }}
       >
         <RouteGateMark
-          gateColor="#D9522F"
+          gateColor="#f05a2a"
           height={350}
-          routeColor="#8E9130"
+          routeColor="#98904f"
           width={395}
         />
       </div>

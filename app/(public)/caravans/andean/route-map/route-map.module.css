@@ -20,9 +20,12 @@
 .eyebrow,
 .routeHeader > p:first-child {
   color: var(--signal-text);
-  font-size: var(--fs-small);
-  font-weight: 600;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -34,8 +37,8 @@
 .intro h1 {
   max-width: 11ch;
   font-family: var(--font-display);
-  font-size: var(--fs-hero);
-  line-height: 1;
+  font-size: var(--fs-display-2);
+  line-height: var(--leading-tight);
 }
 
 .lede {
@@ -82,9 +85,12 @@
 
 .shortForm > div:first-child > p:first-child {
   color: var(--signal-text);
-  font-size: var(--fs-small);
-  font-weight: 600;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
   text-transform: uppercase;
 }
 

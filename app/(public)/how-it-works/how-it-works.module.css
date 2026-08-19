@@ -24,10 +24,12 @@
   max-width: none;
   margin-bottom: var(--space-6);
   color: var(--ink);
-  font-size: var(--fs-body);
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  line-height: 1.35;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
+  letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -71,8 +73,8 @@
 
 .v24Steps li > div p {
   max-width: 58ch;
-  font-size: var(--fs-lead);
-  line-height: 1.5;
+  font-size: var(--fs-body);
+  line-height: var(--leading-body);
 }
 
 /* Present only on steps that can actually be started today. signal-text on
@@ -113,8 +115,8 @@
 
 .v24Reasons p {
   max-width: 58ch;
-  font-size: var(--fs-lead);
-  line-height: 1.5;
+  font-size: var(--fs-body);
+  line-height: var(--leading-body);
 }
 
 .v24Closing {
@@ -191,8 +193,11 @@
 .taxonomyLabel {
   color: var(--signal-text);
   font-family: var(--font-mono);
-  font-size: var(--fs-small);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -263,7 +268,7 @@
   align-items: center;
   gap: var(--space-2);
   color: var(--signal-text);
-  font-weight: 600;
+  font-weight: 500;
   text-underline-offset: 0.16em;
 }
 
@@ -282,10 +287,12 @@
 .kicker,
 .eyebrow,
 .cardLabel {
-  font-size: var(--fs-body);
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  line-height: 1.35;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
+  letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -419,7 +426,7 @@
 .featuredTitleDetail {
   display: block;
   margin-top: var(--space-3);
-  font-size: 0.58em;
+  font-size: var(--fs-title);
   line-height: 1.05;
 }
 
@@ -622,8 +629,8 @@
 
 .largeBody {
   font-family: var(--font-display);
-  font-size: var(--fs-display-3);
-  line-height: 1.18;
+  font-size: var(--fs-lead);
+  line-height: 1.5;
 }
 
 .privacy {
@@ -664,9 +671,9 @@
   max-width: 17ch;
   color: var(--sun);
   font-family: var(--font-display);
-  font-size: var(--fs-display-2);
+  font-size: var(--fs-display-3);
   font-weight: 500; /* §6.3: Fraunces pull quote stays ≥500 */
-  line-height: 1.03;
+  line-height: var(--leading-tight);
 }
 
 .privacyCopy > p {
@@ -918,7 +925,7 @@
 .kicker {
   color: var(--signal-text);
   font-family: var(--font-note);
-  font-size: var(--fs-eyebrow);
+  font-size: var(--eyebrow-size);
 }
 
 .v24Steps {

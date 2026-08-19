@@ -49,11 +49,11 @@
   align-items: center;
   padding: var(--space-5) var(--page-gutter);
   color: var(--ink);
-  font-family: var(--font-note);
+  font-family: var(--font-read);
   font-size: var(--fs-small);
-  letter-spacing: 0.1em;
+  letter-spacing: normal;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .countryNavigation a + a {
@@ -236,8 +236,11 @@
   margin-bottom: var(--space-3);
   color: var(--signal-text);
   font-family: var(--font-note);
-  font-size: var(--fs-small);
-  letter-spacing: 0.12em;
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
+  letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
   text-transform: uppercase;
 }
 

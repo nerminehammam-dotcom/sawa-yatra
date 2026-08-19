@@ -1,7 +1,7 @@
 .homePage {
-  --home-hair-soft: rgb(39 35 31 / 11%);
-  --home-hair: rgb(39 35 31 / 20%);
-  --home-hair-strong: rgb(39 35 31 / 34%);
+  --home-hair-soft: color-mix(in srgb, var(--ink) 11%, transparent);
+  --home-hair: color-mix(in srgb, var(--ink) 20%, transparent);
+  --home-hair-strong: color-mix(in srgb, var(--ink) 34%, transparent);
   --home-body-ink: color-mix(in srgb, var(--ink) 84%, transparent);
   --home-muted-ink: color-mix(in srgb, var(--ink) 60%, transparent);
   --home-band: clamp(4.5rem, 10vw, 9.5rem);
@@ -12,9 +12,8 @@
   color: var(--home-body-ink);
   background: var(--paper);
   font-family: var(--font-read);
-  font-size: 1.1875rem;
-  font-variation-settings: "SOFT" 0, "WONK" 0;
-  line-height: 1.62;
+  font-size: var(--fs-body);
+  line-height: var(--leading-body);
 }
 
 .homePage :where(h1, h2, h3) {
@@ -22,24 +21,16 @@
   font-family: var(--font-editorial);
   font-optical-sizing: auto;
   font-stretch: normal;
-  font-variation-settings: "SOFT" 0, "WONK" 0, "opsz" 144;
+  font-variation-settings: "SOFT" 18, "WONK" var(--wonk);
   font-weight: 500;
-  letter-spacing: -0.006em;
-  line-height: 1.06;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-tight);
   text-wrap: balance;
 }
 
-.homePage h1 {
-  font-size: clamp(2.9rem, 6.2vw, 5.6rem);
-}
-
-.homePage h2 {
-  font-size: clamp(2.2rem, 4.4vw, 3.8rem);
-}
-
 .homePage h3 {
-  font-size: clamp(1.45rem, 2.3vw, 2.05rem);
-  line-height: 1.14;
+  font-variation-settings: "SOFT" 0, "WONK" var(--wonk);
+  line-height: var(--leading-title);
 }
 
 .wrap {
@@ -61,9 +52,9 @@
 .eyebrow {
   margin: 0 0 1.25rem;
   color: var(--signal-text);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  letter-spacing: var(--tracking-eyebrow);
   line-height: 1;
   text-transform: uppercase;
 }
@@ -94,10 +85,10 @@
   inset: 0;
   background: linear-gradient(
     to top,
-    rgb(20 17 14 / 76%) 0%,
-    rgb(20 17 14 / 47%) 28%,
-    rgb(20 17 14 / 11%) 58%,
-    rgb(20 17 14 / 0%) 80%
+    rgb(39 35 31 / 76%) 0%,
+    rgb(39 35 31 / 47%) 28%,
+    rgb(39 35 31 / 11%) 58%,
+    rgb(39 35 31 / 0%) 80%
   );
 }
 
@@ -113,7 +104,7 @@
 .hero h1 em {
   color: var(--sun);
   font-style: italic;
-  font-variation-settings: "SOFT" 0, "WONK" 1, "opsz" 144;
+  font-variation-settings: "SOFT" 45, "WONK" 1;
   font-weight: 400;
 }
 
@@ -131,9 +122,9 @@
 
 .button,
 .textLink {
-  font-family: var(--font-editorial);
-  font-size: 1rem;
-  font-weight: 400;
+  font-family: var(--font-read);
+  font-size: var(--eyebrow-size);
+  font-weight: 500;
 }
 
 .button {
@@ -155,7 +146,7 @@
 }
 
 .button:hover {
-  background: #000;
+  background: var(--ink);
   text-decoration: none;
 }
 
@@ -165,7 +156,7 @@
 }
 
 .buttonPale:hover {
-  background: #fff;
+  background: var(--paper);
 }
 
 .buttonLine {
@@ -194,7 +185,7 @@
 
 .textLinkOnDark {
   color: var(--paper);
-  border-bottom-color: rgb(245 239 226 / 50%);
+  border-bottom-color: color-mix(in srgb, var(--paper) 50%, transparent);
 }
 
 .band {
@@ -274,7 +265,7 @@
   position: relative;
   width: 100%;
   overflow: hidden;
-  background: var(--sand);
+  background: var(--paper);
 }
 
 .featuredImage {
@@ -294,16 +285,16 @@
 }
 
 .featuredCopy h3 {
-  font-size: clamp(1.8rem, 3vw, 2.7rem);
+  font-size: var(--fs-title);
 }
 
 .featuredCopy h3 span {
   display: block;
   margin-top: 0.875rem;
   color: var(--home-muted-ink);
-  font-size: 0.75rem;
+  font-size: var(--fs-small);
   font-weight: 400;
-  letter-spacing: 0.14em;
+  letter-spacing: var(--tracking-eyebrow);
   line-height: 1.5;
   text-transform: uppercase;
 }
@@ -321,9 +312,9 @@
 .cardLabel {
   margin: 1.5rem 0 0.75rem;
   color: var(--home-muted-ink);
-  font-size: 0.6875rem;
+  font-size: var(--eyebrow-size);
   font-weight: 500;
-  letter-spacing: 0.16em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
 
@@ -338,7 +329,7 @@
 .note {
   margin-top: 0.75rem;
   color: var(--home-muted-ink);
-  font-size: 0.78125rem;
+  font-size: var(--fs-small);
   line-height: 1.6;
 }
 
@@ -350,8 +341,8 @@
 
 .homePage .nameBand > .wrap > .eyebrow {
   margin-bottom: 0;
-  font-size: 0.6875rem;
-  letter-spacing: 0.18em;
+  font-size: var(--eyebrow-size);
+  letter-spacing: var(--tracking-eyebrow);
   line-height: 1;
 }
 
@@ -369,14 +360,14 @@
 
 .language {
   color: var(--home-muted-ink);
-  font-size: 0.6875rem;
-  letter-spacing: 0.16em;
+  font-size: var(--eyebrow-size);
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
 
 .word {
   margin-top: 0.5rem;
-  font-size: clamp(2rem, 3.4vw, 3rem) !important;
+  font-size: var(--fs-display-3) !important;
   font-weight: 500 !important;
   line-height: 1.05 !important;
 }
@@ -396,7 +387,7 @@
   max-width: 46ch;
   margin-left: auto;
   color: var(--ink);
-  font-size: clamp(1.125rem, 1.7vw, 1.4rem);
+  font-size: var(--fs-lead);
   font-style: italic;
   line-height: 1.45;
 }

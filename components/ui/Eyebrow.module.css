@@ -5,9 +5,10 @@
 .root {
   color: inherit;
   font-family: var(--font-note);
-  font-size: var(--fs-eyebrow);
-  font-weight: 500;
-  line-height: 1.35;
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
+  line-height: 1;
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }

@@ -14,8 +14,8 @@ export default function manifest(): MetadataRoute.Manifest {
     display: "standalone",
     // --paper. A literal because the manifest is JSON, not CSS; keep it in step
     // with styles/tokens.css by hand.
-    background_color: "#F5EFE2",
-    theme_color: "#F5EFE2",
+    background_color: "#e7e1d6",
+    theme_color: "#e7e1d6",
     icons: [
       { src: "/icon", sizes: "512x512", type: "image/png" },
       { src: "/apple-icon", sizes: "180x180", type: "image/png" },

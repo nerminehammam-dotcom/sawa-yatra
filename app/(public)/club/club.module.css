@@ -399,9 +399,9 @@
 
 .heroInvitation a,
 .application a {
-  color: var(--paper);
-  background: var(--signal-text);
-  border-color: var(--signal-text);
+  color: var(--ink);
+  background: var(--signal);
+  border-color: var(--signal);
   border-radius: var(--radius-pill);
 }
 

@@ -9,7 +9,11 @@
 .header > p:first-child {
   color: var(--signal-text);
   font-family: var(--font-mono);
-  letter-spacing: 0.08em;
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
+  letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
   text-transform: uppercase;
 }
 

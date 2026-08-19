@@ -26,9 +26,12 @@
 .caravan > div > p:first-child,
 .sections header p,
 .ask > p {
-  font-size: var(--fs-body);
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
+  letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -46,8 +49,8 @@
 .introductionCopy h1 {
   color: var(--signal-text);
   max-width: 16ch;
-  font-size: var(--fs-hero);
-  line-height: 0.92;
+  font-size: var(--fs-display-2);
+  line-height: var(--leading-tight);
 }
 
 .introductionCopy > p:last-child {
@@ -509,7 +512,7 @@
 .introductionCopy > p:first-child {
   color: var(--signal-text);
   font-family: var(--font-note);
-  font-size: var(--fs-eyebrow);
+  font-size: var(--eyebrow-size);
 }
 
 .introductionCopy h1 {
@@ -558,9 +561,9 @@
 
 .caravan > a,
 .joining a {
-  color: var(--paper);
-  background: var(--signal-text);
-  border-color: var(--signal-text);
+  color: var(--ink);
+  background: var(--signal);
+  border-color: var(--signal);
 }
 
 .mapTextEquivalent,

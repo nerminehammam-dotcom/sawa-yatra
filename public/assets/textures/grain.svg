@@ -3,5 +3,5 @@
     <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="27" stitchTiles="stitch" />
     <feColorMatrix type="saturate" values="0" />
   </filter>
-  <rect width="180" height="180" fill="#2B2420" filter="url(#grain)" />
+  <rect width="180" height="180" fill="#27231f" filter="url(#grain)" />
 </svg>

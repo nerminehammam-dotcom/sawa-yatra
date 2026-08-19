@@ -5,7 +5,7 @@
 
 .questionnaire,
 .resultPage {
-  font-size: max(1.1875rem, 1em);
+  font-size: var(--fs-body);
 }
 
 .before h2,
@@ -17,8 +17,10 @@
 .panelEyebrow,
 .progress,
 .passport dt {
-  font-size: var(--fs-body);
-  font-weight: 500;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
@@ -42,7 +44,7 @@
   --tsi-clay: var(--clay);
   --tsi-olive: var(--olive);
   --tsi-pink: var(--pink);
-  --tsi-display: var(--font-display, "Fraunces", Georgia, serif);
+  --tsi-display: var(--font-display);
   --tsi-hair: 1px;
   display: grid;
   /* Geometry matched to the Departures/Andean split hero so the two read as one
@@ -74,8 +76,10 @@
 
 .travelSelfIntro .introKicker {
   margin: 0;
-  font-size: var(--fs-body);
-  font-weight: 500;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
   line-height: 1.35;
   text-transform: uppercase;
@@ -86,11 +90,11 @@
 .travelSelfIntro .introTitle {
   margin: 0;
   font-family: var(--tsi-display);
-  font-size: clamp(var(--fs-lead), 2.8vw, var(--fs-title));
+  font-size: var(--fs-title);
   font-optical-sizing: auto;
   font-weight: 500;
-  letter-spacing: -0.025em;
-  line-height: 1.05;
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-tight);
   white-space: nowrap;
 }
 
@@ -228,7 +232,7 @@
 .sliderHelper {
   max-width: 50ch;
   color: var(--ink);
-  font-family: var(--font-display);
+  font-family: var(--font-read);
   font-size: var(--fs-body);
   font-style: italic;
 }
@@ -259,8 +263,8 @@
 
 .poles strong {
   font-family: var(--font-read);
-  font-size: var(--fs-title);
-  font-weight: 400;
+  font-size: var(--fs-lead);
+  font-weight: 500;
 }
 
 .poles small {
@@ -380,8 +384,8 @@
 
 .passion strong {
   font-family: var(--font-read);
-  font-size: var(--fs-title);
-  font-weight: 400;
+  font-size: var(--fs-lead);
+  font-weight: 500;
 }
 
 .passion span {
@@ -489,8 +493,10 @@
 
 .qBandLabel {
   margin: 0;
-  font-size: var(--fs-body);
-  font-weight: 500;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
   line-height: 1.5;
   text-transform: uppercase;
@@ -613,9 +619,9 @@
 
 .qPoles strong {
   font-family: var(--font-read);
-  font-size: var(--fs-title);
-  font-weight: 400;
-  line-height: 1.5;
+  font-size: var(--fs-lead);
+  font-weight: 500;
+  line-height: 1.25;
 }
 
 .qPoles small {
@@ -713,8 +719,9 @@
 
 .qChoices button {
   padding: 0.9rem 1.25rem;
-  font-family: var(--font-display);
+  font-family: var(--font-read);
   font-size: var(--fs-body);
+  font-weight: 500;
 }
 
 .qChoices button:hover,
@@ -751,9 +758,9 @@
 
 .qPassions strong {
   font-family: var(--font-read);
-  font-size: var(--fs-title);
-  font-weight: 400;
-  line-height: 1.2;
+  font-size: var(--fs-lead);
+  font-weight: 500;
+  line-height: 1.25;
 }
 
 .qPassions span {
@@ -876,7 +883,7 @@
 
 .qNarrowLine {
   margin: 0;
-  font-family: var(--font-display);
+  font-family: var(--font-read);
   font-size: var(--fs-body);
   line-height: 1.4;
 }
@@ -915,8 +922,10 @@
 
 .passportHead > p:first-child {
   margin: 0 0 0.75rem;
-  font-size: var(--fs-body);
-  font-weight: 500;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
@@ -935,7 +944,7 @@
 
 .passportReadout {
   margin: 0.75rem 0 0;
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display);
   font-size: var(--fs-body);
   line-height: 1.4;
 }
@@ -990,8 +999,10 @@
 .passportFriction dt {
   margin: 0;
   padding-top: 0.25rem;
-  font-size: var(--fs-body);
-  font-weight: 500;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
@@ -1015,7 +1026,7 @@
 .passportFriction dd {
   max-width: 36ch;
   margin: 0;
-  font-family: var(--font-display), Georgia, serif;
+  font-family: var(--font-display);
   font-size: var(--fs-lead);
   line-height: 1.35;
 }
@@ -1071,8 +1082,10 @@
 
 .resultEyebrow {
   margin-bottom: var(--space-8);
-  font-size: var(--fs-body);
-  font-weight: 500;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
@@ -1087,7 +1100,7 @@
 .resultReadout {
   margin: var(--space-8) auto 0;
   color: var(--ink);
-  font-size: var(--fs-eyebrow);
+  font-size: var(--eyebrow-size);
   letter-spacing: var(--tracking-eyebrow);
 }
 
@@ -1203,8 +1216,10 @@
 }
 
 .otherFamilies li span {
-  font-size: var(--fs-body);
-  font-weight: 500;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
 }
@@ -1474,12 +1489,12 @@
 .travelSelfIntro .introKicker {
   color: var(--tsi-signal-text);
   font-family: var(--font-note);
-  font-size: var(--fs-eyebrow);
+  font-size: var(--eyebrow-size);
 }
 
 .travelSelfIntro .introTitle {
   font-family: var(--font-editorial);
-  font-size: clamp(2.65rem, 5vw, 5rem);
+  font-size: var(--fs-display-2);
   white-space: normal;
 }
 
@@ -1492,12 +1507,12 @@
 .travelSelfIntro .introBegin {
   min-height: var(--touch-min);
   padding-inline: 1.35rem;
-  color: var(--paper);
-  background: var(--signal-text);
-  border-color: var(--signal-text);
+  color: var(--ink);
+  background: var(--signal);
+  border-color: var(--signal);
   border-radius: var(--radius-pill);
-  font-family: var(--font-display);
-  font-weight: 600;
+  font-family: var(--font-read);
+  font-weight: 500;
 }
 
 @media (max-width: 780px) {

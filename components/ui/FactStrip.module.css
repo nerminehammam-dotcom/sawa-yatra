@@ -35,10 +35,11 @@
 .fact dt {
   margin: 0 0 var(--space-1);
   font-family: var(--font-note);
-  font-size: var(--fs-eyebrow);
-  font-weight: 500;
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
-  line-height: 1.2;
+  line-height: 1;
   text-transform: uppercase;
   opacity: 0.72;
 }

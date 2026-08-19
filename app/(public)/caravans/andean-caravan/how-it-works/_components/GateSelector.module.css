@@ -33,9 +33,12 @@
 }
 
 .kicker {
-  font-size: var(--fs-body);
-  font-weight: 500;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
   text-transform: uppercase;
 }
 

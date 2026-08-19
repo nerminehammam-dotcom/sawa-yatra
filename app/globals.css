@@ -22,10 +22,6 @@ html {
 }
 
 body {
-  /* One accent across the public experience: fills and readable accent text
-     resolve to the same restrained rust. */
-  --signal: var(--signal-text);
-
   min-width: 320px;
   min-height: 100%;
   margin: 0;
@@ -34,7 +30,7 @@ body {
   font-family: var(--font-read);
   font-optical-sizing: auto;
   /* §10: sustained body ≥18px - floor raised from 16px. */
-  font-size: clamp(1.125rem, 1.05rem + 0.22vw, 1.25rem);
+  font-size: var(--fs-body);
   font-weight: 400;
   line-height: var(--leading-body);
   overflow-x: clip;
@@ -97,13 +93,10 @@ a {
   text-underline-offset: 0.18em;
 }
 
-/* Hover is a wavy rule, not a colour change. The link text colour is left
-   alone deliberately: signal-text on ink measures 2.57, so recolouring the
-   word on a dark ground would fail. Decoration carries no text-contrast
-   requirement, so the same rule can hold on both grounds. */
+/* Hover changes the rule treatment, not the reading colour. */
 a:hover {
   text-decoration-style: wavy;
-  text-decoration-color: var(--signal-text);
+  text-decoration-color: currentColor;
 }
 
 [data-ground="ink"] a:hover,
@@ -160,10 +153,8 @@ canvas {
   max-width: 100%;
 }
 
-/* The Announcer. Headings left Fraunces for Bricolage Grotesque on 16 August
-   2026. The old weight-500 floor was a Fraunces problem - its display cut lost
-   the `e` crossbar below that on 1x displays - and does not apply to a
-   grotesque, so the weights here are set for colour on the page instead. */
+/* The Announcer. Fraunces keeps a weight-500 floor so its display cut retains
+   the `e` crossbar on 1x displays. */
 h1,
 h2,
 h3,
@@ -171,6 +162,7 @@ h4 {
   font-family: var(--font-editorial);
   font-optical-sizing: auto;
   font-weight: 500;
+  font-variation-settings: "SOFT" 18, "WONK" var(--wonk);
   font-stretch: normal;
   line-height: var(--leading-tight);
   text-wrap: balance;
@@ -179,35 +171,57 @@ h4 {
 h1 {
   font-size: var(--fs-display-1);
   font-weight: 500;
-  letter-spacing: -0.025em;
+  letter-spacing: var(--tracking-display);
 }
 
 h2 {
   font-size: var(--fs-display-2);
-  letter-spacing: -0.018em;
+  letter-spacing: var(--tracking-display);
+}
+
+h3,
+h4 {
+  font-variation-settings: "SOFT" 0, "WONK" var(--wonk);
 }
 
 h3 {
   font-size: var(--fs-title);
   line-height: var(--leading-title);
-  letter-spacing: -0.01em;
+  letter-spacing: var(--tracking-title);
 }
 
 /* The Turn. Exactly one accent word or phrase per headline, never inside body
-   copy. Fraunces italic with the wonky forms on, at the one weight that holds
-   against Bricolage's 620 without shouting.
+   copy. Fraunces italic with the wonky forms on.
 
-   Colour: signal-text on light grounds (5.30 on paper), sun on ink (7.93).
-   Both are existing palette entries and both clear AA at display size. */
+   Colour: Ink on light grounds, Sun on Ink. */
 .turn {
+  font-family: var(--font-editorial);
+  font-size: 1em;
+  font-style: italic;
+  font-weight: 400;
+  font-variation-settings:
+    "SOFT" 45,
+    "WONK" 1;
+  letter-spacing: 0;
+  color: var(--turn-color);
+}
+
+.aside {
   font-family: var(--font-editorial);
   font-style: italic;
   font-weight: 440;
-  font-variation-settings:
-    "SOFT" 0,
-    "WONK" var(--wonk);
-  letter-spacing: -0.01em;
-  color: var(--turn-color);
+  font-variation-settings: "SOFT" 0, "WONK" 0;
+  letter-spacing: var(--tracking-title);
+}
+
+.eyebrow {
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
+  line-height: 1;
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
 }
 
 [data-ground="ink"] .turn,
@@ -246,7 +260,7 @@ p {
   padding: 6px 12px;
   border: 1.5px solid var(--ink);
   font-family: var(--font-note);
-  font-size: 11.5px;
+  font-size: var(--fs-small);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   transform: rotate(-2.5deg);

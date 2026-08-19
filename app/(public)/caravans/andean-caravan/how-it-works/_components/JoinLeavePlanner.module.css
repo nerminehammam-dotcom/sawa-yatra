@@ -37,9 +37,12 @@
 }
 
 .kicker {
-  font-size: var(--fs-small);
-  font-weight: 600;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -209,9 +212,12 @@
 }
 
 .joinRequirement p:first-child {
-  font-size: var(--fs-small);
-  font-weight: 600;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -228,9 +234,12 @@
 }
 
 .exitFlight p:first-child {
-  font-size: var(--fs-small);
-  font-weight: 600;
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
   text-transform: uppercase;
 }
 

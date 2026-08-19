@@ -1,9 +1,10 @@
 .root {
   padding: clamp(3rem, 7vw, 7rem) 0 var(--space-6);
-  color: var(--ink);
-  background: var(--bone);
-  border-top: 1px solid var(--sand);
-  font-family: var(--font-display);
+  color: #fff;
+  background: #000;
+  border-top: 1px solid #000;
+  font-family: var(--font-read);
+  font-weight: 500;
 }
 
 /* Two tracks: Explore and Legal. */
@@ -22,9 +23,9 @@
 
 .navigationLabel {
   margin-bottom: var(--space-4);
-  color: var(--signal-text);
+  color: #fff;
   font-size: var(--fs-small);
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .navigation,
@@ -47,17 +48,21 @@
   display: inline-flex;
   min-height: var(--touch-min);
   align-items: center;
-  color: var(--ink);
+  color: #fff;
   font-size: var(--fs-small);
   /* Light-on-dark blooms: one step below body so it reads at the same colour. */
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: normal;
   text-underline-offset: 0.3em;
   text-transform: none;
 }
 
+.root .link {
+  font-family: var(--font-read);
+}
+
 .link:visited {
-  color: var(--ink);
+  color: #fff;
 }
 
 @media (max-width: 960px) {

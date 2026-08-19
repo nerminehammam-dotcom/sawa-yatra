@@ -5,8 +5,11 @@
   padding: var(--space-1) var(--space-3);
   border: var(--border-hairline) solid;
   border-radius: var(--radius-pill);
-  font-family: var(--font-read);
-  font-size: var(--fs-eyebrow);
+  font-family: var(--font-note);
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
+  line-height: 1;
   letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
   color: var(--ink);

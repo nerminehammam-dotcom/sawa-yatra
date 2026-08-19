@@ -34,9 +34,11 @@
 .founder > p:first-child {
   color: var(--signal-text);
   font-family: var(--font-note);
-  font-size: var(--fs-eyebrow);
-  font-weight: 500;
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
   letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -71,7 +73,7 @@
   min-height: 0;
   margin: 0;
   overflow: hidden;
-  background: var(--sand);
+  background: var(--paper);
   border-radius: var(--radius-card);
 }
 
@@ -99,7 +101,7 @@
   background: color-mix(in srgb, var(--ink) 88%, transparent);
   border-radius: var(--radius-pill);
   font-family: var(--font-note);
-  font-size: 0.75rem;
+  font-size: var(--fs-small);
   line-height: 1.3;
 }
 
@@ -119,9 +121,11 @@
 .profileCopy > p:first-child {
   color: var(--signal-text);
   font-family: var(--font-note);
-  font-size: var(--fs-eyebrow);
-  font-weight: 500;
-  letter-spacing: 0.1em;
+  font-size: var(--eyebrow-size);
+  font-weight: var(--eyebrow-weight);
+  font-variation-settings: normal;
+  letter-spacing: var(--tracking-eyebrow);
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -207,7 +211,7 @@
   margin-top: var(--space-4);
   color: color-mix(in srgb, var(--ink) 62%, transparent);
   font-family: var(--font-note);
-  font-size: 0.8125rem;
+  font-size: var(--fs-small);
   line-height: 1.6;
 }
 
@@ -224,7 +228,7 @@
   min-height: 34rem;
   margin: 0;
   overflow: hidden;
-  background: var(--sand);
+  background: var(--paper);
   border-radius: var(--radius-card);
 }
 

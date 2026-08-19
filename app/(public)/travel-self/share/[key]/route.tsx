@@ -36,8 +36,8 @@ export async function GET(
           // That pairing measures 3.86, which is large-text only - it holds
           // here because the name below is set at 116px, and nowhere on this
           // card is smaller than 18px. Do not reuse this pairing at body size.
-          color: "#27231F",
-          background: "#D9522F",
+          color: "#27231f",
+          background: "#f05a2a",
           textAlign: "center",
         }}
       >
